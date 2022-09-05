@@ -8,24 +8,47 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    let loginView = LoginView()
+    private let loginViewModel: LoginViewModel = LoginViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let view = LoginView()
-        view.backgroundColor = .white
+        loginView.backgroundColor = .white
+        self.view.addSubview(loginView)
         
-        let viewModel = LoginViewModel(self)
-        self.view.addSubview(view)
+        loginView.backBtn.addTarget(self, action: #selector(backBtnDidTap), for: .touchUpInside)
+        loginView.emailTextField.addTarget(self, action: #selector(emailTextFieldEditingChanged), for: .editingChanged)
+        loginView.passwordTextField.addTarget(self, action: #selector(passwordTextFieldEditingChanged), for: .editingChanged)
         
-        view.backBtn.addTarget(self, action: #selector(backBtnDidTap), for: .touchUpInside)
-        
-        view.snp.makeConstraints { make in
+        loginView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview()
         }
+        
+        bind()
     }
     // MARK: - Actions
     @objc func backBtnDidTap(_ sender: UIButton) {
         self.dismiss(animated: true)
+    }
+    @objc func emailTextFieldEditingChanged(_ sender: UITextField) {
+        let text = sender.text ?? ""
+        loginViewModel.emailTextFieldEditingChanged(text)
+    }
+    @objc func passwordTextFieldEditingChanged(_ sender: UITextField) {
+        let text = sender.text ?? ""
+        loginViewModel.passwordTextFieldEditingChanged(text)
+    }
+    //MARK: - Methods
+    private func bind() {
+        loginViewModel.isValidID.bind { isValidID in
+            guard let isValid = isValidID else {return}
+            if isValid {
+                self.loginView.loginButton.defaultButton("로그인하기", UIColor.SignatureColor())
+            } else {
+                self.loginView.loginButton.defaultButton("로그인하기", UIColor.DisabledColor())
+            }
+        }
+
     }
 }
