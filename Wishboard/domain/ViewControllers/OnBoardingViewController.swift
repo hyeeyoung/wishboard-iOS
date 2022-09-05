@@ -13,6 +13,7 @@ class OnBoardingViewController: UIViewController {
         super.viewDidLoad()
 
         let view = OnBoardingView()
+        view.setViewController(self)
         self.view.addSubview(view)
         
         view.snp.makeConstraints { make in
