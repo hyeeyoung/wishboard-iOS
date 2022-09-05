@@ -12,6 +12,8 @@ class OnBoardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationController?.isNavigationBarHidden = true
+        
         let view = OnBoardingView()
         view.setViewController(self)
         self.view.addSubview(view)
@@ -20,5 +22,4 @@ class OnBoardingViewController: UIViewController {
             make.leading.trailing.top.bottom.equalToSuperview()
         }
     }
-
 }

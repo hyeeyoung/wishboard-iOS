@@ -18,7 +18,7 @@ class OnBoardingViewModel {
     }
     func goToLoginPage() {
         let loginViewController = LoginViewController()
-        loginViewController.modalTransitionStyle = .coverVertical
+//        loginViewController.modalTransitionStyle = .coverVertical
         loginViewController.modalPresentationStyle = .fullScreen
         self.viewcontroller.present(loginViewController, animated: true, completion: nil)
     }

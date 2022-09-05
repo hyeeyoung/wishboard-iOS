@@ -16,4 +16,10 @@ extension UIColor{
         }
         return color
     }
+    static func DisabledColor() -> UIColor! {
+        guard let color: UIColor = UIColor(named: "DisabledColor") else{
+            return nil
+        }
+        return color
+    }
 }

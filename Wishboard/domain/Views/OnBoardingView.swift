@@ -24,11 +24,12 @@ class OnBoardingView: UIView {
         onBoardingTableView.dataSource = self
         onBoardingTableView.register(OnBoardingTableViewCell.self, forCellReuseIdentifier: "OnBoardingTableViewCell")
 
-        setUpConstraint()
+        setUpView()
 
         // autoHeight
         onBoardingTableView.rowHeight = UITableView.automaticDimension
         onBoardingTableView.estimatedRowHeight = UITableView.automaticDimension
+        onBoardingTableView.separatorStyle = .none
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -37,7 +38,7 @@ class OnBoardingView: UIView {
     func setViewController(_ viewcontroller: OnBoardingViewController) {
         onBoardingViewModel.setViewController(viewcontroller)
     }
-    func setUpConstraint() {
+    func setUpView() {
         addSubview(onBoardingTableView)
         onBoardingTableView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview()
@@ -66,7 +67,7 @@ extension OnBoardingView: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.bounds.height
+        return tableView.frame.size.height - 50
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
