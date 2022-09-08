@@ -26,11 +26,11 @@ class CartTableViewCell: UITableViewCell {
     let plusButton = UIButton().then{
         $0.setImage(UIImage(named: "ic_cart_plus"), for: .normal)
     }
-    let count = UILabel().then{
+    let countLabel = UILabel().then{
         $0.text = "1"
         $0.font = UIFont.nanumSquare(size: 14)
     }
-    let price = UILabel().then{
+    let priceLabel = UILabel().then{
         $0.text = "1111"
         $0.font = UIFont.monteserrat(size: 18)
     }
@@ -55,8 +55,8 @@ class CartTableViewCell: UITableViewCell {
         contentView.addSubview(itemName)
         contentView.addSubview(minusButton)
         contentView.addSubview(plusButton)
-        contentView.addSubview(count)
-        contentView.addSubview(price)
+        contentView.addSubview(countLabel)
+        contentView.addSubview(priceLabel)
         contentView.addSubview(won)
     }
     func setUpConstraint() {
@@ -81,22 +81,36 @@ class CartTableViewCell: UITableViewCell {
             make.bottom.equalTo(itemImage.snp.bottom)
             make.leading.equalTo(itemImage.snp.trailing).offset(10)
         }
-        count.snp.makeConstraints { make in
+        countLabel.snp.makeConstraints { make in
             make.centerY.equalTo(minusButton)
             make.leading.equalTo(minusButton.snp.trailing).offset(10)
         }
         plusButton.snp.makeConstraints { make in
             make.width.height.equalTo(24)
-            make.centerY.equalTo(count)
-            make.leading.equalTo(count.snp.trailing).offset(10)
+            make.centerY.equalTo(countLabel)
+            make.leading.equalTo(countLabel.snp.trailing).offset(10)
         }
         won.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-10)
             make.centerY.equalTo(plusButton)
         }
-        price.snp.makeConstraints { make in
+        priceLabel.snp.makeConstraints { make in
             make.trailing.equalTo(won.snp.leading).offset(-2)
             make.centerY.equalTo(won)
         }
+    }
+}
+extension CartTableViewCell {
+    func setUpData(_ data: CartListModel) {
+        if let image = data.itemImage {
+            self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
+        }
+        if let name = data.itemName {self.itemName.text = name}
+        guard let count = data.itemCount else {return}
+        guard let price = data.itemPrice else {return}
+        
+        self.countLabel.text = String(count)
+        self.priceLabel.text = String(count * price)
+        
     }
 }

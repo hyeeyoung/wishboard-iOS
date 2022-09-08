@@ -27,7 +27,7 @@ class CartView: UIView {
         $0.text = "전체"
         $0.font = UIFont.nanumSquare(size: 16)
     }
-    let count = UILabel().then{
+    let countLabel = UILabel().then{
         $0.text = "__"
         $0.font = UIFont.monteserrat(size: 16)
     }
@@ -45,7 +45,8 @@ class CartView: UIView {
     }
     // MARK: - Life Cycles
     var cartTableView: UITableView!
-//    var cartData: [WishListModel] = []
+    var cartData: [CartListModel] = []
+    var itemPrice = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -77,7 +78,7 @@ class CartView: UIView {
         
         addSubview(lowerView)
         lowerView.addSubview(total)
-        lowerView.addSubview(count)
+        lowerView.addSubview(countLabel)
         lowerView.addSubview(label)
         lowerView.addSubview(price)
         lowerView.addSubview(won)
@@ -120,13 +121,13 @@ class CartView: UIView {
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(17)
         }
-        count.snp.makeConstraints { make in
+        countLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalTo(total.snp.trailing).offset(4)
         }
         label.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalTo(count.snp.trailing)
+            make.leading.equalTo(countLabel.snp.trailing)
         }
         won.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
@@ -141,10 +142,16 @@ class CartView: UIView {
 // MARK: - Main TableView delegate
 extension CartView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        let count = cartData.count ?? 0
+        self.countLabel.text = String(count)
+        return count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartTableViewCell", for: indexPath) as? CartTableViewCell else { return UITableViewCell() }
+        
+        let itemIdx = indexPath.item
+        cell.setUpData(self.cartData[itemIdx])
+        
         cell.selectionStyle = .none
         return cell
     }
@@ -153,5 +160,26 @@ extension CartView: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+extension CartView {
+    func setTempData() {
+        self.cartData.append(CartListModel(itemImage: "", itemName: "item10", itemPrice: 10000, itemCount: 1))
+        self.cartData.append(CartListModel(itemImage: "", itemName: "item11", itemPrice: 10000, itemCount: 3))
+        self.cartData.append(CartListModel(itemImage: "", itemName: "item12", itemPrice: 20000, itemCount: 3))
+        self.cartData.append(CartListModel(itemImage: "", itemName: "item13", itemPrice: 10000, itemCount: 1))
+        self.cartData.append(CartListModel(itemImage: "", itemName: "item14", itemPrice: 10000, itemCount: 5))
+        
+        self.calculate()
+        self.cartTableView.reloadData()
+    }
+    func calculate() {
+        var totalPrice = 0
+        for data in cartData {
+            guard let initPrice = data.itemPrice else {return}
+            guard let count = data.itemCount else {return}
+            totalPrice = totalPrice + initPrice * count
+        }
+        self.price.text = String(totalPrice)
     }
 }

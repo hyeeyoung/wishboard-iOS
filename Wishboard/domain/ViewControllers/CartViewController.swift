@@ -23,6 +23,7 @@ class CartViewController: UIViewController {
             make.leading.trailing.top.bottom.equalToSuperview()
         }
         
+        self.cartView.setTempData()
         self.cartView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     @objc func goBack() {

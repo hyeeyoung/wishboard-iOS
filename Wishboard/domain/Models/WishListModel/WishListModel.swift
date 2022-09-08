@@ -13,3 +13,9 @@ struct WishListModel {
     let itemPrice: Int?
     let isCart: Bool?
 }
+struct CartListModel {
+    let itemImage: String?
+    let itemName: String?
+    let itemPrice: Int?
+    let itemCount: Int?
+}
