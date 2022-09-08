@@ -18,6 +18,10 @@
 		234F838D28C9857000C4EB41 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838C28C9857000C4EB41 /* CartTableViewCell.swift */; };
 		234F838F28C987CB00C4EB41 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838E28C987CB00C4EB41 /* CartViewController.swift */; };
 		2375C1CA28C5C2550017BAF7 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2375C1C928C5C2550017BAF7 /* OnBoardingView.swift */; };
+		23C2378428C9CEE000CE3200 /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2378328C9CEE000CE3200 /* FolderViewController.swift */; };
+		23C2378628C9CEE800CE3200 /* FolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2378528C9CEE800CE3200 /* FolderView.swift */; };
+		23C2378928C9CF0400CE3200 /* FolderListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2378828C9CF0400CE3200 /* FolderListModel.swift */; };
+		23C2378B28C9CF1D00CE3200 /* FolderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2378A28C9CF1D00CE3200 /* FolderCollectionViewCell.swift */; };
 		23C9567B28C67B9D00D88536 /* OnBoardingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C9567A28C67B9D00D88536 /* OnBoardingTableViewCell.swift */; };
 		23C9568B28C6803900D88536 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C9568A28C6803900D88536 /* UIFont.swift */; };
 		23C9568D28C6812100D88536 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C9568C28C6812100D88536 /* UIColor.swift */; };
@@ -83,6 +87,10 @@
 		234F838C28C9857000C4EB41 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		234F838E28C987CB00C4EB41 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		2375C1C928C5C2550017BAF7 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
+		23C2378328C9CEE000CE3200 /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
+		23C2378528C9CEE800CE3200 /* FolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderView.swift; sourceTree = "<group>"; };
+		23C2378828C9CF0400CE3200 /* FolderListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderListModel.swift; sourceTree = "<group>"; };
+		23C2378A28C9CF1D00CE3200 /* FolderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderCollectionViewCell.swift; sourceTree = "<group>"; };
 		23C9567A28C67B9D00D88536 /* OnBoardingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingTableViewCell.swift; sourceTree = "<group>"; };
 		23C9568A28C6803900D88536 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		23C9568C28C6812100D88536 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -227,12 +235,29 @@
 			path = CartView;
 			sourceTree = "<group>";
 		};
+		23C2378228C9CED300CE3200 /* FolderView */ = {
+			isa = PBXGroup;
+			children = (
+				23C2378528C9CEE800CE3200 /* FolderView.swift */,
+			);
+			path = FolderView;
+			sourceTree = "<group>";
+		};
+		23C2378728C9CEF800CE3200 /* FolderListModel */ = {
+			isa = PBXGroup;
+			children = (
+				23C2378828C9CF0400CE3200 /* FolderListModel.swift */,
+			);
+			path = FolderListModel;
+			sourceTree = "<group>";
+		};
 		23C9567928C67B8A00D88536 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				23C9567A28C67B9D00D88536 /* OnBoardingTableViewCell.swift */,
 				234F838128C96F6300C4EB41 /* WishListCollectionViewCell.swift */,
 				234F838C28C9857000C4EB41 /* CartTableViewCell.swift */,
+				23C2378A28C9CF1D00CE3200 /* FolderCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -353,6 +378,7 @@
 		23DC04E028C58C6C00ABB0CF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				23C2378228C9CED300CE3200 /* FolderView */,
 				234F838928C983C200C4EB41 /* CartView */,
 				234F837728C9628900C4EB41 /* OnBoarding */,
 				234F837628C9628300C4EB41 /* Login */,
@@ -366,6 +392,7 @@
 		23DC04E128C58C7200ABB0CF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				23C2378728C9CEF800CE3200 /* FolderListModel */,
 				234F838628C97BE400C4EB41 /* WishListModel */,
 			);
 			path = Models;
@@ -388,6 +415,7 @@
 				23C956A028C68F9400D88536 /* LoginViewController.swift */,
 				234F837328C9627700C4EB41 /* HomeViewController.swift */,
 				234F838E28C987CB00C4EB41 /* CartViewController.swift */,
+				23C2378328C9CEE000CE3200 /* FolderViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -667,6 +695,7 @@
 			files = (
 				23C956A128C68F9400D88536 /* LoginViewController.swift in Sources */,
 				23D5518928C6B02400D81B5F /* Observable.swift in Sources */,
+				23C2378628C9CEE800CE3200 /* FolderView.swift in Sources */,
 				23D5518328C6A3BD00D81B5F /* UIButton.swift in Sources */,
 				234F837428C9627700C4EB41 /* HomeViewController.swift in Sources */,
 				234F838F28C987CB00C4EB41 /* CartViewController.swift in Sources */,
@@ -677,15 +706,18 @@
 				23C9568B28C6803900D88536 /* UIFont.swift in Sources */,
 				23D5518728C6AFFF00D81B5F /* LoginViewModel.swift in Sources */,
 				234F837928C9629800C4EB41 /* HomeView.swift in Sources */,
+				23C2378928C9CF0400CE3200 /* FolderListModel.swift in Sources */,
 				2375C1CA28C5C2550017BAF7 /* OnBoardingView.swift in Sources */,
 				23C9568D28C6812100D88536 /* UIColor.swift in Sources */,
 				23D5517D28C6936400D81B5F /* OnBoardingViewModel.swift in Sources */,
 				234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */,
+				23C2378428C9CEE000CE3200 /* FolderViewController.swift in Sources */,
 				234F838D28C9857000C4EB41 /* CartTableViewCell.swift in Sources */,
 				234F838228C96F6300C4EB41 /* WishListCollectionViewCell.swift in Sources */,
 				23D5517F28C698D200D81B5F /* LoginView.swift in Sources */,
 				23C9567B28C67B9D00D88536 /* OnBoardingTableViewCell.swift in Sources */,
 				23DC04EB28C591F400ABB0CF /* OnBoardingViewController.swift in Sources */,
+				23C2378B28C9CF1D00CE3200 /* FolderCollectionViewCell.swift in Sources */,
 				234F838828C97BF900C4EB41 /* WishListModel.swift in Sources */,
 				23D5518B28C6B45C00D81B5F /* String.swift in Sources */,
 				23D5518128C69E2900D81B5F /* UITextField.swift in Sources */,
