@@ -19,14 +19,14 @@ class LoginViewModel {
         
     }
     func emailTextFieldEditingChanged(_ text : String) {
-        self.email = text
-        
-        if self.checkEmail(str: self.email!) {
-            isValidEmail = true
-        } else {
-            isValidEmail = false
-        }
-        isValid()
+//        self.email = text
+//
+//        if self.checkEmail(str: self.email!) {
+//            isValidEmail = true
+//        } else {
+//            isValidEmail = false
+//        }
+//        isValid()
     }
     func passwordTextFieldEditingChanged(_ text : String) {
         self.password = text

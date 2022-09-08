@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		234F837428C9627700C4EB41 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F837328C9627700C4EB41 /* HomeViewController.swift */; };
+		234F837928C9629800C4EB41 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F837828C9629800C4EB41 /* HomeView.swift */; };
+		234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F837A28C9647600C4EB41 /* TabBarViewController.swift */; };
+		234F837F28C9678F00C4EB41 /* Montserrat-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 234F837E28C9678F00C4EB41 /* Montserrat-VariableFont_wght.ttf */; };
 		2375C1CA28C5C2550017BAF7 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2375C1C928C5C2550017BAF7 /* OnBoardingView.swift */; };
 		23C9567B28C67B9D00D88536 /* OnBoardingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C9567A28C67B9D00D88536 /* OnBoardingTableViewCell.swift */; };
 		23C9568B28C6803900D88536 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C9568A28C6803900D88536 /* UIFont.swift */; };
@@ -62,6 +66,10 @@
 
 /* Begin PBXFileReference section */
 		1582000F9C7BDE6362679C88 /* Pods_Wishboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wishboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		234F837328C9627700C4EB41 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		234F837828C9629800C4EB41 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		234F837A28C9647600C4EB41 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		234F837E28C9678F00C4EB41 /* Montserrat-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		2375C1C928C5C2550017BAF7 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		23C9567A28C67B9D00D88536 /* OnBoardingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingTableViewCell.swift; sourceTree = "<group>"; };
 		23C9568A28C6803900D88536 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
@@ -135,6 +143,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		234F837528C9627F00C4EB41 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				234F837828C9629800C4EB41 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		234F837628C9628300C4EB41 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				23D5517E28C698D200D81B5F /* LoginView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		234F837728C9628900C4EB41 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				2375C1C928C5C2550017BAF7 /* OnBoardingView.swift */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
+		234F837C28C9676A00C4EB41 /* SUIT */ = {
+			isa = PBXGroup;
+			children = (
+				23C9569028C68D7900D88536 /* SUIT-Bold.ttf */,
+				23C9569128C68D7900D88536 /* SUIT-ExtraBold.ttf */,
+				23C9568F28C68D7900D88536 /* SUIT-ExtraLight.ttf */,
+				23C9568E28C68D7900D88536 /* SUIT-Heavy.ttf */,
+				23C9569228C68D7900D88536 /* SUIT-Light.ttf */,
+				23C9569528C68D7900D88536 /* SUIT-Medium.ttf */,
+				23C9569328C68D7900D88536 /* SUIT-Regular.ttf */,
+				23C9569628C68D7A00D88536 /* SUIT-SemiBold.ttf */,
+				23C9569428C68D7900D88536 /* SUIT-Thin.ttf */,
+			);
+			path = SUIT;
+			sourceTree = "<group>";
+		};
+		234F837D28C9677500C4EB41 /* monteserrat */ = {
+			isa = PBXGroup;
+			children = (
+				234F837E28C9678F00C4EB41 /* Montserrat-VariableFont_wght.ttf */,
+			);
+			path = monteserrat;
+			sourceTree = "<group>";
+		};
 		23C9567928C67B8A00D88536 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +215,7 @@
 			children = (
 				23D5518828C6B02400D81B5F /* Observable.swift */,
 				23D5518A28C6B45C00D81B5F /* String.swift */,
+				234F837A28C9647600C4EB41 /* TabBarViewController.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -166,15 +223,8 @@
 		23C9567E28C67FD900D88536 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				23C9569028C68D7900D88536 /* SUIT-Bold.ttf */,
-				23C9569128C68D7900D88536 /* SUIT-ExtraBold.ttf */,
-				23C9568F28C68D7900D88536 /* SUIT-ExtraLight.ttf */,
-				23C9568E28C68D7900D88536 /* SUIT-Heavy.ttf */,
-				23C9569228C68D7900D88536 /* SUIT-Light.ttf */,
-				23C9569528C68D7900D88536 /* SUIT-Medium.ttf */,
-				23C9569328C68D7900D88536 /* SUIT-Regular.ttf */,
-				23C9569628C68D7A00D88536 /* SUIT-SemiBold.ttf */,
-				23C9569428C68D7900D88536 /* SUIT-Thin.ttf */,
+				234F837D28C9677500C4EB41 /* monteserrat */,
+				234F837C28C9676A00C4EB41 /* SUIT */,
 				23C9568A28C6803900D88536 /* UIFont.swift */,
 			);
 			path = Fonts;
@@ -264,10 +314,11 @@
 		23DC04E028C58C6C00ABB0CF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				23D5517E28C698D200D81B5F /* LoginView.swift */,
+				234F837728C9628900C4EB41 /* OnBoarding */,
+				234F837628C9628300C4EB41 /* Login */,
+				234F837528C9627F00C4EB41 /* Home */,
 				23DC04B328C58B5200ABB0CF /* Main.storyboard */,
 				23DC04B828C58B5500ABB0CF /* LaunchScreen.storyboard */,
-				2375C1C928C5C2550017BAF7 /* OnBoardingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -294,6 +345,7 @@
 				23DC04E828C591E600ABB0CF /* ViewController.swift */,
 				23DC04EA28C591F400ABB0CF /* OnBoardingViewController.swift */,
 				23C956A028C68F9400D88536 /* LoginViewController.swift */,
+				234F837328C9627700C4EB41 /* HomeViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -440,6 +492,7 @@
 				23C9569A28C68D7A00D88536 /* SUIT-ExtraBold.ttf in Resources */,
 				23C9569B28C68D7A00D88536 /* SUIT-Light.ttf in Resources */,
 				23DC04B728C58B5500ABB0CF /* Assets.xcassets in Resources */,
+				234F837F28C9678F00C4EB41 /* Montserrat-VariableFont_wght.ttf in Resources */,
 				23DC04B528C58B5200ABB0CF /* Main.storyboard in Resources */,
 				23C9569828C68D7A00D88536 /* SUIT-ExtraLight.ttf in Resources */,
 			);
@@ -572,14 +625,17 @@
 				23C956A128C68F9400D88536 /* LoginViewController.swift in Sources */,
 				23D5518928C6B02400D81B5F /* Observable.swift in Sources */,
 				23D5518328C6A3BD00D81B5F /* UIButton.swift in Sources */,
+				234F837428C9627700C4EB41 /* HomeViewController.swift in Sources */,
 				23DC04AE28C58B5200ABB0CF /* AppDelegate.swift in Sources */,
 				23DC04E928C591E600ABB0CF /* ViewController.swift in Sources */,
 				23DC04B028C58B5200ABB0CF /* SceneDelegate.swift in Sources */,
 				23C9568B28C6803900D88536 /* UIFont.swift in Sources */,
 				23D5518728C6AFFF00D81B5F /* LoginViewModel.swift in Sources */,
+				234F837928C9629800C4EB41 /* HomeView.swift in Sources */,
 				2375C1CA28C5C2550017BAF7 /* OnBoardingView.swift in Sources */,
 				23C9568D28C6812100D88536 /* UIColor.swift in Sources */,
 				23D5517D28C6936400D81B5F /* OnBoardingViewModel.swift in Sources */,
+				234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */,
 				23D5517F28C698D200D81B5F /* LoginView.swift in Sources */,
 				23C9567B28C67B9D00D88536 /* OnBoardingTableViewCell.swift in Sources */,
 				23DC04EB28C591F400ABB0CF /* OnBoardingViewController.swift in Sources */,
