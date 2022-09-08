@@ -25,5 +25,12 @@ class HomeViewController: UIViewController {
         
         // temp data
         homeView.setTempData()
+        self.homeView.cartButton.addTarget(self, action: #selector(goToCart), for: .touchUpInside)
+    }
+    @objc func goToCart() {
+        let cartVC = CartViewController()
+//        loginViewController.modalTransitionStyle = .coverVertical
+        cartVC.modalPresentationStyle = .fullScreen
+        self.present(cartVC, animated: true, completion: nil)
     }
 }

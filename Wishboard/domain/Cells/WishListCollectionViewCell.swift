@@ -17,7 +17,7 @@ class WishListCollectionViewCell: UICollectionViewCell {
     let itemName = UILabel().then{
         $0.text = "itemName"
         $0.font = UIFont.nanumSquare(size: 15)
-        $0.numberOfLines = 0
+        $0.numberOfLines = 1
     }
     let itemPrice = UILabel().then{
         $0.text = "000,000"

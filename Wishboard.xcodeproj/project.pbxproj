@@ -14,6 +14,9 @@
 		234F838228C96F6300C4EB41 /* WishListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838128C96F6300C4EB41 /* WishListCollectionViewCell.swift */; };
 		234F838528C9711400C4EB41 /* NanumSquareR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 234F838428C9711400C4EB41 /* NanumSquareR.ttf */; };
 		234F838828C97BF900C4EB41 /* WishListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838728C97BF900C4EB41 /* WishListModel.swift */; };
+		234F838B28C983CE00C4EB41 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838A28C983CE00C4EB41 /* CartView.swift */; };
+		234F838D28C9857000C4EB41 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838C28C9857000C4EB41 /* CartTableViewCell.swift */; };
+		234F838F28C987CB00C4EB41 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838E28C987CB00C4EB41 /* CartViewController.swift */; };
 		2375C1CA28C5C2550017BAF7 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2375C1C928C5C2550017BAF7 /* OnBoardingView.swift */; };
 		23C9567B28C67B9D00D88536 /* OnBoardingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C9567A28C67B9D00D88536 /* OnBoardingTableViewCell.swift */; };
 		23C9568B28C6803900D88536 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C9568A28C6803900D88536 /* UIFont.swift */; };
@@ -76,6 +79,9 @@
 		234F838128C96F6300C4EB41 /* WishListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListCollectionViewCell.swift; sourceTree = "<group>"; };
 		234F838428C9711400C4EB41 /* NanumSquareR.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareR.ttf; sourceTree = "<group>"; };
 		234F838728C97BF900C4EB41 /* WishListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListModel.swift; sourceTree = "<group>"; };
+		234F838A28C983CE00C4EB41 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
+		234F838C28C9857000C4EB41 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
+		234F838E28C987CB00C4EB41 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		2375C1C928C5C2550017BAF7 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		23C9567A28C67B9D00D88536 /* OnBoardingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingTableViewCell.swift; sourceTree = "<group>"; };
 		23C9568A28C6803900D88536 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
@@ -213,11 +219,20 @@
 			path = WishListModel;
 			sourceTree = "<group>";
 		};
+		234F838928C983C200C4EB41 /* CartView */ = {
+			isa = PBXGroup;
+			children = (
+				234F838A28C983CE00C4EB41 /* CartView.swift */,
+			);
+			path = CartView;
+			sourceTree = "<group>";
+		};
 		23C9567928C67B8A00D88536 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				23C9567A28C67B9D00D88536 /* OnBoardingTableViewCell.swift */,
 				234F838128C96F6300C4EB41 /* WishListCollectionViewCell.swift */,
+				234F838C28C9857000C4EB41 /* CartTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -338,6 +353,7 @@
 		23DC04E028C58C6C00ABB0CF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				234F838928C983C200C4EB41 /* CartView */,
 				234F837728C9628900C4EB41 /* OnBoarding */,
 				234F837628C9628300C4EB41 /* Login */,
 				234F837528C9627F00C4EB41 /* Home */,
@@ -371,6 +387,7 @@
 				23DC04EA28C591F400ABB0CF /* OnBoardingViewController.swift */,
 				23C956A028C68F9400D88536 /* LoginViewController.swift */,
 				234F837328C9627700C4EB41 /* HomeViewController.swift */,
+				234F838E28C987CB00C4EB41 /* CartViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -652,8 +669,10 @@
 				23D5518928C6B02400D81B5F /* Observable.swift in Sources */,
 				23D5518328C6A3BD00D81B5F /* UIButton.swift in Sources */,
 				234F837428C9627700C4EB41 /* HomeViewController.swift in Sources */,
+				234F838F28C987CB00C4EB41 /* CartViewController.swift in Sources */,
 				23DC04AE28C58B5200ABB0CF /* AppDelegate.swift in Sources */,
 				23DC04E928C591E600ABB0CF /* ViewController.swift in Sources */,
+				234F838B28C983CE00C4EB41 /* CartView.swift in Sources */,
 				23DC04B028C58B5200ABB0CF /* SceneDelegate.swift in Sources */,
 				23C9568B28C6803900D88536 /* UIFont.swift in Sources */,
 				23D5518728C6AFFF00D81B5F /* LoginViewModel.swift in Sources */,
@@ -662,6 +681,7 @@
 				23C9568D28C6812100D88536 /* UIColor.swift in Sources */,
 				23D5517D28C6936400D81B5F /* OnBoardingViewModel.swift in Sources */,
 				234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */,
+				234F838D28C9857000C4EB41 /* CartTableViewCell.swift in Sources */,
 				234F838228C96F6300C4EB41 /* WishListCollectionViewCell.swift in Sources */,
 				23D5517F28C698D200D81B5F /* LoginView.swift in Sources */,
 				23C9567B28C67B9D00D88536 /* OnBoardingTableViewCell.swift in Sources */,
