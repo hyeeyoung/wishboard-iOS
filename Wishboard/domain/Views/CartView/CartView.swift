@@ -143,7 +143,6 @@ class CartView: UIView {
 extension CartView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = cartData.count ?? 0
-        self.countLabel.text = String(count)
         return count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -152,6 +151,7 @@ extension CartView: UITableViewDelegate, UITableViewDataSource {
         let itemIdx = indexPath.item
         cell.setUpData(self.cartData[itemIdx])
         
+        cell.deleteButton.addTarget(self, action: #selector(deleteItem), for: .touchUpInside)
         cell.selectionStyle = .none
         return cell
     }
@@ -160,6 +160,11 @@ extension CartView: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+extension CartView {
+    @objc func deleteItem() {
+        self.cartTableView.reloadData()
     }
 }
 extension CartView {
@@ -175,11 +180,15 @@ extension CartView {
     }
     func calculate() {
         var totalPrice = 0
+        var totalCount = 0
         for data in cartData {
             guard let initPrice = data.itemPrice else {return}
             guard let count = data.itemCount else {return}
+            
             totalPrice = totalPrice + initPrice * count
+            totalCount = totalCount + count
         }
         self.price.text = String(totalPrice)
+        self.countLabel.text = String(totalCount)
     }
 }
