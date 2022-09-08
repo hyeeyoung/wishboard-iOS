@@ -22,6 +22,9 @@
 		23C2378628C9CEE800CE3200 /* FolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2378528C9CEE800CE3200 /* FolderView.swift */; };
 		23C2378928C9CF0400CE3200 /* FolderListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2378828C9CF0400CE3200 /* FolderListModel.swift */; };
 		23C2378B28C9CF1D00CE3200 /* FolderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2378A28C9CF1D00CE3200 /* FolderCollectionViewCell.swift */; };
+		23C5AB4928CAA23300A7E977 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C5AB4828CAA23300A7E977 /* MyPageView.swift */; };
+		23C5AB4B28CAA24300A7E977 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C5AB4A28CAA24300A7E977 /* MyPageViewController.swift */; };
+		23C5AB4D28CAA54600A7E977 /* MypageProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C5AB4C28CAA54600A7E977 /* MypageProfileTableViewCell.swift */; };
 		23C8A1C028C9F23E003ABFE9 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C8A1BF28C9F23E003ABFE9 /* NavigationBar.swift */; };
 		23C8A1C228CA08A9003ABFE9 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C8A1C128CA08A9003ABFE9 /* ItemDetailViewController.swift */; };
 		23C8A1C528CA08B7003ABFE9 /* ItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C8A1C428CA08B7003ABFE9 /* ItemDetailView.swift */; };
@@ -95,6 +98,9 @@
 		23C2378528C9CEE800CE3200 /* FolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderView.swift; sourceTree = "<group>"; };
 		23C2378828C9CF0400CE3200 /* FolderListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderListModel.swift; sourceTree = "<group>"; };
 		23C2378A28C9CF1D00CE3200 /* FolderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderCollectionViewCell.swift; sourceTree = "<group>"; };
+		23C5AB4828CAA23300A7E977 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		23C5AB4A28CAA24300A7E977 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		23C5AB4C28CAA54600A7E977 /* MypageProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageProfileTableViewCell.swift; sourceTree = "<group>"; };
 		23C8A1BF28C9F23E003ABFE9 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		23C8A1C128CA08A9003ABFE9 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		23C8A1C428CA08B7003ABFE9 /* ItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailView.swift; sourceTree = "<group>"; };
@@ -235,20 +241,20 @@
 			path = WishListModel;
 			sourceTree = "<group>";
 		};
-		234F838928C983C200C4EB41 /* CartView */ = {
+		234F838928C983C200C4EB41 /* Cart */ = {
 			isa = PBXGroup;
 			children = (
 				234F838A28C983CE00C4EB41 /* CartView.swift */,
 			);
-			path = CartView;
+			path = Cart;
 			sourceTree = "<group>";
 		};
-		23C2378228C9CED300CE3200 /* FolderView */ = {
+		23C2378228C9CED300CE3200 /* Folder */ = {
 			isa = PBXGroup;
 			children = (
 				23C2378528C9CEE800CE3200 /* FolderView.swift */,
 			);
-			path = FolderView;
+			path = Folder;
 			sourceTree = "<group>";
 		};
 		23C2378728C9CEF800CE3200 /* FolderListModel */ = {
@@ -259,12 +265,20 @@
 			path = FolderListModel;
 			sourceTree = "<group>";
 		};
-		23C8A1C328CA08AB003ABFE9 /* ItemDetailView */ = {
+		23C5AB4728CAA21D00A7E977 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				23C5AB4828CAA23300A7E977 /* MyPageView.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		23C8A1C328CA08AB003ABFE9 /* ItemDetail */ = {
 			isa = PBXGroup;
 			children = (
 				23C8A1C428CA08B7003ABFE9 /* ItemDetailView.swift */,
 			);
-			path = ItemDetailView;
+			path = ItemDetail;
 			sourceTree = "<group>";
 		};
 		23C9567928C67B8A00D88536 /* Cells */ = {
@@ -275,6 +289,7 @@
 				234F838C28C9857000C4EB41 /* CartTableViewCell.swift */,
 				23C2378A28C9CF1D00CE3200 /* FolderCollectionViewCell.swift */,
 				23C8A1C628CA0AC9003ABFE9 /* ItemDetailTableViewCell.swift */,
+				23C5AB4C28CAA54600A7E977 /* MypageProfileTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -396,9 +411,10 @@
 		23DC04E028C58C6C00ABB0CF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				23C8A1C328CA08AB003ABFE9 /* ItemDetailView */,
-				23C2378228C9CED300CE3200 /* FolderView */,
-				234F838928C983C200C4EB41 /* CartView */,
+				23C5AB4728CAA21D00A7E977 /* MyPage */,
+				23C8A1C328CA08AB003ABFE9 /* ItemDetail */,
+				23C2378228C9CED300CE3200 /* Folder */,
+				234F838928C983C200C4EB41 /* Cart */,
 				234F837728C9628900C4EB41 /* OnBoarding */,
 				234F837628C9628300C4EB41 /* Login */,
 				234F837528C9627F00C4EB41 /* Home */,
@@ -436,6 +452,7 @@
 				234F838E28C987CB00C4EB41 /* CartViewController.swift */,
 				23C2378328C9CEE000CE3200 /* FolderViewController.swift */,
 				23C8A1C128CA08A9003ABFE9 /* ItemDetailViewController.swift */,
+				23C5AB4A28CAA24300A7E977 /* MyPageViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -730,8 +747,10 @@
 				23C2378928C9CF0400CE3200 /* FolderListModel.swift in Sources */,
 				2375C1CA28C5C2550017BAF7 /* OnBoardingView.swift in Sources */,
 				23C9568D28C6812100D88536 /* UIColor.swift in Sources */,
+				23C5AB4928CAA23300A7E977 /* MyPageView.swift in Sources */,
 				23D5517D28C6936400D81B5F /* OnBoardingViewModel.swift in Sources */,
 				234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */,
+				23C5AB4D28CAA54600A7E977 /* MypageProfileTableViewCell.swift in Sources */,
 				23C2378428C9CEE000CE3200 /* FolderViewController.swift in Sources */,
 				234F838D28C9857000C4EB41 /* CartTableViewCell.swift in Sources */,
 				23C8A1C228CA08A9003ABFE9 /* ItemDetailViewController.swift in Sources */,
@@ -739,6 +758,7 @@
 				23D5517F28C698D200D81B5F /* LoginView.swift in Sources */,
 				23C8A1C028C9F23E003ABFE9 /* NavigationBar.swift in Sources */,
 				23C9567B28C67B9D00D88536 /* OnBoardingTableViewCell.swift in Sources */,
+				23C5AB4B28CAA24300A7E977 /* MyPageViewController.swift in Sources */,
 				23DC04EB28C591F400ABB0CF /* OnBoardingViewController.swift in Sources */,
 				23C2378B28C9CF1D00CE3200 /* FolderCollectionViewCell.swift in Sources */,
 				234F838828C97BF900C4EB41 /* WishListModel.swift in Sources */,
