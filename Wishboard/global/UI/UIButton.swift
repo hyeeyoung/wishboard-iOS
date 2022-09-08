@@ -34,4 +34,18 @@ extension UIButton {
         attributedString.addAttribute(.foregroundColor, value: color, range: NSRange(location: 0, length: title.count))
         setAttributedTitle(attributedString, for: .normal)
     }
+    // MARK: Cart Button
+    func cartButton(_ color: UIColor) {
+        var config = UIButton.Configuration.tinted()
+        var attText = AttributedString.init("Cart")
+        
+        attText.font = .systemFont(ofSize: 8)
+        attText.foregroundColor = UIColor.black
+        config.attributedTitle = attText
+        config.background.backgroundColor = color
+        config.baseForegroundColor = .black
+        config.cornerStyle = .capsule
+        
+        self.configuration = config
+    }
 }

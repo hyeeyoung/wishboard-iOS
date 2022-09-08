@@ -11,6 +11,9 @@
 		234F837928C9629800C4EB41 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F837828C9629800C4EB41 /* HomeView.swift */; };
 		234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F837A28C9647600C4EB41 /* TabBarViewController.swift */; };
 		234F837F28C9678F00C4EB41 /* Montserrat-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 234F837E28C9678F00C4EB41 /* Montserrat-VariableFont_wght.ttf */; };
+		234F838228C96F6300C4EB41 /* WishListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838128C96F6300C4EB41 /* WishListCollectionViewCell.swift */; };
+		234F838528C9711400C4EB41 /* NanumSquareR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 234F838428C9711400C4EB41 /* NanumSquareR.ttf */; };
+		234F838828C97BF900C4EB41 /* WishListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838728C97BF900C4EB41 /* WishListModel.swift */; };
 		2375C1CA28C5C2550017BAF7 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2375C1C928C5C2550017BAF7 /* OnBoardingView.swift */; };
 		23C9567B28C67B9D00D88536 /* OnBoardingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C9567A28C67B9D00D88536 /* OnBoardingTableViewCell.swift */; };
 		23C9568B28C6803900D88536 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C9568A28C6803900D88536 /* UIFont.swift */; };
@@ -70,6 +73,9 @@
 		234F837828C9629800C4EB41 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		234F837A28C9647600C4EB41 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		234F837E28C9678F00C4EB41 /* Montserrat-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		234F838128C96F6300C4EB41 /* WishListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListCollectionViewCell.swift; sourceTree = "<group>"; };
+		234F838428C9711400C4EB41 /* NanumSquareR.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareR.ttf; sourceTree = "<group>"; };
+		234F838728C97BF900C4EB41 /* WishListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListModel.swift; sourceTree = "<group>"; };
 		2375C1C928C5C2550017BAF7 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		23C9567A28C67B9D00D88536 /* OnBoardingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingTableViewCell.swift; sourceTree = "<group>"; };
 		23C9568A28C6803900D88536 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
@@ -191,10 +197,27 @@
 			path = monteserrat;
 			sourceTree = "<group>";
 		};
+		234F838328C9710500C4EB41 /* NanumSquare */ = {
+			isa = PBXGroup;
+			children = (
+				234F838428C9711400C4EB41 /* NanumSquareR.ttf */,
+			);
+			path = NanumSquare;
+			sourceTree = "<group>";
+		};
+		234F838628C97BE400C4EB41 /* WishListModel */ = {
+			isa = PBXGroup;
+			children = (
+				234F838728C97BF900C4EB41 /* WishListModel.swift */,
+			);
+			path = WishListModel;
+			sourceTree = "<group>";
+		};
 		23C9567928C67B8A00D88536 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				23C9567A28C67B9D00D88536 /* OnBoardingTableViewCell.swift */,
+				234F838128C96F6300C4EB41 /* WishListCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -223,6 +246,7 @@
 		23C9567E28C67FD900D88536 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				234F838328C9710500C4EB41 /* NanumSquare */,
 				234F837D28C9677500C4EB41 /* monteserrat */,
 				234F837C28C9676A00C4EB41 /* SUIT */,
 				23C9568A28C6803900D88536 /* UIFont.swift */,
@@ -326,6 +350,7 @@
 		23DC04E128C58C7200ABB0CF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				234F838628C97BE400C4EB41 /* WishListModel */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -494,6 +519,7 @@
 				23DC04B728C58B5500ABB0CF /* Assets.xcassets in Resources */,
 				234F837F28C9678F00C4EB41 /* Montserrat-VariableFont_wght.ttf in Resources */,
 				23DC04B528C58B5200ABB0CF /* Main.storyboard in Resources */,
+				234F838528C9711400C4EB41 /* NanumSquareR.ttf in Resources */,
 				23C9569828C68D7A00D88536 /* SUIT-ExtraLight.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -636,9 +662,11 @@
 				23C9568D28C6812100D88536 /* UIColor.swift in Sources */,
 				23D5517D28C6936400D81B5F /* OnBoardingViewModel.swift in Sources */,
 				234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */,
+				234F838228C96F6300C4EB41 /* WishListCollectionViewCell.swift in Sources */,
 				23D5517F28C698D200D81B5F /* LoginView.swift in Sources */,
 				23C9567B28C67B9D00D88536 /* OnBoardingTableViewCell.swift in Sources */,
 				23DC04EB28C591F400ABB0CF /* OnBoardingViewController.swift in Sources */,
+				234F838828C97BF900C4EB41 /* WishListModel.swift in Sources */,
 				23D5518B28C6B45C00D81B5F /* String.swift in Sources */,
 				23D5518128C69E2900D81B5F /* UITextField.swift in Sources */,
 			);

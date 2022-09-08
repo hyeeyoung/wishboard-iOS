@@ -26,4 +26,10 @@ extension UIFont{
         }
         return font
     }
+    static func nanumSquare(size: CGFloat = 12) -> UIFont! {
+        guard let font: UIFont = UIFont(name: "NanumSquareR", size: size) else {
+            return nil
+        }
+        return font
+    }
 }

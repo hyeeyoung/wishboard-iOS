@@ -11,6 +11,7 @@ class TabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBar.backgroundColor = .white
         
        // 인스턴스화
         let wishListVC = HomeViewController()

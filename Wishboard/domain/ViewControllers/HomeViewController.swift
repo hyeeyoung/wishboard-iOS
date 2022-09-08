@@ -22,7 +22,8 @@ class HomeViewController: UIViewController {
         homeView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview()
         }
+        
+        // temp data
+        homeView.setTempData()
     }
-    
-
 }
