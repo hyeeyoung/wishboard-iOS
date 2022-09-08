@@ -8,13 +8,29 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    var homeView: HomeView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = .white
+        self.navigationController?.isNavigationBarHidden = true
         
+        homeView = HomeView()
+        self.view.addSubview(homeView)
+        
+        homeView.snp.makeConstraints { make in
+            make.leading.trailing.top.bottom.equalToSuperview()
+        }
+        
+        // temp data
+        homeView.setTempData()
+        self.homeView.cartButton.addTarget(self, action: #selector(goToCart), for: .touchUpInside)
     }
-    
-
+    @objc func goToCart() {
+        let cartVC = CartViewController()
+//        loginViewController.modalTransitionStyle = .coverVertical
+        cartVC.modalPresentationStyle = .fullScreen
+        self.present(cartVC, animated: true, completion: nil)
+    }
 }
