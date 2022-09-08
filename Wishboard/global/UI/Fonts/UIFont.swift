@@ -20,4 +20,10 @@ extension UIFont{
         }
         return font
     }
+    static func monteserrat(size: CGFloat = 14) -> UIFont! {
+        guard let font: UIFont = UIFont(name: "Montserrat-VariableFont_wght", size: size) else {
+            return nil
+        }
+        return font
+    }
 }

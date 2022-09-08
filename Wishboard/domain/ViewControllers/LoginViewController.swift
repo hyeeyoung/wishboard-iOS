@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class LoginViewController: UIViewController {
     let loginView = LoginView()
@@ -24,7 +26,6 @@ class LoginViewController: UIViewController {
         loginView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview()
         }
-        
         bind()
     }
     // MARK: - Actions
