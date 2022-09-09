@@ -16,39 +16,33 @@ class CalenderView: UIView {
     }
     
     // MARK: - Life Cycles
-    var calender: FSCalendar!
+    var calenderTableView: UITableView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setCalender()
-        setUpView()
-        setUpConstraint()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     // MARK: - Functions
-    func setCalender() {
-        calender = FSCalendar().then{
-            $0.appearance.headerMinimumDissolvedAlpha = 0
-            $0.locale = Locale(identifier: "en")
+    func setTableView(dataSourceDelegate: UITableViewDelegate & UITableViewDataSource) {
+        calenderTableView = UITableView().then{
+            $0.delegate = dataSourceDelegate
+            $0.dataSource = dataSourceDelegate
+            $0.register(CalenderTableViewCell.self, forCellReuseIdentifier: "CalenderTableViewCell")
+            $0.register(CalenderNotiTableViewCell.self, forCellReuseIdentifier: "CalenderNotiTableViewCell")
             
-            $0.appearance.headerTitleColor = .black
-            $0.appearance.weekdayTextColor = .black
-            $0.appearance.headerTitleFont = UIFont.Suit(size: 22, family: .Bold)
-            $0.appearance.titleFont = UIFont.Suit(size: 16, family: .Light)
-            $0.appearance.weekdayFont = UIFont.Suit(size: 16, family: .Light)
-            
-            $0.appearance.selectionColor = UIColor(named: "WishBoardColor")
-            $0.appearance.todaySelectionColor = UIColor(named: "WishBoardColor")
-            $0.appearance.titleSelectionColor = .black
+            // autoHeight
+            $0.rowHeight = UITableView.automaticDimension
+            $0.estimatedRowHeight = UITableView.automaticDimension
+            $0.showsVerticalScrollIndicator = false
         }
     }
     func setUpView() {
+        addSubview(calenderTableView)
         addSubview(backButton)
-        addSubview(calender)
     }
     func setUpConstraint() {
         backButton.snp.makeConstraints { make in
@@ -57,10 +51,9 @@ class CalenderView: UIView {
             make.leading.equalToSuperview().offset(16)
             make.top.equalToSuperview().offset(66)
         }
-        calender.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
+        calenderTableView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
             make.top.equalToSuperview().offset(50)
-            make.height.equalTo(385)
         }
     }
 }

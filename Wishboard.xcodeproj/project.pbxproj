@@ -56,6 +56,8 @@
 		23D5518728C6AFFF00D81B5F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5518628C6AFFF00D81B5F /* LoginViewModel.swift */; };
 		23D5518928C6B02400D81B5F /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5518828C6B02400D81B5F /* Observable.swift */; };
 		23D5518B28C6B45C00D81B5F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5518A28C6B45C00D81B5F /* String.swift */; };
+		23D7901428CB0E5F00246109 /* CalenderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D7901328CB0E5F00246109 /* CalenderTableViewCell.swift */; };
+		23D7901628CB172900246109 /* CalenderNotiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D7901528CB172900246109 /* CalenderNotiTableViewCell.swift */; };
 		23DC04AE28C58B5200ABB0CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04AD28C58B5200ABB0CF /* AppDelegate.swift */; };
 		23DC04B028C58B5200ABB0CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04AF28C58B5200ABB0CF /* SceneDelegate.swift */; };
 		23DC04B528C58B5200ABB0CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23DC04B328C58B5200ABB0CF /* Main.storyboard */; };
@@ -139,6 +141,8 @@
 		23D5518628C6AFFF00D81B5F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		23D5518828C6B02400D81B5F /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		23D5518A28C6B45C00D81B5F /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		23D7901328CB0E5F00246109 /* CalenderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderTableViewCell.swift; sourceTree = "<group>"; };
+		23D7901528CB172900246109 /* CalenderNotiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderNotiTableViewCell.swift; sourceTree = "<group>"; };
 		23DC04AA28C58B5200ABB0CF /* Wishboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wishboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23DC04AD28C58B5200ABB0CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23DC04AF28C58B5200ABB0CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -329,6 +333,8 @@
 				23C8A1C628CA0AC9003ABFE9 /* ItemDetailTableViewCell.swift */,
 				23C5AB4C28CAA54600A7E977 /* MypageProfileTableViewCell.swift */,
 				2328C5AD28CAC17C0065ABB2 /* NotiTableViewCell.swift */,
+				23D7901328CB0E5F00246109 /* CalenderTableViewCell.swift */,
+				23D7901528CB172900246109 /* CalenderNotiTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -786,6 +792,7 @@
 				23DC04E928C591E600ABB0CF /* ViewController.swift in Sources */,
 				234F838B28C983CE00C4EB41 /* CartView.swift in Sources */,
 				23DC04B028C58B5200ABB0CF /* SceneDelegate.swift in Sources */,
+				23D7901428CB0E5F00246109 /* CalenderTableViewCell.swift in Sources */,
 				23C9568B28C6803900D88536 /* UIFont.swift in Sources */,
 				2328C5B028CAC7930065ABB2 /* ModifyProfileViewController.swift in Sources */,
 				2328C5AC28CAC1260065ABB2 /* NotificationViewController.swift in Sources */,
@@ -795,6 +802,7 @@
 				23C2378928C9CF0400CE3200 /* FolderListModel.swift in Sources */,
 				2375C1CA28C5C2550017BAF7 /* OnBoardingView.swift in Sources */,
 				23C9568D28C6812100D88536 /* UIColor.swift in Sources */,
+				23D7901628CB172900246109 /* CalenderNotiTableViewCell.swift in Sources */,
 				23C5AB4928CAA23300A7E977 /* MyPageView.swift in Sources */,
 				23D5517D28C6936400D81B5F /* OnBoardingViewModel.swift in Sources */,
 				234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */,

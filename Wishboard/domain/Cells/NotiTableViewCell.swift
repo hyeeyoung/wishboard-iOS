@@ -85,8 +85,19 @@ extension NotiTableViewCell {
         if let name = data.itemName {self.itemName.text = name}
         if let time = data.time {self.timeLabel.text = time}
         if let isViewed = data.isViewed {
-            print("view?", isViewed)
             self.viewView.isHidden = isViewed ? true : false
+        }
+    }
+    func setCalenderNotiCell() {
+        let grayView = UIView().then{
+            $0.backgroundColor = .systemGray6
+            $0.layer.cornerRadius = 24
+        }
+        contentView.insertSubview(grayView, at: 0)
+        grayView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-3)
+            make.top.equalToSuperview().offset(3)
         }
     }
 }
