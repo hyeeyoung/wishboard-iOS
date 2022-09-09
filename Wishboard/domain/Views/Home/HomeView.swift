@@ -22,6 +22,7 @@ class HomeView: UIView {
     }
     
     // MARK: - Life Cycles
+    var viewController : HomeViewController!
     var collectionView : UICollectionView!
     var wishListData: [WishListModel] = []
     
@@ -37,6 +38,9 @@ class HomeView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     // MARK: - Functions
+    func setViewController(_ viewcontroller: HomeViewController) {
+        self.viewController = viewcontroller
+    }
     func setCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()) .then{
             let flowLayout = UICollectionViewFlowLayout()
@@ -107,6 +111,11 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         let itemIdx = indexPath.item
         cell.setUpData(self.wishListData[itemIdx])
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let itemDetailVC = ItemDetailViewController()
+        itemDetailVC.modalPresentationStyle = .fullScreen
+        self.viewController.present(itemDetailVC, animated: true, completion: nil)
     }
 }
 // 임시 데이터

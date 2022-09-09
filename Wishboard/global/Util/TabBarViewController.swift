@@ -15,7 +15,7 @@ class TabBarViewController: UITabBarController {
         
        // 인스턴스화
         let wishListVC = HomeViewController()
-        let folderVC = HomeViewController()
+        let folderVC = FolderViewController()
         let addVC = HomeViewController()
         let noticeVC = HomeViewController()
         let profileVC = HomeViewController()

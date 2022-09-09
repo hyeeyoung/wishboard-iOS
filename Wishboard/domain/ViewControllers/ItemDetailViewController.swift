@@ -1,0 +1,42 @@
+//
+//  ItemDetailViewController.swift
+//  Wishboard
+//
+//  Created by gomin on 2022/09/08.
+//
+
+import UIKit
+
+class ItemDetailViewController: UIViewController {
+    var itemDetailView: ItemDetailView!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.view.backgroundColor = .white
+        self.navigationController?.isNavigationBarHidden = true
+        
+        itemDetailView = ItemDetailView()
+        self.view.addSubview(itemDetailView)
+        
+        itemDetailView.snp.makeConstraints { make in
+            make.leading.trailing.top.bottom.equalToSuperview()
+        }
+        itemDetailView.menuButton.addTarget(self, action: #selector(alertMenu), for: .touchUpInside)
+    }
+    @objc func alertMenu() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let defaultAction =  UIAlertAction(title: "아이템 수정", style: UIAlertAction.Style.default)
+        let cancelAction = UIAlertAction(title: "닫기", style: UIAlertAction.Style.cancel, handler: nil)
+        let destructiveAction = UIAlertAction(title: "아이템 삭제", style: UIAlertAction.Style.destructive){(_) in
+            self.dismiss(animated: true)
+        }
+        alert.addAction(defaultAction)
+        alert.addAction(cancelAction)
+        alert.addAction(destructiveAction)
+
+        self.present(alert, animated: true)
+    }
+
+}

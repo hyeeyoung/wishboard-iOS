@@ -18,6 +18,7 @@ class HomeViewController: UIViewController {
         
         homeView = HomeView()
         self.view.addSubview(homeView)
+        homeView.setViewController(self)
         
         homeView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview()
