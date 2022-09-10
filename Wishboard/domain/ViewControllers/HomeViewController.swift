@@ -25,6 +25,7 @@ class HomeViewController: UIViewController {
         }
         
         // temp data
+        homeView.showBottomSheet()
         homeView.setTempData()
         self.homeView.cartButton.addTarget(self, action: #selector(goToCart), for: .touchUpInside)
     }
