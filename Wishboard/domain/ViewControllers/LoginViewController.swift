@@ -45,9 +45,9 @@ class LoginViewController: UIViewController {
         loginViewModel.isValidID.bind { isValidID in
             guard let isValid = isValidID else {return}
             if isValid {
-                self.loginView.loginButton.defaultButton("로그인하기", UIColor.SignatureColor())
+                self.loginView.loginButton.defaultButton("로그인하기", .wishboardGreen, .black)
             } else {
-                self.loginView.loginButton.defaultButton("로그인하기", UIColor.DisabledColor())
+                self.loginView.loginButton.defaultButton("로그인하기", .wishboardDisabledGray, .black)
             }
         }
 

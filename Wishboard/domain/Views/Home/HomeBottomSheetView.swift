@@ -11,12 +11,12 @@ import UIKit
 class HomeBottomSheetView: UIView {
     // MARK: - Properties
     let okButton = UIButton().then{
-        $0.defaultButton("네! 알겠어요", UIColor(named: "WishBoardColor")!)
+        $0.defaultButton("네! 알겠어요", .black, .white)
     }
     private let pageControl = UIPageControl().then{
         $0.hidesForSinglePage = true
         $0.numberOfPages = 3
-        $0.currentPageIndicatorTintColor = UIColor(named: "WishBoardColor")
+        $0.currentPageIndicatorTintColor = .black
         $0.pageIndicatorTintColor = .lightGray
     }
     

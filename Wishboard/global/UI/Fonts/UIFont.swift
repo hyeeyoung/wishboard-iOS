@@ -20,14 +20,8 @@ extension UIFont{
         }
         return font
     }
-    static func monteserrat(size: CGFloat = 14) -> UIFont! {
-        guard let font: UIFont = UIFont(name: "Montserrat-VariableFont_wght", size: size) else {
-            return nil
-        }
-        return font
-    }
-    static func nanumSquare(size: CGFloat = 12) -> UIFont! {
-        guard let font: UIFont = UIFont(name: "NanumSquareR", size: size) else {
+    static func monteserrat(size: CGFloat = 14, family: Family = .Regular) -> UIFont! {
+        guard let font: UIFont = UIFont(name: "Montserrat-\(family)", size: size) else {
             return nil
         }
         return font

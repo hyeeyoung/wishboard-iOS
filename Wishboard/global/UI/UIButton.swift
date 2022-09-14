@@ -10,14 +10,14 @@ import UIKit
 
 extension UIButton {
     // MARK: Button
-    func defaultButton(_ title: String, _ color: UIColor) {
+    func defaultButton(_ title: String, _ backgroundColor: UIColor, _ titleColor: UIColor) {
         var config = UIButton.Configuration.tinted()
         var attText = AttributedString.init(title)
         
         attText.font = UIFont.Suit(size: 14, family: .Bold)
-        attText.foregroundColor = UIColor.black
+        attText.foregroundColor = titleColor
         config.attributedTitle = attText
-        config.background.backgroundColor = color
+        config.background.backgroundColor = backgroundColor
         config.baseForegroundColor = .black
         config.cornerStyle = .capsule
         
@@ -39,7 +39,7 @@ extension UIButton {
         var config = UIButton.Configuration.tinted()
         var attText = AttributedString.init("Cart")
         
-        attText.font = .systemFont(ofSize: 8)
+        attText.font = UIFont.Suit(size: 11.46, family: .Regular)
         attText.foregroundColor = UIColor.black
         config.attributedTitle = attText
         config.background.backgroundColor = color

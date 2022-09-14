@@ -88,7 +88,7 @@ extension MyPageViewController {
     func setSwitch(_ cell: UITableViewCell) {
         let notiSwitch = UISwitch().then{
             $0.isOn = true
-            $0.onTintColor = UIColor(named: "WishBoardColor")
+            $0.onTintColor = .wishboardGreen
         }
         cell.addSubview(notiSwitch)
         notiSwitch.snp.makeConstraints { make in

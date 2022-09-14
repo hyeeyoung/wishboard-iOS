@@ -4,8 +4,9 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>NanumSquareR.ttf</string>
-		<string>Montserrat-VariableFont_wght.ttf</string>
+		<string>Montserrat-Regular.ttf</string>
+		<string>Montserrat-Light.ttf</string>
+		<string>Montserrat-Bold.ttf</string>
 		<string>SUIT-Light.ttf</string>
 		<string>SUIT-Bold.ttf</string>
 		<string>SUIT-Regular.ttf</string>

@@ -28,7 +28,7 @@ class OnBoardingTableViewCell: UITableViewCell {
     }
     // 가입하기 버튼
     let registerButton = UIButton().then{
-        $0.defaultButton("가입하기", UIColor.SignatureColor())
+        $0.defaultButton("가입하기", .wishboardGreen, .black)
     }
     let loginStackView = UIStackView()
     // 이미 계정이 있으신가요?
@@ -39,7 +39,7 @@ class OnBoardingTableViewCell: UITableViewCell {
     }
     // 로그인
     let loginButton = UIButton().then{
-        $0.setUnderline("로그인", UIColor.SignatureColor())
+        $0.setUnderline("로그인", .wishboardGreen)
     }
     
     override func awakeFromNib() {
