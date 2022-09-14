@@ -32,5 +32,11 @@ extension UIColor{
         blue: 227/255,
         alpha: 1
     )
+    static let popupBackground = UIColor(
+        red: 0/255,
+        green: 0/255,
+        blue: 0/255,
+        alpha: 0.4
+    )
 
 }

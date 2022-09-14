@@ -31,7 +31,7 @@ class ItemDetailView: UIView {
         
         setTableView()
         setUpNavigationView()
-        setUpLowerView(false)
+        setUpLowerView(true)
         setUpConstraint()
     }
     
