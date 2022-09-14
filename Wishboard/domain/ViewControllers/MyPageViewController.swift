@@ -68,6 +68,11 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            let modifyProfile = ModifyProfileViewController()
+            modifyProfile.modalPresentationStyle = .fullScreen
+            self.present(modifyProfile, animated: true, completion: nil)
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
