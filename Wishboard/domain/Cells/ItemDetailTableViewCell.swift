@@ -18,7 +18,8 @@ class ItemDetailTableViewCell: UITableViewCell {
         var attText = AttributedString.init("폴더 지정하기 >")
         
         attText.font = .systemFont(ofSize: 13)
-        attText.foregroundColor = UIColor.lightGray
+        attText.foregroundColor = UIColor.wishboardGray
+        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         config.attributedTitle = attText
         
         $0.configuration = config
@@ -26,7 +27,7 @@ class ItemDetailTableViewCell: UITableViewCell {
     let dateLabel = UILabel().then{
         $0.text = "0주 전"
         $0.font = UIFont.Suit(size: 13, family: .Regular)
-        $0.textColor = .lightGray
+        $0.textColor = .wishboardGray
     }
     let itemNameLabel = UILabel().then{
         $0.text = "itemName"
@@ -118,8 +119,8 @@ class ItemDetailTableViewCell: UITableViewCell {
             make.leading.equalTo(restockLabel.snp.trailing).offset(9)
         }
         setFolderButton.snp.makeConstraints { make in
-            make.leading.equalTo(itemImage.snp.leading).offset(-10)
-            make.top.equalTo(itemImage.snp.bottom).offset(12)
+            make.leading.equalTo(itemImage)
+            make.top.equalTo(itemImage.snp.bottom).offset(20)
         }
         dateLabel.snp.makeConstraints { make in
             make.trailing.equalTo(itemImage.snp.trailing)
@@ -127,7 +128,7 @@ class ItemDetailTableViewCell: UITableViewCell {
         }
         itemNameLabel.snp.makeConstraints { make in
             make.leading.equalTo(itemImage.snp.leading)
-            make.top.equalTo(setFolderButton.snp.bottom)
+            make.top.equalTo(setFolderButton.snp.bottom).offset(10)
         }
         priceLabel.snp.makeConstraints { make in
             make.leading.equalTo(itemImage.snp.leading)
