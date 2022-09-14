@@ -11,10 +11,13 @@ import UIKit
 class NavigationBar {
     // Default navigation bar
     // 뒤로가기 버튼  + 가운데 제목
+    var viewcontroller: UIViewController!
     func defaultNavigationBar(_ title: String, _ view: UIView, _ viewController: UIViewController) -> UIView {
+        self.viewcontroller = viewController
+        
         let navigationView = UIView()
         let pageTitle = UILabel().then{
-            $0.text = "장바구니"
+            $0.text = title
             $0.font = UIFont.Suit(size: 15, family: .Bold)
         }
         let backButton = UIButton().then{
@@ -26,7 +29,8 @@ class NavigationBar {
         navigationView.addSubview(backButton)
         
         navigationView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(50)
+            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
+            else {make.top.equalToSuperview().offset(20)}
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(50)
         }
@@ -40,8 +44,11 @@ class NavigationBar {
             make.leading.equalToSuperview().offset(16)
         }
         
-//        backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         
         return navigationView
+    }
+    @objc func goBack() {
+        self.viewcontroller.dismiss(animated: true)
     }
 }

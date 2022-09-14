@@ -12,7 +12,7 @@ class WishListCollectionViewCell: UICollectionViewCell {
     static let identifier = "WishListCollectionViewCell"
     
     let itemImage = UIImageView().then{
-        $0.backgroundColor = .lightGray
+        $0.backgroundColor = .systemGray6
     }
     let itemName = UILabel().then{
         $0.text = "itemName"
@@ -52,7 +52,7 @@ class WishListCollectionViewCell: UICollectionViewCell {
     }
     func setUpConstraint() {
         itemImage.snp.makeConstraints { make in
-            make.width.height.equalTo(180)
+            make.height.equalTo(itemImage.snp.width)
             make.leading.top.trailing.equalToSuperview()
         }
         itemName.snp.makeConstraints { make in

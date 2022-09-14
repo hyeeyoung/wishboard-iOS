@@ -81,7 +81,8 @@ class ItemDetailView: UIView {
     }
     func setUpNavigationConstraint() {
         navigationView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(50)
+            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
+            else {make.top.equalToSuperview().offset(20)}
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(50)
         }
@@ -100,12 +101,13 @@ class ItemDetailView: UIView {
     }
     func setUpLowerConstraint() {
         lowerView.snp.makeConstraints { make in
-            make.height.equalTo(50)
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-40)
+            if CheckNotch().hasNotch() {make.height.equalTo(78)}
+            else {make.height.equalTo(44)}
+            make.leading.trailing.bottom.equalToSuperview()
         }
         lowerButton.snp.makeConstraints { make in
-            make.centerY.centerX.equalToSuperview()
+            make.leading.trailing.top.equalToSuperview()
+            make.height.equalTo(44)
         }
     }
 }

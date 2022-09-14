@@ -33,8 +33,8 @@ class TabBarViewController: UITabBarController {
         profileVC.tabBarItem.title = "MY"
         
         self.tabBar.tintColor = .black
-//        let fontAttributes = [NSAttributedString.Key.font: UIFont.monteserrat(size: 9)]
-//        UITabBarItem.appearance().setTitleTextAttributes(fontAttributes, for: .normal)
+        let fontAttributes = [NSAttributedString.Key.font: UIFont.monteserrat(size: 9, family: .Regular)]
+        UITabBarItem.appearance().setTitleTextAttributes(fontAttributes, for: .normal)
         
        // navigationController의 root view 설정
         let nav1 = UINavigationController(rootViewController: wishListVC)
