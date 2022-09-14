@@ -16,7 +16,7 @@ class WishListCollectionViewCell: UICollectionViewCell {
     }
     let itemName = UILabel().then{
         $0.text = "itemName"
-        $0.font = UIFont.nanumSquare(size: 15)
+        $0.font = UIFont.Suit(size: 12.5, family: .Regular)
         $0.numberOfLines = 1
     }
     let itemPrice = UILabel().then{
@@ -25,7 +25,7 @@ class WishListCollectionViewCell: UICollectionViewCell {
     }
     let won = UILabel().then{
         $0.text = "원"
-        $0.font = UIFont.nanumSquare(size: 12)
+        $0.font = UIFont.Suit(size: 11.46, family: .Regular)
     }
     let cartButton = UIButton().then{
         $0.cartButton(.white)
@@ -80,7 +80,7 @@ class WishListCollectionViewCell: UICollectionViewCell {
         if let name = data.itemName {self.itemName.text = name}
         if let price = data.itemPrice {self.itemPrice.text = String(price)}
         if let isCart = data.isCart {
-            if isCart {self.cartButton.cartButton(UIColor(named: "WishBoardColor")!)}
+            if isCart {self.cartButton.cartButton(.wishboardGreen)}
             else {self.cartButton.cartButton(.white)}
         }
     }

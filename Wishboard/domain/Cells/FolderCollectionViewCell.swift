@@ -21,12 +21,12 @@ class FolderCollectionViewCell: UICollectionViewCell {
     }
     let countLabel = UILabel().then{
         $0.text = "0"
-        $0.font = UIFont.nanumSquare(size: 12)
+        $0.font = UIFont.Suit(size: 12.5, family: .Regular)
         $0.textColor = .lightGray
     }
     let itemLabel = UILabel().then{
         $0.text = "아이템"
-        $0.font = UIFont.nanumSquare(size: 12)
+        $0.font = UIFont.Suit(size: 12.5, family: .Regular)
         $0.textColor = .lightGray
     }
     let moreButton = UIButton().then{

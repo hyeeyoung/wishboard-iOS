@@ -41,8 +41,8 @@ class CalenderTableViewCell: UITableViewCell {
             $0.appearance.titleFont = UIFont.Suit(size: 16, family: .Light)
             $0.appearance.weekdayFont = UIFont.Suit(size: 16, family: .Light)
             
-            $0.appearance.selectionColor = UIColor(named: "WishBoardColor")
-            $0.appearance.todaySelectionColor = UIColor(named: "WishBoardColor")
+            $0.appearance.selectionColor = .wishboardGreen
+            $0.appearance.todaySelectionColor = .wishboardGreen
             $0.appearance.titleSelectionColor = .black
         }
     }

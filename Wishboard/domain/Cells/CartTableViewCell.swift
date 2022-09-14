@@ -14,7 +14,7 @@ class CartTableViewCell: UITableViewCell {
     }
     let itemName = UILabel().then{
         $0.text = "itemName"
-        $0.font = UIFont.nanumSquare(size: 15)
+        $0.font = UIFont.Suit(size: 12.5, family: .Regular)
         $0.numberOfLines = 0
     }
     let deleteButton = UIButton().then{
@@ -28,7 +28,7 @@ class CartTableViewCell: UITableViewCell {
     }
     let countLabel = UILabel().then{
         $0.text = "1"
-        $0.font = UIFont.nanumSquare(size: 14)
+        $0.font = UIFont.Suit(size: 14.58, family: .Regular)
     }
     let priceLabel = UILabel().then{
         $0.text = "1111"
@@ -36,7 +36,7 @@ class CartTableViewCell: UITableViewCell {
     }
     let won = UILabel().then{
         $0.text = "원"
-        $0.font = UIFont.nanumSquare(size: 15)
+        $0.font = UIFont.Suit(size: 14.58, family: .Regular)
     }
     //MARK: - Life Cycles
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

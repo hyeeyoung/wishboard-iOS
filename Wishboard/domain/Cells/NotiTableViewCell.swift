@@ -15,7 +15,7 @@ class NotiTableViewCell: UITableViewCell {
     }
     let itemName = UILabel().then{
         $0.text = "itemName"
-        $0.font = UIFont.nanumSquare(size: 15)
+        $0.font = UIFont.Suit(size: 14, family: .Regular)
         $0.numberOfLines = 2
     }
     // '재입고 알림'
@@ -25,12 +25,12 @@ class NotiTableViewCell: UITableViewCell {
     }
     // 읽음 표시
     let viewView = UIView().then{
-        $0.backgroundColor = UIColor(named: "WishBoardColor")
+        $0.backgroundColor = .wishboardGreen
         $0.layer.cornerRadius = 4
     }
     let timeLabel = UILabel().then{
         $0.text = ""
-        $0.font = UIFont.nanumSquare(size: 12)
+        $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .gray
     }
     //MARK: - Life Cycles

@@ -21,27 +21,27 @@ class CartView: UIView {
     }
     // lower View
     let lowerView = UIView().then{
-        $0.backgroundColor = UIColor(named: "WishBoardColor")
+        $0.backgroundColor = .wishboardGreen
     }
     let total = UILabel().then{
         $0.text = "전체"
-        $0.font = UIFont.nanumSquare(size: 16)
+        $0.font = UIFont.Suit(size: 14, family: .Regular)
     }
     let countLabel = UILabel().then{
-        $0.text = "__"
-        $0.font = UIFont.monteserrat(size: 16)
+        $0.text = "0"
+        $0.font = UIFont.monteserrat(size: 18, family: .Bold)
     }
     let label = UILabel().then{
         $0.text = "개"
-        $0.font = UIFont.nanumSquare(size: 16)
+        $0.font = UIFont.Suit(size: 14, family: .Regular)
     }
     let price = UILabel().then{
-        $0.text = "0000"
-        $0.font = UIFont.monteserrat(size: 16)
+        $0.text = "0"
+        $0.font = UIFont.monteserrat(size: 18, family: .Bold)
     }
     let won = UILabel().then{
         $0.text = "원"
-        $0.font = UIFont.nanumSquare(size: 16)
+        $0.font = UIFont.Suit(size: 14, family: .Regular)
     }
     // MARK: - Life Cycles
     var cartTableView: UITableView!

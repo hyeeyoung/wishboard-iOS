@@ -18,13 +18,14 @@
 		234F837428C9627700C4EB41 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F837328C9627700C4EB41 /* HomeViewController.swift */; };
 		234F837928C9629800C4EB41 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F837828C9629800C4EB41 /* HomeView.swift */; };
 		234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F837A28C9647600C4EB41 /* TabBarViewController.swift */; };
-		234F837F28C9678F00C4EB41 /* Montserrat-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 234F837E28C9678F00C4EB41 /* Montserrat-VariableFont_wght.ttf */; };
 		234F838228C96F6300C4EB41 /* WishListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838128C96F6300C4EB41 /* WishListCollectionViewCell.swift */; };
-		234F838528C9711400C4EB41 /* NanumSquareR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 234F838428C9711400C4EB41 /* NanumSquareR.ttf */; };
 		234F838828C97BF900C4EB41 /* WishListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838728C97BF900C4EB41 /* WishListModel.swift */; };
 		234F838B28C983CE00C4EB41 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838A28C983CE00C4EB41 /* CartView.swift */; };
 		234F838D28C9857000C4EB41 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838C28C9857000C4EB41 /* CartTableViewCell.swift */; };
 		234F838F28C987CB00C4EB41 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838E28C987CB00C4EB41 /* CartViewController.swift */; };
+		2374789628D1C9D600CF941A /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2374789328D1C9D600CF941A /* Montserrat-Bold.ttf */; };
+		2374789728D1C9D600CF941A /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2374789428D1C9D600CF941A /* Montserrat-Light.ttf */; };
+		2374789828D1C9D600CF941A /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2374789528D1C9D600CF941A /* Montserrat-Regular.ttf */; };
 		2375C1CA28C5C2550017BAF7 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2375C1C928C5C2550017BAF7 /* OnBoardingView.swift */; };
 		238EF90628CB06F800ECA606 /* CalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90528CB06F800ECA606 /* CalenderViewController.swift */; };
 		238EF90928CB070700ECA606 /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90828CB070700ECA606 /* CalenderView.swift */; };
@@ -108,13 +109,14 @@
 		234F837328C9627700C4EB41 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		234F837828C9629800C4EB41 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		234F837A28C9647600C4EB41 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		234F837E28C9678F00C4EB41 /* Montserrat-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		234F838128C96F6300C4EB41 /* WishListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListCollectionViewCell.swift; sourceTree = "<group>"; };
-		234F838428C9711400C4EB41 /* NanumSquareR.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareR.ttf; sourceTree = "<group>"; };
 		234F838728C97BF900C4EB41 /* WishListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListModel.swift; sourceTree = "<group>"; };
 		234F838A28C983CE00C4EB41 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		234F838C28C9857000C4EB41 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		234F838E28C987CB00C4EB41 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		2374789328D1C9D600CF941A /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		2374789428D1C9D600CF941A /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
+		2374789528D1C9D600CF941A /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		2375C1C928C5C2550017BAF7 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		238EF90528CB06F800ECA606 /* CalenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderViewController.swift; sourceTree = "<group>"; };
 		238EF90828CB070700ECA606 /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
@@ -265,17 +267,11 @@
 		234F837D28C9677500C4EB41 /* monteserrat */ = {
 			isa = PBXGroup;
 			children = (
-				234F837E28C9678F00C4EB41 /* Montserrat-VariableFont_wght.ttf */,
+				2374789328D1C9D600CF941A /* Montserrat-Bold.ttf */,
+				2374789428D1C9D600CF941A /* Montserrat-Light.ttf */,
+				2374789528D1C9D600CF941A /* Montserrat-Regular.ttf */,
 			);
 			path = monteserrat;
-			sourceTree = "<group>";
-		};
-		234F838328C9710500C4EB41 /* NanumSquare */ = {
-			isa = PBXGroup;
-			children = (
-				234F838428C9711400C4EB41 /* NanumSquareR.ttf */,
-			);
-			path = NanumSquare;
 			sourceTree = "<group>";
 		};
 		234F838628C97BE400C4EB41 /* WishListModel */ = {
@@ -378,7 +374,6 @@
 		23C9567E28C67FD900D88536 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				234F838328C9710500C4EB41 /* NanumSquare */,
 				234F837D28C9677500C4EB41 /* monteserrat */,
 				234F837C28C9676A00C4EB41 /* SUIT */,
 				23C9568A28C6803900D88536 /* UIFont.swift */,
@@ -657,17 +652,18 @@
 			files = (
 				23C9569E28C68D7A00D88536 /* SUIT-Medium.ttf in Resources */,
 				23C9569928C68D7A00D88536 /* SUIT-Bold.ttf in Resources */,
+				2374789828D1C9D600CF941A /* Montserrat-Regular.ttf in Resources */,
 				23DC04BA28C58B5500ABB0CF /* LaunchScreen.storyboard in Resources */,
 				23C9569D28C68D7A00D88536 /* SUIT-Thin.ttf in Resources */,
+				2374789728D1C9D600CF941A /* Montserrat-Light.ttf in Resources */,
 				23C9569C28C68D7A00D88536 /* SUIT-Regular.ttf in Resources */,
+				2374789628D1C9D600CF941A /* Montserrat-Bold.ttf in Resources */,
 				23C9569728C68D7A00D88536 /* SUIT-Heavy.ttf in Resources */,
 				23C9569F28C68D7A00D88536 /* SUIT-SemiBold.ttf in Resources */,
 				23C9569A28C68D7A00D88536 /* SUIT-ExtraBold.ttf in Resources */,
 				23C9569B28C68D7A00D88536 /* SUIT-Light.ttf in Resources */,
 				23DC04B728C58B5500ABB0CF /* Assets.xcassets in Resources */,
-				234F837F28C9678F00C4EB41 /* Montserrat-VariableFont_wght.ttf in Resources */,
 				23DC04B528C58B5200ABB0CF /* Main.storyboard in Resources */,
-				234F838528C9711400C4EB41 /* NanumSquareR.ttf in Resources */,
 				23C9569828C68D7A00D88536 /* SUIT-ExtraLight.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

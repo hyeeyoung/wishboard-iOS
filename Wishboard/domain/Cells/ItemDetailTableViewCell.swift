@@ -38,7 +38,7 @@ class ItemDetailTableViewCell: UITableViewCell {
     }
     let won = UILabel().then{
         $0.text = "원"
-        $0.font = UIFont.nanumSquare(size: 16)
+        $0.font = UIFont.Suit(size: 14, family: .Regular)
     }
     let seperatorLine = UIView().then{
         $0.backgroundColor = .separator
