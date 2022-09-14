@@ -17,7 +17,7 @@ class TabBarViewController: UITabBarController {
         let wishListVC = HomeViewController()
         let folderVC = FolderViewController()
         let addVC = HomeViewController()
-        let noticeVC = HomeViewController()
+        let noticeVC = NotificationViewController()
         let profileVC = MyPageViewController()
         
         wishListVC.tabBarItem.image = UIImage.init(named: "wishlist")
