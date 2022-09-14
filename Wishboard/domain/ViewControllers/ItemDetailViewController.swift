@@ -22,7 +22,11 @@ class ItemDetailViewController: UIViewController {
         itemDetailView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview()
         }
-        itemDetailView.menuButton.addTarget(self, action: #selector(alertMenu), for: .touchUpInside)
+        itemDetailView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+//        itemDetailView.menuButton.addTarget(self, action: #selector(alertMenu), for: .touchUpInside)
+    }
+    @objc func goBack() {
+        self.dismiss(animated: true)
     }
     @objc func alertMenu() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
