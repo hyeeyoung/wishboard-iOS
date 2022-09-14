@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 import Then
+import MaterialComponents.MaterialBottomSheet
 
 class HomeView: UIView {
     // MARK: - Properties
@@ -96,6 +97,15 @@ class HomeView: UIView {
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(navigationView.snp.bottom)
         }
+    }
+    // Bottom Sheet
+    func showBottomSheet() {
+        let vc = HowToViewController()
+        let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: vc)
+        bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 610
+        bottomSheet.dismissOnDraggingDownSheet = false
+        
+        self.viewController.present(bottomSheet, animated: true, completion: nil)
     }
 }
 // MARK: - WishList CollectionView delegate

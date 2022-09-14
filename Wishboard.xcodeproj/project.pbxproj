@@ -12,6 +12,9 @@
 		2328C5AC28CAC1260065ABB2 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C5AB28CAC1260065ABB2 /* NotificationViewController.swift */; };
 		2328C5AE28CAC17C0065ABB2 /* NotiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C5AD28CAC17C0065ABB2 /* NotiTableViewCell.swift */; };
 		2328C5B028CAC7930065ABB2 /* ModifyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C5AF28CAC7930065ABB2 /* ModifyProfileViewController.swift */; };
+		2340CEAA28CB6173007C362F /* HomeBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEA928CB6173007C362F /* HomeBottomSheetView.swift */; };
+		2340CEAC28CB6252007C362F /* HowToCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEAB28CB6252007C362F /* HowToCollectionViewCell.swift */; };
+		2340CEAE28CB65AE007C362F /* HowToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEAD28CB65AE007C362F /* HowToViewController.swift */; };
 		234F837428C9627700C4EB41 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F837328C9627700C4EB41 /* HomeViewController.swift */; };
 		234F837928C9629800C4EB41 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F837828C9629800C4EB41 /* HomeView.swift */; };
 		234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F837A28C9647600C4EB41 /* TabBarViewController.swift */; };
@@ -68,6 +71,8 @@
 		23DC04D128C58B5500ABB0CF /* WishboardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04D028C58B5500ABB0CF /* WishboardUITestsLaunchTests.swift */; };
 		23DC04E928C591E600ABB0CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04E828C591E600ABB0CF /* ViewController.swift */; };
 		23DC04EB28C591F400ABB0CF /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04EA28C591F400ABB0CF /* OnBoardingViewController.swift */; };
+		23F69CAF28CC17F8001B8C7F /* UIBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */; };
+		23F69CB128CC1819001B8C7F /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CB028CC1819001B8C7F /* UIView.swift */; };
 		8FC34572B49CFC063CDC4619 /* Pods_WishboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 420154A5B1D7E2D7C5F49F42 /* Pods_WishboardTests.framework */; };
 		D2AABDA42A3695B05E58B7E3 /* Pods_Wishboard_WishboardUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A96767C76E2E6FC10E9D71B /* Pods_Wishboard_WishboardUITests.framework */; };
 		ED84FC6549939B997BABB2E0 /* Pods_Wishboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1582000F9C7BDE6362679C88 /* Pods_Wishboard.framework */; };
@@ -97,6 +102,9 @@
 		2328C5AB28CAC1260065ABB2 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		2328C5AD28CAC17C0065ABB2 /* NotiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiTableViewCell.swift; sourceTree = "<group>"; };
 		2328C5AF28CAC7930065ABB2 /* ModifyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyProfileViewController.swift; sourceTree = "<group>"; };
+		2340CEA928CB6173007C362F /* HomeBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomSheetView.swift; sourceTree = "<group>"; };
+		2340CEAB28CB6252007C362F /* HowToCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToCollectionViewCell.swift; sourceTree = "<group>"; };
+		2340CEAD28CB65AE007C362F /* HowToViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToViewController.swift; sourceTree = "<group>"; };
 		234F837328C9627700C4EB41 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		234F837828C9629800C4EB41 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		234F837A28C9647600C4EB41 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +165,8 @@
 		23DC04D028C58B5500ABB0CF /* WishboardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishboardUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		23DC04E828C591E600ABB0CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		23DC04EA28C591F400ABB0CF /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPath.swift; sourceTree = "<group>"; };
+		23F69CB028CC1819001B8C7F /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		420154A5B1D7E2D7C5F49F42 /* Pods_WishboardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WishboardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DAA7711F24BD0F79AAC40EF /* Pods-Wishboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wishboard.release.xcconfig"; path = "Target Support Files/Pods-Wishboard/Pods-Wishboard.release.xcconfig"; sourceTree = "<group>"; };
 		747D3693B171818996C6912D /* Pods-WishboardTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WishboardTests.debug.xcconfig"; path = "Target Support Files/Pods-WishboardTests/Pods-WishboardTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -215,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				234F837828C9629800C4EB41 /* HomeView.swift */,
+				2340CEA928CB6173007C362F /* HomeBottomSheetView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -335,6 +346,7 @@
 				2328C5AD28CAC17C0065ABB2 /* NotiTableViewCell.swift */,
 				23D7901328CB0E5F00246109 /* CalenderTableViewCell.swift */,
 				23D7901528CB172900246109 /* CalenderNotiTableViewCell.swift */,
+				2340CEAB28CB6252007C362F /* HowToCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -347,6 +359,8 @@
 				23D5518028C69E2900D81B5F /* UITextField.swift */,
 				23D5518228C6A3BD00D81B5F /* UIButton.swift */,
 				23C8A1BF28C9F23E003ABFE9 /* NavigationBar.swift */,
+				23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */,
+				23F69CB028CC1819001B8C7F /* UIView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -504,6 +518,7 @@
 				2328C5AB28CAC1260065ABB2 /* NotificationViewController.swift */,
 				2328C5AF28CAC7930065ABB2 /* ModifyProfileViewController.swift */,
 				238EF90528CB06F800ECA606 /* CalenderViewController.swift */,
+				2340CEAD28CB65AE007C362F /* HowToViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -784,11 +799,14 @@
 				23C956A128C68F9400D88536 /* LoginViewController.swift in Sources */,
 				23D5518928C6B02400D81B5F /* Observable.swift in Sources */,
 				23C2378628C9CEE800CE3200 /* FolderView.swift in Sources */,
+				23F69CB128CC1819001B8C7F /* UIView.swift in Sources */,
 				23C8A1C528CA08B7003ABFE9 /* ItemDetailView.swift in Sources */,
 				23D5518328C6A3BD00D81B5F /* UIButton.swift in Sources */,
+				2340CEAA28CB6173007C362F /* HomeBottomSheetView.swift in Sources */,
 				234F837428C9627700C4EB41 /* HomeViewController.swift in Sources */,
 				234F838F28C987CB00C4EB41 /* CartViewController.swift in Sources */,
 				23DC04AE28C58B5200ABB0CF /* AppDelegate.swift in Sources */,
+				23F69CAF28CC17F8001B8C7F /* UIBezierPath.swift in Sources */,
 				23DC04E928C591E600ABB0CF /* ViewController.swift in Sources */,
 				234F838B28C983CE00C4EB41 /* CartView.swift in Sources */,
 				23DC04B028C58B5200ABB0CF /* SceneDelegate.swift in Sources */,
@@ -806,6 +824,7 @@
 				23C5AB4928CAA23300A7E977 /* MyPageView.swift in Sources */,
 				23D5517D28C6936400D81B5F /* OnBoardingViewModel.swift in Sources */,
 				234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */,
+				2340CEAC28CB6252007C362F /* HowToCollectionViewCell.swift in Sources */,
 				23C5AB4D28CAA54600A7E977 /* MypageProfileTableViewCell.swift in Sources */,
 				23C2378428C9CEE000CE3200 /* FolderViewController.swift in Sources */,
 				234F838D28C9857000C4EB41 /* CartTableViewCell.swift in Sources */,
@@ -824,6 +843,7 @@
 				238EF90928CB070700ECA606 /* CalenderView.swift in Sources */,
 				23D5518128C69E2900D81B5F /* UITextField.swift in Sources */,
 				2328C5AE28CAC17C0065ABB2 /* NotiTableViewCell.swift in Sources */,
+				2340CEAE28CB65AE007C362F /* HowToViewController.swift in Sources */,
 				2328C5AA28CAC02C0065ABB2 /* NotiData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
