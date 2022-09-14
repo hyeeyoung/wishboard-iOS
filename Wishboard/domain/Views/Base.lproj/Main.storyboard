@@ -31,6 +31,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="EGn-IM-91r" customClass="TabBarViewController" customModule="Wishboard" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wHK-7T-dLR">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -41,6 +42,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2dt-IS-KPd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1970" y="67"/>
+        </scene>
+        <!--Calender View Controller-->
+        <scene sceneID="OZ7-z6-Xhp">
+            <objects>
+                <viewController id="Xdw-K3-qe9" customClass="CalenderViewController" customModule="Wishboard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="C0k-x6-hNh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="VLN-xO-8Yd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S81-DJ-VS6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1981" y="712"/>
         </scene>
     </scenes>
     <resources>
