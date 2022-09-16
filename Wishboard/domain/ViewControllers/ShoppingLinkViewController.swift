@@ -33,6 +33,7 @@ class ShoppingLinkViewController: UIViewController {
         $0.defaultButton("아이템 불러오기", .wishboardGreen, .black)
     }
     // MARK: - Life Cycles
+    var preVC: UploadItemViewController!
     var link: String!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,11 +47,19 @@ class ShoppingLinkViewController: UIViewController {
         
         self.errorMessage.isHidden = true
         self.completeButton.isEnabled = false
+        self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .gray)
         
         self.shoppingLinkTextField.addTarget(self, action: #selector(LinkTextFieldEditingChanged(_:)), for: .editingChanged)
         self.exitBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        self.completeButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        preVC.uploadItemView.uploadItemTableView.reloadData()
     }
     // MARK: - Functions
+    func setPreViewController(_ preVC: UploadItemViewController) {
+        self.preVC = preVC
+    }
     func setUpView() {
         self.view.addSubview(titleLabel)
         self.view.addSubview(exitBtn)
@@ -93,18 +102,22 @@ class ShoppingLinkViewController: UIViewController {
         self.link = trimString
         self.shoppingLinkTextField.text = self.link
         self.checkLink(self.link)
+        print(self.link)
     }
+    // url 유효성 검사 (임시로 이메일)
     func checkURL(str: String) -> Bool {
-        let regex = "/(http|https):\\/\\/(\\w+:{0,1}\\w*@)?(\\S+)(:[0-9]+)?(\\/|\\/([\\w#!:.?+=&%@!\\-\\/]))?/"
-        return  NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: str)
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
+        return  NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: str)
     }
     func checkLink(_ link: String) {
         if !checkURL(str: link) {
             self.errorMessage.isHidden = false
             self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .gray)
+            self.completeButton.isEnabled = false
         } else {
             self.errorMessage.isHidden = true
             self.completeButton.defaultButton("아이템 불러오기", .wishboardGreen, .black)
+            self.completeButton.isEnabled = true
         }
     }
 }

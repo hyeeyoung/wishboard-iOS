@@ -163,6 +163,12 @@ extension UploadItemViewController {
         guard let type = notivc.notiType else {return}
         guard let dateTime = notivc.dateAndTime else {return}
         if tag == 4 {cell.textLabel?.text = "[" + type + "] " + dateTime}
+        
+        guard let link = linkvc.link else {return}
+        if tag == 5 {
+            cell.textLabel?.text = link
+            subTitle.isHidden = true
+        }
     }
     // TextField가 있는 Cell
     func setTextFieldCell(_ cell: UITableViewCell, _ tag: Int) {
@@ -241,7 +247,7 @@ extension UploadItemViewController {
     }
     // 폴더 설정 BottomSheet
     func showFolderBottomSheet() {
-        foldervc = SetFolderBottomSheetViewController()
+        foldervc.setPreViewController(self)
         let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: foldervc)
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
         bottomSheet.dismissOnDraggingDownSheet = false
@@ -259,7 +265,7 @@ extension UploadItemViewController {
     }
     // 쇼핑몰 링크 BottomSheet
     func showLinkBottomSheet() {
-        linkvc = ShoppingLinkViewController()
+        linkvc.setPreViewController(self)
         let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: linkvc)
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
         bottomSheet.dismissOnDraggingDownSheet = false

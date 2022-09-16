@@ -11,6 +11,7 @@ class SetFolderBottomSheetViewController: UIViewController {
     var setFolderBottomSheetView: SetFolderBottomSheetView!
     var folderListData: [FolderListModel] = []
     var selectedIdx: Int!
+    var preVC: UploadItemViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,12 @@ class SetFolderBottomSheetViewController: UIViewController {
         }
         
         setFolderBottomSheetView.exitBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        preVC.uploadItemView.uploadItemTableView.reloadData()
+    }
+    func setPreViewController(_ preVC: UploadItemViewController) {
+        self.preVC = preVC
     }
     @objc func goBack() {
         self.dismiss(animated: true)
