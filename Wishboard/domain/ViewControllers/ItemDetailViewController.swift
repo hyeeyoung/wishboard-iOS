@@ -43,25 +43,19 @@ class ItemDetailViewController: UIViewController {
         
         self.present(bottomSheet, animated: true, completion: nil)
     }
-//    @objc func alertMenu() {
-//        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//
-//        let defaultAction =  UIAlertAction(title: "아이템 수정", style: UIAlertAction.Style.default)
-//        let cancelAction = UIAlertAction(title: "닫기", style: UIAlertAction.Style.cancel, handler: nil)
-//        let destructiveAction = UIAlertAction(title: "아이템 삭제", style: UIAlertAction.Style.destructive){(_) in
-//            self.dismiss(animated: true)
-//        }
-//        alert.addAction(defaultAction)
-//        alert.addAction(cancelAction)
-//        alert.addAction(destructiveAction)
-//
-//        self.present(alert, animated: true)
-//    }
+    @objc func goModify() {
+        let modifyVC = UploadItemViewController()
+        modifyVC.isUploadItem = false
+        
+        modifyVC.modalPresentationStyle = .fullScreen
+        self.present(modifyVC, animated: true, completion: nil)
+    }
 }
 extension ItemDetailViewController {
     func setItemView() {
         itemDetailView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         itemDetailView.deleteButton.addTarget(self, action: #selector(alertDialog), for: .touchUpInside)
+        itemDetailView.modifyButton.addTarget(self, action: #selector(goModify), for: .touchUpInside)
         
         itemDetailView.setTableView(self)
         itemDetailView.setUpNavigationView()

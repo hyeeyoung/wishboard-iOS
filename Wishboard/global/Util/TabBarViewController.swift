@@ -16,7 +16,7 @@ class TabBarViewController: UITabBarController {
        // 인스턴스화
         let wishListVC = HomeViewController()
         let folderVC = FolderViewController()
-        let addVC = HomeViewController()
+        let addVC = UploadItemViewController()
         let noticeVC = NotificationViewController()
         let profileVC = MyPageViewController()
         
@@ -25,6 +25,8 @@ class TabBarViewController: UITabBarController {
         addVC.tabBarItem.image = UIImage.init(named: "add")
         noticeVC.tabBarItem.image = UIImage.init(named: "notice")
         profileVC.tabBarItem.image = UIImage.init(named: "profile")
+        
+        addVC.isUploadItem = true
         
         wishListVC.tabBarItem.title = "WISHLIST"
         folderVC.tabBarItem.title = "FOLDER"

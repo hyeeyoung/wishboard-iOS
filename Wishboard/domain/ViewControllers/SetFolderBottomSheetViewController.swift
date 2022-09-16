@@ -9,6 +9,8 @@ import UIKit
 
 class SetFolderBottomSheetViewController: UIViewController {
     var setFolderBottomSheetView: SetFolderBottomSheetView!
+    var folderListData: [FolderListModel] = []
+    var selectedIdx: Int!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,18 +39,35 @@ class SetFolderBottomSheetViewController: UIViewController {
 // MARK: - TableView delegate
 extension SetFolderBottomSheetViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        let count = self.folderListData.count ?? 0
+        return 5
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FolderListTableViewCell", for: indexPath) as? FolderListTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
         
+        if indexPath.row == self.selectedIdx {cell.checkIcon.isHidden = false}
+        else {cell.checkIcon.isHidden = true}
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 56
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let idx = indexPath.row
+        self.selectedIdx = idx
+        setFolderBottomSheetView.folderTableView.reloadData()
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+extension SetFolderBottomSheetViewController {
+    func setTempData() {
+        self.folderListData.append(FolderListModel(folderImage: "", folderName: "상의", isChecked: true))
+        self.folderListData.append(FolderListModel(folderImage: "", folderName: "하의", isChecked: false))
+        self.folderListData.append(FolderListModel(folderImage: "", folderName: "아우터", isChecked: false))
+        self.folderListData.append(FolderListModel(folderImage: "", folderName: "악세서리", isChecked: false))
+        self.folderListData.append(FolderListModel(folderImage: "", folderName: "가방", isChecked: false))
+        
+        self.setFolderBottomSheetView.folderTableView.reloadData()
     }
 }

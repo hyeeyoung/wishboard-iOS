@@ -79,6 +79,11 @@
 		23DC04E928C591E600ABB0CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04E828C591E600ABB0CF /* ViewController.swift */; };
 		23DC04EB28C591F400ABB0CF /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04EA28C591F400ABB0CF /* OnBoardingViewController.swift */; };
 		23E378DE28D2EBFA00C52F2D /* PopUpTextfieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E378DD28D2EBFA00C52F2D /* PopUpTextfieldViewController.swift */; };
+		23E378E128D2F07500C52F2D /* UploadItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E378E028D2F07500C52F2D /* UploadItemView.swift */; };
+		23E378E328D2F16900C52F2D /* UploadItemPhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E378E228D2F16900C52F2D /* UploadItemPhotoTableViewCell.swift */; };
+		23E378E528D2F47E00C52F2D /* UploadItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E378E428D2F47E00C52F2D /* UploadItemViewController.swift */; };
+		23E378E728D2FDD000C52F2D /* NotificationSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E378E628D2FDD000C52F2D /* NotificationSettingViewController.swift */; };
+		23E378E928D303B500C52F2D /* ShoppingLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E378E828D303B500C52F2D /* ShoppingLinkViewController.swift */; };
 		23F69CAF28CC17F8001B8C7F /* UIBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */; };
 		23F69CB128CC1819001B8C7F /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CB028CC1819001B8C7F /* UIView.swift */; };
 		8FC34572B49CFC063CDC4619 /* Pods_WishboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 420154A5B1D7E2D7C5F49F42 /* Pods_WishboardTests.framework */; };
@@ -181,6 +186,11 @@
 		23DC04E828C591E600ABB0CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		23DC04EA28C591F400ABB0CF /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		23E378DD28D2EBFA00C52F2D /* PopUpTextfieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpTextfieldViewController.swift; sourceTree = "<group>"; };
+		23E378E028D2F07500C52F2D /* UploadItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemView.swift; sourceTree = "<group>"; };
+		23E378E228D2F16900C52F2D /* UploadItemPhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemPhotoTableViewCell.swift; sourceTree = "<group>"; };
+		23E378E428D2F47E00C52F2D /* UploadItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemViewController.swift; sourceTree = "<group>"; };
+		23E378E628D2FDD000C52F2D /* NotificationSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingViewController.swift; sourceTree = "<group>"; };
+		23E378E828D303B500C52F2D /* ShoppingLinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingLinkViewController.swift; sourceTree = "<group>"; };
 		23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPath.swift; sourceTree = "<group>"; };
 		23F69CB028CC1819001B8C7F /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		420154A5B1D7E2D7C5F49F42 /* Pods_WishboardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WishboardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -359,6 +369,7 @@
 				23D7901528CB172900246109 /* CalenderNotiTableViewCell.swift */,
 				2340CEAB28CB6252007C362F /* HowToCollectionViewCell.swift */,
 				237478A328D20DB500CF941A /* FolderListTableViewCell.swift */,
+				23E378E228D2F16900C52F2D /* UploadItemPhotoTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -485,6 +496,7 @@
 		23DC04E028C58C6C00ABB0CF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				23E378DF28D2F05D00C52F2D /* UploadItem */,
 				238EF90728CB06FC00ECA606 /* Calender */,
 				2328C5A528CABF240065ABB2 /* Notification */,
 				23C5AB4728CAA21D00A7E977 /* MyPage */,
@@ -535,8 +547,19 @@
 				238EF90528CB06F800ECA606 /* CalenderViewController.swift */,
 				2340CEAD28CB65AE007C362F /* HowToViewController.swift */,
 				237478A128D2008300CF941A /* SetFolderBottomSheetViewController.swift */,
+				23E378E428D2F47E00C52F2D /* UploadItemViewController.swift */,
+				23E378E628D2FDD000C52F2D /* NotificationSettingViewController.swift */,
+				23E378E828D303B500C52F2D /* ShoppingLinkViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		23E378DF28D2F05D00C52F2D /* UploadItem */ = {
+			isa = PBXGroup;
+			children = (
+				23E378E028D2F07500C52F2D /* UploadItemView.swift */,
+			);
+			path = UploadItem;
 			sourceTree = "<group>";
 		};
 		78F0EFA2928CA62BC997E0FA /* Pods */ = {
@@ -817,6 +840,7 @@
 				23D5518928C6B02400D81B5F /* Observable.swift in Sources */,
 				23C2378628C9CEE800CE3200 /* FolderView.swift in Sources */,
 				23F69CB128CC1819001B8C7F /* UIView.swift in Sources */,
+				23E378E528D2F47E00C52F2D /* UploadItemViewController.swift in Sources */,
 				23C8A1C528CA08B7003ABFE9 /* ItemDetailView.swift in Sources */,
 				23D5518328C6A3BD00D81B5F /* UIButton.swift in Sources */,
 				2340CEAA28CB6173007C362F /* HomeBottomSheetView.swift in Sources */,
@@ -827,9 +851,11 @@
 				23F69CAF28CC17F8001B8C7F /* UIBezierPath.swift in Sources */,
 				23DC04E928C591E600ABB0CF /* ViewController.swift in Sources */,
 				234F838B28C983CE00C4EB41 /* CartView.swift in Sources */,
+				23E378E928D303B500C52F2D /* ShoppingLinkViewController.swift in Sources */,
 				2374789A28D1DB2900CF941A /* CheckNotch.swift in Sources */,
 				23DC04B028C58B5200ABB0CF /* SceneDelegate.swift in Sources */,
 				23D7901428CB0E5F00246109 /* CalenderTableViewCell.swift in Sources */,
+				23E378E728D2FDD000C52F2D /* NotificationSettingViewController.swift in Sources */,
 				23C9568B28C6803900D88536 /* UIFont.swift in Sources */,
 				2328C5B028CAC7930065ABB2 /* ModifyProfileViewController.swift in Sources */,
 				2328C5AC28CAC1260065ABB2 /* NotificationViewController.swift in Sources */,
@@ -846,6 +872,7 @@
 				23D5517D28C6936400D81B5F /* OnBoardingViewModel.swift in Sources */,
 				234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */,
 				2340CEAC28CB6252007C362F /* HowToCollectionViewCell.swift in Sources */,
+				23E378E328D2F16900C52F2D /* UploadItemPhotoTableViewCell.swift in Sources */,
 				23C5AB4D28CAA54600A7E977 /* MypageProfileTableViewCell.swift in Sources */,
 				23C2378428C9CEE000CE3200 /* FolderViewController.swift in Sources */,
 				234F838D28C9857000C4EB41 /* CartTableViewCell.swift in Sources */,
@@ -862,6 +889,7 @@
 				234F838828C97BF900C4EB41 /* WishListModel.swift in Sources */,
 				23C8A1C728CA0AC9003ABFE9 /* ItemDetailTableViewCell.swift in Sources */,
 				23D5518B28C6B45C00D81B5F /* String.swift in Sources */,
+				23E378E128D2F07500C52F2D /* UploadItemView.swift in Sources */,
 				2374789C28D1EA1700CF941A /* PaddingLabel.swift in Sources */,
 				238EF90928CB070700ECA606 /* CalenderView.swift in Sources */,
 				237478A028D1FF0400CF941A /* SetFolderBottomSheetView.swift in Sources */,
