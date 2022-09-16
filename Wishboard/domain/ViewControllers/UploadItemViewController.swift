@@ -13,7 +13,10 @@ class UploadItemViewController: UIViewController {
     var uploadItemView: UploadItemView!
     let cellTitleArray = ["상품명(필수)", "₩ 가격(필수)", "폴더", "상품 일정 알림", "쇼핑몰 링크", "브랜드, 사이즈, 컬러 등 아이템 정보를 메모로 남겨보세요!😉"]
     var selectedImage: UIImage!
+    
+    var foldervc: SetFolderBottomSheetViewController!
     var notivc: NotificationSettingViewController!
+    var linkvc: ShoppingLinkViewController!
     
     var itemName: String!
     var itemPrice: String!
@@ -23,45 +26,15 @@ class UploadItemViewController: UIViewController {
     
     var isUploadItem: Bool!
     
-    // MARK: - Functions
+    // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
         
-        uploadItemView = UploadItemView()
-        uploadItemView.setTableView(dataSourceDelegate: self)
-        uploadItemView.setUpView()
-        uploadItemView.setUpConstraint()
-        
-        self.view.addSubview(uploadItemView)
-        uploadItemView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview()
-        }
-        
-        uploadItemView.saveButton.addTarget(self, action: #selector(clickEvent), for: .touchUpInside)
-        uploadItemView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        
-        if isUploadItem {
-            uploadItemView.backButton.isHidden = true
-            uploadItemView.pageTitle.text = "아이템 추가"
-            uploadItemView.setSaveButton(false)
-        } else {
-            uploadItemView.backButton.isHidden = false
-            uploadItemView.pageTitle.text = "아이템 수정"
-            uploadItemView.setSaveButton(true)
-        }
-        notivc = NotificationSettingViewController()
+        setUploadItemView()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        
-        print("upload item page: ", notivc.notiType, notivc.dateAndTime)
-        self.uploadItemView.uploadItemTableView.reloadData()
-    }
-//    override func viewDidAppear(_ animated: Bool) {
-//        print("upload item page: ", self.notiType, self.notiDate)
-//    }
     @objc func clickEvent() {
         print("clicked!")
     }
@@ -127,7 +100,38 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
-// MARK: - Functions & Actions
+// MARK: - Functions
+extension UploadItemViewController {
+    func setUploadItemView() {
+        uploadItemView = UploadItemView()
+        uploadItemView.setTableView(dataSourceDelegate: self)
+        uploadItemView.setUpView()
+        uploadItemView.setUpConstraint()
+        
+        self.view.addSubview(uploadItemView)
+        uploadItemView.snp.makeConstraints { make in
+            make.leading.trailing.top.bottom.equalToSuperview()
+        }
+        
+        uploadItemView.saveButton.addTarget(self, action: #selector(clickEvent), for: .touchUpInside)
+        uploadItemView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        
+        if isUploadItem {
+            uploadItemView.backButton.isHidden = true
+            uploadItemView.pageTitle.text = "아이템 추가"
+            uploadItemView.setSaveButton(false)
+        } else {
+            uploadItemView.backButton.isHidden = false
+            uploadItemView.pageTitle.text = "아이템 수정"
+            uploadItemView.setSaveButton(true)
+        }
+        // BottomSheet 객체 선언
+        foldervc =  SetFolderBottomSheetViewController()
+        linkvc = ShoppingLinkViewController()
+        notivc = NotificationSettingViewController()
+    }
+}
+// MARK: - Cell set & Actions
 extension UploadItemViewController {
     // 클릭 시 bottomSheet 올라오는 Cell
     func setSelectCell(_ cell: UITableViewCell, _ tag: Int) {
@@ -237,8 +241,8 @@ extension UploadItemViewController {
     }
     // 폴더 설정 BottomSheet
     func showFolderBottomSheet() {
-        let vc = SetFolderBottomSheetViewController()
-        let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: vc)
+        foldervc = SetFolderBottomSheetViewController()
+        let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: foldervc)
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
         bottomSheet.dismissOnDraggingDownSheet = false
         
@@ -255,8 +259,8 @@ extension UploadItemViewController {
     }
     // 쇼핑몰 링크 BottomSheet
     func showLinkBottomSheet() {
-        let vc = ShoppingLinkViewController()
-        let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: vc)
+        linkvc = ShoppingLinkViewController()
+        let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: linkvc)
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
         bottomSheet.dismissOnDraggingDownSheet = false
         

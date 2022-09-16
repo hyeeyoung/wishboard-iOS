@@ -43,6 +43,9 @@ class NotificationSettingViewController: UIViewController {
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
         self.view.roundCornersDiffernt(topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0)
+        
+        self.notiType = "세일 마감"
+        self.dateAndTime = formatDate(Date())
 
         setUpView()
         setUpConstraint()
@@ -51,6 +54,10 @@ class NotificationSettingViewController: UIViewController {
         notificationPickerView.dataSource = self
         
         self.exitBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+    }
+    // MARK: 현재 뷰가 사라질 때, 이전 뷰의 테이블뷰를 업데이트 시킨다. **
+    override func viewWillDisappear(_ animated: Bool) {
+        self.preVC.uploadItemView.uploadItemTableView.reloadData()
     }
     // MARK: - Functions
     func setPreViewController(_ preVC: UploadItemViewController) {
@@ -103,18 +110,21 @@ class NotificationSettingViewController: UIViewController {
         self.dismiss(animated: true)
     }
     @objc func setDateAndTime() {
-        let dateformatter = DateFormatter()
-        dateformatter.dateStyle = .short
-        dateformatter.timeStyle = .short
-        let date = dateformatter.string(from: dateAndTimePickerView.date)
-        self.dateAndTime = date
-        print(self.dateAndTime!)
+        self.dateAndTime = formatDate(dateAndTimePickerView.date)
     }
     @objc func goUploadPage() {
-        self.preVC.uploadItemView.uploadItemTableView.reloadData()
         self.dismiss(animated: true)
     }
+    // Date를 String으로 format
+    func formatDate(_ date: Date) -> String {
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy.MM.dd a hh:mm"
+        let dateStr = dateformatter.string(from: date)
+        
+        return dateStr
+    }
 }
+// MARK: - Picker delegate
 extension NotificationSettingViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
