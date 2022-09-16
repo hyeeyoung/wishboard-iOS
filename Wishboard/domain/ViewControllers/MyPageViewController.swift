@@ -135,7 +135,7 @@ extension MyPageViewController {
         self.present(dialog, animated: false, completion: nil)
     }
     func showSignoutDialog() {
-        let dialog = PopUpTextfieldViewController(titleText: "회원 탈퇴", messageText: "탈퇴하시면 회원정보는 7일 후 파기됩니다.", greenBtnText: "취소", blackBtnText: "탈퇴", placeholder: "닉네임을 입력해주세요.")
+        let dialog = PopUpDeleteUserViewController(titleText: "회원 탈퇴", messageText: "탈퇴하시면 회원정보는 7일 후 파기됩니다.", greenBtnText: "취소", blackBtnText: "탈퇴", placeholder: "닉네임을 입력해주세요.")
         dialog.modalPresentationStyle = .overCurrentContext
         self.present(dialog, animated: false, completion: nil)
     }
