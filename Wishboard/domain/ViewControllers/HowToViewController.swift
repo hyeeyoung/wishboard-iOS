@@ -9,6 +9,7 @@ import UIKit
 
 class HowToViewController: UIViewController {
     var howToView: HomeBottomSheetView!
+    var preVC: HomeViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +28,11 @@ class HowToViewController: UIViewController {
         
         howToView.okButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        preVC.alertDialog()
+    }
     @objc func goBack() {
         self.dismiss(animated: true)
     }
+    
 }

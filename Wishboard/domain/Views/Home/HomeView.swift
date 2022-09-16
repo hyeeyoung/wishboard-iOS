@@ -100,8 +100,9 @@ class HomeView: UIView {
         }
     }
     // Bottom Sheet
-    func showBottomSheet() {
+    func showBottomSheet(_ preVC: HomeViewController) {
         let vc = HowToViewController()
+        vc.preVC = preVC
         let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: vc)
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 610
         bottomSheet.dismissOnDraggingDownSheet = false
