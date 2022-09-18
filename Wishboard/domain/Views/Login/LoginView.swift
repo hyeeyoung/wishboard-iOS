@@ -30,6 +30,7 @@ class LoginView: UIView {
     // 비밀번호 TextField
     let passwordTextField = UITextField().then{
         $0.defaultTextField("비밀번호")
+        $0.isSecureTextEntry = true
     }
     // 로그인하기 버튼
     let loginButton = UIButton().then{

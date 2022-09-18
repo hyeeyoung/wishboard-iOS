@@ -23,29 +23,35 @@ class RegisterEmailViewController: UIViewController {
         registerEmailView.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalToSuperview()
         }
+        registerEmailView.backBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         registerEmailView.emailTextField.addTarget(self, action: #selector(emailTextFieldEditingChanged(_:)), for: .editingChanged)
-        registerEmailView.loginButton.addTarget(self, action: #selector(nextButtonDidTap), for: .touchUpInside)
+        registerEmailView.nextButton.addTarget(self, action: #selector(nextButtonDidTap), for: .touchUpInside)
     }
 
     // MARK: - Actions
+    @objc func goBack() {
+        self.dismiss(animated: true)
+    }
     @objc func emailTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
         self.email = text
         self.checkValidEmail(self.email)
     }
     @objc func nextButtonDidTap() {
-        print("clicked!")
+        let registerVC = RegisterPasswordViewController()
+        registerVC.modalPresentationStyle = .fullScreen
+        self.present(registerVC, animated: true, completion: nil)
     }
     // MARK: - Functions
     func checkValidEmail(_ email: String) {
         let isValid = self.email.checkEmail(str: self.email)
         if isValid {
-            self.registerEmailView.loginButton.then{
+            self.registerEmailView.nextButton.then{
                 $0.defaultButton("다음", .wishboardGreen, .black)
                 $0.isEnabled = true
             }
         } else {
-            self.registerEmailView.loginButton.then{
+            self.registerEmailView.nextButton.then{
                 $0.defaultButton("다음", .wishboardDisabledGray, .black)
                 $0.isEnabled = false
             }

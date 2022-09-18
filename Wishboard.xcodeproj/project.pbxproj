@@ -17,6 +17,8 @@
 		2340CEAE28CB65AE007C362F /* HowToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEAD28CB65AE007C362F /* HowToViewController.swift */; };
 		2344949428D78A9A00CF3BD9 /* RegisterEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2344949328D78A9A00CF3BD9 /* RegisterEmailViewController.swift */; };
 		2344949728D78AB500CF3BD9 /* RegisterEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2344949628D78AB500CF3BD9 /* RegisterEmailView.swift */; };
+		2344949928D78F6300CF3BD9 /* RegisterPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2344949828D78F6300CF3BD9 /* RegisterPasswordViewController.swift */; };
+		2344949B28D78F7000CF3BD9 /* RegisterPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2344949A28D78F7000CF3BD9 /* RegisterPasswordView.swift */; };
 		234F837428C9627700C4EB41 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F837328C9627700C4EB41 /* HomeViewController.swift */; };
 		234F837928C9629800C4EB41 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F837828C9629800C4EB41 /* HomeView.swift */; };
 		234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F837A28C9647600C4EB41 /* TabBarViewController.swift */; };
@@ -123,6 +125,8 @@
 		2340CEAD28CB65AE007C362F /* HowToViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToViewController.swift; sourceTree = "<group>"; };
 		2344949328D78A9A00CF3BD9 /* RegisterEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterEmailViewController.swift; sourceTree = "<group>"; };
 		2344949628D78AB500CF3BD9 /* RegisterEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterEmailView.swift; sourceTree = "<group>"; };
+		2344949828D78F6300CF3BD9 /* RegisterPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPasswordViewController.swift; sourceTree = "<group>"; };
+		2344949A28D78F7000CF3BD9 /* RegisterPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPasswordView.swift; sourceTree = "<group>"; };
 		234F837328C9627700C4EB41 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		234F837828C9629800C4EB41 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		234F837A28C9647600C4EB41 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -257,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				2344949628D78AB500CF3BD9 /* RegisterEmailView.swift */,
+				2344949A28D78F7000CF3BD9 /* RegisterPasswordView.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -567,6 +572,7 @@
 				23E378E628D2FDD000C52F2D /* NotificationSettingViewController.swift */,
 				23E378E828D303B500C52F2D /* ShoppingLinkViewController.swift */,
 				2344949328D78A9A00CF3BD9 /* RegisterEmailViewController.swift */,
+				2344949828D78F6300CF3BD9 /* RegisterPasswordViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -855,6 +861,7 @@
 			files = (
 				23C956A128C68F9400D88536 /* LoginViewController.swift in Sources */,
 				23D5518928C6B02400D81B5F /* Observable.swift in Sources */,
+				2344949B28D78F7000CF3BD9 /* RegisterPasswordView.swift in Sources */,
 				23C2378628C9CEE800CE3200 /* FolderView.swift in Sources */,
 				23F69CB128CC1819001B8C7F /* UIView.swift in Sources */,
 				23E378E528D2F47E00C52F2D /* UploadItemViewController.swift in Sources */,
@@ -869,6 +876,7 @@
 				23DC04E928C591E600ABB0CF /* ViewController.swift in Sources */,
 				234F838B28C983CE00C4EB41 /* CartView.swift in Sources */,
 				23E378E928D303B500C52F2D /* ShoppingLinkViewController.swift in Sources */,
+				2344949928D78F6300CF3BD9 /* RegisterPasswordViewController.swift in Sources */,
 				2374789A28D1DB2900CF941A /* CheckNotch.swift in Sources */,
 				23DC04B028C58B5200ABB0CF /* SceneDelegate.swift in Sources */,
 				23D7901428CB0E5F00246109 /* CalenderTableViewCell.swift in Sources */,
