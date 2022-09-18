@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EGn-IM-91r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Xdw-K3-qe9">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -43,10 +43,10 @@
             </objects>
             <point key="canvasLocation" x="1970" y="67"/>
         </scene>
-        <!--Pop Up View Controller-->
+        <!--On Boarding View Controller-->
         <scene sceneID="OZ7-z6-Xhp">
             <objects>
-                <viewController id="Xdw-K3-qe9" customClass="PopUpViewController" customModule="Wishboard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Xdw-K3-qe9" customClass="OnBoardingViewController" customModule="Wishboard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C0k-x6-hNh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

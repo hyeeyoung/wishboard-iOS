@@ -22,6 +22,7 @@ class LoginViewController: UIViewController {
         loginView.backBtn.addTarget(self, action: #selector(backBtnDidTap), for: .touchUpInside)
         loginView.emailTextField.addTarget(self, action: #selector(emailTextFieldEditingChanged), for: .editingChanged)
         loginView.passwordTextField.addTarget(self, action: #selector(passwordTextFieldEditingChanged), for: .editingChanged)
+        loginView.loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
         
         loginView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview()
@@ -40,14 +41,24 @@ class LoginViewController: UIViewController {
         let text = sender.text ?? ""
         loginViewModel.passwordTextFieldEditingChanged(text)
     }
+    @objc func loginButtonDidTap() {
+        print("login button clicked!")
+    }
     //MARK: - Methods
     private func bind() {
         loginViewModel.isValidID.bind { isValidID in
             guard let isValid = isValidID else {return}
             if isValid {
-                self.loginView.loginButton.defaultButton("로그인하기", .wishboardGreen, .black)
+                self.loginView.loginButton.then{
+                    $0.defaultButton("로그인하기", .wishboardGreen, .black)
+                    $0.isEnabled = true
+                }
+                
             } else {
-                self.loginView.loginButton.defaultButton("로그인하기", .wishboardDisabledGray, .black)
+                self.loginView.loginButton.then{
+                    $0.defaultButton("로그인하기", .wishboardDisabledGray, .black)
+                    $0.isEnabled = false
+                }
             }
         }
 

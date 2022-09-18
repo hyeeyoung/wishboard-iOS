@@ -30,6 +30,7 @@ class OnBoardingView: UIView {
         onBoardingTableView.rowHeight = UITableView.automaticDimension
         onBoardingTableView.estimatedRowHeight = UITableView.automaticDimension
         onBoardingTableView.separatorStyle = .none
+        onBoardingTableView.showsVerticalScrollIndicator = false
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
