@@ -61,7 +61,8 @@ class NotiView: UIView {
     }
     func setUpNavigationConstraint() {
         navigationView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(50)
+            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
+            else {make.top.equalToSuperview().offset(20)}
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(50)
         }

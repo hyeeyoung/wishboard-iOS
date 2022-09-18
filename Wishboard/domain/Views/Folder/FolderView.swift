@@ -42,7 +42,7 @@ class FolderView: UIView {
 
             var bounds = UIScreen.main.bounds
             var width = bounds.size.width
-            var itemWidth = (width - 32) / 2 - 8
+            var itemWidth = ((width - 32) / 2) - 8
             
             flowLayout.itemSize = CGSize(width: itemWidth, height: 210)
             flowLayout.scrollDirection = .vertical
@@ -73,7 +73,8 @@ class FolderView: UIView {
     }
     func setUpNavigationConstraint() {
         navigationView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(50)
+            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
+            else {make.top.equalToSuperview().offset(20)}
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(50)
         }

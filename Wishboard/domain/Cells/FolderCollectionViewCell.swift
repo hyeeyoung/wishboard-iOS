@@ -55,8 +55,7 @@ class FolderCollectionViewCell: UICollectionViewCell {
     func setUpConstraint() {
         folderImage.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
-            make.width.equalTo(156)
-            make.height.equalTo(148)
+            make.height.equalTo(folderImage.snp.width)
         }
         moreButton.snp.makeConstraints { make in
             make.width.equalTo(12)

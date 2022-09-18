@@ -40,6 +40,7 @@ extension UIButton {
         var attText = AttributedString.init("Cart")
         
         attText.font = UIFont.Suit(size: 11.46, family: .Regular)
+        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         attText.foregroundColor = UIColor.black
         config.attributedTitle = attText
         config.background.backgroundColor = color

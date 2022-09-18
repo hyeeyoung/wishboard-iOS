@@ -31,7 +31,6 @@ class HomeViewController: UIViewController {
     }
     @objc func goToCart() {
         let cartVC = CartViewController()
-//        loginViewController.modalTransitionStyle = .coverVertical
         cartVC.modalPresentationStyle = .fullScreen
         self.present(cartVC, animated: true, completion: nil)
     }
