@@ -31,10 +31,10 @@ class ModifyProfileViewController: UIViewController {
     let nameTextField = UITextField().then{
         $0.placeholder = "닉네임을 수정해주세요."
         $0.addLeftPadding(10)
-        $0.layer.borderWidth = 1
         $0.backgroundColor = .wishboardTextfieldGray
         $0.layer.cornerRadius = 5
         $0.font = UIFont.Suit(size: 16, family: .Regular)
+        $0.clearButtonMode = .whileEditing
     }
     let completeButton = UIButton().then{
         $0.defaultButton("완료", .wishboardGreen, .black)

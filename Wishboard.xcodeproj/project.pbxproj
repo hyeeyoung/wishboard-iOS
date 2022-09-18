@@ -78,6 +78,7 @@
 		23DC04D128C58B5500ABB0CF /* WishboardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04D028C58B5500ABB0CF /* WishboardUITestsLaunchTests.swift */; };
 		23DC04E928C591E600ABB0CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04E828C591E600ABB0CF /* ViewController.swift */; };
 		23DC04EB28C591F400ABB0CF /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04EA28C591F400ABB0CF /* OnBoardingViewController.swift */; };
+		23E378DE28D2EBFA00C52F2D /* PopUpTextfieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E378DD28D2EBFA00C52F2D /* PopUpTextfieldViewController.swift */; };
 		23F69CAF28CC17F8001B8C7F /* UIBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */; };
 		23F69CB128CC1819001B8C7F /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CB028CC1819001B8C7F /* UIView.swift */; };
 		8FC34572B49CFC063CDC4619 /* Pods_WishboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 420154A5B1D7E2D7C5F49F42 /* Pods_WishboardTests.framework */; };
@@ -179,6 +180,7 @@
 		23DC04D028C58B5500ABB0CF /* WishboardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishboardUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		23DC04E828C591E600ABB0CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		23DC04EA28C591F400ABB0CF /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		23E378DD28D2EBFA00C52F2D /* PopUpTextfieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpTextfieldViewController.swift; sourceTree = "<group>"; };
 		23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPath.swift; sourceTree = "<group>"; };
 		23F69CB028CC1819001B8C7F /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		420154A5B1D7E2D7C5F49F42 /* Pods_WishboardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WishboardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -384,6 +386,7 @@
 				234F837A28C9647600C4EB41 /* TabBarViewController.swift */,
 				2374789928D1DB2900CF941A /* CheckNotch.swift */,
 				2374789D28D1EDF600CF941A /* PopUpViewController.swift */,
+				23E378DD28D2EBFA00C52F2D /* PopUpTextfieldViewController.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -839,6 +842,7 @@
 				23C9568D28C6812100D88536 /* UIColor.swift in Sources */,
 				23D7901628CB172900246109 /* CalenderNotiTableViewCell.swift in Sources */,
 				23C5AB4928CAA23300A7E977 /* MyPageView.swift in Sources */,
+				23E378DE28D2EBFA00C52F2D /* PopUpTextfieldViewController.swift in Sources */,
 				23D5517D28C6936400D81B5F /* OnBoardingViewModel.swift in Sources */,
 				234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */,
 				2340CEAC28CB6252007C362F /* HowToCollectionViewCell.swift in Sources */,

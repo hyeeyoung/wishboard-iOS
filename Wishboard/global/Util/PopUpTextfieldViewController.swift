@@ -1,19 +1,20 @@
 //
-//  PopUpViewController.swift
+//  PopUpTextfieldViewController.swift
 //  Wishboard
 //
-//  Created by gomin on 2022/09/14.
+//  Created by gomin on 2022/09/15.
 //
 
 import UIKit
 
 // Default 팝업창
-class PopUpViewController: UIViewController {
+class PopUpTextfieldViewController: UIViewController {
     // MARK: - Properties
     private var titleText: String?
     private var messageText: String?
     private var greenBtnText: String?
     private var blackBtnText: String?
+    private var placeholder: String?
     
     let popupView = UIView().then{
         $0.backgroundColor = .white
@@ -41,17 +42,26 @@ class PopUpViewController: UIViewController {
     }
     var cancelBtn: UIButton!
     var okBtn: UIButton!
+    var textField = UITextField().then{
+        $0.addLeftPadding(10)
+        $0.backgroundColor = .wishboardTextfieldGray
+        $0.layer.cornerRadius = 5
+        $0.font = UIFont.Suit(size: 16, family: .Regular)
+        $0.clearButtonMode = .whileEditing
+    }
     // MARK: - Life Cycles
     convenience init(titleText: String? = nil,
                      messageText: String? = nil,
                      greenBtnText: String? = nil,
-                     blackBtnText: String? = nil) {
+                     blackBtnText: String? = nil,
+                     placeholder: String? = nil) {
         self.init()
 
         self.titleText = titleText
         self.messageText = messageText
         self.greenBtnText = greenBtnText
         self.blackBtnText = blackBtnText
+        self.placeholder = placeholder
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,6 +120,7 @@ class PopUpViewController: UIViewController {
             
             $0.configuration = config
         }
+        textField.placeholder = self.placeholder
     }
     func setUpView() {
         self.view.addSubview(popupView)
@@ -120,11 +131,12 @@ class PopUpViewController: UIViewController {
         popupView.addSubview(verticalSeperator)
         popupView.addSubview(cancelBtn)
         popupView.addSubview(okBtn)
+        popupView.addSubview(textField)
     }
     func setUpConstraint() {
         popupView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(30)
-            make.height.equalTo(168)
+            make.height.equalTo(186)
             make.centerY.centerX.equalToSuperview()
         }
         titleLabel.snp.makeConstraints { make in
@@ -157,6 +169,11 @@ class PopUpViewController: UIViewController {
             make.centerY.equalTo(cancelBtn)
             make.trailing.bottom.equalToSuperview()
             make.leading.equalTo(verticalSeperator.snp.trailing)
+        }
+        textField.snp.makeConstraints { make in
+            make.height.equalTo(42)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.bottom.equalTo(horizontalSeperator.snp.top).offset(-16)
         }
     }
 }
