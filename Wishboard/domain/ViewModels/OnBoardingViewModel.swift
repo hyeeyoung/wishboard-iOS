@@ -22,4 +22,9 @@ class OnBoardingViewModel {
         loginViewController.modalPresentationStyle = .fullScreen
         self.viewcontroller.present(loginViewController, animated: true, completion: nil)
     }
+    func goToRegisterPage() {
+        let registerVC = RegisterEmailViewController()
+        registerVC.modalPresentationStyle = .fullScreen
+        self.viewcontroller.present(registerVC, animated: true, completion: nil)
+    }
 }
