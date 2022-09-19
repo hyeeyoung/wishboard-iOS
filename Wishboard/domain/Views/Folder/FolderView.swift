@@ -24,16 +24,13 @@ class FolderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setCollectionView()
-        setUpView()
-        setUpConstraint()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setCollectionView() {
+    func setCollectionView(_ dataSourceDelegate: UICollectionViewDataSource & UICollectionViewDelegate) {
         folderCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()) .then{
             let flowLayout = UICollectionViewFlowLayout()
             flowLayout.minimumInteritemSpacing = 0
@@ -48,8 +45,8 @@ class FolderView: UIView {
             flowLayout.scrollDirection = .vertical
             
             $0.collectionViewLayout = flowLayout
-            $0.dataSource = self
-            $0.delegate = self
+            $0.dataSource = dataSourceDelegate
+            $0.delegate = dataSourceDelegate
             $0.showsVerticalScrollIndicator = false
             
             $0.register(FolderCollectionViewCell.self, forCellWithReuseIdentifier: FolderCollectionViewCell.identifier)
@@ -87,20 +84,5 @@ class FolderView: UIView {
             make.width.height.equalTo(18)
             make.trailing.equalToSuperview().offset(-16)
         }
-    }
-}
-// MARK: - WishList CollectionView delegate
-extension FolderView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        let count = wishListData.count ?? 0
-        return 7
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FolderCollectionViewCell.identifier,
-                                                            for: indexPath)
-                as? FolderCollectionViewCell else{ fatalError() }
-        let itemIdx = indexPath.item
-//        cell.setUpData(self.wishListData[itemIdx])
-        return cell
     }
 }

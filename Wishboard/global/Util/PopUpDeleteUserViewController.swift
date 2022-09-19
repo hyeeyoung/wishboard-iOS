@@ -7,8 +7,8 @@
 
 import UIKit
 
-// Default 팝업창
-class PopUpTextfieldViewController: UIViewController {
+// 회원 탈퇴 창
+class PopUpDeleteUserViewController: UIViewController {
     // MARK: - Properties
     private var titleText: String?
     private var messageText: String?
