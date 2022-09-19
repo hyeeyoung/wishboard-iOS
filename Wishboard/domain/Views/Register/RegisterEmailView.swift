@@ -31,15 +31,21 @@ class RegisterEmailView: UIView {
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
-    let emailTextField = UITextField().then{
+    var emailTextField = UITextField().then{
         $0.defaultTextField("이메일")
+        $0.becomeFirstResponder()
     }
     let nextButton = UIButton().then{
         $0.defaultButton("다음", .wishboardDisabledGray, .black)
     }
+    lazy var accessoryView: UIView = {
+        return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
+    }()
     // MARK: - Life Cycles
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        emailTextField.inputAccessoryView = accessoryView // <-
 
         setUpView()
         setUpConstraint()
@@ -57,7 +63,8 @@ class RegisterEmailView: UIView {
         addSubview(heartLetterImage)
         addSubview(subTitleLabel)
         addSubview(emailTextField)
-        addSubview(nextButton)
+        
+        accessoryView.addSubview(nextButton)
     }
     func setUpConstraint() {
         setUpNavigationConstraint()
@@ -78,8 +85,8 @@ class RegisterEmailView: UIView {
         }
         nextButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(50)
-            make.top.equalTo(emailTextField.snp.bottom).offset(56)
+            make.height.equalTo(44)
+            make.bottom.equalToSuperview().inset(16)
         }
     }
     func setUpNavigationConstraint() {

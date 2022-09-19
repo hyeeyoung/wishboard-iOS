@@ -31,8 +31,9 @@ class RegisterPasswordView: UIView {
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
-    let pwTextField = UITextField().then{
+    var pwTextField = UITextField().then{
         $0.defaultTextField("비밀번호")
+        $0.becomeFirstResponder()
         $0.isSecureTextEntry = true
     }
     let errorMessage = UILabel().then{
@@ -47,10 +48,15 @@ class RegisterPasswordView: UIView {
     let registerButton = UIButton().then{
         $0.defaultButton("가입하기", .wishboardDisabledGray, .black)
     }
+    lazy var accessoryView: UIView = {
+        return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
+    }()
     // MARK: - Life Cycles
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        pwTextField.inputAccessoryView = accessoryView // <-
+        
         setUpView()
         setUpConstraint()
         
@@ -71,10 +77,9 @@ class RegisterPasswordView: UIView {
         addSubview(pwTextField)
         addSubview(errorMessage)
         
-        addSubview(stack)
+        accessoryView.addSubview(registerButton)
+        accessoryView.addSubview(stack)
         setStackView()
-        
-        addSubview(registerButton)
     }
     func setUpConstraint() {
         setUpNavigationConstraint()
@@ -97,15 +102,16 @@ class RegisterPasswordView: UIView {
             make.leading.trailing.equalTo(pwTextField)
             make.top.equalTo(pwTextField.snp.bottom).offset(5)
         }
-        stack.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(pwTextField.snp.bottom).offset(39)
-        }
         registerButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(50)
-            make.top.equalTo(stack.snp.bottom).offset(5)
+            make.height.equalTo(44)
+            make.bottom.equalToSuperview().inset(16)
         }
+        stack.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(registerButton.snp.top).offset(-6)
+        }
+        
     }
     func setStackView() {
         setLabel("가입 시 ")
