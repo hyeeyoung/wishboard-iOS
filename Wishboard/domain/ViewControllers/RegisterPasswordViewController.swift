@@ -41,7 +41,7 @@ extension RegisterPasswordViewController {
     }
     // MARK: - Functions
     func checkValidPW(_ pw: String) {
-        let isValid = self.pw.checkPassword(str: self.pw)
+        let isValid = self.pw.checkPassword()
         if isValid {
             registerPWView.errorMessage.isHidden = true
             registerPWView.registerButton.then{

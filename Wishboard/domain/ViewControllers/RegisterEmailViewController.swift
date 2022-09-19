@@ -44,7 +44,7 @@ class RegisterEmailViewController: UIViewController {
     }
     // MARK: - Functions
     func checkValidEmail(_ email: String) {
-        let isValid = self.email.checkEmail(str: self.email)
+        let isValid = self.email.checkEmail()
         if isValid {
             self.registerEmailView.nextButton.then{
                 $0.defaultButton("다음", .wishboardGreen, .black)
