@@ -25,8 +25,9 @@ class GetEmailView: UIView {
     var emailTextField = UITextField().then{
         $0.defaultTextField("이메일")
         $0.becomeFirstResponder()
+        $0.clearButtonMode = .never
     }
-    let resendEmailButton = UIButton().then{
+    lazy var resendEmailButton = UIButton().then{
         $0.resendButton(.wishboardGreen)
     }
     let errorMessage = UILabel().then{
@@ -51,28 +52,34 @@ class GetEmailView: UIView {
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
     }()
-    // MARK: - Functions
+    // MARK: - Life Cylces
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        emailTextField.inputAccessoryView = accessoryView // <-
-        codeTextField.inputAccessoryView = accessoryView // <-
-        errorMessage.isHidden = true
-
+        setUpTextFields()
         setUpView()
         setUpConstraint()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    // MARK: - Functions
+    func setUpTextFields() {
+        emailTextField.inputAccessoryView = accessoryView // <-
+        emailTextField.rightView = resendEmailButton
+        emailTextField.rightViewMode = .always
+        
+        codeTextField.inputAccessoryView = accessoryView // <-
+        errorMessage.isHidden = true
+    }
     func setUpView() {
         addSubview(navigationView)
         navigationView.addSubview(backBtn)
         navigationView.addSubview(navigationTitle)
         
         addSubview(emailTextField)
-        emailTextField.addSubview(resendEmailButton)
+//        emailTextField.addSubview(resendEmailButton)
+//        bringSubviewToFront(resendEmailButton)
         
         addSubview(errorMessage)
         addSubview(codeTextField)
@@ -89,10 +96,10 @@ class GetEmailView: UIView {
             make.centerX.equalToSuperview()
             make.top.equalTo(navigationView.snp.bottom).offset(30)
         }
-        resendEmailButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(10)
-            make.centerY.equalToSuperview()
-        }
+//        resendEmailButton.snp.makeConstraints { make in
+//            make.trailing.equalToSuperview().inset(10)
+//            make.centerY.equalToSuperview()
+//        }
         errorMessage.snp.makeConstraints { make in
             make.leading.equalTo(emailTextField)
             make.top.equalTo(emailTextField.snp.bottom).offset(6)

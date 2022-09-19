@@ -60,7 +60,7 @@ extension UIButton {
         config.attributedTitle = attText
         config.background.backgroundColor = .wishboardTextfieldGray
         config.cornerStyle = .capsule
-        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10)
         
         self.configuration = config
     }
