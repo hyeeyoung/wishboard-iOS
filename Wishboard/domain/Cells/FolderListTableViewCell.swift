@@ -19,6 +19,7 @@ class FolderListTableViewCell: UITableViewCell {
     }
     let checkIcon = UIImageView().then{
         $0.image = UIImage(named: "check")
+        $0.isHidden = true
     }
 
     //MARK: - Life Cycles
@@ -52,6 +53,15 @@ class FolderListTableViewCell: UITableViewCell {
             make.width.height.equalTo(24)
             make.trailing.equalToSuperview().inset(16)
             make.centerY.equalToSuperview()
+        }
+    }
+    func setUpData(_ data: FolderListModel) {
+        if let image = data.folderImage {
+            self.image.kf.setImage(with: URL(string: image), placeholder: UIImage())
+        }
+        if let foldername = data.folderName {self.folderName.text = foldername}
+        if let isSelected = data.isChecked {
+            self.checkIcon.isHidden = isSelected ? false : true
         }
     }
 }

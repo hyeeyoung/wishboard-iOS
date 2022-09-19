@@ -38,5 +38,10 @@ extension UIColor{
         blue: 0/255,
         alpha: 0.4
     )
-
+    static let wishboardRed = UIColor(
+        red: 250/255,
+        green: 93/255,
+        blue: 187/255,
+        alpha: 1
+    )
 }
