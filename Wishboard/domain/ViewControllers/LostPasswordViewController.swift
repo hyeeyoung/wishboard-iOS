@@ -32,15 +32,15 @@ class LostPasswordViewController: UIViewController {
         self.dismiss(animated: true)
     }
     @objc func emailTextFieldEditingChanged(_ sender: UITextField) {
-        lostPasswordView.errorMessage.isHidden = false
         let text = sender.text ?? ""
         self.email = text
         self.checkValidEmail(self.email)
     }
     @objc func getEmailButtonDidTap() {
-        let registerVC = RegisterPasswordViewController()
-        registerVC.modalPresentationStyle = .fullScreen
-        self.present(registerVC, animated: true, completion: nil)
+        let getEmailVC = GetEmailViewController()
+        getEmailVC.email = self.email
+        getEmailVC.modalPresentationStyle = .fullScreen
+        self.present(getEmailVC, animated: true, completion: nil)
     }
     // MARK: - Functions
     func checkValidEmail(_ email: String) {
@@ -50,11 +50,13 @@ class LostPasswordViewController: UIViewController {
                 $0.defaultButton("인증메일 받기", .wishboardGreen, .black)
                 $0.isEnabled = true
             }
+            self.lostPasswordView.errorMessage.isHidden = true
         } else {
             self.lostPasswordView.getEmailButton.then{
                 $0.defaultButton("인증메일 받기", .wishboardDisabledGray, .black)
                 $0.isEnabled = false
             }
+            self.lostPasswordView.errorMessage.isHidden = false
         }
     }
 }

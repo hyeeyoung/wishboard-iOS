@@ -49,4 +49,19 @@ extension UIButton {
         
         self.configuration = config
     }
+    // MARK: - Email resend button
+    func resendButton(_ color: UIColor) {
+        var config = UIButton.Configuration.tinted()
+        var attText = AttributedString.init("재전송")
+        
+        attText.font = UIFont.Suit(size: 14, family: .Bold)
+        attText.foregroundColor = color
+        
+        config.attributedTitle = attText
+        config.background.backgroundColor = .wishboardTextfieldGray
+        config.cornerStyle = .capsule
+        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        
+        self.configuration = config
+    }
 }

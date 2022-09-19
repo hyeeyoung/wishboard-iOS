@@ -67,6 +67,7 @@
 		23D4C66028D8E87B00EA7F98 /* GetEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D4C65F28D8E87B00EA7F98 /* GetEmailView.swift */; };
 		23D4C66228D8E88700EA7F98 /* LostPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D4C66128D8E88700EA7F98 /* LostPasswordView.swift */; };
 		23D4C66428D8E96700EA7F98 /* LostPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D4C66328D8E96700EA7F98 /* LostPasswordViewController.swift */; };
+		23D4C66628D8ECF300EA7F98 /* GetEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D4C66528D8ECF300EA7F98 /* GetEmailViewController.swift */; };
 		23D5517D28C6936400D81B5F /* OnBoardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5517C28C6936400D81B5F /* OnBoardingViewModel.swift */; };
 		23D5517F28C698D200D81B5F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5517E28C698D200D81B5F /* LoginView.swift */; };
 		23D5518128C69E2900D81B5F /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5518028C69E2900D81B5F /* UITextField.swift */; };
@@ -178,6 +179,7 @@
 		23D4C65F28D8E87B00EA7F98 /* GetEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEmailView.swift; sourceTree = "<group>"; };
 		23D4C66128D8E88700EA7F98 /* LostPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostPasswordView.swift; sourceTree = "<group>"; };
 		23D4C66328D8E96700EA7F98 /* LostPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostPasswordViewController.swift; sourceTree = "<group>"; };
+		23D4C66528D8ECF300EA7F98 /* GetEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEmailViewController.swift; sourceTree = "<group>"; };
 		23D5517C28C6936400D81B5F /* OnBoardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewModel.swift; sourceTree = "<group>"; };
 		23D5517E28C698D200D81B5F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		23D5518028C69E2900D81B5F /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 				2344949328D78A9A00CF3BD9 /* RegisterEmailViewController.swift */,
 				2344949828D78F6300CF3BD9 /* RegisterPasswordViewController.swift */,
 				23D4C66328D8E96700EA7F98 /* LostPasswordViewController.swift */,
+				23D4C66528D8ECF300EA7F98 /* GetEmailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -922,6 +925,7 @@
 				23C5AB4D28CAA54600A7E977 /* MypageProfileTableViewCell.swift in Sources */,
 				23C2378428C9CEE000CE3200 /* FolderViewController.swift in Sources */,
 				234F838D28C9857000C4EB41 /* CartTableViewCell.swift in Sources */,
+				23D4C66628D8ECF300EA7F98 /* GetEmailViewController.swift in Sources */,
 				238EF90628CB06F800ECA606 /* CalenderViewController.swift in Sources */,
 				23C8A1C228CA08A9003ABFE9 /* ItemDetailViewController.swift in Sources */,
 				234F838228C96F6300C4EB41 /* WishListCollectionViewCell.swift in Sources */,
