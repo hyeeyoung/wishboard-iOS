@@ -27,7 +27,9 @@ class RegisterEmailViewController: UIViewController {
         registerEmailView.emailTextField.addTarget(self, action: #selector(emailTextFieldEditingChanged(_:)), for: .editingChanged)
         registerEmailView.nextButton.addTarget(self, action: #selector(nextButtonDidTap), for: .touchUpInside)
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        registerEmailView.emailTextField.becomeFirstResponder()
+    }
     // MARK: - Actions
     @objc func goBack() {
         self.dismiss(animated: true)

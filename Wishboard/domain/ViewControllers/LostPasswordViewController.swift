@@ -27,6 +27,9 @@ class LostPasswordViewController: UIViewController {
         lostPasswordView.emailTextField.addTarget(self, action: #selector(emailTextFieldEditingChanged(_:)), for: .editingChanged)
         lostPasswordView.getEmailButton.addTarget(self, action: #selector(getEmailButtonDidTap), for: .touchUpInside)
     }
+    override func viewDidAppear(_ animated: Bool) {
+        lostPasswordView.emailTextField.becomeFirstResponder()
+    }
     // MARK: - Actions
     @objc func goBack() {
         self.dismiss(animated: true)
@@ -38,7 +41,6 @@ class LostPasswordViewController: UIViewController {
     }
     @objc func getEmailButtonDidTap() {
         let getEmailVC = GetEmailViewController()
-        getEmailVC.email = self.email
         getEmailVC.modalPresentationStyle = .fullScreen
         self.present(getEmailVC, animated: true, completion: nil)
     }

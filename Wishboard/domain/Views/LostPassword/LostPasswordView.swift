@@ -18,6 +18,11 @@ class LostPasswordView: UIView {
     let backBtn = UIButton().then{
         $0.setImage(UIImage(named: "goBack"), for: .normal)
     }
+    let stepLabel = UILabel().then{
+        $0.text = "1/2 단계"
+        $0.font = UIFont.Suit(size: 14, family: .Regular)
+    }
+    
     let heartLetterImage = UIImageView().then{
         $0.image = UIImage(named: "love-letter")
     }
@@ -60,6 +65,7 @@ class LostPasswordView: UIView {
         addSubview(navigationView)
         navigationView.addSubview(navigationTitle)
         navigationView.addSubview(backBtn)
+        navigationView.addSubview(stepLabel)
         
         addSubview(heartLetterImage)
         addSubview(subTitleLabel)
@@ -110,6 +116,10 @@ class LostPasswordView: UIView {
         navigationTitle.snp.makeConstraints{ make in
             make.centerY.equalToSuperview()
             make.centerX.equalToSuperview()
+        }
+        stepLabel.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
         }
     }
 }

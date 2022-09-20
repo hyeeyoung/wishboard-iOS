@@ -21,25 +21,30 @@ class GetEmailView: UIView {
         $0.textColor = .black
         $0.font = UIFont.Suit(size: 15, family: .Bold)
     }
-    // 이메일 TextField
-    var emailTextField = UITextField().then{
-        $0.defaultTextField("이메일")
-        $0.becomeFirstResponder()
-        $0.clearButtonMode = .never
+    let stepLabel = UILabel().then{
+        $0.text = "2/2 단계"
+        $0.font = UIFont.Suit(size: 14, family: .Regular)
     }
-    lazy var resendEmailButton = UIButton().then{
-        $0.resendButton(.wishboardGreen)
+    let lockedImage = UIImageView().then{
+        $0.image = UIImage(named: "locked")
     }
-    let errorMessage = UILabel().then{
-        $0.text = "이메일 주소를 정확하게 입력해주세요."
-        $0.textColor = .wishboardRed
+    let subTitleLabel = UILabel().then{
+        $0.text = "인증코드가 전송되었어요!\n이메일을 확인해주세요."
         $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.textAlignment = .center
+        $0.numberOfLines = 0
     }
     // 인증코드 TextField
-    let codeTextField = UITextField().then{
+    var codeTextField = UITextField().then{
         $0.defaultTextField("인증코드")
+        $0.becomeFirstResponder()
         $0.isSecureTextEntry = true
     }
+//    let errorMessage = UILabel().then{
+//        $0.text = "이메일 주소를 정확하게 입력해주세요."
+//        $0.textColor = .wishboardRed
+//        $0.font = UIFont.Suit(size: 12, family: .Regular)
+//    }
     var timerLabel = UILabel().then{
         $0.text = "5:00"
         $0.font = UIFont.Suit(size: 14, family: .Regular)
@@ -65,51 +70,44 @@ class GetEmailView: UIView {
     }
     // MARK: - Functions
     func setUpTextFields() {
-        emailTextField.inputAccessoryView = accessoryView // <-
-        emailTextField.rightView = resendEmailButton
-        emailTextField.rightViewMode = .always
-        
         codeTextField.inputAccessoryView = accessoryView // <-
-        errorMessage.isHidden = true
+//        errorMessage.isHidden = true
     }
     func setUpView() {
         addSubview(navigationView)
         navigationView.addSubview(backBtn)
         navigationView.addSubview(navigationTitle)
+        navigationView.addSubview(stepLabel)
         
-        addSubview(emailTextField)
-//        emailTextField.addSubview(resendEmailButton)
-//        bringSubviewToFront(resendEmailButton)
-        
-        addSubview(errorMessage)
+        addSubview(lockedImage)
+        addSubview(subTitleLabel)
         addSubview(codeTextField)
         codeTextField.addSubview(timerLabel)
+//        addSubview(errorMessage)
         
         accessoryView.addSubview(loginButton)
     }
     func setUpConstraint() {
         setNavigationConstraint()
         
-        emailTextField.snp.makeConstraints { make in
-            make.height.equalTo(42)
-            make.leading.trailing.equalToSuperview().inset(16)
+        lockedImage.snp.makeConstraints { make in
+            make.height.width.equalTo(72)
             make.centerX.equalToSuperview()
-            make.top.equalTo(navigationView.snp.bottom).offset(30)
+            make.top.equalTo(navigationView.snp.bottom).offset(24)
         }
-//        resendEmailButton.snp.makeConstraints { make in
-//            make.trailing.equalToSuperview().inset(10)
-//            make.centerY.equalToSuperview()
-//        }
-        errorMessage.snp.makeConstraints { make in
-            make.leading.equalTo(emailTextField)
-            make.top.equalTo(emailTextField.snp.bottom).offset(6)
+        subTitleLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(lockedImage.snp.bottom).offset(10)
         }
         codeTextField.snp.makeConstraints { make in
-            make.height.equalTo(42)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.centerX.equalToSuperview()
-            make.top.equalTo(emailTextField.snp.bottom).offset(34)
+            make.height.equalTo(42)
+            make.top.equalTo(subTitleLabel.snp.bottom).offset(32)
         }
+//        errorMessage.snp.makeConstraints { make in
+//            make.leading.trailing.equalTo(codeTextField)
+//            make.top.equalTo(codeTextField.snp.bottom).offset(5)
+//        }
         timerLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(15)
             make.centerY.equalToSuperview()
@@ -136,6 +134,10 @@ class GetEmailView: UIView {
         navigationTitle.snp.makeConstraints{ make in
             make.centerY.equalToSuperview()
             make.centerX.equalToSuperview()
+        }
+        stepLabel.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
         }
     }
 }
