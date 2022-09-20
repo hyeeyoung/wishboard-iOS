@@ -9,6 +9,7 @@ import UIKit
 
 class FolderViewController: UIViewController {
     var folderView : FolderView!
+    let emptyMessage = "앗, 폴더가 없어요!\n폴더를 추가해서 아이템을 정리해 보세요!"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,8 @@ class FolderViewController: UIViewController {
 extension FolderViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        let count = wishListData.count ?? 0
+//        if count == 0 {EmptyView().setEmptyView(self.emptyMessage, self.folderView.folderCollectionView)}
+//        else {EmptyView().doNotSetEmptyView(self.folderView.folderCollectionView)}
         return 7
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

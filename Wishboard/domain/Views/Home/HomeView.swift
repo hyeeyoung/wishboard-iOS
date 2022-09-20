@@ -26,6 +26,7 @@ class HomeView: UIView {
     var viewController : HomeViewController!
     var collectionView : UICollectionView!
     var wishListData: [WishListModel] = []
+    let emptyMessage = "앗, 아이템이 없어요!\n갖고 싶은 아이템을 등록해보세요!"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -114,6 +115,8 @@ class HomeView: UIView {
 extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let count = wishListData.count ?? 0
+        if count == 0 {EmptyView().setEmptyView(self.emptyMessage, self.collectionView)}
+        else {EmptyView().doNotSetEmptyView(self.collectionView)}
         return count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
