@@ -36,6 +36,11 @@ extension FolderViewController: UICollectionViewDelegate, UICollectionViewDataSo
         cell.moreButton.addTarget(self, action: #selector(alertFolderMenu), for: .touchUpInside)
         return cell
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let folderDetailVC = FolderDetailViewController()
+        folderDetailVC.modalPresentationStyle = .fullScreen
+        self.present(folderDetailVC, animated: true, completion: nil)
+    }
 }
 // MARK: - Functions & Actions
 extension FolderViewController {
