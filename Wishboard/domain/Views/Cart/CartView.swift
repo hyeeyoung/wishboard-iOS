@@ -145,8 +145,7 @@ class CartView: UIView {
 extension CartView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = cartData.count ?? 0
-        if count == 0 {EmptyView().setEmptyView(self.emptyMessage, self.cartTableView)}
-        else {EmptyView().doNotSetEmptyView(self.cartTableView)}
+        EmptyView().setEmptyView(self.emptyMessage, self.cartTableView, count)
         return count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

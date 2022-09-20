@@ -25,8 +25,7 @@ class FolderViewController: UIViewController {
 extension FolderViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        let count = wishListData.count ?? 0
-//        if count == 0 {EmptyView().setEmptyView(self.emptyMessage, self.folderView.folderCollectionView)}
-//        else {EmptyView().doNotSetEmptyView(self.folderView.folderCollectionView)}
+        EmptyView().setEmptyView(self.emptyMessage, self.folderView.folderCollectionView, 7)
         return 7
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
