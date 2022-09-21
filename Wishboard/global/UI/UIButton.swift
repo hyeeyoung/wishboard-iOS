@@ -25,7 +25,7 @@ extension UIButton {
         self.configuration = config
         self.setTitle("", for: .selected)
     }
-    func setLottieView(_ button: UIButton) -> AnimationView {
+    func setHorizontalLottieView(_ button: UIButton) -> AnimationView {
         let lottieView = SetLottie().horizontalBlackView
         button.addSubview(lottieView)
         lottieView.isHidden = true
@@ -36,6 +36,25 @@ extension UIButton {
             make.centerY.centerX.equalToSuperview()
         }
         return lottieView
+    }
+    func setSpinLottieView(_ button: UIButton) -> AnimationView {
+        let lottieView = SetLottie().spinView
+        button.addSubview(lottieView)
+        lottieView.isHidden = true
+        
+        lottieView.snp.makeConstraints { make in
+            make.width.height.equalTo(50)
+            make.centerY.centerX.equalToSuperview()
+        }
+        clearButton(button)
+        return lottieView
+    }
+    func clearButton(_ button: UIButton) {
+        var config = UIButton.Configuration.plain()
+        config.background.backgroundColor = .clear
+        config.baseForegroundColor = .clear
+        
+        self.configuration = config
     }
     // MARK: 밑줄 Button
     func setUnderline(_ title: String, _ color: UIColor) {

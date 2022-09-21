@@ -98,7 +98,7 @@ extension FolderViewController {
         self.present(dialog, animated: false, completion: nil)
     }
     @objc func completeButtonDidTap() {
-        let lottieView = dialog.completeButton.setLottieView(dialog.completeButton)
+        let lottieView = dialog.completeButton.setHorizontalLottieView(dialog.completeButton)
         dialog.completeButton.isSelected = true
         lottieView.isHidden = false
         lottieView.loopMode = .repeat(2) // 2번 반복

@@ -130,7 +130,7 @@ extension ModifyProfileViewController {
         self.present(imagePickerController, animated: true, completion: nil)
     }
     @objc func completeButtonDidTap() {
-        let lottieView = self.completeButton.setLottieView(self.completeButton)
+        let lottieView = self.completeButton.setHorizontalLottieView(self.completeButton)
         self.completeButton.isSelected = true
         lottieView.isHidden = false
         lottieView.loopMode = .repeat(2)

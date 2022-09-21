@@ -55,7 +55,7 @@ extension GetEmailViewController {
         self.checkValidCode()
     }
     @objc func loginButtonDidTap() {
-        let lottieView = getEmailView.loginButton.setLottieView(getEmailView.loginButton)
+        let lottieView = getEmailView.loginButton.setHorizontalLottieView(getEmailView.loginButton)
         getEmailView.loginButton.isSelected = true
         lottieView.isHidden = false
         lottieView.loopMode = .loop

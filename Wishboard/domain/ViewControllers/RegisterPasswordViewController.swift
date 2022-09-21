@@ -42,7 +42,7 @@ extension RegisterPasswordViewController {
         self.checkValidPW(self.pw)
     }
     @objc func registerButtonDidTap() {
-        let lottieView = registerPWView.registerButton.setLottieView(registerPWView.registerButton)
+        let lottieView = registerPWView.registerButton.setHorizontalLottieView(registerPWView.registerButton)
         registerPWView.registerButton.isSelected = true
         lottieView.isHidden = false
         lottieView.loopMode = .loop

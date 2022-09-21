@@ -40,7 +40,7 @@ class LostPasswordViewController: UIViewController {
         self.checkValidEmail(self.email)
     }
     @objc func getEmailButtonDidTap() {
-        let lottieView = lostPasswordView.getEmailButton.setLottieView(lostPasswordView.getEmailButton)
+        let lottieView = lostPasswordView.getEmailButton.setHorizontalLottieView(lostPasswordView.getEmailButton)
         lostPasswordView.getEmailButton.isSelected = true
         lottieView.isHidden = false
         lottieView.loopMode = .repeat(2)
