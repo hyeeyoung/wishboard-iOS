@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Lottie
 
 extension UIButton {
     // MARK: Button
@@ -22,6 +23,19 @@ extension UIButton {
         config.cornerStyle = .capsule
         
         self.configuration = config
+        self.setTitle("", for: .selected)
+    }
+    func setLottieView(_ button: UIButton) -> AnimationView {
+        let lottieView = SetLottie().horizontalBlackView
+        button.addSubview(lottieView)
+        lottieView.isHidden = true
+        
+        lottieView.snp.makeConstraints { make in
+            make.width.equalTo(50)
+            make.height.equalToSuperview()
+            make.centerY.centerX.equalToSuperview()
+        }
+        return lottieView
     }
     // MARK: 밑줄 Button
     func setUnderline(_ title: String, _ color: UIColor) {

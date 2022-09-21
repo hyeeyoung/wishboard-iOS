@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Lottie
 
 class RegisterPasswordViewController: UIViewController {
     var registerPWView: RegisterPasswordView!
@@ -26,6 +27,7 @@ class RegisterPasswordViewController: UIViewController {
         
         registerPWView.backBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         registerPWView.pwTextField.addTarget(self, action: #selector(pwTextFieldEditingChanged(_:)), for: .editingChanged)
+        registerPWView.registerButton.addTarget(self, action: #selector(registerButtonDidTap), for: .touchUpInside)
     }
 
 }
@@ -38,6 +40,15 @@ extension RegisterPasswordViewController {
         let text = sender.text ?? ""
         self.pw = text
         self.checkValidPW(self.pw)
+    }
+    @objc func registerButtonDidTap() {
+        let lottieView = registerPWView.registerButton.setLottieView(registerPWView.registerButton)
+        registerPWView.registerButton.isSelected = true
+        lottieView.isHidden = false
+        lottieView.loopMode = .loop
+        lottieView.play { completion in
+//            self.dismiss(animated: true)
+        }
     }
     // MARK: - Functions
     func checkValidPW(_ pw: String) {

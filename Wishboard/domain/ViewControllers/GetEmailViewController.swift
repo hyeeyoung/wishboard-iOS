@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Lottie
 
 class GetEmailViewController: UIViewController {
     var getEmailView: GetEmailView!
@@ -54,9 +55,16 @@ extension GetEmailViewController {
         self.checkValidCode()
     }
     @objc func loginButtonDidTap() {
-//        let registerVC = RegisterPasswordViewController()
-//        registerVC.modalPresentationStyle = .fullScreen
-//        self.present(registerVC, animated: true, completion: nil)
+        let lottieView = getEmailView.loginButton.setLottieView(getEmailView.loginButton)
+        getEmailView.loginButton.isSelected = true
+        lottieView.isHidden = false
+        lottieView.loopMode = .loop
+        lottieView.play()
+//        lottieView.play { completion in
+//            let getEmailVC = GetEmailViewController()
+//            getEmailVC.modalPresentationStyle = .fullScreen
+//            self.present(getEmailVC, animated: true, completion: nil)
+//        }
     }
     @objc func updateTime() {
         //남은 분

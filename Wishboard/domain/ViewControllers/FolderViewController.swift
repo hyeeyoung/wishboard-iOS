@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Lottie
 
 class FolderViewController: UIViewController {
     var folderView : FolderView!
     let emptyMessage = "앗, 폴더가 없어요!\n폴더를 추가해서 아이템을 정리해 보세요!"
+    var dialog: PopUpWithTextFieldViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,8 +81,9 @@ extension FolderViewController {
         self.present(alert, animated: true)
     }
     func alertModifyDialog() {
-        let dialog = PopUpWithTextFieldViewController(titleText: "폴더명 수정", placeholder: "폴더명", prevText: "폴더명", buttonTitle: "수정")
+        dialog = PopUpWithTextFieldViewController(titleText: "폴더명 수정", placeholder: "폴더명", prevText: "폴더명", buttonTitle: "수정")
         dialog.modalPresentationStyle = .overCurrentContext
+        dialog.completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
         self.present(dialog, animated: false, completion: nil)
     }
     func alertDeleteDialog() {
@@ -89,8 +92,18 @@ extension FolderViewController {
         self.present(dialog, animated: false, completion: nil)
     }
     @objc func alertAddDialog() {
-        let dialog = PopUpWithTextFieldViewController(titleText: "폴더 추가", placeholder: "폴더명", prevText: nil, buttonTitle: "추가")
+        dialog = PopUpWithTextFieldViewController(titleText: "폴더 추가", placeholder: "폴더명", prevText: nil, buttonTitle: "추가")
         dialog.modalPresentationStyle = .overCurrentContext
+        dialog.completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
         self.present(dialog, animated: false, completion: nil)
+    }
+    @objc func completeButtonDidTap() {
+        let lottieView = dialog.completeButton.setLottieView(dialog.completeButton)
+        dialog.completeButton.isSelected = true
+        lottieView.isHidden = false
+        lottieView.loopMode = .repeat(2) // 2번 반복
+        lottieView.play { completion in
+            self.dismiss(animated: true)
+        }
     }
 }

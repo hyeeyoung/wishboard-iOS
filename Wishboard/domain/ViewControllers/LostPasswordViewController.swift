@@ -40,9 +40,16 @@ class LostPasswordViewController: UIViewController {
         self.checkValidEmail(self.email)
     }
     @objc func getEmailButtonDidTap() {
-        let getEmailVC = GetEmailViewController()
-        getEmailVC.modalPresentationStyle = .fullScreen
-        self.present(getEmailVC, animated: true, completion: nil)
+        let lottieView = lostPasswordView.getEmailButton.setLottieView(lostPasswordView.getEmailButton)
+        lostPasswordView.getEmailButton.isSelected = true
+        lottieView.isHidden = false
+        lottieView.loopMode = .repeat(2)
+        lottieView.play { completion in
+            let getEmailVC = GetEmailViewController()
+            getEmailVC.modalPresentationStyle = .fullScreen
+            self.present(getEmailVC, animated: true, completion: nil)
+        }
+        
     }
     // MARK: - Functions
     func checkValidEmail(_ email: String) {

@@ -12,6 +12,9 @@
 		2328C5AC28CAC1260065ABB2 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C5AB28CAC1260065ABB2 /* NotificationViewController.swift */; };
 		2328C5AE28CAC17C0065ABB2 /* NotiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C5AD28CAC17C0065ABB2 /* NotiTableViewCell.swift */; };
 		2328C5B028CAC7930065ABB2 /* ModifyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C5AF28CAC7930065ABB2 /* ModifyProfileViewController.swift */; };
+		2331867F28DA92EE00F17CBF /* loading_spin.json in Resources */ = {isa = PBXBuildFile; fileRef = 2331867D28DA92EE00F17CBF /* loading_spin.json */; };
+		2331868028DA92EE00F17CBF /* loading_horizontal_black.json in Resources */ = {isa = PBXBuildFile; fileRef = 2331867E28DA92EE00F17CBF /* loading_horizontal_black.json */; };
+		2331868228DA933600F17CBF /* SetLottie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2331868128DA933600F17CBF /* SetLottie.swift */; };
 		2340CEAA28CB6173007C362F /* HomeBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEA928CB6173007C362F /* HomeBottomSheetView.swift */; };
 		2340CEAC28CB6252007C362F /* HowToCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEAB28CB6252007C362F /* HowToCollectionViewCell.swift */; };
 		2340CEAE28CB65AE007C362F /* HowToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEAD28CB65AE007C362F /* HowToViewController.swift */; };
@@ -126,6 +129,9 @@
 		2328C5AB28CAC1260065ABB2 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		2328C5AD28CAC17C0065ABB2 /* NotiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiTableViewCell.swift; sourceTree = "<group>"; };
 		2328C5AF28CAC7930065ABB2 /* ModifyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyProfileViewController.swift; sourceTree = "<group>"; };
+		2331867D28DA92EE00F17CBF /* loading_spin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_spin.json; sourceTree = "<group>"; };
+		2331867E28DA92EE00F17CBF /* loading_horizontal_black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_horizontal_black.json; sourceTree = "<group>"; };
+		2331868128DA933600F17CBF /* SetLottie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLottie.swift; sourceTree = "<group>"; };
 		2340CEA928CB6173007C362F /* HomeBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomSheetView.swift; sourceTree = "<group>"; };
 		2340CEAB28CB6252007C362F /* HowToCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToCollectionViewCell.swift; sourceTree = "<group>"; };
 		2340CEAD28CB65AE007C362F /* HowToViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToViewController.swift; sourceTree = "<group>"; };
@@ -267,6 +273,16 @@
 				2328C5A928CAC02C0065ABB2 /* NotiData.swift */,
 			);
 			path = NotificationModel;
+			sourceTree = "<group>";
+		};
+		2331867C28DA92DF00F17CBF /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				2331867E28DA92EE00F17CBF /* loading_horizontal_black.json */,
+				2331867D28DA92EE00F17CBF /* loading_spin.json */,
+				2331868128DA933600F17CBF /* SetLottie.swift */,
+			);
+			path = Lottie;
 			sourceTree = "<group>";
 		};
 		2344949528D78AA400CF3BD9 /* Register */ = {
@@ -479,6 +495,7 @@
 		23DC04AC28C58B5200ABB0CF /* Wishboard */ = {
 			isa = PBXGroup;
 			children = (
+				2331867C28DA92DF00F17CBF /* Lottie */,
 				23DC04DF28C58C6200ABB0CF /* AppDelegate */,
 				23DC04DD28C58C5700ABB0CF /* global */,
 				23DC04DE28C58C5B00ABB0CF /* domain */,
@@ -743,6 +760,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2331867F28DA92EE00F17CBF /* loading_spin.json in Resources */,
 				23C9569E28C68D7A00D88536 /* SUIT-Medium.ttf in Resources */,
 				23C9569928C68D7A00D88536 /* SUIT-Bold.ttf in Resources */,
 				2374789828D1C9D600CF941A /* Montserrat-Regular.ttf in Resources */,
@@ -755,6 +773,7 @@
 				23C9569F28C68D7A00D88536 /* SUIT-SemiBold.ttf in Resources */,
 				23C9569A28C68D7A00D88536 /* SUIT-ExtraBold.ttf in Resources */,
 				23C9569B28C68D7A00D88536 /* SUIT-Light.ttf in Resources */,
+				2331868028DA92EE00F17CBF /* loading_horizontal_black.json in Resources */,
 				23DC04B728C58B5500ABB0CF /* Assets.xcassets in Resources */,
 				23DC04B528C58B5200ABB0CF /* Main.storyboard in Resources */,
 				23C9569828C68D7A00D88536 /* SUIT-ExtraLight.ttf in Resources */,
@@ -885,6 +904,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2331868228DA933600F17CBF /* SetLottie.swift in Sources */,
 				23C956A128C68F9400D88536 /* LoginViewController.swift in Sources */,
 				23D5518928C6B02400D81B5F /* Observable.swift in Sources */,
 				2344949B28D78F7000CF3BD9 /* RegisterPasswordView.swift in Sources */,
