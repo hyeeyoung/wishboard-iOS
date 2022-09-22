@@ -24,7 +24,7 @@ class HomeViewController: UIViewController {
             make.leading.trailing.top.bottom.equalToSuperview()
         }
         
-        homeView.showBottomSheet(self)
+//        homeView.showBottomSheet(self)
         // temp data
         homeView.setTempData()
         self.homeView.cartButton.addTarget(self, action: #selector(goToCart), for: .touchUpInside)

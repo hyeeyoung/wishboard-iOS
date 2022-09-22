@@ -28,7 +28,7 @@
         <!--Tab Bar View Controller-->
         <scene sceneID="hSg-Y9-b8a">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="EGn-IM-91r" customClass="TabBarViewController" customModule="Wishboard" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="EGn-IM-91r" customClass="TabBarViewController" customModule="Wishboard" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wHK-7T-dLR">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
