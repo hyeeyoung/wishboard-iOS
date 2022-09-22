@@ -34,7 +34,8 @@ class SetFolderBottomSheetViewController: UIViewController {
         setFolderBottomSheetView.exitBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     override func viewWillDisappear(_ animated: Bool) {
-        preVC.uploadItemView.uploadItemTableView.reloadData()
+        let indexPath = IndexPath(row: 3, section: 0)
+        self.preVC.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
     }
     func setPreViewController(_ preVC: UploadItemViewController) {
         self.preVC = preVC

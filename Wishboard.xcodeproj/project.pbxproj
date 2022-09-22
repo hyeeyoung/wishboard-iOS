@@ -30,6 +30,7 @@
 		234F838B28C983CE00C4EB41 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838A28C983CE00C4EB41 /* CartView.swift */; };
 		234F838D28C9857000C4EB41 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838C28C9857000C4EB41 /* CartTableViewCell.swift */; };
 		234F838F28C987CB00C4EB41 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838E28C987CB00C4EB41 /* CartViewController.swift */; };
+		2350FADF28DB9BEA00981B8F /* SetNotificationDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2350FADE28DB9BEA00981B8F /* SetNotificationDate.swift */; };
 		2360095E28DA1829001FB107 /* FolderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360095D28DA1829001FB107 /* FolderDetailViewController.swift */; };
 		2360096028DA2297001FB107 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360095F28DA2297001FB107 /* EmptyView.swift */; };
 		2374789628D1C9D600CF941A /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2374789328D1C9D600CF941A /* Montserrat-Bold.ttf */; };
@@ -147,6 +148,7 @@
 		234F838A28C983CE00C4EB41 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		234F838C28C9857000C4EB41 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		234F838E28C987CB00C4EB41 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		2350FADE28DB9BEA00981B8F /* SetNotificationDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNotificationDate.swift; sourceTree = "<group>"; };
 		2360095D28DA1829001FB107 /* FolderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDetailViewController.swift; sourceTree = "<group>"; };
 		2360095F28DA2297001FB107 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		2374789328D1C9D600CF941A /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 				23E378DD28D2EBFA00C52F2D /* PopUpDeleteUserViewController.swift */,
 				2378280328D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift */,
 				2360095F28DA2297001FB107 /* EmptyView.swift */,
+				2350FADE28DB9BEA00981B8F /* SetNotificationDate.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -977,6 +980,7 @@
 				2340CEAE28CB65AE007C362F /* HowToViewController.swift in Sources */,
 				2328C5AA28CAC02C0065ABB2 /* NotiData.swift in Sources */,
 				2344949428D78A9A00CF3BD9 /* RegisterEmailViewController.swift in Sources */,
+				2350FADF28DB9BEA00981B8F /* SetNotificationDate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

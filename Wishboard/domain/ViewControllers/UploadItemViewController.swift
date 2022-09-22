@@ -175,14 +175,17 @@ extension UploadItemViewController {
             }
         }
         
-        guard let type = notivc.notiType else {return}
-        guard let dateTime = notivc.dateAndTime else {return}
-        if tag == 4 {cell.textLabel?.text = "[" + type + "] " + dateTime}
+        if let type = notivc.notiType {
+            if let dateTime = notivc.dateAndTime {
+                if tag == 4 {cell.textLabel?.text = "[" + type + "] " + dateTime}
+            }
+        }
         
-        guard let link = linkvc.link else {return}
-        if tag == 5 {
-            cell.textLabel?.text = link
-            subTitle.isHidden = true
+        if let link = linkvc.link {
+            if tag == 5 {
+                cell.textLabel?.text = link
+                subTitle.isHidden = true
+            }
         }
     }
     // TextField가 있는 Cell
