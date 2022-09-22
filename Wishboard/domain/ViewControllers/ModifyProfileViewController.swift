@@ -113,8 +113,6 @@ extension ModifyProfileViewController {
             make.leading.equalToSuperview().offset(16)
         }
     }
-    
-   
 }
 // MARK: Set Targets
 extension ModifyProfileViewController {
@@ -136,6 +134,7 @@ extension ModifyProfileViewController {
         lottieView.loopMode = .repeat(2)
         lottieView.play { completion in
             self.dismiss(animated: true)
+            ScreenManager().goMainPages(3, self, family: .profileModified)
         }
     }
 }
