@@ -57,9 +57,12 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
         // 사진 선택 Cell
         if tag == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "UploadItemPhotoTableViewCell", for: indexPath) as? UploadItemPhotoTableViewCell else { return UITableViewCell() }
-            if let photo = self.selectedImage {
-                cell.photoImage.image = photo
+            if self.selectedImage != nil {
+                cell.photoImage.image = self.selectedImage
                 cell.cameraImage.isHidden = true
+            } else {
+                cell.photoImage.image = UIImage()
+                cell.cameraImage.isHidden = false
             }
             
             return cell
@@ -120,15 +123,16 @@ extension UploadItemViewController {
         
         uploadItemView.saveButton.addTarget(self, action: #selector(clickEvent), for: .touchUpInside)
         uploadItemView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        uploadItemView.saveButton.addTarget(self, action: #selector(saveButtonDidTap), for: .touchUpInside)
         
         if isUploadItem {
             uploadItemView.backButton.isHidden = true
             uploadItemView.pageTitle.text = "아이템 추가"
+            uploadItemView.saveButton.addTarget(self, action: #selector(saveButtonDidTap), for: .touchUpInside)
             uploadItemView.setSaveButton(false)
         } else {
             uploadItemView.backButton.isHidden = false
             uploadItemView.pageTitle.text = "아이템 수정"
+            uploadItemView.saveButton.addTarget(self, action: #selector(modifyButtonDidTap), for: .touchUpInside)
             uploadItemView.setSaveButton(true)
         }
         // BottomSheet 객체 선언
@@ -142,7 +146,18 @@ extension UploadItemViewController {
         lottieView.isHidden = false
         lottieView.loopMode = .repeat(2) // 2번 반복
         lottieView.play { completion in
+            ScreenManager().goMainPages(0, self)
+            SnackBar(self, "아이템을 위시리스트에 추가했어요!👜")
+        }
+    }
+    @objc func modifyButtonDidTap() {
+        let lottieView = uploadItemView.saveButton.setSpinLottieView(uploadItemView.saveButton)
+        uploadItemView.saveButton.isSelected = true
+        lottieView.isHidden = false
+        lottieView.loopMode = .repeat(2) // 2번 반복
+        lottieView.play { completion in
             self.dismiss(animated: true)
+            SnackBar(self, "아이템을 수정했어요!✍️️")
         }
     }
 }
@@ -238,7 +253,7 @@ extension UploadItemViewController {
         guard let iP = self.itemPrice else {return}
         guard let iI = self.selectedImage else {return}
         
-        if (iN != "") && (iP != "") {uploadItemView.setSaveButton(true)}
+        if (iN != "") && (iP != "") && (iI != nil) {uploadItemView.setSaveButton(true)}
         else {uploadItemView.setSaveButton(false)}
     }
     // '사진 찍기' '사진 보관함' 팝업창
