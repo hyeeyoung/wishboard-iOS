@@ -51,7 +51,7 @@ class OnBoardingView: UIView {
         onBoardingViewModel.goToLoginPage()
     }
     @objc func registerButtonDidTap(_ sender: UIButton) {
-        onBoardingViewModel.goToRegisterPage()
+        
     }
 }
 // MARK: - OnBoarding TableView delegate
