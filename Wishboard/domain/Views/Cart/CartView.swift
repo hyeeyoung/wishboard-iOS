@@ -47,6 +47,7 @@ class CartView: UIView {
     var cartTableView: UITableView!
     var cartData: [CartListModel] = []
     var itemPrice = 0
+    let emptyMessage = "앗, 장바구니가 비어있어요!\n구매할 아이템을 장바구니에 담아보세요!"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -144,6 +145,7 @@ class CartView: UIView {
 extension CartView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = cartData.count ?? 0
+        EmptyView().setEmptyView(self.emptyMessage, self.cartTableView, count)
         return count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -23,6 +23,7 @@ class LoginViewController: UIViewController {
         loginView.emailTextField.addTarget(self, action: #selector(emailTextFieldEditingChanged), for: .editingChanged)
         loginView.passwordTextField.addTarget(self, action: #selector(passwordTextFieldEditingChanged), for: .editingChanged)
         loginView.loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
+        loginView.lostPasswordButton.addTarget(self, action: #selector(lostPasswordButtonDidTap), for: .touchUpInside)
         
         loginView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview()
@@ -43,6 +44,11 @@ class LoginViewController: UIViewController {
     }
     @objc func loginButtonDidTap() {
         print("login button clicked!")
+    }
+    @objc func lostPasswordButtonDidTap() {
+        let lostPwVC = LostPasswordViewController()
+        lostPwVC.modalPresentationStyle = .fullScreen
+        self.present(lostPwVC, animated: true, completion: nil)
     }
     //MARK: - Methods
     private func bind() {

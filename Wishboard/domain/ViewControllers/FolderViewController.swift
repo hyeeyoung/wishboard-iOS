@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import Lottie
 
 class FolderViewController: UIViewController {
     var folderView : FolderView!
+    let emptyMessage = "앗, 폴더가 없어요!\n폴더를 추가해서 아이템을 정리해 보세요!"
+    var dialog: PopUpWithTextFieldViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +27,7 @@ class FolderViewController: UIViewController {
 extension FolderViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        let count = wishListData.count ?? 0
+        EmptyView().setEmptyView(self.emptyMessage, self.folderView.folderCollectionView, 7)
         return 7
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -35,6 +39,11 @@ extension FolderViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         cell.moreButton.addTarget(self, action: #selector(alertFolderMenu), for: .touchUpInside)
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let folderDetailVC = FolderDetailViewController()
+        folderDetailVC.modalPresentationStyle = .fullScreen
+        self.present(folderDetailVC, animated: true, completion: nil)
     }
 }
 // MARK: - Functions & Actions
@@ -72,18 +81,46 @@ extension FolderViewController {
         self.present(alert, animated: true)
     }
     func alertModifyDialog() {
-        let dialog = PopUpWithTextFieldViewController(titleText: "폴더명 수정", placeholder: "폴더명", prevText: "폴더명", buttonTitle: "수정")
+        dialog = PopUpWithTextFieldViewController(titleText: "폴더명 수정", placeholder: "폴더명", prevText: "폴더명", buttonTitle: "수정")
         dialog.modalPresentationStyle = .overCurrentContext
+        dialog.completeButton.addTarget(self, action: #selector(completeModifyButtonDidTap), for: .touchUpInside)
         self.present(dialog, animated: false, completion: nil)
     }
     func alertDeleteDialog() {
         let dialog = PopUpViewController(titleText: "폴더 삭제", messageText: "정말 폴더를 삭제하시겠어요?\n폴더가 삭제되어도 아이템은 사라지지 않아요.", greenBtnText: "취소", blackBtnText: "삭제")
         dialog.modalPresentationStyle = .overCurrentContext
         self.present(dialog, animated: false, completion: nil)
+        
+        dialog.okBtn.addTarget(self, action: #selector(deleteFolderButtonDidTap), for: .touchUpInside)
+    }
+    @objc func deleteFolderButtonDidTap() {
+        self.dismiss(animated: false)
+        SnackBar(self, message: .deleteFolder)
     }
     @objc func alertAddDialog() {
-        let dialog = PopUpWithTextFieldViewController(titleText: "폴더 추가", placeholder: "폴더명", prevText: nil, buttonTitle: "추가")
+        dialog = PopUpWithTextFieldViewController(titleText: "폴더 추가", placeholder: "폴더명", prevText: nil, buttonTitle: "추가")
         dialog.modalPresentationStyle = .overCurrentContext
+        dialog.completeButton.addTarget(self, action: #selector(completeAddButtonDidTap), for: .touchUpInside)
         self.present(dialog, animated: false, completion: nil)
+    }
+    @objc func completeModifyButtonDidTap() {
+        let lottieView = dialog.completeButton.setHorizontalLottieView(dialog.completeButton)
+        dialog.completeButton.isSelected = true
+        lottieView.isHidden = false
+        lottieView.loopMode = .repeat(2) // 2번 반복
+        lottieView.play { completion in
+            self.dismiss(animated: false)
+            SnackBar(self, message: .modifyFolder)
+        }
+    }
+    @objc func completeAddButtonDidTap() {
+        let lottieView = dialog.completeButton.setHorizontalLottieView(dialog.completeButton)
+        dialog.completeButton.isSelected = true
+        lottieView.isHidden = false
+        lottieView.loopMode = .repeat(2) // 2번 반복
+        lottieView.play { completion in
+            self.dismiss(animated: false)
+            SnackBar(self, message: .addFolder)
+        }
     }
 }

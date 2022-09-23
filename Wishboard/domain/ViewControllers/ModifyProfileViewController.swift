@@ -113,20 +113,29 @@ extension ModifyProfileViewController {
             make.leading.equalToSuperview().offset(16)
         }
     }
-    
-   
 }
 // MARK: Set Targets
 extension ModifyProfileViewController {
     func setTarget() {
         self.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         self.cameraButton.addTarget(self, action: #selector(goAlbumButtonDidTap), for: .touchUpInside)
+        self.completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
     }
     @objc func goBack() {self.dismiss(animated: true)}
     // 앨범에서 사진/동영상 선택
     @objc func goAlbumButtonDidTap() {
         self.imagePickerController.sourceType = .photoLibrary
         self.present(imagePickerController, animated: true, completion: nil)
+    }
+    @objc func completeButtonDidTap() {
+        let lottieView = self.completeButton.setHorizontalLottieView(self.completeButton)
+        self.completeButton.isSelected = true
+        lottieView.isHidden = false
+        lottieView.loopMode = .repeat(2)
+        lottieView.play { completion in
+            self.dismiss(animated: true)
+            ScreenManager().goMainPages(3, self, family: .profileModified)
+        }
     }
 }
 // MARK: - ImagePicker Delegate

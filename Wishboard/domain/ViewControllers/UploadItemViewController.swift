@@ -26,12 +26,17 @@ class UploadItemViewController: UIViewController {
     
     var isUploadItem: Bool!
     
+    var numberFormatter: NumberFormatter!
+    
     // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
+        
+        numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
         
         setUploadItemView()
     }
@@ -52,9 +57,12 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
         // 사진 선택 Cell
         if tag == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "UploadItemPhotoTableViewCell", for: indexPath) as? UploadItemPhotoTableViewCell else { return UITableViewCell() }
-            if let photo = self.selectedImage {
-                cell.photoImage.image = photo
+            if self.selectedImage != nil {
+                cell.photoImage.image = self.selectedImage
                 cell.cameraImage.isHidden = true
+            } else {
+                cell.photoImage.image = UIImage()
+                cell.cameraImage.isHidden = false
             }
             
             return cell
@@ -119,16 +127,38 @@ extension UploadItemViewController {
         if isUploadItem {
             uploadItemView.backButton.isHidden = true
             uploadItemView.pageTitle.text = "아이템 추가"
+            uploadItemView.saveButton.addTarget(self, action: #selector(saveButtonDidTap), for: .touchUpInside)
             uploadItemView.setSaveButton(false)
         } else {
             uploadItemView.backButton.isHidden = false
             uploadItemView.pageTitle.text = "아이템 수정"
+            uploadItemView.saveButton.addTarget(self, action: #selector(modifyButtonDidTap), for: .touchUpInside)
             uploadItemView.setSaveButton(true)
         }
         // BottomSheet 객체 선언
         foldervc =  SetFolderBottomSheetViewController()
         linkvc = ShoppingLinkViewController()
         notivc = NotificationSettingViewController()
+    }
+    @objc func saveButtonDidTap() {
+        let lottieView = uploadItemView.saveButton.setSpinLottieView(uploadItemView.saveButton)
+        uploadItemView.saveButton.isSelected = true
+        lottieView.isHidden = false
+        lottieView.loopMode = .repeat(2) // 2번 반복
+        lottieView.play { completion in
+            ScreenManager().goMainPages(0, self)
+            SnackBar(self, message: .addItem)
+        }
+    }
+    @objc func modifyButtonDidTap() {
+        let lottieView = uploadItemView.saveButton.setSpinLottieView(uploadItemView.saveButton)
+        uploadItemView.saveButton.isSelected = true
+        lottieView.isHidden = false
+        lottieView.loopMode = .repeat(2) // 2번 반복
+        lottieView.play { completion in
+            self.dismiss(animated: true)
+            SnackBar(self, message: .modifyItem)
+        }
     }
 }
 // MARK: - Cell set & Actions
@@ -160,14 +190,17 @@ extension UploadItemViewController {
             }
         }
         
-        guard let type = notivc.notiType else {return}
-        guard let dateTime = notivc.dateAndTime else {return}
-        if tag == 4 {cell.textLabel?.text = "[" + type + "] " + dateTime}
+        if let type = notivc.notiType {
+            if let dateTime = notivc.dateAndTime {
+                if tag == 4 {cell.textLabel?.text = "[" + type + "] " + dateTime}
+            }
+        }
         
-        guard let link = linkvc.link else {return}
-        if tag == 5 {
-            cell.textLabel?.text = link
-            subTitle.isHidden = true
+        if let link = linkvc.link {
+            if tag == 5 {
+                cell.textLabel?.text = link
+                subTitle.isHidden = true
+            }
         }
     }
     // TextField가 있는 Cell
@@ -201,12 +234,18 @@ extension UploadItemViewController {
     }
     @objc func itemPriceTextfieldEditingField(_ sender: UITextField) {
         let text = sender.text!
-        self.itemPrice = text
+        self.itemPrice = setPriceString(text)
+        guard let price = Float(self.itemPrice) else {return}
+        sender.text = numberFormatter.string(from: NSNumber(value: price))
         isValidContent()
     }
     @objc func memoTextfieldEditingField(_ sender: UITextField) {
         let text = sender.text!
         self.memo = text
+    }
+    func setPriceString(_ str: String) -> String {
+        let myString = str.replacingOccurrences(of: ",", with: "")
+        return myString
     }
     // 상품명, 가격 입력 여부에 따른 저장버튼 활성화 설정
     func isValidContent() {
@@ -214,7 +253,7 @@ extension UploadItemViewController {
         guard let iP = self.itemPrice else {return}
         guard let iI = self.selectedImage else {return}
         
-        if (iN != "") && (iP != "") {uploadItemView.setSaveButton(true)}
+        if (iN != "") && (iP != "") && (iI != nil) {uploadItemView.setSaveButton(true)}
         else {uploadItemView.setSaveButton(false)}
     }
     // '사진 찍기' '사진 보관함' 팝업창

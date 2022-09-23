@@ -34,6 +34,12 @@ class ItemDetailViewController: UIViewController {
         let dialog = PopUpViewController(titleText: "아이템 삭제", messageText: "정말 아이템을 삭제하시겠어요?\n삭제된 아이템은 다시 복구할 수 없어요!", greenBtnText: "취소", blackBtnText: "삭제")
         dialog.modalPresentationStyle = .overCurrentContext
         self.present(dialog, animated: false, completion: nil)
+        
+        dialog.okBtn.addTarget(self, action: #selector(deleteButtonDidTap), for: .touchUpInside)
+    }
+    @objc func deleteButtonDidTap() {
+        self.dismiss(animated: true)
+        ScreenManager().goMainPages(0, self, family: .itemDeleted)
     }
     @objc func setFolder() {
         let vc = SetFolderBottomSheetViewController()

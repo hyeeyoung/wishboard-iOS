@@ -35,6 +35,7 @@ class ShoppingLinkViewController: UIViewController {
     // MARK: - Life Cycles
     var preVC: UploadItemViewController!
     var link: String!
+    var tempLink: String!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,7 +55,8 @@ class ShoppingLinkViewController: UIViewController {
         self.completeButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     override func viewWillDisappear(_ animated: Bool) {
-        preVC.uploadItemView.uploadItemTableView.reloadData()
+        let indexPath = IndexPath(row: 5, section: 0)
+        self.preVC.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
     }
     // MARK: - Functions
     func setPreViewController(_ preVC: UploadItemViewController) {
@@ -99,18 +101,12 @@ class ShoppingLinkViewController: UIViewController {
     @objc func LinkTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text
         let trimString = text!.trimmingCharacters(in: .whitespaces)
-        self.link = trimString
-        self.shoppingLinkTextField.text = self.link
-        self.checkLink(self.link)
-        print(self.link)
-    }
-    // url 유효성 검사 (임시로 이메일)
-    func checkURL(str: String) -> Bool {
-        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
-        return  NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: str)
+        self.tempLink = trimString
+        self.shoppingLinkTextField.text = self.tempLink
+        self.checkLink(self.tempLink)
     }
     func checkLink(_ link: String) {
-        if !checkURL(str: link) {
+        if !verifyURL(url: link) {
             self.errorMessage.isHidden = false
             self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .gray)
             self.completeButton.isEnabled = false
@@ -118,6 +114,23 @@ class ShoppingLinkViewController: UIViewController {
             self.errorMessage.isHidden = true
             self.completeButton.defaultButton("아이템 불러오기", .wishboardGreen, .black)
             self.completeButton.isEnabled = true
+            self.link = self.tempLink
         }
+    }
+    // url 유효성 검사
+    func verifyURL(url: String) -> Bool {
+        let urlRegEx = "^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$"
+        let urlTest = NSPredicate(format:"SELF MATCHES %@", urlRegEx)
+        if urlTest.evaluate(with: url) {
+            return true
+        }
+                
+        let range = NSRange(location: 0, length: url.utf16.count)
+        guard let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue),
+            let match: NSTextCheckingResult = detector.firstMatch(in: url, options: [], range: range) else {
+            return false
+        }
+        
+        return match.range.length == url.utf16.count
     }
 }
