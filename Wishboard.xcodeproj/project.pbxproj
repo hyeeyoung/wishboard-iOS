@@ -629,6 +629,7 @@
 		23C9567C28C67FC900D88536 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				2331867C28DA92DF00F17CBF /* Lottie */,
 				23C9567E28C67FD900D88536 /* Fonts */,
 				23C9568C28C6812100D88536 /* UIColor.swift */,
 				23D5518028C69E2900D81B5F /* UITextField.swift */,
@@ -703,7 +704,6 @@
 		23DC04AC28C58B5200ABB0CF /* Wishboard */ = {
 			isa = PBXGroup;
 			children = (
-				2331867C28DA92DF00F17CBF /* Lottie */,
 				23DC04DF28C58C6200ABB0CF /* AppDelegate */,
 				23DC04DD28C58C5700ABB0CF /* global */,
 				23DC04DE28C58C5B00ABB0CF /* domain */,
