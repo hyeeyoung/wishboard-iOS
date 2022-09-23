@@ -35,9 +35,9 @@ class ScreenManager {
         
         switch family {
         case .itemDeleted:
-            SnackBar(tabBarController, "아이템을 위시리스트에서 삭제했어요!🗑")
+            SnackBar(tabBarController, message: .deleteItem)
         case .profileModified:
-            SnackBar(tabBarController, "프로필이 수정되었어요!👩‍🎤")
+            SnackBar(tabBarController, message: .modifyProfile)
         default:
             viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
         }

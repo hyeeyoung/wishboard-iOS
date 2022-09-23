@@ -95,7 +95,7 @@ extension FolderViewController {
     }
     @objc func deleteFolderButtonDidTap() {
         self.dismiss(animated: false)
-        SnackBar(self, "폴더를 삭제했어요!🗑")
+        SnackBar(self, message: .deleteFolder)
     }
     @objc func alertAddDialog() {
         dialog = PopUpWithTextFieldViewController(titleText: "폴더 추가", placeholder: "폴더명", prevText: nil, buttonTitle: "추가")
@@ -110,7 +110,7 @@ extension FolderViewController {
         lottieView.loopMode = .repeat(2) // 2번 반복
         lottieView.play { completion in
             self.dismiss(animated: false)
-            SnackBar(self, "폴더명을 수정했어요!📁")
+            SnackBar(self, message: .modifyFolder)
         }
     }
     @objc func completeAddButtonDidTap() {
@@ -120,7 +120,7 @@ extension FolderViewController {
         lottieView.loopMode = .repeat(2) // 2번 반복
         lottieView.play { completion in
             self.dismiss(animated: false)
-            SnackBar(self, "폴더를 추가했어요!😉")
+            SnackBar(self, message: .addFolder)
         }
     }
 }

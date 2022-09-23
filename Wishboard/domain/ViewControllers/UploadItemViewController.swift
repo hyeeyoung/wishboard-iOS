@@ -147,7 +147,7 @@ extension UploadItemViewController {
         lottieView.loopMode = .repeat(2) // 2번 반복
         lottieView.play { completion in
             ScreenManager().goMainPages(0, self)
-            SnackBar(self, "아이템을 위시리스트에 추가했어요!👜")
+            SnackBar(self, message: .addItem)
         }
     }
     @objc func modifyButtonDidTap() {
@@ -157,7 +157,7 @@ extension UploadItemViewController {
         lottieView.loopMode = .repeat(2) // 2번 반복
         lottieView.play { completion in
             self.dismiss(animated: true)
-            SnackBar(self, "아이템을 수정했어요!✍️️")
+            SnackBar(self, message: .modifyItem)
         }
     }
 }
