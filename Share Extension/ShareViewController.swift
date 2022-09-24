@@ -9,6 +9,7 @@ import UIKit
 import Social
 import SnapKit
 import Then
+import MaterialComponents.MaterialBottomSheet
 
 class ShareViewController: UIViewController {
     
@@ -51,6 +52,8 @@ class ShareViewController: UIViewController {
     }
     //MARK: - Life Cycles
     var folderCollectionView: UICollectionView!
+    var notivc: NotificationSettingViewController!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -65,13 +68,25 @@ class ShareViewController: UIViewController {
         setUpView()
         setUpConstraint()
         
+        notivc = NotificationSettingViewController()
+        
         self.quitButton.addTarget(self, action: #selector(quit), for: .touchUpInside)
+        self.setNotification.addTarget(self, action: #selector(showNotificationBottomSheet), for: .touchUpInside)
     }
     // MARK: - Actions
     @objc func quit() {
         print("clicked!!")
         self.dismiss(animated: true)
         
+    }
+    // 알람 설정 BottomSheet
+    @objc func showNotificationBottomSheet() {
+//        notivc.setPreViewController(self)
+        let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: notivc)
+        bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
+        bottomSheet.dismissOnDraggingDownSheet = false
+        
+        self.present(bottomSheet, animated: true, completion: nil)
     }
     //MARK: - Functions
     func setUpCollectionView() {
