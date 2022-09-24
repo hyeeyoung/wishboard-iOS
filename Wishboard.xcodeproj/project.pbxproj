@@ -52,6 +52,7 @@
 		23C2378628C9CEE800CE3200 /* FolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2378528C9CEE800CE3200 /* FolderView.swift */; };
 		23C2378928C9CF0400CE3200 /* FolderListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2378828C9CF0400CE3200 /* FolderListModel.swift */; };
 		23C2378B28C9CF1D00CE3200 /* FolderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2378A28C9CF1D00CE3200 /* FolderCollectionViewCell.swift */; };
+		23C3113728DF633D00A636F6 /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3113628DF633D00A636F6 /* APIModel.swift */; };
 		23C5AB4928CAA23300A7E977 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C5AB4828CAA23300A7E977 /* MyPageView.swift */; };
 		23C5AB4B28CAA24300A7E977 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C5AB4A28CAA24300A7E977 /* MyPageViewController.swift */; };
 		23C5AB4D28CAA54600A7E977 /* MypageProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C5AB4C28CAA54600A7E977 /* MypageProfileTableViewCell.swift */; };
@@ -172,6 +173,7 @@
 		23C2378528C9CEE800CE3200 /* FolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderView.swift; sourceTree = "<group>"; };
 		23C2378828C9CF0400CE3200 /* FolderListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderListModel.swift; sourceTree = "<group>"; };
 		23C2378A28C9CF1D00CE3200 /* FolderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderCollectionViewCell.swift; sourceTree = "<group>"; };
+		23C3113628DF633D00A636F6 /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
 		23C5AB4828CAA23300A7E977 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		23C5AB4A28CAA24300A7E977 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		23C5AB4C28CAA54600A7E977 /* MypageProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageProfileTableViewCell.swift; sourceTree = "<group>"; };
@@ -593,6 +595,47 @@
 			path = FolderListModel;
 			sourceTree = "<group>";
 		};
+		23C3113128DF62C100A636F6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		23C3113228DF62D700A636F6 /* Observable */ = {
+			isa = PBXGroup;
+			children = (
+				23D5518828C6B02400D81B5F /* Observable.swift */,
+			);
+			path = Observable;
+			sourceTree = "<group>";
+		};
+		23C3113328DF62E300A636F6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				23D5518A28C6B45C00D81B5F /* String.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		23C3113428DF630C00A636F6 /* PopUpViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2374789D28D1EDF600CF941A /* PopUpViewController.swift */,
+				23E378DD28D2EBFA00C52F2D /* PopUpDeleteUserViewController.swift */,
+				2378280328D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift */,
+			);
+			path = PopUpViewControllers;
+			sourceTree = "<group>";
+		};
+		23C3113528DF633000A636F6 /* APIModel */ = {
+			isa = PBXGroup;
+			children = (
+				23C3113628DF633D00A636F6 /* APIModel.swift */,
+			);
+			path = APIModel;
+			sourceTree = "<group>";
+		};
 		23C5AB4728CAA21D00A7E977 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -645,13 +688,12 @@
 		23C9567D28C67FD000D88536 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				23D5518828C6B02400D81B5F /* Observable.swift */,
-				23D5518A28C6B45C00D81B5F /* String.swift */,
+				23C3113528DF633000A636F6 /* APIModel */,
+				23C3113428DF630C00A636F6 /* PopUpViewControllers */,
+				23C3113328DF62E300A636F6 /* Extensions */,
+				23C3113228DF62D700A636F6 /* Observable */,
 				234F837A28C9647600C4EB41 /* TabBarViewController.swift */,
 				2374789928D1DB2900CF941A /* CheckNotch.swift */,
-				2374789D28D1EDF600CF941A /* PopUpViewController.swift */,
-				23E378DD28D2EBFA00C52F2D /* PopUpDeleteUserViewController.swift */,
-				2378280328D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift */,
 				2360095F28DA2297001FB107 /* EmptyView.swift */,
 				2350FADE28DB9BEA00981B8F /* SetNotificationDate.swift */,
 				2360FF5B28DCB31600E481A6 /* SnackBar.swift */,
@@ -746,6 +788,7 @@
 				23DC04E028C58C6C00ABB0CF /* Views */,
 				23DC04E128C58C7200ABB0CF /* Models */,
 				23DC04E228C58C7500ABB0CF /* ViewModels */,
+				23C3113128DF62C100A636F6 /* Services */,
 				23C9567928C67B8A00D88536 /* Cells */,
 			);
 			path = domain;
@@ -1167,6 +1210,7 @@
 				238EF90928CB070700ECA606 /* CalenderView.swift in Sources */,
 				237478A028D1FF0400CF941A /* SetFolderBottomSheetView.swift in Sources */,
 				2344949728D78AB500CF3BD9 /* RegisterEmailView.swift in Sources */,
+				23C3113728DF633D00A636F6 /* APIModel.swift in Sources */,
 				23D5518128C69E2900D81B5F /* UITextField.swift in Sources */,
 				2328C5AE28CAC17C0065ABB2 /* NotiTableViewCell.swift in Sources */,
 				2340CEAE28CB65AE007C362F /* HowToViewController.swift in Sources */,
