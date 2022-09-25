@@ -65,6 +65,7 @@ class ShareViewController: UIViewController {
         newFoldervc = NewFolderViewController()
         
         self.quitButton.addTarget(self, action: #selector(quit), for: .touchUpInside)
+        self.completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
         self.setNotificationButton.addTarget(self, action: #selector(showNotificationBottomSheet), for: .touchUpInside)
         self.addFolderButton.addTarget(self, action: #selector(showAddNewFolderBottomSheet), for: .touchUpInside)
     }
@@ -73,6 +74,16 @@ class ShareViewController: UIViewController {
         print("clicked!!")
         self.dismiss(animated: true)
         
+    }
+    @objc func completeButtonDidTap() {
+        let lottieView = completeButton.setHorizontalLottieView(completeButton)
+        completeButton.isSelected = true
+        lottieView.isHidden = false
+        lottieView.loopMode = .repeat(2) // 2번 반복
+        lottieView.play { completion in
+            self.dismiss(animated: true)
+//            SnackBar(self, message: .modifyItem)
+        }
     }
     // 알람 설정 BottomSheet
     @objc func showNotificationBottomSheet() {
