@@ -33,7 +33,10 @@ class NotificationSettingViewController: UIViewController {
     var date: String = ""
     var hour: String = "00"
     var minute: String = "00"
+    
     var preVC: ShareViewController!
+    var isExit: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,27 +44,24 @@ class NotificationSettingViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         self.view.roundCornersDiffernt(topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0)
         
-        self.notiType = "세일 마감"
-        let setNotificationDate = SetNotificationDate()
-        self.date = setNotificationDate.currentYear + "년 " + setNotificationDate.currentMonth + "월 " + setNotificationDate.currentDay + "일 "
-        self.dateAndTime = self.date + " " + self.hour + ":" + self.minute
-
         setUpView()
         setUpConstraint()
         
         notificationPickerView.delegate = self
         notificationPickerView.dataSource = self
         
-        self.exitBtn.addTarget(self, action: #selector(goShareLinkPage), for: .touchUpInside)
+        self.exitBtn.addTarget(self, action: #selector(exit), for: .touchUpInside)
         completeButton.addTarget(self, action: #selector(goShareLinkPage), for: .touchUpInside)
         
         SetNotificationDate()
     }
-    // MARK: 현재 뷰가 사라질 때, 이전 뷰의 테이블뷰를 업데이트 시킨다. **
+    // MARK: 현재 뷰가 사라질 때, 이전 뷰의 날짜Label을 업데이트 시킨다. **
     override func viewWillDisappear(_ animated: Bool) {
-        guard let dT = self.dateAndTime else {return}
-        guard let nT = self.notiType else {return}
-        self.preVC.setNotificationButton.setNotificationButton(dT + " " + nT, true)
+        if !isExit {
+            guard let dT = self.dateAndTime else {return}
+            guard let nT = self.notiType else {return}
+            self.preVC.shareView.setNotificationButton.setNotificationButton(dT + " " + nT, true)
+        }
     }
     // MARK: - Functions
     func setPreViewController(_ preVC: ShareViewController) {
@@ -101,11 +101,18 @@ class NotificationSettingViewController: UIViewController {
     }
     // MARK: - Actions
     @objc func exit() {
-        self.notiType = nil
-        self.dateAndTime = nil
+        self.isExit = true
         self.dismiss(animated: true)
     }
     @objc func goShareLinkPage() {
+        self.isExit = false
+        if self.notiType == nil {self.notiType = "세일 마감"}
+        if self.dateAndTime == nil {
+            let setNotificationDate = SetNotificationDate()
+            self.date = setNotificationDate.currentYear + "년 " + setNotificationDate.currentMonth + "월 " + setNotificationDate.currentDay + "일 "
+            self.dateAndTime = self.date + " " + self.hour + ":" + self.minute
+        }
+        
         self.dismiss(animated: true)
     }
 }
@@ -198,7 +205,5 @@ extension NotificationSettingViewController: UIPickerViewDelegate, UIPickerViewD
         default:
             self.dateAndTime = self.date + " " + self.hour + ":" + self.minute
         }
-//        print(self.notiType)
-//        print(self.dateAndTime!)
     }
 }

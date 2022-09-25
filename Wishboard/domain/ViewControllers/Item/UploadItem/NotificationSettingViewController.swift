@@ -33,7 +33,10 @@ class NotificationSettingViewController: UIViewController {
     var date: String = ""
     var hour: String = "00"
     var minute: String = "00"
+    
     var preVC: UploadItemViewController!
+    var isExit: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,15 +55,17 @@ class NotificationSettingViewController: UIViewController {
         notificationPickerView.delegate = self
         notificationPickerView.dataSource = self
         
-        self.exitBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        self.exitBtn.addTarget(self, action: #selector(exit), for: .touchUpInside)
+        completeButton.addTarget(self, action: #selector(goUploadPage), for: .touchUpInside)
         
         SetNotificationDate()
-        
     }
     // MARK: 현재 뷰가 사라질 때, 이전 뷰의 테이블뷰를 업데이트 시킨다. **
     override func viewWillDisappear(_ animated: Bool) {
-        let indexPath = IndexPath(row: 4, section: 0)
-        self.preVC.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
+        if !isExit {
+            let indexPath = IndexPath(row: 4, section: 0)
+            self.preVC.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
+        }
     }
     // MARK: - Functions
     func setPreViewController(_ preVC: UploadItemViewController) {
@@ -72,8 +77,6 @@ class NotificationSettingViewController: UIViewController {
         self.view.addSubview(notificationPickerView)
         self.view.addSubview(message)
         self.view.addSubview(completeButton)
-        
-        completeButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     func setUpConstraint() {
         titleLabel.snp.makeConstraints { make in
@@ -101,10 +104,19 @@ class NotificationSettingViewController: UIViewController {
         }
     }
     // MARK: - Actions
-    @objc func goBack() {
+    @objc func exit() {
+        self.isExit = true
         self.dismiss(animated: true)
     }
     @objc func goUploadPage() {
+        self.isExit = false
+        if self.notiType == nil {self.notiType = "세일 마감"}
+        if self.dateAndTime == nil {
+            let setNotificationDate = SetNotificationDate()
+            self.date = setNotificationDate.currentYear + "년 " + setNotificationDate.currentMonth + "월 " + setNotificationDate.currentDay + "일 "
+            self.dateAndTime = self.date + " " + self.hour + ":" + self.minute
+        }
+        
         self.dismiss(animated: true)
     }
 }
@@ -197,7 +209,5 @@ extension NotificationSettingViewController: UIPickerViewDelegate, UIPickerViewD
         default:
             self.dateAndTime = self.date + " " + self.hour + ":" + self.minute
         }
-//        print(self.notiType)
-//        print(self.dateAndTime!)
     }
 }
