@@ -97,4 +97,22 @@ extension UIButton {
         
         self.configuration = config
     }
+    // MARK: - Share Viewcontroller's setNotification button
+    func setNotificationButton(_ date: String, _ isSet: Bool) {
+        var config = UIButton.Configuration.plain()
+        var attText: AttributedString!
+        
+        if isSet {
+            attText = AttributedString.init(" " + date)
+        }
+        else {
+            attText = AttributedString.init(" 상품 알림 설정하기")
+        }
+        attText.font = UIFont.Suit(size: 12, family: .Regular)
+        attText.foregroundColor = UIColor.black
+        config.attributedTitle = attText
+        config.image = UIImage(named: "ic_noti")
+        
+        self.configuration = config
+    }
 }

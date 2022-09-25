@@ -33,16 +33,8 @@ class ShareViewController: UIViewController {
         $0.text = "0000"
         $0.font = .systemFont(ofSize: 12, weight: .bold)
     }
-    let setNotification = UIButton().then{
-        var config = UIButton.Configuration.plain()
-        var attText = AttributedString.init(" 상품 알림 설정하기")
-        
-        attText.font = UIFont.Suit(size: 12, family: .Regular)
-        attText.foregroundColor = UIColor.black
-        config.attributedTitle = attText
-        config.image = UIImage(named: "ic_noti")
-        
-        $0.configuration = config
+    var setNotificationButton = UIButton().then{
+        $0.setNotificationButton("", false)
     }
     let addFolderButton = UIButton().then{
         $0.setImage(UIImage(named: "addFolder"), for: .normal)
@@ -71,7 +63,7 @@ class ShareViewController: UIViewController {
         notivc = NotificationSettingViewController()
         
         self.quitButton.addTarget(self, action: #selector(quit), for: .touchUpInside)
-        self.setNotification.addTarget(self, action: #selector(showNotificationBottomSheet), for: .touchUpInside)
+        self.setNotificationButton.addTarget(self, action: #selector(showNotificationBottomSheet), for: .touchUpInside)
     }
     // MARK: - Actions
     @objc func quit() {
@@ -81,7 +73,7 @@ class ShareViewController: UIViewController {
     }
     // 알람 설정 BottomSheet
     @objc func showNotificationBottomSheet() {
-//        notivc.setPreViewController(self)
+        notivc.setPreViewController(self)
         let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: notivc)
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
         bottomSheet.dismissOnDraggingDownSheet = false
@@ -112,7 +104,7 @@ class ShareViewController: UIViewController {
         backgroundView.addSubview(quitButton)
         backgroundView.addSubview(itemName)
         backgroundView.addSubview(itemPrice)
-        backgroundView.addSubview(setNotification)
+        backgroundView.addSubview(setNotificationButton)
         backgroundView.addSubview(addFolderButton)
         backgroundView.addSubview(folderCollectionView)
         backgroundView.addSubview(completeButton)
@@ -137,14 +129,14 @@ class ShareViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(itemName.snp.bottom).offset(2)
         }
-        setNotification.snp.makeConstraints { make in
+        setNotificationButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(itemPrice.snp.bottom).offset(12)
         }
         addFolderButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)
             make.leading.equalToSuperview().offset(16)
-            make.top.equalTo(setNotification.snp.bottom).offset(15)
+            make.top.equalTo(setNotificationButton.snp.bottom).offset(15)
         }
         folderCollectionView.snp.makeConstraints { make in
             make.leading.equalTo(addFolderButton.snp.trailing).offset(10)
@@ -179,6 +171,7 @@ extension ShareViewController: UICollectionViewDelegate, UICollectionViewDataSou
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
 //        let itemDetailVC = ItemDetailViewController()
 //        itemDetailVC.modalPresentationStyle = .fullScreen
 //        self.present(itemDetailVC, animated: true, completion: nil)

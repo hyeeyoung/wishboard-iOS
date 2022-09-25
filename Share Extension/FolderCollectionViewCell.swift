@@ -27,14 +27,21 @@ class FolderCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Life Cycles
+    var isSelectedFolder: Bool = false
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
         setUpView()
         setUpConstraint()
         
-        self.selectedView.isHidden = true
-        self.selectedIcon.isHidden = true
+        if isSelectedFolder {
+            self.selectedView.isHidden = false
+            self.selectedIcon.isHidden = false
+        } else {
+            self.selectedView.isHidden = true
+            self.selectedIcon.isHidden = true
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -43,8 +50,8 @@ class FolderCollectionViewCell: UICollectionViewCell {
     // MARK: - Functions
     func setUpView() {
         contentView.addSubview(folderImage)
-        contentView.addSubview(folderName)
         contentView.addSubview(selectedView)
+        contentView.addSubview(folderName)
         contentView.addSubview(selectedIcon)
     }
     func setUpConstraint() {

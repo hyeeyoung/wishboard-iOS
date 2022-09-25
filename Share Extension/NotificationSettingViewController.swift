@@ -52,15 +52,16 @@ class NotificationSettingViewController: UIViewController {
         notificationPickerView.delegate = self
         notificationPickerView.dataSource = self
         
-        self.exitBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        self.exitBtn.addTarget(self, action: #selector(goShareLinkPage), for: .touchUpInside)
+        completeButton.addTarget(self, action: #selector(goShareLinkPage), for: .touchUpInside)
         
         SetNotificationDate()
-        
     }
     // MARK: 현재 뷰가 사라질 때, 이전 뷰의 테이블뷰를 업데이트 시킨다. **
     override func viewWillDisappear(_ animated: Bool) {
-        let indexPath = IndexPath(row: 4, section: 0)
-        
+        guard let dT = self.dateAndTime else {return}
+        guard let nT = self.notiType else {return}
+        self.preVC.setNotificationButton.setNotificationButton(dT + " " + nT, true)
     }
     // MARK: - Functions
     func setPreViewController(_ preVC: ShareViewController) {
@@ -72,8 +73,6 @@ class NotificationSettingViewController: UIViewController {
         self.view.addSubview(notificationPickerView)
         self.view.addSubview(message)
         self.view.addSubview(completeButton)
-        
-        completeButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     func setUpConstraint() {
         titleLabel.snp.makeConstraints { make in
@@ -101,10 +100,12 @@ class NotificationSettingViewController: UIViewController {
         }
     }
     // MARK: - Actions
-    @objc func goBack() {
+    @objc func exit() {
+        self.notiType = nil
+        self.dateAndTime = nil
         self.dismiss(animated: true)
     }
-    @objc func goUploadPage() {
+    @objc func goShareLinkPage() {
         self.dismiss(animated: true)
     }
 }
