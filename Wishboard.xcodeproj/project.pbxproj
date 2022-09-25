@@ -111,6 +111,7 @@
 		23C9569E28C68D7A00D88536 /* SUIT-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23C9569528C68D7900D88536 /* SUIT-Medium.ttf */; };
 		23C9569F28C68D7A00D88536 /* SUIT-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23C9569628C68D7A00D88536 /* SUIT-SemiBold.ttf */; };
 		23C956A128C68F9400D88536 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C956A028C68F9400D88536 /* LoginViewController.swift */; };
+		23CBAFDC28DFDF8500B41513 /* NewFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CBAFDB28DFDF8500B41513 /* NewFolderViewController.swift */; };
 		23D4C66028D8E87B00EA7F98 /* GetEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D4C65F28D8E87B00EA7F98 /* GetEmailView.swift */; };
 		23D4C66228D8E88700EA7F98 /* LostPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D4C66128D8E88700EA7F98 /* LostPasswordView.swift */; };
 		23D4C66428D8E96700EA7F98 /* LostPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D4C66328D8E96700EA7F98 /* LostPasswordViewController.swift */; };
@@ -263,6 +264,7 @@
 		23C9569528C68D7900D88536 /* SUIT-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Medium.ttf"; sourceTree = "<group>"; };
 		23C9569628C68D7A00D88536 /* SUIT-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-SemiBold.ttf"; sourceTree = "<group>"; };
 		23C956A028C68F9400D88536 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		23CBAFDB28DFDF8500B41513 /* NewFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFolderViewController.swift; sourceTree = "<group>"; };
 		23D4C65F28D8E87B00EA7F98 /* GetEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEmailView.swift; sourceTree = "<group>"; };
 		23D4C66128D8E88700EA7F98 /* LostPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostPasswordView.swift; sourceTree = "<group>"; };
 		23D4C66328D8E96700EA7F98 /* LostPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostPasswordViewController.swift; sourceTree = "<group>"; };
@@ -724,6 +726,7 @@
 				23C3114328DF680300A636F6 /* Info.plist */,
 				236FE94128DF888A006142DB /* FolderCollectionViewCell.swift */,
 				23AADBC028DF8F9800AB75C6 /* NotificationSettingViewController.swift */,
+				23CBAFDB28DFDF8500B41513 /* NewFolderViewController.swift */,
 			);
 			path = "Share Extension";
 			sourceTree = "<group>";
@@ -1318,6 +1321,7 @@
 				236FE92128DF8592006142DB /* UIColor.swift in Sources */,
 				236FE94228DF888A006142DB /* FolderCollectionViewCell.swift in Sources */,
 				236FE93928DF85A4006142DB /* SnackBar.swift in Sources */,
+				23CBAFDC28DFDF8500B41513 /* NewFolderViewController.swift in Sources */,
 				236FE93528DF85A4006142DB /* ScreenManager.swift in Sources */,
 				236FE91F28DF8592006142DB /* UIView.swift in Sources */,
 				236FE93D28DF85B0006142DB /* PopUpDeleteUserViewController.swift in Sources */,

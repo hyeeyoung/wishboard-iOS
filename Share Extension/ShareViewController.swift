@@ -45,6 +45,7 @@ class ShareViewController: UIViewController {
     //MARK: - Life Cycles
     var folderCollectionView: UICollectionView!
     var notivc: NotificationSettingViewController!
+    var newFoldervc: NewFolderViewController!
     
     override func viewDidLoad() {
         
@@ -61,9 +62,11 @@ class ShareViewController: UIViewController {
         setUpConstraint()
         
         notivc = NotificationSettingViewController()
+        newFoldervc = NewFolderViewController()
         
         self.quitButton.addTarget(self, action: #selector(quit), for: .touchUpInside)
         self.setNotificationButton.addTarget(self, action: #selector(showNotificationBottomSheet), for: .touchUpInside)
+        self.addFolderButton.addTarget(self, action: #selector(showAddNewFolderBottomSheet), for: .touchUpInside)
     }
     // MARK: - Actions
     @objc func quit() {
@@ -75,6 +78,14 @@ class ShareViewController: UIViewController {
     @objc func showNotificationBottomSheet() {
         notivc.setPreViewController(self)
         let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: notivc)
+        bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
+        bottomSheet.dismissOnDraggingDownSheet = false
+        
+        self.present(bottomSheet, animated: true, completion: nil)
+    }
+    // 새 폴더 추가 BottomSheet
+    @objc func showAddNewFolderBottomSheet() {
+        let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: newFoldervc)
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
         bottomSheet.dismissOnDraggingDownSheet = false
         
