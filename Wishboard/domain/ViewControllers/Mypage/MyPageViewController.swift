@@ -122,6 +122,15 @@ extension MyPageViewController {
             make.leading.equalToSuperview().offset(16)
             make.bottom.equalToSuperview().offset(-10)
         }
+        
+        notiSwitch.addTarget(self, action: #selector(onClickSwitch(_:)), for: UIControl.Event.valueChanged)
+    }
+    @objc func onClickSwitch(_ sender: UISwitch) {
+        if sender.isOn {
+            MypageDataManager().switchNotificationDataManager(true, self)
+        } else {
+            MypageDataManager().switchNotificationDataManager(false, self)
+        }
     }
     func setVersionLabel(_ cell: UITableViewCell) {
         let versionLabel = UILabel().then{
@@ -148,10 +157,14 @@ extension MyPageViewController {
 }
 // MARK: - API Success
 extension MyPageViewController {
+    // MARK: 사용자 정보 조회 API
     func getUserInfoAPISuccess(_ result: [GetUserInfoModel]) {
-        print(result)
         self.userInfoData = result[0]
         mypageView.mypageTableView.reloadData()
+    }
+    // MARK: 알림 토글 수정 API
+    func switchNotificationAPISuccess(_ result: APIModel<ResultModel>) {
+        print(result.message)
     }
 }
 
