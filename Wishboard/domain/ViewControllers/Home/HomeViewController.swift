@@ -24,7 +24,10 @@ class HomeViewController: UIViewController {
             make.leading.trailing.top.bottom.equalToSuperview()
         }
         
-//        homeView.showBottomSheet(self)
+        // 첫 로그인일 시 앱 이용방법 호출
+        let isFirstLogin = UserDefaults.standard.bool(forKey: "isFirstLogin")
+        if isFirstLogin {homeView.showBottomSheet(self)}
+        
         // temp data
         homeView.setTempData()
         self.homeView.cartButton.addTarget(self, action: #selector(goToCart), for: .touchUpInside)
