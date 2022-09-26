@@ -43,7 +43,10 @@ class LoginViewController: UIViewController {
         loginViewModel.passwordTextFieldEditingChanged(text)
     }
     @objc func loginButtonDidTap() {
-        print("login button clicked!")
+        let email = loginViewModel.email
+        let pw = loginViewModel.password
+        let loginInput = LoginInput(email: email, password: pw)
+        LoginDataManager().loginDataManager(loginInput, self)
     }
     @objc func lostPasswordButtonDidTap() {
         let lostPwVC = LostPasswordViewController()
@@ -68,5 +71,22 @@ class LoginViewController: UIViewController {
             }
         }
 
+    }
+}
+// MARK: - API Success
+extension LoginViewController {
+    func loginAPISuccess(_ result: APIModel<ResultModel>) {
+        let token = result.data?.token
+        UserDefaults.standard.set(token, forKey: "token")
+        UserDefaults.standard.set(false, forKey: "isFirstLogin")
+        
+        ScreenManager().goMain(self)
+    }
+    func loginAPIFail() {
+        SnackBar(self, message: .login)
+        self.loginView.loginButton.then{
+            $0.defaultButton("로그인하기", .wishboardDisabledGray, .black)
+            $0.isEnabled = false
+        }
     }
 }

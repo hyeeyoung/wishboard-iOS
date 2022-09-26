@@ -10,6 +10,8 @@
 		230DBFA828E106EE00E9AED6 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230DBFA728E106EE00E9AED6 /* ShareView.swift */; };
 		232174DB28E1BE81008C155D /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174DA28E1BE81008C155D /* RegisterDataManager.swift */; };
 		232174E428E1BF1C008C155D /* RegisterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E328E1BF1C008C155D /* RegisterInput.swift */; };
+		232174E628E1D469008C155D /* LoginDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E528E1D469008C155D /* LoginDataManager.swift */; };
+		232174E828E1D4AF008C155D /* LoginInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E728E1D4AF008C155D /* LoginInput.swift */; };
 		2328C5A728CABF300065ABB2 /* NotiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C5A628CABF300065ABB2 /* NotiView.swift */; };
 		2328C5AA28CAC02C0065ABB2 /* NotiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C5A928CAC02C0065ABB2 /* NotiData.swift */; };
 		2328C5AC28CAC1260065ABB2 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C5AB28CAC1260065ABB2 /* NotificationViewController.swift */; };
@@ -196,6 +198,8 @@
 		230DBFA728E106EE00E9AED6 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		232174DA28E1BE81008C155D /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
 		232174E328E1BF1C008C155D /* RegisterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInput.swift; sourceTree = "<group>"; };
+		232174E528E1D469008C155D /* LoginDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataManager.swift; sourceTree = "<group>"; };
+		232174E728E1D4AF008C155D /* LoginInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInput.swift; sourceTree = "<group>"; };
 		2328C5A628CABF300065ABB2 /* NotiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiView.swift; sourceTree = "<group>"; };
 		2328C5A928CAC02C0065ABB2 /* NotiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiData.swift; sourceTree = "<group>"; };
 		2328C5AB28CAC1260065ABB2 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
@@ -568,6 +572,7 @@
 			isa = PBXGroup;
 			children = (
 				232174DA28E1BE81008C155D /* RegisterDataManager.swift */,
+				232174E528E1D469008C155D /* LoginDataManager.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -591,6 +596,7 @@
 			isa = PBXGroup;
 			children = (
 				232174E328E1BF1C008C155D /* RegisterInput.swift */,
+				232174E728E1D4AF008C155D /* LoginInput.swift */,
 			);
 			path = AuthenticationInputs;
 			sourceTree = "<group>";
@@ -1434,6 +1440,7 @@
 				2328C5B028CAC7930065ABB2 /* ModifyProfileViewController.swift in Sources */,
 				2328C5AC28CAC1260065ABB2 /* NotificationViewController.swift in Sources */,
 				23D5518728C6AFFF00D81B5F /* LoginViewModel.swift in Sources */,
+				232174E828E1D4AF008C155D /* LoginInput.swift in Sources */,
 				234F837928C9629800C4EB41 /* HomeView.swift in Sources */,
 				2360096028DA2297001FB107 /* EmptyView.swift in Sources */,
 				2328C5A728CABF300065ABB2 /* NotiView.swift in Sources */,
@@ -1468,6 +1475,7 @@
 				23C5AB4B28CAA24300A7E977 /* MyPageViewController.swift in Sources */,
 				23DC04EB28C591F400ABB0CF /* OnBoardingViewController.swift in Sources */,
 				23C2378B28C9CF1D00CE3200 /* FolderCollectionViewCell.swift in Sources */,
+				232174E628E1D469008C155D /* LoginDataManager.swift in Sources */,
 				234F838828C97BF900C4EB41 /* WishListModel.swift in Sources */,
 				23C8A1C728CA0AC9003ABFE9 /* ItemDetailTableViewCell.swift in Sources */,
 				23D5518B28C6B45C00D81B5F /* String.swift in Sources */,
