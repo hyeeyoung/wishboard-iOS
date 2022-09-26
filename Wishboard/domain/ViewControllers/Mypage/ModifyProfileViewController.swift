@@ -43,6 +43,7 @@ class ModifyProfileViewController: UIViewController {
     // 앨범 선택 image picker
     let imagePickerController = UIImagePickerController()
     var selectedPhoto: UIImage!
+    var nickname: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,9 +120,14 @@ extension ModifyProfileViewController {
     func setTarget() {
         self.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         self.cameraButton.addTarget(self, action: #selector(goAlbumButtonDidTap), for: .touchUpInside)
+        self.nameTextField.addTarget(self, action: #selector(nameTextFieldEditingChanged(_:)), for: .editingChanged)
         self.completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
     }
     @objc func goBack() {self.dismiss(animated: true)}
+    @objc func nameTextFieldEditingChanged(_ sender: UITextField) {
+        let text = sender.text ?? ""
+        self.nickname = text
+    }
     // 앨범에서 사진/동영상 선택
     @objc func goAlbumButtonDidTap() {
         self.imagePickerController.sourceType = .photoLibrary
@@ -133,8 +139,8 @@ extension ModifyProfileViewController {
         lottieView.isHidden = false
         lottieView.loopMode = .repeat(2)
         lottieView.play { completion in
-            self.dismiss(animated: true)
-            ScreenManager().goMainPages(3, self, family: .profileModified)
+            let modifyProfileInput = ModifyProfileInputNickname(nickname: self.nickname)
+            ModifyProfileDataManager().modifyProfileDataManager(modifyProfileInput, self)
         }
     }
 }
@@ -148,5 +154,12 @@ extension ModifyProfileViewController : UIImagePickerControllerDelegate, UINavig
             self.profileImage.layer.cornerRadius = 53
         }
         self.dismiss(animated: true, completion: nil)
+    }
+}
+// MARK: - API Success
+extension ModifyProfileViewController {
+    func modifyProfileAPISuccess(_ result: APIModel<ResultModel>) {
+        self.dismiss(animated: true)
+        print(result.message)
     }
 }

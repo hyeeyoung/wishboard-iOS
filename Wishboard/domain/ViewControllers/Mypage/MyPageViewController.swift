@@ -32,8 +32,10 @@ class MyPageViewController: UIViewController {
         // DATA
         MypageDataManager().getUserInfoDataManager(self)
     }
-    
-
+    override func viewDidAppear(_ animated: Bool) {
+        // DATA
+        MypageDataManager().getUserInfoDataManager(self)
+    }
 }
 // MARK: - Main TableView delegate
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
