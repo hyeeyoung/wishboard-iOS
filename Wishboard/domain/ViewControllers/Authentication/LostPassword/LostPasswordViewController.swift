@@ -40,16 +40,8 @@ class LostPasswordViewController: UIViewController {
         self.checkValidEmail(self.email)
     }
     @objc func getEmailButtonDidTap() {
-        let lottieView = lostPasswordView.getEmailButton.setHorizontalLottieView(lostPasswordView.getEmailButton)
-        lostPasswordView.getEmailButton.isSelected = true
-        lottieView.isHidden = false
-        lottieView.loopMode = .repeat(2)
-        lottieView.play { completion in
-            let getEmailVC = GetEmailViewController()
-            getEmailVC.modalPresentationStyle = .fullScreen
-            self.present(getEmailVC, animated: true, completion: nil)
-        }
-        
+        let checkEmailInput = CheckEmailInput(email: self.email)
+        CheckEmailDataManager().checkEmailDataManager(checkEmailInput, self)
     }
     // MARK: - Functions
     func checkValidEmail(_ email: String) {
@@ -67,5 +59,16 @@ class LostPasswordViewController: UIViewController {
             }
             self.lostPasswordView.errorMessage.isHidden = false
         }
+    }
+}
+// MARK: - API Success
+extension LostPasswordViewController {
+    func checkEmailAPISuccess(_ result: APIModel<ResultModel>) {
+        let getEmailVC = GetEmailViewController()
+        getEmailVC.modalPresentationStyle = .fullScreen
+        self.present(getEmailVC, animated: true, completion: nil)
+    }
+    func checkEmaiAPIFail() {
+//        SnackBar(self, message: .checkEmail)
     }
 }
