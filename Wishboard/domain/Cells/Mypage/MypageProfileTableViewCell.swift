@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MypageProfileTableViewCell: UITableViewCell {
     // MARK: - View
@@ -13,8 +14,8 @@ class MypageProfileTableViewCell: UITableViewCell {
         $0.layer.cornerRadius = 32
         $0.backgroundColor = .black
     }
-    let profileImage = UIButton().then{
-        $0.setImage(UIImage(named: "defaultProfile"), for: .normal)
+    let profileImage = UIImageView().then{
+        $0.image = UIImage(named: "defaultProfile")
         $0.layer.cornerRadius = 45
     }
     let cameraButton = UIButton().then{
@@ -73,5 +74,12 @@ class MypageProfileTableViewCell: UITableViewCell {
             make.top.equalTo(userNameLabel.snp.bottom).offset(8)
             make.centerX.equalToSuperview()
         }
+    }
+    func setUpData(_ data: GetUserInfoModel) {
+        if let profileUrl = data.profile_img {
+            profileImage.kf.setImage(with: URL(string: profileUrl), placeholder: UIImage(named: "defaultProfile"))
+        }
+        if let nickname = data.nickname {userNameLabel.text = nickname}
+        if let email = data.email {emailLabel.text = email}
     }
 }

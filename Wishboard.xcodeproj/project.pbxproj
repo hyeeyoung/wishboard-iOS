@@ -36,6 +36,7 @@
 		234F838D28C9857000C4EB41 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838C28C9857000C4EB41 /* CartTableViewCell.swift */; };
 		234F838F28C987CB00C4EB41 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838E28C987CB00C4EB41 /* CartViewController.swift */; };
 		2350FADF28DB9BEA00981B8F /* SetNotificationDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2350FADE28DB9BEA00981B8F /* SetNotificationDate.swift */; };
+		235204CE28E2690F004F5DC6 /* GetUserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235204CD28E2690F004F5DC6 /* GetUserInfoModel.swift */; };
 		2360095E28DA1829001FB107 /* FolderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360095D28DA1829001FB107 /* FolderDetailViewController.swift */; };
 		2360096028DA2297001FB107 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360095F28DA2297001FB107 /* EmptyView.swift */; };
 		2360FF5C28DCB31600E481A6 /* SnackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360FF5B28DCB31600E481A6 /* SnackBar.swift */; };
@@ -148,6 +149,8 @@
 		23E378E928D303B500C52F2D /* ShoppingLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E378E828D303B500C52F2D /* ShoppingLinkViewController.swift */; };
 		23EC504228E25DAC00AAA57E /* CheckEmailInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504128E25DAC00AAA57E /* CheckEmailInput.swift */; };
 		23EC504428E25DE400AAA57E /* CheckEmailDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504328E25DE400AAA57E /* CheckEmailDataManager.swift */; };
+		23EC504628E2664D00AAA57E /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504528E2664D00AAA57E /* APIManager.swift */; };
+		23EC504C28E2670D00AAA57E /* MypageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504B28E2670D00AAA57E /* MypageDataManager.swift */; };
 		23F69CAF28CC17F8001B8C7F /* UIBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */; };
 		23F69CB128CC1819001B8C7F /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CB028CC1819001B8C7F /* UIView.swift */; };
 		8FC34572B49CFC063CDC4619 /* Pods_WishboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 420154A5B1D7E2D7C5F49F42 /* Pods_WishboardTests.framework */; };
@@ -226,6 +229,7 @@
 		234F838C28C9857000C4EB41 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		234F838E28C987CB00C4EB41 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		2350FADE28DB9BEA00981B8F /* SetNotificationDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNotificationDate.swift; sourceTree = "<group>"; };
+		235204CD28E2690F004F5DC6 /* GetUserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserInfoModel.swift; sourceTree = "<group>"; };
 		2360095D28DA1829001FB107 /* FolderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDetailViewController.swift; sourceTree = "<group>"; };
 		2360095F28DA2297001FB107 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		2360FF5B28DCB31600E481A6 /* SnackBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBar.swift; sourceTree = "<group>"; };
@@ -312,6 +316,8 @@
 		23E378E828D303B500C52F2D /* ShoppingLinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingLinkViewController.swift; sourceTree = "<group>"; };
 		23EC504128E25DAC00AAA57E /* CheckEmailInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckEmailInput.swift; sourceTree = "<group>"; };
 		23EC504328E25DE400AAA57E /* CheckEmailDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckEmailDataManager.swift; sourceTree = "<group>"; };
+		23EC504528E2664D00AAA57E /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		23EC504B28E2670D00AAA57E /* MypageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageDataManager.swift; sourceTree = "<group>"; };
 		23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPath.swift; sourceTree = "<group>"; };
 		23F69CB028CC1819001B8C7F /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		420154A5B1D7E2D7C5F49F42 /* Pods_WishboardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WishboardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -585,6 +591,7 @@
 		232174E028E1BED9008C155D /* APIModels */ = {
 			isa = PBXGroup;
 			children = (
+				235204CC28E26902004F5DC6 /* MypageModels */,
 			);
 			path = APIModels;
 			sourceTree = "<group>";
@@ -592,6 +599,7 @@
 		232174E128E1BEE9008C155D /* APIInputs */ = {
 			isa = PBXGroup;
 			children = (
+				23EC504728E266C100AAA57E /* MypageInputs */,
 				232174E228E1BF11008C155D /* AuthenticationInputs */,
 			);
 			path = APIInputs;
@@ -709,6 +717,14 @@
 			path = Cart;
 			sourceTree = "<group>";
 		};
+		235204CC28E26902004F5DC6 /* MypageModels */ = {
+			isa = PBXGroup;
+			children = (
+				235204CD28E2690F004F5DC6 /* GetUserInfoModel.swift */,
+			);
+			path = MypageModels;
+			sourceTree = "<group>";
+		};
 		238EF90728CB06FC00ECA606 /* Calender */ = {
 			isa = PBXGroup;
 			children = (
@@ -736,6 +752,7 @@
 		23C3113128DF62C100A636F6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				23EC504A28E266F700AAA57E /* Mypage */,
 				232174D928E1BE71008C155D /* Authentication */,
 			);
 			path = Services;
@@ -767,12 +784,13 @@
 			path = PopUpViewControllers;
 			sourceTree = "<group>";
 		};
-		23C3113528DF633000A636F6 /* APIModel */ = {
+		23C3113528DF633000A636F6 /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
 				23C3113628DF633D00A636F6 /* APIModel.swift */,
+				23EC504528E2664D00AAA57E /* APIManager.swift */,
 			);
-			path = APIModel;
+			path = APIManager;
 			sourceTree = "<group>";
 		};
 		23C3113D28DF680300A636F6 /* Share Extension */ = {
@@ -840,7 +858,7 @@
 		23C9567D28C67FD000D88536 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				23C3113528DF633000A636F6 /* APIModel */,
+				23C3113528DF633000A636F6 /* APIManager */,
 				23C3113428DF630C00A636F6 /* PopUpViewControllers */,
 				23C3113328DF62E300A636F6 /* Extensions */,
 				23C3113228DF62D700A636F6 /* Observable */,
@@ -1037,6 +1055,21 @@
 				23E378E028D2F07500C52F2D /* UploadItemView.swift */,
 			);
 			path = UploadItem;
+			sourceTree = "<group>";
+		};
+		23EC504728E266C100AAA57E /* MypageInputs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MypageInputs;
+			sourceTree = "<group>";
+		};
+		23EC504A28E266F700AAA57E /* Mypage */ = {
+			isa = PBXGroup;
+			children = (
+				23EC504B28E2670D00AAA57E /* MypageDataManager.swift */,
+			);
+			path = Mypage;
 			sourceTree = "<group>";
 		};
 		78F0EFA2928CA62BC997E0FA /* Pods */ = {
@@ -1448,9 +1481,11 @@
 				2328C5AC28CAC1260065ABB2 /* NotificationViewController.swift in Sources */,
 				23D5518728C6AFFF00D81B5F /* LoginViewModel.swift in Sources */,
 				232174E828E1D4AF008C155D /* LoginInput.swift in Sources */,
+				23EC504628E2664D00AAA57E /* APIManager.swift in Sources */,
 				234F837928C9629800C4EB41 /* HomeView.swift in Sources */,
 				2360096028DA2297001FB107 /* EmptyView.swift in Sources */,
 				2328C5A728CABF300065ABB2 /* NotiView.swift in Sources */,
+				235204CE28E2690F004F5DC6 /* GetUserInfoModel.swift in Sources */,
 				2360095E28DA1829001FB107 /* FolderDetailViewController.swift in Sources */,
 				23C2378928C9CF0400CE3200 /* FolderListModel.swift in Sources */,
 				237478A428D20DB600CF941A /* FolderListTableViewCell.swift in Sources */,
@@ -1469,6 +1504,7 @@
 				23E378E328D2F16900C52F2D /* UploadItemPhotoTableViewCell.swift in Sources */,
 				23C5AB4D28CAA54600A7E977 /* MypageProfileTableViewCell.swift in Sources */,
 				23C2378428C9CEE000CE3200 /* FolderViewController.swift in Sources */,
+				23EC504C28E2670D00AAA57E /* MypageDataManager.swift in Sources */,
 				234F838D28C9857000C4EB41 /* CartTableViewCell.swift in Sources */,
 				23D4C66628D8ECF300EA7F98 /* GetEmailViewController.swift in Sources */,
 				232174E428E1BF1C008C155D /* RegisterInput.swift in Sources */,

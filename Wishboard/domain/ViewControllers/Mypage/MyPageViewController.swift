@@ -11,6 +11,9 @@ class MyPageViewController: UIViewController {
     var mypageView: MyPageView!
     let settingArray = ["설정", "알림 설정", "고객 지원", "문의하기", "서비스 정보", "위시보드 이용 방법", "이용약관", "버전 정보", "계정 관리", "로그아웃", "회원 탈퇴"]
 
+    var userInfoData: GetUserInfoModel!
+    var pushState = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,6 +29,8 @@ class MyPageViewController: UIViewController {
         mypageView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview()
         }
+        // DATA
+        MypageDataManager().getUserInfoDataManager(self)
     }
     
 
@@ -39,6 +44,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         let tag = indexPath.row
         if tag == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "MypageProfileTableViewCell", for: indexPath) as? MypageProfileTableViewCell else { return UITableViewCell() }
+            if let cellData = self.userInfoData {cell.setUpData(cellData)}
             cell.selectionStyle = .none
             return cell
         } else {
@@ -97,7 +103,7 @@ extension MyPageViewController {
     }
     func setSwitch(_ cell: UITableViewCell) {
         let notiSwitch = UISwitch().then{
-            $0.isOn = true
+            $0.isOn = self.pushState
             $0.onTintColor = .wishboardGreen
             $0.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
         }
@@ -140,3 +146,12 @@ extension MyPageViewController {
         self.present(dialog, animated: false, completion: nil)
     }
 }
+// MARK: - API Success
+extension MyPageViewController {
+    func getUserInfoAPISuccess(_ result: [GetUserInfoModel]) {
+        print(result)
+        self.userInfoData = result[0]
+        mypageView.mypageTableView.reloadData()
+    }
+}
+
