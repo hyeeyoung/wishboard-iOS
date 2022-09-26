@@ -49,6 +49,11 @@ class PopUpDeleteUserViewController: UIViewController {
         $0.font = UIFont.Suit(size: 16, family: .Regular)
         $0.clearButtonMode = .whileEditing
     }
+    let errorMessage = UILabel().then{
+        $0.text = "닉네임을 다시 확인해 주세요."
+        $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.textColor = .wishboardRed
+    }
     // MARK: - Life Cycles
     convenience init(titleText: String? = nil,
                      messageText: String? = nil,
@@ -70,6 +75,8 @@ class PopUpDeleteUserViewController: UIViewController {
         setUpContent()
         setUpView()
         setUpConstraint()
+        
+        self.errorMessage.isHidden = true
         
         cancelBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
@@ -132,11 +139,12 @@ class PopUpDeleteUserViewController: UIViewController {
         popupView.addSubview(cancelBtn)
         popupView.addSubview(okBtn)
         popupView.addSubview(textField)
+        popupView.addSubview(errorMessage)
     }
     func setUpConstraint() {
         popupView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(30)
-            make.height.equalTo(186)
+            make.height.equalTo(211)
             make.centerY.centerX.equalToSuperview()
         }
         titleLabel.snp.makeConstraints { make in
@@ -173,7 +181,11 @@ class PopUpDeleteUserViewController: UIViewController {
         textField.snp.makeConstraints { make in
             make.height.equalTo(42)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalTo(horizontalSeperator.snp.top).offset(-16)
+            make.bottom.equalTo(horizontalSeperator.snp.top).offset(-33)
+        }
+        errorMessage.snp.makeConstraints { make in
+            make.leading.equalTo(textField)
+            make.top.equalTo(textField.snp.bottom).offset(6)
         }
     }
 }
