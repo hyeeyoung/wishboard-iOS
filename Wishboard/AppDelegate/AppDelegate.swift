@@ -11,11 +11,12 @@ import UIKit
 //@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         sleep(2)
+        
+        //MARK: UserDefaults
+        UserDefaults.standard.set("http://3.39.165.250:3000", forKey: "url")
         
         return true
     }

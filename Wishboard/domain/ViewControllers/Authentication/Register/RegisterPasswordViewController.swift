@@ -10,6 +10,7 @@ import Lottie
 
 class RegisterPasswordViewController: UIViewController {
     var registerPWView: RegisterPasswordView!
+    var email: String!
     var pw: String!
 
     override func viewDidLoad() {
@@ -47,7 +48,8 @@ extension RegisterPasswordViewController {
         lottieView.isHidden = false
         lottieView.loopMode = .loop
         lottieView.play { completion in
-//            self.dismiss(animated: true)
+            let registerInput = RegisterInput(email: self.email, password: self.pw)
+            RegisterDataManager().registerDataManager(registerInput, self)
         }
     }
     // MARK: - Functions
@@ -66,5 +68,15 @@ extension RegisterPasswordViewController {
                 $0.isEnabled = false
             }
         }
+    }
+}
+// MARK: - API Success
+extension RegisterPasswordViewController {
+    func registerAPISuccess(_ result: APIModel<ResultModel>) {
+        let token = result.data?.token
+        UserDefaults.standard.set(token, forKey: "token")
+        UserDefaults.standard.set(true, forKey: "isFirstLogin")
+        
+        ScreenManager().goMain(self)
     }
 }

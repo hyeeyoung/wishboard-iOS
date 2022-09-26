@@ -41,6 +41,7 @@ class RegisterEmailViewController: UIViewController {
     }
     @objc func nextButtonDidTap() {
         let registerVC = RegisterPasswordViewController()
+        registerVC.email = self.email
         registerVC.modalPresentationStyle = .fullScreen
         self.present(registerVC, animated: true, completion: nil)
     }

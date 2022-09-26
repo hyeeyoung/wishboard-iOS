@@ -8,10 +8,8 @@
 struct APIModel<T: Decodable>: Decodable {
     let success: Bool?
     let message: String?
-    let token: String?
     let data: T?
-    
 }
-struct DataModel: Decodable {
-    
+struct ResultModel: Decodable {
+    let token: String?
 }
