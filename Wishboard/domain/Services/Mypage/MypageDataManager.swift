@@ -30,7 +30,24 @@ class MypageDataManager {
         }
     }
     // MARK: - 알림 토글 수정
+    // 마이페이지
     func switchNotificationDataManager(_ isOn: Bool, _ viewcontroller: MyPageViewController) {
+        AF.request(BaseURL + "/user/push-state/\(isOn)",
+                           method: .put,
+                           parameters: nil,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            switch response.result {
+            case .success(let result):
+                viewcontroller.switchNotificationAPISuccess(result)
+            case .failure(let error):
+                print(error.responseCode)
+            }
+        }
+    }
+    // 앱 이용방법 후 (회원가입 후)
+    func switchNotificationDataManager(_ isOn: Bool, _ viewcontroller: HomeViewController) {
         AF.request(BaseURL + "/user/push-state/\(isOn)",
                            method: .put,
                            parameters: nil,
