@@ -1,17 +1,18 @@
 //
-//  LoginDataManager.swift
+//  CheckEmailDataManager.swift
 //  Wishboard
 //
-//  Created by gomin on 2022/09/26.
+//  Created by gomin on 2022/09/27.
 //
 
 import Alamofire
 
-class LoginDataManager {
+class CheckEmailDataManager {
     let BaseURL = UserDefaults.standard.string(forKey: "url") ?? ""
-    //MARK: 회원가입
-    func loginDataManager(_ parameter: LoginInput, _ viewcontroller: LoginViewController) {
-        AF.request(BaseURL + "/auth/signin",
+    
+    //MARK: 이메일 인증 - 회원가입 시
+    func checkEmailDataManager(_ parameter: CheckEmailInput, _ viewcontroller: RegisterEmailViewController) {
+        AF.request(BaseURL + "/auth/check-email",
                    method: .post,
                    parameters: parameter,
                    encoder: JSONParameterEncoder.default,
@@ -20,12 +21,12 @@ class LoginDataManager {
             .responseDecodable(of: APIModel<ResultModel>.self) { response in
             switch response.result {
             case .success(let result):
-                if result.success! {viewcontroller.loginAPISuccess(result)}
+                if result.success! {viewcontroller.checkEmailAPISuccess(result)}
             case .failure(let error):
                 if let statusCode = error.responseCode {
                     switch statusCode {
-                    case 400, 204:
-                        viewcontroller.loginAPIFail()
+                    case 409:
+                        viewcontroller.checkEmaiAPIFail()
                     default:
                         print(statusCode)
                     }

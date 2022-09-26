@@ -146,6 +146,8 @@
 		23E378E528D2F47E00C52F2D /* UploadItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E378E428D2F47E00C52F2D /* UploadItemViewController.swift */; };
 		23E378E728D2FDD000C52F2D /* NotificationSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E378E628D2FDD000C52F2D /* NotificationSettingViewController.swift */; };
 		23E378E928D303B500C52F2D /* ShoppingLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E378E828D303B500C52F2D /* ShoppingLinkViewController.swift */; };
+		23EC504228E25DAC00AAA57E /* CheckEmailInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504128E25DAC00AAA57E /* CheckEmailInput.swift */; };
+		23EC504428E25DE400AAA57E /* CheckEmailDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504328E25DE400AAA57E /* CheckEmailDataManager.swift */; };
 		23F69CAF28CC17F8001B8C7F /* UIBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */; };
 		23F69CB128CC1819001B8C7F /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CB028CC1819001B8C7F /* UIView.swift */; };
 		8FC34572B49CFC063CDC4619 /* Pods_WishboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 420154A5B1D7E2D7C5F49F42 /* Pods_WishboardTests.framework */; };
@@ -308,6 +310,8 @@
 		23E378E428D2F47E00C52F2D /* UploadItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemViewController.swift; sourceTree = "<group>"; };
 		23E378E628D2FDD000C52F2D /* NotificationSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingViewController.swift; sourceTree = "<group>"; };
 		23E378E828D303B500C52F2D /* ShoppingLinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingLinkViewController.swift; sourceTree = "<group>"; };
+		23EC504128E25DAC00AAA57E /* CheckEmailInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckEmailInput.swift; sourceTree = "<group>"; };
+		23EC504328E25DE400AAA57E /* CheckEmailDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckEmailDataManager.swift; sourceTree = "<group>"; };
 		23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPath.swift; sourceTree = "<group>"; };
 		23F69CB028CC1819001B8C7F /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		420154A5B1D7E2D7C5F49F42 /* Pods_WishboardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WishboardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -573,6 +577,7 @@
 			children = (
 				232174DA28E1BE81008C155D /* RegisterDataManager.swift */,
 				232174E528E1D469008C155D /* LoginDataManager.swift */,
+				23EC504328E25DE400AAA57E /* CheckEmailDataManager.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -597,6 +602,7 @@
 			children = (
 				232174E328E1BF1C008C155D /* RegisterInput.swift */,
 				232174E728E1D4AF008C155D /* LoginInput.swift */,
+				23EC504128E25DAC00AAA57E /* CheckEmailInput.swift */,
 			);
 			path = AuthenticationInputs;
 			sourceTree = "<group>";
@@ -1419,6 +1425,7 @@
 				23F69CB128CC1819001B8C7F /* UIView.swift in Sources */,
 				23E378E528D2F47E00C52F2D /* UploadItemViewController.swift in Sources */,
 				23C8A1C528CA08B7003ABFE9 /* ItemDetailView.swift in Sources */,
+				23EC504428E25DE400AAA57E /* CheckEmailDataManager.swift in Sources */,
 				23D5518328C6A3BD00D81B5F /* UIButton.swift in Sources */,
 				2340CEAA28CB6173007C362F /* HomeBottomSheetView.swift in Sources */,
 				23D4C66228D8E88700EA7F98 /* LostPasswordView.swift in Sources */,
@@ -1483,6 +1490,7 @@
 				2360FF5E28DCC64100E481A6 /* ScreenManager.swift in Sources */,
 				2374789C28D1EA1700CF941A /* PaddingLabel.swift in Sources */,
 				238EF90928CB070700ECA606 /* CalenderView.swift in Sources */,
+				23EC504228E25DAC00AAA57E /* CheckEmailInput.swift in Sources */,
 				237478A028D1FF0400CF941A /* SetFolderBottomSheetView.swift in Sources */,
 				2344949728D78AB500CF3BD9 /* RegisterEmailView.swift in Sources */,
 				23C3113728DF633D00A636F6 /* APIModel.swift in Sources */,

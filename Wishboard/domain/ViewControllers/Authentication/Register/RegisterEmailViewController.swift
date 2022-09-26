@@ -40,10 +40,8 @@ class RegisterEmailViewController: UIViewController {
         self.checkValidEmail(self.email)
     }
     @objc func nextButtonDidTap() {
-        let registerVC = RegisterPasswordViewController()
-        registerVC.email = self.email
-        registerVC.modalPresentationStyle = .fullScreen
-        self.present(registerVC, animated: true, completion: nil)
+        let checkEmailInput = CheckEmailInput(email: self.email)
+        CheckEmailDataManager().checkEmailDataManager(checkEmailInput, self)
     }
     // MARK: - Functions
     func checkValidEmail(_ email: String) {
@@ -59,5 +57,17 @@ class RegisterEmailViewController: UIViewController {
                 $0.isEnabled = false
             }
         }
+    }
+}
+// MARK: - API Success
+extension RegisterEmailViewController {
+    func checkEmailAPISuccess(_ result: APIModel<ResultModel>) {
+        let registerVC = RegisterPasswordViewController()
+        registerVC.email = self.email
+        registerVC.modalPresentationStyle = .fullScreen
+        self.present(registerVC, animated: true, completion: nil)
+    }
+    func checkEmaiAPIFail() {
+        SnackBar(self, message: .checkEmail)
     }
 }
