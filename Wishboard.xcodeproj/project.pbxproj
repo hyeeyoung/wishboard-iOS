@@ -20,6 +20,7 @@
 		2331867F28DA92EE00F17CBF /* loading_spin.json in Resources */ = {isa = PBXBuildFile; fileRef = 2331867D28DA92EE00F17CBF /* loading_spin.json */; };
 		2331868028DA92EE00F17CBF /* loading_horizontal_black.json in Resources */ = {isa = PBXBuildFile; fileRef = 2331867E28DA92EE00F17CBF /* loading_horizontal_black.json */; };
 		2331868228DA933600F17CBF /* SetLottie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2331868128DA933600F17CBF /* SetLottie.swift */; };
+		2335638128E3210C00C0184C /* FCMInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2335638028E3210C00C0184C /* FCMInput.swift */; };
 		2340CEAA28CB6173007C362F /* HomeBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEA928CB6173007C362F /* HomeBottomSheetView.swift */; };
 		2340CEAC28CB6252007C362F /* HowToCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEAB28CB6252007C362F /* HowToCollectionViewCell.swift */; };
 		2340CEAE28CB65AE007C362F /* HowToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEAD28CB65AE007C362F /* HowToViewController.swift */; };
@@ -215,6 +216,7 @@
 		2331867D28DA92EE00F17CBF /* loading_spin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_spin.json; sourceTree = "<group>"; };
 		2331867E28DA92EE00F17CBF /* loading_horizontal_black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_horizontal_black.json; sourceTree = "<group>"; };
 		2331868128DA933600F17CBF /* SetLottie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLottie.swift; sourceTree = "<group>"; };
+		2335638028E3210C00C0184C /* FCMInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMInput.swift; sourceTree = "<group>"; };
 		2340CEA928CB6173007C362F /* HomeBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomSheetView.swift; sourceTree = "<group>"; };
 		2340CEAB28CB6252007C362F /* HowToCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToCollectionViewCell.swift; sourceTree = "<group>"; };
 		2340CEAD28CB65AE007C362F /* HowToViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToViewController.swift; sourceTree = "<group>"; };
@@ -603,6 +605,7 @@
 		232174E128E1BEE9008C155D /* APIInputs */ = {
 			isa = PBXGroup;
 			children = (
+				2335637F28E3210300C0184C /* FCMInput */,
 				23EC504728E266C100AAA57E /* MypageInputs */,
 				232174E228E1BF11008C155D /* AuthenticationInputs */,
 			);
@@ -643,6 +646,14 @@
 				2331868128DA933600F17CBF /* SetLottie.swift */,
 			);
 			path = Lottie;
+			sourceTree = "<group>";
+		};
+		2335637F28E3210300C0184C /* FCMInput */ = {
+			isa = PBXGroup;
+			children = (
+				2335638028E3210C00C0184C /* FCMInput.swift */,
+			);
+			path = FCMInput;
 			sourceTree = "<group>";
 		};
 		2344949528D78AA400CF3BD9 /* Register */ = {
@@ -1479,6 +1490,7 @@
 				23E378E928D303B500C52F2D /* ShoppingLinkViewController.swift in Sources */,
 				2344949928D78F6300CF3BD9 /* RegisterPasswordViewController.swift in Sources */,
 				2374789A28D1DB2900CF941A /* CheckNotch.swift in Sources */,
+				2335638128E3210C00C0184C /* FCMInput.swift in Sources */,
 				23DC04B028C58B5200ABB0CF /* SceneDelegate.swift in Sources */,
 				2360FF5C28DCB31600E481A6 /* SnackBar.swift in Sources */,
 				23D7901428CB0E5F00246109 /* CalenderTableViewCell.swift in Sources */,

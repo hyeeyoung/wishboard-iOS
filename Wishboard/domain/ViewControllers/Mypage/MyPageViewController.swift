@@ -154,6 +154,8 @@ extension MyPageViewController {
         let dialog = PopUpViewController(titleText: "로그아웃", messageText: "정말 로그아웃 하시겠어요?", greenBtnText: "취소", blackBtnText: "로그아웃")
         dialog.modalPresentationStyle = .overCurrentContext
         self.present(dialog, animated: false, completion: nil)
+        
+        dialog.okBtn.addTarget(self, action: #selector(logoutButtonDidTap), for: .touchUpInside)
     }
     func showSignoutDialog() {
         guard let nickName = self.nickName else {return}
@@ -162,6 +164,9 @@ extension MyPageViewController {
         self.present(dialog, animated: false, completion: nil)
         
         dialog.okBtn.addTarget(self, action: #selector(signOutButtonDidTap), for: .touchUpInside)
+    }
+    @objc func logoutButtonDidTap() {
+        MypageDataManager().logoutDataManager(self)
     }
     @objc func signOutButtonDidTap() {
         MypageDataManager().deleteUserDataManager(self)
@@ -186,6 +191,19 @@ extension MyPageViewController {
         SnackBar(onboardingVC, message: .deleteUser)
         self.view.window?.windowScene?.keyWindow?.rootViewController = onboardingVC
         
+        print(result.message)
+    }
+    // MARK: 로그아웃 API
+    func logoutAPISuccess(_ result: APIModel<ResultModel>) {
+        // delete UserInfo
+        UserDefaults.standard.removeObject(forKey: "token")
+        UserDefaults.standard.removeObject(forKey: "email")
+        UserDefaults.standard.removeObject(forKey: "password")
+        UserDefaults.standard.set(false, forKey: "isFirstLogin")
+        
+        let onboardingVC = OnBoardingViewController()
+        onboardingVC.modalPresentationStyle = .fullScreen
+        self.view.window?.windowScene?.keyWindow?.rootViewController = onboardingVC
         print(result.message)
     }
 }

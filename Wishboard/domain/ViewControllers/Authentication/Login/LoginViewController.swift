@@ -80,6 +80,8 @@ extension LoginViewController {
         let token = result.data?.token
         UserDefaults.standard.set(token, forKey: "token")
         UserDefaults.standard.set(false, forKey: "isFirstLogin")
+        UserDefaults.standard.set(loginViewModel.email, forKey: "email")
+        UserDefaults.standard.set(loginViewModel.password, forKey: "password")
         
         ScreenManager().goMain(self)
     }

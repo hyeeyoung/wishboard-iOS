@@ -78,4 +78,21 @@ class MypageDataManager {
             }
         }
     }
+    // MARK: - 회원 탈퇴
+    func logoutDataManager(_ viewcontroller: MyPageViewController) {
+        let logoutInput = FCMInput(fcm_token: nil)
+        AF.request(BaseURL + "/user/fcm",
+                           method: .put,
+                           parameters: logoutInput,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            switch response.result {
+            case .success(let result):
+                viewcontroller.logoutAPISuccess(result)
+            case .failure(let error):
+                print(error.responseCode)
+            }
+        }
+    }
 }
