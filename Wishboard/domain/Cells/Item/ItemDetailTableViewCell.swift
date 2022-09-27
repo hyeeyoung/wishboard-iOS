@@ -11,6 +11,7 @@ class ItemDetailTableViewCell: UITableViewCell {
     // MARK: - Properties
     let itemImage = UIImageView().then{
         $0.backgroundColor = .lightGray
+        $0.clipsToBounds = true
         $0.layer.cornerRadius = 32
     }
     var setFolderButton = UIButton().then{
@@ -152,5 +153,20 @@ class ItemDetailTableViewCell: UITableViewCell {
             make.leading.equalTo(label.snp.leading)
             make.top.equalTo(label.snp.bottom).offset(10)
         }
+    }
+    func setUpData(_ data: WishListModel) {
+        if let url = data.item_img_url {
+            self.itemImage.kf.setImage(with: URL(string: url), placeholder: UIImage())
+        }
+        if data.item_notification_type == nil {
+            self.restockLabel.isHidden = true
+            self.restockDateLabel.isHidden = true
+        }
+        if let folderName = data.folder_name {self.setFolderButton.setFolderButton(folderName)}
+        if let createdDate = data.create_at {self.dateLabel.text = createdDate}
+        if let itemName = data.item_name {self.itemNameLabel.text = itemName}
+        if let itemPrice = data.item_price {self.priceLabel.text = itemPrice}
+        if let link = data.item_url {self.linkLabel.text = link}
+        if let memo = data.item_memo {self.memoLabel.text = memo}
     }
 }

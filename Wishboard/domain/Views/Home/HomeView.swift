@@ -127,7 +127,10 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let itemIdx = indexPath.item
+        
         let itemDetailVC = ItemDetailViewController()
+        itemDetailVC.wishListData = self.wishListData[itemIdx]
         itemDetailVC.modalPresentationStyle = .fullScreen
         self.viewController.present(itemDetailVC, animated: true, completion: nil)
     }

@@ -40,10 +40,6 @@ class SetFolderBottomSheetViewController: UIViewController {
             let indexPath = IndexPath(row: 3, section: 0)
             preVC.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
         }
-        if let preVC = self.preItemDetailVC {
-            preVC.selectedFolder = self.selectedFolder
-            preVC.itemDetailView.itemDetailTableView.reloadData()
-        }
     }
     func setPreViewController(_ preVC: UploadItemViewController) {
         self.preUploadVC = preVC

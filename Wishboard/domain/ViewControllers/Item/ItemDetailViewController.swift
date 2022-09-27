@@ -7,10 +7,11 @@
 
 import UIKit
 import MaterialComponents.MaterialBottomSheet
+import SafariServices
 
 class ItemDetailViewController: UIViewController {
     var itemDetailView: ItemDetailView!
-    var selectedFolder: String!
+    var wishListData: WishListModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,13 +55,13 @@ class ItemDetailViewController: UIViewController {
     @objc func goModify() {
         let modifyVC = UploadItemViewController().then{
             $0.isUploadItem = false
-            $0.itemName = "item test 1"
-            $0.itemPrice = "item price test 1"
-            $0.memo = "memo test 1"
-    //        $0.folder = self.selectedFolder
-            $0.folder = "상의"
-            $0.notificationDate = "ddd"
-            $0.shoppingLink = "www."
+            // TODO: item modify data set
+//            $0.itemName = self.wishListData.item_name
+//            $0.itemPrice = self.wishListData.item_price
+//            $0.memo = self.wishListData.item_memo
+//            $0.folder = self.wishListData.folder_name
+//            $0.notificationDate = "[" + self.wishListData.item_notification_type! + "]" + self.wishListData.item_notification_date!
+//            $0.shoppingLink = self.wishListData.item_url
             
             $0.modalPresentationStyle = .fullScreen
         }
@@ -75,8 +76,20 @@ extension ItemDetailViewController {
         
         itemDetailView.setTableView(self)
         itemDetailView.setUpNavigationView()
-        itemDetailView.setUpLowerView(true)
+        if self.wishListData.item_url != nil {itemDetailView.setUpLowerView(true)}
+        else {itemDetailView.setUpLowerView(false)}
         itemDetailView.setUpConstraint()
+        
+        itemDetailView.lowerButton.addTarget(self, action: #selector(linkButtonDidTap), for: .touchUpInside)
+    }
+    @objc func linkButtonDidTap() {
+        guard let urlStr = self.wishListData.item_url else {return}
+        linkTo(urlStr)
+    }
+    func linkTo(_ urlStr: String) {
+        let url = NSURL(string: urlStr)
+        let linkView: SFSafariViewController = SFSafariViewController(url: url as! URL)
+        self.present(linkView, animated: true, completion: nil)
     }
 }
 // MARK: - TableView delegate
@@ -88,8 +101,8 @@ extension ItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ItemDetailTableViewCell", for: indexPath) as? ItemDetailTableViewCell else { return UITableViewCell() }
         
         cell.setFolderButton.addTarget(self, action: #selector(setFolder), for: .touchUpInside)
-        if let folder = self.selectedFolder {
-            cell.setFolderButton.setFolderButton(folder)
+        if let cellData = self.wishListData {
+            cell.setUpData(cellData)
         }
         cell.selectionStyle = .none
         return cell

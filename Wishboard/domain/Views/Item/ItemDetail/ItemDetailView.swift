@@ -24,6 +24,7 @@ class ItemDetailView: UIView {
     
     // MARK: - Life Cycles
     var lowerView: UIView!
+    var lowerButton: UIButton!
     var itemDetailTableView: UITableView!
     
     override init(frame: CGRect) {
@@ -60,7 +61,7 @@ class ItemDetailView: UIView {
             if isLinkExist {$0.backgroundColor = .black}
             else {$0.backgroundColor = .white}
         }
-        let lowerButton = UIButton().then{
+        lowerButton = UIButton().then{
             var config = UIButton.Configuration.plain()
             var attText = AttributedString.init("쇼핑몰로 이동하기")
             
