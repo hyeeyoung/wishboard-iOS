@@ -179,6 +179,7 @@ extension MyPageViewController {
         self.userInfoData = result[0]
         self.nickName = self.userInfoData.nickname
         mypageView.mypageTableView.reloadData()
+        print(result)
     }
     // MARK: 알림 토글 수정 API
     func switchNotificationAPISuccess(_ result: APIModel<ResultModel>) {

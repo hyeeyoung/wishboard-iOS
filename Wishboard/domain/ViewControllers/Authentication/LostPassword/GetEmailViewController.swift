@@ -103,12 +103,13 @@ extension GetEmailViewController {
     func verifyCodeAPISuccess(_ result: APIModel<VerifyCodeModel>) {
         let token = result.data?.token
         let email = self.email
-        let password = self.authCode
+        let pushState = result.data?.pushState
         UserDefaults.standard.set(token, forKey: "token")
         UserDefaults.standard.set(false, forKey: "isFirstLogin")
         UserDefaults.standard.set(email, forKey: "email")
-        UserDefaults.standard.set(password, forKey: "password")
         
         ScreenManager().goMain(self)
+        
+        print(result)
     }
 }
