@@ -28,9 +28,13 @@ class HomeViewController: UIViewController {
         let isFirstLogin = UserDefaults.standard.bool(forKey: "isFirstLogin")
         if isFirstLogin {homeView.showBottomSheet(self)}
         
-        // temp data
-        homeView.setTempData()
         self.homeView.cartButton.addTarget(self, action: #selector(goToCart), for: .touchUpInside)
+        // DATA
+        WishListDataManager().wishListDataManager(self.homeView)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        // DATA
+        WishListDataManager().wishListDataManager(self.homeView)
     }
     @objc func goToCart() {
         let cartVC = CartViewController()
@@ -53,6 +57,7 @@ class HomeViewController: UIViewController {
 }
 // MARK: - API Success
 extension HomeViewController {
+    // MARK: 알림 허용 팝업창
     func switchNotificationAPISuccess(_ result: APIModel<ResultModel>) {
         print(result.message)
     }

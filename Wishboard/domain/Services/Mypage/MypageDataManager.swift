@@ -14,7 +14,6 @@ class MypageDataManager {
     
     // MARK: - 사용자 정보 조회
     func getUserInfoDataManager(_ viewcontroller: MyPageViewController) {
-        
         AF.request(BaseURL + "/user",
                            method: .get,
                            parameters: nil,

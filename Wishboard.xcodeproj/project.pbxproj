@@ -21,6 +21,7 @@
 		2331868028DA92EE00F17CBF /* loading_horizontal_black.json in Resources */ = {isa = PBXBuildFile; fileRef = 2331867E28DA92EE00F17CBF /* loading_horizontal_black.json */; };
 		2331868228DA933600F17CBF /* SetLottie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2331868128DA933600F17CBF /* SetLottie.swift */; };
 		2335638128E3210C00C0184C /* FCMInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2335638028E3210C00C0184C /* FCMInput.swift */; };
+		2335638428E3245000C0184C /* WishListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2335638328E3245000C0184C /* WishListDataManager.swift */; };
 		2340CEAA28CB6173007C362F /* HomeBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEA928CB6173007C362F /* HomeBottomSheetView.swift */; };
 		2340CEAC28CB6252007C362F /* HowToCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEAB28CB6252007C362F /* HowToCollectionViewCell.swift */; };
 		2340CEAE28CB65AE007C362F /* HowToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEAD28CB65AE007C362F /* HowToViewController.swift */; };
@@ -217,6 +218,7 @@
 		2331867E28DA92EE00F17CBF /* loading_horizontal_black.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_horizontal_black.json; sourceTree = "<group>"; };
 		2331868128DA933600F17CBF /* SetLottie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLottie.swift; sourceTree = "<group>"; };
 		2335638028E3210C00C0184C /* FCMInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMInput.swift; sourceTree = "<group>"; };
+		2335638328E3245000C0184C /* WishListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListDataManager.swift; sourceTree = "<group>"; };
 		2340CEA928CB6173007C362F /* HomeBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomSheetView.swift; sourceTree = "<group>"; };
 		2340CEAB28CB6252007C362F /* HowToCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToCollectionViewCell.swift; sourceTree = "<group>"; };
 		2340CEAD28CB65AE007C362F /* HowToViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToViewController.swift; sourceTree = "<group>"; };
@@ -597,6 +599,9 @@
 		232174E028E1BED9008C155D /* APIModels */ = {
 			isa = PBXGroup;
 			children = (
+				234F838628C97BE400C4EB41 /* WishListModel */,
+				23C2378728C9CEF800CE3200 /* FolderListModel */,
+				2328C5A828CAC0220065ABB2 /* NotificationModel */,
 				235204CC28E26902004F5DC6 /* MypageModels */,
 			);
 			path = APIModels;
@@ -654,6 +659,14 @@
 				2335638028E3210C00C0184C /* FCMInput.swift */,
 			);
 			path = FCMInput;
+			sourceTree = "<group>";
+		};
+		2335638228E3243E00C0184C /* WishList */ = {
+			isa = PBXGroup;
+			children = (
+				2335638328E3245000C0184C /* WishListDataManager.swift */,
+			);
+			path = WishList;
 			sourceTree = "<group>";
 		};
 		2344949528D78AA400CF3BD9 /* Register */ = {
@@ -767,6 +780,7 @@
 		23C3113128DF62C100A636F6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				2335638228E3243E00C0184C /* WishList */,
 				23EC504A28E266F700AAA57E /* Mypage */,
 				232174D928E1BE71008C155D /* Authentication */,
 			);
@@ -1032,9 +1046,6 @@
 			children = (
 				232174E128E1BEE9008C155D /* APIInputs */,
 				232174E028E1BED9008C155D /* APIModels */,
-				2328C5A828CAC0220065ABB2 /* NotificationModel */,
-				23C2378728C9CEF800CE3200 /* FolderListModel */,
-				234F838628C97BE400C4EB41 /* WishListModel */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1519,6 +1530,7 @@
 				23E378DE28D2EBFA00C52F2D /* PopUpDeleteUserViewController.swift in Sources */,
 				23D5517D28C6936400D81B5F /* OnBoardingViewModel.swift in Sources */,
 				234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */,
+				2335638428E3245000C0184C /* WishListDataManager.swift in Sources */,
 				2340CEAC28CB6252007C362F /* HowToCollectionViewCell.swift in Sources */,
 				23E378E328D2F16900C52F2D /* UploadItemPhotoTableViewCell.swift in Sources */,
 				23C5AB4D28CAA54600A7E977 /* MypageProfileTableViewCell.swift in Sources */,

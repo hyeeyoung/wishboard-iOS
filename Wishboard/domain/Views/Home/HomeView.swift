@@ -132,13 +132,11 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         self.viewController.present(itemDetailVC, animated: true, completion: nil)
     }
 }
-// 임시 데이터
 extension HomeView {
-    func setTempData() {
-        self.wishListData.append(WishListModel(itemImage: "", itemName: "item1", itemPrice: 1000, isCart: true))
-        self.wishListData.append(WishListModel(itemImage: "", itemName: "item2", itemPrice: 2000, isCart: false))
-        self.wishListData.append(WishListModel(itemImage: "", itemName: "item3", itemPrice: 3000, isCart: false))
-        self.wishListData.append(WishListModel(itemImage: "", itemName: "item4", itemPrice: 4000, isCart: true))
-        self.wishListData.append(WishListModel(itemImage: "", itemName: "item5", itemPrice: 5000, isCart: true))
+    // MARK: 위시리스트 조회
+    func wishListAPISuccess(_ result: [WishListModel]) {
+        self.wishListData = result
+        print("RESULT:", result)
+        collectionView.reloadData()
     }
 }

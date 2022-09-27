@@ -21,7 +21,7 @@ class WishListCollectionViewCell: UICollectionViewCell {
     }
     let itemPrice = UILabel().then{
         $0.text = "000,000"
-        $0.font = UIFont.monteserrat(size: 12)
+        $0.font = UIFont.monteserrat(size: 14.58, family: .Bold)
     }
     let won = UILabel().then{
         $0.text = "원"
@@ -74,13 +74,13 @@ class WishListCollectionViewCell: UICollectionViewCell {
     }
     
     func setUpData(_ data: WishListModel) {
-        if let image = data.itemImage {
+        if let image = data.item_img_url {
             self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
         }
-        if let name = data.itemName {self.itemName.text = name}
-        if let price = data.itemPrice {self.itemPrice.text = String(price)}
-        if let isCart = data.isCart {
-            if isCart {self.cartButton.cartButton(.wishboardGreen)}
+        if let name = data.item_name {self.itemName.text = name}
+        if let price = data.item_price {self.itemPrice.text = String(price)}
+        if let isCart = data.cart_state {
+            if isCart == 1 {self.cartButton.cartButton(.wishboardGreen)}
             else {self.cartButton.cartButton(.white)}
         }
     }
