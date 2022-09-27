@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class UploadItemPhotoTableViewCell: UITableViewCell {
     let photoImage = UIImageView().then{
@@ -41,5 +42,13 @@ class UploadItemPhotoTableViewCell: UITableViewCell {
             make.height.equalTo(28)
             make.centerY.centerX.equalTo(photoImage)
         }
+    }
+    func setUpImage(_ url: String) {
+        self.photoImage.kf.setImage(with: URL(string: url), placeholder: UIImage())
+        self.cameraImage.isHidden = true
+    }
+    func setUpImage(_ img: UIImage) {
+        self.photoImage.image = img
+        self.cameraImage.isHidden = true
     }
 }

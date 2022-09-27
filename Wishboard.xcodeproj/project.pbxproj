@@ -93,6 +93,7 @@
 		2378280428D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2378280328D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift */; };
 		238EF90628CB06F800ECA606 /* CalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90528CB06F800ECA606 /* CalenderViewController.swift */; };
 		238EF90928CB070700ECA606 /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90828CB070700ECA606 /* CalenderView.swift */; };
+		23A85F7D28E39FE800075667 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F7C28E39FE800075667 /* DateManager.swift */; };
 		23AADBC128DF8F9800AB75C6 /* NotificationSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AADBC028DF8F9800AB75C6 /* NotificationSettingViewController.swift */; };
 		23BB603328E27001007EA1EF /* ModifyProfileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB603228E27001007EA1EF /* ModifyProfileDataManager.swift */; };
 		23BB603528E2709C007EA1EF /* ModifyProfileInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB603428E2709C007EA1EF /* ModifyProfileInput.swift */; };
@@ -257,6 +258,7 @@
 		2378280328D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWithTextFieldViewController.swift; sourceTree = "<group>"; };
 		238EF90528CB06F800ECA606 /* CalenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderViewController.swift; sourceTree = "<group>"; };
 		238EF90828CB070700ECA606 /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
+		23A85F7C28E39FE800075667 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		23AADBC028DF8F9800AB75C6 /* NotificationSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingViewController.swift; sourceTree = "<group>"; };
 		23BB603228E27001007EA1EF /* ModifyProfileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyProfileDataManager.swift; sourceTree = "<group>"; };
 		23BB603428E2709C007EA1EF /* ModifyProfileInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyProfileInput.swift; sourceTree = "<group>"; };
@@ -897,6 +899,7 @@
 				2350FADE28DB9BEA00981B8F /* SetNotificationDate.swift */,
 				2360FF5B28DCB31600E481A6 /* SnackBar.swift */,
 				2360FF5D28DCC64100E481A6 /* ScreenManager.swift */,
+				23A85F7C28E39FE800075667 /* DateManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1495,6 +1498,7 @@
 				234F837428C9627700C4EB41 /* HomeViewController.swift in Sources */,
 				234F838F28C987CB00C4EB41 /* CartViewController.swift in Sources */,
 				23DC04AE28C58B5200ABB0CF /* AppDelegate.swift in Sources */,
+				23A85F7D28E39FE800075667 /* DateManager.swift in Sources */,
 				23F69CAF28CC17F8001B8C7F /* UIBezierPath.swift in Sources */,
 				23DC04E928C591E600ABB0CF /* ViewController.swift in Sources */,
 				234F838B28C983CE00C4EB41 /* CartView.swift in Sources */,

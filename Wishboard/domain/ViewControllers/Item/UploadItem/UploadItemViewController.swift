@@ -12,25 +12,17 @@ class UploadItemViewController: UIViewController {
     // MARK: - Properties
     var uploadItemView: UploadItemView!
     let cellTitleArray = ["상품명(필수)", "₩ 가격(필수)", "폴더", "상품 일정 알림", "쇼핑몰 링크", "브랜드, 사이즈, 컬러 등 아이템 정보를 메모로 남겨보세요!😉"]
+    var numberFormatter: NumberFormatter!
     var selectedImage: UIImage!
-    
+    // Bottom Sheets
     var foldervc: SetFolderBottomSheetViewController!
     var notivc: NotificationSettingViewController!
     var linkvc: ShoppingLinkViewController!
-    
-    var itemImage: UIImage!
-    var itemName: String!
-    var itemPrice: String!
-    var folder: String?
-    var notificationDate: String?
-    var shoppingLink: String?
-    var notiType: String!
-    var notiDate: String!
-    var memo: String!
-    
+    // Modify Item
     var isUploadItem: Bool!
-    
-    var numberFormatter: NumberFormatter!
+    var wishListModifyData: WishListModel!
+    // UploadItem
+    var wishListData: WishListModel!
     
     // MARK: - Life Cycles
     override func viewDidLoad() {
@@ -43,9 +35,10 @@ class UploadItemViewController: UIViewController {
         numberFormatter.numberStyle = .decimal
         
         setUploadItemView()
-    }
-    @objc func clickEvent() {
-        print("clicked!")
+        
+        if !isUploadItem {
+            self.wishListData = self.wishListModifyData
+        }
     }
     @objc func goBack() {
         self.dismiss(animated: true)
@@ -61,16 +54,19 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
         // 사진 선택 Cell
         if tag == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "UploadItemPhotoTableViewCell", for: indexPath) as? UploadItemPhotoTableViewCell else { return UITableViewCell() }
-            if let itemImage = self.itemImage {
-                cell.photoImage.image = itemImage
-                cell.cameraImage.isHidden = false
-            }
-            if self.selectedImage != nil {
-                cell.photoImage.image = self.selectedImage
-                cell.cameraImage.isHidden = true
-            } else {
+            
+            // 만약 아이템 수정이라면 기존 이미지 출력
+            if !isUploadItem {
+                if let itemImageURL = self.wishListData.item_img_url {
+                    cell.setUpImage(itemImageURL)
+                }
+            } else {    // 만약 새로 아이템을 추가하는 경우라면
                 cell.photoImage.image = UIImage()
                 cell.cameraImage.isHidden = false
+            }
+            // 새로 사진을 선택했다면
+            if self.selectedImage != nil {
+                cell.setUpImage(self.selectedImage)
             }
             
             return cell
@@ -129,7 +125,6 @@ extension UploadItemViewController {
             make.leading.trailing.top.bottom.equalToSuperview()
         }
         
-        uploadItemView.saveButton.addTarget(self, action: #selector(clickEvent), for: .touchUpInside)
         uploadItemView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         
         if isUploadItem {
@@ -173,11 +168,25 @@ extension UploadItemViewController {
 extension UploadItemViewController {
     // 클릭 시 bottomSheet 올라오는 Cell
     func setSelectCell(_ cell: UITableViewCell, _ tag: Int) {
+        // 만약 아이템 수정이라면
         if !isUploadItem {
-            if tag == 3 {cell.textLabel?.text = self.folder}
-            if tag == 4 {cell.textLabel?.text = self.notificationDate}
-            if tag == 5 {cell.textLabel?.text = self.shoppingLink}
+            switch tag {
+            case 3:
+                if let folder = self.wishListData.folder_name {cell.textLabel?.text = folder}
+                else {cell.textLabel?.text = cellTitleArray[tag - 1]}
+            case 4:
+                if let notiType = self.wishListData.item_notification_type {
+                    cell.textLabel?.text = "[" + notiType + "] " + DateManager().dateToKoreanStr(self.wishListData.item_notification_date!)!
+                }
+                else {cell.textLabel?.text = cellTitleArray[tag - 1]}
+            case 5:
+                if let link = self.wishListData.item_url {cell.textLabel?.text = link}
+                else {cell.textLabel?.text = cellTitleArray[tag - 1]}
+            default:
+                fatalError()
+            }
         } else {
+            // 새로 아이템 추가하는 경우라면 placeHolder 초기설정
             cell.textLabel?.text = cellTitleArray[tag - 1]
         }
         cell.textLabel?.font = UIFont.Suit(size: 14, family: .Regular)
@@ -185,41 +194,41 @@ extension UploadItemViewController {
         let arrowImg = UIImageView().then{
             $0.image = UIImage(named: "arrow_right")
         }
-        let subTitle = UILabel().then{
-            $0.text = "복사한 링크로 아이템 정보를 불러올 수 있어요!"
-            $0.font = UIFont.Suit(size: 10, family: .Regular)
-            $0.textColor = .wishboardGreen
-        }
         cell.contentView.addSubview(arrowImg)
-        if tag == 5 {cell.contentView.addSubview(subTitle)}
-        
         arrowImg.snp.makeConstraints { make in
             make.width.height.equalTo(24)
             make.trailing.equalToSuperview().offset(-16)
             make.centerY.equalToSuperview()
         }
+        // 쇼핑몰 링크 입력 셀
         if tag == 5 {
+            let subTitle = UILabel().then{
+                $0.text = "복사한 링크로 아이템 정보를 불러올 수 있어요!"
+                $0.font = UIFont.Suit(size: 10, family: .Regular)
+                $0.textColor = .wishboardGreen
+            }
+            cell.contentView.addSubview(subTitle)
             subTitle.snp.makeConstraints { make in
                 make.centerY.equalToSuperview()
                 make.trailing.equalTo(arrowImg.snp.leading)
             }
-        }
-        
-        if let type = notivc.notiType {
-            if let dateTime = notivc.dateAndTime {
-                if tag == 4 {cell.textLabel?.text = "[" + type + "] " + dateTime}
-            }
-        }
-        
-        if let selectedFolder = foldervc.selectedFolder {
-            if tag == 3 {cell.textLabel?.text = selectedFolder}
-        }
-        
-        if let link = linkvc.link {
-            if tag == 5 {
+            // 만약 쇼핑몰 링크를 수정했다면 업데이트
+            if let link = linkvc.link {
                 cell.textLabel?.text = link
                 subTitle.isHidden = true
             }
+        }
+        // 만약 알림 날짜를 재설정했다면 업데이트
+        if let type = notivc.notiType {
+            if let dateTime = notivc.dateAndTime {
+                if tag == 4 {cell.textLabel?.text = "[" + type + "] " + dateTime}
+                self.wishListData.item_notification_type = type
+                self.wishListData.item_notification_date = DateManager().koreanStrToDate(dateTime)
+            }
+        }
+        // 만약 폴더를 재선택했다면 업데이트
+        if let selectedFolder = foldervc.selectedFolder {
+            if tag == 3 {cell.textLabel?.text = selectedFolder}
         }
     }
     // TextField가 있는 Cell
@@ -237,13 +246,15 @@ extension UploadItemViewController {
         // Add target
         switch tag {
         case 1:
-            if let itemName = self.itemName {textfield.text = itemName}
+            if let data = self.wishListData {textfield.text = data.item_name}
             textfield.addTarget(self, action: #selector(itemNameTextfieldEditingField(_:)), for: .editingChanged)
         case 2:
-            if let itemPrice = self.itemPrice {textfield.text = itemPrice}
+            if let data = self.wishListData {
+                textfield.text = numberFormatter.string(from: NSNumber(value: Int(data.item_price!)!))
+            }
             textfield.addTarget(self, action: #selector(itemPriceTextfieldEditingField(_:)), for: .editingChanged)
         default:
-            if let memo = self.memo {textfield.text = memo}
+            if let data = self.wishListData {textfield.text = data.item_memo}
             textfield.addTarget(self, action: #selector(memoTextfieldEditingField(_:)), for: .editingChanged)
         }
         
@@ -251,19 +262,19 @@ extension UploadItemViewController {
     // Actions
     @objc func itemNameTextfieldEditingField(_ sender: UITextField) {
         let text = sender.text!
-        self.itemName = text
+        self.wishListData.item_name = text
         isValidContent()
     }
     @objc func itemPriceTextfieldEditingField(_ sender: UITextField) {
-        let text = sender.text!
-        self.itemPrice = setPriceString(text)
-        guard let price = Float(self.itemPrice) else {return}
+        let text = sender.text ?? ""
+        self.wishListData.item_price = setPriceString(text)
+        guard let price = Float(text) else {return} //
         sender.text = numberFormatter.string(from: NSNumber(value: price))
         isValidContent()
     }
     @objc func memoTextfieldEditingField(_ sender: UITextField) {
         let text = sender.text!
-        self.memo = text
+        self.wishListData.item_memo = text
     }
     func setPriceString(_ str: String) -> String {
         let myString = str.replacingOccurrences(of: ",", with: "")
@@ -271,8 +282,8 @@ extension UploadItemViewController {
     }
     // 상품명, 가격 입력 여부에 따른 저장버튼 활성화 설정
     func isValidContent() {
-        guard let iN = self.itemName else {return}
-        guard let iP = self.itemPrice else {return}
+        guard let iN = self.wishListData.item_name else {return}
+        guard let iP = self.wishListData.item_price else {return}
         guard let iI = self.selectedImage else {return}
         
         if (iN != "") && (iP != "") && (iI != nil) {uploadItemView.setSaveButton(true)}

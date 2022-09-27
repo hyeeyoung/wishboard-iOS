@@ -154,6 +154,7 @@ class ItemDetailTableViewCell: UITableViewCell {
             make.top.equalTo(label.snp.bottom).offset(10)
         }
     }
+    // After API success
     func setUpData(_ data: WishListModel) {
         if let url = data.item_img_url {
             self.itemImage.kf.setImage(with: URL(string: url), placeholder: UIImage())
@@ -163,7 +164,9 @@ class ItemDetailTableViewCell: UITableViewCell {
             self.restockDateLabel.isHidden = true
         }
         if let folderName = data.folder_name {self.setFolderButton.setFolderButton(folderName)}
-        if let createdDate = data.create_at {self.dateLabel.text = createdDate}
+        if let createdDate = data.create_at {
+            self.dateLabel.text = DateManager().dateToKoreanStr(createdDate)
+        }
         if let itemName = data.item_name {self.itemNameLabel.text = itemName}
         if let itemPrice = data.item_price {self.priceLabel.text = itemPrice}
         if let link = data.item_url {self.linkLabel.text = link}

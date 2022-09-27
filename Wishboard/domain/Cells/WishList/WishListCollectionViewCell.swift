@@ -42,7 +42,18 @@ class WishListCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    // MARK: 테이블뷰의 셀이 재사용되기 전 호출되는 함수
+    // 여기서 property들을 초기화해준다.
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        itemImage.image = UIImage()
+        
+        let cache = ImageCache.default
+        cache.clearMemoryCache()
+        cache.clearDiskCache()
+    }
+    // MARK: - Functions
     func setUpView() {
         contentView.addSubview(itemImage)
         contentView.addSubview(itemName)

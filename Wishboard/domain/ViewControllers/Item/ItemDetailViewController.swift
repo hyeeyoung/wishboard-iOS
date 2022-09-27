@@ -55,13 +55,7 @@ class ItemDetailViewController: UIViewController {
     @objc func goModify() {
         let modifyVC = UploadItemViewController().then{
             $0.isUploadItem = false
-            // TODO: item modify data set
-//            $0.itemName = self.wishListData.item_name
-//            $0.itemPrice = self.wishListData.item_price
-//            $0.memo = self.wishListData.item_memo
-//            $0.folder = self.wishListData.folder_name
-//            $0.notificationDate = "[" + self.wishListData.item_notification_type! + "]" + self.wishListData.item_notification_date!
-//            $0.shoppingLink = self.wishListData.item_url
+            $0.wishListModifyData = self.wishListData
             
             $0.modalPresentationStyle = .fullScreen
         }
