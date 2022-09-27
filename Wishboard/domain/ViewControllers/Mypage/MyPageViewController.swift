@@ -13,7 +13,7 @@ class MyPageViewController: UIViewController {
 
     var userInfoData: GetUserInfoModel!
     var nickName: String?
-    var pushState = false
+    var pushState: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,8 +108,9 @@ extension MyPageViewController {
         cell.textLabel?.font = UIFont.Suit(size: 15, family: .Bold)
     }
     func setSwitch(_ cell: UITableViewCell) {
-        let notiSwitch = UISwitch().then{
-            $0.isOn = self.pushState
+        var notiSwitch = UISwitch().then{
+            if let pushState = self.pushState {$0.isOn = pushState}
+            else {$0.isOn = false}
             $0.onTintColor = .wishboardGreen
             $0.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
         }
@@ -178,11 +179,18 @@ extension MyPageViewController {
     func getUserInfoAPISuccess(_ result: [GetUserInfoModel]) {
         self.userInfoData = result[0]
         self.nickName = self.userInfoData.nickname
+        switch self.userInfoData.push_state {
+        case 1:
+            self.pushState = true
+        default:
+            self.pushState = false
+        }
         mypageView.mypageTableView.reloadData()
         print(result)
     }
     // MARK: 알림 토글 수정 API
     func switchNotificationAPISuccess(_ result: APIModel<ResultModel>) {
+        pushState?.toggle()
         print(result.message)
     }
     // MARK: 회원 탈퇴 API
