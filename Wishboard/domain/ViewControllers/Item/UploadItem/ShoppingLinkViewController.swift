@@ -36,6 +36,8 @@ class ShoppingLinkViewController: UIViewController {
     var preVC: UploadItemViewController!
     var link: String!
     var tempLink: String!
+    var isExit: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,12 +53,14 @@ class ShoppingLinkViewController: UIViewController {
         self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .gray)
         
         self.shoppingLinkTextField.addTarget(self, action: #selector(LinkTextFieldEditingChanged(_:)), for: .editingChanged)
-        self.exitBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        self.completeButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        self.exitBtn.addTarget(self, action: #selector(exit), for: .touchUpInside)
+        self.completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
     }
     override func viewWillDisappear(_ animated: Bool) {
-        let indexPath = IndexPath(row: 5, section: 0)
-        self.preVC.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
+        if !isExit {
+            let indexPath = IndexPath(row: 5, section: 0)
+            self.preVC.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
+        }
     }
     // MARK: - Functions
     func setPreViewController(_ preVC: UploadItemViewController) {
@@ -95,7 +99,12 @@ class ShoppingLinkViewController: UIViewController {
         }
     }
     // MARK: - Actions
-    @objc func goBack() {
+    @objc func exit() {
+        self.isExit = true
+        self.dismiss(animated: true)
+    }
+    @objc func completeButtonDidTap() {
+        self.isExit = false
         self.dismiss(animated: true)
     }
     @objc func LinkTextFieldEditingChanged(_ sender: UITextField) {

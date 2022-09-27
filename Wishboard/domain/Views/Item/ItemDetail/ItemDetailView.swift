@@ -29,10 +29,6 @@ class ItemDetailView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-//        setTableView()
-//        setUpNavigationView()
-//        setUpLowerView(true)
-//        setUpConstraint()
     }
     
     required init?(coder: NSCoder) {

@@ -19,16 +19,16 @@ class ModifyProfileViewController: UIViewController {
         $0.setImage(UIImage(named: "goBack"), for: .normal)
     }
     // profile
-    let profileImage = UIImageView().then{
+    var profileImage = UIImageView().then{
         $0.image = UIImage(named: "defaultProfile")
-        $0.layer.cornerRadius = $0.frame.width / 2
-        $0.contentMode = .scaleToFill
         $0.clipsToBounds = true
+        $0.layer.cornerRadius = 53
+        $0.contentMode = .scaleToFill
     }
     let cameraButton = UIButton().then{
         $0.setImage(UIImage(named: "camera_gray"), for: .normal)
     }
-    let nameTextField = UITextField().then{
+    var nameTextField = UITextField().then{
         $0.placeholder = "닉네임을 수정해주세요."
         $0.addLeftPadding(10)
         $0.backgroundColor = .wishboardTextfieldGray
@@ -41,9 +41,16 @@ class ModifyProfileViewController: UIViewController {
     }
     // MARK: - Life Cycles
     // 앨범 선택 image picker
+    var isPhotoSelected = false
+    var isNicknameChanged = false
     let imagePickerController = UIImagePickerController()
     var selectedPhoto: UIImage!
     var nickname: String?
+    
+    var preNickName: String?
+    var preProfileImg: String?
+    var preVC: MyPageViewController!
+    var modified: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +65,12 @@ class ModifyProfileViewController: UIViewController {
         setUpConstraint()
         setTarget()
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        if modified {
+            SnackBar(preVC, message: .modifyProfile)
+            MypageDataManager().getUserInfoDataManager(preVC)
+        }
+    }
 }
 // MARK: - Set Views
 extension ModifyProfileViewController {
@@ -70,6 +83,11 @@ extension ModifyProfileViewController {
         self.view.addSubview(cameraButton)
         self.view.addSubview(nameTextField)
         self.view.addSubview(completeButton)
+        
+        if let image = self.preProfileImg {
+            self.profileImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
+        }
+        nameTextField.text = self.preNickName
     }
     func setUpConstraint() {
         setUpNavigationConstraint()
@@ -125,6 +143,7 @@ extension ModifyProfileViewController {
     }
     @objc func goBack() {self.dismiss(animated: true)}
     @objc func nameTextFieldEditingChanged(_ sender: UITextField) {
+        self.isNicknameChanged = true
         let text = sender.text ?? ""
         self.nickname = text
     }
@@ -137,10 +156,18 @@ extension ModifyProfileViewController {
         let lottieView = self.completeButton.setHorizontalLottieView(self.completeButton)
         self.completeButton.isSelected = true
         lottieView.isHidden = false
-        lottieView.loopMode = .repeat(2)
         lottieView.play { completion in
-            let modifyProfileInput = ModifyProfileInputNickname(nickname: self.nickname)
-            ModifyProfileDataManager().modifyProfileDataManager(modifyProfileInput, self)
+            if self.isPhotoSelected && self.isNicknameChanged {
+                ModifyProfileDataManager().modifyProfileDataManager(self.nickname!, self.selectedPhoto, self)
+            } else if self.isNicknameChanged {
+                let modifyProfileInput = ModifyProfileInputNickname(nickname: self.nickname)
+                ModifyProfileDataManager().modifyProfileDataManager(modifyProfileInput, self)
+            } else if self.isPhotoSelected {
+                ModifyProfileDataManager().modifyProfileDataManager(self.selectedPhoto, self)
+            } else {
+                self.dismiss(animated: true)
+            }
+            
         }
     }
 }
@@ -151,7 +178,7 @@ extension ModifyProfileViewController : UIImagePickerControllerDelegate, UINavig
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.selectedPhoto = image
             self.profileImage.image = image
-            self.profileImage.layer.cornerRadius = 53
+            self.isPhotoSelected = true
         }
         self.dismiss(animated: true, completion: nil)
     }
@@ -159,7 +186,11 @@ extension ModifyProfileViewController : UIImagePickerControllerDelegate, UINavig
 // MARK: - API Success
 extension ModifyProfileViewController {
     func modifyProfileAPISuccess(_ result: APIModel<ResultModel>) {
-        self.dismiss(animated: true)
+        if result.success! {
+            self.modified = true
+            self.dismiss(animated: true)
+        } else {}
+        
         print(result.message)
     }
 }

@@ -82,6 +82,9 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         switch tag {
         case 0:
             let modifyProfile = ModifyProfileViewController()
+            modifyProfile.preNickName = self.userInfoData.nickname
+            modifyProfile.preProfileImg = self.userInfoData.profile_img
+            modifyProfile.preVC = self
             modifyProfile.modalPresentationStyle = .fullScreen
             self.present(modifyProfile, animated: true, completion: nil)
         case 10:
@@ -162,6 +165,7 @@ extension MyPageViewController {
     // MARK: 사용자 정보 조회 API
     func getUserInfoAPISuccess(_ result: [GetUserInfoModel]) {
         self.userInfoData = result[0]
+        print(self.userInfoData)
         mypageView.mypageTableView.reloadData()
     }
     // MARK: 알림 토글 수정 API

@@ -21,6 +21,7 @@ extension UITextField {
         self.placeholder = placeholder
         self.backgroundColor = .wishboardTextfieldGray
         self.layer.cornerRadius = 5
+        self.autocapitalizationType = .none
         self.addLeftPadding(10)
     }
 }

@@ -10,6 +10,7 @@ import MaterialComponents.MaterialBottomSheet
 
 class ItemDetailViewController: UIViewController {
     var itemDetailView: ItemDetailView!
+    var selectedFolder: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,7 @@ class ItemDetailViewController: UIViewController {
     }
     @objc func setFolder() {
         let vc = SetFolderBottomSheetViewController()
+        vc.setPreViewController(self)
         let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: vc)
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
         bottomSheet.dismissOnDraggingDownSheet = false
@@ -78,6 +80,9 @@ extension ItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ItemDetailTableViewCell", for: indexPath) as? ItemDetailTableViewCell else { return UITableViewCell() }
         
         cell.setFolderButton.addTarget(self, action: #selector(setFolder), for: .touchUpInside)
+        if let folder = self.selectedFolder {
+            cell.setFolderButton.setFolderButton(folder)
+        }
         cell.selectionStyle = .none
         return cell
     }

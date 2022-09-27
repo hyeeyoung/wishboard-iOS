@@ -115,4 +115,16 @@ extension UIButton {
         
         self.configuration = config
     }
+    // MARK: 폴더 지정하기 버튼
+    func setFolderButton(_ title: String) {
+        var config = UIButton.Configuration.plain()
+        var attText = AttributedString.init(title)
+        
+        attText.font = .systemFont(ofSize: 13)
+        attText.foregroundColor = UIColor.wishboardGray
+        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        config.attributedTitle = attText
+        
+        self.configuration = config
+    }
 }

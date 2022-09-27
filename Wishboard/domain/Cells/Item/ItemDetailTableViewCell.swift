@@ -13,16 +13,8 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.backgroundColor = .lightGray
         $0.layer.cornerRadius = 32
     }
-    let setFolderButton = UIButton().then{
-        var config = UIButton.Configuration.plain()
-        var attText = AttributedString.init("폴더 지정하기 >")
-        
-        attText.font = .systemFont(ofSize: 13)
-        attText.foregroundColor = UIColor.wishboardGray
-        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        config.attributedTitle = attText
-        
-        $0.configuration = config
+    var setFolderButton = UIButton().then{
+        $0.setFolderButton("폴더 지정하기 >")
     }
     let dateLabel = UILabel().then{
         $0.text = "0주 전"
