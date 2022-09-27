@@ -41,7 +41,7 @@ class LostPasswordViewController: UIViewController {
     }
     @objc func getEmailButtonDidTap() {
         let checkEmailInput = CheckEmailInput(email: self.email)
-        CheckEmailDataManager().checkEmailDataManager(checkEmailInput, self)
+        LostPasswordDataManager().checkEmailDataManager(checkEmailInput, self)
     }
     // MARK: - Functions
     func checkValidEmail(_ email: String) {
@@ -63,12 +63,12 @@ class LostPasswordViewController: UIViewController {
 }
 // MARK: - API Success
 extension LostPasswordViewController {
-    func checkEmailAPISuccess(_ result: APIModel<ResultModel>) {
+    func checkEmailAPISuccess(_ result: APIModel<LostPasswordModel>) {
         let getEmailVC = GetEmailViewController()
         getEmailVC.modalPresentationStyle = .fullScreen
         self.present(getEmailVC, animated: true, completion: nil)
     }
     func checkEmaiAPIFail() {
-//        SnackBar(self, message: .checkEmail)
+        SnackBar(self, message: .login)
     }
 }

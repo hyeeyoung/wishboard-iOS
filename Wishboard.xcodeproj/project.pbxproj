@@ -94,6 +94,8 @@
 		238EF90628CB06F800ECA606 /* CalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90528CB06F800ECA606 /* CalenderViewController.swift */; };
 		238EF90928CB070700ECA606 /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90828CB070700ECA606 /* CalenderView.swift */; };
 		23A85F7D28E39FE800075667 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F7C28E39FE800075667 /* DateManager.swift */; };
+		23A85F7F28E3AA5400075667 /* LostPasswordDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F7E28E3AA5400075667 /* LostPasswordDataManager.swift */; };
+		23A85F8328E3AB1D00075667 /* LostPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F8228E3AB1D00075667 /* LostPasswordModel.swift */; };
 		23AADBC128DF8F9800AB75C6 /* NotificationSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AADBC028DF8F9800AB75C6 /* NotificationSettingViewController.swift */; };
 		23BB603328E27001007EA1EF /* ModifyProfileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB603228E27001007EA1EF /* ModifyProfileDataManager.swift */; };
 		23BB603528E2709C007EA1EF /* ModifyProfileInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB603428E2709C007EA1EF /* ModifyProfileInput.swift */; };
@@ -153,7 +155,6 @@
 		23E378E728D2FDD000C52F2D /* NotificationSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E378E628D2FDD000C52F2D /* NotificationSettingViewController.swift */; };
 		23E378E928D303B500C52F2D /* ShoppingLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E378E828D303B500C52F2D /* ShoppingLinkViewController.swift */; };
 		23EC504228E25DAC00AAA57E /* CheckEmailInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504128E25DAC00AAA57E /* CheckEmailInput.swift */; };
-		23EC504428E25DE400AAA57E /* CheckEmailDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504328E25DE400AAA57E /* CheckEmailDataManager.swift */; };
 		23EC504628E2664D00AAA57E /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504528E2664D00AAA57E /* APIManager.swift */; };
 		23EC504C28E2670D00AAA57E /* MypageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504B28E2670D00AAA57E /* MypageDataManager.swift */; };
 		23F69CAF28CC17F8001B8C7F /* UIBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */; };
@@ -259,6 +260,8 @@
 		238EF90528CB06F800ECA606 /* CalenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderViewController.swift; sourceTree = "<group>"; };
 		238EF90828CB070700ECA606 /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
 		23A85F7C28E39FE800075667 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		23A85F7E28E3AA5400075667 /* LostPasswordDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostPasswordDataManager.swift; sourceTree = "<group>"; };
+		23A85F8228E3AB1D00075667 /* LostPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostPasswordModel.swift; sourceTree = "<group>"; };
 		23AADBC028DF8F9800AB75C6 /* NotificationSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingViewController.swift; sourceTree = "<group>"; };
 		23BB603228E27001007EA1EF /* ModifyProfileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyProfileDataManager.swift; sourceTree = "<group>"; };
 		23BB603428E2709C007EA1EF /* ModifyProfileInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyProfileInput.swift; sourceTree = "<group>"; };
@@ -325,7 +328,6 @@
 		23E378E628D2FDD000C52F2D /* NotificationSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingViewController.swift; sourceTree = "<group>"; };
 		23E378E828D303B500C52F2D /* ShoppingLinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingLinkViewController.swift; sourceTree = "<group>"; };
 		23EC504128E25DAC00AAA57E /* CheckEmailInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckEmailInput.swift; sourceTree = "<group>"; };
-		23EC504328E25DE400AAA57E /* CheckEmailDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckEmailDataManager.swift; sourceTree = "<group>"; };
 		23EC504528E2664D00AAA57E /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		23EC504B28E2670D00AAA57E /* MypageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageDataManager.swift; sourceTree = "<group>"; };
 		23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPath.swift; sourceTree = "<group>"; };
@@ -593,7 +595,7 @@
 			children = (
 				232174DA28E1BE81008C155D /* RegisterDataManager.swift */,
 				232174E528E1D469008C155D /* LoginDataManager.swift */,
-				23EC504328E25DE400AAA57E /* CheckEmailDataManager.swift */,
+				23A85F7E28E3AA5400075667 /* LostPasswordDataManager.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -601,6 +603,7 @@
 		232174E028E1BED9008C155D /* APIModels */ = {
 			isa = PBXGroup;
 			children = (
+				23A85F8028E3AB0500075667 /* AuthenticationModel */,
 				234F838628C97BE400C4EB41 /* WishListModel */,
 				23C2378728C9CEF800CE3200 /* FolderListModel */,
 				2328C5A828CAC0220065ABB2 /* NotificationModel */,
@@ -761,6 +764,22 @@
 				238EF90828CB070700ECA606 /* CalenderView.swift */,
 			);
 			path = Calender;
+			sourceTree = "<group>";
+		};
+		23A85F8028E3AB0500075667 /* AuthenticationModel */ = {
+			isa = PBXGroup;
+			children = (
+				23A85F8128E3AB0C00075667 /* LostPasswordModel */,
+			);
+			path = AuthenticationModel;
+			sourceTree = "<group>";
+		};
+		23A85F8128E3AB0C00075667 /* LostPasswordModel */ = {
+			isa = PBXGroup;
+			children = (
+				23A85F8228E3AB1D00075667 /* LostPasswordModel.swift */,
+			);
+			path = LostPasswordModel;
 			sourceTree = "<group>";
 		};
 		23C2378228C9CED300CE3200 /* Folder */ = {
@@ -1490,7 +1509,6 @@
 				23F69CB128CC1819001B8C7F /* UIView.swift in Sources */,
 				23E378E528D2F47E00C52F2D /* UploadItemViewController.swift in Sources */,
 				23C8A1C528CA08B7003ABFE9 /* ItemDetailView.swift in Sources */,
-				23EC504428E25DE400AAA57E /* CheckEmailDataManager.swift in Sources */,
 				23D5518328C6A3BD00D81B5F /* UIButton.swift in Sources */,
 				2340CEAA28CB6173007C362F /* HomeBottomSheetView.swift in Sources */,
 				23D4C66228D8E88700EA7F98 /* LostPasswordView.swift in Sources */,
@@ -1539,6 +1557,7 @@
 				23E378E328D2F16900C52F2D /* UploadItemPhotoTableViewCell.swift in Sources */,
 				23C5AB4D28CAA54600A7E977 /* MypageProfileTableViewCell.swift in Sources */,
 				23C2378428C9CEE000CE3200 /* FolderViewController.swift in Sources */,
+				23A85F7F28E3AA5400075667 /* LostPasswordDataManager.swift in Sources */,
 				23EC504C28E2670D00AAA57E /* MypageDataManager.swift in Sources */,
 				234F838D28C9857000C4EB41 /* CartTableViewCell.swift in Sources */,
 				23D4C66628D8ECF300EA7F98 /* GetEmailViewController.swift in Sources */,
@@ -1561,6 +1580,7 @@
 				23E378E128D2F07500C52F2D /* UploadItemView.swift in Sources */,
 				2360FF5E28DCC64100E481A6 /* ScreenManager.swift in Sources */,
 				2374789C28D1EA1700CF941A /* PaddingLabel.swift in Sources */,
+				23A85F8328E3AB1D00075667 /* LostPasswordModel.swift in Sources */,
 				238EF90928CB070700ECA606 /* CalenderView.swift in Sources */,
 				23EC504228E25DAC00AAA57E /* CheckEmailInput.swift in Sources */,
 				237478A028D1FF0400CF941A /* SetFolderBottomSheetView.swift in Sources */,
