@@ -40,6 +40,7 @@ class RegisterEmailViewController: UIViewController {
         self.checkValidEmail(self.email)
     }
     @objc func nextButtonDidTap() {
+        self.view.endEditing(true)
         let checkEmailInput = CheckEmailInput(email: self.email)
         CheckEmailDataManager().checkEmailDataManager(checkEmailInput, self)
     }

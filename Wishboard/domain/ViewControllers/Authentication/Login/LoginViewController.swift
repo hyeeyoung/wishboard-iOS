@@ -43,6 +43,7 @@ class LoginViewController: UIViewController {
         loginViewModel.passwordTextFieldEditingChanged(text)
     }
     @objc func loginButtonDidTap() {
+        self.view.endEditing(true)
         let email = loginViewModel.email
         let pw = loginViewModel.password
         let loginInput = LoginInput(email: email, password: pw)

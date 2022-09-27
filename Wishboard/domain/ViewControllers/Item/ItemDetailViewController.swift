@@ -52,10 +52,18 @@ class ItemDetailViewController: UIViewController {
         self.present(bottomSheet, animated: true, completion: nil)
     }
     @objc func goModify() {
-        let modifyVC = UploadItemViewController()
-        modifyVC.isUploadItem = false
-        
-        modifyVC.modalPresentationStyle = .fullScreen
+        let modifyVC = UploadItemViewController().then{
+            $0.isUploadItem = false
+            $0.itemName = "item test 1"
+            $0.itemPrice = "item price test 1"
+            $0.memo = "memo test 1"
+    //        $0.folder = self.selectedFolder
+            $0.folder = "상의"
+            $0.notificationDate = "ddd"
+            $0.shoppingLink = "www."
+            
+            $0.modalPresentationStyle = .fullScreen
+        }
         self.present(modifyVC, animated: true, completion: nil)
     }
 }

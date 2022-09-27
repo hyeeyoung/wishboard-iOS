@@ -18,8 +18,12 @@ class UploadItemViewController: UIViewController {
     var notivc: NotificationSettingViewController!
     var linkvc: ShoppingLinkViewController!
     
+    var itemImage: UIImage!
     var itemName: String!
     var itemPrice: String!
+    var folder: String?
+    var notificationDate: String?
+    var shoppingLink: String?
     var notiType: String!
     var notiDate: String!
     var memo: String!
@@ -57,6 +61,10 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
         // 사진 선택 Cell
         if tag == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "UploadItemPhotoTableViewCell", for: indexPath) as? UploadItemPhotoTableViewCell else { return UITableViewCell() }
+            if let itemImage = self.itemImage {
+                cell.photoImage.image = itemImage
+                cell.cameraImage.isHidden = false
+            }
             if self.selectedImage != nil {
                 cell.photoImage.image = self.selectedImage
                 cell.cameraImage.isHidden = true
@@ -165,8 +173,15 @@ extension UploadItemViewController {
 extension UploadItemViewController {
     // 클릭 시 bottomSheet 올라오는 Cell
     func setSelectCell(_ cell: UITableViewCell, _ tag: Int) {
-        cell.textLabel?.text = cellTitleArray[tag - 1]
+        if !isUploadItem {
+            if tag == 3 {cell.textLabel?.text = self.folder}
+            if tag == 4 {cell.textLabel?.text = self.notificationDate}
+            if tag == 5 {cell.textLabel?.text = self.shoppingLink}
+        } else {
+            cell.textLabel?.text = cellTitleArray[tag - 1]
+        }
         cell.textLabel?.font = UIFont.Suit(size: 14, family: .Regular)
+        
         let arrowImg = UIImageView().then{
             $0.image = UIImage(named: "arrow_right")
         }
@@ -196,6 +211,10 @@ extension UploadItemViewController {
             }
         }
         
+        if let selectedFolder = foldervc.selectedFolder {
+            if tag == 3 {cell.textLabel?.text = selectedFolder}
+        }
+        
         if let link = linkvc.link {
             if tag == 5 {
                 cell.textLabel?.text = link
@@ -218,10 +237,13 @@ extension UploadItemViewController {
         // Add target
         switch tag {
         case 1:
+            if let itemName = self.itemName {textfield.text = itemName}
             textfield.addTarget(self, action: #selector(itemNameTextfieldEditingField(_:)), for: .editingChanged)
         case 2:
+            if let itemPrice = self.itemPrice {textfield.text = itemPrice}
             textfield.addTarget(self, action: #selector(itemPriceTextfieldEditingField(_:)), for: .editingChanged)
         default:
+            if let memo = self.memo {textfield.text = memo}
             textfield.addTarget(self, action: #selector(memoTextfieldEditingField(_:)), for: .editingChanged)
         }
         

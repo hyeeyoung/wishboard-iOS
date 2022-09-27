@@ -16,6 +16,7 @@ class MypageProfileTableViewCell: UITableViewCell {
     }
     let profileImage = UIImageView().then{
         $0.image = UIImage(named: "defaultProfile")
+        $0.clipsToBounds = true
         $0.layer.cornerRadius = 45
     }
     let cameraButton = UIButton().then{
@@ -76,7 +77,7 @@ class MypageProfileTableViewCell: UITableViewCell {
         }
     }
     func setUpData(_ data: GetUserInfoModel) {
-        if let profileUrl = data.profile_img {
+        if let profileUrl = data.profile_img_url {
             profileImage.kf.setImage(with: URL(string: profileUrl), placeholder: UIImage(named: "defaultProfile"))
         }
         if let nickname = data.nickname {userNameLabel.text = nickname}

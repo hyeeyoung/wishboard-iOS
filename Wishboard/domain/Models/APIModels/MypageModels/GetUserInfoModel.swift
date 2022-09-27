@@ -7,7 +7,7 @@
 
 struct GetUserInfoModel: Decodable {
     let email: String?
-    let profile_img: String?
+    let profile_img_url: String?
     let nickname: String?
     let push_state: Int?
   }

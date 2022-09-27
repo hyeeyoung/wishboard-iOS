@@ -47,6 +47,7 @@ extension RegisterPasswordViewController {
 //        registerPWView.registerButton.isSelected = true
         lottieView.isHidden = false
         lottieView.play { completion in
+            self.view.endEditing(true)
             let registerInput = RegisterInput(email: self.email, password: self.pw)
             RegisterDataManager().registerDataManager(registerInput, self)
         }

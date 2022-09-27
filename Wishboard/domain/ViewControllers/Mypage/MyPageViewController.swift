@@ -83,7 +83,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             let modifyProfile = ModifyProfileViewController()
             modifyProfile.preNickName = self.userInfoData.nickname
-            modifyProfile.preProfileImg = self.userInfoData.profile_img
+            modifyProfile.preProfileImg = self.userInfoData.profile_img_url
             modifyProfile.preVC = self
             modifyProfile.modalPresentationStyle = .fullScreen
             self.present(modifyProfile, animated: true, completion: nil)
