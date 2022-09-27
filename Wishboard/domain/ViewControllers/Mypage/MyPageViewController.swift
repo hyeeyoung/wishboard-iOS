@@ -12,6 +12,7 @@ class MyPageViewController: UIViewController {
     let settingArray = ["설정", "알림 설정", "고객 지원", "문의하기", "서비스 정보", "위시보드 이용 방법", "이용약관", "버전 정보", "계정 관리", "로그아웃", "회원 탈퇴"]
 
     var userInfoData: GetUserInfoModel!
+    var nickName: String?
     var pushState = false
     
     override func viewDidLoad() {
@@ -155,9 +156,15 @@ extension MyPageViewController {
         self.present(dialog, animated: false, completion: nil)
     }
     func showSignoutDialog() {
-        let dialog = PopUpDeleteUserViewController(titleText: "회원 탈퇴", messageText: "탈퇴하시면 회원정보는 7일 후 파기됩니다.", greenBtnText: "취소", blackBtnText: "탈퇴", placeholder: "닉네임을 입력해주세요.")
+        guard let nickName = self.nickName else {return}
+        let dialog = PopUpDeleteUserViewController(titleText: "회원 탈퇴", messageText: "탈퇴하시면 회원정보는 7일 후 파기됩니다.", greenBtnText: "취소", blackBtnText: "탈퇴", placeholder: "닉네임을 입력해주세요.", nickName: nickName)
         dialog.modalPresentationStyle = .overCurrentContext
         self.present(dialog, animated: false, completion: nil)
+        
+        dialog.okBtn.addTarget(self, action: #selector(signOutButtonDidTap), for: .touchUpInside)
+    }
+    @objc func signOutButtonDidTap() {
+        MypageDataManager().deleteUserDataManager(self)
     }
 }
 // MARK: - API Success
@@ -165,11 +172,20 @@ extension MyPageViewController {
     // MARK: 사용자 정보 조회 API
     func getUserInfoAPISuccess(_ result: [GetUserInfoModel]) {
         self.userInfoData = result[0]
-        print(self.userInfoData)
+        self.nickName = self.userInfoData.nickname
         mypageView.mypageTableView.reloadData()
     }
     // MARK: 알림 토글 수정 API
     func switchNotificationAPISuccess(_ result: APIModel<ResultModel>) {
+        print(result.message)
+    }
+    // MARK: 회원 탈퇴 API
+    func deleteUserAPISuccess(_ result: APIModel<ResultModel>) {
+        let onboardingVC = OnBoardingViewController()
+        onboardingVC.modalPresentationStyle = .fullScreen
+        SnackBar(onboardingVC, message: .deleteUser)
+        self.view.window?.windowScene?.keyWindow?.rootViewController = onboardingVC
+        
         print(result.message)
     }
 }

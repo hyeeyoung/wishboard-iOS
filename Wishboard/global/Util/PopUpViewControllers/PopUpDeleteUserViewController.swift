@@ -15,6 +15,7 @@ class PopUpDeleteUserViewController: UIViewController {
     private var greenBtnText: String?
     private var blackBtnText: String?
     private var placeholder: String?
+    private var nickName: String?
     
     let popupView = UIView().then{
         $0.backgroundColor = .white
@@ -59,7 +60,8 @@ class PopUpDeleteUserViewController: UIViewController {
                      messageText: String? = nil,
                      greenBtnText: String? = nil,
                      blackBtnText: String? = nil,
-                     placeholder: String? = nil) {
+                     placeholder: String? = nil,
+                     nickName: String? = nil) {
         self.init()
 
         self.titleText = titleText
@@ -67,6 +69,7 @@ class PopUpDeleteUserViewController: UIViewController {
         self.greenBtnText = greenBtnText
         self.blackBtnText = blackBtnText
         self.placeholder = placeholder
+        self.nickName = nickName
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +82,7 @@ class PopUpDeleteUserViewController: UIViewController {
         self.errorMessage.isHidden = true
         
         cancelBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        textField.addTarget(self, action: #selector(nickNameTextFieldEditingChanged(_:)), for: .editingChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,6 +106,16 @@ class PopUpDeleteUserViewController: UIViewController {
     // MARK: - Actions
     @objc func goBack() {
         self.dismiss(animated: false)
+    }
+    @objc func nickNameTextFieldEditingChanged(_ sender: UITextField) {
+        let text = sender.text ?? ""
+        if text != self.nickName {
+            self.errorMessage.isHidden = false
+            self.okBtn.isEnabled = false
+        } else {
+            self.errorMessage.isHidden = true
+            self.okBtn.isEnabled = true
+        }
     }
     // MARK: - Functions
     func setUpContent() {

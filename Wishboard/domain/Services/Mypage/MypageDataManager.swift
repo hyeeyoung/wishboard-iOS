@@ -62,5 +62,20 @@ class MypageDataManager {
             }
         }
     }
-    
+    // MARK: - 회원 탈퇴
+    func deleteUserDataManager(_ viewcontroller: MyPageViewController) {
+        AF.request(BaseURL + "/user/active",
+                           method: .put,
+                           parameters: nil,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            switch response.result {
+            case .success(let result):
+                viewcontroller.deleteUserAPISuccess(result)
+            case .failure(let error):
+                print(error.responseCode)
+            }
+        }
+    }
 }
