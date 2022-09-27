@@ -11,7 +11,10 @@ import Lottie
 class GetEmailViewController: UIViewController {
     var getEmailView: GetEmailView!
     var isValidTime: Bool = true
+    // 인증번호 Properties
+    var authCode: String?
     var code: String = ""
+    var email: String?
     // Timer Properties
     var timer: Timer!
     let timeSelector: Selector = #selector(updateTime)
@@ -58,13 +61,10 @@ extension GetEmailViewController {
         let lottieView = getEmailView.loginButton.setHorizontalLottieView(getEmailView.loginButton)
         getEmailView.loginButton.isSelected = true
         lottieView.isHidden = false
-        lottieView.loopMode = .loop
-        lottieView.play()
-//        lottieView.play { completion in
-//            let getEmailVC = GetEmailViewController()
-//            getEmailVC.modalPresentationStyle = .fullScreen
-//            self.present(getEmailVC, animated: true, completion: nil)
-//        }
+        lottieView.play { completion in
+            let lostPasswordInput = LostPasswordInput(verify: true, email: self.email)
+            LostPasswordDataManager().verifyCodeDataManager(lostPasswordInput, self)
+        }
     }
     @objc func updateTime() {
         //남은 분
@@ -84,10 +84,11 @@ extension GetEmailViewController {
     func checkValidCode() {
         let codeCount = self.code.count ?? 0
         var isValidCode = codeCount > 0 ? true : false
+        isValidCode = self.code == self.authCode ? true : false //인증코드가 맞을 때
         if isValidCode && self.isValidTime {
             self.getEmailView.loginButton.then{
                 $0.defaultButton("로그인 하기", .wishboardGreen, .black)
-                $0.isEnabled = false
+                $0.isEnabled = true
             }
         } else {
             self.getEmailView.loginButton.then{
@@ -95,5 +96,19 @@ extension GetEmailViewController {
                 $0.isEnabled = false
             }
         }
+    }
+}
+// MARK: - API Success
+extension GetEmailViewController {
+    func verifyCodeAPISuccess(_ result: APIModel<VerifyCodeModel>) {
+        let token = result.data?.token
+        let email = self.email
+        let password = self.authCode
+        UserDefaults.standard.set(token, forKey: "token")
+        UserDefaults.standard.set(false, forKey: "isFirstLogin")
+        UserDefaults.standard.set(email, forKey: "email")
+        UserDefaults.standard.set(password, forKey: "password")
+        
+        ScreenManager().goMain(self)
     }
 }

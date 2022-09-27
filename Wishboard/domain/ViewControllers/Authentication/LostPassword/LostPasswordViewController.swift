@@ -64,9 +64,16 @@ class LostPasswordViewController: UIViewController {
 // MARK: - API Success
 extension LostPasswordViewController {
     func checkEmailAPISuccess(_ result: APIModel<LostPasswordModel>) {
+        let authCode = result.data?.verificationCode
+        
         let getEmailVC = GetEmailViewController()
+        getEmailVC.authCode = authCode
+        getEmailVC.email = self.email
+        
         getEmailVC.modalPresentationStyle = .fullScreen
         self.present(getEmailVC, animated: true, completion: nil)
+        
+        print(result)
     }
     func checkEmaiAPIFail() {
         SnackBar(self, message: .login)

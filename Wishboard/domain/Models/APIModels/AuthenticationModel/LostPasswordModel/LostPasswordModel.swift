@@ -8,3 +8,8 @@
 struct LostPasswordModel: Decodable {
     let verificationCode: String?
 }
+
+struct VerifyCodeModel: Decodable {
+    let token: String?
+    let pushState: Int?
+}
