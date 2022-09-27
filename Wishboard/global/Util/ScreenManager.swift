@@ -21,7 +21,6 @@ class ScreenManager {
     func goMainPages(_ index: Int, _ viewcontroller: UIViewController) {
         guard let tabBarController = viewcontroller.tabBarController else {return}
         tabBarController.selectedIndex = index
-        tabBarController.viewDidLoad()
         tabBarController.modalPresentationStyle = .fullScreen
         viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
     }
@@ -29,7 +28,6 @@ class ScreenManager {
     func goMainPages(_ index: Int, _ viewcontroller: UIViewController, family: Family) {
         guard let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabBarViewController") as? UITabBarController else {return}
         tabBarController.selectedIndex = index
-        tabBarController.viewDidLoad()
         tabBarController.modalPresentationStyle = .fullScreen
         viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
         

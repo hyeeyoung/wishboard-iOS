@@ -44,4 +44,10 @@ extension UIColor{
         blue: 187/255,
         alpha: 1
     )
+    static let folderSelectedBackground = UIColor(
+        red: 0/255,
+        green: 0/255,
+        blue: 0/255,
+        alpha: 0.7
+    )
 }
