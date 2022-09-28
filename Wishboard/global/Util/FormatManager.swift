@@ -7,7 +7,8 @@
 
 import Foundation
 
-class DateManager {
+class FormatManager {
+    // MARK: - Date
     // 서버에서 받은 created_at을 "YY년 MM월 dd일 HH:mm"로 변환
     func createdDateToKoreanStr(_ date: String) -> String? {
         let dateToDate = date.toCreatedDate()  //YYYY-MM-dd HH:mm:ss
@@ -45,6 +46,29 @@ class DateManager {
         let time = str[startIndex ..< endIndex]
         
         return "20" + year + "-" + month + "-" + day + " " + time + ":00"
+    }
+    
+    // MARK: - Number (price)
+    // 숫자를 ,넣은 문자열로     // 1000 -> 1,000
+    func numToPrice(num: Int) -> String? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        
+        if let price = numberFormatter.string(from: NSNumber(value: num)) {
+            return price
+        } else {
+            return nil
+        }
+    }
+    // 숫자문자열을 ,넣은 문자열로
+    func strToPrice(numStr: String) -> String? {
+        if let num = Int(numStr) {return self.numToPrice(num: num)}
+        else {return nil}
+    }
+    // 문자열을 숫자로     // 1,000 -> 1000
+    func priceToStr(price: String) -> String {
+        let priceStr = price.components(separatedBy: [","]).joined()
+        return priceStr
     }
 }
 extension String {

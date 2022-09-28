@@ -176,7 +176,7 @@ extension UploadItemViewController {
                 else {cell.textLabel?.text = cellTitleArray[tag - 1]}
             case 4:
                 if let notiType = self.wishListData.item_notification_type {
-                    cell.textLabel?.text = "[" + notiType + "] " + DateManager().notiDateToKoreanStr(self.wishListData.item_notification_date!)!
+                    cell.textLabel?.text = "[" + notiType + "] " + FormatManager().notiDateToKoreanStr(self.wishListData.item_notification_date!)!
                 }
                 else {cell.textLabel?.text = cellTitleArray[tag - 1]}
             case 5:
@@ -226,7 +226,7 @@ extension UploadItemViewController {
             if let dateTime = notivc.dateAndTime {
                 if tag == 4 {cell.textLabel?.text = "[" + type + "] " + dateTime}
                 self.wishListData.item_notification_type = type
-                self.wishListData.item_notification_date = DateManager().koreanStrToDate(dateTime)
+                self.wishListData.item_notification_date = FormatManager().koreanStrToDate(dateTime)
             }
         }
         // 만약 폴더를 재선택했다면 업데이트
