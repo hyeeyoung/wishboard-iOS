@@ -56,12 +56,12 @@ class FolderListTableViewCell: UITableViewCell {
         }
     }
     func setUpData(_ data: FolderListModel) {
-        if let image = data.folderImage {
+        if let image = data.folder_thumbnail {
             self.image.kf.setImage(with: URL(string: image), placeholder: UIImage())
         }
-        if let foldername = data.folderName {self.folderName.text = foldername}
-        if let isSelected = data.isChecked {
-            self.checkIcon.isHidden = isSelected ? false : true
-        }
+        if let foldername = data.folder_name {self.folderName.text = foldername}
+//        if let isSelected = data.isChecked {
+//            self.checkIcon.isHidden = isSelected ? false : true
+//        }
     }
 }

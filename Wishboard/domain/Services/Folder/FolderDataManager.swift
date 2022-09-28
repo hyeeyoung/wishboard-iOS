@@ -83,4 +83,26 @@ class FolderDataManager {
             }
         }
     }
+    // MARK: - 폴더 리스트 조회
+    func getFolderListDataManager(_ viewcontroller: SetFolderBottomSheetViewController) {
+        AF.request(BaseURL + "/folder/list",
+                           method: .get,
+                           parameters: nil,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: [FolderListModel].self) { response in
+            switch response.result {
+            case .success(let result):
+                viewcontroller.getFolderListAPISuccess(result)
+            case .failure(let error):
+                let statusCode = error.responseCode
+                switch statusCode {
+                case 429:
+                    viewcontroller.getFolderListAPIFail()
+                default:
+                    print(error.responseCode)
+                }
+            }
+        }
+    }
 }

@@ -614,7 +614,6 @@
 				2339D4FA28E3CD2A00E636FD /* FolderModel */,
 				23A85F8028E3AB0500075667 /* AuthenticationModel */,
 				234F838628C97BE400C4EB41 /* WishListModel */,
-				23C2378728C9CEF800CE3200 /* FolderListModel */,
 				2328C5A828CAC0220065ABB2 /* NotificationModel */,
 				235204CC28E26902004F5DC6 /* MypageModels */,
 			);
@@ -697,6 +696,7 @@
 			isa = PBXGroup;
 			children = (
 				2339D4FB28E3CD3800E636FD /* FolderModel.swift */,
+				23C2378828C9CF0400CE3200 /* FolderListModel.swift */,
 			);
 			path = FolderModel;
 			sourceTree = "<group>";
@@ -823,14 +823,6 @@
 				23C2378528C9CEE800CE3200 /* FolderView.swift */,
 			);
 			path = Folder;
-			sourceTree = "<group>";
-		};
-		23C2378728C9CEF800CE3200 /* FolderListModel */ = {
-			isa = PBXGroup;
-			children = (
-				23C2378828C9CF0400CE3200 /* FolderListModel.swift */,
-			);
-			path = FolderListModel;
 			sourceTree = "<group>";
 		};
 		23C3113128DF62C100A636F6 /* Services */ = {
