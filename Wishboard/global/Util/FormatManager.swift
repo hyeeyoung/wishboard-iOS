@@ -28,6 +28,7 @@ class FormatManager {
         } else {return nil}
     }
     // "YY년 MM월 dd일 HH:mm"을 "YYYY-MM-dd HH:mm:ss"로 변환
+    // 2022-9-20 1:30
     func koreanStrToDate(_ str: String) -> String? {
         var startIndex = str.index(str.startIndex, offsetBy: 0)// 사용자지정 시작인덱스
         var endIndex = str.index(str.startIndex, offsetBy: 2)// 사용자지정 끝인덱스
