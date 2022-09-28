@@ -15,19 +15,19 @@ import Lottie
 class ShareViewController: UIViewController {
     //MARK: - Properties
     var shareView: ShareView!
-    
+    var folderListData: [FolderListModel] = []
     var notivc: NotificationSettingViewController!
     var newFoldervc: NewFolderViewController!
+    
+    var selectedFolder: String?
+    var selectedFolderIdx: Int?
     //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .clear
-
-//        let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
-//        defaults?.set("sss", forKey: "share")
-//        defaults?.synchronize()
         
         setUpShareView()
+        FolderDataManager().getFolderListDataManager(self)
     }
     //MARK: - Functions
     func setUpShareView() {
@@ -84,28 +84,44 @@ class ShareViewController: UIViewController {
 // MARK: - CollectionView delegate
 extension ShareViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        let count = wishListData.count ?? 0
-        return 6
+        let count = folderListData.count ?? 0
+        return count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FolderCollectionViewCell.identifier,
                                                             for: indexPath)
                 as? FolderCollectionViewCell else{ fatalError() }
-        cell.clipsToBounds = true
-        cell.layer.cornerRadius = 10
+        let itemIdx = indexPath.row
+        cell.setUpData(self.folderListData[itemIdx])
+        
+        if let selectedFolderIdx = self.selectedFolderIdx {
+            if selectedFolderIdx == self.folderListData[itemIdx].folder_id {
+                cell.setSelectedFolder(true)
+            } else {
+                cell.setSelectedFolder(false)
+            }
+        } else {
+            if itemIdx == 0 {cell.setSelectedFolder(true)}
+            else {cell.setSelectedFolder(false)}
+        }
+        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let itemDetailVC = ItemDetailViewController()
-//        itemDetailVC.modalPresentationStyle = .fullScreen
-//        self.present(itemDetailVC, animated: true, completion: nil)
+        let itemIdx = indexPath.item
+        self.selectedFolderIdx = self.folderListData[itemIdx].folder_id!
+        print(self.selectedFolderIdx)
+        shareView.folderCollectionView.reloadData()
     }
-    
-    func setTempData() {
-//        self.wishListData.append(WishListModel(itemImage: "", itemName: "item1", itemPrice: 1000, isCart: true))
-//        self.wishListData.append(WishListModel(itemImage: "", itemName: "item2", itemPrice: 2000, isCart: false))
-//        self.wishListData.append(WishListModel(itemImage: "", itemName: "item3", itemPrice: 3000, isCart: false))
-//        self.wishListData.append(WishListModel(itemImage: "", itemName: "item4", itemPrice: 4000, isCart: true))
-//        self.wishListData.append(WishListModel(itemImage: "", itemName: "item5", itemPrice: 5000, isCart: true))
+}
+// MARK: - API Success
+extension ShareViewController {
+    // MARK: 폴더 리스트 조회 API
+    func getFolderListAPISuccess(_ result: [FolderListModel]) {
+        self.folderListData = result
+        shareView.folderCollectionView.reloadData()
+    }
+    func getFolderListAPIFail() {
+        FolderDataManager().getFolderListDataManager(self)
     }
 }

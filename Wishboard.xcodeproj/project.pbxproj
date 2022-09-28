@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		230180E628E50B7C001034FC /* FolderDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230180E528E50B7C001034FC /* FolderDataManager.swift */; };
+		230180E728E50BC1001034FC /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504528E2664D00AAA57E /* APIManager.swift */; };
+		230180E828E50BE2001034FC /* FolderListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2378828C9CF0400CE3200 /* FolderListModel.swift */; };
+		230180E928E50C0B001034FC /* FolderInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339D4FE28E3CFF900E636FD /* FolderInput.swift */; };
 		230A3F5928E4B5CA00966682 /* NotificationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230A3F5828E4B5CA00966682 /* NotificationDataManager.swift */; };
 		230DBFA828E106EE00E9AED6 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230DBFA728E106EE00E9AED6 /* ShareView.swift */; };
 		232174DB28E1BE81008C155D /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174DA28E1BE81008C155D /* RegisterDataManager.swift */; };
@@ -216,6 +220,7 @@
 /* Begin PBXFileReference section */
 		0B45833F72B5C3662B383FBF /* Pods-Wishboard-Share Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wishboard-Share Extension.release.xcconfig"; path = "Target Support Files/Pods-Wishboard-Share Extension/Pods-Wishboard-Share Extension.release.xcconfig"; sourceTree = "<group>"; };
 		1582000F9C7BDE6362679C88 /* Pods_Wishboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wishboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		230180E528E50B7C001034FC /* FolderDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDataManager.swift; sourceTree = "<group>"; };
 		230A3F5828E4B5CA00966682 /* NotificationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataManager.swift; sourceTree = "<group>"; };
 		230DBFA728E106EE00E9AED6 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		232174DA28E1BE81008C155D /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
@@ -400,6 +405,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		230180E428E50B6D001034FC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				230180E528E50B7C001034FC /* FolderDataManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		2307A23D28DE545F00E00005 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -932,6 +945,7 @@
 		23C3113D28DF680300A636F6 /* Share Extension */ = {
 			isa = PBXGroup;
 			children = (
+				230180E428E50B6D001034FC /* Services */,
 				230DBFA628E106E000E9AED6 /* View */,
 				23C3114028DF680300A636F6 /* MainInterface.storyboard */,
 				23CBAFDE28DFE53400B41513 /* Cell */,
@@ -1567,11 +1581,13 @@
 				23AADBC128DF8F9800AB75C6 /* NotificationSettingViewController.swift in Sources */,
 				236FE91828DF8512006142DB /* SetLottie.swift in Sources */,
 				230DBFA828E106EE00E9AED6 /* ShareView.swift in Sources */,
+				230180E628E50B7C001034FC /* FolderDataManager.swift in Sources */,
 				236FE92228DF8592006142DB /* UITextField.swift in Sources */,
 				236FE93F28DF85B0006142DB /* PopUpWithTextFieldViewController.swift in Sources */,
 				236FE91D28DF8592006142DB /* PaddingLabel.swift in Sources */,
 				236FE94028DF85B3006142DB /* APIModel.swift in Sources */,
 				236FE91128DF83E6006142DB /* UIFont.swift in Sources */,
+				230180E928E50C0B001034FC /* FolderInput.swift in Sources */,
 				236FE93A28DF85A4006142DB /* SetNotificationDate.swift in Sources */,
 				236FE92128DF8592006142DB /* UIColor.swift in Sources */,
 				236FE94228DF888A006142DB /* FolderCollectionViewCell.swift in Sources */,
@@ -1582,9 +1598,11 @@
 				236FE93D28DF85B0006142DB /* PopUpDeleteUserViewController.swift in Sources */,
 				236FE91E28DF8592006142DB /* UIBezierPath.swift in Sources */,
 				236FE93C28DF85AA006142DB /* String.swift in Sources */,
+				230180E828E50BE2001034FC /* FolderListModel.swift in Sources */,
 				236FE93B28DF85A7006142DB /* Observable.swift in Sources */,
 				236FE93E28DF85B0006142DB /* PopUpViewController.swift in Sources */,
 				23C3113F28DF680300A636F6 /* ShareViewController.swift in Sources */,
+				230180E728E50BC1001034FC /* APIManager.swift in Sources */,
 				236FE93828DF85A4006142DB /* EmptyView.swift in Sources */,
 				236FE91C28DF8592006142DB /* UIButton.swift in Sources */,
 			);

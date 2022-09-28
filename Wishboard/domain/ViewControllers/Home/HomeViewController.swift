@@ -12,6 +12,7 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setToken() 
 
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
@@ -68,5 +69,14 @@ extension HomeViewController {
     func addCartAPISuccess(_ result: APIModel<ResultModel>) {
         WishListDataManager().wishListDataManager(self.homeView, self)
         print(result.message)
+    }
+}
+// MARK: - Token User Defaults for Share Extension
+extension HomeViewController {
+    func setToken() {
+        let token = UserDefaults.standard.string(forKey: "token") ?? ""
+        let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
+        defaults?.set(token, forKey: "token")
+        defaults?.synchronize()
     }
 }

@@ -18,6 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //MARK: UserDefaults
         UserDefaults.standard.set("http://3.39.165.250:3000", forKey: "url")
         
+        let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
+        defaults?.set("http://3.39.165.250:3000", forKey: "url")
+        defaults?.synchronize()
+        
         return true
     }
 

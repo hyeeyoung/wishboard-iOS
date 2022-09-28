@@ -12,36 +12,31 @@ class FolderCollectionViewCell: UICollectionViewCell {
     
     let folderImage = UIImageView().then{
         $0.backgroundColor = .lightGray
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 10
     }
     let folderName = UILabel().then{
         $0.text = "folderName"
         $0.textColor = .white
-        $0.font = UIFont.Suit(size: 10, family: .Regular)
+        $0.font = UIFont.Suit(size: 11, family: .Bold)
         $0.numberOfLines = 1
+        $0.textAlignment = .center
     }
     let selectedView = UIView().then{
         $0.backgroundColor = .folderSelectedBackground
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 10
     }
     let selectedIcon = UIImageView().then{
         $0.image = UIImage(named: "check_white")
     }
     
     // MARK: - Life Cycles
-    var isSelectedFolder: Bool = false
-    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
         setUpView()
         setUpConstraint()
-        
-        if isSelectedFolder {
-            self.selectedView.isHidden = false
-            self.selectedIcon.isHidden = false
-        } else {
-            self.selectedView.isHidden = true
-            self.selectedIcon.isHidden = true
-        }
     }
     
     required init?(coder: NSCoder) {
@@ -61,6 +56,7 @@ class FolderCollectionViewCell: UICollectionViewCell {
         folderName.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-6)
             make.centerX.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(3)
         }
         selectedView.snp.makeConstraints { make in
             make.leading.top.trailing.bottom.equalToSuperview()
@@ -71,15 +67,19 @@ class FolderCollectionViewCell: UICollectionViewCell {
         }
     }
     
-//    func setUpData(_ data: WishListModel) {
-//        if let image = data.itemImage {
-//            self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
-//        }
-//        if let name = data.itemName {self.itemName.text = name}
-//        if let price = data.itemPrice {self.itemPrice.text = String(price)}
-//        if let isCart = data.isCart {
-//            if isCart {self.cartButton.cartButton(.wishboardGreen)}
-//            else {self.cartButton.cartButton(.white)}
-//        }
-//    }
+    func setUpData(_ data: FolderListModel) {
+        if let image = data.folder_thumbnail {
+            self.folderImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
+        }
+        if let name = data.folder_name {self.folderName.text = name}
+    }
+    func setSelectedFolder(_ isSelected: Bool) {
+        if isSelected {
+            self.selectedView.isHidden = false
+            self.selectedIcon.isHidden = false
+        } else {
+            self.selectedView.isHidden = true
+            self.selectedIcon.isHidden = true
+        }
+    }
 }
