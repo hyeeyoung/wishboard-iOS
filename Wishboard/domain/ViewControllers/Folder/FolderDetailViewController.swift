@@ -130,7 +130,13 @@ extension FolderDetailViewController {
     // 폴더 내 아이템 조회 API
     func getFolderDetailAPISuccess(_ result: [WishListModel]) {
         self.wishListData = result
-        folderDetailCollectionView.reloadData()
+        // reload data with animation
+        UIView.transition(with: folderDetailCollectionView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                              self.folderDetailCollectionView.reloadData()},
+                          completion: nil);
     }
     func getFolderDetailAPIFail() {
         FolderDataManager().getFolderDetailDataManager(self.folderId, self)

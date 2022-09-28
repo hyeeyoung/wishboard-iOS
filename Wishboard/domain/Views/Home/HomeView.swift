@@ -153,7 +153,13 @@ extension HomeView {
     // MARK: 위시리스트 조회 API
     func wishListAPISuccess(_ result: [WishListModel]) {
         self.wishListData = result
-        collectionView.reloadData()
+        // reload data with animation
+        UIView.transition(with: collectionView,
+                                  duration: 0.35,
+                                  options: .transitionCrossDissolve,
+                                  animations: { () -> Void in
+                                    self.collectionView.reloadData()},
+                                completion: nil);
     }
 }
 // MARK: - CartGesture

@@ -177,6 +177,7 @@ extension CartView: UITableViewDelegate, UITableViewDataSource {
     }
 }
 extension CartView {
+    // (+) 버튼 클릭
     @objc func plusButtonDidTap(_ sender: CartGesture) {
         guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
         guard var itemCount = sender.cartItem?.cartItemInfo?.item_count else {return}
@@ -185,6 +186,7 @@ extension CartView {
         let modifyCountInput = CartModifyCountInput(item_count: itemCount)
         CartDataManager().modifyCountDataManager(itemId, modifyCountInput, self)
     }
+    // (-) 버튼 클릭
     @objc func minusButtonDidTap(_ sender: CartGesture) {
         guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
         guard var itemCount = sender.cartItem?.cartItemInfo?.item_count else {return}
@@ -194,6 +196,7 @@ extension CartView {
         let modifyCountInput = CartModifyCountInput(item_count: itemCount)
         CartDataManager().modifyCountDataManager(itemId, modifyCountInput, self)
     }
+    // (X) 버튼 클릭
     @objc func deleteButtonDidTap(_ sender: CartGesture) {
         guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
         CartDataManager().deleteCartDataManager(itemId, self)
@@ -218,7 +221,13 @@ extension CartView {
     // MARK: Cart 조회 API
     func getCartListAPISuccess(_ result: [CartListModel]) {
         self.cartData = result
-        cartTableView.reloadData()
+        // reload data with animation
+        UIView.transition(with: cartTableView,
+                                  duration: 0.35,
+                                  options: .transitionCrossDissolve,
+                                  animations: { () -> Void in
+                                    self.cartTableView.reloadData()},
+                                completion: nil);
         calculate()
     }
     func getCartListAPIFail() {

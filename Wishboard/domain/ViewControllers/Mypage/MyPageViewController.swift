@@ -185,8 +185,17 @@ extension MyPageViewController {
         default:
             self.pushState = false
         }
-        mypageView.mypageTableView.reloadData()
+        // reload data with animation
+        UIView.transition(with: mypageView.mypageTableView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                              self.mypageView.mypageTableView.reloadData()},
+                          completion: nil);
         print(result)
+    }
+    func getUserInfoAPIFail() {
+        MypageDataManager().getUserInfoDataManager(self)
     }
     // MARK: 알림 토글 수정 API
     func switchNotificationAPISuccess(_ result: APIModel<ResultModel>) {

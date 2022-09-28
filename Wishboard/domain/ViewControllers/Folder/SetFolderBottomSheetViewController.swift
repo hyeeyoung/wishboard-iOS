@@ -95,7 +95,13 @@ extension SetFolderBottomSheetViewController: UITableViewDelegate, UITableViewDa
 extension SetFolderBottomSheetViewController {
     func getFolderListAPISuccess(_ result: [FolderListModel]) {
         self.folderListData = result
-        setFolderBottomSheetView.folderTableView.reloadData()
+        // reload data with animation
+        UIView.transition(with: setFolderBottomSheetView.folderTableView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                            self.setFolderBottomSheetView.folderTableView.reloadData()},
+                          completion: nil);
     }
     func getFolderListAPIFail() {
         FolderDataManager().getFolderListDataManager(self)
