@@ -29,6 +29,7 @@
 		2339D4F928E3CCE300E636FD /* FolderDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339D4F828E3CCE300E636FD /* FolderDataManager.swift */; };
 		2339D4FC28E3CD3800E636FD /* FolderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339D4FB28E3CD3800E636FD /* FolderModel.swift */; };
 		2339D4FF28E3CFF900E636FD /* FolderInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339D4FE28E3CFF900E636FD /* FolderInput.swift */; };
+		233CDED328E4FE0A004E12BC /* UploadItemInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233CDED228E4FE0A004E12BC /* UploadItemInput.swift */; };
 		2340CEAA28CB6173007C362F /* HomeBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEA928CB6173007C362F /* HomeBottomSheetView.swift */; };
 		2340CEAC28CB6252007C362F /* HowToCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEAB28CB6252007C362F /* HowToCollectionViewCell.swift */; };
 		2340CEAE28CB65AE007C362F /* HowToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEAD28CB65AE007C362F /* HowToViewController.swift */; };
@@ -237,6 +238,7 @@
 		2339D4F828E3CCE300E636FD /* FolderDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDataManager.swift; sourceTree = "<group>"; };
 		2339D4FB28E3CD3800E636FD /* FolderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderModel.swift; sourceTree = "<group>"; };
 		2339D4FE28E3CFF900E636FD /* FolderInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderInput.swift; sourceTree = "<group>"; };
+		233CDED228E4FE0A004E12BC /* UploadItemInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemInput.swift; sourceTree = "<group>"; };
 		2340CEA928CB6173007C362F /* HomeBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomSheetView.swift; sourceTree = "<group>"; };
 		2340CEAB28CB6252007C362F /* HowToCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToCollectionViewCell.swift; sourceTree = "<group>"; };
 		2340CEAD28CB65AE007C362F /* HowToViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToViewController.swift; sourceTree = "<group>"; };
@@ -642,6 +644,7 @@
 		232174E128E1BEE9008C155D /* APIInputs */ = {
 			isa = PBXGroup;
 			children = (
+				233CDED128E4FDFB004E12BC /* UploadItemInput */,
 				23279A1228E4A11A00CAD1CA /* CartInput */,
 				2339D4FD28E3CFED00E636FD /* FolderInput */,
 				2335637F28E3210300C0184C /* FCMInput */,
@@ -751,6 +754,14 @@
 				2339D4FE28E3CFF900E636FD /* FolderInput.swift */,
 			);
 			path = FolderInput;
+			sourceTree = "<group>";
+		};
+		233CDED128E4FDFB004E12BC /* UploadItemInput */ = {
+			isa = PBXGroup;
+			children = (
+				233CDED228E4FE0A004E12BC /* UploadItemInput.swift */,
+			);
+			path = UploadItemInput;
 			sourceTree = "<group>";
 		};
 		2344949528D78AA400CF3BD9 /* Register */ = {
@@ -1675,6 +1686,7 @@
 				238EF90928CB070700ECA606 /* CalenderView.swift in Sources */,
 				23EC504228E25DAC00AAA57E /* CheckEmailInput.swift in Sources */,
 				237478A028D1FF0400CF941A /* SetFolderBottomSheetView.swift in Sources */,
+				233CDED328E4FE0A004E12BC /* UploadItemInput.swift in Sources */,
 				2344949728D78AB500CF3BD9 /* RegisterEmailView.swift in Sources */,
 				23C3113728DF633D00A636F6 /* APIModel.swift in Sources */,
 				23D5518128C69E2900D81B5F /* UITextField.swift in Sources */,

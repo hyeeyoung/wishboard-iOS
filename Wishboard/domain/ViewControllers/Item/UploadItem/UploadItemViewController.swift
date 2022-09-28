@@ -177,10 +177,40 @@ extension UploadItemViewController {
         let lottieView = uploadItemView.saveButton.setSpinLottieView(uploadItemView.saveButton)
         uploadItemView.saveButton.isSelected = true
         lottieView.isHidden = false
-        lottieView.loopMode = .repeat(2) // 2번 반복
         lottieView.play { completion in
-            self.dismiss(animated: true)
-            SnackBar(self, message: .modifyItem)
+            let data = self.wishListData
+            if let image = self.selectedImage {
+                if let folderId = data?.folder_id {
+                    // 모든 데이터가 존재하는 경우
+                    if let notiType = data?.item_notification_type {
+                        ItemDataManager().uploadItemDataManager(folderId, image, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!, (data?.item_id)!, self)
+                    } else {
+                        // 알림 날짜 설정은 하지 않은 경우
+                        ItemDataManager().uploadItemDataManager(folderId, image, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!,(data?.item_id)!, self)
+                    }
+                } else {
+                    // 일부 데이터가 존재하는 경우
+                    ItemDataManager().uploadItemDataManager(image, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
+                }
+            } else {
+                if let folderId = data?.folder_id {
+                    // 모든 데이터가 존재하는 경우
+                    if let notiType = data?.item_notification_type {
+                        let uploadItemInput = UploadItemInputWithAll(item_img: data?.item_img_url, item_name: data?.item_name, item_price: data?.item_price, item_url: data?.item_url, item_memo: data?.item_memo, folder_id: folderId, item_notification_date: data?.item_notification_date, item_notification_type: data?.item_notification_type)
+                        ItemDataManager().modifyItemDataManager((data?.item_id)!, uploadItemInput, self)
+                    } else {
+                        // 알림 날짜 설정은 하지 않은 경우
+                        let uploadItemInput = UploadItemInputWithFolder(item_img: data?.item_img_url, item_name: data?.item_name, item_price: data?.item_price, item_url: data?.item_url, item_memo: data?.item_memo, folder_id: folderId)
+                        ItemDataManager().modifyItemDataManager((data?.item_id)!, uploadItemInput, self)
+                    }
+                } else {
+                    // 일부 데이터가 존재하는 경우
+                    let uploadItemInput = UploadItemInput(item_img: data?.item_img_url, item_name: data?.item_name, item_price: data?.item_price, item_url: data?.item_url, item_memo: data?.item_memo)
+                    ItemDataManager().modifyItemDataManager((data?.item_id)!, uploadItemInput, self)
+                }
+            }
+            self.viewDidLoad()
+            ScreenManager().goMainPages(0, self, family: .itemUpload)
         }
     }
 }
@@ -392,6 +422,11 @@ extension UploadItemViewController {
     func uploadItemAPISuccess(_ result: APIModel<ResultModel>) {
         ScreenManager().goMainPages(0, self)
         SnackBar(self, message: .addItem)
+        print(result.message)
+    }
+    func modifyItemAPISuccess(_ result: APIModel<ResultModel>) {
+//        self.viewDidLoad()
+        ScreenManager().goMainPages(0, self, family: .itemUpload)
         print(result.message)
     }
 }
