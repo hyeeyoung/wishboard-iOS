@@ -21,9 +21,3 @@ struct WishListModel: Decodable {
     var item_notification_date: String?
     var cart_state: Int?
 }
-struct CartListModel {
-    let itemImage: String?
-    let itemName: String?
-    let itemPrice: Int?
-    let itemCount: Int?
-}

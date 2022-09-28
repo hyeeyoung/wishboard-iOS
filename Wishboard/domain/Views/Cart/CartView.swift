@@ -170,25 +170,25 @@ extension CartView {
         self.cartTableView.reloadData()
     }
 }
+// MARK: - API Success
 extension CartView {
-    func setTempData() {
-        self.cartData.append(CartListModel(itemImage: "", itemName: "item10", itemPrice: 10000, itemCount: 1))
-        self.cartData.append(CartListModel(itemImage: "", itemName: "item11", itemPrice: 10000, itemCount: 3))
-        self.cartData.append(CartListModel(itemImage: "", itemName: "item12", itemPrice: 20000, itemCount: 3))
-        self.cartData.append(CartListModel(itemImage: "", itemName: "item13", itemPrice: 10000, itemCount: 1))
-        self.cartData.append(CartListModel(itemImage: "", itemName: "item14", itemPrice: 10000, itemCount: 5))
-        
-        self.calculate()
-        self.cartTableView.reloadData()
+    // Cart 조회
+    func getCartListAPISuccess(_ result: [CartListModel]) {
+        self.cartData = result
+        cartTableView.reloadData()
+        calculate()
+    }
+    func getCartListAPIFail() {
+        CartDataManager().getFolderDataManager(self)
     }
     func calculate() {
         var totalPrice = 0
         var totalCount = 0
         for data in cartData {
-            guard let initPrice = data.itemPrice else {return}
-            guard let count = data.itemCount else {return}
+            guard let initPrice = data.wishItem?.item_price else {return}
+            guard let count = data.cartItemInfo?.item_count else {return}
             
-            totalPrice = totalPrice + initPrice * count
+            totalPrice = totalPrice + Int(initPrice)! * count
             totalCount = totalCount + count
         }
         self.price.text = String(totalPrice)

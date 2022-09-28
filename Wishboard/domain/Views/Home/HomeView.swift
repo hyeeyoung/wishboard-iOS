@@ -139,7 +139,6 @@ extension HomeView {
     // MARK: 위시리스트 조회
     func wishListAPISuccess(_ result: [WishListModel]) {
         self.wishListData = result
-        print("RESULT:", result)
         collectionView.reloadData()
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 class CartTableViewCell: UITableViewCell {
     let itemImage = UIImageView().then{
-        $0.backgroundColor = .lightGray
+        $0.backgroundColor = .systemGray6
         $0.layer.cornerRadius = 10
     }
     let itemName = UILabel().then{
@@ -32,7 +32,7 @@ class CartTableViewCell: UITableViewCell {
     }
     let priceLabel = UILabel().then{
         $0.text = "1111"
-        $0.font = UIFont.monteserrat(size: 18)
+        $0.font = UIFont.monteserrat(size: 18.75, family: .Bold)
     }
     let won = UILabel().then{
         $0.text = "원"
@@ -74,7 +74,6 @@ class CartTableViewCell: UITableViewCell {
             make.top.equalTo(itemImage.snp.top)
             make.leading.equalTo(itemImage.snp.trailing).offset(10)
             make.trailing.equalTo(deleteButton.snp.leading).offset(-10)
-            make.bottom.equalTo(minusButton.snp.top).offset(-10)
         }
         minusButton.snp.makeConstraints { make in
             make.width.height.equalTo(24)
@@ -102,15 +101,15 @@ class CartTableViewCell: UITableViewCell {
 }
 extension CartTableViewCell {
     func setUpData(_ data: CartListModel) {
-        if let image = data.itemImage {
+        if let image = data.wishItem?.item_img {
             self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
         }
-        if let name = data.itemName {self.itemName.text = name}
-        guard let count = data.itemCount else {return}
-        guard let price = data.itemPrice else {return}
+        if let name = data.wishItem?.item_name {self.itemName.text = name}
+        guard let count = data.cartItemInfo?.item_count else {return}
+        guard let price = data.wishItem?.item_price else {return}
         
         self.countLabel.text = String(count)
-        self.priceLabel.text = String(count * price)
+        self.priceLabel.text = String(count * Int(price)!)
         
     }
 }
