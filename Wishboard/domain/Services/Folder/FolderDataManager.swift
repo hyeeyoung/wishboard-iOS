@@ -62,9 +62,25 @@ class FolderDataManager {
             case .success(let result):
                 viewcontroller.modifyFolderAPISuccess(result)
             case .failure(let error):
+                viewcontroller.modifyFolderAPIFail()
                 print(error.responseCode)
             }
         }
     }
-
+    // MARK: - 폴더 삭제
+    func deleteFolderDataManager(_ folderId: Int, _ viewcontroller: FolderViewController) {
+        AF.request(BaseURL + "/folder/\(folderId)",
+                           method: .delete,
+                           parameters: nil,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            switch response.result {
+            case .success(let result):
+                viewcontroller.deleteFolderAPISuccess(result)
+            case .failure(let error):
+                print(error.responseCode)
+            }
+        }
+    }
 }
