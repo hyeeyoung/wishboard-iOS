@@ -26,7 +26,7 @@ class FolderDataManager {
             case .failure(let error):
                 let statusCode = error.responseCode
                 switch statusCode {
-                case 404:
+                case 429:
                     viewcontroller.getFolderAPIFail()
                 default:
                     print(error.responseCode)
@@ -50,4 +50,21 @@ class FolderDataManager {
             }
         }
     }
+    // MARK: - 폴더명 수정
+    func modifyFolderDataManager(_ folderId: Int, _ parameter: AddFolderInput, _ viewcontroller: FolderViewController) {
+        AF.request(BaseURL + "/folder/\(folderId)",
+                           method: .put,
+                           parameters: parameter,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            switch response.result {
+            case .success(let result):
+                viewcontroller.modifyFolderAPISuccess(result)
+            case .failure(let error):
+                print(error.responseCode)
+            }
+        }
+    }
+
 }

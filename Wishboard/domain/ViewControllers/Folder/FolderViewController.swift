@@ -45,7 +45,9 @@ extension FolderViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let itemIdx = indexPath.item
         cell.setUpData(self.folderData[itemIdx])
         
-        cell.moreButton.addTarget(self, action: #selector(alertFolderMenu), for: .touchUpInside)
+        let folderMenuGesture = CustomButton(target: self, action: #selector(alertFolderMenu(_:)))
+        folderMenuGesture.folderData = self.folderData[itemIdx]
+        cell.moreButton.addGestureRecognizer(folderMenuGesture)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -70,14 +72,16 @@ extension FolderViewController {
         folderView.plusButton.addTarget(self, action: #selector(alertAddDialog), for: .touchUpInside)
     }
     // 폴더 메뉴 하단 팝업창
-    @objc func alertFolderMenu() {
+    @objc func alertFolderMenu(_ sender: CustomButton) {
+        guard let folderData = sender.folderData else {return}
+        let folderId = folderData.folder_id
+        
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
         let modifyAction =  UIAlertAction(title: "폴더명 수정", style: UIAlertAction.Style.default){(_) in
-            self.alertModifyDialog()
+            self.alertModifyDialog(folderData: folderData)
         }
         let deleteAction =  UIAlertAction(title: "폴더 삭제", style: UIAlertAction.Style.default){(_) in
-            self.alertDeleteDialog()
+            self.alertDeleteDialog(folderId: folderId!)
         }
         let cancelAction = UIAlertAction(title: "취소", style: UIAlertAction.Style.cancel, handler: nil)
         
@@ -88,13 +92,16 @@ extension FolderViewController {
 
         self.present(alert, animated: true)
     }
-    func alertModifyDialog() {
-        dialog = PopUpWithTextFieldViewController(titleText: "폴더명 수정", placeholder: "폴더명", prevText: "폴더명", buttonTitle: "수정")
+    func alertModifyDialog(folderData: FolderModel) {
+        dialog = PopUpWithTextFieldViewController(titleText: "폴더명 수정", placeholder: "폴더명", prevText: folderData.folder_name, buttonTitle: "수정")
         dialog.modalPresentationStyle = .overCurrentContext
-        dialog.completeButton.addTarget(self, action: #selector(completeModifyButtonDidTap), for: .touchUpInside)
+        let folderMenuGesture = CustomButton(target: self, action: #selector(completeModifyButtonDidTap(_:)))
+        folderMenuGesture.folderData = folderData
+        dialog.completeButton.addGestureRecognizer(folderMenuGesture)
+        dialog.textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         self.present(dialog, animated: false, completion: nil)
     }
-    func alertDeleteDialog() {
+    func alertDeleteDialog(folderId: Int) {
         let dialog = PopUpViewController(titleText: "폴더 삭제", messageText: "정말 폴더를 삭제하시겠어요?\n폴더가 삭제되어도 아이템은 사라지지 않아요.", greenBtnText: "취소", blackBtnText: "삭제")
         dialog.modalPresentationStyle = .overCurrentContext
         self.present(dialog, animated: false, completion: nil)
@@ -112,14 +119,14 @@ extension FolderViewController {
         dialog.textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         self.present(dialog, animated: false, completion: nil)
     }
-    @objc func completeModifyButtonDidTap() {
+    @objc func completeModifyButtonDidTap(_ sender: CustomButton) {
+        let folderId = sender.folderData?.folder_id
         let lottieView = dialog.completeButton.setHorizontalLottieView(dialog.completeButton)
         dialog.completeButton.isSelected = true
         lottieView.isHidden = false
-        lottieView.loopMode = .repeat(2) // 2번 반복
         lottieView.play { completion in
-            self.dismiss(animated: false)
-            SnackBar(self, message: .modifyFolder)
+            let addFolderInput = AddFolderInput(folder_name: self.folderStr)
+            FolderDataManager().modifyFolderDataManager(folderId!, addFolderInput, self)
         }
     }
     @objc func textFieldEditingChanged(_ sender: UITextField) {
@@ -144,7 +151,7 @@ extension FolderViewController {
         folderView.folderCollectionView.reloadData()
     }
     func getFolderAPIFail() {
-        print("폴더 정보 없음")
+        FolderDataManager().getFolderDataManager(self)
     }
     // MARK: 폴더 추가 API
     func addFolderAPISuccess(_ result: APIModel<ResultModel>) {
@@ -154,4 +161,15 @@ extension FolderViewController {
         FolderDataManager().getFolderDataManager(self)
         print(result.message)
     }
+    // MARK: 폴더명 수정 API
+    func modifyFolderAPISuccess(_ result: APIModel<ResultModel>) {
+        self.folderStr = ""
+        self.dismiss(animated: false)
+        SnackBar(self, message: .modifyFolder)
+        FolderDataManager().getFolderDataManager(self)
+        print(result.message)
+    }
+}
+class CustomButton: UITapGestureRecognizer {
+    var folderData: FolderModel?
 }
