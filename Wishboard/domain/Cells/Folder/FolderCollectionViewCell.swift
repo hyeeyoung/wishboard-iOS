@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FolderCollectionViewCell: UICollectionViewCell {
     static let identifier = "FolderCollectionViewCell"
@@ -44,7 +45,20 @@ class FolderCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    // MARK: 테이블뷰의 셀이 재사용되기 전 호출되는 함수
+    // 여기서 property들을 초기화해준다.
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        folderImage.image = nil
+        folderType.text = nil
+        countLabel.text = nil
+        
+        let cache = ImageCache.default
+        cache.clearMemoryCache()
+        cache.clearDiskCache()
+    }
+    // MARK: - Functions
     func setUpView() {
         contentView.addSubview(folderImage)
         contentView.addSubview(moreButton)
