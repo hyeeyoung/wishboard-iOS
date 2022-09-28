@@ -323,6 +323,10 @@ extension UploadItemViewController {
     // 폴더 설정 BottomSheet
     func showFolderBottomSheet() {
         foldervc.setPreViewController(self)
+        if !isUploadItem {
+            foldervc.selectedFolderId = self.wishListData.folder_id
+            foldervc.selectedFolder = self.wishListData.folder_name
+        }
         let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: foldervc)
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
         bottomSheet.dismissOnDraggingDownSheet = false

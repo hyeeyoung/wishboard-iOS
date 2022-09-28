@@ -12,7 +12,6 @@ class SetFolderBottomSheetViewController: UIViewController {
     var folderListData: [FolderListModel] = []
     var selectedFolder: String?     // 선택된 폴더 이름
     var selectedFolderId: Int?     // 선택된 폴더 id (서버로 전송될 folder_id값)
-    var selectedFolderIndex: Int?     // 선택된 폴더 인덱스 (체크표시)
     var preUploadVC: UploadItemViewController!
     var preItemDetailVC: ItemDetailViewController!
 
@@ -69,8 +68,8 @@ extension SetFolderBottomSheetViewController: UITableViewDelegate, UITableViewDa
         cell.selectionStyle = .none
         let itemIdx = indexPath.item
         cell.setUpData(self.folderListData[itemIdx])
-        if let selectedFolderIndex = self.selectedFolderIndex {
-            if selectedFolderIndex == itemIdx {
+        if let selectedFolderId = self.selectedFolderId {
+            if selectedFolderId == self.folderListData[itemIdx].folder_id {
                 cell.checkIcon.isHidden = false
             } else {
                 cell.checkIcon.isHidden = true
@@ -88,7 +87,6 @@ extension SetFolderBottomSheetViewController: UITableViewDelegate, UITableViewDa
         let idx = indexPath.row
         self.selectedFolder = folderListData[idx].folder_name
         self.selectedFolderId = folderListData[idx].folder_id
-        self.selectedFolderIndex = idx
         tableView.deselectRow(at: indexPath, animated: true)
         self.dismiss(animated: true)
     }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FolderListTableViewCell: UITableViewCell {
     let image = UIImageView().then{
@@ -31,6 +32,17 @@ class FolderListTableViewCell: UITableViewCell {
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    // MARK: 테이블뷰의 셀이 재사용되기 전 호출되는 함수
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        image.image = nil
+        folderName.text = nil
+        
+        let cache = ImageCache.default
+        cache.clearMemoryCache()
+        cache.clearDiskCache()
     }
     // MARK: - Functions
     func setUpView() {
@@ -60,8 +72,5 @@ class FolderListTableViewCell: UITableViewCell {
             self.image.kf.setImage(with: URL(string: image), placeholder: UIImage())
         }
         if let foldername = data.folder_name {self.folderName.text = foldername}
-//        if let isSelected = data.isChecked {
-//            self.checkIcon.isHidden = isSelected ? false : true
-//        }
     }
 }
