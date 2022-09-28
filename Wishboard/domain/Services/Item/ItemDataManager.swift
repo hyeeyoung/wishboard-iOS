@@ -11,6 +11,30 @@ import Alamofire
 class ItemDataManager {
     let BaseURL = UserDefaults.standard.string(forKey: "url") ?? ""
     let multiHeader = APIManager().getMultipartHeader()
+    let header = APIManager().getHeader()
+    
+    // MARK: - 아이템 삭제
+    func deleteItemDataManager(_ itemId: Int,_ viewcontroller: ItemDetailViewController) {
+        AF.request(BaseURL + "/item/\(itemId)",
+                           method: .delete,
+                           parameters: nil,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            switch response.result {
+            case .success(let result):
+                viewcontroller.deleteItemAPISuccess(result)
+            case .failure(let error):
+                let statusCode = error.responseCode
+                switch statusCode {
+                case 429:
+                    viewcontroller.deleteItemAPIFail()
+                default:
+                    print(error.responseCode)
+                }
+            }
+        }
+    }
     
     // MARK: - 아이템 직접 추가 - 모든 데이터가 존재하는 경우
     func uploadItemDataManager(_ folderId: Int,

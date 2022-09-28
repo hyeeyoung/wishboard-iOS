@@ -40,8 +40,8 @@ class ItemDetailViewController: UIViewController {
         dialog.okBtn.addTarget(self, action: #selector(deleteButtonDidTap), for: .touchUpInside)
     }
     @objc func deleteButtonDidTap() {
-        self.dismiss(animated: true)
-        ScreenManager().goMainPages(0, self, family: .itemDeleted)
+        guard let itemId = self.wishListData.item_id else {return}
+        ItemDataManager().deleteItemDataManager(itemId, self)
     }
     @objc func setFolder() {
         let vc = SetFolderBottomSheetViewController()
@@ -109,5 +109,18 @@ extension ItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+// MARK: - API Success
+extension ItemDetailViewController {
+    func deleteItemAPISuccess(_ result: APIModel<ResultModel>) {
+        self.dismiss(animated: true)
+        ScreenManager().goMainPages(0, self, family: .itemDeleted)
+        
+        print(result.message)
+    }
+    func deleteItemAPIFail() {
+        guard let itemId = self.wishListData.item_id else {return}
+        ItemDataManager().deleteItemDataManager(itemId, self)
     }
 }
