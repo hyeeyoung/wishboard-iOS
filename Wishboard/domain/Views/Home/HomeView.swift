@@ -124,6 +124,11 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 as? WishListCollectionViewCell else{ fatalError() }
         let itemIdx = indexPath.item
         cell.setUpData(self.wishListData[itemIdx])
+        
+        let addCartGesture = AddCartGesture(target: self, action: #selector(addCartButtonDidTap(_:)))
+        addCartGesture.itemId = self.wishListData[itemIdx].item_id
+        cell.cartButton.addGestureRecognizer(addCartGesture)
+        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -136,9 +141,22 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
 }
 extension HomeView {
-    // MARK: 위시리스트 조회
+    @objc func addCartButtonDidTap(_ sender: AddCartGesture) {
+        if let itemId = sender.itemId {
+            let addCartInput = AddCartInput(item_id: itemId)
+            CartDataManager().addCartDataManager(addCartInput, self, self.viewController)
+        }
+    }
+}
+// MARK: - API Success
+extension HomeView {
+    // MARK: 위시리스트 조회 API
     func wishListAPISuccess(_ result: [WishListModel]) {
         self.wishListData = result
         collectionView.reloadData()
     }
+}
+// MARK: - CartGesture
+class AddCartGesture: UITapGestureRecognizer {
+    var itemId: Int?
 }

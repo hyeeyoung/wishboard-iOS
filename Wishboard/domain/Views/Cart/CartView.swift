@@ -196,6 +196,20 @@ extension CartView {
     @objc func deleteItem(_ sender: CartGesture) {
         self.cartTableView.reloadData()
     }
+    // MARK: 계산
+    func calculate() {
+        var totalPrice = 0
+        var totalCount = 0
+        for data in cartData {
+            guard let initPrice = data.wishItem?.item_price else {return}
+            guard let count = data.cartItemInfo?.item_count else {return}
+            
+            totalPrice = totalPrice + Int(initPrice)! * count
+            totalCount = totalCount + count
+        }
+        self.price.text = FormatManager().strToPrice(numStr: String(totalPrice))
+        self.countLabel.text = String(totalCount)
+    }
 }
 // MARK: - API Success
 extension CartView {
@@ -213,19 +227,6 @@ extension CartView {
         CartDataManager().getCartListDataManager(self)
         calculate()
         print(result.message)
-    }
-    func calculate() {
-        var totalPrice = 0
-        var totalCount = 0
-        for data in cartData {
-            guard let initPrice = data.wishItem?.item_price else {return}
-            guard let count = data.cartItemInfo?.item_count else {return}
-            
-            totalPrice = totalPrice + Int(initPrice)! * count
-            totalCount = totalCount + count
-        }
-        self.price.text = String(totalPrice)
-        self.countLabel.text = String(totalCount)
     }
 }
 // MARK: - CartGesture

@@ -50,4 +50,20 @@ class CartDataManager {
             }
         }
     }
+    // MARK: - 장바구니 추가
+    func addCartDataManager(_ parameter: AddCartInput,_ homeView: HomeView, _ viewcontroller: HomeViewController) {
+        AF.request(BaseURL + "/cart",
+                           method: .post,
+                           parameters: parameter,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            switch response.result {
+            case .success(let result):
+                viewcontroller.addCartAPISuccess(result)
+            case .failure(let error):
+                print(error.responseCode)
+            }
+        }
+    }
 }

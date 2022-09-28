@@ -64,4 +64,9 @@ extension HomeViewController {
     func wishListAPIFail() {
         WishListDataManager().wishListDataManager(self.homeView, self)
     }
+    // MARK: 카트 추가 API
+    func addCartAPISuccess(_ result: APIModel<ResultModel>) {
+        WishListDataManager().wishListDataManager(self.homeView, self)
+        print(result.message)
+    }
 }

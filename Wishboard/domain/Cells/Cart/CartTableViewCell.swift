@@ -109,7 +109,7 @@ extension CartTableViewCell {
         guard let price = data.wishItem?.item_price else {return}
         
         self.countLabel.text = String(count)
-        self.priceLabel.text = String(count * Int(price)!)
+        self.priceLabel.text = FormatManager().strToPrice(numStr: String(count * Int(price)!))
         
     }
 }
