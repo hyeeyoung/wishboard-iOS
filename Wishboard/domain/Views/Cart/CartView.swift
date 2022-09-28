@@ -156,15 +156,16 @@ extension CartView: UITableViewDelegate, UITableViewDataSource {
         
         let plusGesture = CartGesture(target: self, action: #selector(plusButtonDidTap(_:)))
         let minusGesture = CartGesture(target: self, action: #selector(minusButtonDidTap(_:)))
-        let deleteGesture = CartGesture(target: self, action: #selector(deleteItem(_:)))
+        let deleteGesture = CartGesture(target: self, action: #selector(deleteButtonDidTap(_:)))
         
         plusGesture.cartItem = self.cartData[itemIdx]
         minusGesture.cartItem = self.cartData[itemIdx]
-        plusGesture.cartItem = self.cartData[itemIdx]
+        deleteGesture.cartItem = self.cartData[itemIdx]
         
         cell.plusButton.addGestureRecognizer(plusGesture)
         cell.minusButton.addGestureRecognizer(minusGesture)
         cell.deleteButton.addGestureRecognizer(deleteGesture)
+        
         cell.selectionStyle = .none
         return cell
     }
@@ -193,8 +194,9 @@ extension CartView {
         let modifyCountInput = CartModifyCountInput(item_count: itemCount)
         CartDataManager().modifyCountDataManager(itemId, modifyCountInput, self)
     }
-    @objc func deleteItem(_ sender: CartGesture) {
-        self.cartTableView.reloadData()
+    @objc func deleteButtonDidTap(_ sender: CartGesture) {
+        guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
+        CartDataManager().deleteCartDataManager(itemId, self)
     }
     // MARK: 계산
     func calculate() {
@@ -222,10 +224,14 @@ extension CartView {
     func getCartListAPIFail() {
         CartDataManager().getCartListDataManager(self)
     }
-    // MARK: 카트 수량 변경 API
+    // MARK: 장바구니 수량 변경 API
     func modifyCountAPISuccess(_ result: APIModel<ResultModel>) {
         CartDataManager().getCartListDataManager(self)
-        calculate()
+        print(result.message)
+    }
+    // MARK: 장바구니 삭제 API
+    func deleteCartAPISuccess(_ result: APIModel<ResultModel>) {
+        CartDataManager().getCartListDataManager(self)
         print(result.message)
     }
 }

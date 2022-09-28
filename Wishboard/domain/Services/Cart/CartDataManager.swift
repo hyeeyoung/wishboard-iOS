@@ -66,4 +66,20 @@ class CartDataManager {
             }
         }
     }
+    // MARK: - 장바구니 삭제
+    func deleteCartDataManager(_ itemId: Int, _ cartView: CartView) {
+        AF.request(BaseURL + "/cart/\(itemId)",
+                           method: .delete,
+                           parameters: nil,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            switch response.result {
+            case .success(let result):
+                cartView.deleteCartAPISuccess(result)
+            case .failure(let error):
+                print(error.responseCode)
+            }
+        }
+    }
 }
