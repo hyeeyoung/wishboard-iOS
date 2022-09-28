@@ -13,6 +13,7 @@ class FolderCollectionViewCell: UICollectionViewCell {
     
     let folderImage = UIImageView().then{
         $0.backgroundColor = .systemGray6
+        $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
     }
     let folderType = UILabel().then{

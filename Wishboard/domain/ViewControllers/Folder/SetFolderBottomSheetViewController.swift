@@ -14,6 +14,7 @@ class SetFolderBottomSheetViewController: UIViewController {
     var selectedFolderId: Int?     // 선택된 폴더 id (서버로 전송될 folder_id값)
     var preUploadVC: UploadItemViewController!
     var preItemDetailVC: ItemDetailViewController!
+    var itemId: Int?    // 아이템 폴더 수정 시 itemId
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,11 @@ class SetFolderBottomSheetViewController: UIViewController {
         if let preVC = self.preUploadVC {
             let indexPath = IndexPath(row: 3, section: 0)
             preVC.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+        if let preVC = self.preItemDetailVC {
+            preVC.wishListData.folder_id = self.selectedFolderId
+            preVC.wishListData.folder_name = self.selectedFolder
+            preVC.itemDetailView.itemDetailTableView.reloadData()
         }
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -88,11 +94,16 @@ extension SetFolderBottomSheetViewController: UITableViewDelegate, UITableViewDa
         self.selectedFolder = folderListData[idx].folder_name
         self.selectedFolderId = folderListData[idx].folder_id
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if let itemId = self.itemId {
+            FolderDataManager().modifyItemFolderDataManager(itemId, self.selectedFolderId!, self)
+        }
         self.dismiss(animated: true)
     }
 }
 // MARK: - API Success
 extension SetFolderBottomSheetViewController {
+    // MARK: 폴더 리스트 가져오기
     func getFolderListAPISuccess(_ result: [FolderListModel]) {
         self.folderListData = result
         // reload data with animation
@@ -105,5 +116,9 @@ extension SetFolderBottomSheetViewController {
     }
     func getFolderListAPIFail() {
         FolderDataManager().getFolderListDataManager(self)
+    }
+    // MARK: 아이템의 폴더 수정
+    func modifyItemFolderAPISuccess(_ result: APIModel<ResultModel>) {
+        print(result.message)
     }
 }

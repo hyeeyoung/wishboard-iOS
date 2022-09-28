@@ -46,8 +46,9 @@ class ItemDetailViewController: UIViewController {
     @objc func setFolder() {
         let vc = SetFolderBottomSheetViewController()
         vc.setPreViewController(self)
-            vc.selectedFolderId = self.wishListData.folder_id
-            vc.selectedFolder = self.wishListData.folder_name
+        vc.itemId = self.wishListData.item_id
+        vc.selectedFolderId = self.wishListData.folder_id
+        vc.selectedFolder = self.wishListData.folder_name
         let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: vc)
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
         bottomSheet.dismissOnDraggingDownSheet = false

@@ -127,4 +127,27 @@ class FolderDataManager {
             }
         }
     }
+    // MARK: - 아이템의 폴더 수정
+    func modifyItemFolderDataManager(_ itemId: Int, _ folderId: Int, _ viewcontroller: SetFolderBottomSheetViewController) {
+        AF.request(BaseURL + "/item/\(itemId)/folder/\(folderId)",
+                           method: .put,
+                           parameters: nil,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            switch response.result {
+            case .success(let result):
+                viewcontroller.modifyItemFolderAPISuccess(result)
+            case .failure(let error):
+//                let statusCode = error.responseCode
+//                switch statusCode {
+//                case 429:
+//                    viewcontroller.getFolderDetailAPIFail()
+//                default:
+//                    print(error.responseCode)
+//                }
+                print(error.responseCode)
+            }
+        }
+    }
 }
