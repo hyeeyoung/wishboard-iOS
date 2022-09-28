@@ -13,7 +13,7 @@ class WishListDataManager {
     let header = APIManager().getHeader()
     
     // MARK: - 홈화면 위시리스트 조회 + 상세 조회
-    func wishListDataManager(_ viewcontroller: HomeView) {
+    func wishListDataManager(_ homeView: HomeView, _ viewcontroller: HomeViewController) {
         AF.request(BaseURL + "/item",
                            method: .get,
                            parameters: nil,
@@ -22,10 +22,15 @@ class WishListDataManager {
             .responseDecodable(of: [WishListModel].self) { response in
             switch response.result {
             case .success(let result):
-                viewcontroller.wishListAPISuccess(result)
+                homeView.wishListAPISuccess(result)
             case .failure(let error):
-                print(error.responseCode)
-                print(error.localizedDescription)
+                let statusCode = error.responseCode
+                switch statusCode {
+                case 429:
+                    viewcontroller.wishListAPIFail()
+                default:
+                    print(error.responseCode)
+                }
             }
         }
     }

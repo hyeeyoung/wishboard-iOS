@@ -30,11 +30,11 @@ class HomeViewController: UIViewController {
         
         self.homeView.cartButton.addTarget(self, action: #selector(goToCart), for: .touchUpInside)
         // DATA
-        WishListDataManager().wishListDataManager(self.homeView)
+        WishListDataManager().wishListDataManager(self.homeView, self)
     }
     override func viewDidAppear(_ animated: Bool) {
         // DATA
-        WishListDataManager().wishListDataManager(self.homeView)
+        WishListDataManager().wishListDataManager(self.homeView, self)
     }
     @objc func goToCart() {
         let cartVC = CartViewController()
@@ -60,5 +60,8 @@ extension HomeViewController {
     // MARK: 알림 허용 팝업창
     func switchNotificationAPISuccess(_ result: APIModel<ResultModel>) {
         print(result.message)
+    }
+    func wishListAPIFail() {
+        WishListDataManager().wishListDataManager(self.homeView, self)
     }
 }

@@ -105,4 +105,26 @@ class FolderDataManager {
             }
         }
     }
+    // MARK: - 폴더 내 아이템 조회
+    func getFolderDetailDataManager(_ folderId: Int, _ viewcontroller: FolderDetailViewController) {
+        AF.request(BaseURL + "/folder/item/\(folderId)",
+                           method: .get,
+                           parameters: nil,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: [WishListModel].self) { response in
+            switch response.result {
+            case .success(let result):
+                viewcontroller.getFolderDetailAPISuccess(result)
+            case .failure(let error):
+                let statusCode = error.responseCode
+                switch statusCode {
+                case 429:
+                    viewcontroller.getFolderDetailAPIFail()
+                default:
+                    print(error.responseCode)
+                }
+            }
+        }
+    }
 }

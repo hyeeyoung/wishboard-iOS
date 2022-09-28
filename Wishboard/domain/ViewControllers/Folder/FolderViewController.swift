@@ -51,7 +51,12 @@ extension FolderViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let itemIdx = indexPath.item
+        let folderName = self.folderData[itemIdx].folder_name
+        let folderId = self.folderData[itemIdx].folder_id
         let folderDetailVC = FolderDetailViewController()
+        folderDetailVC.folderName = folderName
+        folderDetailVC.folderId = folderId
         folderDetailVC.modalPresentationStyle = .fullScreen
         self.present(folderDetailVC, animated: true, completion: nil)
     }
