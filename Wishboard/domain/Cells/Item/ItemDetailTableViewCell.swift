@@ -159,13 +159,19 @@ class ItemDetailTableViewCell: UITableViewCell {
         if let url = data.item_img_url {
             self.itemImage.kf.setImage(with: URL(string: url), placeholder: UIImage())
         }
-        if data.item_notification_type == nil {
+        if let notificationType = data.item_notification_type {
+            if let notificationDate = data.item_notification_date {
+                let notiDateStr = DateManager().notiDateToKoreanStr(notificationDate)
+                self.restockLabel.text = notificationType
+                self.restockDateLabel.text = notiDateStr
+            }
+        } else {
             self.restockLabel.isHidden = true
             self.restockDateLabel.isHidden = true
         }
         if let folderName = data.folder_name {self.setFolderButton.setFolderButton(folderName)}
         if let createdDate = data.create_at {
-            self.dateLabel.text = DateManager().dateToKoreanStr(createdDate)
+            self.dateLabel.text = DateManager().createdDateToKoreanStr(createdDate)
         }
         if let itemName = data.item_name {self.itemNameLabel.text = itemName}
         if let itemPrice = data.item_price {self.priceLabel.text = itemPrice}

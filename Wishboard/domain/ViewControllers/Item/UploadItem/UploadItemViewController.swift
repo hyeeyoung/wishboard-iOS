@@ -176,7 +176,7 @@ extension UploadItemViewController {
                 else {cell.textLabel?.text = cellTitleArray[tag - 1]}
             case 4:
                 if let notiType = self.wishListData.item_notification_type {
-                    cell.textLabel?.text = "[" + notiType + "] " + DateManager().dateToKoreanStr(self.wishListData.item_notification_date!)!
+                    cell.textLabel?.text = "[" + notiType + "] " + DateManager().notiDateToKoreanStr(self.wishListData.item_notification_date!)!
                 }
                 else {cell.textLabel?.text = cellTitleArray[tag - 1]}
             case 5:

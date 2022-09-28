@@ -8,10 +8,19 @@
 import Foundation
 
 class DateManager {
-    // 서버에서 받은 데이터를 "YY년 MM월 dd일 HH:mm"로 변환
-    func dateToKoreanStr(_ date: String) -> String? {
-        let dateToDate = date.toDate()  //YYYY-MM-dd HH:mm:ss
-        let dateformatter = DateFormatter()
+    // 서버에서 받은 created_at을 "YY년 MM월 dd일 HH:mm"로 변환
+    func createdDateToKoreanStr(_ date: String) -> String? {
+        let dateToDate = date.toCreatedDate()  //YYYY-MM-dd HH:mm:ss
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "YY년 MM월 dd일 HH:mm"
+        if let dateToDate = dateToDate {
+            return dateformatter.string(from: dateToDate)
+        } else {return nil}
+    }
+    // 서버에서 받은 notification_date를 "YY년 MM월 dd일 HH:mm"로 변환
+    func notiDateToKoreanStr(_ date: String) -> String? {
+        let dateToDate = date.toNotiDate() //YYYY-MM-dd HH:mm
+        let dateformatter = DateFormatter()
         dateformatter.dateFormat = "YY년 MM월 dd일 HH:mm"
         if let dateToDate = dateToDate {
             return dateformatter.string(from: dateToDate)
@@ -39,9 +48,19 @@ class DateManager {
     }
 }
 extension String {
-    func toDate() -> Date? { //"yyyy-MM-dd HH:mm:ss"
+    func toCreatedDate() -> Date? { //"yyyy-MM-dd HH:mm:ss"
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        if let date = dateFormatter.date(from: self) {
+            return date
+        } else {
+            return nil
+        }
+    }
+    func toNotiDate() -> Date? { //"yyyy-MM-dd HH:mm"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
         dateFormatter.timeZone = TimeZone(identifier: "UTC")
         if let date = dateFormatter.date(from: self) {
             return date
