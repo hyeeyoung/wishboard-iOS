@@ -22,6 +22,8 @@
 		2331868228DA933600F17CBF /* SetLottie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2331868128DA933600F17CBF /* SetLottie.swift */; };
 		2335638128E3210C00C0184C /* FCMInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2335638028E3210C00C0184C /* FCMInput.swift */; };
 		2335638428E3245000C0184C /* WishListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2335638328E3245000C0184C /* WishListDataManager.swift */; };
+		2339D4F928E3CCE300E636FD /* FolderDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339D4F828E3CCE300E636FD /* FolderDataManager.swift */; };
+		2339D4FC28E3CD3800E636FD /* FolderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339D4FB28E3CD3800E636FD /* FolderModel.swift */; };
 		2340CEAA28CB6173007C362F /* HomeBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEA928CB6173007C362F /* HomeBottomSheetView.swift */; };
 		2340CEAC28CB6252007C362F /* HowToCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEAB28CB6252007C362F /* HowToCollectionViewCell.swift */; };
 		2340CEAE28CB65AE007C362F /* HowToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEAD28CB65AE007C362F /* HowToViewController.swift */; };
@@ -222,6 +224,8 @@
 		2331868128DA933600F17CBF /* SetLottie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLottie.swift; sourceTree = "<group>"; };
 		2335638028E3210C00C0184C /* FCMInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMInput.swift; sourceTree = "<group>"; };
 		2335638328E3245000C0184C /* WishListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListDataManager.swift; sourceTree = "<group>"; };
+		2339D4F828E3CCE300E636FD /* FolderDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDataManager.swift; sourceTree = "<group>"; };
+		2339D4FB28E3CD3800E636FD /* FolderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderModel.swift; sourceTree = "<group>"; };
 		2340CEA928CB6173007C362F /* HomeBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomSheetView.swift; sourceTree = "<group>"; };
 		2340CEAB28CB6252007C362F /* HowToCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToCollectionViewCell.swift; sourceTree = "<group>"; };
 		2340CEAD28CB65AE007C362F /* HowToViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToViewController.swift; sourceTree = "<group>"; };
@@ -605,6 +609,7 @@
 		232174E028E1BED9008C155D /* APIModels */ = {
 			isa = PBXGroup;
 			children = (
+				2339D4FA28E3CD2A00E636FD /* FolderModel */,
 				23A85F8028E3AB0500075667 /* AuthenticationModel */,
 				234F838628C97BE400C4EB41 /* WishListModel */,
 				23C2378728C9CEF800CE3200 /* FolderListModel */,
@@ -675,6 +680,22 @@
 				2335638328E3245000C0184C /* WishListDataManager.swift */,
 			);
 			path = WishList;
+			sourceTree = "<group>";
+		};
+		2339D4F728E3CCD700E636FD /* Folder */ = {
+			isa = PBXGroup;
+			children = (
+				2339D4F828E3CCE300E636FD /* FolderDataManager.swift */,
+			);
+			path = Folder;
+			sourceTree = "<group>";
+		};
+		2339D4FA28E3CD2A00E636FD /* FolderModel */ = {
+			isa = PBXGroup;
+			children = (
+				2339D4FB28E3CD3800E636FD /* FolderModel.swift */,
+			);
+			path = FolderModel;
 			sourceTree = "<group>";
 		};
 		2344949528D78AA400CF3BD9 /* Register */ = {
@@ -804,6 +825,7 @@
 		23C3113128DF62C100A636F6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				2339D4F728E3CCD700E636FD /* Folder */,
 				2335638228E3243E00C0184C /* WishList */,
 				23EC504A28E266F700AAA57E /* Mypage */,
 				232174D928E1BE71008C155D /* Authentication */,
@@ -1526,6 +1548,7 @@
 				23E378E928D303B500C52F2D /* ShoppingLinkViewController.swift in Sources */,
 				2344949928D78F6300CF3BD9 /* RegisterPasswordViewController.swift in Sources */,
 				2374789A28D1DB2900CF941A /* CheckNotch.swift in Sources */,
+				2339D4FC28E3CD3800E636FD /* FolderModel.swift in Sources */,
 				2335638128E3210C00C0184C /* FCMInput.swift in Sources */,
 				23DC04B028C58B5200ABB0CF /* SceneDelegate.swift in Sources */,
 				2360FF5C28DCB31600E481A6 /* SnackBar.swift in Sources */,
@@ -1574,6 +1597,7 @@
 				23C9567B28C67B9D00D88536 /* OnBoardingTableViewCell.swift in Sources */,
 				237478A228D2008300CF941A /* SetFolderBottomSheetViewController.swift in Sources */,
 				23C5AB4B28CAA24300A7E977 /* MyPageViewController.swift in Sources */,
+				2339D4F928E3CCE300E636FD /* FolderDataManager.swift in Sources */,
 				23DC04EB28C591F400ABB0CF /* OnBoardingViewController.swift in Sources */,
 				23BB603528E2709C007EA1EF /* ModifyProfileInput.swift in Sources */,
 				23C2378B28C9CF1D00CE3200 /* FolderCollectionViewCell.swift in Sources */,

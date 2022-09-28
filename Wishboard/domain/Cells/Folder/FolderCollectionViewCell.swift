@@ -76,4 +76,12 @@ class FolderCollectionViewCell: UICollectionViewCell {
             make.leading.equalTo(countLabel.snp.trailing).offset(3)
         }
     }
+    // API
+    func setUpData(_ data: FolderModel) {
+        if let image = data.folder_thumbnail {
+            self.folderImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
+        }
+        if let folderName = data.folder_name {folderType.text = folderName}
+        if let itemCount = data.item_count {countLabel.text = String(itemCount)}
+    }
 }

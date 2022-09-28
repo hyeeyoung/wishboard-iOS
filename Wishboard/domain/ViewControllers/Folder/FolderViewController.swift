@@ -12,6 +12,7 @@ class FolderViewController: UIViewController {
     var folderView : FolderView!
     let emptyMessage = "앗, 폴더가 없어요!\n폴더를 추가해서 아이템을 정리해 보세요!"
     var dialog: PopUpWithTextFieldViewController!
+    var folderData: [FolderModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,23 +20,26 @@ class FolderViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
 
         setFolderView()
+        FolderDataManager().getFolderDataManager(self)
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        FolderDataManager().getFolderDataManager(self)
+    }
 
 }
 // MARK: - CollectionView delegate
 extension FolderViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        let count = wishListData.count ?? 0
-        EmptyView().setEmptyView(self.emptyMessage, self.folderView.folderCollectionView, 7)
-        return 7
+        let count = folderData.count ?? 0
+        EmptyView().setEmptyView(self.emptyMessage, self.folderView.folderCollectionView, count)
+        return count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FolderCollectionViewCell.identifier,
                                                             for: indexPath)
                 as? FolderCollectionViewCell else{ fatalError() }
         let itemIdx = indexPath.item
-//        cell.setUpData(self.wishListData[itemIdx])
+        cell.setUpData(self.folderData[itemIdx])
         
         cell.moreButton.addTarget(self, action: #selector(alertFolderMenu), for: .touchUpInside)
         return cell
@@ -122,5 +126,15 @@ extension FolderViewController {
             self.dismiss(animated: false)
             SnackBar(self, message: .addFolder)
         }
+    }
+}
+// MARK: - API Success
+extension FolderViewController {
+    func getFolderAPISuccess(_ result: [FolderModel]) {
+        self.folderData = result
+        folderView.folderCollectionView.reloadData()
+    }
+    func getFolderAPIFail() {
+        print("폴더 정보 없음")
     }
 }
