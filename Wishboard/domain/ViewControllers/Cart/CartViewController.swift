@@ -25,11 +25,11 @@ class CartViewController: UIViewController {
         
         self.cartView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         // DATA
-        CartDataManager().getFolderDataManager(self.cartView)
+        CartDataManager().getCartListDataManager(self.cartView)
     }
     override func viewDidAppear(_ animated: Bool) {
         // DATA
-        CartDataManager().getFolderDataManager(self.cartView)
+        CartDataManager().getCartListDataManager(self.cartView)
     }
     @objc func goBack() {
         self.dismiss(animated: true)

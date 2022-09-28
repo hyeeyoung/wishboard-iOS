@@ -154,7 +154,17 @@ extension CartView: UITableViewDelegate, UITableViewDataSource {
         let itemIdx = indexPath.item
         cell.setUpData(self.cartData[itemIdx])
         
-        cell.deleteButton.addTarget(self, action: #selector(deleteItem), for: .touchUpInside)
+        let plusGesture = CartGesture(target: self, action: #selector(plusButtonDidTap(_:)))
+        let minusGesture = CartGesture(target: self, action: #selector(minusButtonDidTap(_:)))
+        let deleteGesture = CartGesture(target: self, action: #selector(deleteItem(_:)))
+        
+        plusGesture.cartItem = self.cartData[itemIdx]
+        minusGesture.cartItem = self.cartData[itemIdx]
+        plusGesture.cartItem = self.cartData[itemIdx]
+        
+        cell.plusButton.addGestureRecognizer(plusGesture)
+        cell.minusButton.addGestureRecognizer(minusGesture)
+        cell.deleteButton.addGestureRecognizer(deleteGesture)
         cell.selectionStyle = .none
         return cell
     }
@@ -166,20 +176,43 @@ extension CartView: UITableViewDelegate, UITableViewDataSource {
     }
 }
 extension CartView {
-    @objc func deleteItem() {
+    @objc func plusButtonDidTap(_ sender: CartGesture) {
+        guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
+        guard var itemCount = sender.cartItem?.cartItemInfo?.item_count else {return}
+        itemCount = itemCount + 1
+        
+        let modifyCountInput = CartModifyCountInput(item_count: itemCount)
+        CartDataManager().modifyCountDataManager(itemId, modifyCountInput, self)
+    }
+    @objc func minusButtonDidTap(_ sender: CartGesture) {
+        guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
+        guard var itemCount = sender.cartItem?.cartItemInfo?.item_count else {return}
+        if itemCount == 1 {return}
+        else {itemCount = itemCount - 1}
+        
+        let modifyCountInput = CartModifyCountInput(item_count: itemCount)
+        CartDataManager().modifyCountDataManager(itemId, modifyCountInput, self)
+    }
+    @objc func deleteItem(_ sender: CartGesture) {
         self.cartTableView.reloadData()
     }
 }
 // MARK: - API Success
 extension CartView {
-    // Cart 조회
+    // MARK: Cart 조회 API
     func getCartListAPISuccess(_ result: [CartListModel]) {
         self.cartData = result
         cartTableView.reloadData()
         calculate()
     }
     func getCartListAPIFail() {
-        CartDataManager().getFolderDataManager(self)
+        CartDataManager().getCartListDataManager(self)
+    }
+    // MARK: 카트 수량 변경 API
+    func modifyCountAPISuccess(_ result: APIModel<ResultModel>) {
+        CartDataManager().getCartListDataManager(self)
+        calculate()
+        print(result.message)
     }
     func calculate() {
         var totalPrice = 0
@@ -194,4 +227,8 @@ extension CartView {
         self.price.text = String(totalPrice)
         self.countLabel.text = String(totalCount)
     }
+}
+// MARK: - CartGesture
+class CartGesture: UITapGestureRecognizer {
+    var cartItem: CartListModel?
 }

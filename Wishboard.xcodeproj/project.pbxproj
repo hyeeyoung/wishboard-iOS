@@ -14,6 +14,7 @@
 		232174E828E1D4AF008C155D /* LoginInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E728E1D4AF008C155D /* LoginInput.swift */; };
 		23279A0E28E4981100CAD1CA /* CartDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23279A0D28E4981000CAD1CA /* CartDataManager.swift */; };
 		23279A1128E4989900CAD1CA /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23279A1028E4989900CAD1CA /* CartModel.swift */; };
+		23279A1428E4A12300CAD1CA /* CartInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23279A1328E4A12300CAD1CA /* CartInput.swift */; };
 		2328C5A728CABF300065ABB2 /* NotiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C5A628CABF300065ABB2 /* NotiView.swift */; };
 		2328C5AA28CAC02C0065ABB2 /* NotiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C5A928CAC02C0065ABB2 /* NotiData.swift */; };
 		2328C5AC28CAC1260065ABB2 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C5AB28CAC1260065ABB2 /* NotificationViewController.swift */; };
@@ -219,6 +220,7 @@
 		232174E728E1D4AF008C155D /* LoginInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInput.swift; sourceTree = "<group>"; };
 		23279A0D28E4981000CAD1CA /* CartDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartDataManager.swift; sourceTree = "<group>"; };
 		23279A1028E4989900CAD1CA /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
+		23279A1328E4A12300CAD1CA /* CartInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartInput.swift; sourceTree = "<group>"; };
 		2328C5A628CABF300065ABB2 /* NotiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiView.swift; sourceTree = "<group>"; };
 		2328C5A928CAC02C0065ABB2 /* NotiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiData.swift; sourceTree = "<group>"; };
 		2328C5AB28CAC1260065ABB2 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
@@ -628,6 +630,7 @@
 		232174E128E1BEE9008C155D /* APIInputs */ = {
 			isa = PBXGroup;
 			children = (
+				23279A1228E4A11A00CAD1CA /* CartInput */,
 				2339D4FD28E3CFED00E636FD /* FolderInput */,
 				2335637F28E3210300C0184C /* FCMInput */,
 				23EC504728E266C100AAA57E /* MypageInputs */,
@@ -661,6 +664,14 @@
 				23279A1028E4989900CAD1CA /* CartModel.swift */,
 			);
 			path = CartModel;
+			sourceTree = "<group>";
+		};
+		23279A1228E4A11A00CAD1CA /* CartInput */ = {
+			isa = PBXGroup;
+			children = (
+				23279A1328E4A12300CAD1CA /* CartInput.swift */,
+			);
+			path = CartInput;
 			sourceTree = "<group>";
 		};
 		2328C5A528CABF240065ABB2 /* Notification */ = {
@@ -1613,6 +1624,7 @@
 				23C2378428C9CEE000CE3200 /* FolderViewController.swift in Sources */,
 				23A85F7F28E3AA5400075667 /* LostPasswordDataManager.swift in Sources */,
 				23EC504C28E2670D00AAA57E /* MypageDataManager.swift in Sources */,
+				23279A1428E4A12300CAD1CA /* CartInput.swift in Sources */,
 				234F838D28C9857000C4EB41 /* CartTableViewCell.swift in Sources */,
 				23D4C66628D8ECF300EA7F98 /* GetEmailViewController.swift in Sources */,
 				232174E428E1BF1C008C155D /* RegisterInput.swift in Sources */,
