@@ -70,7 +70,7 @@ extension ItemDetailViewController {
         
         itemDetailView.setTableView(self)
         itemDetailView.setUpNavigationView()
-        if self.wishListData.item_url != nil {itemDetailView.setUpLowerView(true)}
+        if self.wishListData.item_url != "" {itemDetailView.setUpLowerView(true)}
         else {itemDetailView.setUpLowerView(false)}
         itemDetailView.setUpConstraint()
         

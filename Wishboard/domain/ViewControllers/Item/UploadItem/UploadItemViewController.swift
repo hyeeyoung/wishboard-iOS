@@ -180,7 +180,10 @@ extension UploadItemViewController {
                 }
                 else {cell.textLabel?.text = cellTitleArray[tag - 1]}
             case 5:
-                if let link = self.wishListData.item_url {cell.textLabel?.text = link}
+                if let link = self.wishListData.item_url {
+                    if link != "" {cell.textLabel?.text = link}
+                    else {cell.textLabel?.text = cellTitleArray[tag - 1]}
+                }
                 else {cell.textLabel?.text = cellTitleArray[tag - 1]}
             default:
                 fatalError()
