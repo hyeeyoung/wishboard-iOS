@@ -34,4 +34,20 @@ class FolderDataManager {
             }
         }
     }
+    // MARK: - 폴더 추가
+    func addFolderDataManager(_ parameter: AddFolderInput, _ viewcontroller: FolderViewController) {
+        AF.request(BaseURL + "/folder",
+                           method: .post,
+                           parameters: parameter,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            switch response.result {
+            case .success(let result):
+                viewcontroller.addFolderAPISuccess(result)
+            case .failure(let error):
+                print(error.responseCode)
+            }
+        }
+    }
 }

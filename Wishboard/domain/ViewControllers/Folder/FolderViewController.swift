@@ -13,6 +13,7 @@ class FolderViewController: UIViewController {
     let emptyMessage = "앗, 폴더가 없어요!\n폴더를 추가해서 아이템을 정리해 보세요!"
     var dialog: PopUpWithTextFieldViewController!
     var folderData: [FolderModel] = []
+    var folderStr: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,9 @@ class FolderViewController: UIViewController {
         FolderDataManager().getFolderDataManager(self)
     }
     override func viewDidAppear(_ animated: Bool) {
+        FolderDataManager().getFolderDataManager(self)
+    }
+    override func viewWillAppear(_ animated: Bool) {
         FolderDataManager().getFolderDataManager(self)
     }
 
@@ -105,6 +109,7 @@ extension FolderViewController {
         dialog = PopUpWithTextFieldViewController(titleText: "폴더 추가", placeholder: "폴더명", prevText: nil, buttonTitle: "추가")
         dialog.modalPresentationStyle = .overCurrentContext
         dialog.completeButton.addTarget(self, action: #selector(completeAddButtonDidTap), for: .touchUpInside)
+        dialog.textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         self.present(dialog, animated: false, completion: nil)
     }
     @objc func completeModifyButtonDidTap() {
@@ -117,24 +122,36 @@ extension FolderViewController {
             SnackBar(self, message: .modifyFolder)
         }
     }
+    @objc func textFieldEditingChanged(_ sender: UITextField) {
+        let text = sender.text ?? ""
+        self.folderStr = text
+    }
     @objc func completeAddButtonDidTap() {
         let lottieView = dialog.completeButton.setHorizontalLottieView(dialog.completeButton)
         dialog.completeButton.isSelected = true
         lottieView.isHidden = false
-        lottieView.loopMode = .repeat(2) // 2번 반복
         lottieView.play { completion in
-            self.dismiss(animated: false)
-            SnackBar(self, message: .addFolder)
+            let addFolderInput = AddFolderInput(folder_name: self.folderStr)
+            FolderDataManager().addFolderDataManager(addFolderInput, self)
         }
     }
 }
 // MARK: - API Success
 extension FolderViewController {
+    // MARK: 폴더 조회 API
     func getFolderAPISuccess(_ result: [FolderModel]) {
         self.folderData = result
         folderView.folderCollectionView.reloadData()
     }
     func getFolderAPIFail() {
         print("폴더 정보 없음")
+    }
+    // MARK: 폴더 추가 API
+    func addFolderAPISuccess(_ result: APIModel<ResultModel>) {
+        self.folderStr = ""
+        self.dismiss(animated: false)
+        SnackBar(self, message: .addFolder)
+        FolderDataManager().getFolderDataManager(self)
+        print(result.message)
     }
 }
