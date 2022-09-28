@@ -51,7 +51,7 @@ extension CalenderViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         default:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CalenderNotiTableViewCell", for: indexPath) as? CalenderNotiTableViewCell else { return UITableViewCell() }
-            if let date = self.selectedDate {cell.setSelectedDate(date)}
+            if let date = self.selectedDate {cell.setSelectedDate(date); cell.selectedDate = date}
             cell.selectionStyle = .none
             return cell
         }
@@ -78,8 +78,12 @@ extension CalenderViewController: FSCalendarDelegate {
         let convertStr = myDateFormatter.string(from: date)
         
         self.selectedDate = convertStr
-//        print("format::", convertStr)
-        
-        self.calenderView.calenderTableView.reloadData()
+        // reload data with animation
+        UIView.transition(with: calenderView.calenderTableView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                              self.calenderView.calenderTableView.reloadData()},
+                          completion: nil);
     }
 }

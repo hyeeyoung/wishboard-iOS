@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		230A3F5928E4B5CA00966682 /* NotificationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230A3F5828E4B5CA00966682 /* NotificationDataManager.swift */; };
 		230DBFA828E106EE00E9AED6 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230DBFA728E106EE00E9AED6 /* ShareView.swift */; };
 		232174DB28E1BE81008C155D /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174DA28E1BE81008C155D /* RegisterDataManager.swift */; };
 		232174E428E1BF1C008C155D /* RegisterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E328E1BF1C008C155D /* RegisterInput.swift */; };
@@ -16,7 +17,7 @@
 		23279A1128E4989900CAD1CA /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23279A1028E4989900CAD1CA /* CartModel.swift */; };
 		23279A1428E4A12300CAD1CA /* CartInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23279A1328E4A12300CAD1CA /* CartInput.swift */; };
 		2328C5A728CABF300065ABB2 /* NotiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C5A628CABF300065ABB2 /* NotiView.swift */; };
-		2328C5AA28CAC02C0065ABB2 /* NotiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C5A928CAC02C0065ABB2 /* NotiData.swift */; };
+		2328C5AA28CAC02C0065ABB2 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C5A928CAC02C0065ABB2 /* NotificationModel.swift */; };
 		2328C5AC28CAC1260065ABB2 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C5AB28CAC1260065ABB2 /* NotificationViewController.swift */; };
 		2328C5AE28CAC17C0065ABB2 /* NotiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C5AD28CAC17C0065ABB2 /* NotiTableViewCell.swift */; };
 		2328C5B028CAC7930065ABB2 /* ModifyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2328C5AF28CAC7930065ABB2 /* ModifyProfileViewController.swift */; };
@@ -213,6 +214,7 @@
 /* Begin PBXFileReference section */
 		0B45833F72B5C3662B383FBF /* Pods-Wishboard-Share Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wishboard-Share Extension.release.xcconfig"; path = "Target Support Files/Pods-Wishboard-Share Extension/Pods-Wishboard-Share Extension.release.xcconfig"; sourceTree = "<group>"; };
 		1582000F9C7BDE6362679C88 /* Pods_Wishboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wishboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		230A3F5828E4B5CA00966682 /* NotificationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataManager.swift; sourceTree = "<group>"; };
 		230DBFA728E106EE00E9AED6 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		232174DA28E1BE81008C155D /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
 		232174E328E1BF1C008C155D /* RegisterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInput.swift; sourceTree = "<group>"; };
@@ -222,7 +224,7 @@
 		23279A1028E4989900CAD1CA /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
 		23279A1328E4A12300CAD1CA /* CartInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartInput.swift; sourceTree = "<group>"; };
 		2328C5A628CABF300065ABB2 /* NotiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiView.swift; sourceTree = "<group>"; };
-		2328C5A928CAC02C0065ABB2 /* NotiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiData.swift; sourceTree = "<group>"; };
+		2328C5A928CAC02C0065ABB2 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		2328C5AB28CAC1260065ABB2 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		2328C5AD28CAC17C0065ABB2 /* NotiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiTableViewCell.swift; sourceTree = "<group>"; };
 		2328C5AF28CAC7930065ABB2 /* ModifyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyProfileViewController.swift; sourceTree = "<group>"; };
@@ -596,6 +598,14 @@
 			path = OnBoarding;
 			sourceTree = "<group>";
 		};
+		230A3F5728E4B5BE00966682 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				230A3F5828E4B5CA00966682 /* NotificationDataManager.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
 		230DBFA628E106E000E9AED6 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -685,7 +695,7 @@
 		2328C5A828CAC0220065ABB2 /* NotificationModel */ = {
 			isa = PBXGroup;
 			children = (
-				2328C5A928CAC02C0065ABB2 /* NotiData.swift */,
+				2328C5A928CAC02C0065ABB2 /* NotificationModel.swift */,
 			);
 			path = NotificationModel;
 			sourceTree = "<group>";
@@ -860,6 +870,7 @@
 		23C3113128DF62C100A636F6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				230A3F5728E4B5BE00966682 /* Notification */,
 				23279A0C28E497FD00CAD1CA /* Cart */,
 				2339D4F728E3CCD700E636FD /* Folder */,
 				2335638228E3243E00C0184C /* WishList */,
@@ -1585,6 +1596,7 @@
 				2344949928D78F6300CF3BD9 /* RegisterPasswordViewController.swift in Sources */,
 				2374789A28D1DB2900CF941A /* CheckNotch.swift in Sources */,
 				2339D4FC28E3CD3800E636FD /* FolderModel.swift in Sources */,
+				230A3F5928E4B5CA00966682 /* NotificationDataManager.swift in Sources */,
 				2339D4FF28E3CFF900E636FD /* FolderInput.swift in Sources */,
 				2335638128E3210C00C0184C /* FCMInput.swift in Sources */,
 				23DC04B028C58B5200ABB0CF /* SceneDelegate.swift in Sources */,
@@ -1657,7 +1669,7 @@
 				2328C5AE28CAC17C0065ABB2 /* NotiTableViewCell.swift in Sources */,
 				23279A1128E4989900CAD1CA /* CartModel.swift in Sources */,
 				2340CEAE28CB65AE007C362F /* HowToViewController.swift in Sources */,
-				2328C5AA28CAC02C0065ABB2 /* NotiData.swift in Sources */,
+				2328C5AA28CAC02C0065ABB2 /* NotificationModel.swift in Sources */,
 				2344949428D78A9A00CF3BD9 /* RegisterEmailViewController.swift in Sources */,
 				2350FADF28DB9BEA00981B8F /* SetNotificationDate.swift in Sources */,
 			);

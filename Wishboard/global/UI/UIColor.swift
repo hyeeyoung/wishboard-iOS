@@ -14,6 +14,12 @@ extension UIColor{
         blue: 133/255,
         alpha: 1
     )
+    static let wishboardLightGreen = UIColor(
+        red: 124/255,
+        green: 248/255,
+        blue: 133/255,
+        alpha: 0.25
+    )
     static let wishboardGray = UIColor(
         red: 170/255,
         green: 170/255,
@@ -49,5 +55,11 @@ extension UIColor{
         green: 0/255,
         blue: 0/255,
         alpha: 0.7
+    )
+    static let notificationBackgroundGray = UIColor(
+        red: 239/255,
+        green: 239/255,
+        blue: 239/255,
+        alpha: 1
     )
 }

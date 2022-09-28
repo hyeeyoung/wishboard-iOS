@@ -17,7 +17,7 @@ class CalenderNotiTableViewCell: UITableViewCell {
     //MARK: - Life Cycles
     var noticeTableView: UITableView!
     var selectedDate: String!
-    var notiData: [NotiData] = []
+    var notiData: [NotificationModel] = []
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,8 +26,6 @@ class CalenderNotiTableViewCell: UITableViewCell {
         setUpView()
         setUpConstraint()
         
-        // temp data
-        setTempData()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -35,6 +33,10 @@ class CalenderNotiTableViewCell: UITableViewCell {
     // MARK: - Functions
     func setSelectedDate(_ date: String) {
         self.label.text = date + " 일정"
+        self.selectedDate = date    // 00월 00일
+        
+        self.notiData.removeAll()
+        NotificationDataManager().getCalenderNotificationDataManager(self)
     }
     func setUpTableView() {
         noticeTableView = UITableView().then{
@@ -75,7 +77,7 @@ extension CalenderNotiTableViewCell: UITableViewDelegate, UITableViewDataSource 
         let itemIdx = indexPath.item
         cell.setUpData(self.notiData[itemIdx])
 
-        cell.setCalenderNotiCell()
+        cell.setCalenderNotiCell(self.notiData[itemIdx])
         cell.selectionStyle = .none
         return cell
     }
@@ -86,11 +88,29 @@ extension CalenderNotiTableViewCell: UITableViewDelegate, UITableViewDataSource 
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
-// temp data
+// MARK: - API Success
 extension CalenderNotiTableViewCell {
-    func setTempData() {
-        self.notiData.append(NotiData(itemImage: "", itemName: "item1", time: "1주 전", isViewed: false))
-        self.notiData.append(NotiData(itemImage: "", itemName: "item2", time: "2주 전", isViewed: true))
-        self.noticeTableView.reloadData()
+    func getCalenderNotificationAPISuccess(_ result: [NotificationModel]) {
+        let myDateFormatter = DateFormatter()
+        myDateFormatter.dateFormat = "MM월 dd일" // 2020년 08월 13일 오후 04시 30분
+        myDateFormatter.locale = Locale(identifier:"ko_KR") // PM, AM을 언어에 맞게 setting (ex: PM -> 오후)
+
+        for data in result {
+            print(data)
+            let dateStr = myDateFormatter.string(from: (data.item_notification_date?.toCreatedDate())!)
+            if dateStr == self.selectedDate {
+                self.notiData.append(data)
+            }
+        }
+        // reload data with animation
+        UIView.transition(with: noticeTableView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                              self.noticeTableView.reloadData()},
+                          completion: nil);
+    }
+    func getCalenderNotificationAPIFail() {
+        NotificationDataManager().getCalenderNotificationDataManager(self)
     }
 }
