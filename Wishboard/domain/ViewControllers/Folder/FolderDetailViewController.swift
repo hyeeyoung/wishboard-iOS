@@ -141,4 +141,14 @@ extension FolderDetailViewController {
     func getFolderDetailAPIFail() {
         FolderDataManager().getFolderDetailDataManager(self.folderId, self)
     }
+    func noWishList() {
+        self.wishListData = []
+        // reload data with animation
+        UIView.transition(with: folderDetailCollectionView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                              self.folderDetailCollectionView.reloadData()},
+                          completion: nil);
+    }
 }

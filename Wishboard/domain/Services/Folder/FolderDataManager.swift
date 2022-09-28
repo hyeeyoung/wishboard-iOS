@@ -28,6 +28,8 @@ class FolderDataManager {
                 switch statusCode {
                 case 429:
                     viewcontroller.getFolderAPIFail()
+                case 404:
+                    viewcontroller.noFolder()
                 default:
                     print(error.responseCode)
                 }
@@ -121,6 +123,8 @@ class FolderDataManager {
                 switch statusCode {
                 case 429:
                     viewcontroller.getFolderDetailAPIFail()
+                case 404:
+                    viewcontroller.noWishList()
                 default:
                     print(error.responseCode)
                 }
@@ -139,13 +143,6 @@ class FolderDataManager {
             case .success(let result):
                 viewcontroller.modifyItemFolderAPISuccess(result)
             case .failure(let error):
-//                let statusCode = error.responseCode
-//                switch statusCode {
-//                case 429:
-//                    viewcontroller.getFolderDetailAPIFail()
-//                default:
-//                    print(error.responseCode)
-//                }
                 print(error.responseCode)
             }
         }

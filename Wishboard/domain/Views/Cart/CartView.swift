@@ -233,6 +233,16 @@ extension CartView {
     func getCartListAPIFail() {
         CartDataManager().getCartListDataManager(self)
     }
+    func noCartItem() {
+        self.cartData = []
+        // reload data with animation
+        UIView.transition(with: cartTableView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                              self.cartTableView.reloadData()},
+                          completion: nil);
+    }
     // MARK: 장바구니 수량 변경 API
     func modifyCountAPISuccess(_ result: APIModel<ResultModel>) {
         CartDataManager().getCartListDataManager(self)

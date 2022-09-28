@@ -172,6 +172,16 @@ extension FolderViewController {
     func getFolderAPIFail() {
         FolderDataManager().getFolderDataManager(self)
     }
+    func noFolder() {
+        self.folderData = []
+        // reload data with animation
+        UIView.transition(with: folderView.folderCollectionView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                              self.folderView.folderCollectionView.reloadData()},
+                          completion: nil);
+    }
     // MARK: 폴더 추가 API
     func addFolderAPISuccess(_ result: APIModel<ResultModel>) {
         self.folderStr = ""

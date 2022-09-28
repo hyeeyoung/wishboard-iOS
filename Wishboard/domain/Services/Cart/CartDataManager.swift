@@ -28,6 +28,8 @@ class CartDataManager {
                 switch statusCode {
                 case 429:
                     cartView.getCartListAPIFail()
+                case 404:
+                    cartView.noCartItem()
                 default:
                     print(error.responseCode)
                 }
