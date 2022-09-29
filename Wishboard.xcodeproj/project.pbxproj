@@ -113,6 +113,7 @@
 		23A85F8328E3AB1D00075667 /* LostPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F8228E3AB1D00075667 /* LostPasswordModel.swift */; };
 		23A85F8528E3AE6200075667 /* LostPasswordInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F8428E3AE6200075667 /* LostPasswordInput.swift */; };
 		23AADBC128DF8F9800AB75C6 /* NotificationSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AADBC028DF8F9800AB75C6 /* NotificationSettingViewController.swift */; };
+		23B885EC28E5A9B400142FFA /* UploadItemInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233CDED228E4FE0A004E12BC /* UploadItemInput.swift */; };
 		23BB603328E27001007EA1EF /* ModifyProfileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB603228E27001007EA1EF /* ModifyProfileDataManager.swift */; };
 		23BB603528E2709C007EA1EF /* ModifyProfileInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB603428E2709C007EA1EF /* ModifyProfileInput.swift */; };
 		23C2378428C9CEE000CE3200 /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2378328C9CEE000CE3200 /* FolderViewController.swift */; };
@@ -1607,6 +1608,7 @@
 				236FE92128DF8592006142DB /* UIColor.swift in Sources */,
 				236FE94228DF888A006142DB /* FolderCollectionViewCell.swift in Sources */,
 				236FE93928DF85A4006142DB /* SnackBar.swift in Sources */,
+				23B885EC28E5A9B400142FFA /* UploadItemInput.swift in Sources */,
 				23CBAFDC28DFDF8500B41513 /* NewFolderViewController.swift in Sources */,
 				236FE93528DF85A4006142DB /* ScreenManager.swift in Sources */,
 				236FE91F28DF8592006142DB /* UIView.swift in Sources */,

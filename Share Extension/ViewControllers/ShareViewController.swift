@@ -70,6 +70,8 @@ class ShareViewController: UIViewController {
                        item_provider.loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil)
                         { (data, error) in
                                print("URL : \(data)")
+                            self.webURL = (data as! NSURL).absoluteString!
+                            print("WEBBB", self.webURL)
                             ShareDataManager().getItemDataDataManager((data as! NSURL).absoluteString!, self)
                         }
                    }
@@ -81,14 +83,27 @@ class ShareViewController: UIViewController {
     @objc func quit() {
         self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
     }
+    // 위시리스트 추가 버튼
     @objc func completeButtonDidTap() {
         let lottieView = shareView.completeButton.setHorizontalLottieView(shareView.completeButton)
         shareView.completeButton.isSelected = true
         lottieView.isHidden = false
-        lottieView.loopMode = .repeat(2) // 2번 반복
         lottieView.play { completion in
-            self.dismiss(animated: true)
-//            self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
+            // 이미지 uri를 UIImage로 변환
+            let url = URL(string: self.itemImg!)
+            var selectedImage : UIImage?
+            let data = try? Data(contentsOf: url!)
+            DispatchQueue.main.async {
+                selectedImage = UIImage(data: data!)
+                // 폴더 & 알림 날짜 설정까지 했을 경우
+                if var notificationDate = self.notificationDate {
+                    notificationDate = FormatManager().koreanStrToDate(notificationDate)!
+                    ShareDataManager().uploadItemDataManager(self.selectedFolderIdx!, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self.notificationType!, notificationDate, self)
+                } else {
+                    // 폴더만 설정했을 경우
+                    ShareDataManager().uploadItemDataManager(self.selectedFolderIdx!, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self)
+                }
+            }
         }
     }
     // 알람 설정 BottomSheet
@@ -130,7 +145,10 @@ extension ShareViewController: UICollectionViewDelegate, UICollectionViewDataSou
                 cell.setSelectedFolder(false)
             }
         } else {
-            if itemIdx == 0 {cell.setSelectedFolder(true)}
+            if itemIdx == 0 {
+                cell.setSelectedFolder(true)
+                self.selectedFolderIdx = self.folderListData[itemIdx].folder_id
+            }
             else {cell.setSelectedFolder(false)}
         }
         
@@ -139,7 +157,7 @@ extension ShareViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let itemIdx = indexPath.item
         self.selectedFolderIdx = self.folderListData[itemIdx].folder_id!
-        print(self.selectedFolderIdx)
+        
         reloadDataAnimation()
     }
 }
@@ -179,6 +197,11 @@ extension ShareViewController {
     }
     func getItemDataAPIFail() {
         
+    }
+    // MARK: 아이템 간편 등록
+    func uploadItemAPISuccess(_ result: APIModel<ResultModel>) {
+        self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
+        print(result.message)
     }
     func reloadDataAnimation() {
         // reload data with animation

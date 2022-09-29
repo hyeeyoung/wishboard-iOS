@@ -25,6 +25,7 @@ class ItemDetailTableViewCell: UITableViewCell {
     let itemNameLabel = UILabel().then{
         $0.text = "itemName"
         $0.font = UIFont.Suit(size: 18, family: .Regular)
+        $0.numberOfLines = 0
     }
     let priceLabel = UILabel().then{
         $0.text = "0"
@@ -120,7 +121,7 @@ class ItemDetailTableViewCell: UITableViewCell {
             make.centerY.equalTo(setFolderButton)
         }
         itemNameLabel.snp.makeConstraints { make in
-            make.leading.equalTo(itemImage.snp.leading)
+            make.leading.trailing.equalTo(itemImage)
             make.top.equalTo(setFolderButton.snp.bottom).offset(10)
         }
         priceLabel.snp.makeConstraints { make in
