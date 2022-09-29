@@ -6,21 +6,30 @@
 //
 
 import UIKit
+import Kingfisher
 
 @UIApplicationMain
 //@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        // MARK: LaunchScreen
         sleep(2)
+        
+        // MARK: Network check
+        NetworkCheck.shared.startMonitoring()
         
         //MARK: UserDefaults
         UserDefaults.standard.set("http://3.39.165.250:3000", forKey: "url")
-        
+        // MARK: UserDefaults for Share Extension
         let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
         defaults?.set("http://3.39.165.250:3000", forKey: "url")
         defaults?.synchronize()
+        
+        // MARK: Clean Cache
+        let cache = ImageCache.default
+        cache.clearMemoryCache()
+        cache.clearDiskCache()
         
         return true
     }

@@ -310,6 +310,7 @@ extension UploadItemViewController {
             if let itemName = self.wishListData.item_name {textfield.text = itemName}
             textfield.addTarget(self, action: #selector(itemNameTextfieldEditingField(_:)), for: .editingChanged)
         case 2:
+            textfield.keyboardType = .numberPad
             if let price = self.wishListData.item_price {
                 textfield.text = numberFormatter.string(from: NSNumber(value: Int(price)!))
             }

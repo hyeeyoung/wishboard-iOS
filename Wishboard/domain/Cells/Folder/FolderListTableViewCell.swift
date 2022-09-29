@@ -11,6 +11,7 @@ import Kingfisher
 class FolderListTableViewCell: UITableViewCell {
     let image = UIImageView().then{
         $0.backgroundColor = .systemGray6
+        $0.clipsToBounds = true
         $0.layer.cornerRadius = 20
     }
     let folderName = UILabel().then{
@@ -39,10 +40,6 @@ class FolderListTableViewCell: UITableViewCell {
 
         image.image = nil
         folderName.text = nil
-        
-        let cache = ImageCache.default
-        cache.clearMemoryCache()
-        cache.clearDiskCache()
     }
     // MARK: - Functions
     func setUpView() {

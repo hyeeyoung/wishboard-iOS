@@ -54,10 +54,6 @@ class FolderCollectionViewCell: UICollectionViewCell {
         folderImage.image = nil
         folderType.text = nil
         countLabel.text = nil
-        
-        let cache = ImageCache.default
-        cache.clearMemoryCache()
-        cache.clearDiskCache()
     }
     // MARK: - Functions
     func setUpView() {
