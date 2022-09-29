@@ -167,6 +167,7 @@
 		23DC04D128C58B5500ABB0CF /* WishboardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04D028C58B5500ABB0CF /* WishboardUITestsLaunchTests.swift */; };
 		23DC04E928C591E600ABB0CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04E828C591E600ABB0CF /* ViewController.swift */; };
 		23DC04EB28C591F400ABB0CF /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04EA28C591F400ABB0CF /* OnBoardingViewController.swift */; };
+		23DF699F28E5F33C00F7FBD0 /* FCMDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DF699E28E5F33C00F7FBD0 /* FCMDataManager.swift */; };
 		23E378DE28D2EBFA00C52F2D /* PopUpDeleteUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E378DD28D2EBFA00C52F2D /* PopUpDeleteUserViewController.swift */; };
 		23E378E128D2F07500C52F2D /* UploadItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E378E028D2F07500C52F2D /* UploadItemView.swift */; };
 		23E378E328D2F16900C52F2D /* UploadItemPhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E378E228D2F16900C52F2D /* UploadItemPhotoTableViewCell.swift */; };
@@ -354,6 +355,7 @@
 		23DC04D028C58B5500ABB0CF /* WishboardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishboardUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		23DC04E828C591E600ABB0CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		23DC04EA28C591F400ABB0CF /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		23DF699E28E5F33C00F7FBD0 /* FCMDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMDataManager.swift; sourceTree = "<group>"; };
 		23E378DD28D2EBFA00C52F2D /* PopUpDeleteUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDeleteUserViewController.swift; sourceTree = "<group>"; };
 		23E378E028D2F07500C52F2D /* UploadItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemView.swift; sourceTree = "<group>"; };
 		23E378E228D2F16900C52F2D /* UploadItemPhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemPhotoTableViewCell.swift; sourceTree = "<group>"; };
@@ -913,6 +915,7 @@
 		23C3113128DF62C100A636F6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				23DF699D28E5F33300F7FBD0 /* FCM */,
 				23D0824C28E4DC2A00CE541E /* Item */,
 				230A3F5728E4B5BE00966682 /* Notification */,
 				23279A0C28E497FD00CAD1CA /* Cart */,
@@ -1222,6 +1225,14 @@
 				2307A23D28DE545F00E00005 /* Authentication */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		23DF699D28E5F33300F7FBD0 /* FCM */ = {
+			isa = PBXGroup;
+			children = (
+				23DF699E28E5F33C00F7FBD0 /* FCMDataManager.swift */,
+			);
+			path = FCM;
 			sourceTree = "<group>";
 		};
 		23E378DF28D2F05D00C52F2D /* UploadItem */ = {
@@ -1669,6 +1680,7 @@
 				23E378E728D2FDD000C52F2D /* NotificationSettingViewController.swift in Sources */,
 				23C9568B28C6803900D88536 /* UIFont.swift in Sources */,
 				2328C5B028CAC7930065ABB2 /* ModifyProfileViewController.swift in Sources */,
+				23DF699F28E5F33C00F7FBD0 /* FCMDataManager.swift in Sources */,
 				2328C5AC28CAC1260065ABB2 /* NotificationViewController.swift in Sources */,
 				23D5518728C6AFFF00D81B5F /* LoginViewModel.swift in Sources */,
 				232174E828E1D4AF008C155D /* LoginInput.swift in Sources */,

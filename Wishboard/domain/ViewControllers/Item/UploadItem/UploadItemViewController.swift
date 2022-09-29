@@ -167,9 +167,6 @@ extension UploadItemViewController {
                 // 일부 데이터가 존재하는 경우
                 ItemDataManager().uploadItemDataManager(self.selectedImage, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, self)
             }
-            
-            self.viewDidLoad()
-            ScreenManager().goMainPages(0, self, family: .itemUpload)
         }
     }
     // MARK: 저장 버튼 클릭 시 (아이템 수정)
@@ -179,45 +176,27 @@ extension UploadItemViewController {
         lottieView.isHidden = false
         lottieView.play { completion in
             let data = self.wishListData
-            if let image = self.selectedImage {
+            DispatchQueue.main.async {
+                // 이미지 uri를 UIImage로 변환
+                let url = URL(string: (data?.item_img_url!)!)
+                let imgData = try? Data(contentsOf: url!)
+                var selectedImage : UIImage?
+                if self.selectedImage == nil {selectedImage = UIImage(data: imgData!)}
+                else {selectedImage = self.selectedImage}
+                
                 if let folderId = data?.folder_id {
                     // 모든 데이터가 존재하는 경우
                     if let notiType = data?.item_notification_type {
-                        ItemDataManager().modifyItemDataManager(folderId, self.selectedImage, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!, (data?.item_id)!, self)
+                        ItemDataManager().modifyItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!, (data?.item_id)!, self)
                     } else {
                         // 알림 날짜 설정은 하지 않은 경우
-                        ItemDataManager().modifyItemDataManager(folderId, self.selectedImage, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
+                        ItemDataManager().modifyItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
                     }
                 } else {
                     // 일부 데이터가 존재하는 경우
-                    ItemDataManager().modifyItemDataManager(self.selectedImage, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
+                    ItemDataManager().modifyItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
                 }
-                self.viewDidLoad()
-                ScreenManager().goMainPages(0, self, family: .itemUpload)
-            } else {
-                // 이미지 uri를 UIImage로 변환
-                let url = URL(string: (data?.item_img_url!)!)
-                var selectedImage : UIImage?
-                let imgData = try? Data(contentsOf: url!)
-                DispatchQueue.main.async {
-                    selectedImage = UIImage(data: imgData!)
-                    if let folderId = data?.folder_id {
-                        // 모든 데이터가 존재하는 경우
-                        if let notiType = data?.item_notification_type {
-                            ItemDataManager().modifyItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_notification_type)!, (data?.item_notification_date)!, (data?.item_id)!, self)
-                        } else {
-                            // 알림 날짜 설정은 하지 않은 경우
-                            ItemDataManager().modifyItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
-                        }
-                    } else {
-                        // 일부 데이터가 존재하는 경우
-                        ItemDataManager().modifyItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
-                    }
-                }
-                self.viewDidLoad()
-                ScreenManager().goMainPages(0, self, family: .itemModified)
             }
-            
         }
     }
 }
@@ -423,19 +402,28 @@ extension UploadItemViewController: UIImagePickerControllerDelegate, UINavigatio
             let indexPath = IndexPath(row: 0, section: 0)
             self.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
         }
+        // 카메라에서 사진 찍은 경우
+        if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
+            self.selectedImage = image
+            isValidContent()
+            
+            // 첫번째 셀만 reload
+            let indexPath = IndexPath(row: 0, section: 0)
+            self.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
+        }
         picker.dismiss(animated: true, completion: nil)
     }
 }
 // MARK: - API Success
 extension UploadItemViewController {
     func uploadItemAPISuccess(_ result: APIModel<ResultModel>) {
-        ScreenManager().goMainPages(0, self)
-        SnackBar(self, message: .addItem)
+        self.viewDidLoad()
+        ScreenManager().goMainPages(0, self, family: .itemUpload)
         print(result.message)
     }
     func modifyItemAPISuccess(_ result: APIModel<ResultModel>) {
-//        self.viewDidLoad()
-        ScreenManager().goMainPages(0, self, family: .itemUpload)
+        self.viewDidLoad()
+        ScreenManager().goMainPages(0, self, family: .itemModified)
         print(result.message)
     }
 }

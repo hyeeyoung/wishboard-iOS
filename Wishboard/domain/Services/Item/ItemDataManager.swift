@@ -220,7 +220,7 @@ class ItemDataManager {
                     do {
                         let decoder = JSONDecoder()
                         let result = try decoder.decode(APIModel<ResultModel>.self, from: data)
-                        viewcontroller.uploadItemAPISuccess(result)
+                        viewcontroller.modifyItemAPISuccess(result)
                         print(result)
                     } catch {
                         print("error", data)
@@ -267,7 +267,7 @@ class ItemDataManager {
                     do {
                         let decoder = JSONDecoder()
                         let result = try decoder.decode(APIModel<ResultModel>.self, from: data)
-                        viewcontroller.uploadItemAPISuccess(result)
+                        viewcontroller.modifyItemAPISuccess(result)
                         print(result)
                     } catch {
                         let str = String(decoding: data, as: UTF8.self)
@@ -313,7 +313,7 @@ class ItemDataManager {
                     do {
                         let decoder = JSONDecoder()
                         let result = try decoder.decode(APIModel<ResultModel>.self, from: data)
-                        viewcontroller.uploadItemAPISuccess(result)
+                        viewcontroller.modifyItemAPISuccess(result)
                         print(result)
                     } catch {
 //                        print("error", data) //error 38bytes

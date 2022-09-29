@@ -9,7 +9,7 @@ import UIKit
 
 class NotificationViewController: UIViewController {
     var notiView: NotiView!
-
+    // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,9 +24,18 @@ class NotificationViewController: UIViewController {
         }
         // DATA
         NotificationDataManager().getNotificationListDataManager(self.notiView)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goCalenderDidTap(sender:)))
+        notiView.navigationView.addGestureRecognizer(tapGesture)
     }
     override func viewDidAppear(_ animated: Bool) {
         // DATA
         NotificationDataManager().getNotificationListDataManager(self.notiView)
+    }
+    // MARK: - Actions
+    @objc func goCalenderDidTap(sender: UITapGestureRecognizer) {
+        let calenderVC = CalenderViewController()
+        calenderVC.modalPresentationStyle = .fullScreen
+        self.present(calenderVC, animated: true, completion: nil)
     }
 }

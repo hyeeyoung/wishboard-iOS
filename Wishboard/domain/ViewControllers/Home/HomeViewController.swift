@@ -32,6 +32,7 @@ class HomeViewController: UIViewController {
         self.homeView.cartButton.addTarget(self, action: #selector(goToCart), for: .touchUpInside)
         // DATA
         WishListDataManager().wishListDataManager(self.homeView, self)
+        sendFCM()
     }
     override func viewDidAppear(_ animated: Bool) {
         // DATA
@@ -70,6 +71,10 @@ extension HomeViewController {
         WishListDataManager().wishListDataManager(self.homeView, self)
         print(result.message)
     }
+    // MARK: FCM API
+    func fcmAPISuccess(_ result: APIModel<ResultModel>) {
+        print(result.message)
+    }
 }
 // MARK: - Token User Defaults for Share Extension
 extension HomeViewController {
@@ -78,5 +83,11 @@ extension HomeViewController {
         let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
         defaults?.set(token, forKey: "token")
         defaults?.synchronize()
+    }
+    func sendFCM() {
+        // Send FCM token to server
+        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
+        let fcmInput = FCMInput(fcm_token: deviceToken)
+        FCMDataManager().fcmDataManager(fcmInput, self)
     }
 }

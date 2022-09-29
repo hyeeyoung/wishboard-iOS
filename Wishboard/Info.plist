@@ -16,7 +16,7 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>저희 앱은 카메라를 이용합니다.</string>
+	<string>Wishboard는 사용자의 카메라를 이용합니다.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Montserrat-Regular.ttf</string>

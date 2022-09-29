@@ -33,6 +33,11 @@ class CalenderViewController: UIViewController {
         calenderView.setTableView(dataSourceDelegate: self)
         calenderView.setUpView()
         calenderView.setUpConstraint()
+        
+        calenderView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+    }
+    @objc func goBack() {
+        self.dismiss(animated: true)
     }
 
 }
