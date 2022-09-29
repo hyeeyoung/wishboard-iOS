@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Lottie
 
 class NewFolderViewController: UIViewController {
     let titleLabel = UILabel().then{
@@ -40,6 +41,10 @@ class NewFolderViewController: UIViewController {
     // MARK: - Life Cycles
     var folderStr: String!
     var tempFolderStr: String!
+    var isAddSuccess: Bool = false
+    var preVC: ShareViewController!
+    
+    var lottieView: AnimationView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +62,12 @@ class NewFolderViewController: UIViewController {
         
         self.newFolderTextField.addTarget(self, action: #selector(folderTextFieldEditingChanged(_:)), for: .editingChanged)
         self.exitBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        self.completeButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        self.completeButton.addTarget(self, action: #selector(addNewFolderButtonDidTap), for: .touchUpInside)
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        if let preVC = self.preVC {
+            if isAddSuccess {FolderDataManager().getFolderListDataManager(preVC)}
+        }
     }
     // MARK: - Functions
     func setUpView() {
@@ -101,6 +111,16 @@ class NewFolderViewController: UIViewController {
     @objc func goBack() {
         self.dismiss(animated: true)
     }
+    @objc func addNewFolderButtonDidTap() {
+        lottieView = self.completeButton.setHorizontalLottieView(self.completeButton)
+        self.completeButton.isSelected = true
+        lottieView.isHidden = false
+        lottieView.play { completion in
+            let addFolderInput = AddFolderInput(folder_name: self.folderStr)
+            FolderDataManager().addFolderDataManager(addFolderInput, self)
+        }
+        
+    }
     @objc func folderTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
         
@@ -111,16 +131,37 @@ class NewFolderViewController: UIViewController {
     }
     func checkValidFolder(_ folder: String, _ isValidCount: Bool) {
         // TODO: 유효한 폴더명인 지 확인 필요
-        let isValid: Bool = true
-        if isValid && isValidCount {
+        if isValidCount {
+            self.textFieldCountLabel.textColor = .wishboardGray
             self.errorMessage.isHidden = true
+            self.completeButton.isSelected = false
             self.completeButton.defaultButton("추가", .wishboardGreen, .black)
             self.completeButton.isEnabled = true
             self.folderStr = self.tempFolderStr
         } else {
-            self.errorMessage.isHidden = false
+            self.textFieldCountLabel.textColor = .wishboardRed
+            self.errorMessage.isHidden = true
+            self.completeButton.isSelected = false
             self.completeButton.defaultButton("추가", .wishboardDisabledGray, .gray)
             self.completeButton.isEnabled = false
         }
+    }
+}
+// MARK: - API Success
+extension NewFolderViewController {
+    // MARK: 새 폴더 추가 API
+    func addFolderAPISuccess(_ result: APIModel<ResultModel>) {
+        self.isAddSuccess = true
+        self.viewDidLoad()
+        self.dismiss(animated: true)
+        
+        print(result.message)
+    }
+    func addFolderAPIFail() {
+        self.lottieView.isHidden = true
+        self.completeButton.reloadInputViews()
+        self.errorMessage.isHidden = false
+        self.completeButton.defaultButton("추가", .wishboardDisabledGray, .gray)
+        self.completeButton.isEnabled = false
     }
 }

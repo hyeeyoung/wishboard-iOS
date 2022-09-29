@@ -102,6 +102,7 @@ class ShareViewController: UIViewController {
     }
     // 새 폴더 추가 BottomSheet
     @objc func showAddNewFolderBottomSheet() {
+        newFoldervc.preVC = self
         let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: newFoldervc)
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
         bottomSheet.dismissOnDraggingDownSheet = false
@@ -139,13 +140,7 @@ extension ShareViewController: UICollectionViewDelegate, UICollectionViewDataSou
         let itemIdx = indexPath.item
         self.selectedFolderIdx = self.folderListData[itemIdx].folder_id!
         print(self.selectedFolderIdx)
-        // reload data with animation
-        UIView.transition(with: shareView.folderCollectionView,
-                          duration: 0.35,
-                          options: .transitionCrossDissolve,
-                          animations: { () -> Void in
-                              self.shareView.folderCollectionView.reloadData()},
-                          completion: nil);
+        reloadDataAnimation()
     }
 }
 // MARK: - API Success
@@ -153,13 +148,7 @@ extension ShareViewController {
     // MARK: 폴더 리스트 조회 API
     func getFolderListAPISuccess(_ result: [FolderListModel]) {
         self.folderListData = result
-        // reload data with animation
-        UIView.transition(with: shareView.folderCollectionView,
-                          duration: 0.35,
-                          options: .transitionCrossDissolve,
-                          animations: { () -> Void in
-                              self.shareView.folderCollectionView.reloadData()},
-                          completion: nil);
+        reloadDataAnimation()
     }
     func getFolderListAPIFail() {
         FolderDataManager().getFolderListDataManager(self)
@@ -190,5 +179,14 @@ extension ShareViewController {
     }
     func getItemDataAPIFail() {
         
+    }
+    func reloadDataAnimation() {
+        // reload data with animation
+        UIView.transition(with: shareView.folderCollectionView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                              self.shareView.folderCollectionView.reloadData()},
+                          completion: nil);
     }
 }
