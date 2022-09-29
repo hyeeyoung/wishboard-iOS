@@ -10,7 +10,7 @@ import UIKit
 
 class ScreenManager {
     enum Family: String {
-        case itemDeleted, profileModified, itemUpload
+        case itemDeleted, profileModified, itemUpload, itemModified
     }
     func goMain(_ viewcontroller: UIViewController) {
         // 첫화면으로 전환
@@ -38,6 +38,8 @@ class ScreenManager {
             SnackBar(tabBarController, message: .modifyProfile)
         case .itemUpload:
             SnackBar(tabBarController, message: .addItem)
+        case .itemModified:
+            SnackBar(tabBarController, message: .modifyItem)
         default:
             viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
         }

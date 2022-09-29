@@ -183,34 +183,41 @@ extension UploadItemViewController {
                 if let folderId = data?.folder_id {
                     // 모든 데이터가 존재하는 경우
                     if let notiType = data?.item_notification_type {
-                        ItemDataManager().uploadItemDataManager(folderId, image, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!, (data?.item_id)!, self)
+                        ItemDataManager().modifyItemDataManager(folderId, self.selectedImage, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!, (data?.item_id)!, self)
                     } else {
                         // 알림 날짜 설정은 하지 않은 경우
-                        ItemDataManager().uploadItemDataManager(folderId, image, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!,(data?.item_id)!, self)
+                        ItemDataManager().modifyItemDataManager(folderId, self.selectedImage, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
                     }
                 } else {
                     // 일부 데이터가 존재하는 경우
-                    ItemDataManager().uploadItemDataManager(image, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
+                    ItemDataManager().modifyItemDataManager(self.selectedImage, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
                 }
+                self.viewDidLoad()
+                ScreenManager().goMainPages(0, self, family: .itemUpload)
             } else {
-                if let folderId = data?.folder_id {
-                    // 모든 데이터가 존재하는 경우
-                    if let notiType = data?.item_notification_type {
-                        let uploadItemInput = UploadItemInputWithAll(item_img: data?.item_img_url, item_name: data?.item_name, item_price: data?.item_price, item_url: data?.item_url, item_memo: data?.item_memo, folder_id: folderId, item_notification_date: data?.item_notification_date, item_notification_type: data?.item_notification_type)
-                        ItemDataManager().modifyItemDataManager((data?.item_id)!, uploadItemInput, self)
+                // 이미지 uri를 UIImage로 변환
+                let url = URL(string: (data?.item_img_url!)!)
+                var selectedImage : UIImage?
+                let imgData = try? Data(contentsOf: url!)
+                DispatchQueue.main.async {
+                    selectedImage = UIImage(data: imgData!)
+                    if let folderId = data?.folder_id {
+                        // 모든 데이터가 존재하는 경우
+                        if let notiType = data?.item_notification_type {
+                            ItemDataManager().modifyItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_notification_type)!, (data?.item_notification_date)!, (data?.item_id)!, self)
+                        } else {
+                            // 알림 날짜 설정은 하지 않은 경우
+                            ItemDataManager().modifyItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
+                        }
                     } else {
-                        // 알림 날짜 설정은 하지 않은 경우
-                        let uploadItemInput = UploadItemInputWithFolder(item_img: data?.item_img_url, item_name: data?.item_name, item_price: data?.item_price, item_url: data?.item_url, item_memo: data?.item_memo, folder_id: folderId)
-                        ItemDataManager().modifyItemDataManager((data?.item_id)!, uploadItemInput, self)
+                        // 일부 데이터가 존재하는 경우
+                        ItemDataManager().modifyItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
                     }
-                } else {
-                    // 일부 데이터가 존재하는 경우
-                    let uploadItemInput = UploadItemInput(item_img: data?.item_img_url, item_name: data?.item_name, item_price: data?.item_price, item_url: data?.item_url, item_memo: data?.item_memo)
-                    ItemDataManager().modifyItemDataManager((data?.item_id)!, uploadItemInput, self)
                 }
+                self.viewDidLoad()
+                ScreenManager().goMainPages(0, self, family: .itemModified)
             }
-            self.viewDidLoad()
-            ScreenManager().goMainPages(0, self, family: .itemUpload)
+            
         }
     }
 }
@@ -265,6 +272,7 @@ extension UploadItemViewController {
                 make.centerY.equalToSuperview()
                 make.trailing.equalTo(arrowImg.snp.leading)
             }
+            if !isUploadItem {subTitle.isHidden = true}
             // 만약 쇼핑몰 링크를 수정했다면 업데이트
             if let link = linkvc.link {
                 cell.textLabel?.text = link

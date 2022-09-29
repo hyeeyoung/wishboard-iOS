@@ -180,7 +180,7 @@ class ItemDataManager {
         }
     }
     // MARK: - 아이템 수정 - 모든 데이터가 존재하는 경우
-    func uploadItemDataManager(_ folderId: Int,
+    func modifyItemDataManager(_ folderId: Int,
                                _ photo: UIImage,
                                _ itemName: String,
                                _ itemPrice: String,
@@ -231,7 +231,7 @@ class ItemDataManager {
         }
     }
     // MARK: - 아이템 수정 - 날짜 설정은 하지 않은 경우
-    func uploadItemDataManager(_ folderId: Int,
+    func modifyItemDataManager(_ folderId: Int,
                                _ photo: UIImage,
                                _ itemName: String,
                                _ itemPrice: String,
@@ -279,7 +279,7 @@ class ItemDataManager {
         }
     }
     // MARK: - 아이템 수정 - 데이터가 일부만 존재하는 경우
-    func uploadItemDataManager(_ photo: UIImage,
+    func modifyItemDataManager(_ photo: UIImage,
                                _ itemName: String,
                                _ itemPrice: String,
                                _ itemURL: String,
@@ -321,55 +321,6 @@ class ItemDataManager {
                         print("error", str)
                     }
                 case let .failure(error): // 요청 x
-                print(error.responseCode)
-            }
-        }
-    }
-    // MARK: - 아이템 수정 (사진 변동 없이)
-    func modifyItemDataManager(_ itemId: Int,_ parameter: UploadItemInput, _ viewcontroller: UploadItemViewController) {
-        AF.request(BaseURL + "/item/\(itemId)",
-                           method: .put,
-                           parameters: parameter,
-                           encoder: JSONParameterEncoder.default,
-                           headers: header)
-            .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
-            switch response.result {
-            case .success(let result):
-                viewcontroller.modifyItemAPISuccess(result)
-            case .failure(let error):
-                print(error.responseCode)
-            }
-        }
-    }
-    func modifyItemDataManager(_ itemId: Int,_ parameter: UploadItemInputWithFolder, _ viewcontroller: UploadItemViewController) {
-        AF.request(BaseURL + "/item/\(itemId)",
-                           method: .put,
-                           parameters: parameter,
-                           encoder: JSONParameterEncoder.default,
-                           headers: header)
-            .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
-            switch response.result {
-            case .success(let result):
-                viewcontroller.modifyItemAPISuccess(result)
-            case .failure(let error):
-                print(error.responseCode)
-            }
-        }
-    }
-    func modifyItemDataManager(_ itemId: Int,_ parameter: UploadItemInputWithAll, _ viewcontroller: UploadItemViewController) {
-        AF.request(BaseURL + "/item/\(itemId)",
-                           method: .put,
-                           parameters: parameter,
-                           encoder: JSONParameterEncoder.default,
-                           headers: header)
-            .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
-            switch response.result {
-            case .success(let result):
-                viewcontroller.modifyItemAPISuccess(result)
-            case .failure(let error):
                 print(error.responseCode)
             }
         }
