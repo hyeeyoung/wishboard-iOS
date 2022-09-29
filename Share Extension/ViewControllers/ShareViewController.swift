@@ -11,6 +11,7 @@ import SnapKit
 import Then
 import MaterialComponents.MaterialBottomSheet
 import Lottie
+import MobileCoreServices
 
 class ShareViewController: UIViewController {
     //MARK: - Properties
@@ -21,13 +22,23 @@ class ShareViewController: UIViewController {
     
     var selectedFolder: String?
     var selectedFolderIdx: Int?
+    
+    var webURL: String?
+    var itemImg: String?
+    var itemName: String?
+    var itemPrice: String?
+    var notificationType: String?
+    var notificationDate: String?
     //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .clear
         
         setUpShareView()
-        FolderDataManager().getFolderListDataManager(self)
+        
+        DispatchQueue.main.async {
+            self.getWebURL()
+        }
     }
     //MARK: - Functions
     func setUpShareView() {
@@ -48,6 +59,23 @@ class ShareViewController: UIViewController {
         shareView.completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
         shareView.setNotificationButton.addTarget(self, action: #selector(showNotificationBottomSheet), for: .touchUpInside)
         shareView.addFolderButton.addTarget(self, action: #selector(showAddNewFolderBottomSheet), for: .touchUpInside)
+    }
+    func getWebURL() {
+        let extensionItems = extensionContext?.inputItems as! [NSExtensionItem]
+        for items in extensionItems{
+           if let itemProviders = items.attachments {
+               for item_provider in itemProviders {
+                   //URL 데이터를 가지고 있는가?
+                   if item_provider.hasItemConformingToTypeIdentifier(kUTTypeURL as String) {
+                       item_provider.loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil)
+                        { (data, error) in
+                               print("URL : \(data)")
+                            ShareDataManager().getItemDataDataManager((data as! NSURL).absoluteString!, self)
+                        }
+                   }
+               }
+           }
+        }
     }
     // MARK: - Actions
     @objc func quit() {
@@ -111,7 +139,13 @@ extension ShareViewController: UICollectionViewDelegate, UICollectionViewDataSou
         let itemIdx = indexPath.item
         self.selectedFolderIdx = self.folderListData[itemIdx].folder_id!
         print(self.selectedFolderIdx)
-        shareView.folderCollectionView.reloadData()
+        // reload data with animation
+        UIView.transition(with: shareView.folderCollectionView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                              self.shareView.folderCollectionView.reloadData()},
+                          completion: nil);
     }
 }
 // MARK: - API Success
@@ -119,9 +153,42 @@ extension ShareViewController {
     // MARK: 폴더 리스트 조회 API
     func getFolderListAPISuccess(_ result: [FolderListModel]) {
         self.folderListData = result
-        shareView.folderCollectionView.reloadData()
+        // reload data with animation
+        UIView.transition(with: shareView.folderCollectionView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                              self.shareView.folderCollectionView.reloadData()},
+                          completion: nil);
     }
     func getFolderListAPIFail() {
         FolderDataManager().getFolderListDataManager(self)
+    }
+    // MARK: 아이템 정보 파싱
+    func getItemDataAPISuccess(_ result: APIModel<ItemParsingModel>) {
+        guard let itemImg = result.data?.item_img else {return}
+        guard let itemName = result.data?.item_name else {return}
+        guard let itemPrice = result.data?.item_price else {return}
+        
+        self.itemImg = itemImg
+        self.itemName = itemName
+        self.itemPrice = itemPrice
+        
+        self.shareView.itemImage.kf.setImage(with: URL(string: itemImg), placeholder: UIImage())
+        self.shareView.itemName.text = self.itemName
+        self.shareView.itemPrice.text = FormatManager().strToPrice(numStr: itemPrice)
+        
+        // reload data with animation
+        UIView.transition(with: shareView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                              self.shareView.reloadInputViews()},
+                          completion: nil);
+        
+        FolderDataManager().getFolderListDataManager(self)
+    }
+    func getItemDataAPIFail() {
+        
     }
 }

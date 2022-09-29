@@ -43,7 +43,7 @@ class UploadItemViewController: UIViewController {
         }
     }
     override func viewDidAppear(_ animated: Bool) {
-        print("fmfmfmfmf", self.wishListData.folder_id)
+        
     }
     @objc func goBack() {
         self.dismiss(animated: true)

@@ -9,19 +9,17 @@ import Foundation
 import Alamofire
 
 class FolderDataManager {
-    
     let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
-    
     
     // MARK: - 폴더 리스트 조회
     func getFolderListDataManager(_ viewcontroller: ShareViewController) {
+        print("start get folder list")
         let BaseURL = defaults?.string(forKey: "url") ?? ""
         let token = defaults?.string(forKey: "token") ?? ""
         let header: HTTPHeaders = [
             "Authorization": "Bearer " + token,
             "Accept": "application/json"
         ]
-        print("token?", token)
         AF.request(BaseURL + "/folder/list",
                            method: .get,
                            parameters: nil,
@@ -35,8 +33,9 @@ class FolderDataManager {
                 let statusCode = error.responseCode
                 switch statusCode {
                 case 429:
-                    viewcontroller.getFolderListAPIFail()
+                    viewcontroller.getItemDataAPIFail()
                 default:
+                    viewcontroller.getItemDataAPIFail()
                     print(error.localizedDescription)
                     print(error.responseCode)
                 }

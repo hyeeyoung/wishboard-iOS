@@ -42,6 +42,12 @@ class FolderCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        folderImage.image = nil
+        folderName.text = nil
+    }
     // MARK: - Functions
     func setUpView() {
         contentView.addSubview(folderImage)

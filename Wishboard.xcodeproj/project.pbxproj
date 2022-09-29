@@ -103,6 +103,9 @@
 		237478A428D20DB600CF941A /* FolderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237478A328D20DB500CF941A /* FolderListTableViewCell.swift */; };
 		2375C1CA28C5C2550017BAF7 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2375C1C928C5C2550017BAF7 /* OnBoardingView.swift */; };
 		2378280428D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2378280328D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift */; };
+		2385582728E51DD000E6A09E /* ShareDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2385582628E51DD000E6A09E /* ShareDataManager.swift */; };
+		2385582A28E51E4700E6A09E /* ShareModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2385582928E51E4700E6A09E /* ShareModel.swift */; };
+		2385582B28E51F7500E6A09E /* FormatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F7C28E39FE800075667 /* FormatManager.swift */; };
 		238EF90628CB06F800ECA606 /* CalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90528CB06F800ECA606 /* CalenderViewController.swift */; };
 		238EF90928CB070700ECA606 /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90828CB070700ECA606 /* CalenderView.swift */; };
 		23A85F7D28E39FE800075667 /* FormatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F7C28E39FE800075667 /* FormatManager.swift */; };
@@ -280,6 +283,8 @@
 		237478A328D20DB500CF941A /* FolderListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderListTableViewCell.swift; sourceTree = "<group>"; };
 		2375C1C928C5C2550017BAF7 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		2378280328D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWithTextFieldViewController.swift; sourceTree = "<group>"; };
+		2385582628E51DD000E6A09E /* ShareDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDataManager.swift; sourceTree = "<group>"; };
+		2385582928E51E4700E6A09E /* ShareModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareModel.swift; sourceTree = "<group>"; };
 		238EF90528CB06F800ECA606 /* CalenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderViewController.swift; sourceTree = "<group>"; };
 		238EF90828CB070700ECA606 /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
 		23A85F7C28E39FE800075667 /* FormatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatManager.swift; sourceTree = "<group>"; };
@@ -409,6 +414,7 @@
 			isa = PBXGroup;
 			children = (
 				230180E528E50B7C001034FC /* FolderDataManager.swift */,
+				2385582628E51DD000E6A09E /* ShareDataManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -861,6 +867,14 @@
 			path = MypageModels;
 			sourceTree = "<group>";
 		};
+		2385582828E51E3900E6A09E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2385582928E51E4700E6A09E /* ShareModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		238EF90728CB06FC00ECA606 /* Calender */ = {
 			isa = PBXGroup;
 			children = (
@@ -945,6 +959,7 @@
 		23C3113D28DF680300A636F6 /* Share Extension */ = {
 			isa = PBXGroup;
 			children = (
+				2385582828E51E3900E6A09E /* Model */,
 				230180E428E50B6D001034FC /* Services */,
 				230DBFA628E106E000E9AED6 /* View */,
 				23C3114028DF680300A636F6 /* MainInterface.storyboard */,
@@ -1595,10 +1610,13 @@
 				23CBAFDC28DFDF8500B41513 /* NewFolderViewController.swift in Sources */,
 				236FE93528DF85A4006142DB /* ScreenManager.swift in Sources */,
 				236FE91F28DF8592006142DB /* UIView.swift in Sources */,
+				2385582A28E51E4700E6A09E /* ShareModel.swift in Sources */,
 				236FE93D28DF85B0006142DB /* PopUpDeleteUserViewController.swift in Sources */,
 				236FE91E28DF8592006142DB /* UIBezierPath.swift in Sources */,
 				236FE93C28DF85AA006142DB /* String.swift in Sources */,
 				230180E828E50BE2001034FC /* FolderListModel.swift in Sources */,
+				2385582B28E51F7500E6A09E /* FormatManager.swift in Sources */,
+				2385582728E51DD000E6A09E /* ShareDataManager.swift in Sources */,
 				236FE93B28DF85A7006142DB /* Observable.swift in Sources */,
 				236FE93E28DF85B0006142DB /* PopUpViewController.swift in Sources */,
 				23C3113F28DF680300A636F6 /* ShareViewController.swift in Sources */,
