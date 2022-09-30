@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SafariServices
 
 class RegisterPasswordView: UIView {
     // MARK: - View
@@ -41,9 +42,15 @@ class RegisterPasswordView: UIView {
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .wishboardRed
     }
-    let stack = UIStackView().then{
-        $0.axis = .horizontal
-        $0.spacing = 0
+    let termLabel = UILabel().then{
+        $0.numberOfLines = 0
+        $0.isUserInteractionEnabled = true
+        $0.textAlignment = .center
+        let recognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(termLabelTapped(_:))
+          )
+        $0.addGestureRecognizer(recognizer)
     }
     let registerButton = UIButton().then{
         $0.defaultButton("가입하기", .wishboardDisabledGray, .black)
@@ -52,6 +59,7 @@ class RegisterPasswordView: UIView {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
     }()
     // MARK: - Life Cycles
+    var preVC: RegisterPasswordViewController!
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -78,8 +86,8 @@ class RegisterPasswordView: UIView {
         addSubview(errorMessage)
         
         accessoryView.addSubview(registerButton)
-        accessoryView.addSubview(stack)
-        setStackView()
+        accessoryView.addSubview(termLabel)
+        configureLabel()
     }
     func setUpConstraint() {
         setUpNavigationConstraint()
@@ -107,18 +115,11 @@ class RegisterPasswordView: UIView {
             make.height.equalTo(44)
             make.bottom.equalToSuperview().inset(16)
         }
-        stack.snp.makeConstraints { make in
+        termLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
             make.centerX.equalToSuperview()
             make.bottom.equalTo(registerButton.snp.top).offset(-6)
         }
-        
-    }
-    func setStackView() {
-        setLabel("가입 시 ")
-        setUnderLinedButton("이용약관")
-        setLabel(" 및 ")
-        setUnderLinedButton("개인정보 취급방침")
-        setLabel("에 동의하는 것으로 간주합니다.")
     }
     func setUpNavigationConstraint() {
         navigationView.snp.makeConstraints{ make in
@@ -143,19 +144,67 @@ class RegisterPasswordView: UIView {
     }
 }
 extension RegisterPasswordView {
-    func setLabel(_ title: String) {
-        let label = UILabel().then{
-            $0.text = title
-            $0.font = UIFont.Suit(size: 12, family: .Regular)
-            $0.textColor  = .wishboardGray
-        }
-        stack.addArrangedSubview(label)
+    // Label의 특정 문자열에 밑줄 긋고 색상 변경
+    func configureLabel() {
+      let useTerm = "이용약관"
+      let personalTerm = "개인정보 취급방침"
+      let generalText = String(
+        format: "가입 시 %@ 및 %@에 동의하는 것으로 간주합니다.",
+        useTerm,
+        personalTerm
+      )
+
+      // NSAttributedString.Key, Value 속성 정의
+      let generalAttributes: [NSAttributedString.Key: Any] = [
+        .foregroundColor: UIColor.wishboardGray,
+        .font: UIFont.Suit(size: 12, family: .Regular)
+      ]
+      let linkAttributes: [NSAttributedString.Key: Any] = [
+        .underlineStyle: NSUnderlineStyle.single.rawValue,
+        .foregroundColor: UIColor.wishboardGreen,
+        .font: UIFont.Suit(size: 12, family: .Regular)
+      ]
+
+      let mutableString = NSMutableAttributedString()
+      
+      // generalAttributes(기본 스타일) 적용
+      mutableString.append(
+        NSAttributedString(string: generalText,attributes: generalAttributes)
+      )
+        
+      // 각 문자열의 range에 linkAttributes 적용
+      mutableString.setAttributes(
+        linkAttributes,
+        range: (generalText as NSString).range(of: useTerm)
+      )
+      mutableString.setAttributes(
+        linkAttributes,
+        range: (generalText as NSString).range(of: personalTerm)
+      )
+
+        termLabel.attributedText = mutableString
     }
-    func setUnderLinedButton(_ title: String) {
-        let underlineButton = UIButton().then{
-            $0.setUnderline(title, .wishboardGreen)
+    // 밑줄 쳐진 특정 문자열 클릭 시
+    @objc func termLabelTapped(_ sender: UITapGestureRecognizer) {
+        print("clicked!!")
+        //fixedLabel에서 UITapGestureRecognizer로 선택된 부분의 CGPoint를 구합니다.
+        let point = sender.location(in: termLabel)
+        
+        // fixedLabel 내에서 문자열 google이 차지하는 CGRect값을 구해, 그 안에 point가 포함되는지를 판단합니다.
+        if let userTermRect = termLabel.boundingRectForCharacterRange(subText: "google"),
+           userTermRect.contains(point) {
+            present(url: "https://www.google.com")
         }
-        stack.addArrangedSubview(underlineButton)
+        if let personalTermRect = termLabel.boundingRectForCharacterRange(subText: "github"),
+           personalTermRect.contains(point) {
+            present(url: "https://www.github.com")
+        }
     }
-    
+    // URL 이동
+    func present(url string: String) {
+      if let url = URL(string: string) {
+        let viewController = SFSafariViewController(url: url)
+          preVC.present(viewController, animated: true)
+      }
+    }
 }

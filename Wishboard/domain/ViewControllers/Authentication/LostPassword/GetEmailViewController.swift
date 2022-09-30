@@ -8,7 +8,7 @@
 import UIKit
 import Lottie
 
-class GetEmailViewController: UIViewController {
+class GetEmailViewController: KeyboardViewController {
     var getEmailView: GetEmailView!
     var isValidTime: Bool = true
     // 인증번호 Properties
@@ -43,6 +43,7 @@ extension GetEmailViewController {
         getEmailView.codeTextField.addTarget(self, action: #selector(codeTextFieldEditingChanged(_:)), for: .editingChanged)
         getEmailView.loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
         
+        super.textfield = getEmailView.codeTextField
         // Timer
         timer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: timeSelector, userInfo: nil, repeats: true)
     }

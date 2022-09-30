@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LostPasswordViewController: UIViewController {
+class LostPasswordViewController: KeyboardViewController {
     var lostPasswordView: LostPasswordView!
     var email: String!
 
@@ -26,6 +26,8 @@ class LostPasswordViewController: UIViewController {
         lostPasswordView.backBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         lostPasswordView.emailTextField.addTarget(self, action: #selector(emailTextFieldEditingChanged(_:)), for: .editingChanged)
         lostPasswordView.getEmailButton.addTarget(self, action: #selector(getEmailButtonDidTap), for: .touchUpInside)
+        
+        super.textfield = lostPasswordView.emailTextField
     }
     override func viewDidAppear(_ animated: Bool) {
         lostPasswordView.emailTextField.becomeFirstResponder()

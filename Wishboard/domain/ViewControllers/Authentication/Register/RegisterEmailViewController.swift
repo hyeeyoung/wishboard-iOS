@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RegisterEmailViewController: UIViewController {
+class RegisterEmailViewController: KeyboardViewController {
     var registerEmailView: RegisterEmailView!
     var email: String!
 
@@ -26,9 +26,8 @@ class RegisterEmailViewController: UIViewController {
         registerEmailView.backBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         registerEmailView.emailTextField.addTarget(self, action: #selector(emailTextFieldEditingChanged(_:)), for: .editingChanged)
         registerEmailView.nextButton.addTarget(self, action: #selector(nextButtonDidTap), for: .touchUpInside)
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        registerEmailView.emailTextField.becomeFirstResponder()
+        
+        super.textfield = registerEmailView.emailTextField
     }
     // MARK: - Actions
     @objc func goBack() {
