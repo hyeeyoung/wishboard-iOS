@@ -40,12 +40,15 @@ class ItemDetailViewController: UIViewController {
         dialog.okBtn.addTarget(self, action: #selector(deleteButtonDidTap), for: .touchUpInside)
     }
     @objc func deleteButtonDidTap() {
-        self.dismiss(animated: true)
-        ScreenManager().goMainPages(0, self, family: .itemDeleted)
+        guard let itemId = self.wishListData.item_id else {return}
+        ItemDataManager().deleteItemDataManager(itemId, self)
     }
     @objc func setFolder() {
         let vc = SetFolderBottomSheetViewController()
         vc.setPreViewController(self)
+        vc.itemId = self.wishListData.item_id
+        vc.selectedFolderId = self.wishListData.folder_id
+        vc.selectedFolder = self.wishListData.folder_name
         let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: vc)
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
         bottomSheet.dismissOnDraggingDownSheet = false
@@ -70,7 +73,7 @@ extension ItemDetailViewController {
         
         itemDetailView.setTableView(self)
         itemDetailView.setUpNavigationView()
-        if self.wishListData.item_url != nil {itemDetailView.setUpLowerView(true)}
+        if self.wishListData.item_url != "" {itemDetailView.setUpLowerView(true)}
         else {itemDetailView.setUpLowerView(false)}
         itemDetailView.setUpConstraint()
         
@@ -106,5 +109,18 @@ extension ItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+// MARK: - API Success
+extension ItemDetailViewController {
+    func deleteItemAPISuccess(_ result: APIModel<ResultModel>) {
+        self.dismiss(animated: true)
+        ScreenManager().goMainPages(0, self, family: .itemDeleted)
+        
+        print(result.message)
+    }
+    func deleteItemAPIFail() {
+        guard let itemId = self.wishListData.item_id else {return}
+        ItemDataManager().deleteItemDataManager(itemId, self)
     }
 }

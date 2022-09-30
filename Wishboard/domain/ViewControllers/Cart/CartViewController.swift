@@ -23,8 +23,13 @@ class CartViewController: UIViewController {
             make.leading.trailing.top.bottom.equalToSuperview()
         }
         
-        self.cartView.setTempData()
         self.cartView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        // DATA
+        CartDataManager().getCartListDataManager(self.cartView)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        // DATA
+        CartDataManager().getCartListDataManager(self.cartView)
     }
     @objc func goBack() {
         self.dismiss(animated: true)

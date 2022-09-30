@@ -70,15 +70,16 @@ class ItemDetailView: UIView {
                 attText.foregroundColor = UIColor.white
                 config.attributedTitle = attText
                 config.background.backgroundColor = .black
+                $0.isEnabled = true
             } else {
                 attText.foregroundColor = .wishboardGray
                 config.attributedTitle = attText
                 config.background.backgroundColor = .white
+                $0.isEnabled = false
             }
             
             $0.configuration = config
         }
-        
         addSubview(lowerView)
         lowerView.addSubview(lowerButton)
         addSubview(itemDetailTableView)

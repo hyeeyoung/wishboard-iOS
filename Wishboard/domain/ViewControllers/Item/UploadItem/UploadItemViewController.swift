@@ -38,7 +38,12 @@ class UploadItemViewController: UIViewController {
         
         if !isUploadItem {
             self.wishListData = self.wishListModifyData
+        } else {
+            self.wishListData = WishListModel(folder_id: nil, folder_name: nil, item_id: nil, item_img_url: nil, item_name: nil, item_price: nil, item_url: "", item_memo: "", create_at: nil, item_notification_type: nil, item_notification_date: nil, cart_state: nil)
         }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        
     }
     @objc func goBack() {
         self.dismiss(animated: true)
@@ -143,24 +148,76 @@ extension UploadItemViewController {
         linkvc = ShoppingLinkViewController()
         notivc = NotificationSettingViewController()
     }
+    // MARK: - 저장 버튼 클릭 시 (아이템 추가)
     @objc func saveButtonDidTap() {
         let lottieView = uploadItemView.saveButton.setSpinLottieView(uploadItemView.saveButton)
         uploadItemView.saveButton.isSelected = true
         lottieView.isHidden = false
-        lottieView.loopMode = .repeat(2) // 2번 반복
         lottieView.play { completion in
-            ScreenManager().goMainPages(0, self)
-            SnackBar(self, message: .addItem)
+            let data = self.wishListData
+            if let folderId = data?.folder_id {
+                // 모든 데이터가 존재하는 경우
+                if let notiType = data?.item_notification_type {
+                    ItemDataManager().uploadItemDataManager(folderId, self.selectedImage, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!, self)
+                } else {
+                    // 알림 날짜 설정은 하지 않은 경우
+                    ItemDataManager().uploadItemDataManager(folderId, self.selectedImage, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, self)
+                }
+            } else {
+                // 일부 데이터가 존재하는 경우
+                ItemDataManager().uploadItemDataManager(self.selectedImage, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, self)
+            }
+            
+            self.viewDidLoad()
+            ScreenManager().goMainPages(0, self, family: .itemUpload)
         }
     }
+    // MARK: 저장 버튼 클릭 시 (아이템 수정)
     @objc func modifyButtonDidTap() {
         let lottieView = uploadItemView.saveButton.setSpinLottieView(uploadItemView.saveButton)
         uploadItemView.saveButton.isSelected = true
         lottieView.isHidden = false
-        lottieView.loopMode = .repeat(2) // 2번 반복
         lottieView.play { completion in
-            self.dismiss(animated: true)
-            SnackBar(self, message: .modifyItem)
+            let data = self.wishListData
+            if let image = self.selectedImage {
+                if let folderId = data?.folder_id {
+                    // 모든 데이터가 존재하는 경우
+                    if let notiType = data?.item_notification_type {
+                        ItemDataManager().modifyItemDataManager(folderId, self.selectedImage, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!, (data?.item_id)!, self)
+                    } else {
+                        // 알림 날짜 설정은 하지 않은 경우
+                        ItemDataManager().modifyItemDataManager(folderId, self.selectedImage, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
+                    }
+                } else {
+                    // 일부 데이터가 존재하는 경우
+                    ItemDataManager().modifyItemDataManager(self.selectedImage, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
+                }
+                self.viewDidLoad()
+                ScreenManager().goMainPages(0, self, family: .itemUpload)
+            } else {
+                // 이미지 uri를 UIImage로 변환
+                let url = URL(string: (data?.item_img_url!)!)
+                var selectedImage : UIImage?
+                let imgData = try? Data(contentsOf: url!)
+                DispatchQueue.main.async {
+                    selectedImage = UIImage(data: imgData!)
+                    if let folderId = data?.folder_id {
+                        // 모든 데이터가 존재하는 경우
+                        if let notiType = data?.item_notification_type {
+                            ItemDataManager().modifyItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_notification_type)!, (data?.item_notification_date)!, (data?.item_id)!, self)
+                        } else {
+                            // 알림 날짜 설정은 하지 않은 경우
+                            ItemDataManager().modifyItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
+                        }
+                    } else {
+                        // 일부 데이터가 존재하는 경우
+                        ItemDataManager().modifyItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
+                    }
+                }
+                self.viewDidLoad()
+                ScreenManager().goMainPages(0, self, family: .itemModified)
+            }
+            
         }
     }
 }
@@ -176,11 +233,14 @@ extension UploadItemViewController {
                 else {cell.textLabel?.text = cellTitleArray[tag - 1]}
             case 4:
                 if let notiType = self.wishListData.item_notification_type {
-                    cell.textLabel?.text = "[" + notiType + "] " + DateManager().dateToKoreanStr(self.wishListData.item_notification_date!)!
+                    cell.textLabel?.text = "[" + notiType + "] " + FormatManager().notiDateToKoreanStr(self.wishListData.item_notification_date!)!
                 }
                 else {cell.textLabel?.text = cellTitleArray[tag - 1]}
             case 5:
-                if let link = self.wishListData.item_url {cell.textLabel?.text = link}
+                if let link = self.wishListData.item_url {
+                    if link != "" {cell.textLabel?.text = link}
+                    else {cell.textLabel?.text = cellTitleArray[tag - 1]}
+                }
                 else {cell.textLabel?.text = cellTitleArray[tag - 1]}
             default:
                 fatalError()
@@ -212,6 +272,7 @@ extension UploadItemViewController {
                 make.centerY.equalToSuperview()
                 make.trailing.equalTo(arrowImg.snp.leading)
             }
+            if !isUploadItem {subTitle.isHidden = true}
             // 만약 쇼핑몰 링크를 수정했다면 업데이트
             if let link = linkvc.link {
                 cell.textLabel?.text = link
@@ -223,7 +284,7 @@ extension UploadItemViewController {
             if let dateTime = notivc.dateAndTime {
                 if tag == 4 {cell.textLabel?.text = "[" + type + "] " + dateTime}
                 self.wishListData.item_notification_type = type
-                self.wishListData.item_notification_date = DateManager().koreanStrToDate(dateTime)
+                self.wishListData.item_notification_date = FormatManager().koreanStrToDate(dateTime)
             }
         }
         // 만약 폴더를 재선택했다면 업데이트
@@ -246,15 +307,15 @@ extension UploadItemViewController {
         // Add target
         switch tag {
         case 1:
-            if let data = self.wishListData {textfield.text = data.item_name}
+            if let itemName = self.wishListData.item_name {textfield.text = itemName}
             textfield.addTarget(self, action: #selector(itemNameTextfieldEditingField(_:)), for: .editingChanged)
         case 2:
-            if let data = self.wishListData {
-                textfield.text = numberFormatter.string(from: NSNumber(value: Int(data.item_price!)!))
+            if let price = self.wishListData.item_price {
+                textfield.text = numberFormatter.string(from: NSNumber(value: Int(price)!))
             }
             textfield.addTarget(self, action: #selector(itemPriceTextfieldEditingField(_:)), for: .editingChanged)
         default:
-            if let data = self.wishListData {textfield.text = data.item_memo}
+            if let memo = self.wishListData.item_memo {textfield.text = memo}
             textfield.addTarget(self, action: #selector(memoTextfieldEditingField(_:)), for: .editingChanged)
         }
         
@@ -320,6 +381,10 @@ extension UploadItemViewController {
     // 폴더 설정 BottomSheet
     func showFolderBottomSheet() {
         foldervc.setPreViewController(self)
+        if !isUploadItem {
+            foldervc.selectedFolderId = self.wishListData.folder_id
+            foldervc.selectedFolder = self.wishListData.folder_name
+        }
         let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: foldervc)
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
         bottomSheet.dismissOnDraggingDownSheet = false
@@ -348,10 +413,6 @@ extension UploadItemViewController {
 // MARK: - ImagePicker Delegate
 extension UploadItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//        if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
-//            self.selectedImage = image
-//            self.uploadItemView.uploadItemTableView.reloadData()
-//        }
         // 앨범에서 사진 선택 시
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.selectedImage = image
@@ -362,5 +423,18 @@ extension UploadItemViewController: UIImagePickerControllerDelegate, UINavigatio
             self.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
         }
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+// MARK: - API Success
+extension UploadItemViewController {
+    func uploadItemAPISuccess(_ result: APIModel<ResultModel>) {
+        ScreenManager().goMainPages(0, self)
+        SnackBar(self, message: .addItem)
+        print(result.message)
+    }
+    func modifyItemAPISuccess(_ result: APIModel<ResultModel>) {
+//        self.viewDidLoad()
+        ScreenManager().goMainPages(0, self, family: .itemUpload)
+        print(result.message)
     }
 }

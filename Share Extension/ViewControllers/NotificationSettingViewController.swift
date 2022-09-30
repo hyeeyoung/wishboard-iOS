@@ -61,6 +61,8 @@ class NotificationSettingViewController: UIViewController {
             guard let dT = self.dateAndTime else {return}
             guard let nT = self.notiType else {return}
             self.preVC.shareView.setNotificationButton.setNotificationButton(dT + " " + nT, true)
+            preVC.notificationType = nT
+            preVC.notificationDate = dT
         }
     }
     // MARK: - Functions

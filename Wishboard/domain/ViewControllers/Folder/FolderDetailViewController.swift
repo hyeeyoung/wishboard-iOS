@@ -10,15 +10,17 @@ import UIKit
 class FolderDetailViewController: UIViewController {
     // MARK: - View
     let navigationView = UIView()
-    let navigationTitle = UILabel().then{
+    var navigationTitle = UILabel().then{
         $0.text = "목걸이"
         $0.font = UIFont.Suit(size: 15, family: .Bold)
     }
     let backBtn = UIButton().then{
         $0.setImage(UIImage(named: "goBack"), for: .normal)
     }
-
+    let emptyMessage = "앗, 아이템이 없어요!\n갖고 싶은 아이템을 등록해보세요!"
     // MARK: - Life Cycles
+    var folderName: String!
+    var folderId: Int!
     var folderDetailCollectionView: UICollectionView!
     var wishListData: [WishListModel] = []
     override func viewDidLoad() {
@@ -26,13 +28,19 @@ class FolderDetailViewController: UIViewController {
         
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
+        if let folderName = self.folderName {navigationTitle.text = folderName}
         
         setUpCollectionView()
         setUpView()
         setUpConstraint()
 
-        setTempData()
         self.backBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        // DATA
+        FolderDataManager().getFolderDetailDataManager(self.folderId, self)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        // DATA
+        FolderDataManager().getFolderDetailDataManager(self.folderId, self)
     }
 }
 // MARK: - Actions & Functions
@@ -98,6 +106,7 @@ extension FolderDetailViewController {
 extension FolderDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let count = wishListData.count ?? 0
+        EmptyView().setEmptyView(self.emptyMessage, self.folderDetailCollectionView, count)
         return count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -109,16 +118,37 @@ extension FolderDetailViewController: UICollectionViewDelegate, UICollectionView
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let itemIdx = indexPath.item
         let itemDetailVC = ItemDetailViewController()
+        itemDetailVC.wishListData = self.wishListData[itemIdx]
         itemDetailVC.modalPresentationStyle = .fullScreen
         self.present(itemDetailVC, animated: true, completion: nil)
     }
-    
-    func setTempData() {
-//        self.wishListData.append(WishListModel(itemImage: "", itemName: "item1", itemPrice: 1000, isCart: true))
-//        self.wishListData.append(WishListModel(itemImage: "", itemName: "item2", itemPrice: 2000, isCart: false))
-//        self.wishListData.append(WishListModel(itemImage: "", itemName: "item3", itemPrice: 3000, isCart: false))
-//        self.wishListData.append(WishListModel(itemImage: "", itemName: "item4", itemPrice: 4000, isCart: true))
-//        self.wishListData.append(WishListModel(itemImage: "", itemName: "item5", itemPrice: 5000, isCart: true))
+}
+// MARK: - API Success
+extension FolderDetailViewController {
+    // 폴더 내 아이템 조회 API
+    func getFolderDetailAPISuccess(_ result: [WishListModel]) {
+        self.wishListData = result
+        // reload data with animation
+        UIView.transition(with: folderDetailCollectionView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                              self.folderDetailCollectionView.reloadData()},
+                          completion: nil);
+    }
+    func getFolderDetailAPIFail() {
+        FolderDataManager().getFolderDetailDataManager(self.folderId, self)
+    }
+    func noWishList() {
+        self.wishListData = []
+        // reload data with animation
+        UIView.transition(with: folderDetailCollectionView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                              self.folderDetailCollectionView.reloadData()},
+                          completion: nil);
     }
 }

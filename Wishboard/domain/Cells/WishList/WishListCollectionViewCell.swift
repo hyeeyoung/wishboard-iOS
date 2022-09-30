@@ -89,7 +89,7 @@ class WishListCollectionViewCell: UICollectionViewCell {
             self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
         }
         if let name = data.item_name {self.itemName.text = name}
-        if let price = data.item_price {self.itemPrice.text = String(price)}
+        if let price = data.item_price {self.itemPrice.text = FormatManager().strToPrice(numStr: price)}
         if let isCart = data.cart_state {
             if isCart == 1 {self.cartButton.cartButton(.wishboardGreen)}
             else {self.cartButton.cartButton(.white)}

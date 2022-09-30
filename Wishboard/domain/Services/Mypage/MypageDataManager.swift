@@ -24,7 +24,13 @@ class MypageDataManager {
             case .success(let result):
                 viewcontroller.getUserInfoAPISuccess(result)
             case .failure(let error):
-                print(error.responseCode)
+                let statusCode = error.responseCode
+                switch statusCode {
+                case 429:
+                    viewcontroller.getUserInfoAPIFail()
+                default:
+                    print(error.responseCode)
+                }
             }
         }
     }

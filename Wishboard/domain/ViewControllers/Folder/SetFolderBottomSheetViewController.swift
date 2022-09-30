@@ -10,9 +10,11 @@ import UIKit
 class SetFolderBottomSheetViewController: UIViewController {
     var setFolderBottomSheetView: SetFolderBottomSheetView!
     var folderListData: [FolderListModel] = []
-    var selectedFolder: String?
+    var selectedFolder: String?     // 선택된 폴더 이름
+    var selectedFolderId: Int?     // 선택된 폴더 id (서버로 전송될 folder_id값)
     var preUploadVC: UploadItemViewController!
     var preItemDetailVC: ItemDetailViewController!
+    var itemId: Int?    // 아이템 폴더 수정 시 itemId
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,13 +35,24 @@ class SetFolderBottomSheetViewController: UIViewController {
         }
         
         setFolderBottomSheetView.exitBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        setTempData()
+        // DATA
+        FolderDataManager().getFolderListDataManager(self)
     }
     override func viewWillDisappear(_ animated: Bool) {
         if let preVC = self.preUploadVC {
             let indexPath = IndexPath(row: 3, section: 0)
+            preVC.wishListData.folder_id = self.selectedFolderId
             preVC.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
         }
+        if let preVC = self.preItemDetailVC {
+            preVC.wishListData.folder_id = self.selectedFolderId
+            preVC.wishListData.folder_name = self.selectedFolder
+            preVC.itemDetailView.itemDetailTableView.reloadData()
+        }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        FolderDataManager().getFolderListDataManager(self)
+        print(self.selectedFolder, self.selectedFolderId)
     }
     func setPreViewController(_ preVC: UploadItemViewController) {
         self.preUploadVC = preVC
@@ -62,6 +75,16 @@ extension SetFolderBottomSheetViewController: UITableViewDelegate, UITableViewDa
         cell.selectionStyle = .none
         let itemIdx = indexPath.item
         cell.setUpData(self.folderListData[itemIdx])
+        if let selectedFolderId = self.selectedFolderId {
+            if selectedFolderId == self.folderListData[itemIdx].folder_id {
+                cell.checkIcon.isHidden = false
+            } else {
+                cell.checkIcon.isHidden = true
+            }
+        } else {
+            if itemIdx == 0 {cell.checkIcon.isHidden = false}
+            else {cell.checkIcon.isHidden = true}
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -69,21 +92,34 @@ extension SetFolderBottomSheetViewController: UITableViewDelegate, UITableViewDa
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let idx = indexPath.row
-        self.selectedFolder = folderListData[idx].folderName
-        
+        self.selectedFolder = folderListData[idx].folder_name
+        self.selectedFolderId = folderListData[idx].folder_id
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if let itemId = self.itemId {
+            FolderDataManager().modifyItemFolderDataManager(itemId, self.selectedFolderId!, self)
+        }
         self.dismiss(animated: true)
     }
 }
+// MARK: - API Success
 extension SetFolderBottomSheetViewController {
-    func setTempData() {
-        self.folderListData.append(FolderListModel(folderImage: "", folderName: "상의", isChecked: true))
-        self.folderListData.append(FolderListModel(folderImage: "", folderName: "하의", isChecked: false))
-        self.folderListData.append(FolderListModel(folderImage: "", folderName: "아우터", isChecked: false))
-        self.folderListData.append(FolderListModel(folderImage: "", folderName: "악세서리", isChecked: false))
-        self.folderListData.append(FolderListModel(folderImage: "", folderName: "가방", isChecked: false))
-        
-        print(self.folderListData[1])
-        self.setFolderBottomSheetView.folderTableView.reloadData()
+    // MARK: 폴더 리스트 가져오기
+    func getFolderListAPISuccess(_ result: [FolderListModel]) {
+        self.folderListData = result
+        // reload data with animation
+        UIView.transition(with: setFolderBottomSheetView.folderTableView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                            self.setFolderBottomSheetView.folderTableView.reloadData()},
+                          completion: nil);
+    }
+    func getFolderListAPIFail() {
+        FolderDataManager().getFolderListDataManager(self)
+    }
+    // MARK: 아이템의 폴더 수정
+    func modifyItemFolderAPISuccess(_ result: APIModel<ResultModel>) {
+        print(result.message)
     }
 }

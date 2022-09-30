@@ -70,7 +70,7 @@ class SetNotificationDate {
                     dateMonth = dateMonth + 1
                 }
                 dateDay = dateDay + 1
-                dateData.append(currentYear + "년 " + String(dateMonth) + "월 " + String(dateDay) + "일")
+                dateData.append(currentYear + "년 " + setNumber(num: dateMonth) + "월 " + setNumber(num: dateDay) + "일")
                 break
             case 12:
                 if dateDay == 31 {
@@ -79,7 +79,7 @@ class SetNotificationDate {
                     dateYear = 1
                 }
                 dateDay = dateDay + 1
-                dateData.append(String(dateYear) + "년 " + String(dateMonth) + "월 " + String(dateDay) + "일")
+                dateData.append(setNumber(num: dateYear) + "년 " + setNumber(num: dateMonth) + "월 " + setNumber(num: dateDay) + "일")
                 break
             case 2:
                 if dateDay == 28 {
@@ -87,7 +87,7 @@ class SetNotificationDate {
                     dateMonth = dateMonth + 1
                 }
                 dateDay = dateDay + 1
-                dateData.append(currentYear + "년 " + String(dateMonth) + "월 " + String(dateDay) + "일")
+                dateData.append(currentYear + "년 " + setNumber(num: dateMonth) + "월 " + setNumber(num: dateDay) + "일")
                 break
             default:
                 if dateDay == 30 {
@@ -95,7 +95,7 @@ class SetNotificationDate {
                     dateMonth = dateMonth + 1
                 }
                 dateDay = dateDay + 1
-                dateData.append(currentYear + "년 " + String(dateMonth) + "월 " + String(dateDay) + "일")
+                dateData.append(currentYear + "년 " + setNumber(num: dateMonth) + "월 " + setNumber(num: dateDay) + "일")
                 break
                 
             }
@@ -109,5 +109,10 @@ class SetNotificationDate {
         // MARK: Minute
         minuteData.append("00")
         minuteData.append("30")
+    }
+    func setNumber(num: Int) -> String {
+        if num < 10 {
+            return "0" + String(num)
+        } else {return String(num)}
     }
 }

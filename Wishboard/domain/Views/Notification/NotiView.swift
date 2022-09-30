@@ -15,9 +15,10 @@ class NotiView: UIView {
         $0.text = "알림"
         $0.font = UIFont.Suit(size: 22, family: .Bold)
     }
+    let emptyMessage = "앗, 알림이 없어요!"
     // MARK: - Life Cycles
     var notificationTableView: UITableView!
-    var notiData: [NotiData] = []
+    var notiData: [NotificationModel] = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -76,6 +77,7 @@ class NotiView: UIView {
 extension NotiView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = self.notiData.count ?? 0
+        EmptyView().setEmptyView(self.emptyMessage, self.notificationTableView, count)
         return count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -93,14 +95,21 @@ extension NotiView: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
+// MARK: - API Success
 extension NotiView {
-    func setTempData() {
-        self.notiData.append(NotiData(itemImage: "", itemName: "item1", time: "1주 전", isViewed: false))
-        self.notiData.append(NotiData(itemImage: "", itemName: "item2", time: "2주 전", isViewed: false))
-        self.notiData.append(NotiData(itemImage: "", itemName: "item3", time: "3주 전", isViewed: true))
-        self.notiData.append(NotiData(itemImage: "", itemName: "item4", time: "4주 전", isViewed: true))
-        self.notiData.append(NotiData(itemImage: "", itemName: "item5", time: "5주 전", isViewed: true))
+    // MARK: 알림 조회 API
+    func getNotificationListAPISuccess(_ result: [NotificationModel]) {
+        self.notiData = result
+        // reload data with animation
+        UIView.transition(with: notificationTableView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                              self.notificationTableView.reloadData()},
+                          completion: nil);
         
-        self.notificationTableView.reloadData()
+    }
+    func getNotificationListAPIFail() {
+        NotificationDataManager().getNotificationListDataManager(self)
     }
 }

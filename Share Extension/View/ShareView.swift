@@ -12,6 +12,7 @@ class ShareView: UIView {
     //MARK: - Properties
     let itemImage = UIImageView().then{
         $0.backgroundColor = .lightGray
+        $0.clipsToBounds = true
         $0.layer.cornerRadius = 40
     }
     let backgroundView = UIView().then{
@@ -24,6 +25,8 @@ class ShareView: UIView {
     let itemName = UILabel().then{
         $0.text = "itemName"
         $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.numberOfLines = 1
+        $0.textAlignment = .center
     }
     let itemPrice = UILabel().then{
         $0.text = "0000"
@@ -91,6 +94,7 @@ class ShareView: UIView {
         }
         itemName.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalToSuperview().offset(50)
         }
         itemPrice.snp.makeConstraints { make in

@@ -12,6 +12,7 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setToken() 
 
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
@@ -30,11 +31,11 @@ class HomeViewController: UIViewController {
         
         self.homeView.cartButton.addTarget(self, action: #selector(goToCart), for: .touchUpInside)
         // DATA
-        WishListDataManager().wishListDataManager(self.homeView)
+        WishListDataManager().wishListDataManager(self.homeView, self)
     }
     override func viewDidAppear(_ animated: Bool) {
         // DATA
-        WishListDataManager().wishListDataManager(self.homeView)
+        WishListDataManager().wishListDataManager(self.homeView, self)
     }
     @objc func goToCart() {
         let cartVC = CartViewController()
@@ -60,5 +61,22 @@ extension HomeViewController {
     // MARK: 알림 허용 팝업창
     func switchNotificationAPISuccess(_ result: APIModel<ResultModel>) {
         print(result.message)
+    }
+    func wishListAPIFail() {
+        WishListDataManager().wishListDataManager(self.homeView, self)
+    }
+    // MARK: 카트 추가 API
+    func addCartAPISuccess(_ result: APIModel<ResultModel>) {
+        WishListDataManager().wishListDataManager(self.homeView, self)
+        print(result.message)
+    }
+}
+// MARK: - Token User Defaults for Share Extension
+extension HomeViewController {
+    func setToken() {
+        let token = UserDefaults.standard.string(forKey: "token") ?? ""
+        let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
+        defaults?.set(token, forKey: "token")
+        defaults?.synchronize()
     }
 }

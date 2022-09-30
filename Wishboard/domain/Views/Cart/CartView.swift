@@ -154,7 +154,18 @@ extension CartView: UITableViewDelegate, UITableViewDataSource {
         let itemIdx = indexPath.item
         cell.setUpData(self.cartData[itemIdx])
         
-        cell.deleteButton.addTarget(self, action: #selector(deleteItem), for: .touchUpInside)
+        let plusGesture = CartGesture(target: self, action: #selector(plusButtonDidTap(_:)))
+        let minusGesture = CartGesture(target: self, action: #selector(minusButtonDidTap(_:)))
+        let deleteGesture = CartGesture(target: self, action: #selector(deleteButtonDidTap(_:)))
+        
+        plusGesture.cartItem = self.cartData[itemIdx]
+        minusGesture.cartItem = self.cartData[itemIdx]
+        deleteGesture.cartItem = self.cartData[itemIdx]
+        
+        cell.plusButton.addGestureRecognizer(plusGesture)
+        cell.minusButton.addGestureRecognizer(minusGesture)
+        cell.deleteButton.addGestureRecognizer(deleteGesture)
+        
         cell.selectionStyle = .none
         return cell
     }
@@ -166,32 +177,84 @@ extension CartView: UITableViewDelegate, UITableViewDataSource {
     }
 }
 extension CartView {
-    @objc func deleteItem() {
-        self.cartTableView.reloadData()
-    }
-}
-extension CartView {
-    func setTempData() {
-        self.cartData.append(CartListModel(itemImage: "", itemName: "item10", itemPrice: 10000, itemCount: 1))
-        self.cartData.append(CartListModel(itemImage: "", itemName: "item11", itemPrice: 10000, itemCount: 3))
-        self.cartData.append(CartListModel(itemImage: "", itemName: "item12", itemPrice: 20000, itemCount: 3))
-        self.cartData.append(CartListModel(itemImage: "", itemName: "item13", itemPrice: 10000, itemCount: 1))
-        self.cartData.append(CartListModel(itemImage: "", itemName: "item14", itemPrice: 10000, itemCount: 5))
+    // (+) 버튼 클릭
+    @objc func plusButtonDidTap(_ sender: CartGesture) {
+        guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
+        guard var itemCount = sender.cartItem?.cartItemInfo?.item_count else {return}
+        itemCount = itemCount + 1
         
-        self.calculate()
-        self.cartTableView.reloadData()
+        let modifyCountInput = CartModifyCountInput(item_count: itemCount)
+        CartDataManager().modifyCountDataManager(itemId, modifyCountInput, self)
     }
+    // (-) 버튼 클릭
+    @objc func minusButtonDidTap(_ sender: CartGesture) {
+        guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
+        guard var itemCount = sender.cartItem?.cartItemInfo?.item_count else {return}
+        if itemCount == 1 {return}
+        else {itemCount = itemCount - 1}
+        
+        let modifyCountInput = CartModifyCountInput(item_count: itemCount)
+        CartDataManager().modifyCountDataManager(itemId, modifyCountInput, self)
+    }
+    // (X) 버튼 클릭
+    @objc func deleteButtonDidTap(_ sender: CartGesture) {
+        guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
+        CartDataManager().deleteCartDataManager(itemId, self)
+    }
+    // MARK: 계산
     func calculate() {
         var totalPrice = 0
         var totalCount = 0
         for data in cartData {
-            guard let initPrice = data.itemPrice else {return}
-            guard let count = data.itemCount else {return}
+            guard let initPrice = data.wishItem?.item_price else {return}
+            guard let count = data.cartItemInfo?.item_count else {return}
             
-            totalPrice = totalPrice + initPrice * count
+            totalPrice = totalPrice + Int(initPrice)! * count
             totalCount = totalCount + count
         }
-        self.price.text = String(totalPrice)
+        self.price.text = FormatManager().strToPrice(numStr: String(totalPrice))
         self.countLabel.text = String(totalCount)
     }
+}
+// MARK: - API Success
+extension CartView {
+    // MARK: Cart 조회 API
+    func getCartListAPISuccess(_ result: [CartListModel]) {
+        self.cartData = result
+        // reload data with animation
+        UIView.transition(with: cartTableView,
+                                  duration: 0.35,
+                                  options: .transitionCrossDissolve,
+                                  animations: { () -> Void in
+                                    self.cartTableView.reloadData()},
+                                completion: nil);
+        calculate()
+    }
+    func getCartListAPIFail() {
+        CartDataManager().getCartListDataManager(self)
+    }
+    func noCartItem() {
+        self.cartData = []
+        // reload data with animation
+        UIView.transition(with: cartTableView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                              self.cartTableView.reloadData()},
+                          completion: nil);
+    }
+    // MARK: 장바구니 수량 변경 API
+    func modifyCountAPISuccess(_ result: APIModel<ResultModel>) {
+        CartDataManager().getCartListDataManager(self)
+        print(result.message)
+    }
+    // MARK: 장바구니 삭제 API
+    func deleteCartAPISuccess(_ result: APIModel<ResultModel>) {
+        CartDataManager().getCartListDataManager(self)
+        print(result.message)
+    }
+}
+// MARK: - CartGesture
+class CartGesture: UITapGestureRecognizer {
+    var cartItem: CartListModel?
 }

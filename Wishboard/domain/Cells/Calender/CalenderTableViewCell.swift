@@ -10,6 +10,7 @@ import FSCalendar
 
 class CalenderTableViewCell: UITableViewCell {
     var calender: FSCalendar!
+    var events: [Date] = []
     
     //MARK: - Life Cycles
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -22,6 +23,7 @@ class CalenderTableViewCell: UITableViewCell {
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(385)
         }
+        NotificationDataManager().getCalenderNotificationDataManager(self)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -32,6 +34,9 @@ class CalenderTableViewCell: UITableViewCell {
     }
     func setCalender() {
         calender = FSCalendar().then{
+            $0.delegate = self
+            $0.dataSource = self
+            
             $0.appearance.headerMinimumDissolvedAlpha = 0
             $0.locale = Locale(identifier: "en")
             
@@ -40,10 +45,50 @@ class CalenderTableViewCell: UITableViewCell {
             $0.appearance.headerTitleFont = UIFont.Suit(size: 22, family: .Bold)
             $0.appearance.titleFont = UIFont.Suit(size: 16, family: .Light)
             $0.appearance.weekdayFont = UIFont.Suit(size: 16, family: .Light)
+            $0.appearance.subtitleFont = UIFont.Suit(size: 16, family: .Bold)
             
+            $0.appearance.todayColor = .wishboardGreen
+            $0.appearance.titleTodayColor = .black
             $0.appearance.selectionColor = .wishboardGreen
             $0.appearance.todaySelectionColor = .wishboardGreen
             $0.appearance.titleSelectionColor = .black
+            
+            $0.appearance.eventDefaultColor = .wishboardLightGreen
+            $0.appearance.eventSelectionColor = .wishboardLightGreen
         }
+    }
+    
+}
+// MARK: - Calender delegate
+extension CalenderTableViewCell: FSCalendarDelegate, FSCalendarDataSource {
+    //이벤트 표시 개수
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        if self.events.contains(date) {
+            return 1
+        } else {
+            return 0
+        }
+    }
+}
+// MARK: - API Success
+extension CalenderTableViewCell {
+    func getCalenderNotificationAPISuccess(_ result: [NotificationModel]) {
+        events.removeAll()
+        for data in result {
+            guard let notificationDate = data.item_notification_date else {return}
+            let startIndex = notificationDate.index(notificationDate.startIndex, offsetBy: 0)// 사용자지정 시작인덱스
+            let endIndex = notificationDate.index(notificationDate.startIndex, offsetBy: 10)// 사용자지정 끝인덱스
+            var notificationDateStr = notificationDate[startIndex ..< endIndex]
+            
+            let dfMatter = DateFormatter()
+            dfMatter.locale = Locale(identifier: "ko_KR")
+            dfMatter.dateFormat = "yyyy-MM-dd"
+            guard let eventDate = dfMatter.date(from: String(notificationDateStr)) else {return}
+            
+            events.append(eventDate)
+        }
+    }
+    func getCalenderNotificationAPIFail() {
+        NotificationDataManager().getCalenderNotificationDataManager(self)
     }
 }

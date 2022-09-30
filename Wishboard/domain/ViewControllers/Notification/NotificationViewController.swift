@@ -17,12 +17,16 @@ class NotificationViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         
         notiView = NotiView()
-        notiView.setTempData()
         self.view.addSubview(notiView)
         
         notiView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview()
         }
+        // DATA
+        NotificationDataManager().getNotificationListDataManager(self.notiView)
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        // DATA
+        NotificationDataManager().getNotificationListDataManager(self.notiView)
+    }
 }
