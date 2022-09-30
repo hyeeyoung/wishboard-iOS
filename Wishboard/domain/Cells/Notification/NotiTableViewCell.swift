@@ -11,6 +11,7 @@ class NotiTableViewCell: UITableViewCell {
     // MARK: - Views
     let itemImage = UIImageView().then{
         $0.backgroundColor = .systemGray6
+        $0.clipsToBounds = true
         $0.layer.cornerRadius = 40
     }
     let itemName = UILabel().then{

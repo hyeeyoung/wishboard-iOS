@@ -8,7 +8,7 @@
 import UIKit
 import Lottie
 
-class NewFolderViewController: UIViewController {
+class NewFolderViewController: KeyboardViewController {
     let titleLabel = UILabel().then{
         $0.text = "새 폴더 추가"
         $0.font = UIFont.Suit(size: 14, family: .Bold)
@@ -48,6 +48,7 @@ class NewFolderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        super.textfield = self.newFolderTextField
         
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true

@@ -30,7 +30,7 @@ class KeyboardViewController: UIViewController {
         if let textfield = self.textfield {self.removeKeyboardNotifications()}
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !CheckNotch().hasNotch() {self.view.endEditing(true)}
+        self.view.endEditing(true)
     }
     // MARK: - Functions
     func addKeyboardNotifications() {
