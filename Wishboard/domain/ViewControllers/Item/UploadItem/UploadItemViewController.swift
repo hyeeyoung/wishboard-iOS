@@ -23,6 +23,8 @@ class UploadItemViewController: UIViewController {
     var wishListModifyData: WishListModel!
     // UploadItem
     var wishListData: WishListModel!
+    // keyboard
+    var restoreFrameValue: CGFloat = 0.0
     
     // MARK: - Life Cycles
     override func viewDidLoad() {
@@ -30,6 +32,8 @@ class UploadItemViewController: UIViewController {
 
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
+        // keyboard
+        self.restoreFrameValue = self.view.frame.origin.y
         
         numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -42,8 +46,17 @@ class UploadItemViewController: UIViewController {
             self.wishListData = WishListModel(folder_id: nil, folder_name: nil, item_id: nil, item_img_url: nil, item_name: nil, item_price: nil, item_url: "", item_memo: "", create_at: nil, item_notification_type: nil, item_notification_date: nil, cart_state: nil)
         }
     }
-    override func viewDidAppear(_ animated: Bool) {
-        
+    override func viewWillAppear(_ animated: Bool) {
+        // 키보드가 나타날 때 앱에게 알리는 메서드 추가
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillAppear(noti:)), name: UIResponder.keyboardWillShowNotification , object: nil)
+        // 키보드가 사라질 때 앱에게 알리는 메서드 추가
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillDisappear(noti:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        // 키보드가 나타날 때 앱에게 알리는 메서드 제거
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
+        // 키보드가 사라질 때 앱에게 알리는 메서드 제거
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     @objc func goBack() {
         self.dismiss(animated: true)
@@ -129,7 +142,7 @@ extension UploadItemViewController {
         uploadItemView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview()
         }
-        
+        uploadItemView.uploadItemTableView.keyboardDismissMode = .onDrag
         uploadItemView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         
         if isUploadItem {
@@ -212,7 +225,9 @@ extension UploadItemViewController {
                 else {cell.textLabel?.text = cellTitleArray[tag - 1]}
             case 4:
                 if let notiType = self.wishListData.item_notification_type {
-                    cell.textLabel?.text = "[" + notiType + "] " + FormatManager().notiDateToKoreanStr(self.wishListData.item_notification_date!)!
+                    if let notiDate = self.wishListData.item_notification_date {
+                        cell.textLabel?.text = "[" + notiType + "] " + notiDate
+                    }
                 }
                 else {cell.textLabel?.text = cellTitleArray[tag - 1]}
             case 5:
@@ -278,6 +293,7 @@ extension UploadItemViewController {
             $0.placeholder = self.cellTitleArray[tag - 1]
             $0.font = UIFont.Suit(size: 14, family: .Regular)
             $0.addLeftPadding(16)
+            $0.delegate = self
         }
         cell.contentView.addSubview(textfield)
         textfield.snp.makeConstraints { make in
@@ -426,4 +442,46 @@ extension UploadItemViewController {
         ScreenManager().goMainPages(0, self, family: .itemModified)
         print(result.message)
     }
+}
+// MARK: - TextField & Keyboard Methods
+extension UploadItemViewController: UITextFieldDelegate {
+    
+    @objc func keyboardWillAppear(noti: NSNotification) {
+        if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            self.view.frame.origin.y -= keyboardHeight
+        }
+        print("keyboard Will appear Execute")
+    }
+    
+    @objc func keyboardWillDisappear(noti: NSNotification) {
+        if self.view.frame.origin.y != restoreFrameValue {
+            if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                let keyboardRectangle = keyboardFrame.cgRectValue
+                let keyboardHeight = keyboardRectangle.height
+                self.view.frame.origin.y += keyboardHeight
+            }
+            print("keyboard Will Disappear Execute")
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.frame.origin.y = restoreFrameValue
+        print("touches Began Execute")
+        self.view.endEditing(true)
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("textFieldShouldReturn Execute")
+        textField.resignFirstResponder()
+        return true
+    }
+
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        print("textFieldShouldEndEditing Execute")
+        self.view.frame.origin.y = self.restoreFrameValue
+        return true
+    }
+    
 }
