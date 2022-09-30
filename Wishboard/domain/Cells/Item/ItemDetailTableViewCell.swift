@@ -153,6 +153,8 @@ class ItemDetailTableViewCell: UITableViewCell {
         memoLabel.snp.makeConstraints { make in
             make.leading.equalTo(label.snp.leading)
             make.top.equalTo(label.snp.bottom).offset(10)
+            if CheckNotch().hasNotch() {make.bottom.equalToSuperview().offset(-78)}
+            else {make.bottom.equalToSuperview().offset(-44)}
         }
     }
     // After API success
