@@ -29,7 +29,9 @@ class FolderViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         FolderDataManager().getFolderDataManager(self)
     }
-
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
 // MARK: - CollectionView delegate
 extension FolderViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -103,6 +105,8 @@ extension FolderViewController {
         dialog.completeButton.addTarget(self, action: #selector(completeAddButtonDidTap), for: .touchUpInside)
         dialog.textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         self.present(dialog, animated: false, completion: nil)
+        
+        dialog.textField.delegate = self
     }
     // 폴더명 수정 팝업창
     func alertModifyDialog(folderData: FolderModel) {
@@ -113,6 +117,8 @@ extension FolderViewController {
         dialog.completeButton.addGestureRecognizer(folderMenuGesture)
         dialog.textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         self.present(dialog, animated: false, completion: nil)
+        
+        dialog.textField.delegate = self
     }
     // 폴더 삭제 팝업창
     func alertDeleteDialog(folderData: FolderModel) {
@@ -156,6 +162,19 @@ extension FolderViewController {
         self.folderStr = text
     }
 }
+// MARK: - TextField delegate
+extension FolderViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        self.view.bounds.origin.y = 0.0
+        return true
+    }
+}
+
 // MARK: - API Success
 extension FolderViewController {
     // MARK: 폴더 조회 API

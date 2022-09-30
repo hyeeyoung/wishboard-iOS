@@ -18,16 +18,16 @@ class KeyboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        textfield.delegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
         self.addKeyboardNotifications()
     }
     override func viewDidAppear(_ animated: Bool) {
-        self.textfield.becomeFirstResponder()
+        if let textfield = self.textfield {self.textfield.becomeFirstResponder()}
     }
     override func viewWillDisappear(_ animated: Bool) {
-        self.removeKeyboardNotifications()
+        if let textfield = self.textfield {self.removeKeyboardNotifications()}
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !CheckNotch().hasNotch() {self.view.endEditing(true)}

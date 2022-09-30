@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ModifyProfileViewController: UIViewController {
+class ModifyProfileViewController: KeyboardViewController {
     // MARK: - Views
     // navigation view
     let navigationView = UIView()
@@ -64,6 +64,8 @@ class ModifyProfileViewController: UIViewController {
         setUpView()
         setUpConstraint()
         setTarget()
+        
+        super.textfield = self.nameTextField
     }
     override func viewDidDisappear(_ animated: Bool) {
         if modified {
