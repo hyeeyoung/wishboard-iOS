@@ -18,7 +18,7 @@ class KeyboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        textfield.delegate = self
+        if let textfield = self.textfield { textfield.delegate = self }
     }
     override func viewWillAppear(_ animated: Bool) {
         self.addKeyboardNotifications()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ShoppingLinkViewController: UIViewController {
+class ShoppingLinkViewController: KeyboardViewController {
     let titleLabel = UILabel().then{
         $0.text = "쇼핑몰 링크"
         $0.font = UIFont.Suit(size: 14, family: .Bold)
@@ -40,6 +40,7 @@ class ShoppingLinkViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        super.textfield = self.shoppingLinkTextField
         
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
