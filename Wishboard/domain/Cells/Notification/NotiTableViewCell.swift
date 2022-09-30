@@ -80,7 +80,7 @@ class NotiTableViewCell: UITableViewCell {
 extension NotiTableViewCell {
     // After API
     func setUpData(_ data: NotificationModel) {
-        if let image = data.item_img {
+        if let image = data.item_img_url {
             self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
         }
         if let name = data.item_name {self.itemName.text = name}
