@@ -10,15 +10,6 @@ import UIKit
 
 class CartView: UIView {
     // MARK: - Properties
-    // Navigation View
-    let navigationView = UIView()
-    let pageTitle = UILabel().then{
-        $0.text = "장바구니"
-        $0.font = UIFont.Suit(size: 15, family: .Bold)
-    }
-    let backButton = UIButton().then{
-        $0.setImage(UIImage(named: "goBack"), for: .normal)
-    }
     // lower View
     let lowerView = UIView().then{
         $0.backgroundColor = .wishboardGreen
@@ -72,11 +63,6 @@ class CartView: UIView {
         cartTableView.showsVerticalScrollIndicator = false
     }
     func setUpView() {
-        addSubview(navigationView)
-        
-        navigationView.addSubview(pageTitle)
-        navigationView.addSubview(backButton)
-        
         addSubview(lowerView)
         lowerView.addSubview(total)
         lowerView.addSubview(countLabel)
@@ -87,57 +73,39 @@ class CartView: UIView {
         addSubview(cartTableView)
     }
     func setUpConstraint() {
-        setUpNavigationConstraint()
         setUpLowerConstraint()
         
         cartTableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(navigationView.snp.bottom)
+            make.top.equalToSuperview()
             make.bottom.equalTo(lowerView.snp.top)
-        }
-    }
-    func setUpNavigationConstraint() {
-        navigationView.snp.makeConstraints { make in
-            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
-            else {make.top.equalToSuperview().offset(20)}
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(50)
-        }
-        pageTitle.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-        }
-        backButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.width.equalTo(18)
-            make.height.equalTo(14)
-            make.leading.equalToSuperview().offset(16)
         }
     }
     func setUpLowerConstraint() {
         lowerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            if CheckNotch().hasNotch() {make.bottom.equalToSuperview().inset(40)}
-            else {make.bottom.equalToSuperview()}
-            make.height.equalTo(50)
+            make.bottom.equalToSuperview()
+            if CheckNotch().hasNotch() {make.height.equalTo(78)}
+            else {make.height.equalTo(50)}
         }
         total.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(17)
+            make.top.equalToSuperview().offset(16)
         }
         countLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+            make.centerY.equalTo(total)
             make.leading.equalTo(total.snp.trailing).offset(4)
         }
         label.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+            make.centerY.equalTo(total)
             make.leading.equalTo(countLabel.snp.trailing)
         }
         won.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+            make.centerY.equalTo(total)
             make.trailing.equalToSuperview().offset(-18)
         }
         price.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+            make.centerY.equalTo(total)
             make.trailing.equalTo(won.snp.leading)
         }
     }

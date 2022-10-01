@@ -7,31 +7,27 @@
 
 import UIKit
 
-class CartViewController: UIViewController {
+class CartViewController: TitleCenterViewController {
     var cartView: CartView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.view.backgroundColor = .white
-        self.navigationController?.isNavigationBarHidden = true
+        super.navigationTitle.text = "장바구니"
+        self.tabBarController?.tabBar.isHidden = true
         
         cartView = CartView()
         self.view.addSubview(cartView)
         
         cartView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(super.navigationView.snp.bottom)
         }
-        
-        self.cartView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         // DATA
         CartDataManager().getCartListDataManager(self.cartView)
     }
     override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
         // DATA
         CartDataManager().getCartListDataManager(self.cartView)
-    }
-    @objc func goBack() {
-        self.dismiss(animated: true)
     }
 }
