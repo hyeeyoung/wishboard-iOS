@@ -7,17 +7,7 @@
 
 import UIKit
 
-class ModifyProfileViewController: KeyboardViewController {
-    // MARK: - Views
-    // navigation view
-    let navigationView = UIView()
-    let pageTitle = UILabel().then{
-        $0.text = "프로필 수정"
-        $0.font = UIFont.Suit(size: 15, family: .Bold)
-    }
-    let backButton = UIButton().then{
-        $0.setImage(UIImage(named: "goBack"), for: .normal)
-    }
+class ModifyProfileViewController: TitleCenterViewController {
     // profile
     var profileImage = UIImageView().then{
         $0.image = UIImage(named: "defaultProfile")
@@ -57,6 +47,7 @@ class ModifyProfileViewController: KeyboardViewController {
 
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
+        super.navigationTitle.text = "프로필 수정"
         
         // imagePicker delegate
         imagePickerController.delegate = self
@@ -65,7 +56,7 @@ class ModifyProfileViewController: KeyboardViewController {
         setUpConstraint()
         setTarget()
         
-        super.textfield = self.nameTextField
+        self.nameTextField.delegate = self
     }
     override func viewDidDisappear(_ animated: Bool) {
         if modified {
@@ -77,10 +68,6 @@ class ModifyProfileViewController: KeyboardViewController {
 // MARK: - Set Views
 extension ModifyProfileViewController {
     func setUpView() {
-        self.view.addSubview(navigationView)
-        navigationView.addSubview(pageTitle)
-        navigationView.addSubview(backButton)
-        
         self.view.addSubview(profileImage)
         self.view.addSubview(cameraButton)
         self.view.addSubview(nameTextField)
@@ -92,8 +79,6 @@ extension ModifyProfileViewController {
         nameTextField.text = self.preNickName
     }
     func setUpConstraint() {
-        setUpNavigationConstraint()
-        
         profileImage.snp.makeConstraints { make in
             make.width.height.equalTo(106)
             make.centerX.equalToSuperview()
@@ -117,33 +102,14 @@ extension ModifyProfileViewController {
             make.centerX.equalToSuperview()
         }
     }
-    func setUpNavigationConstraint() {
-        navigationView.snp.makeConstraints { make in
-            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
-            else {make.top.equalToSuperview().offset(20)}
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(50)
-        }
-        pageTitle.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-        }
-        backButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.width.equalTo(18)
-            make.height.equalTo(14)
-            make.leading.equalToSuperview().offset(16)
-        }
-    }
 }
 // MARK: Set Targets
 extension ModifyProfileViewController {
     func setTarget() {
-        self.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         self.cameraButton.addTarget(self, action: #selector(goAlbumButtonDidTap), for: .touchUpInside)
         self.nameTextField.addTarget(self, action: #selector(nameTextFieldEditingChanged(_:)), for: .editingChanged)
         self.completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
     }
-    @objc func goBack() {self.dismiss(animated: true)}
     @objc func nameTextFieldEditingChanged(_ sender: UITextField) {
         self.isNicknameChanged = true
         let text = sender.text ?? ""
@@ -183,6 +149,18 @@ extension ModifyProfileViewController : UIImagePickerControllerDelegate, UINavig
             self.isPhotoSelected = true
         }
         self.dismiss(animated: true, completion: nil)
+    }
+}
+// MARK: - Textfield delegate
+extension ModifyProfileViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        self.view.bounds.origin.y = 0.0
+        return true
     }
 }
 // MARK: - API Success

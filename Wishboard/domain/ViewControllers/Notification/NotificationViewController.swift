@@ -15,6 +15,8 @@ class NotificationViewController: UIViewController {
 
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         
         notiView = NotiView()
         self.view.addSubview(notiView)

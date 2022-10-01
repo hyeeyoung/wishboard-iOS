@@ -7,16 +7,8 @@
 
 import UIKit
 
-class FolderDetailViewController: UIViewController {
+class FolderDetailViewController: TitleCenterViewController {
     // MARK: - View
-    let navigationView = UIView()
-    var navigationTitle = UILabel().then{
-        $0.text = "목걸이"
-        $0.font = UIFont.Suit(size: 15, family: .Bold)
-    }
-    let backBtn = UIButton().then{
-        $0.setImage(UIImage(named: "goBack"), for: .normal)
-    }
     let emptyMessage = "앗, 아이템이 없어요!\n갖고 싶은 아이템을 등록해보세요!"
     // MARK: - Life Cycles
     var folderName: String!
@@ -26,28 +18,26 @@ class FolderDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .white
-        self.navigationController?.isNavigationBarHidden = true
-        if let folderName = self.folderName {navigationTitle.text = folderName}
-        
         setUpCollectionView()
         setUpView()
-        setUpConstraint()
 
-        self.backBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         // DATA
-        FolderDataManager().getFolderDetailDataManager(self.folderId, self)
+        if let folderName = self.folderName {super.navigationTitle.text = folderName}
+        if let folderId = self.folderId {
+            FolderDataManager().getFolderDetailDataManager(self.folderId, self)
+        }
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         // DATA
-        FolderDataManager().getFolderDetailDataManager(self.folderId, self)
+        if let folderName = self.folderName {super.navigationTitle.text = folderName}
+        if let folderId = self.folderId {
+            FolderDataManager().getFolderDetailDataManager(self.folderId, self)
+        }
     }
 }
 // MARK: - Actions & Functions
 extension FolderDetailViewController {
-    @objc func goBack() {
-        self.dismiss(animated: true)
-    }
     func setUpCollectionView() {
         folderDetailCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then{
             let flowLayout = UICollectionViewFlowLayout()
@@ -70,35 +60,10 @@ extension FolderDetailViewController {
         }
     }
     func setUpView() {
-        self.view.addSubview(navigationView)
-        navigationView.addSubview(navigationTitle)
-        navigationView.addSubview(backBtn)
-        
         self.view.addSubview(folderDetailCollectionView)
-    }
-    func setUpConstraint() {
-        setUpNavigationConstraint()
-        
         folderDetailCollectionView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(self.navigationView.snp.bottom)
-        }
-    }
-    func setUpNavigationConstraint() {
-        navigationView.snp.makeConstraints{ make in
-            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
-            else {make.top.equalToSuperview().offset(20)}
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(56)
-        }
-        backBtn.snp.makeConstraints{ make in
-            make.width.height.equalTo(24)
-            make.leading.equalToSuperview().offset(16)
-            make.centerY.equalToSuperview()
-        }
-        navigationTitle.snp.makeConstraints{ make in
-            make.centerY.equalToSuperview()
-            make.centerX.equalToSuperview()
         }
     }
 }

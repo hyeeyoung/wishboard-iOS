@@ -20,6 +20,8 @@ class MyPageViewController: UIViewController {
 
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         
         mypageView = MyPageView()
         mypageView.setTableView(dataSourceDelegate: self)
@@ -82,12 +84,11 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         let tag = indexPath.row
         switch tag {
         case 0:
-            let modifyProfile = ModifyProfileViewController()
-            modifyProfile.preNickName = self.userInfoData.nickname
-            modifyProfile.preProfileImg = self.userInfoData.profile_img_url
-            modifyProfile.preVC = self
-            modifyProfile.modalPresentationStyle = .fullScreen
-            self.present(modifyProfile, animated: true, completion: nil)
+            let vc = ModifyProfileViewController()
+            vc.preNickName = self.userInfoData.nickname
+            vc.preProfileImg = self.userInfoData.profile_img_url
+            vc.preVC = self
+            self.navigationController?.pushViewController(vc, animated: true)
         case 10:
             showLogoutDialog()
         case 11:

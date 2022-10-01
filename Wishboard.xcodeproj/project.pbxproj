@@ -180,6 +180,9 @@
 		23EC504228E25DAC00AAA57E /* CheckEmailInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504128E25DAC00AAA57E /* CheckEmailInput.swift */; };
 		23EC504628E2664D00AAA57E /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504528E2664D00AAA57E /* APIManager.swift */; };
 		23EC504C28E2670D00AAA57E /* MypageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504B28E2670D00AAA57E /* MypageDataManager.swift */; };
+		23F07F3E28E7CCBA0012D77D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */; };
+		23F07F4028E7D37B0012D77D /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F3F28E7D37B0012D77D /* NavigationController.swift */; };
+		23F07F4428E7D5930012D77D /* TitleCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */; };
 		23F69CAF28CC17F8001B8C7F /* UIBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */; };
 		23F69CB128CC1819001B8C7F /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CB028CC1819001B8C7F /* UIView.swift */; };
 		8FC34572B49CFC063CDC4619 /* Pods_WishboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 420154A5B1D7E2D7C5F49F42 /* Pods_WishboardTests.framework */; };
@@ -370,6 +373,9 @@
 		23EC504128E25DAC00AAA57E /* CheckEmailInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckEmailInput.swift; sourceTree = "<group>"; };
 		23EC504528E2664D00AAA57E /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		23EC504B28E2670D00AAA57E /* MypageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageDataManager.swift; sourceTree = "<group>"; };
+		23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		23F07F3F28E7D37B0012D77D /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCenterViewController.swift; sourceTree = "<group>"; };
 		23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPath.swift; sourceTree = "<group>"; };
 		23F69CB028CC1819001B8C7F /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		420154A5B1D7E2D7C5F49F42 /* Pods_WishboardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WishboardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1048,6 +1054,9 @@
 				23A85F7C28E39FE800075667 /* FormatManager.swift */,
 				239ED94B28E5D8A500CBCCAD /* NetworkCheck.swift */,
 				23E0ACC428E79F09008C35C2 /* KeyboardViewController.swift */,
+				23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */,
+				23F07F3F28E7D37B0012D77D /* NavigationController.swift */,
+				23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1662,10 +1671,12 @@
 				23BB603328E27001007EA1EF /* ModifyProfileDataManager.swift in Sources */,
 				23F69CB128CC1819001B8C7F /* UIView.swift in Sources */,
 				23E378E528D2F47E00C52F2D /* UploadItemViewController.swift in Sources */,
+				23F07F3E28E7CCBA0012D77D /* BaseViewController.swift in Sources */,
 				23C8A1C528CA08B7003ABFE9 /* ItemDetailView.swift in Sources */,
 				23D5518328C6A3BD00D81B5F /* UIButton.swift in Sources */,
 				2340CEAA28CB6173007C362F /* HomeBottomSheetView.swift in Sources */,
 				23D4C66228D8E88700EA7F98 /* LostPasswordView.swift in Sources */,
+				23F07F4028E7D37B0012D77D /* NavigationController.swift in Sources */,
 				2374789E28D1EDF600CF941A /* PopUpViewController.swift in Sources */,
 				234F837428C9627700C4EB41 /* HomeViewController.swift in Sources */,
 				234F838F28C987CB00C4EB41 /* CartViewController.swift in Sources */,
@@ -1698,6 +1709,7 @@
 				2328C5A728CABF300065ABB2 /* NotiView.swift in Sources */,
 				235204CE28E2690F004F5DC6 /* GetUserInfoModel.swift in Sources */,
 				2360095E28DA1829001FB107 /* FolderDetailViewController.swift in Sources */,
+				23F07F4428E7D5930012D77D /* TitleCenterViewController.swift in Sources */,
 				23C2378928C9CF0400CE3200 /* FolderListModel.swift in Sources */,
 				237478A428D20DB600CF941A /* FolderListTableViewCell.swift in Sources */,
 				23E0ACC528E79F09008C35C2 /* KeyboardViewController.swift in Sources */,

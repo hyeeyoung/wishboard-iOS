@@ -19,6 +19,8 @@ class FolderViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
 
         setFolderView()
         FolderDataManager().getFolderDataManager(self)
@@ -56,11 +58,11 @@ extension FolderViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let itemIdx = indexPath.item
         let folderName = self.folderData[itemIdx].folder_name
         let folderId = self.folderData[itemIdx].folder_id
-        let folderDetailVC = FolderDetailViewController()
-        folderDetailVC.folderName = folderName
-        folderDetailVC.folderId = folderId
-        folderDetailVC.modalPresentationStyle = .fullScreen
-        self.present(folderDetailVC, animated: true, completion: nil)
+        
+        let vc = FolderDetailViewController()
+        vc.folderName = folderName
+        vc.folderId = folderId
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 // MARK: - Functions & Actions
