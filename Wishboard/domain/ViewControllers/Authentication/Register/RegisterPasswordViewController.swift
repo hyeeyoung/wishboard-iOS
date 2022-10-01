@@ -16,9 +16,6 @@ class RegisterPasswordViewController: KeyboardViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         super.navigationTitle.text = "가입하기"
-
-        self.view.backgroundColor = .white
-        self.navigationController?.isNavigationBarHidden = true
         
         registerPWView = RegisterPasswordView()
         self.view.addSubview(registerPWView)

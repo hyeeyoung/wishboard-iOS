@@ -153,7 +153,6 @@ extension HomeView {
     // MARK: 위시리스트 조회 API
     func wishListAPISuccess(_ result: [WishListModel]) {
         self.wishListData = result
-        print(result)
         // reload data with animation
         UIView.transition(with: collectionView,
                                   duration: 0.35,

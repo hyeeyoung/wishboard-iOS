@@ -16,7 +16,7 @@ class ScreenManager {
         // 첫화면으로 전환
         guard let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabBarViewController") as? UITabBarController else {return}
         viewcontroller.navigationController?.pushViewController(tabBarController, animated: true)
-        viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
+//        viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
     }
     func goMainPages(_ index: Int, _ viewcontroller: UIViewController) {
         guard let tabBarController = viewcontroller.tabBarController else {return}

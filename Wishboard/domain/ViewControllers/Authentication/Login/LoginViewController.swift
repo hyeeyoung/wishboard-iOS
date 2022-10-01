@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class LoginViewController: BaseViewController {
+class LoginViewController: TitleCenterViewController {
     let loginView = LoginView()
     private let loginViewModel: LoginViewModel = LoginViewModel()
     
@@ -17,11 +17,7 @@ class LoginViewController: BaseViewController {
         super.viewDidLoad()
         super.navigationTitle.text = "로그인하기"
 
-//        loginView.backgroundColor = .white
         self.view.addSubview(loginView)
-        
-        loginView.setUpView()
-        loginView.setUpConstraint(vc: self)
         
         loginView.emailTextField.addTarget(self, action: #selector(emailTextFieldEditingChanged), for: .editingChanged)
         loginView.passwordTextField.addTarget(self, action: #selector(passwordTextFieldEditingChanged), for: .editingChanged)
@@ -29,7 +25,8 @@ class LoginViewController: BaseViewController {
         loginView.lostPasswordButton.addTarget(self, action: #selector(lostPasswordButtonDidTap), for: .touchUpInside)
         
         loginView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(super.navigationView.snp.bottom)
         }
         bind()
     }
@@ -51,8 +48,7 @@ class LoginViewController: BaseViewController {
     }
     @objc func lostPasswordButtonDidTap() {
         let lostPwVC = LostPasswordViewController()
-        lostPwVC.modalPresentationStyle = .fullScreen
-        self.present(lostPwVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(lostPwVC, animated: true)
     }
     //MARK: - Methods
     private func bind() {

@@ -33,6 +33,8 @@ class LoginView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        setUpView()
+        setUpConstraint()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -44,12 +46,12 @@ class LoginView: UIView {
         addSubview(loginButton)
         addSubview(lostPasswordButton)
     }
-    func setUpConstraint(vc: LoginViewController) {
+    func setUpConstraint() {
         self.emailTextField.snp.makeConstraints { make in
             make.height.equalTo(42)
             make.leading.trailing.equalToSuperview().inset(16)
             make.centerX.equalToSuperview()
-            make.top.equalTo(vc.navigationView.snp.bottom).offset(30)
+            make.top.equalToSuperview().offset(30)
         }
         self.passwordTextField.snp.makeConstraints { make in
             make.height.equalTo(42)

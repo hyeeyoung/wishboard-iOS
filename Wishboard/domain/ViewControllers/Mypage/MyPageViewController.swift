@@ -22,6 +22,7 @@ class MyPageViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        self.tabBarController?.tabBar.isHidden = false
         
         mypageView = MyPageView()
         mypageView.setTableView(dataSourceDelegate: self)
@@ -36,6 +37,7 @@ class MyPageViewController: UIViewController {
         MypageDataManager().getUserInfoDataManager(self)
     }
     override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
         // DATA
         MypageDataManager().getUserInfoDataManager(self)
     }
@@ -168,6 +170,7 @@ extension MyPageViewController {
         dialog.okBtn.addTarget(self, action: #selector(signOutButtonDidTap), for: .touchUpInside)
     }
     @objc func logoutButtonDidTap() {
+        self.dismiss(animated: false)
         MypageDataManager().logoutDataManager(self)
     }
     @objc func signOutButtonDidTap() {
@@ -221,8 +224,7 @@ extension MyPageViewController {
         UserDefaults.standard.set(false, forKey: "isFirstLogin")
         
         let onboardingVC = OnBoardingViewController()
-        onboardingVC.modalPresentationStyle = .fullScreen
-        self.view.window?.windowScene?.keyWindow?.rootViewController = onboardingVC
+        self.navigationController?.pushViewController(onboardingVC, animated: true)
         print(result.message)
     }
 }
