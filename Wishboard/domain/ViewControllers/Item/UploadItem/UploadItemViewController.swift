@@ -55,7 +55,7 @@ class UploadItemViewController: UIViewController {
         self.removeKeyboardNotifications()
     }
     @objc func goBack() {
-        self.dismiss(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
 }
 // MARK: - TableView delegate
@@ -139,16 +139,18 @@ extension UploadItemViewController {
             make.leading.trailing.top.bottom.equalToSuperview()
         }
         uploadItemView.uploadItemTableView.keyboardDismissMode = .onDrag
-        uploadItemView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         
         if isUploadItem {
+            self.tabBarController?.tabBar.isHidden = false
             uploadItemView.backButton.isHidden = true
             uploadItemView.pageTitle.text = "아이템 추가"
             uploadItemView.saveButton.addTarget(self, action: #selector(saveButtonDidTap), for: .touchUpInside)
             uploadItemView.setSaveButton(false)
         } else {
+            self.tabBarController?.tabBar.isHidden = true
             uploadItemView.backButton.isHidden = false
             uploadItemView.pageTitle.text = "아이템 수정"
+            uploadItemView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
             uploadItemView.saveButton.addTarget(self, action: #selector(modifyButtonDidTap), for: .touchUpInside)
             uploadItemView.setSaveButton(true)
         }

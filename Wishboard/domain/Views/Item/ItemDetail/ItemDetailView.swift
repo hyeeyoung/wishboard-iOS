@@ -10,7 +10,6 @@ import UIKit
 
 class ItemDetailView: UIView {
     // MARK: - Properties
-    // Navigation View
     let navigationView = UIView()
     let modifyButton = UIButton().then{
         $0.setImage(UIImage(named: "pencil"), for: .normal)

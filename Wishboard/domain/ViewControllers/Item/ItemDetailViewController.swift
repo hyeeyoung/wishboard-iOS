@@ -31,7 +31,7 @@ class ItemDetailViewController: UIViewController {
     }
     // MARK: - Actions
     @objc func goBack() {
-        self.dismiss(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     @objc func alertDialog() {
         let dialog = PopUpViewController(titleText: "아이템 삭제", messageText: "정말 아이템을 삭제하시겠어요?\n삭제된 아이템은 다시 복구할 수 없어요!", greenBtnText: "취소", blackBtnText: "삭제")
