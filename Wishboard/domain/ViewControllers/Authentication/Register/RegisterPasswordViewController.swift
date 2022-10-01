@@ -15,6 +15,7 @@ class RegisterPasswordViewController: KeyboardViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        super.navigationTitle.text = "가입하기"
 
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
@@ -23,24 +24,20 @@ class RegisterPasswordViewController: KeyboardViewController {
         self.view.addSubview(registerPWView)
         
         registerPWView.snp.makeConstraints { make in
-            make.top.leading.trailing.bottom.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(super.navigationView.snp.bottom)
         }
         registerPWView.preVC = self
         registerPWView.registerButton.isEnabled = false
-        registerPWView.backBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         registerPWView.pwTextField.addTarget(self, action: #selector(pwTextFieldEditingChanged(_:)), for: .editingChanged)
         registerPWView.registerButton.addTarget(self, action: #selector(registerButtonDidTap), for: .touchUpInside)
         
         super.textfield = registerPWView.pwTextField
         if !CheckNotch().hasNotch() {registerPWView.termLabel.isHidden = true}
     }
-
 }
 extension RegisterPasswordViewController {
     // MARK: - Actions
-    @objc func goBack() {
-        self.dismiss(animated: true)
-    }
     @objc func pwTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
         self.pw = text

@@ -13,6 +13,8 @@ class OnBoardingViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         
         let view = OnBoardingView()
         view.setViewController(self)

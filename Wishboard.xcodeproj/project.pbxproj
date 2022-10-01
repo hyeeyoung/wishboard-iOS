@@ -13,6 +13,7 @@
 		230180E928E50C0B001034FC /* FolderInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339D4FE28E3CFF900E636FD /* FolderInput.swift */; };
 		230A3F5928E4B5CA00966682 /* NotificationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230A3F5828E4B5CA00966682 /* NotificationDataManager.swift */; };
 		230DBFA828E106EE00E9AED6 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230DBFA728E106EE00E9AED6 /* ShareView.swift */; };
+		231B581028E8A33C0030D33E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */; };
 		232174DB28E1BE81008C155D /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174DA28E1BE81008C155D /* RegisterDataManager.swift */; };
 		232174E428E1BF1C008C155D /* RegisterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E328E1BF1C008C155D /* RegisterInput.swift */; };
 		232174E628E1D469008C155D /* LoginDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E528E1D469008C155D /* LoginDataManager.swift */; };
@@ -1626,6 +1627,7 @@
 			files = (
 				23AADBC128DF8F9800AB75C6 /* NotificationSettingViewController.swift in Sources */,
 				236FE91828DF8512006142DB /* SetLottie.swift in Sources */,
+				231B581028E8A33C0030D33E /* BaseViewController.swift in Sources */,
 				230DBFA828E106EE00E9AED6 /* ShareView.swift in Sources */,
 				230180E628E50B7C001034FC /* FolderDataManager.swift in Sources */,
 				236FE92228DF8592006142DB /* UITextField.swift in Sources */,

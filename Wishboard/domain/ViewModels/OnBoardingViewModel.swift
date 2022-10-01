@@ -18,13 +18,10 @@ class OnBoardingViewModel {
     }
     func goToLoginPage() {
         let loginViewController = LoginViewController()
-//        loginViewController.modalTransitionStyle = .coverVertical
-        loginViewController.modalPresentationStyle = .fullScreen
-        self.viewcontroller.present(loginViewController, animated: true, completion: nil)
+        self.viewcontroller.navigationController?.pushViewController(loginViewController, animated: true)
     }
     func goToRegisterPage() {
-        let registerVC = RegisterEmailViewController()
-        registerVC.modalPresentationStyle = .fullScreen
-        self.viewcontroller.present(registerVC, animated: true, completion: nil)
+        let registerVC = RegisterEmailViewController(title: "1/2단계")
+        self.viewcontroller.navigationController?.pushViewController(registerVC, animated: true)
     }
 }

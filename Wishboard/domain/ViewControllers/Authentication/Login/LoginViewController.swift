@@ -9,17 +9,20 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseViewController {
     let loginView = LoginView()
     private let loginViewModel: LoginViewModel = LoginViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        super.navigationTitle.text = "로그인하기"
 
-        loginView.backgroundColor = .white
+//        loginView.backgroundColor = .white
         self.view.addSubview(loginView)
         
-        loginView.backBtn.addTarget(self, action: #selector(backBtnDidTap), for: .touchUpInside)
+        loginView.setUpView()
+        loginView.setUpConstraint(vc: self)
+        
         loginView.emailTextField.addTarget(self, action: #selector(emailTextFieldEditingChanged), for: .editingChanged)
         loginView.passwordTextField.addTarget(self, action: #selector(passwordTextFieldEditingChanged), for: .editingChanged)
         loginView.loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
@@ -31,9 +34,6 @@ class LoginViewController: UIViewController {
         bind()
     }
     // MARK: - Actions
-    @objc func backBtnDidTap(_ sender: UIButton) {
-        self.dismiss(animated: true)
-    }
     @objc func emailTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
         loginViewModel.emailTextFieldEditingChanged(text)

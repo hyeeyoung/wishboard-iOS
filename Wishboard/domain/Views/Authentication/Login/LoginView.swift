@@ -12,17 +12,6 @@ import SnapKit
 
 class LoginView: UIView {
     // MARK: - Views
-    let navigationView = UIView()
-        
-    lazy var backBtn = UIButton().then{
-        $0.setImage(UIImage(named: "goBack"), for: .normal)
-        $0.isUserInteractionEnabled = true
-    }
-    let navigationTitle = UILabel().then{
-        $0.text = "로그인 하기"
-        $0.textColor = .black
-        $0.font = UIFont.Suit(size: 15, family: .Bold)
-    }
     // 이메일 TextField
     let emailTextField = UITextField().then{
         $0.defaultTextField("이메일")
@@ -44,45 +33,23 @@ class LoginView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        setUpView()
-        setUpConstraint()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     func setUpView() {
-        addSubview(navigationView)
-        navigationView.addSubview(backBtn)
-        navigationView.addSubview(navigationTitle)
-        
         addSubview(emailTextField)
         addSubview(passwordTextField)
         addSubview(loginButton)
         addSubview(lostPasswordButton)
     }
-    func setUpConstraint() {
-        navigationView.snp.makeConstraints{ make in
-            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
-            else {make.top.equalToSuperview().offset(20)}
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(56)
-        }
-        backBtn.snp.makeConstraints{ make in
-            make.width.height.equalTo(24)
-            make.leading.equalToSuperview().offset(16)
-            make.centerY.equalToSuperview()
-        }
-        navigationTitle.snp.makeConstraints{ make in
-            make.centerY.equalToSuperview()
-            make.centerX.equalToSuperview()
-        }
-        
+    func setUpConstraint(vc: LoginViewController) {
         self.emailTextField.snp.makeConstraints { make in
             make.height.equalTo(42)
             make.leading.trailing.equalToSuperview().inset(16)
             make.centerX.equalToSuperview()
-            make.top.equalTo(navigationView.snp.bottom).offset(30)
+            make.top.equalTo(vc.navigationView.snp.bottom).offset(30)
         }
         self.passwordTextField.snp.makeConstraints { make in
             make.height.equalTo(42)

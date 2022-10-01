@@ -13,6 +13,7 @@ class RegisterEmailViewController: KeyboardViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        super.navigationTitle.text = "가입하기"
 
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
@@ -21,18 +22,15 @@ class RegisterEmailViewController: KeyboardViewController {
         self.view.addSubview(registerEmailView)
         
         registerEmailView.snp.makeConstraints { make in
-            make.top.leading.trailing.bottom.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(super.navigationView.snp.bottom)
         }
-        registerEmailView.backBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         registerEmailView.emailTextField.addTarget(self, action: #selector(emailTextFieldEditingChanged(_:)), for: .editingChanged)
         registerEmailView.nextButton.addTarget(self, action: #selector(nextButtonDidTap), for: .touchUpInside)
         
         super.textfield = registerEmailView.emailTextField
     }
     // MARK: - Actions
-    @objc func goBack() {
-        self.dismiss(animated: true)
-    }
     @objc func emailTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
         self.email = text
@@ -62,10 +60,9 @@ class RegisterEmailViewController: KeyboardViewController {
 // MARK: - API Success
 extension RegisterEmailViewController {
     func checkEmailAPISuccess(_ result: APIModel<ResultModel>) {
-        let registerVC = RegisterPasswordViewController()
+        let registerVC = RegisterPasswordViewController(title: "2/2단계")
         registerVC.email = self.email
-        registerVC.modalPresentationStyle = .fullScreen
-        self.present(registerVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(registerVC, animated: true)
     }
     func checkEmaiAPIFail() {
         SnackBar(self, message: .checkEmail)
