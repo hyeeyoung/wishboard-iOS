@@ -41,8 +41,10 @@ class UploadItemViewController: UIViewController {
         setUploadItemView()
         
         if !isUploadItem {
+            self.tabBarController?.tabBar.isHidden = true
             self.wishListData = self.wishListModifyData
         } else {
+            self.tabBarController?.tabBar.isHidden = false
             self.wishListData = WishListModel(folder_id: nil, folder_name: nil, item_id: nil, item_img_url: nil, item_name: nil, item_price: nil, item_url: "", item_memo: "", create_at: nil, item_notification_type: nil, item_notification_date: nil, cart_state: nil)
         }
     }

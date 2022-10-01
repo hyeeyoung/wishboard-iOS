@@ -16,6 +16,8 @@ class HomeViewController: UIViewController {
 
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        self.tabBarController?.tabBar.isHidden = false
         
         homeView = HomeView()
         self.view.addSubview(homeView)
@@ -35,6 +37,7 @@ class HomeViewController: UIViewController {
         sendFCM()
     }
     override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
         // DATA
         WishListDataManager().wishListDataManager(self.homeView, self)
     }

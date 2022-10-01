@@ -18,6 +18,7 @@ class ItemDetailViewController: UIViewController {
 
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.isHidden = true
         
         itemDetailView = ItemDetailView()
         self.view.addSubview(itemDetailView)
@@ -62,7 +63,7 @@ class ItemDetailViewController: UIViewController {
             
             $0.modalPresentationStyle = .fullScreen
         }
-        self.present(modifyVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(modifyVC, animated: true)
     }
 }
 extension ItemDetailViewController {

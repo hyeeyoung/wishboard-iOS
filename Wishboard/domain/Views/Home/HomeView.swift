@@ -137,7 +137,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         let vc = ItemDetailViewController()
         vc.wishListData = self.wishListData[itemIdx]
         vc.modalPresentationStyle = .fullScreen
-        self.viewController.present(vc, animated: true)
+        self.viewController.navigationController?.pushViewController(vc, animated: true)
     }
 }
 extension HomeView {
