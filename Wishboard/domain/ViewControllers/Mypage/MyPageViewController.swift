@@ -87,6 +87,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         switch tag {
         case 0:
             let vc = ModifyProfileViewController()
+            vc.nameTextField.text = self.userInfoData.nickname
+            vc.profileImage.kf.setImage(with: URL(string: self.userInfoData.profile_img_url!), placeholder: UIImage())
             vc.preNickName = self.userInfoData.nickname
             vc.preProfileImg = self.userInfoData.profile_img_url
             vc.preVC = self

@@ -133,7 +133,7 @@ extension ModifyProfileViewController {
             } else if self.isPhotoSelected {
                 ModifyProfileDataManager().modifyProfileDataManager(self.selectedPhoto, self)
             } else {
-                self.dismiss(animated: true)
+                self.navigationController?.popViewController(animated: true)
             }
             
         }
@@ -168,7 +168,7 @@ extension ModifyProfileViewController {
     func modifyProfileAPISuccess(_ result: APIModel<ResultModel>) {
         if result.success! {
             self.modified = true
-            self.dismiss(animated: true)
+            self.navigationController?.popViewController(animated: true)
         } else {}
         
         print(result.message)
