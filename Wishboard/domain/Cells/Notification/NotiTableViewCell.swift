@@ -79,19 +79,24 @@ class NotiTableViewCell: UITableViewCell {
     }
 }
 extension NotiTableViewCell {
-    // After API
+    // MARK: 알람탭 페이지 조회 API 호출 후
     func setUpData(_ data: NotificationModel) {
         if let image = data.item_img_url {
             self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
         }
         if let name = data.item_name {self.itemName.text = name}
-        if let time = data.item_notification_date {self.timeLabel.text = time}
+        if let time = data.item_notification_date {self.timeLabel.text = FormatManager().createdDateToKoreanStr(time)}
         if let isViewed = data.read_state {
             self.viewView.isHidden = isViewed == 1 ? true : false
         }
     }
-    // 캘린더 알림 조회 API 호출 후 
+    // MARK: 캘린더 알림 조회 API 호출 후
     func setCalenderNotiCell(_ data: NotificationModel) {
+        if let image = data.item_img_url {
+            self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
+        }
+        if let name = data.item_name {self.itemName.text = name}
+        // 뒷배경 뷰 추가
         let grayView = UIView().then{
             $0.backgroundColor = .notificationBackgroundGray
             $0.layer.cornerRadius = 24
@@ -102,8 +107,9 @@ extension NotiTableViewCell {
             make.bottom.equalToSuperview().offset(-3)
             make.top.equalToSuperview().offset(3)
         }
+        // 초록 동그라미는 보여주지 않는다.
         self.viewView.isHidden = true
-        
+        // 알람 시간 파싱 ('오전 0시 0분')
         let dateStr = data.item_notification_date
         let myDateFormatter = DateFormatter()
         myDateFormatter.dateFormat = "a HH시 mm분" // 2020년 08월 13일 오후 04시 30분

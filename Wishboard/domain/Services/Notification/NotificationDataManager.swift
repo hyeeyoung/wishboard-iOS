@@ -34,6 +34,29 @@ class NotificationDataManager {
             }
         }
     }
+    // MARK: - 알림 읽음 처리
+    func readNotificationListDataManager(_ itemId: Int, _ notiView: NotiView) {
+        AF.request(BaseURL + "/noti/\(itemId)/read-state",
+                           method: .put,
+                           parameters: nil,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            switch response.result {
+            case .success(let result):
+                notiView.readNotificationAPISuccess(result)
+            case .failure(let error):
+//                let statusCode = error.responseCode
+//                switch statusCode {
+//                case 429:
+//                    notiView.getNotificationListAPIFail()
+//                default:
+//                    print(error.responseCode)
+//                }
+                print(error.responseCode)
+            }
+        }
+    }
     // MARK: - 캘린더 알림 조회
     func getCalenderNotificationDataManager(_ tableViewCell: CalenderTableViewCell) {
         AF.request(BaseURL + "/noti/calendar",

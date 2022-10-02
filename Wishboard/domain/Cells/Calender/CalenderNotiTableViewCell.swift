@@ -75,8 +75,6 @@ extension CalenderNotiTableViewCell: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "NotiTableViewCell", for: indexPath) as? NotiTableViewCell else { return UITableViewCell() }
         let itemIdx = indexPath.item
-        cell.setUpData(self.notiData[itemIdx])
-
         cell.setCalenderNotiCell(self.notiData[itemIdx])
         cell.selectionStyle = .none
         return cell

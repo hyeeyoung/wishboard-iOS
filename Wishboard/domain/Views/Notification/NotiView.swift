@@ -72,6 +72,13 @@ extension NotiView: UITableViewDelegate, UITableViewDataSource {
         return 115
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let index = indexPath.item
+        // 읽음 처리
+        if let itemId = self.notiData[index].item_id {
+            NotificationDataManager().readNotificationListDataManager(itemId, self)
+        }
+        // TODO: 아이템 상세 뷰 이동
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -91,5 +98,17 @@ extension NotiView {
     }
     func getNotificationListAPIFail() {
         NotificationDataManager().getNotificationListDataManager(self)
+    }
+    // MARK: 알림 읽음 처리 API
+    func readNotificationAPISuccess(_ result: APIModel<ResultModel>) {
+        print(result.message)
+        // reload data with animation
+        UIView.transition(with: notificationTableView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                              self.notificationTableView.reloadData()},
+                          completion: nil);
+        
     }
 }
