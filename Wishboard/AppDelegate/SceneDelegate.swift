@@ -25,6 +25,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController(rootViewController: OnBoardingViewController())
         window?.rootViewController = navigationController // 루트 뷰컨트롤러 생성
         window?.makeKeyAndVisible()
+        
+        // MARK: Light mode
+        //iOS 13 부터 다크모드가 적용되므로 다음과 같은 조건문 성립.
+        if #available(iOS 13.0, *) {
+            // iOS 13 부터는 다크모드로만 제한.
+            self.window?.overrideUserInterfaceStyle = UIUserInterfaceStyle.light
+        } else {
+        // Fallback on earlier versions
+            self.window?.overrideUserInterfaceStyle = UIUserInterfaceStyle.light
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
