@@ -15,7 +15,7 @@ class TabBarViewController: UITabBarController {
         
        // 인스턴스화
         let wishListVC = HomeViewController()
-        let folderVC = FolderViewController()
+        let folderVC = FolderViewController(btnImage: UIImage(named: "ic_new_folder")!)
         let addVC = UploadItemViewController()
         let noticeVC = NotificationViewController()
         let profileVC = MyPageViewController()

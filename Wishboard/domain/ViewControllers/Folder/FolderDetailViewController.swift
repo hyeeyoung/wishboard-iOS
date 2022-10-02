@@ -29,6 +29,7 @@ class FolderDetailViewController: TitleCenterViewController {
         
     }
     override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
         // DATA
         if let folderName = self.folderName {super.navigationTitle.text = folderName}
         if let folderId = self.folderId {
@@ -86,8 +87,7 @@ extension FolderDetailViewController: UICollectionViewDelegate, UICollectionView
         let itemIdx = indexPath.item
         let itemDetailVC = ItemDetailViewController()
         itemDetailVC.wishListData = self.wishListData[itemIdx]
-        itemDetailVC.modalPresentationStyle = .fullScreen
-        self.present(itemDetailVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(itemDetailVC, animated: true)
     }
 }
 // MARK: - API Success

@@ -9,21 +9,11 @@ import Foundation
 import UIKit
 
 class MyPageView: UIView {
-    // MARK: - View
-    let navigationView = UIView()
-    let titleLabel = UILabel().then{
-        $0.text = "마이페이지"
-        $0.font = UIFont.Suit(size: 22, family: .Bold)
-    }
     // MARK: - Life Cycles
     var mypageTableView: UITableView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-//        setTableView()
-//        setUpView()
-//        setUpConstraint()
     }
     
     required init?(coder: NSCoder) {
@@ -45,30 +35,13 @@ class MyPageView: UIView {
         
     }
     func setUpView() {
-        addSubview(navigationView)
-        navigationView.addSubview(titleLabel)
-        
         addSubview(mypageTableView)
     }
     func setUpConstraint() {
-        setUpNavigationConstraint()
-        
         mypageTableView.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(navigationView.snp.bottom)
-        }
-    }
-    func setUpNavigationConstraint() {
-        navigationView.snp.makeConstraints { make in
-            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
-            else {make.top.equalToSuperview().offset(20)}
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(50)
-        }
-        titleLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(16)
+            make.top.equalToSuperview()
         }
     }
 }

@@ -7,32 +7,32 @@
 
 import UIKit
 
-class NotificationViewController: UIViewController {
+class NotificationViewController: TitleLeftViewController {
     var notiView: NotiView!
     // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.view.backgroundColor = .white
-        self.navigationController?.isNavigationBarHidden = true
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        super.navigationTitle.text = "알림"
         
         notiView = NotiView()
         self.view.addSubview(notiView)
         
         notiView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(super.navigationView.snp.bottom)
         }
         // DATA
         NotificationDataManager().getNotificationListDataManager(self.notiView)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goCalenderDidTap(sender:)))
-        notiView.navigationView.addGestureRecognizer(tapGesture)
+        super.navigationView.addGestureRecognizer(tapGesture)
     }
     override func viewDidAppear(_ animated: Bool) {
         // DATA
         NotificationDataManager().getNotificationListDataManager(self.notiView)
+        self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     // MARK: - Actions
     @objc func goCalenderDidTap(sender: UITapGestureRecognizer) {

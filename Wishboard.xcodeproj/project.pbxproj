@@ -110,6 +110,7 @@
 		238EF90628CB06F800ECA606 /* CalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90528CB06F800ECA606 /* CalenderViewController.swift */; };
 		238EF90928CB070700ECA606 /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90828CB070700ECA606 /* CalenderView.swift */; };
 		239ED94C28E5D8A500CBCCAD /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239ED94B28E5D8A500CBCCAD /* NetworkCheck.swift */; };
+		23A48E6F28E9137100FD77A7 /* TitleLeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A48E6E28E9137100FD77A7 /* TitleLeftViewController.swift */; };
 		23A85F7D28E39FE800075667 /* FormatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F7C28E39FE800075667 /* FormatManager.swift */; };
 		23A85F7F28E3AA5400075667 /* LostPasswordDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F7E28E3AA5400075667 /* LostPasswordDataManager.swift */; };
 		23A85F8328E3AB1D00075667 /* LostPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F8228E3AB1D00075667 /* LostPasswordModel.swift */; };
@@ -298,6 +299,7 @@
 		238EF90528CB06F800ECA606 /* CalenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderViewController.swift; sourceTree = "<group>"; };
 		238EF90828CB070700ECA606 /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
 		239ED94B28E5D8A500CBCCAD /* NetworkCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheck.swift; sourceTree = "<group>"; };
+		23A48E6E28E9137100FD77A7 /* TitleLeftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLeftViewController.swift; sourceTree = "<group>"; };
 		23A85F7C28E39FE800075667 /* FormatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatManager.swift; sourceTree = "<group>"; };
 		23A85F7E28E3AA5400075667 /* LostPasswordDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostPasswordDataManager.swift; sourceTree = "<group>"; };
 		23A85F8228E3AB1D00075667 /* LostPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostPasswordModel.swift; sourceTree = "<group>"; };
@@ -900,6 +902,29 @@
 			path = Calender;
 			sourceTree = "<group>";
 		};
+		23A48E6C28E9132C00FD77A7 /* BaseViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				23F07F3F28E7D37B0012D77D /* NavigationController.swift */,
+				234F837A28C9647600C4EB41 /* TabBarViewController.swift */,
+				23E0ACC428E79F09008C35C2 /* KeyboardViewController.swift */,
+				23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */,
+				23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */,
+				23A48E6E28E9137100FD77A7 /* TitleLeftViewController.swift */,
+			);
+			path = BaseViewControllers;
+			sourceTree = "<group>";
+		};
+		23A48E6D28E9134400FD77A7 /* UtilManager */ = {
+			isa = PBXGroup;
+			children = (
+				2374789928D1DB2900CF941A /* CheckNotch.swift */,
+				2360FF5D28DCC64100E481A6 /* ScreenManager.swift */,
+				23A85F7C28E39FE800075667 /* FormatManager.swift */,
+			);
+			path = UtilManager;
+			sourceTree = "<group>";
+		};
 		23A85F8028E3AB0500075667 /* AuthenticationModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1042,22 +1067,16 @@
 		23C9567D28C67FD000D88536 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				23A48E6D28E9134400FD77A7 /* UtilManager */,
+				23A48E6C28E9132C00FD77A7 /* BaseViewControllers */,
 				23C3113528DF633000A636F6 /* APIManager */,
 				23C3113428DF630C00A636F6 /* PopUpViewControllers */,
 				23C3113328DF62E300A636F6 /* Extensions */,
 				23C3113228DF62D700A636F6 /* Observable */,
-				234F837A28C9647600C4EB41 /* TabBarViewController.swift */,
-				2374789928D1DB2900CF941A /* CheckNotch.swift */,
 				2360095F28DA2297001FB107 /* EmptyView.swift */,
 				2350FADE28DB9BEA00981B8F /* SetNotificationDate.swift */,
 				2360FF5B28DCB31600E481A6 /* SnackBar.swift */,
-				2360FF5D28DCC64100E481A6 /* ScreenManager.swift */,
-				23A85F7C28E39FE800075667 /* FormatManager.swift */,
 				239ED94B28E5D8A500CBCCAD /* NetworkCheck.swift */,
-				23E0ACC428E79F09008C35C2 /* KeyboardViewController.swift */,
-				23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */,
-				23F07F3F28E7D37B0012D77D /* NavigationController.swift */,
-				23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1725,6 +1744,7 @@
 				23C5AB4928CAA23300A7E977 /* MyPageView.swift in Sources */,
 				23D4C66028D8E87B00EA7F98 /* GetEmailView.swift in Sources */,
 				232174DB28E1BE81008C155D /* RegisterDataManager.swift in Sources */,
+				23A48E6F28E9137100FD77A7 /* TitleLeftViewController.swift in Sources */,
 				23E378DE28D2EBFA00C52F2D /* PopUpDeleteUserViewController.swift in Sources */,
 				23D5517D28C6936400D81B5F /* OnBoardingViewModel.swift in Sources */,
 				234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */,

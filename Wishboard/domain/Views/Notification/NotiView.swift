@@ -10,11 +10,6 @@ import UIKit
 
 class NotiView: UIView {
     // MARK: - View
-    let navigationView = UIView()
-    let titleLabel = UILabel().then{
-        $0.text = "알림"
-        $0.font = UIFont.Suit(size: 22, family: .Bold)
-    }
     let emptyMessage = "앗, 알림이 없어요!"
     // MARK: - Life Cycles
     var notificationTableView: UITableView!
@@ -46,30 +41,15 @@ class NotiView: UIView {
         }
     }
     func setUpView() {
-        addSubview(navigationView)
-        navigationView.addSubview(titleLabel)
         
         addSubview(notificationTableView)
     }
     func setUpConstraint() {
-        setUpNavigationConstraint()
         
         notificationTableView.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(navigationView.snp.bottom)
-        }
-    }
-    func setUpNavigationConstraint() {
-        navigationView.snp.makeConstraints { make in
-            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
-            else {make.top.equalToSuperview().offset(20)}
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(50)
-        }
-        titleLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(16)
+            make.top.equalToSuperview()
         }
     }
 }

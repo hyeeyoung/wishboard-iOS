@@ -90,25 +90,23 @@ class BaseViewController: UIViewController {
     }
 }
 // MARK: - Custom right button
-extension BaseViewController{
-    class EtcButton: UIButton{
-        init(title: String){
-            super.init(frame: .zero)
-            
-            self.setTitle(title, for: .normal)
-            self.titleLabel?.textAlignment = .center
-            self.titleLabel?.font = UIFont.Suit(size: 14, family: .Regular)
-            self.setTitleColor(.black, for: .normal)
-            self.titleEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 4, right: 0)
-        }
+class EtcButton: UIButton{
+    init(title: String){
+        super.init(frame: .zero)
         
-        init(image: UIImage){
-            super.init(frame: .zero)
-            self.setImage(image, for: .normal)
-        }
-        
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
+        self.setTitle(title, for: .normal)
+        self.titleLabel?.textAlignment = .center
+        self.titleLabel?.font = UIFont.Suit(size: 14, family: .Regular)
+        self.setTitleColor(.black, for: .normal)
+        self.titleEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 4, right: 0)
+    }
+    
+    init(image: UIImage){
+        super.init(frame: .zero)
+        self.setImage(image, for: .normal)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

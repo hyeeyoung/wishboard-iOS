@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyPageViewController: UIViewController {
+class MyPageViewController: TitleLeftViewController {
     var mypageView: MyPageView!
     let settingArray = ["설정", "알림 설정", "고객 지원", "문의하기", "서비스 정보", "위시보드 이용 방법", "이용약관", "버전 정보", "계정 관리", "로그아웃", "회원 탈퇴"]
 
@@ -17,12 +17,7 @@ class MyPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.view.backgroundColor = .white
-        self.navigationController?.isNavigationBarHidden = true
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
-        self.tabBarController?.tabBar.isHidden = false
+        super.navigationTitle.text = "마이페이지"
         
         mypageView = MyPageView()
         mypageView.setTableView(dataSourceDelegate: self)
@@ -31,13 +26,17 @@ class MyPageViewController: UIViewController {
         self.view.addSubview(mypageView)
         
         mypageView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(super.navigationView.snp.bottom)
         }
         // DATA
         MypageDataManager().getUserInfoDataManager(self)
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         // DATA
         MypageDataManager().getUserInfoDataManager(self)
     }

@@ -8,7 +8,7 @@
 import UIKit
 import Lottie
 
-class FolderViewController: UIViewController {
+class FolderViewController: TitleLeftViewController {
     var folderView : FolderView!
     let emptyMessage = "앗, 폴더가 없어요!\n폴더를 추가해서 아이템을 정리해 보세요!"
     var dialog: PopUpWithTextFieldViewController!
@@ -17,15 +17,16 @@ class FolderViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
-        self.navigationController?.isNavigationBarHidden = true
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        super.navigationTitle.text = "폴더"
 
         setFolderView()
         FolderDataManager().getFolderDataManager(self)
     }
     override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        self.navigationController?.isNavigationBarHidden = true
         FolderDataManager().getFolderDataManager(self)
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -33,6 +34,9 @@ class FolderViewController: UIViewController {
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    override func rightPositionBtnDidClicked() {
+        alertAddDialog()
     }
 }
 // MARK: - CollectionView delegate
@@ -72,13 +76,12 @@ extension FolderViewController {
         self.view.addSubview(folderView)
         
         folderView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(super.navigationView.snp.bottom)
         }
         folderView.setCollectionView(self)
         folderView.setUpView()
         folderView.setUpConstraint()
-        
-        folderView.plusButton.addTarget(self, action: #selector(alertAddDialog), for: .touchUpInside)
     }
     // 폴더 메뉴 하단 팝업창
     @objc func alertFolderMenu(_ sender: CustomButton) {
@@ -101,7 +104,7 @@ extension FolderViewController {
         self.present(alert, animated: true)
     }
     // 폴더 추가 팝업창
-    @objc func alertAddDialog() {
+    func alertAddDialog() {
         dialog = PopUpWithTextFieldViewController(titleText: "폴더 추가", placeholder: "폴더명", prevText: nil, buttonTitle: "추가")
         dialog.modalPresentationStyle = .overCurrentContext
         dialog.completeButton.addTarget(self, action: #selector(completeAddButtonDidTap), for: .touchUpInside)
