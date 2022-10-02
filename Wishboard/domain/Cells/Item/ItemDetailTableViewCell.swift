@@ -20,7 +20,7 @@ class ItemDetailTableViewCell: UITableViewCell {
     let dateLabel = UILabel().then{
         $0.text = "0주 전"
         $0.font = UIFont.Suit(size: 13, family: .Regular)
-        $0.textColor = .wishboardGray
+        $0.textColor = .gray
     }
     let itemNameLabel = UILabel().then{
         $0.text = "itemName"
