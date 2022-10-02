@@ -21,6 +21,9 @@ class HomeView: UIView {
     let cartButton = UIButton().then{
         $0.setImage(UIImage(named: "cart"), for: .normal)
     }
+    let calenderButton = UIButton().then{
+        $0.setImage(UIImage(named: "ic_calendar"), for: .normal)
+    }
     
     // MARK: - Life Cycles
     var viewController : HomeViewController!
@@ -68,6 +71,7 @@ class HomeView: UIView {
         addSubview(navigationView)
         
         navigationView.addSubview(logo)
+        navigationView.addSubview(calenderButton)
         navigationView.addSubview(cartButton)
 
         addSubview(collectionView)
@@ -85,11 +89,15 @@ class HomeView: UIView {
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
         }
-        cartButton.snp.makeConstraints { make in
-            make.width.equalTo(23)
-            make.height.equalTo(22)
+        calenderButton.snp.makeConstraints { make in
+            make.width.height.equalTo(24)
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().inset(16)
+        }
+        cartButton.snp.makeConstraints { make in
+            make.width.height.equalTo(24)
+            make.centerY.equalToSuperview()
+            make.trailing.equalTo(calenderButton.snp.leading).offset(-16)
         }
     }
     func setUpConstraint() {
