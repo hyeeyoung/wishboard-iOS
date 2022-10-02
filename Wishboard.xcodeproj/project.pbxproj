@@ -111,6 +111,7 @@
 		238EF90928CB070700ECA606 /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90828CB070700ECA606 /* CalenderView.swift */; };
 		239ED94C28E5D8A500CBCCAD /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239ED94B28E5D8A500CBCCAD /* NetworkCheck.swift */; };
 		23A48E6F28E9137100FD77A7 /* TitleLeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A48E6E28E9137100FD77A7 /* TitleLeftViewController.swift */; };
+		23A48E7128E92E7D00FD77A7 /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239ED94B28E5D8A500CBCCAD /* NetworkCheck.swift */; };
 		23A85F7D28E39FE800075667 /* FormatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F7C28E39FE800075667 /* FormatManager.swift */; };
 		23A85F7F28E3AA5400075667 /* LostPasswordDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F7E28E3AA5400075667 /* LostPasswordDataManager.swift */; };
 		23A85F8328E3AB1D00075667 /* LostPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F8228E3AB1D00075667 /* LostPasswordModel.swift */; };
@@ -1649,6 +1650,7 @@
 				231B581028E8A33C0030D33E /* BaseViewController.swift in Sources */,
 				230DBFA828E106EE00E9AED6 /* ShareView.swift in Sources */,
 				230180E628E50B7C001034FC /* FolderDataManager.swift in Sources */,
+				23A48E7128E92E7D00FD77A7 /* NetworkCheck.swift in Sources */,
 				236FE92228DF8592006142DB /* UITextField.swift in Sources */,
 				236FE93F28DF85B0006142DB /* PopUpWithTextFieldViewController.swift in Sources */,
 				236FE91D28DF8592006142DB /* PaddingLabel.swift in Sources */,
