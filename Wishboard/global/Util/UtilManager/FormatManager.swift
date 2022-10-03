@@ -13,16 +13,11 @@ class FormatManager {
     func createdDateToKoreanStr(_ date: String) -> String? {
         let dateToDate = date.toCreatedDate()  //YYYY-MM-dd HH:mm:ss
         var dateNum: Int!
-//        let dateformatter = DateFormatter()
-//        dateformatter.dateFormat = "YY년 MM월 dd일 HH:mm"
-//        if let dateToDate = dateToDate {
-//            return dateformatter.string(from: dateToDate)
-//        } else {return nil}
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.day]
         formatter.unitsStyle = .full   // 이유는 모르겠으나 꼭 필요하다!
         if let daysString = formatter.string(from: dateToDate!, to: Date()) {
-            dateNum = Int(daysString.replacingOccurrences(of: "일", with: ""))
+            dateNum = Int(daysString.filter {$0.isNumber})
             return dateToWeek(dateNum: dateNum)
         } else {return nil}
     }
