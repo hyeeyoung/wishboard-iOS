@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import SafariServices
 
 class NotiView: UIView {
     // MARK: - View
@@ -54,11 +53,6 @@ class NotiView: UIView {
             make.top.equalToSuperview()
         }
     }
-    func linkTo(_ urlStr: String) {
-        let url = NSURL(string: urlStr)
-        let linkView: SFSafariViewController = SFSafariViewController(url: url as! URL)
-        self.preVC.present(linkView, animated: true, completion: nil)
-    }
 }
 // MARK: - Main TableView delegate
 extension NotiView: UITableViewDelegate, UITableViewDataSource {
@@ -83,7 +77,7 @@ extension NotiView: UITableViewDelegate, UITableViewDataSource {
         // 쇼핑몰 이동
         if let urlStr = self.notiData[index].item_url {
             if urlStr != "" {
-                linkTo(urlStr)
+                ScreenManager().linkTo(viewcontroller: preVC, urlStr)
                 // 읽음 처리
                 if let itemId = self.notiData[index].item_id {
                     NotificationDataManager().readNotificationListDataManager(itemId, self)

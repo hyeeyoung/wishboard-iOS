@@ -85,7 +85,11 @@ extension NotiTableViewCell {
             self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
         }
         if let name = data.item_name {self.itemName.text = name}
-        if let time = data.item_notification_date {self.timeLabel.text = FormatManager().createdDateToKoreanStr(time)}
+        if let time = data.item_notification_date {
+            if let dateStr = FormatManager().createdDateToKoreanStr(time) {
+                self.timeLabel.text = dateStr
+            }
+        }
         if let isViewed = data.read_state {
             self.viewView.isHidden = isViewed == 1 ? true : false
         }

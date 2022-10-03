@@ -28,7 +28,7 @@
         <!--On Boarding View Controller-->
         <scene sceneID="OZ7-z6-Xhp">
             <objects>
-                <viewController id="Xdw-K3-qe9" customClass="OnBoardingViewController" customModule="Wishboard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnBoardingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xdw-K3-qe9" customClass="OnBoardingViewController" customModule="Wishboard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C0k-x6-hNh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -39,7 +39,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S81-DJ-VS6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2528.985507246377" y="730.58035714285711"/>
+            <point key="canvasLocation" x="2557" y="67"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="am8-Sd-hRx">
@@ -47,6 +47,7 @@
                 <tabBarController storyboardIdentifier="TabBarViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hI3-fP-Cix" customClass="TabBarViewController" customModule="Wishboard" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="EYo-BJ-WdC">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -56,7 +57,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pjb-ZT-vrH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2604" y="67"/>
+            <point key="canvasLocation" x="3433" y="67"/>
         </scene>
     </scenes>
     <resources>

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SafariServices
 
 class ScreenManager {
     enum Family: String {
@@ -43,5 +44,11 @@ class ScreenManager {
         default:
             viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
         }
+    }
+    // MARK: 링크 이동
+    func linkTo(viewcontroller: UIViewController, _ urlStr: String) {
+        let url = NSURL(string: urlStr)
+        let linkView: SFSafariViewController = SFSafariViewController(url: url as! URL)
+        viewcontroller.present(linkView, animated: true, completion: nil)
     }
 }

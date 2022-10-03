@@ -96,6 +96,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             showLogoutDialog()
         case 11:
             showSignoutDialog()
+        case 7:
+            ScreenManager().linkTo(viewcontroller: self, "https://www.wishboard.xyz/terms.html")
         default:
             tableView.deselectRow(at: indexPath, animated: true)
         }

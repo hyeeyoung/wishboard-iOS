@@ -7,7 +7,6 @@
 
 import UIKit
 import MaterialComponents.MaterialBottomSheet
-import SafariServices
 
 class ItemDetailViewController: UIViewController {
     var itemDetailView: ItemDetailView!
@@ -82,12 +81,7 @@ extension ItemDetailViewController {
     }
     @objc func linkButtonDidTap() {
         guard let urlStr = self.wishListData.item_url else {return}
-        linkTo(urlStr)
-    }
-    func linkTo(_ urlStr: String) {
-        let url = NSURL(string: urlStr)
-        let linkView: SFSafariViewController = SFSafariViewController(url: url as! URL)
-        self.present(linkView, animated: true, completion: nil)
+        ScreenManager().linkTo(viewcontroller: self, urlStr)
     }
 }
 // MARK: - TableView delegate
