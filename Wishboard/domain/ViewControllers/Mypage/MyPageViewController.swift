@@ -86,10 +86,14 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         switch tag {
         case 0:
             let vc = ModifyProfileViewController()
-            vc.nameTextField.text = self.userInfoData.nickname
-            vc.profileImage.kf.setImage(with: URL(string: self.userInfoData.profile_img_url!), placeholder: UIImage())
-            vc.preNickName = self.userInfoData.nickname
-            vc.preProfileImg = self.userInfoData.profile_img_url
+            if let nickname = self.userInfoData.nickname {
+                vc.nameTextField.text = nickname
+                vc.preNickName = self.userInfoData.nickname
+            }
+            if let profileImg = self.userInfoData.profile_img_url {
+                vc.profileImage.kf.setImage(with: URL(string: profileImg), placeholder: UIImage())
+                vc.preProfileImg = self.userInfoData.profile_img_url
+            }
             vc.preVC = self
             self.navigationController?.pushViewController(vc, animated: true)
         case 10:
@@ -113,6 +117,7 @@ extension MyPageViewController {
         }
         cell.textLabel?.font = UIFont.Suit(size: 15, family: .Bold)
     }
+    // 알림 설정 - Switch 넣기
     func setSwitch(_ cell: UITableViewCell) {
         var notiSwitch = UISwitch().then{
             if let pushState = self.pushState {$0.isOn = pushState}
@@ -145,6 +150,7 @@ extension MyPageViewController {
             MypageDataManager().switchNotificationDataManager(false, self)
         }
     }
+    // 버전 정보 표시 (1.0.0)
     func setVersionLabel(_ cell: UITableViewCell) {
         let versionLabel = UILabel().then{
             $0.text = "1.0.0"
@@ -157,6 +163,7 @@ extension MyPageViewController {
             make.centerY.equalToSuperview()
         }
     }
+    // 로그아웃 팝업창
     func showLogoutDialog() {
         let dialog = PopUpViewController(titleText: "로그아웃", messageText: "정말 로그아웃 하시겠어요?", greenBtnText: "취소", blackBtnText: "로그아웃")
         dialog.modalPresentationStyle = .overCurrentContext
@@ -164,6 +171,7 @@ extension MyPageViewController {
         
         dialog.okBtn.addTarget(self, action: #selector(logoutButtonDidTap), for: .touchUpInside)
     }
+    // 회원 탈퇴 팝업창
     func showSignoutDialog() {
         guard let nickName = self.nickName else {return}
         let dialog = PopUpDeleteUserViewController(titleText: "회원 탈퇴", messageText: "탈퇴하시면 회원정보는 7일 후 파기됩니다.", greenBtnText: "취소", blackBtnText: "탈퇴", placeholder: "닉네임을 입력해주세요.", nickName: nickName)
@@ -177,6 +185,7 @@ extension MyPageViewController {
         MypageDataManager().logoutDataManager(self)
     }
     @objc func signOutButtonDidTap() {
+        self.dismiss(animated: false)
         MypageDataManager().deleteUserDataManager(self)
     }
 }
@@ -211,10 +220,15 @@ extension MyPageViewController {
     }
     // MARK: 회원 탈퇴 API
     func deleteUserAPISuccess(_ result: APIModel<ResultModel>) {
+        // delete UserInfo
+        UserDefaults.standard.removeObject(forKey: "token")
+        UserDefaults.standard.removeObject(forKey: "email")
+        UserDefaults.standard.removeObject(forKey: "password")
+        UserDefaults.standard.removeObject(forKey: "isFirstLogin")
+        
         let onboardingVC = OnBoardingViewController()
-        onboardingVC.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(onboardingVC, animated: true)
         SnackBar(onboardingVC, message: .deleteUser)
-        self.view.window?.windowScene?.keyWindow?.rootViewController = onboardingVC
         
         print(result.message)
     }
@@ -228,6 +242,7 @@ extension MyPageViewController {
         
         let onboardingVC = OnBoardingViewController()
         self.navigationController?.pushViewController(onboardingVC, animated: true)
+        
         print(result.message)
     }
 }

@@ -53,15 +53,20 @@ class HomeViewController: UIViewController {
     }
     func alertDialog() {
         let dialog = PopUpViewController(titleText: "알림 허용", messageText: "알림을 받아보시겠어요?\n직접 등록하신 아이템의 재입고 날짜 등의 상품 일정 알림을 받으실 거에요.", greenBtnText: "나중에", blackBtnText: "허용")
-        dialog.cancelBtn.addTarget(self, action: #selector(cancelButtonDidTap), for: .touchUpInside)
-        dialog.okBtn.addTarget(self, action: #selector(okButtonDidTap), for: .touchUpInside)
         dialog.modalPresentationStyle = .overCurrentContext
         self.present(dialog, animated: false, completion: nil)
+        
+        dialog.okBtn.addTarget(self, action: #selector(okButtonDidTap), for: .touchUpInside)
+        dialog.cancelBtn.addTarget(self, action: #selector(cancelButtonDidTap), for: .touchUpInside)
     }
     @objc func cancelButtonDidTap() {
+        // 앱 이용방법 더는 안 띄우게
+        UserDefaults.standard.set(false, forKey: "isFirstLogin")
         MypageDataManager().switchNotificationDataManager(false, self)
     }
     @objc func okButtonDidTap() {
+        // 앱 이용방법 더는 안 띄우게
+        UserDefaults.standard.set(false, forKey: "isFirstLogin")
         MypageDataManager().switchNotificationDataManager(true, self)
     }
 }
@@ -69,6 +74,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController {
     // MARK: 알림 허용 팝업창
     func switchNotificationAPISuccess(_ result: APIModel<ResultModel>) {
+        self.dismiss(animated: false)
         print(result.message)
     }
     func wishListAPIFail() {

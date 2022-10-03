@@ -52,15 +52,15 @@ class PopUpViewController: UIViewController {
         self.messageText = messageText
         self.greenBtnText = greenBtnText
         self.blackBtnText = blackBtnText
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = .popupBackground
         
         setUpContent()
         setUpView()
         setUpConstraint()
-        
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = .popupBackground
+
         cancelBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     

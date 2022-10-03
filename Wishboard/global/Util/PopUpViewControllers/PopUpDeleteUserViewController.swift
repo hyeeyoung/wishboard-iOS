@@ -70,15 +70,14 @@ class PopUpDeleteUserViewController: UIViewController {
         self.blackBtnText = blackBtnText
         self.placeholder = placeholder
         self.nickName = nickName
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = .popupBackground
         
         setUpContent()
         setUpView()
         setUpConstraint()
-        
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = .popupBackground
         self.errorMessage.isHidden = true
         
         cancelBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
