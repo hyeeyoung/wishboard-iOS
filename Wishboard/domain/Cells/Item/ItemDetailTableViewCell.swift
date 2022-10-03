@@ -174,7 +174,9 @@ class ItemDetailTableViewCell: UITableViewCell {
         }
         if let folderName = data.folder_name {self.setFolderButton.setFolderButton(folderName)}
         if let createdDate = data.create_at {
-            self.dateLabel.text = FormatManager().createdDateToKoreanStr(createdDate)
+            if let dateStr = FormatManager().createdDateToKoreanStr(createdDate) {
+                self.dateLabel.text = dateStr
+            }
         }
         if let itemName = data.item_name {self.itemNameLabel.text = itemName}
         if let itemPrice = data.item_price {self.priceLabel.text = FormatManager().strToPrice(numStr: itemPrice)}

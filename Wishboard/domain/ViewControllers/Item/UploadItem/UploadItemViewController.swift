@@ -323,9 +323,11 @@ extension UploadItemViewController {
     @objc func itemPriceTextfieldEditingField(_ sender: UITextField) {
         let text = sender.text ?? ""
         self.wishListData.item_price = setPriceString(text)
-        guard let price = self.wishListData.item_price else {return}
-        sender.text = numberFormatter.string(from: NSNumber(value: Float(price)!))
-        isValidContent()
+        if let priceStr = self.wishListData.item_price {
+            guard let price = Float(priceStr) else {return}
+            sender.text = numberFormatter.string(from: NSNumber(value: price))
+            isValidContent()
+        }
     }
     @objc func memoTextfieldEditingField(_ sender: UITextField) {
         let text = sender.text!

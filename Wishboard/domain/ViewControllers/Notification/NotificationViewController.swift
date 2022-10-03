@@ -17,6 +17,7 @@ class NotificationViewController: TitleLeftViewController {
         notiView = NotiView()
         self.view.addSubview(notiView)
         
+        notiView.preVC = self
         notiView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(super.navigationView.snp.bottom)

@@ -7,11 +7,13 @@
 
 import Foundation
 import UIKit
+import SafariServices
 
 class NotiView: UIView {
     // MARK: - View
     let emptyMessage = "앗, 알림이 없어요!"
     // MARK: - Life Cycles
+    var preVC: NotificationViewController!
     var notificationTableView: UITableView!
     var notiData: [NotificationModel] = []
     
@@ -52,6 +54,11 @@ class NotiView: UIView {
             make.top.equalToSuperview()
         }
     }
+    func linkTo(_ urlStr: String) {
+        let url = NSURL(string: urlStr)
+        let linkView: SFSafariViewController = SFSafariViewController(url: url as! URL)
+        self.preVC.present(linkView, animated: true, completion: nil)
+    }
 }
 // MARK: - Main TableView delegate
 extension NotiView: UITableViewDelegate, UITableViewDataSource {
@@ -73,12 +80,16 @@ extension NotiView: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let index = indexPath.item
-        // 읽음 처리
-        if let itemId = self.notiData[index].item_id {
-            NotificationDataManager().readNotificationListDataManager(itemId, self)
-        }
-        // TODO: 아이템 상세 뷰 이동
-        
+        // 쇼핑몰 이동
+        if let urlStr = self.notiData[index].item_url {
+            if urlStr != "" {
+                linkTo(urlStr)
+                // 읽음 처리
+                if let itemId = self.notiData[index].item_id {
+                    NotificationDataManager().readNotificationListDataManager(itemId, self)
+                }
+            } else {SnackBar(preVC, message: .ShoppingLink)}
+        } else {SnackBar(preVC, message: .ShoppingLink)}
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
