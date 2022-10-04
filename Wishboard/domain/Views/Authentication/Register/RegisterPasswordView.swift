@@ -103,14 +103,17 @@ class RegisterPasswordView: UIView {
         setLabel("가입 시 ")
         let termButton = setUnderLinedButton("이용약관")
         setLabel(" 및 ")
-        let personalTermButton = setUnderLinedButton("개인정보 취급방침")
+        let privacyTermButton = setUnderLinedButton("개인정보 취급방침")
         setLabel("에 동의하는 것으로 간주합니다.")
         
         termButton.addTarget(self, action: #selector(termButtonDidTap), for: .touchUpInside)
-        personalTermButton.addTarget(self, action: #selector(termButtonDidTap), for: .touchUpInside)
+        privacyTermButton.addTarget(self, action: #selector(privacyButtonDidTap), for: .touchUpInside)
     }
     @objc func termButtonDidTap() {
         ScreenManager().linkTo(viewcontroller: preVC, "https://www.wishboard.xyz/terms.html")
+    }
+    @objc func privacyButtonDidTap() {
+        ScreenManager().linkTo(viewcontroller: preVC, "https://www.wishboard.xyz/privacy-policy.html")
     }
 }
 

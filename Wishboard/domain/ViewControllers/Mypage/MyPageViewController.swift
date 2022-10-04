@@ -100,6 +100,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             showLogoutDialog()
         case 11:
             showSignoutDialog()
+        case 6:
+            ScreenManager().linkTo(viewcontroller: self, "https://hushed-bolt-fd4.notion.site/383c308f256f4f189b7c0b68a8f68d9f")
         case 7:
             ScreenManager().linkTo(viewcontroller: self, "https://www.wishboard.xyz/terms.html")
         default:
@@ -116,6 +118,7 @@ extension MyPageViewController {
             make.leading.equalToSuperview().offset(16)
         }
         cell.textLabel?.font = UIFont.Suit(size: 15, family: .Bold)
+        cell.selectionStyle = .none
     }
     // 알림 설정 - Switch 넣기
     func setSwitch(_ cell: UITableViewCell) {
