@@ -74,9 +74,13 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
                 if let itemImageURL = self.wishListData.item_img_url {
                     cell.setUpImage(itemImageURL)
                 }
-            } else {    // 만약 새로 아이템을 추가하는 경우라면
-                cell.photoImage.image = UIImage()
-                cell.cameraImage.isHidden = false
+            } else { // 링크로 아이템 불러온 경우라면
+                if let itemImageURL = self.wishListData.item_img_url {
+                    cell.setUpImage(itemImageURL)
+                } else { // 만약 새로 아이템을 추가하는 경우라면
+                    cell.photoImage.image = UIImage()
+                    cell.cameraImage.isHidden = false
+                }
             }
             // 새로 사진을 선택했다면
             if self.selectedImage != nil {
@@ -166,18 +170,28 @@ extension UploadItemViewController {
         lottieView.isHidden = false
         lottieView.play { completion in
             let data = self.wishListData
-            if let folderId = data?.folder_id {
-                // 모든 데이터가 존재하는 경우
-                if let notiType = data?.item_notification_type {
-                    ItemDataManager().uploadItemDataManager(folderId, self.selectedImage, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!, self)
+            DispatchQueue.main.async {
+                // 이미지 uri를 UIImage로 변환
+                let url = URL(string: (data?.item_img_url!)!)
+                let imgData = try? Data(contentsOf: url!)
+                var selectedImage : UIImage?
+                if self.selectedImage == nil {selectedImage = UIImage(data: imgData!)}
+                else {selectedImage = self.selectedImage}
+               
+                if let folderId = data?.folder_id {
+                    // 모든 데이터가 존재하는 경우
+                    if let notiType = data?.item_notification_type {
+                        ItemDataManager().uploadItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!, self)
+                    } else {
+                        // 알림 날짜 설정은 하지 않은 경우
+                        ItemDataManager().uploadItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, self)
+                    }
                 } else {
-                    // 알림 날짜 설정은 하지 않은 경우
-                    ItemDataManager().uploadItemDataManager(folderId, self.selectedImage, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, self)
+                    // 일부 데이터가 존재하는 경우
+                    ItemDataManager().uploadItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, self)
                 }
-            } else {
-                // 일부 데이터가 존재하는 경우
-                ItemDataManager().uploadItemDataManager(self.selectedImage, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, self)
             }
+            
         }
     }
     // MARK: 저장 버튼 클릭 시 (아이템 수정)
@@ -324,9 +338,9 @@ extension UploadItemViewController {
         let text = sender.text ?? ""
         self.wishListData.item_price = setPriceString(text)
         if let priceStr = self.wishListData.item_price {
+            isValidContent()
             guard let price = Float(priceStr) else {return}
             sender.text = numberFormatter.string(from: NSNumber(value: price))
-            isValidContent()
         }
     }
     @objc func memoTextfieldEditingField(_ sender: UITextField) {
@@ -341,10 +355,11 @@ extension UploadItemViewController {
     func isValidContent() {
         guard let iN = self.wishListData.item_name else {return}
         guard let iP = self.wishListData.item_price else {return}
-        guard let iI = self.selectedImage else {return}
-        
-        if (iN != "") && (iP != "") && (iI != nil) {uploadItemView.setSaveButton(true)}
-        else {uploadItemView.setSaveButton(false)}
+        if self.selectedImage != nil || self.wishListData.item_img_url != nil {
+            if (iN != "") && (iP != "") {uploadItemView.setSaveButton(true)}
+            else {uploadItemView.setSaveButton(false)}
+        }
+        print("URL???", self.wishListData.item_url)
     }
     // '사진 찍기' '사진 보관함' 팝업창
     func alertCameraMenu() {
@@ -432,11 +447,13 @@ extension UploadItemViewController: UIImagePickerControllerDelegate, UINavigatio
 }
 // MARK: - API Success
 extension UploadItemViewController {
+    // MARK: 아이템 추가 API
     func uploadItemAPISuccess(_ result: APIModel<ResultModel>) {
         self.viewDidLoad()
         ScreenManager().goMainPages(0, self, family: .itemUpload)
         print(result.message)
     }
+    // MARK: 아이템 수정 API
     func modifyItemAPISuccess(_ result: APIModel<ResultModel>) {
         self.viewDidLoad()
         ScreenManager().goMainPages(0, self, family: .itemModified)

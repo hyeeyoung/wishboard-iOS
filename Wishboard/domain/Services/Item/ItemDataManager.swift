@@ -35,7 +35,31 @@ class ItemDataManager {
             }
         }
     }
-    
+    // MARK: - 링크 복사로 불러오기
+    func getItemByLinkDataManager(_ url: String, _ viewcontroller: ShoppingLinkViewController) {
+        AF.request(BaseURL + "/item/parse?site=\(url)",
+                           method: .get,
+                           parameters: nil,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: APIModel<ItemParsingModel>.self) { response in
+            switch response.result {
+            case .success(let result):
+                viewcontroller.getItemByLinkAPISuccess(result)
+            case .failure(let error):
+                let statusCode = error.responseCode
+                switch statusCode {
+                case 404:
+                    viewcontroller.getItemByLinkAPIFail()
+                case 429:
+                    viewcontroller.getItemByLinkAPIFail429()
+                default:
+                    print(error.localizedDescription)
+                    print(error.responseCode)
+                }
+            }
+        }
+    }
     // MARK: - 아이템 직접 추가 - 모든 데이터가 존재하는 경우
     func uploadItemDataManager(_ folderId: Int,
                                _ photo: UIImage,
