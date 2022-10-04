@@ -53,6 +53,13 @@ class ItemDetailView: UIView {
         navigationView.addSubview(deleteButton)
         navigationView.addSubview(backButton)
     }
+    func isLinkExist(isLinkExist: Bool) {
+        if isLinkExist {
+            setUpLowerView(true)
+        } else {
+            setUpLowerView(false)
+        }
+    }
     func setUpLowerView(_ isLinkExist: Bool) {
         // lower View
         lowerView = UIView()

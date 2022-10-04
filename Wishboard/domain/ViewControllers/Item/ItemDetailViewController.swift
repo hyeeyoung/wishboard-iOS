@@ -73,8 +73,8 @@ extension ItemDetailViewController {
         
         itemDetailView.setTableView(self)
         itemDetailView.setUpNavigationView()
-        if self.wishListData.item_url != "" {itemDetailView.setUpLowerView(true)}
-        else {itemDetailView.setUpLowerView(false)}
+        if self.wishListData.item_url != "" {itemDetailView.isLinkExist(isLinkExist: true)}
+        else {itemDetailView.isLinkExist(isLinkExist: false)}
         itemDetailView.setUpConstraint()
         
         itemDetailView.lowerButton.addTarget(self, action: #selector(linkButtonDidTap), for: .touchUpInside)

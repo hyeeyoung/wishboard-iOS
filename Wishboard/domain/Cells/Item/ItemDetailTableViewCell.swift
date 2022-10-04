@@ -36,7 +36,11 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.font = UIFont.Suit(size: 14, family: .Regular)
     }
     let seperatorLine1 = UIView().then{
-        $0.backgroundColor = .separator
+        $0.backgroundColor = .systemGray5
+    }
+    let stack = UIStackView().then{
+        $0.axis = .vertical
+        $0.spacing = 16
     }
     let linkLabel = UILabel().then{
         $0.text = "w.musinsa.com"
@@ -44,13 +48,13 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.font = UIFont.Suit(size: 12, family: .Regular)
     }
     let seperatorLine2 = UIView().then{
-        $0.backgroundColor = .separator
+        $0.backgroundColor = .systemGray5
     }
-    let label = UILabel().then{
+    let memoTitlelabel = UILabel().then{
         $0.text = "메모"
         $0.font = UIFont.Suit(size: 12, family: .Bold)
     }
-    let memoLabel = UILabel().then{
+    let memoContentLabel = UILabel().then{
         $0.text = "memo"
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.numberOfLines = 0
@@ -94,10 +98,12 @@ class ItemDetailTableViewCell: UITableViewCell {
         contentView.addSubview(priceLabel)
         contentView.addSubview(won)
         contentView.addSubview(seperatorLine1)
-        contentView.addSubview(linkLabel)
-        contentView.addSubview(seperatorLine2)
-        contentView.addSubview(label)
-        contentView.addSubview(memoLabel)
+        contentView.addSubview(stack)
+        
+        stack.addArrangedSubview(linkLabel)
+        stack.addArrangedSubview(seperatorLine2)
+        stack.addArrangedSubview(memoTitlelabel)
+        stack.addArrangedSubview(memoContentLabel)
     }
     func setUpConstraint() {
         itemImage.snp.makeConstraints { make in
@@ -134,27 +140,17 @@ class ItemDetailTableViewCell: UITableViewCell {
         }
         seperatorLine1.snp.makeConstraints { make in
             make.height.equalTo(1)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(priceLabel.snp.bottom).offset(20)
         }
-        linkLabel.snp.makeConstraints { make in
-            make.leading.equalTo(priceLabel)
+        stack.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(seperatorLine1.snp.bottom).offset(16)
+            if CheckNotch().hasNotch() {make.bottom.equalToSuperview().offset(-78)}
+            else {make.bottom.equalToSuperview().offset(-44)}
         }
         seperatorLine2.snp.makeConstraints { make in
             make.height.equalTo(1)
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(linkLabel.snp.bottom).offset(16)
-        }
-        label.snp.makeConstraints { make in
-            make.leading.equalTo(priceLabel.snp.leading)
-            make.top.equalTo(seperatorLine2.snp.bottom).offset(16)
-        }
-        memoLabel.snp.makeConstraints { make in
-            make.leading.equalTo(label.snp.leading)
-            make.top.equalTo(label.snp.bottom).offset(10)
-            if CheckNotch().hasNotch() {make.bottom.equalToSuperview().offset(-78)}
-            else {make.bottom.equalToSuperview().offset(-44)}
         }
     }
     // After API success
@@ -180,7 +176,13 @@ class ItemDetailTableViewCell: UITableViewCell {
         }
         if let itemName = data.item_name {self.itemNameLabel.text = itemName}
         if let itemPrice = data.item_price {self.priceLabel.text = FormatManager().strToPrice(numStr: itemPrice)}
-        if let link = data.item_url {self.linkLabel.text = link}
-        if let memo = data.item_memo {self.memoLabel.text = memo}
+        if let link = data.item_url {
+            if link != "" {self.linkLabel.text = link}
+            else {
+                self.linkLabel.isHidden = true
+                self.seperatorLine2.isHidden = true
+            }
+        }
+        if let memo = data.item_memo {self.memoContentLabel.text = memo}
     }
 }
