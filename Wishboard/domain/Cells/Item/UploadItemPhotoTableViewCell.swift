@@ -13,6 +13,7 @@ class UploadItemPhotoTableViewCell: UITableViewCell {
         $0.backgroundColor = .wishboardTextfieldGray
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 32
+        $0.contentMode = .scaleAspectFit
     }
     let cameraImage = UIImageView().then{
         $0.image = UIImage(named: "camera_gray")

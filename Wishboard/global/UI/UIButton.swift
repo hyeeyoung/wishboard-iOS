@@ -120,7 +120,7 @@ extension UIButton {
         var config = UIButton.Configuration.plain()
         var attText = AttributedString.init(title)
         
-        attText.font = .systemFont(ofSize: 13)
+        attText.font = .systemFont(ofSize: 12)
         attText.foregroundColor = UIColor.gray
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         config.attributedTitle = attText

@@ -10,21 +10,22 @@ import UIKit
 class ItemDetailTableViewCell: UITableViewCell {
     // MARK: - Properties
     let itemImage = UIImageView().then{
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = .wishboardTextfieldGray
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 32
+        $0.contentMode = .center
     }
     var setFolderButton = UIButton().then{
         $0.setFolderButton("폴더 지정하기 >")
     }
     let dateLabel = UILabel().then{
         $0.text = "0주 전"
-        $0.font = UIFont.Suit(size: 13, family: .Regular)
+        $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .gray
     }
     let itemNameLabel = UILabel().then{
         $0.text = "itemName"
-        $0.font = UIFont.Suit(size: 18, family: .Regular)
+        $0.font = UIFont.Suit(size: 16, family: .Regular)
         $0.numberOfLines = 0
     }
     let priceLabel = UILabel().then{
