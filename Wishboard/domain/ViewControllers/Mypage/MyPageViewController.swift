@@ -176,8 +176,8 @@ extension MyPageViewController {
     }
     // 회원 탈퇴 팝업창
     func showSignoutDialog() {
-        guard let nickName = self.nickName else {return}
-        let dialog = PopUpDeleteUserViewController(titleText: "회원 탈퇴", messageText: "탈퇴하시면 회원정보는 7일 후 파기됩니다.", greenBtnText: "취소", blackBtnText: "탈퇴", placeholder: "닉네임을 입력해주세요.", nickName: nickName)
+        guard let email = self.userInfoData.email else {return}
+        let dialog = PopUpDeleteUserViewController(titleText: "회원 탈퇴", messageText: "탈퇴하시면 회원정보는 7일 후 파기됩니다.", greenBtnText: "취소", blackBtnText: "탈퇴", placeholder: "이메일을 입력해주세요.", email: email)
         dialog.modalPresentationStyle = .overCurrentContext
         self.present(dialog, animated: false, completion: nil)
         
