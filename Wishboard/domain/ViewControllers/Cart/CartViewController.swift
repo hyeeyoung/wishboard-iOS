@@ -22,6 +22,7 @@ class CartViewController: TitleCenterViewController {
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(super.navigationView.snp.bottom)
         }
+        cartView.preVC = self
         // DATA
         CartDataManager().getCartListDataManager(self.cartView)
     }

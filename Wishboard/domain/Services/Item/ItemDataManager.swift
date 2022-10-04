@@ -13,6 +13,29 @@ class ItemDataManager {
     let multiHeader = APIManager().getMultipartHeader()
     let header = APIManager().getHeader()
     
+    // MARK: - 아이템 상세 조회
+    func getItemDetailDataManager(_ itemId: Int,_ viewcontroller: ItemDetailViewController) {
+        AF.request(BaseURL + "/item/\(itemId)",
+                           method: .get,
+                           parameters: nil,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: [WishListModel].self) { response in
+            switch response.result {
+            case .success(let result):
+                viewcontroller.getItemDetailAPISuccess(result[0])
+            case .failure(let error):
+                let statusCode = error.responseCode
+                switch statusCode {
+                case 429:
+                    viewcontroller.getItemDetailAPIFail()
+                default:
+                    print(error.responseCode)
+                }
+            }
+        }
+    }
+    
     // MARK: - 아이템 삭제
     func deleteItemDataManager(_ itemId: Int,_ viewcontroller: ItemDetailViewController) {
         AF.request(BaseURL + "/item/\(itemId)",

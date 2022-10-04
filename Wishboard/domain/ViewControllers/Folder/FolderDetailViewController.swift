@@ -86,7 +86,7 @@ extension FolderDetailViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let itemIdx = indexPath.item
         let itemDetailVC = ItemDetailViewController()
-        itemDetailVC.wishListData = self.wishListData[itemIdx]
+        itemDetailVC.itemId = self.wishListData[itemIdx].item_id
         self.navigationController?.pushViewController(itemDetailVC, animated: true)
     }
 }

@@ -35,6 +35,7 @@ class CartView: UIView {
         $0.font = UIFont.Suit(size: 14, family: .Regular)
     }
     // MARK: - Life Cycles
+    var preVC: CartViewController!
     var cartTableView: UITableView!
     var cartData: [CartListModel] = []
     var itemPrice = 0
@@ -142,6 +143,10 @@ extension CartView: UITableViewDelegate, UITableViewDataSource {
         return 112
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let itemIdx = indexPath.item
+        let vc = ItemDetailViewController()
+        vc.itemId = self.cartData[itemIdx].wishItem?.item_id
+        self.preVC.navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

@@ -10,6 +10,7 @@ import MaterialComponents.MaterialBottomSheet
 
 class ItemDetailViewController: UIViewController {
     var itemDetailView: ItemDetailView!
+    var itemId: Int!
     var wishListData: WishListModel!
 
     override func viewDidLoad() {
@@ -27,6 +28,10 @@ class ItemDetailViewController: UIViewController {
         }
         
         setItemView()
+        ItemDataManager().getItemDetailDataManager(self.itemId, self)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        ItemDataManager().getItemDetailDataManager(self.itemId, self)
     }
     // MARK: - Actions
     @objc func goBack() {
@@ -59,8 +64,6 @@ class ItemDetailViewController: UIViewController {
         let modifyVC = UploadItemViewController().then{
             $0.isUploadItem = false
             $0.wishListModifyData = self.wishListData
-            
-            $0.modalPresentationStyle = .fullScreen
         }
         self.navigationController?.pushViewController(modifyVC, animated: true)
     }
@@ -73,11 +76,12 @@ extension ItemDetailViewController {
         
         itemDetailView.setTableView(self)
         itemDetailView.setUpNavigationView()
-        if self.wishListData.item_url != "" {itemDetailView.isLinkExist(isLinkExist: true)}
-        else {itemDetailView.isLinkExist(isLinkExist: false)}
-        itemDetailView.setUpConstraint()
+        if let data = self.wishListData {
+            if data.item_url != "" {itemDetailView.isLinkExist(isLinkExist: true)}
+            else {itemDetailView.isLinkExist(isLinkExist: false)}
+        } else {itemDetailView.isLinkExist(isLinkExist: false)}
         
-        itemDetailView.lowerButton.addTarget(self, action: #selector(linkButtonDidTap), for: .touchUpInside)
+        itemDetailView.setUpConstraint()
     }
     @objc func linkButtonDidTap() {
         guard let urlStr = self.wishListData.item_url else {return}
@@ -105,6 +109,7 @@ extension ItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
 }
 // MARK: - API Success
 extension ItemDetailViewController {
+    // MARK: 아이템 삭제
     func deleteItemAPISuccess(_ result: APIModel<ResultModel>) {
         self.dismiss(animated: true)
         ScreenManager().goMainPages(0, self, family: .itemDeleted)
@@ -114,5 +119,19 @@ extension ItemDetailViewController {
     func deleteItemAPIFail() {
         guard let itemId = self.wishListData.item_id else {return}
         ItemDataManager().deleteItemDataManager(itemId, self)
+    }
+    // MARK: 아이템 상세 조회
+    func getItemDetailAPISuccess(_ result: WishListModel) {
+        self.wishListData = result
+        self.itemDetailView.itemDetailTableView.reloadData()
+        // lower view setting
+        if let data = self.wishListData {
+            if data.item_url != "" {itemDetailView.isLinkExist(isLinkExist: true)}
+            else {itemDetailView.isLinkExist(isLinkExist: false)}
+        } else {itemDetailView.isLinkExist(isLinkExist: false)}
+        itemDetailView.lowerButton.addTarget(self, action: #selector(linkButtonDidTap), for: .touchUpInside)
+    }
+    func getItemDetailAPIFail() {
+        ItemDataManager().getItemDetailDataManager(self.itemId, self)
     }
 }

@@ -56,6 +56,7 @@ extension CalenderViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         default:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CalenderNotiTableViewCell", for: indexPath) as? CalenderNotiTableViewCell else { return UITableViewCell() }
+            cell.preVC = self
             if let date = self.selectedDate {cell.setSelectedDate(date); cell.selectedDate = date}
             cell.selectionStyle = .none
             return cell

@@ -45,8 +45,9 @@ class SetFolderBottomSheetViewController: UIViewController {
             preVC.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
         }
         if let preVC = self.preItemDetailVC {
-            preVC.wishListData.folder_id = self.selectedFolderId
-            preVC.wishListData.folder_name = self.selectedFolder
+            if let itemId = self.itemId {
+                ItemDataManager().getItemDetailDataManager(itemId, preVC)
+            }
             preVC.itemDetailView.itemDetailTableView.reloadData()
         }
     }
@@ -99,7 +100,6 @@ extension SetFolderBottomSheetViewController: UITableViewDelegate, UITableViewDa
         if let itemId = self.itemId {
             FolderDataManager().modifyItemFolderDataManager(itemId, self.selectedFolderId!, self)
         }
-        self.dismiss(animated: true)
     }
 }
 // MARK: - API Success
@@ -120,6 +120,7 @@ extension SetFolderBottomSheetViewController {
     }
     // MARK: 아이템의 폴더 수정
     func modifyItemFolderAPISuccess(_ result: APIModel<ResultModel>) {
+        self.dismiss(animated: true)
         print(result.message)
     }
 }
