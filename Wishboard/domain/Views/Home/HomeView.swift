@@ -133,9 +133,9 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         let itemIdx = indexPath.item
         cell.setUpData(self.wishListData[itemIdx])
         
-        let addCartGesture = AddCartGesture(target: self, action: #selector(addCartButtonDidTap(_:)))
-        addCartGesture.itemId = self.wishListData[itemIdx].item_id
-        cell.cartButton.addGestureRecognizer(addCartGesture)
+        let cartGesture = HomeCartGesture(target: self, action: #selector(cartButtonDidTap(_:)))
+        cartGesture.data = self.wishListData[itemIdx]
+        cell.cartButton.addGestureRecognizer(cartGesture)
         
         return cell
     }
@@ -148,10 +148,15 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
 }
 extension HomeView {
-    @objc func addCartButtonDidTap(_ sender: AddCartGesture) {
-        if let itemId = sender.itemId {
-            let addCartInput = AddCartInput(item_id: itemId)
-            CartDataManager().addCartDataManager(addCartInput, self, self.viewController)
+    // 장바구니 추가, 삭제
+    @objc func cartButtonDidTap(_ sender: HomeCartGesture) {
+        if let data = sender.data {
+            if data.cart_state == 1 {
+                CartDataManager().deleteCartDataManager(data.item_id!, self, self.viewController)
+            } else {
+                let addCartInput = AddCartInput(item_id: data.item_id)
+                CartDataManager().addCartDataManager(addCartInput, self, self.viewController)
+            }
         }
     }
 }
@@ -170,6 +175,6 @@ extension HomeView {
     }
 }
 // MARK: - CartGesture
-class AddCartGesture: UITapGestureRecognizer {
-    var itemId: Int?
+class HomeCartGesture: UITapGestureRecognizer {
+    var data: WishListModel?
 }

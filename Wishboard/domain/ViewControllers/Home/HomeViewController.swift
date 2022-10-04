@@ -85,6 +85,11 @@ extension HomeViewController {
         WishListDataManager().wishListDataManager(self.homeView, self)
         print(result.message)
     }
+    // MARK: 장바구니 삭제 API
+    func deleteCartAPISuccess(_ result: APIModel<ResultModel>) {
+        WishListDataManager().wishListDataManager(self.homeView, self)
+        print(result.message)
+    }
     // MARK: FCM API
     func fcmAPISuccess(_ result: APIModel<ResultModel>) {
         print(result.message)
