@@ -78,12 +78,12 @@ extension NotiView: UITableViewDelegate, UITableViewDataSource {
         if let urlStr = self.notiData[index].item_url {
             if urlStr != "" {
                 ScreenManager().linkTo(viewcontroller: preVC, urlStr)
-                // 읽음 처리
-                if let itemId = self.notiData[index].item_id {
-                    NotificationDataManager().readNotificationListDataManager(itemId, self)
-                }
             } else {SnackBar(preVC, message: .ShoppingLink)}
         } else {SnackBar(preVC, message: .ShoppingLink)}
+        // 읽음 처리
+        if let itemId = self.notiData[index].item_id {
+            NotificationDataManager().readNotificationListDataManager(itemId, self)
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
