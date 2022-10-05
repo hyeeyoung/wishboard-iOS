@@ -16,7 +16,7 @@ class NotiTableViewCell: UITableViewCell {
     }
     let itemName = UILabel().then{
         $0.text = "itemName"
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.numberOfLines = 2
     }
     // '재입고 알림'

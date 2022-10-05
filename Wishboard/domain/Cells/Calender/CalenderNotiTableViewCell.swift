@@ -81,7 +81,7 @@ extension CalenderNotiTableViewCell: UITableViewDelegate, UITableViewDataSource 
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 104
+        return 116
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let itemIdx = indexPath.item
