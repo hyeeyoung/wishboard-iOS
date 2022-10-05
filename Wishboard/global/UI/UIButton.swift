@@ -37,18 +37,6 @@ extension UIButton {
         }
         return lottieView
     }
-    func setSpinLottieView(_ button: UIButton) -> AnimationView {
-        let lottieView = SetLottie().spinView
-        button.addSubview(lottieView)
-        lottieView.isHidden = true
-        
-        lottieView.snp.makeConstraints { make in
-            make.width.height.equalTo(50)
-            make.centerY.centerX.equalToSuperview()
-        }
-        clearButton(button)
-        return lottieView
-    }
     func clearButton(_ button: UIButton) {
         var config = UIButton.Configuration.plain()
         config.background.backgroundColor = .clear
