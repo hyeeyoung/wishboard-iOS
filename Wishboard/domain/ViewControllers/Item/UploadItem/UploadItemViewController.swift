@@ -178,11 +178,14 @@ extension UploadItemViewController {
             let data = self.wishListData
             DispatchQueue.main.async {
                 // 이미지 uri를 UIImage로 변환
-                let url = URL(string: (data?.item_img_url!)!)
-                let imgData = try? Data(contentsOf: url!)
                 var selectedImage : UIImage?
-                if self.selectedImage == nil {selectedImage = UIImage(data: imgData!)}
-                else {selectedImage = self.selectedImage}
+                if self.selectedImage == nil {
+                    if let imageUrl = data?.item_url {
+                        let url = URL(string: imageUrl)
+                        let imgData = try? Data(contentsOf: url!)
+                        selectedImage = UIImage(data: imgData!)
+                    }
+                } else {selectedImage = self.selectedImage}
                
                 if let folderId = data?.folder_id {
                     // 모든 데이터가 존재하는 경우
