@@ -19,6 +19,7 @@ class UploadItemViewController: UIViewController {
     var notivc: NotificationSettingViewController!
     var linkvc: ShoppingLinkViewController!
     // Modify Item
+    var preVC: ItemDetailViewController!
     var isUploadItem: Bool!
     var wishListModifyData: WishListModel!
     // UploadItem
@@ -53,6 +54,11 @@ class UploadItemViewController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.removeKeyboardNotifications()
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        if let preVC = self.preVC {
+            SnackBar(preVC, message: .modifyItem)
+        }
     }
     @objc func goBack() {
         self.navigationController?.popViewController(animated: true)
@@ -456,7 +462,7 @@ extension UploadItemViewController {
     // MARK: 아이템 수정 API
     func modifyItemAPISuccess(_ result: APIModel<ResultModel>) {
         self.viewDidLoad()
-        ScreenManager().goMainPages(0, self, family: .itemModified)
+        self.navigationController?.popViewController(animated: true)
         print(result.message)
     }
 }

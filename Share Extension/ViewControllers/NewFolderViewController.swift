@@ -158,11 +158,15 @@ extension NewFolderViewController {
         
         print(result.message)
     }
-    func addFolderAPIFail() {
+    func sameFolderNameFail() {
         self.lottieView.isHidden = true
         self.completeButton.reloadInputViews()
         self.errorMessage.isHidden = false
         self.completeButton.defaultButton("추가", .wishboardDisabledGray, .gray)
         self.completeButton.isEnabled = false
+    }
+    func addFolderAPIFail() {
+        let addFolderInput = AddFolderInput(folder_name: self.folderStr)
+        FolderDataManager().addFolderDataManager(addFolderInput, self)
     }
 }

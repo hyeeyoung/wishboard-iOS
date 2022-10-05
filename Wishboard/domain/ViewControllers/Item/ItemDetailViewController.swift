@@ -64,6 +64,7 @@ class ItemDetailViewController: UIViewController {
         let modifyVC = UploadItemViewController().then{
             $0.isUploadItem = false
             $0.wishListModifyData = self.wishListData
+            $0.preVC = self
         }
         self.navigationController?.pushViewController(modifyVC, animated: true)
     }
