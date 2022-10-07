@@ -48,6 +48,7 @@ class ShoppingLinkViewController: KeyboardViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         super.textfield = self.shoppingLinkTextField
+        super.backBtn.isHidden = true
         
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true

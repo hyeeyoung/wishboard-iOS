@@ -100,6 +100,7 @@ extension SetFolderBottomSheetViewController: UITableViewDelegate, UITableViewDa
         if let itemId = self.itemId {
             FolderDataManager().modifyItemFolderDataManager(itemId, self.selectedFolderId!, self)
         }
+        self.dismiss(animated: true)
     }
 }
 // MARK: - API Success

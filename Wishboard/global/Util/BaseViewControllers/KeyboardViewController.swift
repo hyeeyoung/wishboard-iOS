@@ -39,8 +39,8 @@ class KeyboardViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         if let textfield = self.textfield {self.textfield.becomeFirstResponder()}
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        if let textfield = self.textfield {self.removeKeyboardNotifications()}
+    override func viewDidDisappear(_ animated: Bool) {
+        self.removeKeyboardNotifications()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
