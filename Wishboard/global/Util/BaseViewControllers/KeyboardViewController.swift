@@ -42,8 +42,12 @@ class KeyboardViewController: BaseViewController {
     override func viewDidDisappear(_ animated: Bool) {
         self.removeKeyboardNotifications()
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        self.removeKeyboardNotifications()
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+        self.removeKeyboardNotifications()
     }
     // MARK: - Functions
     func addKeyboardNotifications() {

@@ -70,11 +70,11 @@ class BaseViewController: UIViewController {
         if !NetworkCheck.shared.isConnected {SnackBar(self, message: .networkCheck)}
     }
     override func viewDidAppear(_ animated: Bool) {
-        if !NetworkCheck.shared.isConnected {
-            DispatchQueue.main.async {
-                SnackBar(self, message: .networkCheck)
-            }
-        }
+//        if !NetworkCheck.shared.isConnected {
+//            DispatchQueue.main.async {
+//                SnackBar(self, message: .networkCheck)
+//            }
+//        }
     }
     // MARK: - Actions
     @objc func backBtnDidClicked(){

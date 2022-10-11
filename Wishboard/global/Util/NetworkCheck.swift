@@ -42,7 +42,7 @@ final class NetworkCheck {
             } else {
                 print("연결안됨!")
                 guard let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabBarViewController") as? UITabBarController else {return}
-                SnackBar(tabBarController, message: .networkCheck)
+//                SnackBar(tabBarController, message: .networkCheck)
             }
         }
     }

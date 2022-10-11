@@ -68,7 +68,7 @@ class TitleLeftViewController: UIViewController {
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         self.navigationController?.isNavigationBarHidden = true
         
-        if !NetworkCheck.shared.isConnected {SnackBar(self, message: .networkCheck)}
+//        if !NetworkCheck.shared.isConnected {SnackBar(self, message: .networkCheck)}
     }
     // MARK: - Actions & Functions
     @objc func rightPositionBtnDidClicked(){

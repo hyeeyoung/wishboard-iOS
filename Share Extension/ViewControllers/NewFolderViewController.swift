@@ -49,6 +49,7 @@ class NewFolderViewController: KeyboardViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         super.textfield = self.newFolderTextField
+        super.backBtn.isHidden = true
         
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
