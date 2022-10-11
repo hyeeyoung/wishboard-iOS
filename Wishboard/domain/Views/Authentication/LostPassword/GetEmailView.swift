@@ -10,21 +10,6 @@ import UIKit
 
 class GetEmailView: UIView {
     // MARK: - Views
-    let navigationView = UIView()
-        
-    lazy var backBtn = UIButton().then{
-        $0.setImage(UIImage(named: "goBack"), for: .normal)
-        $0.isUserInteractionEnabled = true
-    }
-    let navigationTitle = UILabel().then{
-        $0.text = "이메일로 로그인하기"
-        $0.textColor = .black
-        $0.font = UIFont.Suit(size: 15, family: .Bold)
-    }
-    let stepLabel = UILabel().then{
-        $0.text = "2/2 단계"
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
-    }
     let lockedImage = UIImageView().then{
         $0.image = UIImage(named: "locked")
     }
@@ -40,11 +25,6 @@ class GetEmailView: UIView {
         $0.becomeFirstResponder()
         $0.isSecureTextEntry = true
     }
-//    let errorMessage = UILabel().then{
-//        $0.text = "이메일 주소를 정확하게 입력해주세요."
-//        $0.textColor = .wishboardRed
-//        $0.font = UIFont.Suit(size: 12, family: .Regular)
-//    }
     var timerLabel = UILabel().then{
         $0.text = "5:00"
         $0.font = UIFont.Suit(size: 14, family: .Regular)
@@ -71,29 +51,20 @@ class GetEmailView: UIView {
     // MARK: - Functions
     func setUpTextFields() {
         codeTextField.inputAccessoryView = accessoryView // <-
-//        errorMessage.isHidden = true
     }
     func setUpView() {
-        addSubview(navigationView)
-        navigationView.addSubview(backBtn)
-        navigationView.addSubview(navigationTitle)
-        navigationView.addSubview(stepLabel)
-        
         addSubview(lockedImage)
         addSubview(subTitleLabel)
         addSubview(codeTextField)
         codeTextField.addSubview(timerLabel)
-//        addSubview(errorMessage)
         
         accessoryView.addSubview(loginButton)
     }
     func setUpConstraint() {
-        setNavigationConstraint()
-        
         lockedImage.snp.makeConstraints { make in
             make.height.width.equalTo(72)
             make.centerX.equalToSuperview()
-            make.top.equalTo(navigationView.snp.bottom).offset(24)
+            make.top.equalToSuperview().offset(24)
         }
         subTitleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -104,10 +75,6 @@ class GetEmailView: UIView {
             make.height.equalTo(42)
             make.top.equalTo(subTitleLabel.snp.bottom).offset(32)
         }
-//        errorMessage.snp.makeConstraints { make in
-//            make.leading.trailing.equalTo(codeTextField)
-//            make.top.equalTo(codeTextField.snp.bottom).offset(5)
-//        }
         timerLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(15)
             make.centerY.equalToSuperview()
@@ -117,27 +84,6 @@ class GetEmailView: UIView {
             make.leading.trailing.equalToSuperview().inset(16)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().inset(16)
-        }
-    }
-    func setNavigationConstraint() {
-        navigationView.snp.makeConstraints{ make in
-            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
-            else {make.top.equalToSuperview().offset(20)}
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(56)
-        }
-        backBtn.snp.makeConstraints{ make in
-            make.width.height.equalTo(24)
-            make.leading.equalToSuperview().offset(16)
-            make.centerY.equalToSuperview()
-        }
-        navigationTitle.snp.makeConstraints{ make in
-            make.centerY.equalToSuperview()
-            make.centerX.equalToSuperview()
-        }
-        stepLabel.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(16)
-            make.centerY.equalToSuperview()
         }
     }
 }

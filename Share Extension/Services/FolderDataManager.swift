@@ -61,6 +61,8 @@ class FolderDataManager {
                 let statusCode = error.responseCode
                 switch statusCode {
                 case 409:
+                    viewcontroller.sameFolderNameFail()
+                case 429:
                     viewcontroller.addFolderAPIFail()
                 default:
                     print(error.localizedDescription)

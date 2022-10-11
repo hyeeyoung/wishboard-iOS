@@ -1,8 +1,8 @@
 //
-//  ShareInput.swift
-//  Share Extension
+//  ItemParsingModel.swift
+//  Wishboard
 //
-//  Created by gomin on 2022/09/29.
+//  Created by gomin on 2022/10/04.
 //
 
 struct ItemParsingModel: Decodable {

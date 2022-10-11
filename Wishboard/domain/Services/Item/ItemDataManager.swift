@@ -13,6 +13,29 @@ class ItemDataManager {
     let multiHeader = APIManager().getMultipartHeader()
     let header = APIManager().getHeader()
     
+    // MARK: - 아이템 상세 조회
+    func getItemDetailDataManager(_ itemId: Int,_ viewcontroller: ItemDetailViewController) {
+        AF.request(BaseURL + "/item/\(itemId)",
+                           method: .get,
+                           parameters: nil,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: [WishListModel].self) { response in
+            switch response.result {
+            case .success(let result):
+                viewcontroller.getItemDetailAPISuccess(result[0])
+            case .failure(let error):
+                let statusCode = error.responseCode
+                switch statusCode {
+                case 429:
+                    viewcontroller.getItemDetailAPIFail()
+                default:
+                    print(error.responseCode)
+                }
+            }
+        }
+    }
+    
     // MARK: - 아이템 삭제
     func deleteItemDataManager(_ itemId: Int,_ viewcontroller: ItemDetailViewController) {
         AF.request(BaseURL + "/item/\(itemId)",
@@ -35,7 +58,31 @@ class ItemDataManager {
             }
         }
     }
-    
+    // MARK: - 링크 복사로 불러오기
+    func getItemByLinkDataManager(_ url: String, _ viewcontroller: ShoppingLinkViewController) {
+        AF.request(BaseURL + "/item/parse?site=\(url)",
+                           method: .get,
+                           parameters: nil,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: APIModel<ItemParsingModel>.self) { response in
+            switch response.result {
+            case .success(let result):
+                viewcontroller.getItemByLinkAPISuccess(result)
+            case .failure(let error):
+                let statusCode = error.responseCode
+                switch statusCode {
+                case 404:
+                    viewcontroller.getItemByLinkAPIFail()
+                case 429:
+                    viewcontroller.getItemByLinkAPIFail429()
+                default:
+                    print(error.localizedDescription)
+                    print(error.responseCode)
+                }
+            }
+        }
+    }
     // MARK: - 아이템 직접 추가 - 모든 데이터가 존재하는 경우
     func uploadItemDataManager(_ folderId: Int,
                                _ photo: UIImage,
@@ -220,7 +267,7 @@ class ItemDataManager {
                     do {
                         let decoder = JSONDecoder()
                         let result = try decoder.decode(APIModel<ResultModel>.self, from: data)
-                        viewcontroller.uploadItemAPISuccess(result)
+                        viewcontroller.modifyItemAPISuccess(result)
                         print(result)
                     } catch {
                         print("error", data)
@@ -267,7 +314,7 @@ class ItemDataManager {
                     do {
                         let decoder = JSONDecoder()
                         let result = try decoder.decode(APIModel<ResultModel>.self, from: data)
-                        viewcontroller.uploadItemAPISuccess(result)
+                        viewcontroller.modifyItemAPISuccess(result)
                         print(result)
                     } catch {
                         let str = String(decoding: data, as: UTF8.self)
@@ -313,7 +360,7 @@ class ItemDataManager {
                     do {
                         let decoder = JSONDecoder()
                         let result = try decoder.decode(APIModel<ResultModel>.self, from: data)
-                        viewcontroller.uploadItemAPISuccess(result)
+                        viewcontroller.modifyItemAPISuccess(result)
                         print(result)
                     } catch {
 //                        print("error", data) //error 38bytes

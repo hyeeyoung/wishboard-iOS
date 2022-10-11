@@ -13,6 +13,9 @@ class OnBoardingViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        self.tabBarController?.tabBar.isHidden = true
         
         let view = OnBoardingView()
         view.setViewController(self)
@@ -24,6 +27,7 @@ class OnBoardingViewController: UIViewController {
         checkRememberMe()
     }
     override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
         checkRememberMe()
     }
     func checkRememberMe() {

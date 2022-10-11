@@ -10,6 +10,7 @@ import UIKit
 class CartTableViewCell: UITableViewCell {
     let itemImage = UIImageView().then{
         $0.backgroundColor = .systemGray6
+        $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
     }
     let itemName = UILabel().then{
@@ -52,12 +53,12 @@ class CartTableViewCell: UITableViewCell {
     func setUpView() {
         contentView.addSubview(itemImage)
         contentView.addSubview(deleteButton)
-        contentView.addSubview(itemName)
         contentView.addSubview(minusButton)
         contentView.addSubview(plusButton)
         contentView.addSubview(countLabel)
         contentView.addSubview(priceLabel)
         contentView.addSubview(won)
+        contentView.addSubview(itemName)
     }
     func setUpConstraint() {
         itemImage.snp.makeConstraints { make in
@@ -69,11 +70,6 @@ class CartTableViewCell: UITableViewCell {
             make.width.height.equalTo(15)
             make.top.equalTo(itemImage.snp.top)
             make.trailing.equalToSuperview().offset(-19)
-        }
-        itemName.snp.makeConstraints { make in
-            make.top.equalTo(itemImage.snp.top)
-            make.leading.equalTo(itemImage.snp.trailing).offset(10)
-            make.trailing.equalTo(deleteButton.snp.leading).offset(-10)
         }
         minusButton.snp.makeConstraints { make in
             make.width.height.equalTo(24)
@@ -96,6 +92,12 @@ class CartTableViewCell: UITableViewCell {
         priceLabel.snp.makeConstraints { make in
             make.trailing.equalTo(won.snp.leading).offset(-2)
             make.centerY.equalTo(won)
+        }
+        itemName.snp.makeConstraints { make in
+            make.top.equalTo(itemImage.snp.top)
+            make.leading.equalTo(itemImage.snp.trailing).offset(10)
+            make.trailing.equalTo(deleteButton.snp.leading).offset(-10)
+            make.bottom.equalTo(minusButton.snp.top).offset(-10)
         }
     }
 }

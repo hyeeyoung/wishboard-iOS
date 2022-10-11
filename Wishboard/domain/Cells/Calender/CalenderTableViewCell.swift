@@ -20,7 +20,7 @@ class CalenderTableViewCell: UITableViewCell {
         
         contentView.addSubview(calender)
         calender.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
+            make.top.leading.trailing.bottom.equalToSuperview()
             make.height.equalTo(385)
         }
         NotificationDataManager().getCalenderNotificationDataManager(self)

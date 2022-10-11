@@ -12,13 +12,36 @@ class FormatManager {
     // 서버에서 받은 created_at을 "YY년 MM월 dd일 HH:mm"로 변환
     func createdDateToKoreanStr(_ date: String) -> String? {
         let dateToDate = date.toCreatedDate()  //YYYY-MM-dd HH:mm:ss
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "YY년 MM월 dd일 HH:mm"
-        if let dateToDate = dateToDate {
-            return dateformatter.string(from: dateToDate)
+        var dateNum: Int!
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.day]
+        formatter.unitsStyle = .full   // 이유는 모르겠으나 꼭 필요하다!
+        if let daysString = formatter.string(from: dateToDate!, to: Date()) {
+            dateNum = Int(daysString.filter {$0.isNumber})
+            return dateToWeek(dateNum: dateNum)
         } else {return nil}
     }
+    func dateToWeek(dateNum: Int) -> String {
+        var week: Int!
+        var month: Int!
+        var year: Int!
+        switch dateNum {
+        case 0:
+            return "오늘"
+        case 1:
+            return "어제"
+        default:
+            if dateNum > 7 {week = dateNum / 7}
+            else {return String(dateNum)+"일 전"}
+            if week > 4 {month = week / 4}
+            else {return String(week)+"주 전"}
+            if month > 12 {year = month / 12}
+            else {return String(month)+"달 전"}
+            return String(year) + "년 전"
+        }
+    }
     // 서버에서 받은 notification_date를 "YY년 MM월 dd일 HH:mm"로 변환
+    // '0일 전', '0주전' 으로 변환
     func notiDateToKoreanStr(_ date: String) -> String? {
         let dateToDate = date.toNotiDate() //YYYY-MM-dd HH:mm
         let dateformatter = DateFormatter()
@@ -72,6 +95,7 @@ class FormatManager {
         return priceStr
     }
 }
+// MARK: - String extension
 extension String {
     func toCreatedDate() -> Date? { //"yyyy-MM-dd HH:mm:ss"
         let dateFormatter = DateFormatter()
@@ -94,7 +118,7 @@ extension String {
         }
     }
 }
-
+// MARK: - Date extension
 extension Date {
     func toString() -> String {
         let dateFormatter = DateFormatter()

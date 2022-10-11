@@ -10,13 +10,9 @@ import UIKit
 
 class NotiView: UIView {
     // MARK: - View
-    let navigationView = UIView()
-    let titleLabel = UILabel().then{
-        $0.text = "알림"
-        $0.font = UIFont.Suit(size: 22, family: .Bold)
-    }
     let emptyMessage = "앗, 알림이 없어요!"
     // MARK: - Life Cycles
+    var preVC: NotificationViewController!
     var notificationTableView: UITableView!
     var notiData: [NotificationModel] = []
     
@@ -46,30 +42,15 @@ class NotiView: UIView {
         }
     }
     func setUpView() {
-        addSubview(navigationView)
-        navigationView.addSubview(titleLabel)
         
         addSubview(notificationTableView)
     }
     func setUpConstraint() {
-        setUpNavigationConstraint()
         
         notificationTableView.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(navigationView.snp.bottom)
-        }
-    }
-    func setUpNavigationConstraint() {
-        navigationView.snp.makeConstraints { make in
-            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
-            else {make.top.equalToSuperview().offset(20)}
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(50)
-        }
-        titleLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(16)
+            make.top.equalToSuperview()
         }
     }
 }
@@ -92,6 +73,24 @@ extension NotiView: UITableViewDelegate, UITableViewDataSource {
         return 115
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let index = indexPath.item
+        // 쇼핑몰 이동
+        if let urlStr = self.notiData[index].item_url {
+            if urlStr != "" {
+                ScreenManager().linkTo(viewcontroller: preVC, urlStr)
+            } else {SnackBar(preVC, message: .ShoppingLink)}
+        } else {SnackBar(preVC, message: .ShoppingLink)}
+        // 읽음 처리
+        if let itemId = self.notiData[index].item_id {
+            NotificationDataManager().readNotificationListDataManager(itemId, self)
+            // reload data with animation
+            UIView.transition(with: notificationTableView,
+                              duration: 0.35,
+                              options: .transitionCrossDissolve,
+                              animations: { () -> Void in
+                self.notificationTableView.reloadRows(at: [indexPath], with: .automatic)},
+                              completion: nil);
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -111,5 +110,9 @@ extension NotiView {
     }
     func getNotificationListAPIFail() {
         NotificationDataManager().getNotificationListDataManager(self)
+    }
+    // MARK: 알림 읽음 처리 API
+    func readNotificationAPISuccess(_ result: APIModel<ResultModel>) {
+        print(result.message)
     }
 }

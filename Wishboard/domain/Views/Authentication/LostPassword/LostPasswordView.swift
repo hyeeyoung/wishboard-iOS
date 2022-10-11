@@ -10,19 +10,6 @@ import UIKit
 
 class LostPasswordView: UIView {
     // MARK: - View
-    let navigationView = UIView()
-    let navigationTitle = UILabel().then{
-        $0.text = "이메일로 로그인하기"
-        $0.font = UIFont.Suit(size: 15, family: .Bold)
-    }
-    let backBtn = UIButton().then{
-        $0.setImage(UIImage(named: "goBack"), for: .normal)
-    }
-    let stepLabel = UILabel().then{
-        $0.text = "1/2 단계"
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
-    }
-    
     let heartLetterImage = UIImageView().then{
         $0.image = UIImage(named: "love-letter")
     }
@@ -62,11 +49,6 @@ class LostPasswordView: UIView {
     }
     // MARK: - Functions
     func setUpView() {
-        addSubview(navigationView)
-        navigationView.addSubview(navigationTitle)
-        navigationView.addSubview(backBtn)
-        navigationView.addSubview(stepLabel)
-        
         addSubview(heartLetterImage)
         addSubview(subTitleLabel)
         addSubview(emailTextField)
@@ -75,12 +57,10 @@ class LostPasswordView: UIView {
         accessoryView.addSubview(getEmailButton)
     }
     func setUpConstraint() {
-        setUpNavigationConstraint()
-        
         heartLetterImage.snp.makeConstraints { make in
             make.height.width.equalTo(72)
             make.centerX.equalToSuperview()
-            make.top.equalTo(navigationView.snp.bottom).offset(24)
+            make.top.equalToSuperview().offset(24)
         }
         subTitleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -99,27 +79,6 @@ class LostPasswordView: UIView {
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(44)
             make.bottom.equalToSuperview().inset(16)
-        }
-    }
-    func setUpNavigationConstraint() {
-        navigationView.snp.makeConstraints{ make in
-            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
-            else {make.top.equalToSuperview().offset(20)}
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(56)
-        }
-        backBtn.snp.makeConstraints{ make in
-            make.width.height.equalTo(24)
-            make.leading.equalToSuperview().offset(16)
-            make.centerY.equalToSuperview()
-        }
-        navigationTitle.snp.makeConstraints{ make in
-            make.centerY.equalToSuperview()
-            make.centerX.equalToSuperview()
-        }
-        stepLabel.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(16)
-            make.centerY.equalToSuperview()
         }
     }
 }

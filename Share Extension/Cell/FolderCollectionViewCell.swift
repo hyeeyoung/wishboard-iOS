@@ -15,6 +15,11 @@ class FolderCollectionViewCell: UICollectionViewCell {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
     }
+    let folderBackground = UIView().then{
+        $0.backgroundColor = .notificationGray
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 10
+    }
     let folderName = UILabel().then{
         $0.text = "folderName"
         $0.textColor = .white
@@ -51,6 +56,8 @@ class FolderCollectionViewCell: UICollectionViewCell {
     // MARK: - Functions
     func setUpView() {
         contentView.addSubview(folderImage)
+        folderImage.addSubview(folderBackground)
+        
         contentView.addSubview(selectedView)
         contentView.addSubview(folderName)
         contentView.addSubview(selectedIcon)
@@ -58,6 +65,9 @@ class FolderCollectionViewCell: UICollectionViewCell {
     func setUpConstraint() {
         folderImage.snp.makeConstraints { make in
             make.leading.top.trailing.bottom.equalToSuperview()
+        }
+        folderBackground.snp.makeConstraints { make in
+            make.leading.trailing.top.bottom.equalTo(folderImage)
         }
         folderName.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-6)

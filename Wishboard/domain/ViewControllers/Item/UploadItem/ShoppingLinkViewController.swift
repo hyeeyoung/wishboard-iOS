@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Lottie
 
-class ShoppingLinkViewController: UIViewController {
+class ShoppingLinkViewController: KeyboardViewController {
     let titleLabel = UILabel().then{
         $0.text = "쇼핑몰 링크"
         $0.font = UIFont.Suit(size: 14, family: .Bold)
@@ -38,8 +39,16 @@ class ShoppingLinkViewController: UIViewController {
     var tempLink: String!
     var isExit: Bool = true
     
+    var itemImgUrl: String?
+    var itemName: String?
+    var itemPrice: String?
+    
+    var lottieView: AnimationView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        super.textfield = self.shoppingLinkTextField
+        super.backBtn.isHidden = true
         
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
@@ -58,8 +67,17 @@ class ShoppingLinkViewController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         if !isExit {
-            let indexPath = IndexPath(row: 5, section: 0)
-            self.preVC.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
+            self.preVC.wishListData.item_img_url = self.itemImgUrl
+            self.preVC.wishListData.item_name = self.itemName
+            self.preVC.wishListData.item_price = self.itemPrice
+            self.preVC.wishListData.item_url = self.link
+            
+            let indexPath0 = IndexPath(row: 0, section: 0)
+            let indexPath1 = IndexPath(row: 1, section: 0)
+            let indexPath2 = IndexPath(row: 2, section: 0)
+            let indexPath5 = IndexPath(row: 5, section: 0)
+            self.preVC.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath0, indexPath1, indexPath2, indexPath5], with: .automatic)
+            self.preVC.isValidContent()
         }
     }
     // MARK: - Functions
@@ -104,8 +122,12 @@ class ShoppingLinkViewController: UIViewController {
         self.dismiss(animated: true)
     }
     @objc func completeButtonDidTap() {
-        self.isExit = false
-        self.dismiss(animated: true)
+        lottieView = self.completeButton.setHorizontalLottieView(self.completeButton)
+        self.completeButton.isSelected = true
+        lottieView.isHidden = false
+        lottieView.play { completion in
+            ItemDataManager().getItemByLinkDataManager(self.link, self)
+        }
     }
     @objc func LinkTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text
@@ -141,5 +163,36 @@ class ShoppingLinkViewController: UIViewController {
         }
         
         return match.range.length == url.utf16.count
+    }
+}
+// MARK: - API Success
+extension ShoppingLinkViewController {
+    // MARK: 아이템 불러오기 API
+    func getItemByLinkAPISuccess(_ result: APIModel<ItemParsingModel>) {
+        if let imageUrl = result.data?.item_img {
+            self.itemImgUrl = imageUrl
+        }
+        if let itemName = result.data?.item_name {
+            self.itemName = itemName
+        }
+        if let itemPrice = result.data?.item_price {
+            self.itemPrice = itemPrice
+        }
+        self.viewDidLoad()
+        self.isExit = false
+        self.lottieView.isHidden = true
+        self.completeButton.isSelected = false
+        
+        self.dismiss(animated: true)
+    }
+    func getItemByLinkAPIFail() {
+        self.errorMessage.isHidden = false
+        self.completeButton.isSelected = false
+        self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .gray)
+        self.completeButton.isEnabled = false
+        self.lottieView.isHidden = true
+    }
+    func getItemByLinkAPIFail429() {
+        ItemDataManager().getItemByLinkDataManager(self.link, self)
     }
 }

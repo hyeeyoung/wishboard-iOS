@@ -8,7 +8,7 @@
 import UIKit
 import Lottie
 
-class GetEmailViewController: UIViewController {
+class GetEmailViewController: KeyboardViewController {
     var getEmailView: GetEmailView!
     var isValidTime: Bool = true
     // 인증번호 Properties
@@ -23,9 +23,7 @@ class GetEmailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.view.backgroundColor = .white
-        self.navigationController?.isNavigationBarHidden = true
+        super.navigationTitle.text = "이메일로 로그인하기"
         
         setGetEmailView()
     }
@@ -36,22 +34,20 @@ extension GetEmailViewController {
         self.view.addSubview(getEmailView)
         
         getEmailView.snp.makeConstraints { make in
-            make.top.leading.trailing.bottom.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(super.navigationView.snp.bottom)
         }
         
-        getEmailView.backBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         getEmailView.codeTextField.addTarget(self, action: #selector(codeTextFieldEditingChanged(_:)), for: .editingChanged)
         getEmailView.loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
         
+        super.textfield = getEmailView.codeTextField
         // Timer
         timer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: timeSelector, userInfo: nil, repeats: true)
     }
 }
 extension GetEmailViewController {
     // MARK: - Actions
-    @objc func goBack() {
-        self.dismiss(animated: true)
-    }
     @objc func codeTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
         self.code = text

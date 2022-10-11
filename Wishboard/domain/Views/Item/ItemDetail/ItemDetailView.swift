@@ -10,7 +10,6 @@ import UIKit
 
 class ItemDetailView: UIView {
     // MARK: - Properties
-    // Navigation View
     let navigationView = UIView()
     let modifyButton = UIButton().then{
         $0.setImage(UIImage(named: "pencil"), for: .normal)
@@ -53,6 +52,13 @@ class ItemDetailView: UIView {
         navigationView.addSubview(modifyButton)
         navigationView.addSubview(deleteButton)
         navigationView.addSubview(backButton)
+    }
+    func isLinkExist(isLinkExist: Bool) {
+        if isLinkExist {
+            setUpLowerView(true)
+        } else {
+            setUpLowerView(false)
+        }
     }
     func setUpLowerView(_ isLinkExist: Bool) {
         // lower View

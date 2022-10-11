@@ -21,6 +21,9 @@ class HomeView: UIView {
     let cartButton = UIButton().then{
         $0.setImage(UIImage(named: "cart"), for: .normal)
     }
+    let calenderButton = UIButton().then{
+        $0.setImage(UIImage(named: "ic_calendar"), for: .normal)
+    }
     
     // MARK: - Life Cycles
     var viewController : HomeViewController!
@@ -68,6 +71,7 @@ class HomeView: UIView {
         addSubview(navigationView)
         
         navigationView.addSubview(logo)
+        navigationView.addSubview(calenderButton)
         navigationView.addSubview(cartButton)
 
         addSubview(collectionView)
@@ -85,11 +89,15 @@ class HomeView: UIView {
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
         }
-        cartButton.snp.makeConstraints { make in
-            make.width.equalTo(23)
-            make.height.equalTo(22)
+        calenderButton.snp.makeConstraints { make in
+            make.width.height.equalTo(24)
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().inset(16)
+        }
+        cartButton.snp.makeConstraints { make in
+            make.width.height.equalTo(24)
+            make.centerY.equalToSuperview()
+            make.trailing.equalTo(calenderButton.snp.leading).offset(-16)
         }
     }
     func setUpConstraint() {
@@ -125,26 +133,30 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         let itemIdx = indexPath.item
         cell.setUpData(self.wishListData[itemIdx])
         
-        let addCartGesture = AddCartGesture(target: self, action: #selector(addCartButtonDidTap(_:)))
-        addCartGesture.itemId = self.wishListData[itemIdx].item_id
-        cell.cartButton.addGestureRecognizer(addCartGesture)
+        let cartGesture = HomeCartGesture(target: self, action: #selector(cartButtonDidTap(_:)))
+        cartGesture.data = self.wishListData[itemIdx]
+        cell.cartButton.addGestureRecognizer(cartGesture)
         
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let itemIdx = indexPath.item
         
-        let itemDetailVC = ItemDetailViewController()
-        itemDetailVC.wishListData = self.wishListData[itemIdx]
-        itemDetailVC.modalPresentationStyle = .fullScreen
-        self.viewController.present(itemDetailVC, animated: true, completion: nil)
+        let vc = ItemDetailViewController()
+        vc.itemId = self.wishListData[itemIdx].item_id
+        self.viewController.navigationController?.pushViewController(vc, animated: true)
     }
 }
 extension HomeView {
-    @objc func addCartButtonDidTap(_ sender: AddCartGesture) {
-        if let itemId = sender.itemId {
-            let addCartInput = AddCartInput(item_id: itemId)
-            CartDataManager().addCartDataManager(addCartInput, self, self.viewController)
+    // 장바구니 추가, 삭제
+    @objc func cartButtonDidTap(_ sender: HomeCartGesture) {
+        if let data = sender.data {
+            if data.cart_state == 1 {
+                CartDataManager().deleteCartDataManager(data.item_id!, self, self.viewController)
+            } else {
+                let addCartInput = AddCartInput(item_id: data.item_id)
+                CartDataManager().addCartDataManager(addCartInput, self, self.viewController)
+            }
         }
     }
 }
@@ -153,7 +165,6 @@ extension HomeView {
     // MARK: 위시리스트 조회 API
     func wishListAPISuccess(_ result: [WishListModel]) {
         self.wishListData = result
-        print(result)
         // reload data with animation
         UIView.transition(with: collectionView,
                                   duration: 0.35,
@@ -164,6 +175,6 @@ extension HomeView {
     }
 }
 // MARK: - CartGesture
-class AddCartGesture: UITapGestureRecognizer {
-    var itemId: Int?
+class HomeCartGesture: UITapGestureRecognizer {
+    var data: WishListModel?
 }

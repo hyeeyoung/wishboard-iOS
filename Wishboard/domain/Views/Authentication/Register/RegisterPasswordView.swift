@@ -7,21 +7,10 @@
 
 import Foundation
 import UIKit
+import SafariServices
 
 class RegisterPasswordView: UIView {
     // MARK: - View
-    let navigationView = UIView()
-    let navigationTitle = UILabel().then{
-        $0.text = "가입하기"
-        $0.font = UIFont.Suit(size: 15, family: .Bold)
-    }
-    let backBtn = UIButton().then{
-        $0.setImage(UIImage(named: "goBack"), for: .normal)
-    }
-    let stepLabel = UILabel().then{
-        $0.text = "2/2 단계"
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
-    }
     let lockedImage = UIImageView().then{
         $0.image = UIImage(named: "locked")
     }
@@ -49,9 +38,10 @@ class RegisterPasswordView: UIView {
         $0.defaultButton("가입하기", .wishboardDisabledGray, .black)
     }
     lazy var accessoryView: UIView = {
-        return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
+        return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 100.0))
     }()
     // MARK: - Life Cycles
+    var preVC: RegisterPasswordViewController!
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -61,17 +51,16 @@ class RegisterPasswordView: UIView {
         setUpConstraint()
         
         self.errorMessage.isHidden = true
+        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    @objc func terClicked() {
+        ScreenManager().linkTo(viewcontroller: preVC, "https://www.wishboard.xyz/terms.html")
+    }
     // MARK: - Functions
     func setUpView() {
-        addSubview(navigationView)
-        navigationView.addSubview(navigationTitle)
-        navigationView.addSubview(backBtn)
-        navigationView.addSubview(stepLabel)
-        
         addSubview(lockedImage)
         addSubview(subTitleLabel)
         addSubview(pwTextField)
@@ -82,12 +71,10 @@ class RegisterPasswordView: UIView {
         setStackView()
     }
     func setUpConstraint() {
-        setUpNavigationConstraint()
-        
         lockedImage.snp.makeConstraints { make in
             make.height.width.equalTo(72)
             make.centerX.equalToSuperview()
-            make.top.equalTo(navigationView.snp.bottom).offset(24)
+            make.top.equalToSuperview().offset(24)
         }
         subTitleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -108,40 +95,28 @@ class RegisterPasswordView: UIView {
             make.bottom.equalToSuperview().inset(16)
         }
         stack.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(registerButton.snp.top).offset(-6)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.bottom.equalTo(registerButton.snp.top).offset(-5)
         }
-        
     }
     func setStackView() {
         setLabel("가입 시 ")
-        setUnderLinedButton("이용약관")
+        let termButton = setUnderLinedButton("이용약관")
         setLabel(" 및 ")
-        setUnderLinedButton("개인정보 취급방침")
+        let privacyTermButton = setUnderLinedButton("개인정보 취급방침")
         setLabel("에 동의하는 것으로 간주합니다.")
+        
+        termButton.addTarget(self, action: #selector(termButtonDidTap), for: .touchUpInside)
+        privacyTermButton.addTarget(self, action: #selector(privacyButtonDidTap), for: .touchUpInside)
     }
-    func setUpNavigationConstraint() {
-        navigationView.snp.makeConstraints{ make in
-            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
-            else {make.top.equalToSuperview().offset(20)}
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(56)
-        }
-        backBtn.snp.makeConstraints{ make in
-            make.width.height.equalTo(24)
-            make.leading.equalToSuperview().offset(16)
-            make.centerY.equalToSuperview()
-        }
-        navigationTitle.snp.makeConstraints{ make in
-            make.centerY.equalToSuperview()
-            make.centerX.equalToSuperview()
-        }
-        stepLabel.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(16)
-            make.centerY.equalToSuperview()
-        }
+    @objc func termButtonDidTap() {
+        ScreenManager().linkTo(viewcontroller: preVC, "https://www.wishboard.xyz/terms.html")
+    }
+    @objc func privacyButtonDidTap() {
+        ScreenManager().linkTo(viewcontroller: preVC, "https://www.wishboard.xyz/privacy-policy.html")
     }
 }
+
 extension RegisterPasswordView {
     func setLabel(_ title: String) {
         let label = UILabel().then{
@@ -151,11 +126,11 @@ extension RegisterPasswordView {
         }
         stack.addArrangedSubview(label)
     }
-    func setUnderLinedButton(_ title: String) {
+    func setUnderLinedButton(_ title: String) -> UIButton {
         let underlineButton = UIButton().then{
             $0.setUnderline(title, .wishboardGreen)
         }
         stack.addArrangedSubview(underlineButton)
+        return underlineButton
     }
-    
 }

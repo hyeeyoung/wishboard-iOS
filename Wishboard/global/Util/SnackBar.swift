@@ -28,7 +28,7 @@ class SnackBar {
         backgroundView.addSubview(title)
         
         // 만약 하단바가 존재할 때
-        if (originView.tabBarController != nil) {
+        if (originView.tabBarController?.tabBar.isHidden == false) {
             originView.tabBarController?.tabBar.addSubview(backgroundView)
         } else {
             originView.view.addSubview(backgroundView)
@@ -44,11 +44,13 @@ class SnackBar {
         }
         
         // MARK: Animation
-        UIView.animate(withDuration: 0.5) {
-            self.backgroundView.transform = CGAffineTransform(translationX: 0, y: -81)
-        } completion: { finished in
-            UIView.animate(withDuration: 0.5, delay: 2.5) {
-                self.backgroundView.transform = .identity
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.5) {
+                self.backgroundView.transform = CGAffineTransform(translationX: 0, y: -81)
+            } completion: { finished in
+                UIView.animate(withDuration: 0.5, delay: 2.5) {
+                    self.backgroundView.transform = .identity
+                }
             }
         }
     }

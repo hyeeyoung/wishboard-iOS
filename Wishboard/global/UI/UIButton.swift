@@ -37,18 +37,6 @@ extension UIButton {
         }
         return lottieView
     }
-    func setSpinLottieView(_ button: UIButton) -> AnimationView {
-        let lottieView = SetLottie().spinView
-        button.addSubview(lottieView)
-        lottieView.isHidden = true
-        
-        lottieView.snp.makeConstraints { make in
-            make.width.height.equalTo(50)
-            make.centerY.centerX.equalToSuperview()
-        }
-        clearButton(button)
-        return lottieView
-    }
     func clearButton(_ button: UIButton) {
         var config = UIButton.Configuration.plain()
         config.background.backgroundColor = .clear
@@ -120,8 +108,8 @@ extension UIButton {
         var config = UIButton.Configuration.plain()
         var attText = AttributedString.init(title)
         
-        attText.font = .systemFont(ofSize: 13)
-        attText.foregroundColor = UIColor.wishboardGray
+        attText.font = .systemFont(ofSize: 12)
+        attText.foregroundColor = UIColor.gray
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         config.attributedTitle = attText
         

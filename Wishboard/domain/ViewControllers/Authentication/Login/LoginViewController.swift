@@ -9,31 +9,28 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class LoginViewController: UIViewController {
+class LoginViewController: TitleCenterViewController {
     let loginView = LoginView()
     private let loginViewModel: LoginViewModel = LoginViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        super.navigationTitle.text = "로그인하기"
 
-        loginView.backgroundColor = .white
         self.view.addSubview(loginView)
         
-        loginView.backBtn.addTarget(self, action: #selector(backBtnDidTap), for: .touchUpInside)
         loginView.emailTextField.addTarget(self, action: #selector(emailTextFieldEditingChanged), for: .editingChanged)
         loginView.passwordTextField.addTarget(self, action: #selector(passwordTextFieldEditingChanged), for: .editingChanged)
         loginView.loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
         loginView.lostPasswordButton.addTarget(self, action: #selector(lostPasswordButtonDidTap), for: .touchUpInside)
         
         loginView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(super.navigationView.snp.bottom)
         }
         bind()
     }
     // MARK: - Actions
-    @objc func backBtnDidTap(_ sender: UIButton) {
-        self.dismiss(animated: true)
-    }
     @objc func emailTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
         loginViewModel.emailTextFieldEditingChanged(text)
@@ -51,8 +48,7 @@ class LoginViewController: UIViewController {
     }
     @objc func lostPasswordButtonDidTap() {
         let lostPwVC = LostPasswordViewController()
-        lostPwVC.modalPresentationStyle = .fullScreen
-        self.present(lostPwVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(lostPwVC, animated: true)
     }
     //MARK: - Methods
     private func bind() {

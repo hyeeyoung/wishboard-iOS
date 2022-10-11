@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SafariServices
 
 class ScreenManager {
     enum Family: String {
@@ -15,8 +16,8 @@ class ScreenManager {
     func goMain(_ viewcontroller: UIViewController) {
         // 첫화면으로 전환
         guard let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabBarViewController") as? UITabBarController else {return}
-        tabBarController.modalPresentationStyle = .fullScreen
-        viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
+        viewcontroller.navigationController?.pushViewController(tabBarController, animated: true)
+//        viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
     }
     func goMainPages(_ index: Int, _ viewcontroller: UIViewController) {
         guard let tabBarController = viewcontroller.tabBarController else {return}
@@ -43,5 +44,11 @@ class ScreenManager {
         default:
             viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
         }
+    }
+    // MARK: 링크 이동
+    func linkTo(viewcontroller: UIViewController, _ urlStr: String) {
+        let url = NSURL(string: urlStr)
+        let linkView: SFSafariViewController = SFSafariViewController(url: url as! URL)
+        viewcontroller.present(linkView, animated: true, completion: nil)
     }
 }

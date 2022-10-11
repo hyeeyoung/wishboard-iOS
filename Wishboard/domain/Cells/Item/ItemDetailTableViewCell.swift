@@ -10,21 +10,22 @@ import UIKit
 class ItemDetailTableViewCell: UITableViewCell {
     // MARK: - Properties
     let itemImage = UIImageView().then{
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = .wishboardTextfieldGray
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 32
+        $0.contentMode = .center
     }
     var setFolderButton = UIButton().then{
         $0.setFolderButton("폴더 지정하기 >")
     }
     let dateLabel = UILabel().then{
         $0.text = "0주 전"
-        $0.font = UIFont.Suit(size: 13, family: .Regular)
-        $0.textColor = .wishboardGray
+        $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.textColor = .gray
     }
     let itemNameLabel = UILabel().then{
         $0.text = "itemName"
-        $0.font = UIFont.Suit(size: 18, family: .Regular)
+        $0.font = UIFont.Suit(size: 16, family: .Regular)
         $0.numberOfLines = 0
     }
     let priceLabel = UILabel().then{
@@ -36,7 +37,11 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.font = UIFont.Suit(size: 14, family: .Regular)
     }
     let seperatorLine1 = UIView().then{
-        $0.backgroundColor = .separator
+        $0.backgroundColor = .systemGray5
+    }
+    let stack = UIStackView().then{
+        $0.axis = .vertical
+        $0.spacing = 16
     }
     let linkLabel = UILabel().then{
         $0.text = "w.musinsa.com"
@@ -44,13 +49,13 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.font = UIFont.Suit(size: 12, family: .Regular)
     }
     let seperatorLine2 = UIView().then{
-        $0.backgroundColor = .separator
+        $0.backgroundColor = .systemGray5
     }
-    let label = UILabel().then{
+    let memoTitlelabel = UILabel().then{
         $0.text = "메모"
         $0.font = UIFont.Suit(size: 12, family: .Bold)
     }
-    let memoLabel = UILabel().then{
+    let memoContentLabel = UILabel().then{
         $0.text = "memo"
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.numberOfLines = 0
@@ -94,10 +99,12 @@ class ItemDetailTableViewCell: UITableViewCell {
         contentView.addSubview(priceLabel)
         contentView.addSubview(won)
         contentView.addSubview(seperatorLine1)
-        contentView.addSubview(linkLabel)
-        contentView.addSubview(seperatorLine2)
-        contentView.addSubview(label)
-        contentView.addSubview(memoLabel)
+        contentView.addSubview(stack)
+        
+        stack.addArrangedSubview(linkLabel)
+        stack.addArrangedSubview(seperatorLine2)
+        stack.addArrangedSubview(memoTitlelabel)
+        stack.addArrangedSubview(memoContentLabel)
     }
     func setUpConstraint() {
         itemImage.snp.makeConstraints { make in
@@ -134,25 +141,17 @@ class ItemDetailTableViewCell: UITableViewCell {
         }
         seperatorLine1.snp.makeConstraints { make in
             make.height.equalTo(1)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(priceLabel.snp.bottom).offset(20)
         }
-        linkLabel.snp.makeConstraints { make in
-            make.leading.equalTo(priceLabel)
+        stack.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(seperatorLine1.snp.bottom).offset(16)
+            if CheckNotch().hasNotch() {make.bottom.equalToSuperview().offset(-78)}
+            else {make.bottom.equalToSuperview().offset(-44)}
         }
         seperatorLine2.snp.makeConstraints { make in
             make.height.equalTo(1)
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(linkLabel.snp.bottom).offset(16)
-        }
-        label.snp.makeConstraints { make in
-            make.leading.equalTo(priceLabel.snp.leading)
-            make.top.equalTo(seperatorLine2.snp.bottom).offset(16)
-        }
-        memoLabel.snp.makeConstraints { make in
-            make.leading.equalTo(label.snp.leading)
-            make.top.equalTo(label.snp.bottom).offset(10)
         }
     }
     // After API success
@@ -162,6 +161,8 @@ class ItemDetailTableViewCell: UITableViewCell {
         }
         if let notificationType = data.item_notification_type {
             if let notificationDate = data.item_notification_date {
+                self.restockLabel.isHidden = false
+                self.restockDateLabel.isHidden = false
                 let notiDateStr = FormatManager().notiDateToKoreanStr(notificationDate)
                 self.restockLabel.text = notificationType
                 self.restockDateLabel.text = notiDateStr
@@ -172,11 +173,19 @@ class ItemDetailTableViewCell: UITableViewCell {
         }
         if let folderName = data.folder_name {self.setFolderButton.setFolderButton(folderName)}
         if let createdDate = data.create_at {
-            self.dateLabel.text = FormatManager().createdDateToKoreanStr(createdDate)
+            if let dateStr = FormatManager().createdDateToKoreanStr(createdDate) {
+                self.dateLabel.text = dateStr
+            }
         }
         if let itemName = data.item_name {self.itemNameLabel.text = itemName}
         if let itemPrice = data.item_price {self.priceLabel.text = FormatManager().strToPrice(numStr: itemPrice)}
-        if let link = data.item_url {self.linkLabel.text = link}
-        if let memo = data.item_memo {self.memoLabel.text = memo}
+        if let link = data.item_url {
+            if link != "" {self.linkLabel.text = link}
+            else {
+                self.linkLabel.isHidden = true
+                self.seperatorLine2.isHidden = true
+            }
+        }
+        if let memo = data.item_memo {self.memoContentLabel.text = memo}
     }
 }

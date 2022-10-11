@@ -33,6 +33,11 @@ class CalenderViewController: UIViewController {
         calenderView.setTableView(dataSourceDelegate: self)
         calenderView.setUpView()
         calenderView.setUpConstraint()
+        
+        calenderView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+    }
+    @objc func goBack() {
+        self.navigationController?.popViewController(animated: true)
     }
 
 }
@@ -51,6 +56,7 @@ extension CalenderViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         default:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CalenderNotiTableViewCell", for: indexPath) as? CalenderNotiTableViewCell else { return UITableViewCell() }
+            cell.preVC = self
             if let date = self.selectedDate {cell.setSelectedDate(date); cell.selectedDate = date}
             cell.selectionStyle = .none
             return cell
@@ -62,7 +68,7 @@ extension CalenderViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             return 385
         default:
-            return tableView.frame.height - 385
+            return tableView.frame.height
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

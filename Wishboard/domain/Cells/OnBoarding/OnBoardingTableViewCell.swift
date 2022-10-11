@@ -27,7 +27,7 @@ class OnBoardingTableViewCell: UITableViewCell {
         $0.numberOfLines = 0
     }
     // 가입하기 버튼
-    let registerButton = UIButton().then{
+    lazy var registerButton = UIButton().then{
         $0.defaultButton("가입하기", .wishboardGreen, .black)
     }
     let loginStackView = UIStackView()

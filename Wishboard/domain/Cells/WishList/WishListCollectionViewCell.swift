@@ -48,10 +48,6 @@ class WishListCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
 
         itemImage.image = UIImage()
-        
-        let cache = ImageCache.default
-        cache.clearMemoryCache()
-        cache.clearDiskCache()
     }
     // MARK: - Functions
     func setUpView() {

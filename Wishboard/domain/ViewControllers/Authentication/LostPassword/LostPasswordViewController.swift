@@ -7,33 +7,30 @@
 
 import UIKit
 
-class LostPasswordViewController: UIViewController {
+class LostPasswordViewController: KeyboardViewController {
     var lostPasswordView: LostPasswordView!
     var email: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.view.backgroundColor = .white
-        self.navigationController?.isNavigationBarHidden = true
+        super.navigationTitle.text = "이메일로 로그인하기"
         
         lostPasswordView = LostPasswordView()
         self.view.addSubview(lostPasswordView)
         
         lostPasswordView.snp.makeConstraints { make in
-            make.top.leading.trailing.bottom.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(super.navigationView.snp.bottom)
         }
-        lostPasswordView.backBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         lostPasswordView.emailTextField.addTarget(self, action: #selector(emailTextFieldEditingChanged(_:)), for: .editingChanged)
         lostPasswordView.getEmailButton.addTarget(self, action: #selector(getEmailButtonDidTap), for: .touchUpInside)
+        
+        super.textfield = lostPasswordView.emailTextField
     }
     override func viewDidAppear(_ animated: Bool) {
         lostPasswordView.emailTextField.becomeFirstResponder()
     }
     // MARK: - Actions
-    @objc func goBack() {
-        self.dismiss(animated: true)
-    }
     @objc func emailTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
         self.email = text
@@ -66,13 +63,11 @@ extension LostPasswordViewController {
     func checkEmailAPISuccess(_ result: APIModel<LostPasswordModel>) {
         let authCode = result.data?.verificationCode
         
-        let getEmailVC = GetEmailViewController()
+        let getEmailVC = GetEmailViewController(title: "2/2단계")
         getEmailVC.authCode = authCode
         getEmailVC.email = self.email
         
-        getEmailVC.modalPresentationStyle = .fullScreen
-        self.present(getEmailVC, animated: true, completion: nil)
-        
+        self.navigationController?.pushViewController(getEmailVC, animated: true)
         print(result)
     }
     func checkEmaiAPIFail() {

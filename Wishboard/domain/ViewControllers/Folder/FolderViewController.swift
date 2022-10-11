@@ -8,7 +8,7 @@
 import UIKit
 import Lottie
 
-class FolderViewController: UIViewController {
+class FolderViewController: TitleLeftViewController {
     var folderView : FolderView!
     let emptyMessage = "앗, 폴더가 없어요!\n폴더를 추가해서 아이템을 정리해 보세요!"
     var dialog: PopUpWithTextFieldViewController!
@@ -17,19 +17,27 @@ class FolderViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
-        self.navigationController?.isNavigationBarHidden = true
+        super.navigationTitle.text = "폴더"
 
         setFolderView()
         FolderDataManager().getFolderDataManager(self)
     }
     override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        self.navigationController?.isNavigationBarHidden = true
         FolderDataManager().getFolderDataManager(self)
     }
     override func viewWillAppear(_ animated: Bool) {
         FolderDataManager().getFolderDataManager(self)
     }
-
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    override func rightPositionBtnDidClicked() {
+        alertAddDialog()
+    }
 }
 // MARK: - CollectionView delegate
 extension FolderViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -54,11 +62,11 @@ extension FolderViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let itemIdx = indexPath.item
         let folderName = self.folderData[itemIdx].folder_name
         let folderId = self.folderData[itemIdx].folder_id
-        let folderDetailVC = FolderDetailViewController()
-        folderDetailVC.folderName = folderName
-        folderDetailVC.folderId = folderId
-        folderDetailVC.modalPresentationStyle = .fullScreen
-        self.present(folderDetailVC, animated: true, completion: nil)
+        
+        let vc = FolderDetailViewController()
+        vc.folderName = folderName
+        vc.folderId = folderId
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 // MARK: - Functions & Actions
@@ -68,13 +76,12 @@ extension FolderViewController {
         self.view.addSubview(folderView)
         
         folderView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(super.navigationView.snp.bottom)
         }
         folderView.setCollectionView(self)
         folderView.setUpView()
         folderView.setUpConstraint()
-        
-        folderView.plusButton.addTarget(self, action: #selector(alertAddDialog), for: .touchUpInside)
     }
     // 폴더 메뉴 하단 팝업창
     @objc func alertFolderMenu(_ sender: CustomButton) {
@@ -97,12 +104,14 @@ extension FolderViewController {
         self.present(alert, animated: true)
     }
     // 폴더 추가 팝업창
-    @objc func alertAddDialog() {
+    func alertAddDialog() {
         dialog = PopUpWithTextFieldViewController(titleText: "폴더 추가", placeholder: "폴더명", prevText: nil, buttonTitle: "추가")
         dialog.modalPresentationStyle = .overCurrentContext
         dialog.completeButton.addTarget(self, action: #selector(completeAddButtonDidTap), for: .touchUpInside)
         dialog.textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         self.present(dialog, animated: false, completion: nil)
+        
+        dialog.textField.delegate = self
     }
     // 폴더명 수정 팝업창
     func alertModifyDialog(folderData: FolderModel) {
@@ -113,6 +122,8 @@ extension FolderViewController {
         dialog.completeButton.addGestureRecognizer(folderMenuGesture)
         dialog.textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         self.present(dialog, animated: false, completion: nil)
+        
+        dialog.textField.delegate = self
     }
     // 폴더 삭제 팝업창
     func alertDeleteDialog(folderData: FolderModel) {
@@ -156,6 +167,19 @@ extension FolderViewController {
         self.folderStr = text
     }
 }
+// MARK: - TextField delegate
+extension FolderViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        self.view.bounds.origin.y = 0.0
+        return true
+    }
+}
+
 // MARK: - API Success
 extension FolderViewController {
     // MARK: 폴더 조회 API

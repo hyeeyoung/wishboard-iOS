@@ -15,7 +15,7 @@ class PopUpDeleteUserViewController: UIViewController {
     private var greenBtnText: String?
     private var blackBtnText: String?
     private var placeholder: String?
-    private var nickName: String?
+    private var email: String?
     
     let popupView = UIView().then{
         $0.backgroundColor = .white
@@ -51,7 +51,7 @@ class PopUpDeleteUserViewController: UIViewController {
         $0.clearButtonMode = .whileEditing
     }
     let errorMessage = UILabel().then{
-        $0.text = "닉네임을 다시 확인해 주세요."
+        $0.text = "이메일을 다시 확인해 주세요."
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .wishboardRed
     }
@@ -61,7 +61,7 @@ class PopUpDeleteUserViewController: UIViewController {
                      greenBtnText: String? = nil,
                      blackBtnText: String? = nil,
                      placeholder: String? = nil,
-                     nickName: String? = nil) {
+                     email: String? = nil) {
         self.init()
 
         self.titleText = titleText
@@ -69,20 +69,19 @@ class PopUpDeleteUserViewController: UIViewController {
         self.greenBtnText = greenBtnText
         self.blackBtnText = blackBtnText
         self.placeholder = placeholder
-        self.nickName = nickName
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = .popupBackground
+        self.email = email
         
         setUpContent()
         setUpView()
         setUpConstraint()
-        
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = .popupBackground
         self.errorMessage.isHidden = true
         
         cancelBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        textField.addTarget(self, action: #selector(nickNameTextFieldEditingChanged(_:)), for: .editingChanged)
+        textField.addTarget(self, action: #selector(emailTextFieldEditingChanged(_:)), for: .editingChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,9 +106,9 @@ class PopUpDeleteUserViewController: UIViewController {
     @objc func goBack() {
         self.dismiss(animated: false)
     }
-    @objc func nickNameTextFieldEditingChanged(_ sender: UITextField) {
+    @objc func emailTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
-        if text != self.nickName {
+        if text != self.email {
             self.errorMessage.isHidden = false
             self.okBtn.isEnabled = false
         } else {

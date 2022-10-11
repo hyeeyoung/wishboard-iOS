@@ -9,15 +9,6 @@ import Foundation
 import UIKit
 
 class FolderView: UIView {
-    // MARK: - View
-    let navigationView = UIView()
-    let titleLabel = UILabel().then{
-        $0.text = "폴더"
-        $0.font = UIFont.Suit(size: 22, family: .Bold)
-    }
-    let plusButton = UIButton().then{
-        $0.setImage(UIImage(named: "ic_new_folder"), for: .normal)
-    }
     // MARK: - Life Cycles
     var folderCollectionView: UICollectionView!
     
@@ -53,36 +44,13 @@ class FolderView: UIView {
         }
     }
     func setUpView() {
-        addSubview(navigationView)
-        navigationView.addSubview(titleLabel)
-        navigationView.addSubview(plusButton)
-        
         addSubview(folderCollectionView)
     }
     func setUpConstraint() {
-        setUpNavigationConstraint()
-        
         folderCollectionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(navigationView.snp.bottom)
+            make.top.equalToSuperview()
             make.bottom.equalToSuperview()
-        }
-    }
-    func setUpNavigationConstraint() {
-        navigationView.snp.makeConstraints { make in
-            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
-            else {make.top.equalToSuperview().offset(20)}
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(50)
-        }
-        titleLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(16)
-        }
-        plusButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.width.height.equalTo(18)
-            make.trailing.equalToSuperview().offset(-16)
         }
     }
 }

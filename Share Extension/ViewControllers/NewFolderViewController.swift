@@ -8,7 +8,7 @@
 import UIKit
 import Lottie
 
-class NewFolderViewController: UIViewController {
+class NewFolderViewController: KeyboardViewController {
     let titleLabel = UILabel().then{
         $0.text = "새 폴더 추가"
         $0.font = UIFont.Suit(size: 14, family: .Bold)
@@ -48,6 +48,8 @@ class NewFolderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        super.textfield = self.newFolderTextField
+        super.backBtn.isHidden = true
         
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
@@ -157,11 +159,15 @@ extension NewFolderViewController {
         
         print(result.message)
     }
-    func addFolderAPIFail() {
+    func sameFolderNameFail() {
         self.lottieView.isHidden = true
         self.completeButton.reloadInputViews()
         self.errorMessage.isHidden = false
         self.completeButton.defaultButton("추가", .wishboardDisabledGray, .gray)
         self.completeButton.isEnabled = false
+    }
+    func addFolderAPIFail() {
+        let addFolderInput = AddFolderInput(folder_name: self.folderStr)
+        FolderDataManager().addFolderDataManager(addFolderInput, self)
     }
 }

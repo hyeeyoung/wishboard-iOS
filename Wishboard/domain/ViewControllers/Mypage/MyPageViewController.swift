@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyPageViewController: UIViewController {
+class MyPageViewController: TitleLeftViewController {
     var mypageView: MyPageView!
     let settingArray = ["설정", "알림 설정", "고객 지원", "문의하기", "서비스 정보", "위시보드 이용 방법", "이용약관", "버전 정보", "계정 관리", "로그아웃", "회원 탈퇴"]
 
@@ -17,9 +17,7 @@ class MyPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.view.backgroundColor = .white
-        self.navigationController?.isNavigationBarHidden = true
+        super.navigationTitle.text = "마이페이지"
         
         mypageView = MyPageView()
         mypageView.setTableView(dataSourceDelegate: self)
@@ -28,12 +26,17 @@ class MyPageViewController: UIViewController {
         self.view.addSubview(mypageView)
         
         mypageView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(super.navigationView.snp.bottom)
         }
         // DATA
         MypageDataManager().getUserInfoDataManager(self)
     }
     override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         // DATA
         MypageDataManager().getUserInfoDataManager(self)
     }
@@ -82,16 +85,25 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         let tag = indexPath.row
         switch tag {
         case 0:
-            let modifyProfile = ModifyProfileViewController()
-            modifyProfile.preNickName = self.userInfoData.nickname
-            modifyProfile.preProfileImg = self.userInfoData.profile_img_url
-            modifyProfile.preVC = self
-            modifyProfile.modalPresentationStyle = .fullScreen
-            self.present(modifyProfile, animated: true, completion: nil)
+            let vc = ModifyProfileViewController()
+            if let nickname = self.userInfoData.nickname {
+                vc.nameTextField.text = nickname
+                vc.preNickName = self.userInfoData.nickname
+            }
+            if let profileImg = self.userInfoData.profile_img_url {
+                vc.profileImage.kf.setImage(with: URL(string: profileImg), placeholder: UIImage())
+                vc.preProfileImg = self.userInfoData.profile_img_url
+            }
+            vc.preVC = self
+            self.navigationController?.pushViewController(vc, animated: true)
         case 10:
             showLogoutDialog()
         case 11:
             showSignoutDialog()
+        case 6:
+            ScreenManager().linkTo(viewcontroller: self, "https://hushed-bolt-fd4.notion.site/383c308f256f4f189b7c0b68a8f68d9f")
+        case 7:
+            ScreenManager().linkTo(viewcontroller: self, "https://www.wishboard.xyz/terms.html")
         default:
             tableView.deselectRow(at: indexPath, animated: true)
         }
@@ -106,7 +118,9 @@ extension MyPageViewController {
             make.leading.equalToSuperview().offset(16)
         }
         cell.textLabel?.font = UIFont.Suit(size: 15, family: .Bold)
+        cell.selectionStyle = .none
     }
+    // 알림 설정 - Switch 넣기
     func setSwitch(_ cell: UITableViewCell) {
         var notiSwitch = UISwitch().then{
             if let pushState = self.pushState {$0.isOn = pushState}
@@ -139,6 +153,7 @@ extension MyPageViewController {
             MypageDataManager().switchNotificationDataManager(false, self)
         }
     }
+    // 버전 정보 표시 (1.0.0)
     func setVersionLabel(_ cell: UITableViewCell) {
         let versionLabel = UILabel().then{
             $0.text = "1.0.0"
@@ -151,6 +166,7 @@ extension MyPageViewController {
             make.centerY.equalToSuperview()
         }
     }
+    // 로그아웃 팝업창
     func showLogoutDialog() {
         let dialog = PopUpViewController(titleText: "로그아웃", messageText: "정말 로그아웃 하시겠어요?", greenBtnText: "취소", blackBtnText: "로그아웃")
         dialog.modalPresentationStyle = .overCurrentContext
@@ -158,18 +174,21 @@ extension MyPageViewController {
         
         dialog.okBtn.addTarget(self, action: #selector(logoutButtonDidTap), for: .touchUpInside)
     }
+    // 회원 탈퇴 팝업창
     func showSignoutDialog() {
-        guard let nickName = self.nickName else {return}
-        let dialog = PopUpDeleteUserViewController(titleText: "회원 탈퇴", messageText: "탈퇴하시면 회원정보는 7일 후 파기됩니다.", greenBtnText: "취소", blackBtnText: "탈퇴", placeholder: "닉네임을 입력해주세요.", nickName: nickName)
+        guard let email = self.userInfoData.email else {return}
+        let dialog = PopUpDeleteUserViewController(titleText: "회원 탈퇴", messageText: "탈퇴하시면 회원정보는 7일 후 파기됩니다.", greenBtnText: "취소", blackBtnText: "탈퇴", placeholder: "이메일을 입력해주세요.", email: email)
         dialog.modalPresentationStyle = .overCurrentContext
         self.present(dialog, animated: false, completion: nil)
         
         dialog.okBtn.addTarget(self, action: #selector(signOutButtonDidTap), for: .touchUpInside)
     }
     @objc func logoutButtonDidTap() {
+        self.dismiss(animated: false)
         MypageDataManager().logoutDataManager(self)
     }
     @objc func signOutButtonDidTap() {
+        self.dismiss(animated: false)
         MypageDataManager().deleteUserDataManager(self)
     }
 }
@@ -204,10 +223,15 @@ extension MyPageViewController {
     }
     // MARK: 회원 탈퇴 API
     func deleteUserAPISuccess(_ result: APIModel<ResultModel>) {
+        // delete UserInfo
+        UserDefaults.standard.removeObject(forKey: "token")
+        UserDefaults.standard.removeObject(forKey: "email")
+        UserDefaults.standard.removeObject(forKey: "password")
+        UserDefaults.standard.removeObject(forKey: "isFirstLogin")
+        
         let onboardingVC = OnBoardingViewController()
-        onboardingVC.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(onboardingVC, animated: true)
         SnackBar(onboardingVC, message: .deleteUser)
-        self.view.window?.windowScene?.keyWindow?.rootViewController = onboardingVC
         
         print(result.message)
     }
@@ -220,8 +244,8 @@ extension MyPageViewController {
         UserDefaults.standard.set(false, forKey: "isFirstLogin")
         
         let onboardingVC = OnBoardingViewController()
-        onboardingVC.modalPresentationStyle = .fullScreen
-        self.view.window?.windowScene?.keyWindow?.rootViewController = onboardingVC
+        self.navigationController?.pushViewController(onboardingVC, animated: true)
+        
         print(result.message)
     }
 }

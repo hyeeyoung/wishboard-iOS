@@ -15,6 +15,7 @@ class CalenderNotiTableViewCell: UITableViewCell {
     }
     
     //MARK: - Life Cycles
+    var preVC: CalenderViewController!
     var noticeTableView: UITableView!
     var selectedDate: String!
     var notiData: [NotificationModel] = []
@@ -75,16 +76,18 @@ extension CalenderNotiTableViewCell: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "NotiTableViewCell", for: indexPath) as? NotiTableViewCell else { return UITableViewCell() }
         let itemIdx = indexPath.item
-        cell.setUpData(self.notiData[itemIdx])
-
         cell.setCalenderNotiCell(self.notiData[itemIdx])
         cell.selectionStyle = .none
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 104
+        return 116
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let itemIdx = indexPath.item
+        let vc = ItemDetailViewController()
+        vc.itemId = self.notiData[itemIdx].item_id
+        self.preVC.navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

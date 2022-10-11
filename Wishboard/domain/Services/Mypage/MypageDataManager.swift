@@ -83,7 +83,7 @@ class MypageDataManager {
             }
         }
     }
-    // MARK: - 회원 탈퇴
+    // MARK: - 로그아웃
     func logoutDataManager(_ viewcontroller: MyPageViewController) {
         let logoutInput = FCMInput(fcm_token: nil)
         AF.request(BaseURL + "/user/fcm",
