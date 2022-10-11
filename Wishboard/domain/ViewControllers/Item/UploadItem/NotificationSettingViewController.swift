@@ -63,6 +63,9 @@ class NotificationSettingViewController: UIViewController {
     // MARK: 현재 뷰가 사라질 때, 이전 뷰의 테이블뷰를 업데이트 시킨다. **
     override func viewWillDisappear(_ animated: Bool) {
         if !isExit {
+            self.preVC.wishListData.item_notification_type = self.notiType
+            self.preVC.wishListData.item_notification_date = FormatManager().koreanStrToDate(self.dateAndTime!)
+            
             let indexPath = IndexPath(row: 4, section: 0)
             self.preVC.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
         }
