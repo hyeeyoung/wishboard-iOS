@@ -181,7 +181,7 @@ extension UploadItemViewController {
                 // 이미지 uri를 UIImage로 변환
                 var selectedImage : UIImage?
                 if self.selectedImage == nil {
-                    if let imageUrl = data?.item_url {
+                    if let imageUrl = data?.item_img_url {
                         let url = URL(string: imageUrl)
                         let imgData = try? Data(contentsOf: url!)
                         selectedImage = UIImage(data: imgData!)
