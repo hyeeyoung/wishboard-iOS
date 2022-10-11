@@ -21,6 +21,7 @@ class UploadItemViewController: UIViewController {
     // Modify Item
     var preVC: ItemDetailViewController!
     var isUploadItem: Bool!
+    var isModified: Bool!
     var wishListModifyData: WishListModel!
     // UploadItem
     var wishListData: WishListModel!
@@ -56,8 +57,9 @@ class UploadItemViewController: UIViewController {
         self.removeKeyboardNotifications()
     }
     override func viewDidDisappear(_ animated: Bool) {
-        if let preVC = self.preVC {
+        if let modified = self.isModified {
             SnackBar(preVC, message: .modifyItem)
+            self.isModified = false
         }
     }
     @objc func goBack() {
@@ -464,6 +466,7 @@ extension UploadItemViewController {
     func modifyItemAPISuccess(_ result: APIModel<ResultModel>) {
         self.viewDidLoad()
         self.navigationController?.popViewController(animated: true)
+        isModified = true
         print(result.message)
     }
 }
