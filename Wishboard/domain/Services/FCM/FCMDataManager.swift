@@ -24,6 +24,13 @@ class FCMDataManager {
             case .success(let result):
                 viewcontroller.fcmAPISuccess(result)
             case .failure(let error):
+                let statusCode = error.responseCode
+                switch statusCode {
+                case 429:
+                    viewcontroller.sendFCM()
+                default:
+                    print(error.localizedDescription)
+                }
                 print(error.responseCode)
             }
         }

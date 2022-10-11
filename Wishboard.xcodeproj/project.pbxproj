@@ -111,6 +111,8 @@
 		238EF90628CB06F800ECA606 /* CalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90528CB06F800ECA606 /* CalenderViewController.swift */; };
 		238EF90928CB070700ECA606 /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90828CB070700ECA606 /* CalenderView.swift */; };
 		239ED94C28E5D8A500CBCCAD /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239ED94B28E5D8A500CBCCAD /* NetworkCheck.swift */; };
+		23A32DB928F5816300A791F5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 23A32DB828F5816300A791F5 /* GoogleService-Info.plist */; };
+		23A32DBA28F5816300A791F5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 23A32DB828F5816300A791F5 /* GoogleService-Info.plist */; };
 		23A48E6F28E9137100FD77A7 /* TitleLeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A48E6E28E9137100FD77A7 /* TitleLeftViewController.swift */; };
 		23A48E7128E92E7D00FD77A7 /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239ED94B28E5D8A500CBCCAD /* NetworkCheck.swift */; };
 		23A85F7D28E39FE800075667 /* FormatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F7C28E39FE800075667 /* FormatManager.swift */; };
@@ -300,6 +302,7 @@
 		238EF90528CB06F800ECA606 /* CalenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderViewController.swift; sourceTree = "<group>"; };
 		238EF90828CB070700ECA606 /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
 		239ED94B28E5D8A500CBCCAD /* NetworkCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheck.swift; sourceTree = "<group>"; };
+		23A32DB828F5816300A791F5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		23A48E6E28E9137100FD77A7 /* TitleLeftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLeftViewController.swift; sourceTree = "<group>"; };
 		23A85F7C28E39FE800075667 /* FormatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatManager.swift; sourceTree = "<group>"; };
 		23A85F7E28E3AA5400075667 /* LostPasswordDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostPasswordDataManager.swift; sourceTree = "<group>"; };
@@ -1152,6 +1155,7 @@
 		23DC04AC28C58B5200ABB0CF /* Wishboard */ = {
 			isa = PBXGroup;
 			children = (
+				23A32DB828F5816300A791F5 /* GoogleService-Info.plist */,
 				23C3114B28DF6AE200A636F6 /* Wishboard.entitlements */,
 				23DC04DF28C58C6200ABB0CF /* AppDelegate */,
 				23DC04DD28C58C5700ABB0CF /* global */,
@@ -1466,6 +1470,7 @@
 				23C3114228DF680300A636F6 /* MainInterface.storyboard in Resources */,
 				236FE93028DF8599006142DB /* SUIT-Medium.ttf in Resources */,
 				236FE92A28DF8599006142DB /* SUIT-Light.ttf in Resources */,
+				23A32DBA28F5816300A791F5 /* GoogleService-Info.plist in Resources */,
 				236FE92E28DF8599006142DB /* SUIT-ExtraBold.ttf in Resources */,
 				236FE92F28DF8599006142DB /* SUIT-ExtraLight.ttf in Resources */,
 				236FE91028DF8385006142DB /* Assets.xcassets in Resources */,
@@ -1488,6 +1493,7 @@
 				23C9569728C68D7A00D88536 /* SUIT-Heavy.ttf in Resources */,
 				23C9569F28C68D7A00D88536 /* SUIT-SemiBold.ttf in Resources */,
 				23C9569A28C68D7A00D88536 /* SUIT-ExtraBold.ttf in Resources */,
+				23A32DB928F5816300A791F5 /* GoogleService-Info.plist in Resources */,
 				23C9569B28C68D7A00D88536 /* SUIT-Light.ttf in Resources */,
 				2331868028DA92EE00F17CBF /* loading_horizontal_black.json in Resources */,
 				23DC04B728C58B5500ABB0CF /* Assets.xcassets in Resources */,
@@ -2042,6 +2048,7 @@
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wishboard/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Wishboard는 사용자의 카메라를 이용합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -2073,6 +2080,7 @@
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wishboard/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Wishboard는 사용자의 카메라를 이용합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
