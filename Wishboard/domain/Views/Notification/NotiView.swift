@@ -78,20 +78,23 @@ extension NotiView: UITableViewDelegate, UITableViewDataSource {
         if let urlStr = self.notiData[index].item_url {
             if urlStr != "" {
                 ScreenManager().linkTo(viewcontroller: preVC, urlStr)
-            } else {SnackBar(preVC, message: .ShoppingLink)}
-        } else {SnackBar(preVC, message: .ShoppingLink)}
-        // 읽음 처리
-        if let itemId = self.notiData[index].item_id {
-            NotificationDataManager().readNotificationListDataManager(itemId, self)
-            // reload data with animation
-            UIView.transition(with: notificationTableView,
-                              duration: 0.35,
-                              options: .transitionCrossDissolve,
-                              animations: { () -> Void in
-                self.notificationTableView.reloadRows(at: [indexPath], with: .automatic)},
-                              completion: nil);
+            } else {
+                DispatchQueue.main.async {
+                    SnackBar(self.preVC, message: .ShoppingLink)
+                }
+            }
+        } else {
+            DispatchQueue.main.async {
+                SnackBar(self.preVC, message: .ShoppingLink)
+            }
         }
-        tableView.deselectRow(at: indexPath, animated: true)
+        // 읽음 처리
+        DispatchQueue.main.async {
+            if let itemId = self.notiData[index].item_id {
+                NotificationDataManager().readNotificationListDataManager(itemId, self)
+            }
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 }
 // MARK: - API Success
@@ -113,6 +116,7 @@ extension NotiView {
     }
     // MARK: 알림 읽음 처리 API
     func readNotificationAPISuccess(_ result: APIModel<ResultModel>) {
+        NotificationDataManager().getNotificationListDataManager(self)
         print(result.message)
     }
 }
