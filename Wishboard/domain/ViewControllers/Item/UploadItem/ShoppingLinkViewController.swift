@@ -155,13 +155,13 @@ class ShoppingLinkViewController: KeyboardViewController {
         if urlTest.evaluate(with: url) {
             return true
         }
-                
+
         let range = NSRange(location: 0, length: url.utf16.count)
         guard let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue),
             let match: NSTextCheckingResult = detector.firstMatch(in: url, options: [], range: range) else {
             return false
         }
-        
+
         return match.range.length == url.utf16.count
     }
 }
