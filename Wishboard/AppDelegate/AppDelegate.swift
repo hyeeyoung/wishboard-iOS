@@ -85,7 +85,9 @@ extension AppDelegate {
         
         let fcmDeviceToken = fcmToken ?? ""
         UserDefaults.standard.set(fcmDeviceToken, forKey: "deviceToken")
-        sendFCM()
+        DispatchQueue.main.async {
+            self.sendFCM()
+        }
     }
 //    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
 //        print("Received data message: \(remoteMessage.appData)")

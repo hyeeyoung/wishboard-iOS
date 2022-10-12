@@ -27,7 +27,9 @@ class FCMDataManager {
                 let statusCode = error.responseCode
                 switch statusCode {
                 case 429:
-                    viewcontroller.sendFCM()
+                    DispatchQueue.main.async {
+                        viewcontroller.sendFCM()
+                    }
                 default:
                     print(error.localizedDescription)
                 }
