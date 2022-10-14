@@ -20,8 +20,12 @@ class NotiTableViewCell: UITableViewCell {
         $0.numberOfLines = 2
     }
     // '재입고 알림'
+    let notificationTypeLabel = UILabel().then{
+        $0.text = "재입고"
+        $0.font = UIFont.Suit(size: 13, family: .Bold)
+    }
     let label = UILabel().then{
-        $0.text = "재입고 알림"
+        $0.text = " 알림"
         $0.font = UIFont.Suit(size: 13, family: .Bold)
     }
     // 읽음 표시
@@ -47,6 +51,7 @@ class NotiTableViewCell: UITableViewCell {
     // MARK: - Functions
     func setUpView() {
         contentView.addSubview(itemImage)
+        contentView.addSubview(notificationTypeLabel)
         contentView.addSubview(label)
         contentView.addSubview(viewView)
         contentView.addSubview(timeLabel)
@@ -58,22 +63,26 @@ class NotiTableViewCell: UITableViewCell {
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(16)
         }
-        label.snp.makeConstraints { make in
+        notificationTypeLabel.snp.makeConstraints { make in
             make.leading.equalTo(itemImage.snp.trailing).offset(14)
             make.top.equalTo(itemImage)
+        }
+        label.snp.makeConstraints { make in
+            make.leading.equalTo(notificationTypeLabel.snp.trailing)
+            make.centerY.equalTo(notificationTypeLabel)
         }
         viewView.snp.makeConstraints { make in
             make.width.height.equalTo(8)
             make.leading.equalTo(label.snp.trailing).offset(5)
-            make.centerY.equalTo(label)
+            make.centerY.equalTo(notificationTypeLabel)
         }
         timeLabel.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-16)
-            make.leading.equalTo(label.snp.leading)
+            make.leading.equalTo(notificationTypeLabel.snp.leading)
         }
         itemName.snp.makeConstraints { make in
-            make.top.equalTo(label.snp.bottom).offset(8)
-            make.leading.equalTo(label.snp.leading)
+            make.top.equalTo(notificationTypeLabel.snp.bottom).offset(8)
+            make.leading.equalTo(notificationTypeLabel.snp.leading)
             make.trailing.equalToSuperview().offset(-16)
         }
     }
@@ -84,6 +93,7 @@ extension NotiTableViewCell {
         if let image = data.item_img_url {
             self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
         }
+        if let notiType = data.item_notification_type {self.notificationTypeLabel.text = notiType}
         if let name = data.item_name {self.itemName.text = name}
         if let time = data.item_notification_date {
             if let dateStr = FormatManager().createdDateToKoreanStr(time) {
@@ -99,6 +109,7 @@ extension NotiTableViewCell {
         if let image = data.item_img_url {
             self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
         }
+        if let notiType = data.item_notification_type {self.notificationTypeLabel.text = notiType}
         if let name = data.item_name {self.itemName.text = name}
         // 뒷배경 뷰 추가
         let grayView = UIView().then{
