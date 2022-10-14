@@ -126,7 +126,6 @@ extension NotiTableViewCell {
         self.viewView.isHidden = true
         // 알람 시간 파싱 ('오전 0시 0분')
         let dateStr = data.item_notification_date
-        print("알람 캘린더 시간: ", dateStr)
         let myDateFormatter = DateFormatter()
         myDateFormatter.dateFormat = "a HH시 mm분" // 2020년 08월 13일 오후 04시 30분
         myDateFormatter.locale = Locale(identifier:"ko_KR")

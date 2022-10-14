@@ -83,11 +83,17 @@ extension AppDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("파이어베이스 토큰: \(fcmToken)")
         
+        // 디바이스가 변경되었을 때에만 (기존의 디바이스 토큰과 지금 얻은 디바이스 토큰값이 다를 때에만)
+        // FCM 수정 API 호출
+        let preDeviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
         let fcmDeviceToken = fcmToken ?? ""
-        UserDefaults.standard.set(fcmDeviceToken, forKey: "deviceToken")
-        DispatchQueue.main.async {
-            self.sendFCM()
+        if preDeviceToken != fcmDeviceToken {
+            DispatchQueue.main.async {
+                UserDefaults.standard.set(fcmDeviceToken, forKey: "deviceToken")
+                self.sendFCM()
+            }
         }
+        
     }
 //    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
 //        print("Received data message: \(remoteMessage.appData)")
