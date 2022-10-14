@@ -8,7 +8,7 @@
 import UIKit
 import Lottie
 
-class ShoppingLinkViewController: KeyboardViewController {
+class ShoppingLinkViewController: BottomSheetKeyboardViewController {
     let titleLabel = UILabel().then{
         $0.text = "쇼핑몰 링크"
         $0.font = UIFont.Suit(size: 14, family: .Bold)
@@ -155,13 +155,13 @@ class ShoppingLinkViewController: KeyboardViewController {
         if urlTest.evaluate(with: url) {
             return true
         }
-                
+
         let range = NSRange(location: 0, length: url.utf16.count)
         guard let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue),
             let match: NSTextCheckingResult = detector.firstMatch(in: url, options: [], range: range) else {
             return false
         }
-        
+
         return match.range.length == url.utf16.count
     }
 }

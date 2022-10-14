@@ -81,6 +81,11 @@ extension FolderDetailViewController: UICollectionViewDelegate, UICollectionView
                 as? WishListCollectionViewCell else{ fatalError() }
         let itemIdx = indexPath.item
         cell.setUpData(self.wishListData[itemIdx])
+        
+        let cartGesture = HomeCartGesture(target: self, action: #selector(cartButtonDidTap(_:)))
+        cartGesture.data = self.wishListData[itemIdx]
+        cell.cartButton.addGestureRecognizer(cartGesture)
+        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -88,6 +93,35 @@ extension FolderDetailViewController: UICollectionViewDelegate, UICollectionView
         let itemDetailVC = ItemDetailViewController()
         itemDetailVC.itemId = self.wishListData[itemIdx].item_id
         self.navigationController?.pushViewController(itemDetailVC, animated: true)
+    }
+}
+extension FolderDetailViewController {
+    // MARK: 장바구니 버튼 클릭 이벤트
+    @objc func cartButtonDidTap(_ sender: HomeCartGesture) {
+        if let data = sender.data {
+            // 장바구니 삭제
+            if data.cart_state == 1 {
+                CartDataManager().deleteCartDataManager(data.item_id!, self)
+            } else {
+                // 장바구니 추가
+                let addCartInput = AddCartInput(item_id: data.item_id)
+                CartDataManager().addCartDataManager(addCartInput, self)
+            }
+        }
+    }
+    // MARK: 장바구니 추가 API
+    func addCartAPISuccess(_ result: APIModel<ResultModel>) {
+        if let folderId = self.folderId {
+            FolderDataManager().getFolderDetailDataManager(self.folderId, self)
+        }
+        print(result.message)
+    }
+    // MARK: 장바구니 삭제 API
+    func deleteCartAPISuccess(_ result: APIModel<ResultModel>) {
+        if let folderId = self.folderId {
+            FolderDataManager().getFolderDetailDataManager(self.folderId, self)
+        }
+        print(result.message)
     }
 }
 // MARK: - API Success

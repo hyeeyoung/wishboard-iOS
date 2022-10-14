@@ -21,7 +21,7 @@ class UploadItemViewController: UIViewController {
     // Modify Item
     var preVC: ItemDetailViewController!
     var isUploadItem: Bool!
-    var isModified: Bool!
+    var isModified: Bool = false
     var wishListModifyData: WishListModel!
     // UploadItem
     var wishListData: WishListModel!
@@ -57,9 +57,11 @@ class UploadItemViewController: UIViewController {
         self.removeKeyboardNotifications()
     }
     override func viewDidDisappear(_ animated: Bool) {
-        if let modified = self.isModified {
-            SnackBar(preVC, message: .modifyItem)
-            self.isModified = false
+        if let preVC = self.preVC {
+            if self.isModified {
+                SnackBar(preVC, message: .modifyItem)
+                self.isModified = false
+            }
         }
     }
     @objc func goBack() {
@@ -197,8 +199,13 @@ extension UploadItemViewController {
                         ItemDataManager().uploadItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, self)
                     }
                 } else {
-                    // 일부 데이터가 존재하는 경우
-                    ItemDataManager().uploadItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, self)
+                    // 폴더가 없고, 알람설정은 한 경우
+                    if let notiType = data?.item_notification_type {
+                        ItemDataManager().uploadItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!, self)
+                    } else {
+                        // 일부 데이터가 존재하는 경우
+                        ItemDataManager().uploadItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, self)
+                    }
                 }
             }
             
@@ -227,8 +234,13 @@ extension UploadItemViewController {
                         ItemDataManager().modifyItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
                     }
                 } else {
-                    // 일부 데이터가 존재하는 경우
-                    ItemDataManager().modifyItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
+                    // 폴더가 없고, 알람설정은 한 경우
+                    if let notiType = data?.item_notification_type {
+                        ItemDataManager().modifyItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!, (data?.item_id)!, self)
+                    } else {
+                        // 폴더가 없고, 알람설정도 안 한 경우
+                        ItemDataManager().modifyItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
+                    }
                 }
             }
         }

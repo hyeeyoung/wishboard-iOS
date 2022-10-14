@@ -53,7 +53,24 @@ class CartDataManager {
         }
     }
     // MARK: - 장바구니 추가
+    // 홈 페이지
     func addCartDataManager(_ parameter: AddCartInput,_ homeView: HomeView, _ viewcontroller: HomeViewController) {
+        AF.request(BaseURL + "/cart",
+                           method: .post,
+                           parameters: parameter,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            switch response.result {
+            case .success(let result):
+                viewcontroller.addCartAPISuccess(result)
+            case .failure(let error):
+                print(error.responseCode)
+            }
+        }
+    }
+    // 폴더 디테일 페이지
+    func addCartDataManager(_ parameter: AddCartInput, _ viewcontroller: FolderDetailViewController) {
         AF.request(BaseURL + "/cart",
                            method: .post,
                            parameters: parameter,
@@ -86,6 +103,22 @@ class CartDataManager {
     }
     // MARK: - 장바구니 삭제 : 홈 페이지
     func deleteCartDataManager(_ itemId: Int, _ homeView: HomeView, _ viewcontroller: HomeViewController) {
+        AF.request(BaseURL + "/cart/\(itemId)",
+                           method: .delete,
+                           parameters: nil,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            switch response.result {
+            case .success(let result):
+                viewcontroller.deleteCartAPISuccess(result)
+            case .failure(let error):
+                print(error.responseCode)
+            }
+        }
+    }
+    // MARK: - 장바구니 삭제 : 폴더 디테일 페이지
+    func deleteCartDataManager(_ itemId: Int, _ viewcontroller: FolderDetailViewController) {
         AF.request(BaseURL + "/cart/\(itemId)",
                            method: .delete,
                            parameters: nil,

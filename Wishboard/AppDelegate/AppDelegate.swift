@@ -50,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         return true
     }
+
     // MARK: 세로방향 고정
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         
@@ -84,10 +85,23 @@ extension AppDelegate {
         
         let fcmDeviceToken = fcmToken ?? ""
         UserDefaults.standard.set(fcmDeviceToken, forKey: "deviceToken")
+        DispatchQueue.main.async {
+            self.sendFCM()
+        }
     }
 //    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
 //        print("Received data message: \(remoteMessage.appData)")
 //    }
+    // MARK: FCM API
+    func sendFCM() {
+        // Send FCM token to server
+        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
+        let fcmInput = FCMInput(fcm_token: deviceToken)
+        FCMDataManager().fcmDataManager(fcmInput, self)
+    }
+    func fcmAPISuccess(_ result: APIModel<ResultModel>) {
+        print(result.message)
+    }
 }
 extension AppDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,willPresent notification: UNNotification,withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {

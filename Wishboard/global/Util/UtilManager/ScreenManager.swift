@@ -47,8 +47,8 @@ class ScreenManager {
     }
     // MARK: 링크 이동
     func linkTo(viewcontroller: UIViewController, _ urlStr: String) {
-        let url = NSURL(string: urlStr)
-        let linkView: SFSafariViewController = SFSafariViewController(url: url as! URL)
+        guard let url = NSURL(string: urlStr) else {return}
+        let linkView: SFSafariViewController = SFSafariViewController(url: url as URL)
         viewcontroller.present(linkView, animated: true, completion: nil)
     }
 }

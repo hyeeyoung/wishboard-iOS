@@ -8,7 +8,7 @@
 import UIKit
 import Lottie
 
-class NewFolderViewController: KeyboardViewController {
+class NewFolderViewController: BottomSheetKeyboardViewController {
     let titleLabel = UILabel().then{
         $0.text = "새 폴더 추가"
         $0.font = UIFont.Suit(size: 14, family: .Bold)

@@ -180,7 +180,11 @@ class ItemDetailTableViewCell: UITableViewCell {
         if let itemName = data.item_name {self.itemNameLabel.text = itemName}
         if let itemPrice = data.item_price {self.priceLabel.text = FormatManager().strToPrice(numStr: itemPrice)}
         if let link = data.item_url {
-            if link != "" {self.linkLabel.text = link}
+            if link != "" {
+                self.linkLabel.isHidden = false
+                self.seperatorLine2.isHidden = false
+                self.linkLabel.text = link
+            }
             else {
                 self.linkLabel.isHidden = true
                 self.seperatorLine2.isHidden = true

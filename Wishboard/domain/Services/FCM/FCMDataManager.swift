@@ -13,7 +13,7 @@ class FCMDataManager {
     let header = APIManager().getHeader()
     
     // MARK: - FCM
-    func fcmDataManager(_ parameter: FCMInput, _ viewcontroller: HomeViewController) {
+    func fcmDataManager(_ parameter: FCMInput, _ viewcontroller: AppDelegate) {
         AF.request(BaseURL + "/user/fcm",
                            method: .put,
                            parameters: parameter,
@@ -27,7 +27,9 @@ class FCMDataManager {
                 let statusCode = error.responseCode
                 switch statusCode {
                 case 429:
-                    viewcontroller.sendFCM()
+                    DispatchQueue.main.async {
+                        viewcontroller.sendFCM()
+                    }
                 default:
                     print(error.localizedDescription)
                 }

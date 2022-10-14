@@ -51,6 +51,8 @@
 		234F838D28C9857000C4EB41 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838C28C9857000C4EB41 /* CartTableViewCell.swift */; };
 		234F838F28C987CB00C4EB41 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234F838E28C987CB00C4EB41 /* CartViewController.swift */; };
 		2350FADF28DB9BEA00981B8F /* SetNotificationDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2350FADE28DB9BEA00981B8F /* SetNotificationDate.swift */; };
+		235129D928F679C900489CAD /* BottomSheetKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235129D828F679C900489CAD /* BottomSheetKeyboardViewController.swift */; };
+		235129DA28F67BAE00489CAD /* BottomSheetKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235129D828F679C900489CAD /* BottomSheetKeyboardViewController.swift */; };
 		235204CE28E2690F004F5DC6 /* GetUserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235204CD28E2690F004F5DC6 /* GetUserInfoModel.swift */; };
 		235D550628EBD2C700314D62 /* ItemParsingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235D550528EBD2C700314D62 /* ItemParsingModel.swift */; };
 		235D550728EBD2CE00314D62 /* ItemParsingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235D550528EBD2C700314D62 /* ItemParsingModel.swift */; };
@@ -277,6 +279,7 @@
 		234F838C28C9857000C4EB41 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		234F838E28C987CB00C4EB41 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		2350FADE28DB9BEA00981B8F /* SetNotificationDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNotificationDate.swift; sourceTree = "<group>"; };
+		235129D828F679C900489CAD /* BottomSheetKeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetKeyboardViewController.swift; sourceTree = "<group>"; };
 		235204CD28E2690F004F5DC6 /* GetUserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserInfoModel.swift; sourceTree = "<group>"; };
 		235D550528EBD2C700314D62 /* ItemParsingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemParsingModel.swift; sourceTree = "<group>"; };
 		2360095D28DA1829001FB107 /* FolderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDetailViewController.swift; sourceTree = "<group>"; };
@@ -914,6 +917,7 @@
 				23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */,
 				23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */,
 				23A48E6E28E9137100FD77A7 /* TitleLeftViewController.swift */,
+				235129D828F679C900489CAD /* BottomSheetKeyboardViewController.swift */,
 			);
 			path = BaseViewControllers;
 			sourceTree = "<group>";
@@ -1659,6 +1663,7 @@
 				236FE93F28DF85B0006142DB /* PopUpWithTextFieldViewController.swift in Sources */,
 				236FE91D28DF8592006142DB /* PaddingLabel.swift in Sources */,
 				23E0ACC828E7B563008C35C2 /* KeyboardViewController.swift in Sources */,
+				235129DA28F67BAE00489CAD /* BottomSheetKeyboardViewController.swift in Sources */,
 				236FE94028DF85B3006142DB /* APIModel.swift in Sources */,
 				236FE91128DF83E6006142DB /* UIFont.swift in Sources */,
 				230180E928E50C0B001034FC /* FolderInput.swift in Sources */,
@@ -1711,6 +1716,7 @@
 				23F69CAF28CC17F8001B8C7F /* UIBezierPath.swift in Sources */,
 				23DC04E928C591E600ABB0CF /* ViewController.swift in Sources */,
 				234F838B28C983CE00C4EB41 /* CartView.swift in Sources */,
+				235129D928F679C900489CAD /* BottomSheetKeyboardViewController.swift in Sources */,
 				23E378E928D303B500C52F2D /* ShoppingLinkViewController.swift in Sources */,
 				2344949928D78F6300CF3BD9 /* RegisterPasswordViewController.swift in Sources */,
 				2374789A28D1DB2900CF941A /* CheckNotch.swift in Sources */,
@@ -1902,6 +1908,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Share Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Share Extension";
@@ -2042,6 +2049,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Wishboard/Wishboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2074,6 +2082,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Wishboard/Wishboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
