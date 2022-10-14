@@ -43,6 +43,7 @@ class FormatManager {
     // 서버에서 받은 notification_date를 "YY년 MM월 dd일 HH:mm"로 변환
     // '0일 전', '0주전' 으로 변환
     func notiDateToKoreanStr(_ date: String) -> String? {
+        print("변환 전 :", date)
         let dateToDate = date.toNotiDate() //YYYY-MM-dd HH:mm
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "YY년 MM월 dd일 HH:mm"
@@ -100,7 +101,7 @@ extension String {
     func toCreatedDate() -> Date? { //"yyyy-MM-dd HH:mm:ss"
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        dateFormatter.timeZone = TimeZone(identifier: "ko_KR")
         if let date = dateFormatter.date(from: self) {
             return date
         } else {
@@ -110,7 +111,7 @@ extension String {
     func toNotiDate() -> Date? { //"yyyy-MM-dd HH:mm"
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        dateFormatter.timeZone = TimeZone(identifier: "ko_KR")
         if let date = dateFormatter.date(from: self) {
             return date
         } else {
