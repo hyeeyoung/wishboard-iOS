@@ -13,7 +13,7 @@ class ModifyProfileViewController: TitleCenterViewController {
         $0.image = UIImage(named: "defaultProfile")
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 53
-        $0.contentMode = .scaleToFill
+        $0.contentMode = .scaleAspectFill
     }
     let cameraButton = UIButton().then{
         $0.setImage(UIImage(named: "camera_gray"), for: .normal)

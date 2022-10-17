@@ -18,6 +18,7 @@ class MypageProfileTableViewCell: UITableViewCell {
         $0.image = UIImage(named: "defaultProfile")
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 45
+        $0.contentMode = .scaleAspectFill
     }
     let cameraButton = UIButton().then{
         $0.setImage(UIImage(named: "camera_green"), for: .normal)
