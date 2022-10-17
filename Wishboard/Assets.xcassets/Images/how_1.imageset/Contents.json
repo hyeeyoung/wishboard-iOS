@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "how_1.svg",
+      "filename" : "how_ro_use_1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "how_ro_use_1@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "how_ro_use_1@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
@@ -17,5 +19,8 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
   }
 }

@@ -11,7 +11,7 @@ class HowToCollectionViewCell: UICollectionViewCell {
     static let identifier = "HowToCollectionViewCell"
     // MARK: - Properties
     let backGroundView = UIView().then{
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = .howToBackground
     }
     let phoneImage = UIImageView()
     let title = UILabel().then{

@@ -200,8 +200,13 @@ extension ShareViewController {
     }
     // MARK: 아이템 간편 등록
     func uploadItemAPISuccess(_ result: APIModel<ResultModel>) {
-        self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
-        SnackBar(self, message: .addItem)
+        self.extensionContext?.completeRequest(returningItems: nil, completionHandler: { result in
+            DispatchQueue.main.async {
+                SnackBar(self, message: .addItem)
+            }
+        })
+//        self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
+//        SnackBar(self, message: .addItem)
         print(result.message)
     }
     func reloadDataAnimation() {
