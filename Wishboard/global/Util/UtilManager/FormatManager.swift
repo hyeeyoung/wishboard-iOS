@@ -66,7 +66,7 @@ class FormatManager {
         let day = str[startIndex ..< endIndex]
         
         startIndex = str.index(str.startIndex, offsetBy: 13)// 사용자지정 시작인덱스
-        endIndex = str.index(str.startIndex, offsetBy: 18)// 사용자지정 끝인덱스
+        endIndex = str.index(str.startIndex, offsetBy: 17)// 사용자지정 끝인덱스
         let time = str[startIndex ..< endIndex]
         
         return "20" + year + "-" + month + "-" + day + " " + time + ":00"
