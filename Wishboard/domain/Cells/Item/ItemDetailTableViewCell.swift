@@ -13,7 +13,7 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.backgroundColor = .wishboardTextfieldGray
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 32
-        $0.contentMode = .center
+        $0.contentMode = .scaleAspectFill
     }
     var setFolderButton = UIButton().then{
         $0.setFolderButton("폴더 지정하기 >")

@@ -43,7 +43,6 @@ class FormatManager {
     // 서버에서 받은 notification_date를 "YY년 MM월 dd일 HH:mm"로 변환
     // '0일 전', '0주전' 으로 변환
     func notiDateToKoreanStr(_ date: String) -> String? {
-        print("변환 전 :", date)
         let dateToDate = date.toNotiDate() //YYYY-MM-dd HH:mm
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "YY년 MM월 dd일 HH:mm"
@@ -66,8 +65,8 @@ class FormatManager {
         endIndex = str.index(str.startIndex, offsetBy: 10)// 사용자지정 끝인덱스
         let day = str[startIndex ..< endIndex]
         
-        startIndex = str.index(str.startIndex, offsetBy: 12)// 사용자지정 시작인덱스
-        endIndex = str.index(str.startIndex, offsetBy: 17)// 사용자지정 끝인덱스
+        startIndex = str.index(str.startIndex, offsetBy: 13)// 사용자지정 시작인덱스
+        endIndex = str.index(str.startIndex, offsetBy: 18)// 사용자지정 끝인덱스
         let time = str[startIndex ..< endIndex]
         
         return "20" + year + "-" + month + "-" + day + " " + time + ":00"

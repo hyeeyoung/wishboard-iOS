@@ -68,4 +68,11 @@ extension UIColor{
         blue: 0/255,
         alpha: 0.3
     )
+    static let howToBackground = UIColor(
+        red: 237/255,
+        green: 237/255,
+        blue: 237/255,
+        alpha: 1
+    )
+
 }
