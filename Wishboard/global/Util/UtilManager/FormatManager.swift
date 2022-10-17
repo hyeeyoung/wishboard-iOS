@@ -56,16 +56,16 @@ class FormatManager {
         var startIndex = str.index(str.startIndex, offsetBy: 0)// 사용자지정 시작인덱스
         var endIndex = str.index(str.startIndex, offsetBy: 2)// 사용자지정 끝인덱스
         let year = str[startIndex ..< endIndex]
-        
+
         startIndex = str.index(str.startIndex, offsetBy: 4)// 사용자지정 시작인덱스
         endIndex = str.index(str.startIndex, offsetBy: 6)// 사용자지정 끝인덱스
         let month = str[startIndex ..< endIndex]
-        
+
         startIndex = str.index(str.startIndex, offsetBy: 8)// 사용자지정 시작인덱스
         endIndex = str.index(str.startIndex, offsetBy: 10)// 사용자지정 끝인덱스
         let day = str[startIndex ..< endIndex]
-        
-        startIndex = str.index(str.startIndex, offsetBy: 13)// 사용자지정 시작인덱스
+
+        startIndex = str.index(str.startIndex, offsetBy: 12)// 사용자지정 시작인덱스
         endIndex = str.index(str.startIndex, offsetBy: 17)// 사용자지정 끝인덱스
         let time = str[startIndex ..< endIndex]
         
