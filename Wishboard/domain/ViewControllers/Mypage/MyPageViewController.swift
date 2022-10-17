@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class MyPageViewController: TitleLeftViewController {
     var mypageView: MyPageView!
@@ -96,6 +97,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             }
             vc.preVC = self
             self.navigationController?.pushViewController(vc, animated: true)
+        case 4:
+            showSendEmail()
         case 10:
             showLogoutDialog()
         case 11:
@@ -190,6 +193,47 @@ extension MyPageViewController {
     @objc func signOutButtonDidTap() {
         self.dismiss(animated: false)
         MypageDataManager().deleteUserDataManager(self)
+    }
+}
+// MARK: - Email delegate
+extension MyPageViewController: MFMailComposeViewControllerDelegate {
+    func showSendMailErrorAlert() {
+        let sendMailErrorAlert = UIAlertController(title: "메일을 전송 실패", message: "아이폰 이메일 설정을 확인하고 다시 시도해주세요.", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .default) {
+            (action) in
+            print("확인")
+        }
+        sendMailErrorAlert.addAction(confirmAction)
+        self.present(sendMailErrorAlert, animated: true, completion: nil)
+    }
+    func showSendEmail() {
+        if MFMailComposeViewController.canSendMail() {
+            let compseVC = MFMailComposeViewController()
+            compseVC.mailComposeDelegate = self
+            
+            let deviceModel = UserDefaults.standard.string(forKey: "deviceModel") ?? ""
+            let osVersion = UserDefaults.standard.string(forKey: "OSVersion") ?? ""
+            let appVersion = UserDefaults.standard.string(forKey: "appVersion") ?? ""
+            
+            let messageBody = "\nDevice: \(deviceModel)"
+                                + "\nOS Version: \(osVersion)"
+                                + "\nApp Version: \(appVersion)"
+                                + "\n---------------------\n\n"
+                                + "문의할 내용을 입력해 주세요."
+            
+            compseVC.setToRecipients(["wishboard2022@gmail.com"])
+            compseVC.setSubject("위시보드팀에 문의하기")
+            compseVC.setMessageBody(messageBody, isHTML: false)
+            
+            self.present(compseVC, animated: true, completion: nil)
+            
+        }
+        else {
+            self.showSendMailErrorAlert()
+        }
+    }
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
 // MARK: - API Success

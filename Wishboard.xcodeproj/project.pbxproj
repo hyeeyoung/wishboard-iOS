@@ -151,6 +151,7 @@
 		23C9569F28C68D7A00D88536 /* SUIT-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23C9569628C68D7A00D88536 /* SUIT-SemiBold.ttf */; };
 		23C956A128C68F9400D88536 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C956A028C68F9400D88536 /* LoginViewController.swift */; };
 		23CBAFDC28DFDF8500B41513 /* NewFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CBAFDB28DFDF8500B41513 /* NewFolderViewController.swift */; };
+		23CF158628FD630E000D012F /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CF158528FD630E000D012F /* UIDevice.swift */; };
 		23D0824E28E4DC3A00CE541E /* ItemDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D0824D28E4DC3A00CE541E /* ItemDataManager.swift */; };
 		23D4C66028D8E87B00EA7F98 /* GetEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D4C65F28D8E87B00EA7F98 /* GetEmailView.swift */; };
 		23D4C66228D8E88700EA7F98 /* LostPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D4C66128D8E88700EA7F98 /* LostPasswordView.swift */; };
@@ -343,6 +344,7 @@
 		23C9569628C68D7A00D88536 /* SUIT-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-SemiBold.ttf"; sourceTree = "<group>"; };
 		23C956A028C68F9400D88536 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		23CBAFDB28DFDF8500B41513 /* NewFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFolderViewController.swift; sourceTree = "<group>"; };
+		23CF158528FD630E000D012F /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		23D0824D28E4DC3A00CE541E /* ItemDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDataManager.swift; sourceTree = "<group>"; };
 		23D4C65F28D8E87B00EA7F98 /* GetEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEmailView.swift; sourceTree = "<group>"; };
 		23D4C66128D8E88700EA7F98 /* LostPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostPasswordView.swift; sourceTree = "<group>"; };
@@ -928,6 +930,7 @@
 				2374789928D1DB2900CF941A /* CheckNotch.swift */,
 				2360FF5D28DCC64100E481A6 /* ScreenManager.swift */,
 				23A85F7C28E39FE800075667 /* FormatManager.swift */,
+				23CF158528FD630E000D012F /* UIDevice.swift */,
 			);
 			path = UtilManager;
 			sourceTree = "<group>";
@@ -1750,6 +1753,7 @@
 				2375C1CA28C5C2550017BAF7 /* OnBoardingView.swift in Sources */,
 				2378280428D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift in Sources */,
 				23C9568D28C6812100D88536 /* UIColor.swift in Sources */,
+				23CF158628FD630E000D012F /* UIDevice.swift in Sources */,
 				23D7901628CB172900246109 /* CalenderNotiTableViewCell.swift in Sources */,
 				23D4C66428D8E96700EA7F98 /* LostPasswordViewController.swift in Sources */,
 				23C5AB4928CAA23300A7E977 /* MyPageView.swift in Sources */,

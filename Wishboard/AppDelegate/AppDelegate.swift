@@ -35,6 +35,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         cache.clearMemoryCache()
         cache.clearDiskCache()
         
+        // MARK: Device Model
+        // device model
+        let deviceModel = UIDevice.modelName
+        UserDefaults.standard.set(deviceModel, forKey: "deviceModel")
+        // OS version
+        var systemVersion = UIDevice.current.systemVersion
+        UserDefaults.standard.set(systemVersion, forKey: "OSVersion")
+        // App version
+        if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            UserDefaults.standard.set(appVersion, forKey: "appVersion")
+        }
+        
         // MARK: Firebase
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
