@@ -46,7 +46,7 @@ class NotificationSettingViewController: UIViewController {
         
         self.notiType = "세일 마감"
         let setNotificationDate = SetNotificationDate()
-        self.date = setNotificationDate.currentYear + "년 " + setNotificationDate.currentMonth + "월 " + setNotificationDate.currentDay + "일 "
+        self.date = setNotificationDate.currentYear + "년 " + setNotificationDate.currentMonth + "월 " + setNotificationDate.currentDay + "일"
         self.dateAndTime = self.date + " " + self.hour + ":" + self.minute
 
         setUpView()
@@ -116,7 +116,7 @@ class NotificationSettingViewController: UIViewController {
         if self.notiType == nil {self.notiType = "세일 마감"}
         if self.dateAndTime == nil {
             let setNotificationDate = SetNotificationDate()
-            self.date = setNotificationDate.currentYear + "년 " + setNotificationDate.currentMonth + "월 " + setNotificationDate.currentDay + "일 "
+            self.date = setNotificationDate.currentYear + "년 " + setNotificationDate.currentMonth + "월 " + setNotificationDate.currentDay + "일"
             self.dateAndTime = self.date + " " + self.hour + ":" + self.minute
         }
         
