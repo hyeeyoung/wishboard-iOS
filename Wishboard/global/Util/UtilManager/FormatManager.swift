@@ -53,25 +53,31 @@ class FormatManager {
     // "YY년 MM월 dd일 HH:mm"을 "YYYY-MM-dd HH:mm:ss"로 변환
     // 2022-9-20 1:30
     func koreanStrToDate(_ str: String) -> String? {
-        var startIndex = str.index(str.startIndex, offsetBy: 0)// 사용자지정 시작인덱스
-        var endIndex = str.index(str.startIndex, offsetBy: 2)// 사용자지정 끝인덱스
-        let year = str[startIndex ..< endIndex]
-
-        startIndex = str.index(str.startIndex, offsetBy: 4)// 사용자지정 시작인덱스
-        endIndex = str.index(str.startIndex, offsetBy: 6)// 사용자지정 끝인덱스
-        let month = str[startIndex ..< endIndex]
-
-        startIndex = str.index(str.startIndex, offsetBy: 8)// 사용자지정 시작인덱스
-        endIndex = str.index(str.startIndex, offsetBy: 10)// 사용자지정 끝인덱스
-        let day = str[startIndex ..< endIndex]
-
-        startIndex = str.index(str.startIndex, offsetBy: 12)// 사용자지정 시작인덱스
-        endIndex = str.index(str.startIndex, offsetBy: 17)// 사용자지정 끝인덱스
-        let time = str[startIndex ..< endIndex]
-        
-        return "20" + year + "-" + month + "-" + day + " " + time + ":00"
+//        print("원래 날짜:", str)
+        let strToDate = str.koreanToDate()
+//        print("Date 변환 최종:", strToDate?.toString())
+        if let strToDate = strToDate {
+            return strToDate.toString()
+        } else {return nil}
+//        var startIndex = str.index(str.startIndex, offsetBy: 0)// 사용자지정 시작인덱스
+//        var endIndex = str.index(str.startIndex, offsetBy: 2)// 사용자지정 끝인덱스
+//        let year = str[startIndex ..< endIndex]
+//
+//        startIndex = str.index(str.startIndex, offsetBy: 4)// 사용자지정 시작인덱스
+//        endIndex = str.index(str.startIndex, offsetBy: 6)// 사용자지정 끝인덱스
+//        let month = str[startIndex ..< endIndex]
+//
+//        startIndex = str.index(str.startIndex, offsetBy: 8)// 사용자지정 시작인덱스
+//        endIndex = str.index(str.startIndex, offsetBy: 10)// 사용자지정 끝인덱스
+//        let day = str[startIndex ..< endIndex]
+//
+//        startIndex = str.index(str.startIndex, offsetBy: 12)// 사용자지정 시작인덱스
+//        endIndex = str.index(str.startIndex, offsetBy: 17)// 사용자지정 끝인덱스
+//        let time = str[startIndex ..< endIndex]
+//
+//
+//        return "20" + year + "-" + month + "-" + day + " " + time + ":00"
     }
-    
     // MARK: - Number (price)
     // 숫자를 ,넣은 문자열로     // 1000 -> 1,000
     func numToPrice(num: Int) -> String? {
@@ -117,13 +123,25 @@ extension String {
             return nil
         }
     }
+    func koreanToDate() -> Date? {
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "YY년 MM월 dd일 HH:mm"
+        dateformatter.timeZone = TimeZone(identifier: "ko_KR")
+        if let date = dateformatter.date(from: self) {
+//            print("Date 변환 날짜:", date)
+            return date
+        } else {
+//            print("Date 변환 x")
+            return nil
+        }
+    }
 }
 // MARK: - Date extension
 extension Date {
     func toString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        dateFormatter.timeZone = TimeZone(identifier: "ko_KR")
         return dateFormatter.string(from: self)
     }
 }
