@@ -32,7 +32,10 @@ class FolderCollectionViewCell: UICollectionViewCell {
         $0.textColor = .lightGray
     }
     let moreButton = UIButton().then{
-        $0.setImage(UIImage(named: "ic_more"), for: .normal)
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(named: "ic_more")
+        config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        $0.configuration = config
     }
     
     // MARK: - Life Cycles
@@ -69,9 +72,9 @@ class FolderCollectionViewCell: UICollectionViewCell {
             make.height.equalTo(folderImage.snp.width)
         }
         moreButton.snp.makeConstraints { make in
-            make.width.height.equalTo(24)
-            make.trailing.equalToSuperview()
-            make.top.equalTo(folderImage.snp.bottom)
+            make.width.height.equalTo(44)
+            make.trailing.equalToSuperview().offset(10)
+            make.top.equalTo(folderImage.snp.bottom).offset(-10)
         }
         folderType.snp.makeConstraints { make in
             make.leading.equalTo(folderImage)
@@ -81,6 +84,7 @@ class FolderCollectionViewCell: UICollectionViewCell {
         countLabel.snp.makeConstraints { make in
             make.leading.equalTo(folderType)
             make.top.equalTo(folderType.snp.bottom).offset(5)
+            make.bottom.equalToSuperview().offset(-10)
         }
         itemLabel.snp.makeConstraints { make in
             make.centerY.equalTo(countLabel)
