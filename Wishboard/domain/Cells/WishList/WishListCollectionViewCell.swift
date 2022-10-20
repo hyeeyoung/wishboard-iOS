@@ -75,7 +75,7 @@ class WishListCollectionViewCell: UICollectionViewCell {
             make.leading.equalTo(itemPrice.snp.trailing).offset(2)
         }
         cartButton.snp.makeConstraints { make in
-            make.width.height.equalTo(41)
+            make.width.height.equalTo(40)
             make.bottom.trailing.equalTo(itemImage).inset(10)
         }
     }
