@@ -35,9 +35,13 @@ class BaseViewController: UIViewController {
     let navigationView = UIView()
     
     lazy var backBtn = UIButton().then{
-        $0.setImage(UIImage(named: "goBack"), for: .normal)
         $0.isUserInteractionEnabled = true
         $0.addTarget(self, action: #selector(backBtnDidClicked), for: .touchUpInside)
+        
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(named: "goBack")
+        config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        $0.configuration = config
     }
     
     lazy var navigationTitle = UILabel().then{

@@ -12,7 +12,10 @@ import FSCalendar
 class CalenderView: UIView {
     // MARK: - View
     let backButton = UIButton().then{
-        $0.setImage(UIImage(named: "goBack"), for: .normal)
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(named: "goBack")
+        config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        $0.configuration = config
     }
     
     // MARK: - Life Cycles
@@ -47,9 +50,8 @@ class CalenderView: UIView {
     }
     func setUpConstraint() {
         backButton.snp.makeConstraints { make in
-            make.width.equalTo(18)
-            make.height.equalTo(14)
-            make.leading.equalToSuperview().offset(16)
+            make.width.height.equalTo(44)
+            make.leading.equalToSuperview().offset(6)
             if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(66)}
             else {make.top.equalToSuperview().offset(35)}
         }

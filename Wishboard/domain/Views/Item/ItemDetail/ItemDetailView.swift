@@ -18,7 +18,10 @@ class ItemDetailView: UIView {
         $0.setImage(UIImage(named: "trash"), for: .normal)
     }
     let backButton = UIButton().then{
-        $0.setImage(UIImage(named: "goBack"), for: .normal)
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(named: "goBack")
+        config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        $0.configuration = config
     }
     
     // MARK: - Life Cycles
@@ -128,9 +131,8 @@ class ItemDetailView: UIView {
         }
         backButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.width.equalTo(18)
-            make.height.equalTo(14)
-            make.leading.equalToSuperview().offset(16)
+            make.width.height.equalTo(44)
+            make.leading.equalToSuperview().offset(6)
         }
     }
 }

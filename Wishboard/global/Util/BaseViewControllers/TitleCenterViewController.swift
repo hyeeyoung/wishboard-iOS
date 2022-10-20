@@ -19,9 +19,8 @@ class TitleCenterViewController: BaseViewController {
             $0.centerY.centerX.equalToSuperview()
         }
         backBtn.snp.makeConstraints{ make in
-            make.width.equalTo(backBtn.snp.height)
-            make.leading.equalToSuperview().offset(20)
-            make.top.equalToSuperview().offset(16)
+            make.width.height.equalTo(44)
+            make.leading.equalToSuperview().offset(10)
             make.centerY.equalToSuperview()
         }
     }
