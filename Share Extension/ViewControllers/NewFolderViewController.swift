@@ -71,6 +71,10 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
             if isAddSuccess {FolderDataManager().getFolderListDataManager(preVC)}
         }
     }
+    override func viewDidAppear(_ animated: Bool) {
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
+    }
     // MARK: - Functions
     func setUpView() {
         self.view.addSubview(titleLabel)

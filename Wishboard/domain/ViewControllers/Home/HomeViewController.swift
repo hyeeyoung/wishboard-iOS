@@ -42,6 +42,8 @@ class HomeViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
         // DATA
         WishListDataManager().wishListDataManager(self.homeView, self)
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
     }
     // MARK: - Actions & Functions
     @objc func goToCart() {

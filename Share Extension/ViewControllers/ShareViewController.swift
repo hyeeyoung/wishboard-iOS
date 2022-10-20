@@ -40,6 +40,10 @@ class ShareViewController: UIViewController {
             self.getWebURL()
         }
     }
+    override func viewDidAppear(_ animated: Bool) {
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
+    }
     //MARK: - Functions
     func setUpShareView() {
         // Set Views & Constraints

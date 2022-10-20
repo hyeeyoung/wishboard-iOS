@@ -32,5 +32,7 @@ class CartViewController: TitleCenterViewController {
         self.tabBarController?.tabBar.isHidden = true
         // DATA
         CartDataManager().getCartListDataManager(self.cartView)
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
     }
 }

@@ -71,6 +71,10 @@ class NotificationSettingViewController: UIViewController {
             self.preVC.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
         }
     }
+    override func viewDidAppear(_ animated: Bool) {
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
+    }
     // MARK: - Functions
     func setPreViewController(_ preVC: UploadItemViewController) {
         self.preVC = preVC

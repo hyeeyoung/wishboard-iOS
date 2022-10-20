@@ -71,14 +71,10 @@ class BaseViewController: UIViewController {
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(50)
         }
-        if !NetworkCheck.shared.isConnected {SnackBar(self, message: .networkCheck)}
+        NetworkCheck.shared.startMonitoring(vc: self)
     }
     override func viewDidAppear(_ animated: Bool) {
-//        if !NetworkCheck.shared.isConnected {
-//            DispatchQueue.main.async {
-//                SnackBar(self, message: .networkCheck)
-//            }
-//        }
+        NetworkCheck.shared.startMonitoring(vc: self)
     }
     // MARK: - Actions
     @objc func backBtnDidClicked(){

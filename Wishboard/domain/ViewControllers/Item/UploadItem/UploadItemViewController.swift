@@ -52,6 +52,8 @@ class UploadItemViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         self.addKeyboardNotifications()
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.removeKeyboardNotifications()

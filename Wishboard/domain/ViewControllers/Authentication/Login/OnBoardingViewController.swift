@@ -28,6 +28,9 @@ class OnBoardingViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
+        // 자동 로그인
         checkRememberMe()
     }
     func checkRememberMe() {

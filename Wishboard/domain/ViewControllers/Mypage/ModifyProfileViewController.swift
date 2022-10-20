@@ -65,6 +65,10 @@ class ModifyProfileViewController: TitleCenterViewController {
             MypageDataManager().getUserInfoDataManager(preVC)
         }
     }
+    override func viewDidAppear(_ animated: Bool) {
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
+    }
 }
 // MARK: - Set Views
 extension ModifyProfileViewController {

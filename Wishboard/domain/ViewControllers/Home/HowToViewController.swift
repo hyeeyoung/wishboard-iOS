@@ -31,6 +31,10 @@ class HowToViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         preVC.alertDialog()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
+    }
     @objc func goBack() {
         self.dismiss(animated: true)
     }

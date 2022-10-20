@@ -65,6 +65,10 @@ class NotificationSettingViewController: UIViewController {
             preVC.notificationDate = dT
         }
     }
+    override func viewDidAppear(_ animated: Bool) {
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
+    }
     // MARK: - Functions
     func setPreViewController(_ preVC: ShareViewController) {
         self.preVC = preVC

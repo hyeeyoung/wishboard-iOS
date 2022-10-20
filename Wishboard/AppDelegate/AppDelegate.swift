@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         sleep(2)
         
         // MARK: Network check
-        NetworkCheck.shared.startMonitoring()
+//        NetworkCheck.shared.startMonitoring()
         
         //MARK: UserDefaults
         UserDefaults.standard.set("http://3.39.165.250:3000", forKey: "url")
