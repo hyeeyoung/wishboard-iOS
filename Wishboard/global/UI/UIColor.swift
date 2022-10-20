@@ -80,4 +80,10 @@ extension UIColor{
         blue: 41/255,
         alpha: 1
     )
+    static let dialogMessageColor = UIColor(
+        red: 133/255,
+        green: 133/255,
+        blue: 133/255,
+        alpha: 1
+    )
 }

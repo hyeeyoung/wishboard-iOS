@@ -31,15 +31,15 @@ class PopUpDeleteUserViewController: UIViewController {
     let messageLabel = UILabel().then{
         $0.text = "message"
         $0.font = UIFont.Suit(size: 14, family: .Regular)
-        $0.textColor = .wishboardGray
+        $0.textColor = .dialogMessageColor
         $0.numberOfLines = 0
         $0.textAlignment = .center
     }
     let horizontalSeperator = UIView().then{
-        $0.backgroundColor = .opaqueSeparator
+        $0.backgroundColor = .wishboardDisabledGray
     }
     let verticalSeperator = UIView().then{
-        $0.backgroundColor = .opaqueSeparator
+        $0.backgroundColor = .wishboardDisabledGray
     }
     var cancelBtn: UIButton!
     var okBtn: UIButton!
