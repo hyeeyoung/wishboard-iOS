@@ -21,7 +21,7 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
         $0.backgroundColor = .wishboardTextfieldGray
         $0.layer.cornerRadius = 5
         $0.font = UIFont.Suit(size: 16, family: .Regular)
-        $0.textColor = .wishboardGray
+        $0.textColor = .editTextFontColor
         $0.clearButtonMode = .whileEditing
         $0.placeholder = "쇼핑몰 링크"
     }

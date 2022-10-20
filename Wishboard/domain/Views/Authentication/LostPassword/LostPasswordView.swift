@@ -23,6 +23,7 @@ class LostPasswordView: UIView {
     var emailTextField = UITextField().then{
         $0.defaultTextField("이메일")
         $0.becomeFirstResponder()
+        $0.textColor = .editTextFontColor
     }
     let errorMessage = UILabel().then{
         $0.text = "이메일 주소를 정확하게 입력해주세요."

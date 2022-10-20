@@ -23,6 +23,7 @@ class RegisterEmailView: UIView {
     var emailTextField = UITextField().then{
         $0.defaultTextField("이메일")
         $0.becomeFirstResponder()
+        $0.textColor = .editTextFontColor
     }
     let nextButton = UIButton().then{
         $0.defaultButton("다음", .wishboardDisabledGray, .black)

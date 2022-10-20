@@ -328,6 +328,7 @@ extension UploadItemViewController {
             $0.font = UIFont.Suit(size: 14, family: .Regular)
             $0.addLeftPadding(16)
             $0.delegate = self
+            $0.textColor = .editTextFontColor
         }
         cell.contentView.addSubview(textfield)
         textfield.snp.makeConstraints { make in

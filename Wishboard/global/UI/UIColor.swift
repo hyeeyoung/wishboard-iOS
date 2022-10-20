@@ -74,5 +74,10 @@ extension UIColor{
         blue: 237/255,
         alpha: 1
     )
-
+    static let editTextFontColor = UIColor(
+        red: 41/255,
+        green: 41/255,
+        blue: 41/255,
+        alpha: 1
+    )
 }

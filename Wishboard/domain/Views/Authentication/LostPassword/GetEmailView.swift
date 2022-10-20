@@ -25,6 +25,7 @@ class GetEmailView: UIView {
         $0.defaultTextField("인증코드")
         $0.becomeFirstResponder()
         $0.isSecureTextEntry = true
+        $0.textColor = .editTextFontColor
     }
     var timerLabel = UILabel().then{
         $0.text = "5:00"

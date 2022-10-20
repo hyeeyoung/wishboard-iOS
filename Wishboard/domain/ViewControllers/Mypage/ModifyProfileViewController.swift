@@ -25,6 +25,7 @@ class ModifyProfileViewController: TitleCenterViewController {
         $0.layer.cornerRadius = 5
         $0.font = UIFont.Suit(size: 16, family: .Regular)
         $0.clearButtonMode = .whileEditing
+        $0.textColor = .editTextFontColor
     }
     let completeButton = UIButton().then{
         $0.defaultButton("완료", .wishboardGreen, .black)

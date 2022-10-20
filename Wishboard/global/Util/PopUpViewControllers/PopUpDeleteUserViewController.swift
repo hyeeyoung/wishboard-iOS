@@ -49,6 +49,7 @@ class PopUpDeleteUserViewController: UIViewController {
         $0.layer.cornerRadius = 5
         $0.font = UIFont.Suit(size: 16, family: .Regular)
         $0.clearButtonMode = .whileEditing
+        $0.textColor = .editTextFontColor
     }
     let errorMessage = UILabel().then{
         $0.text = "이메일을 다시 확인해 주세요."

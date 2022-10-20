@@ -25,6 +25,7 @@ class RegisterPasswordView: UIView {
         $0.defaultTextField("비밀번호")
         $0.becomeFirstResponder()
         $0.isSecureTextEntry = true
+        $0.textColor = .editTextFontColor
     }
     let errorMessage = UILabel().then{
         $0.text = "8자리 이상의 영문자, 숫자, 특수 문자 조합으로 입력해주세요."
