@@ -105,7 +105,7 @@ class RegisterPasswordView: UIView {
         setLabel("가입 시 ")
         let termButton = setUnderLinedButton("이용약관")
         setLabel(" 및 ")
-        let privacyTermButton = setUnderLinedButton("개인정보 취급방침")
+        let privacyTermButton = setUnderLinedButton("개인정보 처리방침")
         setLabel("에 동의하는 것으로 간주합니다.")
         
         termButton.addTarget(self, action: #selector(termButtonDidTap), for: .touchUpInside)
@@ -131,7 +131,7 @@ extension RegisterPasswordView {
     }
     func setUnderLinedButton(_ title: String) -> UIButton {
         let underlineButton = UIButton().then{
-            $0.setUnderline(title, .wishboardGreen)
+            $0.setUnderline(title, .wishboardGreen, UIFont.Suit(size: 12, family: .Medium))
         }
         stack.addArrangedSubview(underlineButton)
         return underlineButton
