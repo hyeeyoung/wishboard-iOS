@@ -147,7 +147,8 @@ extension FolderViewController {
     @objc func completeModifyButtonDidTap(_ sender: CustomButton) {
         let folderId = sender.folderData?.folder_id
         let lottieView = dialog.completeButton.setHorizontalLottieView(dialog.completeButton)
-        dialog.completeButton.isSelected = true
+        dialog.completeButton.isEnabled = false
+        dialog.completeButton.setTitle("", for: .normal)
         lottieView.isHidden = false
         lottieView.play { completion in
             let addFolderInput = AddFolderInput(folder_name: self.folderStr)
@@ -157,7 +158,9 @@ extension FolderViewController {
     // 폴더 추가 버튼 클릭
     @objc func completeAddButtonDidTap() {
         let lottieView = dialog.completeButton.setHorizontalLottieView(dialog.completeButton)
-        dialog.completeButton.isSelected = true
+        dialog.completeButton.isEnabled = false
+        dialog.completeButton.setTitle("", for: .normal)
+        
         lottieView.isHidden = false
         lottieView.play { completion in
             let addFolderInput = AddFolderInput(folder_name: self.folderStr)
