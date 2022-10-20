@@ -193,6 +193,18 @@ class ItemDetailTableViewCell: UITableViewCell {
                 self.seperatorLine2.isHidden = true
             }
         }
-        if let memo = data.item_memo {self.memoContentLabel.text = memo}
+        if let memo = data.item_memo {
+            if memo != "" {
+                self.memoContentLabel.isHidden = false
+                self.seperatorLine2.isHidden = false
+                self.memoTitlelabel.isHidden = false
+                self.memoContentLabel.text = memo
+            }
+            else {
+                self.seperatorLine2.isHidden = true
+                self.memoTitlelabel.isHidden = true
+                self.memoContentLabel.isHidden = true
+            }
+        }
     }
 }
