@@ -72,6 +72,7 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
             self.preVC.wishListData.item_name = self.itemName
             self.preVC.wishListData.item_price = self.itemPrice
             self.preVC.wishListData.item_url = self.link
+            self.preVC.isValidContent()
             
             let indexPath0 = IndexPath(row: 0, section: 0)
             let indexPath1 = IndexPath(row: 1, section: 0)
