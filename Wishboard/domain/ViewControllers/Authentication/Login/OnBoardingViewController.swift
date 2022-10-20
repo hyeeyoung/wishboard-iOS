@@ -36,7 +36,21 @@ class OnBoardingViewController: UIViewController {
             let password = UserDefaults.standard.string(forKey: "password")
             print(email, password, token)
             
+            // FCM
+            sendFCM()
+            // go Main
             ScreenManager().goMain(self)
         }
+    }
+    // MARK: FCM API
+    func sendFCM() {
+        // Send FCM token to server
+        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
+        print("device Token:", deviceToken)
+        let fcmInput = FCMInput(fcm_token: deviceToken)
+        FCMDataManager().fcmDataManager(fcmInput, self)
+    }
+    func fcmAPISuccess(_ result: APIModel<ResultModel>) {
+        print("FCMAPI::", result.message)
     }
 }

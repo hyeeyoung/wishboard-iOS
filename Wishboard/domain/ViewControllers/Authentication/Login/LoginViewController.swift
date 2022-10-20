@@ -79,6 +79,9 @@ extension LoginViewController {
         UserDefaults.standard.set(loginViewModel.email, forKey: "email")
         UserDefaults.standard.set(loginViewModel.password, forKey: "password")
         
+        // FCM
+        sendFCM()
+        // go Main
         ScreenManager().goMain(self)
     }
     func loginAPIFail() {
@@ -87,5 +90,16 @@ extension LoginViewController {
             $0.defaultButton("로그인하기", .wishboardDisabledGray, .black)
             $0.isEnabled = false
         }
+    }
+    // MARK: FCM API
+    func sendFCM() {
+        // Send FCM token to server
+        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
+        print("device Token:", deviceToken)
+        let fcmInput = FCMInput(fcm_token: deviceToken)
+        FCMDataManager().fcmDataManager(fcmInput, self)
+    }
+    func fcmAPISuccess(_ result: APIModel<ResultModel>) {
+        print(result.message)
     }
 }
