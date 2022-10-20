@@ -177,6 +177,7 @@ extension UploadItemViewController {
     }
     // MARK: - 저장 버튼 클릭 시 (아이템 추가)
     @objc func saveButtonDidTap() {
+        uploadItemView.saveButton.isEnabled = false
         let lottieView = SetLottie().setSpinLottie(viewcontroller: self)
         lottieView.isHidden = false
         lottieView.play { completion in
@@ -215,6 +216,7 @@ extension UploadItemViewController {
     }
     // MARK: 저장 버튼 클릭 시 (아이템 수정)
     @objc func modifyButtonDidTap() {
+        uploadItemView.saveButton.isEnabled = false
         let lottieView = SetLottie().setSpinLottie(viewcontroller: self)
         lottieView.isHidden = false
         lottieView.play { completion in
