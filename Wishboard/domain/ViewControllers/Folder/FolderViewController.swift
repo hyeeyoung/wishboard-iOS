@@ -108,7 +108,7 @@ extension FolderViewController {
     }
     // 폴더 추가 팝업창
     func alertAddDialog() {
-        dialog = PopUpWithTextFieldViewController(titleText: "폴더 추가", placeholder: "폴더명", prevText: nil, buttonTitle: "추가")
+        dialog = PopUpWithTextFieldViewController(titleText: "새 폴더 추가", placeholder: "폴더명", prevText: nil, buttonTitle: "추가")
         dialog.modalPresentationStyle = .overFullScreen
         dialog.completeButton.addTarget(self, action: #selector(completeAddButtonDidTap), for: .touchUpInside)
         dialog.textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
