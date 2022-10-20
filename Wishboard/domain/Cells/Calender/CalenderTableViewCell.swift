@@ -42,9 +42,9 @@ class CalenderTableViewCell: UITableViewCell {
             
             $0.appearance.headerTitleColor = .black
             $0.appearance.weekdayTextColor = .black
-            $0.appearance.headerTitleFont = UIFont.Suit(size: 22, family: .Bold)
-            $0.appearance.titleFont = UIFont.Suit(size: 16, family: .Light)
-            $0.appearance.weekdayFont = UIFont.Suit(size: 16, family: .Light)
+            $0.appearance.headerTitleFont = UIFont.Suit(size: 20, family: .Bold)
+            $0.appearance.titleFont = UIFont.Suit(size: 16, family: .Regular)
+            $0.appearance.weekdayFont = UIFont.Suit(size: 16, family: .Medium)
             $0.appearance.subtitleFont = UIFont.Suit(size: 16, family: .Bold)
             
             $0.appearance.todayColor = .wishboardGreen
