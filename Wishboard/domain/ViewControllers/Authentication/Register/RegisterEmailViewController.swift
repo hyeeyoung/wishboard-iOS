@@ -57,7 +57,7 @@ class RegisterEmailViewController: KeyboardViewController {
 // MARK: - API Success
 extension RegisterEmailViewController {
     func checkEmailAPISuccess(_ result: APIModel<ResultModel>) {
-        let registerVC = RegisterPasswordViewController(title: "2/2단계")
+        let registerVC = RegisterPasswordViewController(title: "2/2 단계")
         registerVC.email = self.email
         self.navigationController?.pushViewController(registerVC, animated: true)
     }

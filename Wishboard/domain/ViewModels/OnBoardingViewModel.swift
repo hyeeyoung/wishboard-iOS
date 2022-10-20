@@ -21,7 +21,7 @@ class OnBoardingViewModel {
         self.viewcontroller.navigationController?.pushViewController(loginViewController, animated: true)
     }
     func goToRegisterPage() {
-        let registerVC = RegisterEmailViewController(title: "1/2단계")
+        let registerVC = RegisterEmailViewController(title: "1/2 단계")
         self.viewcontroller.navigationController?.pushViewController(registerVC, animated: true)
     }
 }

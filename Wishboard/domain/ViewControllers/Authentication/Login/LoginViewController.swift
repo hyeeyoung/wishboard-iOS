@@ -47,7 +47,7 @@ class LoginViewController: TitleCenterViewController {
         LoginDataManager().loginDataManager(loginInput, self)
     }
     @objc func lostPasswordButtonDidTap() {
-        let lostPwVC = LostPasswordViewController()
+        let lostPwVC = LostPasswordViewController(title: "1/2 단계")
         self.navigationController?.pushViewController(lostPwVC, animated: true)
     }
     //MARK: - Methods

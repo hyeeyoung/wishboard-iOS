@@ -63,7 +63,7 @@ extension LostPasswordViewController {
     func checkEmailAPISuccess(_ result: APIModel<LostPasswordModel>) {
         let authCode = result.data?.verificationCode
         
-        let getEmailVC = GetEmailViewController(title: "2/2단계")
+        let getEmailVC = GetEmailViewController(title: "2/2 단계")
         getEmailVC.authCode = authCode
         getEmailVC.email = self.email
         
