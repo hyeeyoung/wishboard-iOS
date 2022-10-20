@@ -25,10 +25,16 @@ class CartTableViewCell: UITableViewCell {
         $0.configuration = config
     }
     let minusButton = UIButton().then{
-        $0.setImage(UIImage(named: "ic_cart_minus"), for: .normal)
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(named: "ic_cart_minus")
+        config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        $0.configuration = config
     }
     let plusButton = UIButton().then{
-        $0.setImage(UIImage(named: "ic_cart_plus"), for: .normal)
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(named: "ic_cart_plus")
+        config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        $0.configuration = config
     }
     let countLabel = UILabel().then{
         $0.text = "1"
@@ -75,18 +81,18 @@ class CartTableViewCell: UITableViewCell {
             make.trailing.equalToSuperview().offset(-9)
         }
         minusButton.snp.makeConstraints { make in
-            make.width.height.equalTo(24)
-            make.bottom.equalTo(itemImage.snp.bottom)
-            make.leading.equalTo(itemImage.snp.trailing).offset(10)
+            make.width.height.equalTo(44)
+            make.bottom.equalTo(itemImage.snp.bottom).offset(10)
+            make.leading.equalTo(itemImage.snp.trailing)
         }
         countLabel.snp.makeConstraints { make in
             make.centerY.equalTo(minusButton)
-            make.leading.equalTo(minusButton.snp.trailing).offset(10)
+            make.leading.equalTo(minusButton.snp.trailing)
         }
         plusButton.snp.makeConstraints { make in
-            make.width.height.equalTo(24)
+            make.width.height.equalTo(44)
             make.centerY.equalTo(countLabel)
-            make.leading.equalTo(countLabel.snp.trailing).offset(10)
+            make.leading.equalTo(countLabel.snp.trailing)
         }
         won.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-10)
