@@ -86,4 +86,10 @@ extension UIColor{
         blue: 133/255,
         alpha: 1
     )
+    static let unselectedTabColor = UIColor(
+        red: 193/255,
+        green: 193/255,
+        blue: 193/255,
+        alpha: 1
+    )
 }
