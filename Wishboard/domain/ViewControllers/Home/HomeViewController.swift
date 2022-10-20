@@ -23,8 +23,10 @@ class HomeViewController: UIViewController {
         self.view.addSubview(homeView)
         homeView.setViewController(self)
         
+        let tabBarHeight = self.tabBarController?.tabBar.frame.height ?? 0
         homeView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview()
+            make.leading.trailing.top.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-tabBarHeight)
         }
         
         // 첫 로그인일 시 앱 이용방법 호출

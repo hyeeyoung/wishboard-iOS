@@ -18,9 +18,11 @@ class NotificationViewController: TitleLeftViewController {
         self.view.addSubview(notiView)
         
         notiView.preVC = self
+        let tabBarHeight = self.tabBarController?.tabBar.frame.height ?? 0
         notiView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
             make.top.equalTo(super.navigationView.snp.bottom)
+            make.bottom.equalToSuperview().offset(-tabBarHeight)
         }
         // DATA
         NotificationDataManager().getNotificationListDataManager(self.notiView)

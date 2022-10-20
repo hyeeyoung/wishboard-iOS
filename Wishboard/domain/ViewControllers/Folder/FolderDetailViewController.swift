@@ -62,9 +62,11 @@ extension FolderDetailViewController {
     }
     func setUpView() {
         self.view.addSubview(folderDetailCollectionView)
+        let tabBarHeight = self.tabBarController?.tabBar.frame.height ?? 0
         folderDetailCollectionView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(self.navigationView.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(super.navigationView.snp.bottom)
+            make.bottom.equalToSuperview().offset(-tabBarHeight)
         }
     }
 }

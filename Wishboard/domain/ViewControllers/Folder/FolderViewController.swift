@@ -75,10 +75,13 @@ extension FolderViewController {
         folderView = FolderView()
         self.view.addSubview(folderView)
         
+        let tabBarHeight = self.tabBarController?.tabBar.frame.height ?? 0
         folderView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
             make.top.equalTo(super.navigationView.snp.bottom)
+            make.bottom.equalToSuperview().offset(-tabBarHeight)
         }
+        
         folderView.setCollectionView(self)
         folderView.setUpView()
         folderView.setUpConstraint()
