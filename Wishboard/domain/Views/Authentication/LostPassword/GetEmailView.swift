@@ -16,6 +16,7 @@ class GetEmailView: UIView {
     let subTitleLabel = UILabel().then{
         $0.text = "인증코드가 전송되었어요!\n이메일을 확인해주세요."
         $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.setTextWithLineHeight()
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }

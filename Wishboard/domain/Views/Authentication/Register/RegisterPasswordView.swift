@@ -17,6 +17,7 @@ class RegisterPasswordView: UIView {
     let subTitleLabel = UILabel().then{
         $0.text = "마지막 비밀번호 입력 단계예요!\n입력된 비밀번호로 바로 가입되니 신중히 입력해 주세요."
         $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.setTextWithLineHeight()
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
@@ -123,6 +124,7 @@ extension RegisterPasswordView {
             $0.text = title
             $0.font = UIFont.Suit(size: 12, family: .Regular)
             $0.textColor  = .wishboardGray
+            $0.setTextWithLineHeight()
         }
         stack.addArrangedSubview(label)
     }

@@ -19,6 +19,7 @@ class NavigationBar {
         let pageTitle = UILabel().then{
             $0.text = title
             $0.font = UIFont.Suit(size: 15, family: .Bold)
+            $0.setTextWithLineHeight()
         }
         let backButton = UIButton().then{
             $0.setImage(UIImage(named: "goBack"), for: .normal)

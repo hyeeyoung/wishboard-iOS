@@ -23,6 +23,7 @@ class NotificationSettingViewController: UIViewController {
         $0.text = "30분 전에 상품 일정을 알려드려요! 시간은 30분 단위로 설정할 수 있어요."
         $0.font = UIFont.Suit(size: 8, family: .Regular)
         $0.textColor = .wishboardGray
+        $0.setTextWithLineHeight()
     }
     let completeButton = UIButton().then{
         $0.defaultButton("완료", .wishboardGreen, .black)

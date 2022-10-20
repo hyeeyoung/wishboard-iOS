@@ -21,6 +21,7 @@ class HowToCollectionViewCell: UICollectionViewCell {
     let subTitle = UILabel().then{
         $0.font = UIFont.Suit(size: 14, family: .Regular)
         $0.numberOfLines = 0
+        $0.setTextWithLineHeight()
         $0.textAlignment = .center
     }
     // MARK: - Life Cycles

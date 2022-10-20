@@ -135,6 +135,7 @@ extension MyPageViewController {
             $0.text = "알림 설정을 켜면 상품의 재입고, 프리오더 시작일 등 상품 일정을 알림 받을 수 있어요!"
             $0.font = UIFont.Suit(size: 8, family: .Regular)
             $0.textColor = .wishboardGray
+            $0.setTextWithLineHeight()
         }
         cell.addSubview(notiSwitch)
         cell.addSubview(subTitleLabel)
@@ -162,6 +163,7 @@ extension MyPageViewController {
             $0.text = "1.0.0"
             $0.font = UIFont.Suit(size: 12, family: .Bold)
             $0.textColor = .gray
+            $0.setTextWithLineHeight()
         }
         cell.addSubview(versionLabel)
         versionLabel.snp.makeConstraints { make in

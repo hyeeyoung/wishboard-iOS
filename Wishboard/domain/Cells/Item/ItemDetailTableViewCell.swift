@@ -27,6 +27,7 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.text = "itemName"
         $0.font = UIFont.Suit(size: 16, family: .Regular)
         $0.numberOfLines = 0
+        $0.setTextWithLineHeight()
     }
     let priceLabel = UILabel().then{
         $0.text = "0"
@@ -47,6 +48,7 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.text = "w.musinsa.com"
         $0.textColor = .wishboardGray
         $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.setTextWithLineHeight()
     }
     let seperatorLine2 = UIView().then{
         $0.backgroundColor = .systemGray5
@@ -59,6 +61,7 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.text = "memo"
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.numberOfLines = 0
+        $0.setTextWithLineHeight()
     }
     // 재입고 초록색
     let restockLabel = PaddingLabel().then{

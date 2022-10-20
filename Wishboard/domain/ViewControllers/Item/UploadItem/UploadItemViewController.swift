@@ -293,6 +293,7 @@ extension UploadItemViewController {
                 $0.text = "복사한 링크로 아이템 정보를 불러올 수 있어요!"
                 $0.font = UIFont.Suit(size: 10, family: .Regular)
                 $0.textColor = .wishboardGreen
+                $0.setTextWithLineHeight()
             }
             cell.contentView.addSubview(subTitle)
             subTitle.snp.makeConstraints { make in

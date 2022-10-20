@@ -17,22 +17,27 @@ class CartView: UIView {
     let total = UILabel().then{
         $0.text = "전체"
         $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.setTextWithLineHeight()
     }
     let countLabel = UILabel().then{
         $0.text = "0"
         $0.font = UIFont.monteserrat(size: 18, family: .Bold)
+        $0.setTextWithLineHeight()
     }
     let label = UILabel().then{
         $0.text = "개"
         $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.setTextWithLineHeight()
     }
     let price = UILabel().then{
         $0.text = "0"
         $0.font = UIFont.monteserrat(size: 18, family: .Bold)
+        $0.setTextWithLineHeight()
     }
     let won = UILabel().then{
         $0.text = "원"
         $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.setTextWithLineHeight()
     }
     // MARK: - Life Cycles
     var preVC: CartViewController!

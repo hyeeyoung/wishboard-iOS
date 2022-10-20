@@ -21,10 +21,11 @@ class OnBoardingTableViewCell: UITableViewCell {
     }
     // Onbarding label
     let onboardingLabel = UILabel().then{
-        $0.text = "흩어져있는 위시리스트를 위시보드로 간편하게 통합 관리해 보세요!️"
+        $0.text = "흩어져있는 위시리스트를\n위시보드로 간편하게 통합 관리해 보세요!️"
         $0.font = UIFont.Suit()
-        $0.textAlignment = .center
         $0.numberOfLines = 0
+        $0.setTextWithLineHeight()
+        $0.textAlignment = .center
     }
     // 가입하기 버튼
     lazy var registerButton = UIButton().then{

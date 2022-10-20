@@ -29,6 +29,7 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
         $0.text = "쇼핑몰 링크를 다시 확인해 주세요."
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .wishboardRed
+        $0.setTextWithLineHeight()
     }
     let completeButton = UIButton().then{
         $0.defaultButton("아이템 불러오기", .wishboardGreen, .black)
