@@ -104,9 +104,13 @@ class PopUpWithTextFieldViewController: UIViewController {
         let textLength = text.count
         self.countLabel.text = "(" + String(textLength) + "/10)자"
         
-        if textLength > 10 || textLength == 0 {
+        if textLength > 10 {
             completeButton.defaultButton(self.buttonTitle!, .wishboardDisabledGray, .gray)
             self.countLabel.textColor = .wishboardRed
+            completeButton.isEnabled = false
+        } else if textLength == 0 {
+            completeButton.defaultButton(self.buttonTitle!, .wishboardDisabledGray, .gray)
+            self.countLabel.textColor = .wishboardGray
             completeButton.isEnabled = false
         } else {
             completeButton.defaultButton(self.buttonTitle!, .wishboardGreen, .black)
