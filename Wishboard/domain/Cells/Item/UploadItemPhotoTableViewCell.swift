@@ -10,7 +10,7 @@ import Kingfisher
 
 class UploadItemPhotoTableViewCell: UITableViewCell {
     let photoImage = UIImageView().then{
-        $0.backgroundColor = .wishboardTextfieldGray
+        $0.backgroundColor = .uploadPhotoBackground
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 32
         $0.contentMode = .scaleAspectFit

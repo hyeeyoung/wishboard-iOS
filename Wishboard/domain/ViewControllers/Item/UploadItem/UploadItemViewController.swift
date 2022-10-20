@@ -80,7 +80,7 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
         // 사진 선택 Cell
         if tag == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "UploadItemPhotoTableViewCell", for: indexPath) as? UploadItemPhotoTableViewCell else { return UITableViewCell() }
-            
+            cell.selectionStyle = .none
             // 만약 아이템 수정이라면 기존 이미지 출력
             if !isUploadItem {
                 if let itemImageURL = self.wishListData.item_img_url {

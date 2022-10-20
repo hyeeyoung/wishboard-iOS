@@ -92,4 +92,10 @@ extension UIColor{
         blue: 193/255,
         alpha: 1
     )
+    static let uploadPhotoBackground = UIColor(
+        red: 235/255,
+        green: 235/255,
+        blue: 235/255,
+        alpha: 1
+    )
 }
