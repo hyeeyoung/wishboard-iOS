@@ -109,7 +109,7 @@ extension FolderViewController {
     // 폴더 추가 팝업창
     func alertAddDialog() {
         dialog = PopUpWithTextFieldViewController(titleText: "폴더 추가", placeholder: "폴더명", prevText: nil, buttonTitle: "추가")
-        dialog.modalPresentationStyle = .overCurrentContext
+        dialog.modalPresentationStyle = .overFullScreen
         dialog.completeButton.addTarget(self, action: #selector(completeAddButtonDidTap), for: .touchUpInside)
         dialog.textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         self.present(dialog, animated: false, completion: nil)
@@ -119,7 +119,7 @@ extension FolderViewController {
     // 폴더명 수정 팝업창
     func alertModifyDialog(folderData: FolderModel) {
         dialog = PopUpWithTextFieldViewController(titleText: "폴더명 수정", placeholder: "폴더명", prevText: folderData.folder_name, buttonTitle: "수정")
-        dialog.modalPresentationStyle = .overCurrentContext
+        dialog.modalPresentationStyle = .overFullScreen
         let folderMenuGesture = CustomButton(target: self, action: #selector(completeModifyButtonDidTap(_:)))
         folderMenuGesture.folderData = folderData
         dialog.completeButton.addGestureRecognizer(folderMenuGesture)
@@ -131,7 +131,7 @@ extension FolderViewController {
     // 폴더 삭제 팝업창
     func alertDeleteDialog(folderData: FolderModel) {
         let dialog = PopUpViewController(titleText: "폴더 삭제", messageText: "정말 폴더를 삭제하시겠어요?\n폴더가 삭제되어도 아이템은 사라지지 않아요.", greenBtnText: "취소", blackBtnText: "삭제")
-        dialog.modalPresentationStyle = .overCurrentContext
+        dialog.modalPresentationStyle = .overFullScreen
         self.present(dialog, animated: false, completion: nil)
         
         let folderMenuGesture = CustomButton(target: self, action: #selector(deleteFolderButtonDidTap(_:)))

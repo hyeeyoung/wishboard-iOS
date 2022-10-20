@@ -54,7 +54,7 @@ class HomeViewController: UIViewController {
     }
     func alertDialog() {
         let dialog = PopUpViewController(titleText: "알림 허용", messageText: "알림을 받아보시겠어요?\n직접 등록하신 아이템의 재입고 날짜 등의 상품 일정 알림을 받으실 거에요.", greenBtnText: "나중에", blackBtnText: "허용")
-        dialog.modalPresentationStyle = .overCurrentContext
+        dialog.modalPresentationStyle = .overFullScreen
         self.present(dialog, animated: false, completion: nil)
         
         dialog.okBtn.addTarget(self, action: #selector(okButtonDidTap), for: .touchUpInside)

@@ -174,7 +174,7 @@ extension MyPageViewController {
     // 로그아웃 팝업창
     func showLogoutDialog() {
         let dialog = PopUpViewController(titleText: "로그아웃", messageText: "정말 로그아웃 하시겠어요?", greenBtnText: "취소", blackBtnText: "로그아웃")
-        dialog.modalPresentationStyle = .overCurrentContext
+        dialog.modalPresentationStyle = .overFullScreen
         self.present(dialog, animated: false, completion: nil)
         
         dialog.okBtn.addTarget(self, action: #selector(logoutButtonDidTap), for: .touchUpInside)
@@ -183,7 +183,7 @@ extension MyPageViewController {
     func showSignoutDialog() {
         guard let email = self.userInfoData.email else {return}
         let dialog = PopUpDeleteUserViewController(titleText: "회원 탈퇴", messageText: "탈퇴하시면 회원정보는 7일 후 파기됩니다.", greenBtnText: "취소", blackBtnText: "탈퇴", placeholder: "이메일을 입력해주세요.", email: email)
-        dialog.modalPresentationStyle = .overCurrentContext
+        dialog.modalPresentationStyle = .overFullScreen
         self.present(dialog, animated: false, completion: nil)
         
         dialog.okBtn.addTarget(self, action: #selector(signOutButtonDidTap), for: .touchUpInside)
