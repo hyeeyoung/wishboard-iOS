@@ -304,7 +304,12 @@ extension UploadItemViewController {
                 make.centerY.equalToSuperview()
                 make.trailing.equalTo(arrowImg.snp.leading)
             }
-            if !isUploadItem {subTitle.isHidden = true}
+            if !isUploadItem {
+                if let link = self.wishListData.item_url {
+                    if link != "" {subTitle.isHidden = true}
+                    else {subTitle.isHidden = false}
+                }
+            }
             // 만약 쇼핑몰 링크를 수정했다면 업데이트
             if let link = linkvc.link {
                 cell.textLabel?.text = link
