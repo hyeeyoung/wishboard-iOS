@@ -67,6 +67,7 @@ class CartView: UIView {
         cartTableView.rowHeight = UITableView.automaticDimension
         cartTableView.estimatedRowHeight = UITableView.automaticDimension
         cartTableView.showsVerticalScrollIndicator = false
+        cartTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     func setUpView() {
         addSubview(lowerView)
