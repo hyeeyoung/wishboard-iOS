@@ -19,7 +19,10 @@ class CartTableViewCell: UITableViewCell {
         $0.numberOfLines = 0
     }
     let deleteButton = UIButton().then{
-        $0.setImage(UIImage(named: "x"), for: .normal)
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(named: "x")
+        config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        $0.configuration = config
     }
     let minusButton = UIButton().then{
         $0.setImage(UIImage(named: "ic_cart_minus"), for: .normal)
@@ -67,9 +70,9 @@ class CartTableViewCell: UITableViewCell {
             make.leading.equalToSuperview().offset(16)
         }
         deleteButton.snp.makeConstraints { make in
-            make.width.height.equalTo(15)
-            make.top.equalTo(itemImage.snp.top)
-            make.trailing.equalToSuperview().offset(-19)
+            make.width.height.equalTo(44)
+            make.top.equalTo(itemImage.snp.top).offset(-10)
+            make.trailing.equalToSuperview().offset(-9)
         }
         minusButton.snp.makeConstraints { make in
             make.width.height.equalTo(24)
@@ -94,10 +97,10 @@ class CartTableViewCell: UITableViewCell {
             make.centerY.equalTo(won)
         }
         itemName.snp.makeConstraints { make in
-            make.top.equalTo(itemImage.snp.top)
+            make.top.equalTo(itemImage.snp.top).offset(5)
             make.leading.equalTo(itemImage.snp.trailing).offset(10)
             make.trailing.equalTo(deleteButton.snp.leading).offset(-10)
-            make.bottom.equalTo(minusButton.snp.top).offset(-10)
+            make.bottom.lessThanOrEqualTo(minusButton.snp.top).offset(-10)
         }
     }
 }
