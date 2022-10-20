@@ -37,6 +37,8 @@ class CalenderViewController: UIViewController {
         calenderView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+        // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
     }
     @objc func goBack() {
