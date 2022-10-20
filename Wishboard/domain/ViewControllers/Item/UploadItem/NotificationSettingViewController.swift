@@ -137,7 +137,7 @@ extension NotificationSettingViewController: UIPickerViewDelegate, UIPickerViewD
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component {
         case 0:
-            return 3
+            return 5
         case 1:
             return 90
         case 2:
