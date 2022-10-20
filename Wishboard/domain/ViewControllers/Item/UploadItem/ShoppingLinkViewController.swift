@@ -135,17 +135,20 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
         }
     }
     @objc func LinkTextFieldEditingChanged(_ sender: UITextField) {
-        let text = sender.text
-        let trimString = text!.trimmingCharacters(in: .whitespaces)
+        let text = sender.text ?? ""
+        let trimString = text.trimmingCharacters(in: .whitespaces)
         self.tempLink = trimString
         self.shoppingLinkTextField.text = self.tempLink
         self.checkLink(self.tempLink)
     }
     func checkLink(_ link: String) {
         if !verifyURL(url: link) {
-            self.errorMessage.isHidden = false
-            self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .gray)
-            self.completeButton.isEnabled = false
+            if link == "" {self.errorMessage.isHidden = true}
+            else {
+                self.errorMessage.isHidden = false
+                self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .gray)
+                self.completeButton.isEnabled = false
+            }
         } else {
             self.errorMessage.isHidden = true
             self.completeButton.defaultButton("아이템 불러오기", .wishboardGreen, .black)
