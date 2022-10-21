@@ -112,6 +112,8 @@
 		2385582B28E51F7500E6A09E /* FormatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F7C28E39FE800075667 /* FormatManager.swift */; };
 		238EF90628CB06F800ECA606 /* CalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90528CB06F800ECA606 /* CalenderViewController.swift */; };
 		238EF90928CB070700ECA606 /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90828CB070700ECA606 /* CalenderView.swift */; };
+		23933AC6290322A500FAC80A /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23933AC5290322A500FAC80A /* Montserrat-ExtraBold.ttf */; };
+		23933AC82903233A00FAC80A /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23933AC72903233A00FAC80A /* Montserrat-Medium.ttf */; };
 		2395FFF42902E1C1005A8D8F /* UploadItemTextfieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2395FFF32902E1C1005A8D8F /* UploadItemTextfieldTableViewCell.swift */; };
 		2395FFF62902E1D7005A8D8F /* UploadItemBottomSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2395FFF52902E1D7005A8D8F /* UploadItemBottomSheetTableViewCell.swift */; };
 		239ED94C28E5D8A500CBCCAD /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239ED94B28E5D8A500CBCCAD /* NetworkCheck.swift */; };
@@ -307,6 +309,8 @@
 		2385582628E51DD000E6A09E /* ShareDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDataManager.swift; sourceTree = "<group>"; };
 		238EF90528CB06F800ECA606 /* CalenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderViewController.swift; sourceTree = "<group>"; };
 		238EF90828CB070700ECA606 /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
+		23933AC5290322A500FAC80A /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
+		23933AC72903233A00FAC80A /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		2395FFF32902E1C1005A8D8F /* UploadItemTextfieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemTextfieldTableViewCell.swift; sourceTree = "<group>"; };
 		2395FFF52902E1D7005A8D8F /* UploadItemBottomSheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemBottomSheetTableViewCell.swift; sourceTree = "<group>"; };
 		239ED94B28E5D8A500CBCCAD /* NetworkCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheck.swift; sourceTree = "<group>"; };
@@ -870,6 +874,8 @@
 		234F837D28C9677500C4EB41 /* monteserrat */ = {
 			isa = PBXGroup;
 			children = (
+				23933AC72903233A00FAC80A /* Montserrat-Medium.ttf */,
+				23933AC5290322A500FAC80A /* Montserrat-ExtraBold.ttf */,
 				2374789328D1C9D600CF941A /* Montserrat-Bold.ttf */,
 				2374789428D1C9D600CF941A /* Montserrat-Light.ttf */,
 				2374789528D1C9D600CF941A /* Montserrat-Regular.ttf */,
@@ -1501,6 +1507,7 @@
 				23C9569E28C68D7A00D88536 /* SUIT-Medium.ttf in Resources */,
 				2374789828D1C9D600CF941A /* Montserrat-Regular.ttf in Resources */,
 				23DC04BA28C58B5500ABB0CF /* LaunchScreen.storyboard in Resources */,
+				23933AC82903233A00FAC80A /* Montserrat-Medium.ttf in Resources */,
 				2374789728D1C9D600CF941A /* Montserrat-Light.ttf in Resources */,
 				2374789628D1C9D600CF941A /* Montserrat-Bold.ttf in Resources */,
 				23C9569728C68D7A00D88536 /* SUIT-Heavy.ttf in Resources */,
@@ -1512,6 +1519,7 @@
 				23DC04B728C58B5500ABB0CF /* Assets.xcassets in Resources */,
 				236FE90428DF7BE0006142DB /* SUIT-Bold.ttf in Resources */,
 				23DC04B528C58B5200ABB0CF /* Main.storyboard in Resources */,
+				23933AC6290322A500FAC80A /* Montserrat-ExtraBold.ttf in Resources */,
 				23C9569828C68D7A00D88536 /* SUIT-ExtraLight.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

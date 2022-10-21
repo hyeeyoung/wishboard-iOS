@@ -19,6 +19,8 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Montserrat-Medium.ttf</string>
+		<string>Montserrat-ExtraBold.ttf</string>
 		<string>SUIT-Medium.ttf</string>
 		<string>Montserrat-Regular.ttf</string>
 		<string>Montserrat-Light.ttf</string>

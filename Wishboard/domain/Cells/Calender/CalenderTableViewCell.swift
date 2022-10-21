@@ -12,17 +12,19 @@ class CalenderTableViewCell: UITableViewCell {
     var calender: FSCalendar!
     var events: [Date] = []
     
+    let weekSeperator = UIView().then{
+        $0.backgroundColor = .wishboardDisabledGray
+    }
+    let underSeperator = UIView().then{
+        $0.backgroundColor = .wishboardDisabledGray
+    }
+    
     //MARK: - Life Cycles
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setCalender()
         
-        contentView.addSubview(calender)
-        calender.snp.makeConstraints { make in
-            make.top.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(385)
-        }
         NotificationDataManager().getCalenderNotificationDataManager(self)
     }
     required init?(coder: NSCoder) {
@@ -42,9 +44,9 @@ class CalenderTableViewCell: UITableViewCell {
             
             $0.appearance.headerTitleColor = .black
             $0.appearance.weekdayTextColor = .black
-            $0.appearance.headerTitleFont = UIFont.Suit(size: 20, family: .Bold)
+            $0.appearance.headerTitleFont = UIFont.monteserrat(size: 20, family: .ExtraBold)
             $0.appearance.titleFont = UIFont.Suit(size: 16, family: .Regular)
-            $0.appearance.weekdayFont = UIFont.Suit(size: 16, family: .Medium)
+            $0.appearance.weekdayFont = UIFont.monteserrat(size: 14, family: .Medium)
             $0.appearance.subtitleFont = UIFont.Suit(size: 16, family: .Bold)
             
             $0.appearance.todayColor = .wishboardGreen
@@ -55,6 +57,23 @@ class CalenderTableViewCell: UITableViewCell {
             
             $0.appearance.eventDefaultColor = .wishboardLightGreen
             $0.appearance.eventSelectionColor = .wishboardLightGreen
+        }
+        contentView.addSubview(calender)
+        calender.addSubview(weekSeperator)
+        calender.addSubview(underSeperator)
+        
+        calender.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(385)
+        }
+        weekSeperator.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(80)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(1)
+        }
+        underSeperator.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(1)
         }
     }
     

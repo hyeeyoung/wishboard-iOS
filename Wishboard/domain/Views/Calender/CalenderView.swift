@@ -41,7 +41,7 @@ class CalenderView: UIView {
             $0.rowHeight = UITableView.automaticDimension
             $0.estimatedRowHeight = UITableView.automaticDimension
             $0.showsVerticalScrollIndicator = false
-            $0.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            $0.separatorStyle = .none
         }
     }
     func setUpView() {
@@ -52,8 +52,8 @@ class CalenderView: UIView {
         backButton.snp.makeConstraints { make in
             make.width.height.equalTo(44)
             make.leading.equalToSuperview().offset(6)
-            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(66)}
-            else {make.top.equalToSuperview().offset(35)}
+            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(56)}
+            else {make.top.equalToSuperview().offset(25)}
         }
         calenderTableView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
