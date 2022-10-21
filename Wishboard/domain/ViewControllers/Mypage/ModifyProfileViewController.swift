@@ -14,6 +14,7 @@ class ModifyProfileViewController: TitleCenterViewController {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 53
         $0.contentMode = .scaleAspectFill
+        $0.isUserInteractionEnabled = true
     }
     let cameraButton = UIButton().then{
         $0.setImage(UIImage(named: "camera_gray"), for: .normal)
@@ -111,6 +112,7 @@ extension ModifyProfileViewController {
 // MARK: Set Targets
 extension ModifyProfileViewController {
     func setTarget() {
+        self.profileImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(goAlbumImageDidTap)))
         self.cameraButton.addTarget(self, action: #selector(goAlbumButtonDidTap), for: .touchUpInside)
         self.nameTextField.addTarget(self, action: #selector(nameTextFieldEditingChanged(_:)), for: .editingChanged)
         self.completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
@@ -121,6 +123,12 @@ extension ModifyProfileViewController {
         self.nickname = text
     }
     // 앨범에서 사진/동영상 선택
+    // 프로필 이미지 클릭 시
+    @objc func goAlbumImageDidTap(sender: UITapGestureRecognizer) {
+        self.imagePickerController.sourceType = .photoLibrary
+        self.present(imagePickerController, animated: true, completion: nil)
+    }
+    // 카메라 클릭 시
     @objc func goAlbumButtonDidTap() {
         self.imagePickerController.sourceType = .photoLibrary
         self.present(imagePickerController, animated: true, completion: nil)
