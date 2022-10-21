@@ -44,6 +44,7 @@ class SetFolderBottomSheetViewController: UIViewController {
             preVC.wishListData.folder_id = self.selectedFolderId
             preVC.wishListData.folder_name = self.selectedFolder
             preVC.uploadItemView.uploadContentTableView.reloadRows(at: [indexPath], with: .automatic)
+            preVC.view.endEditing(true)
         }
         if let preVC = self.preItemDetailVC {
             if let itemId = self.itemId {

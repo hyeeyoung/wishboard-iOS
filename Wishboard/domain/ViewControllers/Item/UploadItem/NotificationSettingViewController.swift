@@ -66,10 +66,12 @@ class NotificationSettingViewController: UIViewController {
         if !isExit {
             self.preVC.wishListData.item_notification_type = self.notiType
             self.preVC.wishListData.item_notification_date = FormatManager().koreanStrToDate(self.dateAndTime!)
-            print("???", FormatManager().koreanStrToDate(self.dateAndTime!))
             
             let indexPath = IndexPath(row: 3, section: 0)
             self.preVC.uploadItemView.uploadContentTableView.reloadRows(at: [indexPath], with: .automatic)
+            self.preVC.view.endEditing(true)
+        } else {
+            self.preVC.view.endEditing(true)
         }
     }
     override func viewDidAppear(_ animated: Bool) {

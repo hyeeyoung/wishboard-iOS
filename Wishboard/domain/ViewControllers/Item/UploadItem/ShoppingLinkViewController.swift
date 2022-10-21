@@ -81,6 +81,9 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
             self.preVC.uploadItemView.uploadImageTableView.reloadData()
             self.preVC.uploadItemView.uploadContentTableView.reloadRows(at: [indexPath1, indexPath2, indexPath5], with: .automatic)
             self.preVC.isValidContent()
+            self.preVC.view.endEditing(true)
+        } else {
+            self.preVC.view.endEditing(true)
         }
     }
     override func viewDidAppear(_ animated: Bool) {

@@ -27,6 +27,7 @@ class UploadItemViewController: UIViewController {
     var wishListData: WishListModel!
     // keyboard
     var restoreFrameValue: CGFloat = 0.0
+    var preKeyboardHeight: CGFloat = 0.0
     
     // MARK: - Life Cycles
     override func viewDidLoad() {
@@ -174,8 +175,8 @@ extension UploadItemViewController {
         uploadItemView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview()
         }
-//        uploadItemView.setImageTableView.keyboardDismissMode = .onDrag
-//        uploadItemView.setContentTableView.keyboardDismissMode = .onDrag
+        uploadItemView.uploadImageTableView.keyboardDismissMode = .onDrag
+        uploadItemView.uploadContentTableView.keyboardDismissMode = .onDrag
         
         if isUploadItem {
             self.tabBarController?.tabBar.isHidden = false
@@ -375,9 +376,6 @@ extension UploadItemViewController: UIImagePickerControllerDelegate, UINavigatio
             self.selectedImage = image
             isValidContent()
             
-            // 첫번째 셀만 reload
-//            let indexPath = IndexPath(row: 0, section: 0)
-//            self.uploadItemView.uploadContentTableView.reloadRows(at: [indexPath], with: .automatic)
             self.uploadItemView.uploadImageTableView.reloadData()
         }
         // 카메라에서 사진 찍은 경우
@@ -385,9 +383,6 @@ extension UploadItemViewController: UIImagePickerControllerDelegate, UINavigatio
             self.selectedImage = image
             isValidContent()
             
-            // 첫번째 셀만 reload
-//            let indexPath = IndexPath(row: 0, section: 0)
-//            self.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
             self.uploadItemView.uploadImageTableView.reloadData()
         }
         picker.dismiss(animated: true, completion: nil)
@@ -427,7 +422,16 @@ extension UploadItemViewController: UITextFieldDelegate {
         if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            self.view.frame.origin.y -= keyboardHeight
+            print("pre:", preKeyboardHeight, "curr:", keyboardHeight)
+            if preKeyboardHeight < keyboardHeight {
+                let dif = keyboardHeight - preKeyboardHeight
+                self.view.frame.origin.y -= dif / 1.2
+                preKeyboardHeight = keyboardHeight
+            } else if preKeyboardHeight > keyboardHeight {
+                let dif = preKeyboardHeight - keyboardHeight
+                self.view.frame.origin.y += dif / 1.2
+                preKeyboardHeight = keyboardHeight
+            }
         }
         print("keyboard Will appear Execute")
     }
@@ -457,6 +461,7 @@ extension UploadItemViewController: UITextFieldDelegate {
 
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         print("textFieldShouldEndEditing Execute")
+        self.preKeyboardHeight = 0.0
         self.view.frame.origin.y = self.restoreFrameValue
         return true
     }
