@@ -130,6 +130,7 @@ extension CartView: UITableViewDelegate, UITableViewDataSource {
         let itemIdx = indexPath.item
         cell.setUpData(self.cartData[itemIdx])
         
+        // 수량 변경 버튼 이벤트
         let plusGesture = CartGesture(target: self, action: #selector(plusButtonDidTap(_:)))
         let minusGesture = CartGesture(target: self, action: #selector(minusButtonDidTap(_:)))
         let deleteGesture = CartGesture(target: self, action: #selector(deleteButtonDidTap(_:)))
@@ -142,6 +143,15 @@ extension CartView: UITableViewDelegate, UITableViewDataSource {
         cell.minusButton.addGestureRecognizer(minusGesture)
         cell.deleteButton.addGestureRecognizer(deleteGesture)
         
+        // 장바구니 아이템 클릭 이벤트 (이미지, 상품명만)
+        let cartItemImageGesture = CartGesture(target: self, action: #selector(cartItemDidTap(_:)))
+        cartItemImageGesture.cartItem = self.cartData[itemIdx]
+        cell.itemImage.addGestureRecognizer(cartItemImageGesture)
+        
+        let cartItemNameGesture = CartGesture(target: self, action: #selector(cartItemDidTap(_:)))
+        cartItemNameGesture.cartItem = self.cartData[itemIdx]
+        cell.itemName.addGestureRecognizer(cartItemNameGesture)
+        
         cell.selectionStyle = .none
         return cell
     }
@@ -149,10 +159,6 @@ extension CartView: UITableViewDelegate, UITableViewDataSource {
         return 112
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let itemIdx = indexPath.item
-        let vc = ItemDetailViewController()
-        vc.itemId = self.cartData[itemIdx].wishItem?.item_id
-        self.preVC.navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -180,6 +186,14 @@ extension CartView {
     @objc func deleteButtonDidTap(_ sender: CartGesture) {
         guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
         CartDataManager().deleteCartDataManager(itemId, self)
+    }
+    // 상품 이미지, 상품명 클릭 (아이템 디테일 화면으로 이동)
+    @objc func cartItemDidTap(_ sender: CartGesture) {
+        print("click")
+        guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
+        let vc = ItemDetailViewController()
+        vc.itemId = itemId
+        self.preVC.navigationController?.pushViewController(vc, animated: true)
     }
     // MARK: 계산
     func calculate() {

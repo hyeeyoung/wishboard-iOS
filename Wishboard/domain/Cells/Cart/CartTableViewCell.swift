@@ -8,15 +8,17 @@
 import UIKit
 
 class CartTableViewCell: UITableViewCell {
-    let itemImage = UIImageView().then{
+    lazy var itemImage = UIImageView().then{
         $0.backgroundColor = .systemGray6
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
+        $0.isUserInteractionEnabled = true
     }
     let itemName = UILabel().then{
         $0.text = "itemName"
         $0.font = UIFont.Suit(size: 12.5, family: .Regular)
-        $0.numberOfLines = 0
+        $0.numberOfLines = 2
+        $0.isUserInteractionEnabled = true
     }
     let deleteButton = UIButton().then{
         var config = UIButton.Configuration.plain()
@@ -105,8 +107,8 @@ class CartTableViewCell: UITableViewCell {
         itemName.snp.makeConstraints { make in
             make.top.equalTo(itemImage.snp.top).offset(5)
             make.leading.equalTo(itemImage.snp.trailing).offset(10)
-            make.trailing.equalTo(deleteButton.snp.leading).offset(-10)
-            make.bottom.lessThanOrEqualTo(minusButton.snp.top).offset(-10)
+            make.trailing.equalTo(deleteButton.snp.leading)
+//            make.bottom.lessThanOrEqualTo(minusButton.snp.top).offset(-10)
         }
     }
 }
