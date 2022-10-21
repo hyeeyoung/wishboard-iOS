@@ -45,7 +45,7 @@ class NotificationSettingViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         self.view.roundCornersDiffernt(topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0)
         
-        self.notiType = "세일 마감"
+        self.notiType = "재입고"
         let setNotificationDate = SetNotificationDate()
         self.date = setNotificationDate.currentYear + "년 " + setNotificationDate.currentMonth + "월 " + setNotificationDate.currentDay + "일"
         self.dateAndTime = self.date + " " + self.hour + ":" + self.minute
@@ -66,9 +66,10 @@ class NotificationSettingViewController: UIViewController {
         if !isExit {
             self.preVC.wishListData.item_notification_type = self.notiType
             self.preVC.wishListData.item_notification_date = FormatManager().koreanStrToDate(self.dateAndTime!)
+            print("???", FormatManager().koreanStrToDate(self.dateAndTime!))
             
-            let indexPath = IndexPath(row: 4, section: 0)
-            self.preVC.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
+            let indexPath = IndexPath(row: 3, section: 0)
+            self.preVC.uploadItemView.uploadContentTableView.reloadRows(at: [indexPath], with: .automatic)
         }
     }
     override func viewDidAppear(_ animated: Bool) {

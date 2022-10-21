@@ -70,13 +70,13 @@ class SetNotificationDate {
                     dateMonth = dateMonth + 1
                 }
                 dateDay = dateDay + 1
-                dateData.append(currentYear + "년 " + setNumber(num: dateMonth) + "월 " + setNumber(num: dateDay) + "일")
+                dateData.append(setNumber(num: dateYear) + "년 " + setNumber(num: dateMonth) + "월 " + setNumber(num: dateDay) + "일")
                 break
             case 12:
                 if dateDay == 31 {
                     dateDay = 0
                     dateMonth = 1
-                    dateYear = 1
+                    dateYear = dateYear + 1
                 }
                 dateDay = dateDay + 1
                 dateData.append(setNumber(num: dateYear) + "년 " + setNumber(num: dateMonth) + "월 " + setNumber(num: dateDay) + "일")
@@ -87,7 +87,7 @@ class SetNotificationDate {
                     dateMonth = dateMonth + 1
                 }
                 dateDay = dateDay + 1
-                dateData.append(currentYear + "년 " + setNumber(num: dateMonth) + "월 " + setNumber(num: dateDay) + "일")
+                dateData.append(setNumber(num: dateYear) + "년 " + setNumber(num: dateMonth) + "월 " + setNumber(num: dateDay) + "일")
                 break
             default:
                 if dateDay == 30 {
@@ -95,7 +95,7 @@ class SetNotificationDate {
                     dateMonth = dateMonth + 1
                 }
                 dateDay = dateDay + 1
-                dateData.append(currentYear + "년 " + setNumber(num: dateMonth) + "월 " + setNumber(num: dateDay) + "일")
+                dateData.append(setNumber(num: dateYear) + "년 " + setNumber(num: dateMonth) + "월 " + setNumber(num: dateDay) + "일")
                 break
                 
             }

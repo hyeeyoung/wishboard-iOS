@@ -112,7 +112,7 @@ class NotificationSettingViewController: UIViewController {
     }
     @objc func goShareLinkPage() {
         self.isExit = false
-        if self.notiType == nil {self.notiType = "세일 마감"}
+        if self.notiType == nil {self.notiType = "재입고"}
         if self.dateAndTime == nil {
             let setNotificationDate = SetNotificationDate()
             self.date = setNotificationDate.currentYear + "년 " + setNotificationDate.currentMonth + "월 " + setNotificationDate.currentDay + "일"

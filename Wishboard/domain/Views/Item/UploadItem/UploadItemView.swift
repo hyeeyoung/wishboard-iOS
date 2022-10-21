@@ -26,7 +26,9 @@ class UploadItemView: UIView {
     }
     
     // MARK: - Life Cycles
-    var uploadItemTableView: UITableView!
+//    var uploadItemTableView: UITableView!
+    var uploadImageTableView: UITableView!
+    var uploadContentTableView: UITableView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -48,11 +50,25 @@ class UploadItemView: UIView {
             saveButton.isEnabled = false
         }
     }
-    func setTableView(dataSourceDelegate: UITableViewDelegate & UITableViewDataSource) {
-        uploadItemTableView = UITableView().then{
+    func setImageTableView(dataSourceDelegate: UITableViewDelegate & UITableViewDataSource) {
+        uploadImageTableView = UITableView().then{
             $0.delegate = dataSourceDelegate
             $0.dataSource = dataSourceDelegate
             $0.register(UploadItemPhotoTableViewCell.self, forCellReuseIdentifier: "UploadItemPhotoTableViewCell")
+            
+            // autoHeight
+            $0.rowHeight = UITableView.automaticDimension
+            $0.estimatedRowHeight = UITableView.automaticDimension
+            $0.showsVerticalScrollIndicator = false
+            $0.separatorStyle = .none
+        }
+    }
+    func setContentTableView(dataSourceDelegate: UITableViewDelegate & UITableViewDataSource) {
+        uploadContentTableView = UITableView().then{
+            $0.delegate = dataSourceDelegate
+            $0.dataSource = dataSourceDelegate
+            $0.register(UploadItemTextfieldTableViewCell.self, forCellReuseIdentifier: "UploadItemTextfieldTableViewCell")
+            $0.register(UploadItemBottomSheetTableViewCell.self, forCellReuseIdentifier: "UploadItemBottomSheetTableViewCell")
             
             // autoHeight
             $0.rowHeight = UITableView.automaticDimension
@@ -67,14 +83,20 @@ class UploadItemView: UIView {
         navigationView.addSubview(backButton)
         navigationView.addSubview(saveButton)
         
-        addSubview(uploadItemTableView)
+        addSubview(uploadImageTableView)
+        addSubview(uploadContentTableView)
     }
     func setUpConstraint() {
         setUpNavigationConstraint()
         
-        uploadItemTableView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
+        uploadImageTableView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
             make.top.equalTo(navigationView.snp.bottom)
+            make.height.equalTo(251)
+        }
+        uploadContentTableView.snp.makeConstraints { make in
+            make.top.equalTo(uploadImageTableView.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
     func setUpNavigationConstraint() {

@@ -74,11 +74,12 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
             self.preVC.wishListData.item_url = self.link
             self.preVC.isValidContent()
             
-            let indexPath0 = IndexPath(row: 0, section: 0)
-            let indexPath1 = IndexPath(row: 1, section: 0)
-            let indexPath2 = IndexPath(row: 2, section: 0)
-            let indexPath5 = IndexPath(row: 5, section: 0)
-            self.preVC.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath0, indexPath1, indexPath2, indexPath5], with: .automatic)
+//            let indexPath0 = IndexPath(row: 0, section: 0)
+            let indexPath1 = IndexPath(row: 0, section: 0)
+            let indexPath2 = IndexPath(row: 1, section: 0)
+            let indexPath5 = IndexPath(row: 4, section: 0)
+            self.preVC.uploadItemView.uploadImageTableView.reloadData()
+            self.preVC.uploadItemView.uploadContentTableView.reloadRows(at: [indexPath1, indexPath2, indexPath5], with: .automatic)
             self.preVC.isValidContent()
         }
     }

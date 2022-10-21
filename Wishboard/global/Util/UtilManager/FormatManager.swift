@@ -10,6 +10,7 @@ import Foundation
 class FormatManager {
     // MARK: - Date
     // 서버에서 받은 created_at을 "YY년 MM월 dd일 HH:mm"로 변환
+    // '0일 전', '0주전' 으로 변환
     func createdDateToKoreanStr(_ date: String) -> String? {
         let dateToDate = date.toCreatedDate()  //YYYY-MM-dd HH:mm:ss
         var dateNum: Int!
@@ -41,7 +42,6 @@ class FormatManager {
         }
     }
     // 서버에서 받은 notification_date를 "YY년 MM월 dd일 HH:mm"로 변환
-    // '0일 전', '0주전' 으로 변환
     func notiDateToKoreanStr(_ date: String) -> String? {
         let dateToDate = date.toNotiDate() //YYYY-MM-dd HH:mm
         let dateformatter = DateFormatter()
@@ -122,7 +122,7 @@ extension String {
 extension Date {
     func toString() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
         dateFormatter.timeZone = TimeZone(identifier: "ko_KR")
         return dateFormatter.string(from: self)
     }

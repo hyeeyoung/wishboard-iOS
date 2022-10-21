@@ -40,9 +40,10 @@ class SetFolderBottomSheetViewController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         if let preVC = self.preUploadVC {
-            let indexPath = IndexPath(row: 3, section: 0)
+            let indexPath = IndexPath(row: 2, section: 0)
             preVC.wishListData.folder_id = self.selectedFolderId
-            preVC.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
+            preVC.wishListData.folder_name = self.selectedFolder
+            preVC.uploadItemView.uploadContentTableView.reloadRows(at: [indexPath], with: .automatic)
         }
         if let preVC = self.preItemDetailVC {
             if let itemId = self.itemId {

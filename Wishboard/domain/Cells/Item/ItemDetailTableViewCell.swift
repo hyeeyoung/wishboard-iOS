@@ -198,10 +198,21 @@ class ItemDetailTableViewCell: UITableViewCell {
         }
         if let memo = data.item_memo {
             if memo != "" {
-                self.memoContentLabel.isHidden = false
-                self.seperatorLine2.isHidden = false
-                self.memoTitlelabel.isHidden = false
-                self.memoContentLabel.text = memo
+                // 쇼핑몰 링크가 없고, 메모가 있는 경우
+                if let link = data.item_url {
+                    if link == "" {
+                        self.seperatorLine2.isHidden = true
+                        self.memoContentLabel.isHidden = false
+                        self.memoTitlelabel.isHidden = false
+                        self.memoContentLabel.text = memo
+                    } else {
+                        // 쇼핑몰 링크가 있고, 메모가 있는 경우
+                        self.memoContentLabel.isHidden = false
+                        self.seperatorLine2.isHidden = false
+                        self.memoTitlelabel.isHidden = false
+                        self.memoContentLabel.text = memo
+                    }
+                }
             }
             else {
                 self.seperatorLine2.isHidden = true
