@@ -186,7 +186,10 @@ class ItemDetailTableViewCell: UITableViewCell {
             if link != "" {
                 self.linkLabel.isHidden = false
                 self.seperatorLine2.isHidden = false
-                self.linkLabel.text = link
+                // link 도메인만 보이게
+                var url = URL(string: link)
+                var domain = url?.host
+                self.linkLabel.text = domain
             }
             else {
                 self.linkLabel.isHidden = true
