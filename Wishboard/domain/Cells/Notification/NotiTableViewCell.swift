@@ -127,10 +127,14 @@ extension NotiTableViewCell {
         // 알람 시간 파싱 ('오전 0시 0분')
         let dateStr = data.item_notification_date
         let myDateFormatter = DateFormatter()
-        myDateFormatter.dateFormat = "a HH시 mm분" // 2020년 08월 13일 오후 04시 30분
+        myDateFormatter.dateFormat = "a h시 mm분" // 2020년 08월 13일 오후 04시 30분
         myDateFormatter.locale = Locale(identifier:"ko_KR")
-        let notificationTime = myDateFormatter.string(from: (dateStr?.toCreatedDate()!)!)
+        let notificationTimeStr = myDateFormatter.string(from: (dateStr?.toCreatedDate()!)!)
         
+        // 00분인지, 30분인지 구분
+        let minute = notificationTimeStr[notificationTimeStr.index(notificationTimeStr.endIndex, offsetBy: -3)]
+        var notificationTime = notificationTimeStr
+        if minute != "3" {notificationTime = String(notificationTimeStr.dropLast(3))}
         self.timeLabel.text = notificationTime
     }
 }
