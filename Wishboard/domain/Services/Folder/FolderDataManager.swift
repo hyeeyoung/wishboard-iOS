@@ -48,6 +48,13 @@ class FolderDataManager {
             case .success(let result):
                 viewcontroller.addFolderAPISuccess(result)
             case .failure(let error):
+                let statusCode = error.responseCode
+                switch statusCode {
+                case 409:
+                    viewcontroller.sameFolderNameFail()
+                default:
+                    print(error.responseCode)
+                }
                 print(error.responseCode)
             }
         }
@@ -64,7 +71,13 @@ class FolderDataManager {
             case .success(let result):
                 viewcontroller.modifyFolderAPISuccess(result)
             case .failure(let error):
-                viewcontroller.modifyFolderAPIFail()
+                let statusCode = error.responseCode
+                switch statusCode {
+                case 400, 409:
+                    viewcontroller.sameFolderNameFail()
+                default:
+                    print(error.responseCode)
+                }
                 print(error.responseCode)
             }
         }

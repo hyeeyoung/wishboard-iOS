@@ -228,9 +228,9 @@ extension FolderViewController {
         FolderDataManager().getFolderDataManager(self)
         print(result.message)
     }
-    func modifyFolderAPIFail() {
+    func sameFolderNameFail() {
         self.dismiss(animated: false)
-        print("폴더명 수정 Error")
+        SnackBar(self, message: .checkFolderName)
     }
     // MARK: 폴더 삭제 API
     func deleteFolderAPISuccess(_ result: APIModel<ResultModel>) {
