@@ -25,8 +25,6 @@ class CartViewController: TitleCenterViewController {
             make.bottom.equalToSuperview().offset(-tabBarHeight)
         }
         cartView.preVC = self
-        // DATA
-        CartDataManager().getCartListDataManager(self.cartView)
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
