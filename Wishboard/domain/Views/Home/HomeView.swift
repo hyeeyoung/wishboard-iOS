@@ -30,6 +30,7 @@ class HomeView: UIView {
     var collectionView : UICollectionView!
     var wishListData: [WishListModel] = []
     let emptyMessage = "앗, 아이템이 없어요!\n갖고 싶은 아이템을 등록해보세요!"
+    var refreshControl = UIRefreshControl()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,6 +38,8 @@ class HomeView: UIView {
         setCollectionView()
         setUpView()
         setUpConstraint()
+        
+        initRefresh()
     }
     
     required init?(coder: NSCoder) {
@@ -172,6 +175,27 @@ extension HomeView {
                                   animations: { () -> Void in
                                     self.collectionView.reloadData()},
                                 completion: nil);
+        refreshControl.endRefreshing()
+    }
+}
+// MARK: - Refresh
+extension HomeView {
+    func initRefresh() {
+        refreshControl.addTarget(self, action: #selector(refreshTable(refresh:)), for: .valueChanged)
+        
+        refreshControl.backgroundColor = .white
+        refreshControl.tintColor = .black
+        
+        collectionView.refreshControl = refreshControl
+    }
+    
+    @objc func refreshTable(refresh: UIRefreshControl) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            // DATA reload
+            WishListDataManager().wishListDataManager(self, self.viewController)
+            self.collectionView.reloadData()
+            refresh.endRefreshing()
+        }
     }
 }
 // MARK: - CartGesture
