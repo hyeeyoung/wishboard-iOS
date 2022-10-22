@@ -63,6 +63,8 @@ class NotificationSettingViewController: UIViewController {
             self.preVC.shareView.setNotificationButton.setNotificationButton(dT + " " + nT, true)
             preVC.notificationType = nT
             preVC.notificationDate = dT
+            
+            preVC.view.endEditing(true)
         }
     }
     override func viewDidAppear(_ animated: Bool) {

@@ -51,7 +51,7 @@ class CalenderTableViewCell: UITableViewCell {
             
             $0.appearance.todayColor = .wishboardGreen
             $0.appearance.titleTodayColor = .black
-            $0.appearance.selectionColor = .wishboardGreen
+            $0.appearance.selectionColor = .clear
             $0.appearance.todaySelectionColor = .wishboardGreen
             $0.appearance.titleSelectionColor = .black
             

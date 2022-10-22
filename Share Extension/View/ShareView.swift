@@ -22,15 +22,17 @@ class ShareView: UIView {
     lazy var quitButton = UIButton().then{
         $0.setImage(UIImage(named: "x"), for: .normal)
     }
-    let itemName = UILabel().then{
+    let itemNameTextField = UITextField().then{
+        $0.borderStyle = .none
         $0.text = "itemName"
         $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.numberOfLines = 1
         $0.textAlignment = .center
     }
-    let itemPrice = UILabel().then{
+    let itemPriceTextField = UITextField().then{
+        $0.borderStyle = .none
         $0.text = "0000"
         $0.font = .systemFont(ofSize: 12, weight: .bold)
+        $0.keyboardType = .numberPad
     }
     var setNotificationButton = UIButton().then{
         $0.setNotificationButton("", false)
@@ -73,8 +75,8 @@ class ShareView: UIView {
     func setUpView() {
         addSubview(backgroundView)
         backgroundView.addSubview(quitButton)
-        backgroundView.addSubview(itemName)
-        backgroundView.addSubview(itemPrice)
+        backgroundView.addSubview(itemNameTextField)
+        backgroundView.addSubview(itemPriceTextField)
         backgroundView.addSubview(setNotificationButton)
         backgroundView.addSubview(addFolderButton)
         backgroundView.addSubview(folderCollectionView)
@@ -92,18 +94,18 @@ class ShareView: UIView {
             make.trailing.equalToSuperview().offset(-16)
             make.top.equalToSuperview().offset(12)
         }
-        itemName.snp.makeConstraints { make in
+        itemNameTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalToSuperview().offset(50)
         }
-        itemPrice.snp.makeConstraints { make in
+        itemPriceTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(itemName.snp.bottom).offset(2)
+            make.top.equalTo(itemNameTextField.snp.bottom).offset(2)
         }
         setNotificationButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(itemPrice.snp.bottom).offset(12)
+            make.top.equalTo(itemPriceTextField.snp.bottom).offset(12)
         }
         addFolderButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)

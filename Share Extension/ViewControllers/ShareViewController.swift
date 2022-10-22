@@ -29,10 +29,22 @@ class ShareViewController: UIViewController {
     var itemPrice: String?
     var notificationType: String?
     var notificationDate: String?
+    
+    var numberFormatter: NumberFormatter!
+    // keyboard
+    var restoreFrameValue: CGFloat = 0.0
+    var preKeyboardHeight: CGFloat = 0.0
+    
     //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .clear
+        
+        // keyboard
+        self.restoreFrameValue = self.view.frame.origin.y
+        // itemPrice numberFormat
+        numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
         
         setUpShareView()
         
@@ -43,6 +55,14 @@ class ShareViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.addKeyboardNotifications()
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        self.removeKeyboardNotifications()
     }
     //MARK: - Functions
     func setUpShareView() {
@@ -59,6 +79,8 @@ class ShareViewController: UIViewController {
         notivc = NotificationSettingViewController()
         newFoldervc = NewFolderViewController()
         // Add Targets
+        shareView.itemNameTextField.addTarget(self, action: #selector(itemNameTextFieldEditingChanged(_:)), for: .editingChanged)
+        shareView.itemPriceTextField.addTarget(self, action: #selector(itemPriceTextFieldEditingChanged(_:)), for: .editingChanged)
         shareView.quitButton.addTarget(self, action: #selector(quit), for: .touchUpInside)
         shareView.completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
         shareView.setNotificationButton.addTarget(self, action: #selector(showNotificationBottomSheet), for: .touchUpInside)
@@ -84,6 +106,42 @@ class ShareViewController: UIViewController {
         }
     }
     // MARK: - Actions
+    // 상품명 편집
+    @objc func itemNameTextFieldEditingChanged(_ sender: UITextField) {
+        let text = sender.text ?? ""
+        self.itemName = text
+        print(self.itemName)
+        setButton()
+    }
+    // 상품가격 편집
+    @objc func itemPriceTextFieldEditingChanged(_ sender: UITextField) {
+        let text = sender.text ?? ""
+        self.itemPrice = setPriceString(text)
+        if let priceStr = self.itemPrice {
+            guard let price = Float(priceStr) else {return}
+            sender.text = numberFormatter.string(from: NSNumber(value: price))
+        }
+        print(self.itemPrice)
+        setButton()
+    }
+    func setPriceString(_ str: String) -> String {
+        let myString = str.replacingOccurrences(of: ",", with: "")
+        return myString
+    }
+    func isValidContent() -> Bool {
+        if self.itemName != "" && self.itemPrice != "" {return true}
+        else {return false}
+    }
+    func setButton() {
+        if isValidContent() {
+            shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardGreen, .black)
+            shareView.completeButton.isEnabled = true
+        } else {
+            shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardDisabledGray, .dialogMessageColor)
+            shareView.completeButton.isEnabled = false
+        }
+    }
+    // X버튼 클릭
     @objc func quit() {
         self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
     }
@@ -102,7 +160,7 @@ class ShareViewController: UIViewController {
                 // 폴더 & 알림 날짜 설정까지 했을 경우
                 if var notificationDate = self.notificationDate {
                     notificationDate = FormatManager().koreanStrToDate(notificationDate)!
-                    ShareDataManager().uploadItemDataManager(self.selectedFolderIdx!, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self.notificationType!, notificationDate, self)
+                    ShareDataManager().uploadItemDataManager(self.selectedFolderIdx!, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self.notificationType!, notificationDate + ":00", self)
                 } else {
                     // 폴더만 설정했을 경우
                     ShareDataManager().uploadItemDataManager(self.selectedFolderIdx!, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self)
@@ -186,8 +244,8 @@ extension ShareViewController {
         self.itemPrice = itemPrice
         
         self.shareView.itemImage.kf.setImage(with: URL(string: itemImg), placeholder: UIImage())
-        self.shareView.itemName.text = self.itemName
-        self.shareView.itemPrice.text = FormatManager().strToPrice(numStr: itemPrice)
+        self.shareView.itemNameTextField.text = self.itemName
+        self.shareView.itemPriceTextField.text = FormatManager().strToPrice(numStr: itemPrice)
         
         // reload data with animation
         UIView.transition(with: shareView,
@@ -222,4 +280,68 @@ extension ShareViewController {
                               self.shareView.folderCollectionView.reloadData()},
                           completion: nil);
     }
+}
+// MARK: - TextField & Keyboard Methods
+extension ShareViewController: UITextFieldDelegate {
+    func addKeyboardNotifications() {
+        // 키보드가 나타날 때 앱에게 알리는 메서드 추가
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillAppear(noti:)), name: UIResponder.keyboardWillShowNotification , object: nil)
+        // 키보드가 사라질 때 앱에게 알리는 메서드 추가
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillDisappear(noti:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    func removeKeyboardNotifications() {
+        // 키보드가 나타날 때 앱에게 알리는 메서드 제거
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
+        // 키보드가 사라질 때 앱에게 알리는 메서드 제거
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    @objc func keyboardWillAppear(noti: NSNotification) {
+        if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            print("pre:", preKeyboardHeight, "curr:", keyboardHeight)
+            if preKeyboardHeight < keyboardHeight {
+                let dif = keyboardHeight - preKeyboardHeight
+                self.view.frame.origin.y -= dif
+                preKeyboardHeight = keyboardHeight
+            } else if preKeyboardHeight > keyboardHeight {
+                let dif = preKeyboardHeight - keyboardHeight
+                self.view.frame.origin.y += dif
+                preKeyboardHeight = keyboardHeight
+            }
+        }
+        print("keyboard Will appear Execute")
+    }
+    
+    @objc func keyboardWillDisappear(noti: NSNotification) {
+        if self.view.frame.origin.y != restoreFrameValue {
+            if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                let keyboardRectangle = keyboardFrame.cgRectValue
+                let keyboardHeight = keyboardRectangle.height
+                self.view.frame.origin.y += keyboardHeight
+            }
+            print("keyboard Will Disappear Execute")
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.frame.origin.y = restoreFrameValue
+        print("touches Began Execute")
+        self.view.endEditing(true)
+        self.preKeyboardHeight = 0.0
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("textFieldShouldReturn Execute")
+        textField.resignFirstResponder()
+        return true
+    }
+
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        print("textFieldShouldEndEditing Execute")
+        self.preKeyboardHeight = 0.0
+        self.view.frame.origin.y = self.restoreFrameValue
+        return true
+    }
+    
 }

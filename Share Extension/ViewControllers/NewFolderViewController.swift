@@ -69,6 +69,7 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
     override func viewDidDisappear(_ animated: Bool) {
         if let preVC = self.preVC {
             if isAddSuccess {FolderDataManager().getFolderListDataManager(preVC)}
+            preVC.view.endEditing(true)
         }
     }
     override func viewDidAppear(_ animated: Bool) {
