@@ -46,7 +46,7 @@ class UploadItemView: UIView {
             saveButton.isEnabled = true
         }
         else {
-            saveButton.defaultButton("저장", .wishboardDisabledGray, .gray)
+            saveButton.defaultButton("저장", .wishboardDisabledGray, .dialogMessageColor)
             saveButton.isEnabled = false
         }
     }

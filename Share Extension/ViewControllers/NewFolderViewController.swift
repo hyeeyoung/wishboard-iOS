@@ -60,7 +60,7 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
         
         self.errorMessage.isHidden = true
         self.completeButton.isEnabled = false
-        self.completeButton.defaultButton("추가", .wishboardDisabledGray, .gray)
+        self.completeButton.defaultButton("추가", .wishboardDisabledGray, .dialogMessageColor)
         
         self.newFolderTextField.addTarget(self, action: #selector(folderTextFieldEditingChanged(_:)), for: .editingChanged)
         self.exitBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -149,7 +149,7 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
             self.textFieldCountLabel.textColor = .wishboardRed
             self.errorMessage.isHidden = true
             self.completeButton.isSelected = false
-            self.completeButton.defaultButton("추가", .wishboardDisabledGray, .gray)
+            self.completeButton.defaultButton("추가", .wishboardDisabledGray, .dialogMessageColor)
             self.completeButton.isEnabled = false
         }
     }
@@ -168,7 +168,7 @@ extension NewFolderViewController {
         self.lottieView.isHidden = true
         self.completeButton.reloadInputViews()
         self.errorMessage.isHidden = false
-        self.completeButton.defaultButton("추가", .wishboardDisabledGray, .gray)
+        self.completeButton.defaultButton("추가", .wishboardDisabledGray, .dialogMessageColor)
         self.completeButton.isEnabled = false
     }
     func addFolderAPIFail() {

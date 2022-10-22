@@ -60,7 +60,7 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
         
         self.errorMessage.isHidden = true
         self.completeButton.isEnabled = false
-        self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .gray)
+        self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .dialogMessageColor)
         
         self.shoppingLinkTextField.addTarget(self, action: #selector(LinkTextFieldEditingChanged(_:)), for: .editingChanged)
         self.exitBtn.addTarget(self, action: #selector(exit), for: .touchUpInside)
@@ -151,7 +151,7 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
             if link == "" {self.errorMessage.isHidden = true}
             else {
                 self.errorMessage.isHidden = false
-                self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .gray)
+                self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .dialogMessageColor)
                 self.completeButton.isEnabled = false
             }
         } else {
@@ -201,7 +201,7 @@ extension ShoppingLinkViewController {
     func getItemByLinkAPIFail() {
         self.errorMessage.isHidden = false
         self.completeButton.isSelected = false
-        self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .gray)
+        self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .dialogMessageColor)
         self.completeButton.isEnabled = false
         self.lottieView.isHidden = true
     }

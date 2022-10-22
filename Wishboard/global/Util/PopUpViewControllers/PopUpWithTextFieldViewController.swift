@@ -61,7 +61,7 @@ class PopUpWithTextFieldViewController: UIViewController {
             self.countLabel.text = "(" + String(prevText.count) + "/10)자"
         }
         completeButton = UIButton().then{
-            $0.defaultButton(self.buttonTitle!, .wishboardDisabledGray, .gray)
+            $0.defaultButton(self.buttonTitle!, .wishboardDisabledGray, .dialogMessageColor)
             $0.isEnabled = false
         }
     }
@@ -105,11 +105,11 @@ class PopUpWithTextFieldViewController: UIViewController {
         self.countLabel.text = "(" + String(textLength) + "/10)자"
         
         if textLength > 10 {
-            completeButton.defaultButton(self.buttonTitle!, .wishboardDisabledGray, .gray)
+            completeButton.defaultButton(self.buttonTitle!, .wishboardDisabledGray, .dialogMessageColor)
             self.countLabel.textColor = .wishboardRed
             completeButton.isEnabled = false
         } else if textLength == 0 {
-            completeButton.defaultButton(self.buttonTitle!, .wishboardDisabledGray, .gray)
+            completeButton.defaultButton(self.buttonTitle!, .wishboardDisabledGray, .dialogMessageColor)
             self.countLabel.textColor = .wishboardGray
             completeButton.isEnabled = false
         } else {
