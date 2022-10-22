@@ -236,6 +236,8 @@ extension CartView {
                           animations: { () -> Void in
                               self.cartTableView.reloadData()},
                           completion: nil);
+        self.price.text = "0"
+        self.countLabel.text = "0"
     }
     // MARK: 장바구니 수량 변경 API
     func modifyCountAPISuccess(_ result: APIModel<ResultModel>) {

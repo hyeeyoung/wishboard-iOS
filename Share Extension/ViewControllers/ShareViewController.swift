@@ -110,7 +110,7 @@ class ShareViewController: UIViewController {
     @objc func itemNameTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
         self.itemName = text
-        print(self.itemName)
+//        print(self.itemName)
         setButton()
     }
     // 상품가격 편집
@@ -121,7 +121,7 @@ class ShareViewController: UIViewController {
             guard let price = Float(priceStr) else {return}
             sender.text = numberFormatter.string(from: NSNumber(value: price))
         }
-        print(self.itemPrice)
+//        print(self.itemPrice)
         setButton()
     }
     func setPriceString(_ str: String) -> String {
@@ -218,7 +218,8 @@ extension ShareViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let itemIdx = indexPath.item
-        self.selectedFolderIdx = self.folderListData[itemIdx].folder_id!
+        guard let folderId = self.folderListData[itemIdx].folder_id else {return}
+        self.selectedFolderIdx = folderId
         
         reloadDataAnimation()
     }
