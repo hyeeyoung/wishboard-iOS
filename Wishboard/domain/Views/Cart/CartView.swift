@@ -229,13 +229,7 @@ extension CartView {
     }
     func noCartItem() {
         self.cartData = []
-        // reload data with animation
-        UIView.transition(with: cartTableView,
-                          duration: 0.35,
-                          options: .transitionCrossDissolve,
-                          animations: { () -> Void in
-                              self.cartTableView.reloadData()},
-                          completion: nil);
+        cartTableView.reloadData()
         self.price.text = "0"
         self.countLabel.text = "0"
     }
