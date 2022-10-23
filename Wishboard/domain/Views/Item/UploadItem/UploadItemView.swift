@@ -61,6 +61,9 @@ class UploadItemView: UIView {
             $0.estimatedRowHeight = UITableView.automaticDimension
             $0.showsVerticalScrollIndicator = false
             $0.separatorStyle = .none
+            // scroll disable
+            $0.isScrollEnabled = false
+            $0.isPagingEnabled = false
         }
     }
     func setContentTableView(dataSourceDelegate: UITableViewDelegate & UITableViewDataSource) {
