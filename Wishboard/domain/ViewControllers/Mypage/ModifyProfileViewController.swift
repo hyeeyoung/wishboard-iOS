@@ -121,6 +121,17 @@ extension ModifyProfileViewController {
         self.isNicknameChanged = true
         let text = sender.text ?? ""
         self.nickname = text
+        isNicknameValid(nickname: self.nickname!)
+    }
+    // 닉네임 유효성 검사
+    func isNicknameValid(nickname: String) {
+        if nickname == "" {
+            self.completeButton.defaultButton("완료", .wishboardDisabledGray, .dialogMessageColor)
+            self.completeButton.isEnabled = false
+        } else {
+            self.completeButton.defaultButton("완료", .wishboardGreen, .black)
+            self.completeButton.isEnabled = true
+        }
     }
     // 앨범에서 사진/동영상 선택
     // 프로필 이미지 클릭 시
