@@ -129,7 +129,7 @@ extension MyPageViewController {
             if let pushState = self.pushState {$0.isOn = pushState}
             else {$0.isOn = false}
             $0.onTintColor = .wishboardGreen
-            $0.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
+            $0.transform = CGAffineTransform(scaleX: 0.66, y: 0.65)
         }
         let subTitleLabel = UILabel().then{
             $0.text = "알림 설정을 켜면 상품의 재입고, 프리오더 시작일 등 상품 일정을 알림 받을 수 있어요!"
