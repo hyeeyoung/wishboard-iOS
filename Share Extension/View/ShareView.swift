@@ -27,12 +27,15 @@ class ShareView: UIView {
         $0.text = "itemName"
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textAlignment = .center
+        $0.placeholder = "상품명을 입력해 주세요."
     }
     let itemPriceTextField = UITextField().then{
         $0.borderStyle = .none
         $0.text = "0000"
         $0.font = .systemFont(ofSize: 12, weight: .bold)
         $0.keyboardType = .numberPad
+        $0.textAlignment = .center
+        $0.placeholder = "가격을 입력해 주세요."
     }
     var setNotificationButton = UIButton().then{
         $0.setNotificationButton("", false)
