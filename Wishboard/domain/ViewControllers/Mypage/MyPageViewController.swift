@@ -10,7 +10,7 @@ import MessageUI
 
 class MyPageViewController: TitleLeftViewController {
     var mypageView: MyPageView!
-    let settingArray = ["설정", "알림 설정", "고객 지원", "문의하기", "서비스 정보", "위시보드 이용 방법", "이용약관", "버전 정보", "계정 관리", "로그아웃", "회원 탈퇴"]
+    let settingArray = ["설정", "알림 설정", "고객 지원", "문의하기", "서비스 정보", "위시보드 이용 방법", "이용약관", "개인정보처리방침", "오픈소스 라이브러리", "버전 정보", "계정 관리", "로그아웃", "회원 탈퇴"]
 
     var userInfoData: GetUserInfoModel!
     var nickName: String?
@@ -45,7 +45,7 @@ class MyPageViewController: TitleLeftViewController {
 // MARK: - Main TableView delegate
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 12
+        return 14
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tag = indexPath.row
@@ -57,14 +57,22 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             let cell = UITableViewCell()
             cell.textLabel?.text = settingArray[tag - 1]
-            if tag == 1 || tag == 3 || tag == 5 || tag == 9 {self.setTitleConstraint(cell)}
+            if tag == 1 || tag == 3 || tag == 5 || tag == 11 {self.setTitleConstraint(cell)}
             else {
                 cell.textLabel?.font = UIFont.Suit(size: 12, family: .Regular)
                 cell.textLabel?.textColor = .black
                 if tag == 2 {self.setSwitch(cell)}
-                if tag == 8 {self.setVersionLabel(cell)}
+                if tag == 10 {self.setVersionLabel(cell)}
             }
-            
+            let separator = UIView().then {
+                $0.backgroundColor = .wishboardDisabledGray
+            }
+            cell.addSubview(separator)
+            separator.snp.makeConstraints { make in
+                make.leading.trailing.equalToSuperview()
+                make.height.equalTo(1)
+                make.bottom.equalToSuperview()
+            }
             return cell
         }
         
@@ -74,10 +82,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         switch tag {
         case 0:
             return 184
-        case 1, 3, 5, 9:
+        case 1, 3, 5, 11:
             return 62
-        case 2:
-            return 76
         default:
             return 40
         }
@@ -98,15 +104,26 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             vc.preVC = self
             self.navigationController?.pushViewController(vc, animated: true)
         case 4:
+            // 문의하기
             showSendEmail()
-        case 10:
+        case 12:
+            // 로그아웃
             showLogoutDialog()
-        case 11:
+        case 13:
+            // 회원탈퇴
             showSignoutDialog()
         case 6:
+            // 위시보드 이용 방법
             ScreenManager().linkTo(viewcontroller: self, "https://hushed-bolt-fd4.notion.site/383c308f256f4f189b7c0b68a8f68d9f")
         case 7:
+            // 이용약관
             ScreenManager().linkTo(viewcontroller: self, "https://www.wishboard.xyz/terms.html")
+        case 8:
+            // 개인정보처리방침
+            ScreenManager().linkTo(viewcontroller: self, "https://www.wishboard.xyz/privacy-policy.html")
+        case 9:
+            // 오픈소스 라이브러리
+            ScreenManager().linkTo(viewcontroller: self, "https://www.wishboard.xyz/opensource.html")
         default:
             tableView.deselectRow(at: indexPath, animated: true)
         }
@@ -131,21 +148,10 @@ extension MyPageViewController {
             $0.onTintColor = .wishboardGreen
             $0.transform = CGAffineTransform(scaleX: 0.66, y: 0.65)
         }
-        let subTitleLabel = UILabel().then{
-            $0.text = "알림 설정을 켜면 상품의 재입고, 프리오더 시작일 등 상품 일정을 알림 받을 수 있어요!"
-            $0.font = UIFont.Suit(size: 8, family: .Regular)
-            $0.textColor = .wishboardGray
-            $0.setTextWithLineHeight()
-        }
         cell.addSubview(notiSwitch)
-        cell.addSubview(subTitleLabel)
         notiSwitch.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-16)
             make.centerY.equalToSuperview()
-        }
-        subTitleLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
-            make.bottom.equalToSuperview().offset(-10)
         }
         
         notiSwitch.addTarget(self, action: #selector(onClickSwitch(_:)), for: UIControl.Event.valueChanged)
