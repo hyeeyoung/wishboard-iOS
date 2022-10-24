@@ -75,6 +75,7 @@ class MypageProfileTableViewCell: UITableViewCell {
         emailLabel.snp.makeConstraints { make in
             make.top.equalTo(userNameLabel.snp.bottom).offset(8)
             make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().inset(20)
         }
     }
     func setUpData(_ data: GetUserInfoModel) {
