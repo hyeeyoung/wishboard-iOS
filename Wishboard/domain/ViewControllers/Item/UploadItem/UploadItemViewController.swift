@@ -35,6 +35,9 @@ class UploadItemViewController: UIViewController {
 
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.view.backgroundColor = .white
+        self.tabBarController?.view.backgroundColor = .white
+        
         // keyboard
         self.restoreFrameValue = self.view.frame.origin.y
         
@@ -441,7 +444,7 @@ extension UploadItemViewController: UITextFieldDelegate {
             if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
                 let keyboardRectangle = keyboardFrame.cgRectValue
                 let keyboardHeight = keyboardRectangle.height
-                self.view.frame.origin.y += keyboardHeight
+//                self.view.frame.origin.y += keyboardHeight
             }
             print("keyboard Will Disappear Execute")
         }
@@ -450,8 +453,7 @@ extension UploadItemViewController: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.frame.origin.y = restoreFrameValue
         print("touches Began Execute")
-        self.view.endEditing(true)
-    }
+        self.view.endEditing(true)    }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("textFieldShouldReturn Execute")
