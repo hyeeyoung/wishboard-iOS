@@ -67,8 +67,9 @@ class WishListCollectionViewCell: UICollectionViewCell {
             make.leading.trailing.equalToSuperview().offset(10)
         }
         itemPrice.snp.makeConstraints { make in
-            make.top.equalTo(itemName.snp.bottom).offset(10)
+            make.top.equalTo(itemName.snp.bottom).offset(8)
             make.leading.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview().inset(20)
         }
         won.snp.makeConstraints { make in
             make.centerY.equalTo(itemPrice)
