@@ -282,8 +282,9 @@ extension MyPageViewController {
         UserDefaults.standard.removeObject(forKey: "isFirstLogin")
         
         let onboardingVC = OnBoardingViewController()
+        onboardingVC.deleteUser = true
         self.navigationController?.pushViewController(onboardingVC, animated: true)
-        SnackBar(onboardingVC, message: .deleteUser)
+//        SnackBar(onboardingVC, message: .deleteUser)
         
         print(result.message)
     }

@@ -8,7 +8,8 @@
 import UIKit
 
 class OnBoardingViewController: UIViewController {
-
+    var deleteUser = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,6 +33,8 @@ class OnBoardingViewController: UIViewController {
         NetworkCheck.shared.startMonitoring(vc: self)
         // 자동 로그인
         checkRememberMe()
+        // 탈퇴 후 스낵바
+        if self.deleteUser {SnackBar(self, message: .deleteUser)}
     }
     func checkRememberMe() {
         if let token = UserDefaults.standard.string(forKey: "token") {
