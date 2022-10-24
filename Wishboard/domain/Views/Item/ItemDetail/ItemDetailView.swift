@@ -48,6 +48,7 @@ class ItemDetailView: UIView {
         itemDetailTableView.rowHeight = UITableView.automaticDimension
         itemDetailTableView.estimatedRowHeight = UITableView.automaticDimension
         itemDetailTableView.showsVerticalScrollIndicator = false
+        itemDetailTableView.separatorStyle = .none
     }
     func setUpNavigationView() {
         addSubview(navigationView)
