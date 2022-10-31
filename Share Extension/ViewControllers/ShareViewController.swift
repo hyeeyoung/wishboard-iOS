@@ -46,6 +46,7 @@ class ShareViewController: UIViewController {
         numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         
+        self.selectedFolderIdx = -1
         setUpShareView()
         
         DispatchQueue.main.async {
@@ -157,13 +158,23 @@ class ShareViewController: UIViewController {
             let data = try? Data(contentsOf: url!)
             DispatchQueue.main.async {
                 selectedImage = UIImage(data: data!)
-                // 폴더 & 알림 날짜 설정까지 했을 경우
+                // 폴더O, 알림O
                 if var notificationDate = self.notificationDate {
                     notificationDate = FormatManager().koreanStrToDate(notificationDate)!
-                    ShareDataManager().uploadItemDataManager(self.selectedFolderIdx!, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self.notificationType!, notificationDate + ":00", self)
+                    if let selectedFolderIdx = self.selectedFolderIdx {
+                        ShareDataManager().uploadItemDataManager(selectedFolderIdx, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self.notificationType!, notificationDate + ":00", self)
+                    } else {
+                        // 폴더X, 알림O
+                        ShareDataManager().uploadItemDataManager(selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self.notificationType!, notificationDate + ":00", self)
+                    }
                 } else {
-                    // 폴더만 설정했을 경우
-                    ShareDataManager().uploadItemDataManager(self.selectedFolderIdx!, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self)
+                    // 폴더O, 알림X
+                    if let selectedFolderIdx = self.selectedFolderIdx {
+                        ShareDataManager().uploadItemDataManager(selectedFolderIdx, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self)
+                    } else {
+                        // 폴더X, 알림X
+                        ShareDataManager().uploadItemDataManager(selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self)
+                    }
                 }
             }
         }
@@ -203,15 +214,14 @@ extension ShareViewController: UICollectionViewDelegate, UICollectionViewDataSou
         if let selectedFolderIdx = self.selectedFolderIdx {
             if selectedFolderIdx == self.folderListData[itemIdx].folder_id {
                 cell.setSelectedFolder(true)
+            } else if selectedFolderIdx == -1 && itemIdx == 0 {
+                cell.setSelectedFolder(true)
+                self.selectedFolderIdx = self.folderListData[itemIdx].folder_id
             } else {
                 cell.setSelectedFolder(false)
             }
         } else {
-            if itemIdx == 0 {
-                cell.setSelectedFolder(true)
-                self.selectedFolderIdx = self.folderListData[itemIdx].folder_id
-            }
-            else {cell.setSelectedFolder(false)}
+            cell.setSelectedFolder(false)
         }
         
         return cell
@@ -230,7 +240,7 @@ extension ShareViewController {
     // MARK: 폴더 리스트 조회 API
     func getFolderListAPISuccess(_ result: [FolderListModel]) {
         self.folderListData = result
-        self.selectedFolderIdx = nil
+        self.selectedFolderIdx = -1
         reloadDataAnimation()
     }
     func getFolderListAPIFail() {
