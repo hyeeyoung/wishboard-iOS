@@ -16,7 +16,7 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.contentMode = .scaleAspectFill
     }
     var setFolderButton = UIButton().then{
-        $0.setFolderButton("폴더 지정하기 >")
+        $0.setFolderButton("폴더를 지정해 보세요! > ")
     }
     let dateLabel = UILabel().then{
         $0.text = "0주 전"
