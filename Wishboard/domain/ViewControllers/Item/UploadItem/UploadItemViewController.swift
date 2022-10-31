@@ -303,13 +303,13 @@ extension UploadItemViewController {
     }
     // 상품명, 가격 입력 여부에 따른 저장버튼 활성화 설정
     func isValidContent() {
-        guard let iN = self.wishListData.item_name else {return}
-        guard let iP = self.wishListData.item_price else {return}
-        if self.selectedImage != nil || self.wishListData.item_img_url != nil {
-            if (iN != "") && (iP != "") {uploadItemView.setSaveButton(true)}
-            else {uploadItemView.setSaveButton(false)}
-        }
-        print("URL???", self.wishListData.item_url)
+        if self.wishListData.item_name != nil && self.wishListData.item_price != nil {
+            if self.wishListData.item_name != "" && self.wishListData.item_price != "" {
+                if self.selectedImage != nil || self.wishListData.item_img_url != nil {
+                    uploadItemView.setSaveButton(true)
+                }
+            } else {uploadItemView.setSaveButton(false)}
+        } else {uploadItemView.setSaveButton(false)}
     }
     // '사진 찍기' '사진 보관함' 팝업창
     func alertCameraMenu() {
