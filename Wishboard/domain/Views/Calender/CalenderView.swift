@@ -34,6 +34,8 @@ class CalenderView: UIView {
             $0.estimatedRowHeight = UITableView.automaticDimension
             $0.showsVerticalScrollIndicator = false
             $0.separatorStyle = .none
+            
+//            $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         }
     }
     func setUpView() {

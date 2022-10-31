@@ -100,7 +100,6 @@ extension CalenderNotiTableViewCell {
         myDateFormatter.locale = Locale(identifier:"ko_KR") // PM, AM을 언어에 맞게 setting (ex: PM -> 오후)
 
         for data in result {
-            print(data)
             let dateStr = myDateFormatter.string(from: (data.item_notification_date?.toCreatedDate())!)
             if dateStr == self.selectedDate {
                 self.notiData.append(data)

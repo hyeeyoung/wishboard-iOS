@@ -78,8 +78,7 @@ extension CalenderViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             return 385
         default:
-            if CheckNotch().hasNotch() {return tableView.frame.height - 385 - 100}
-            else {return tableView.frame.height - 385}
+            return tableView.frame.height - 385 - 44
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
