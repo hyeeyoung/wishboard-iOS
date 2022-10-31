@@ -64,6 +64,7 @@ extension OnBoardingView: UITableViewDelegate, UITableViewDataSource {
 
         cell.selectionStyle = .none
         cell.loginButton.addTarget(self, action: #selector(loginButtonDidTap(_:)), for: .touchUpInside)
+        cell.accountExistButton.addTarget(self, action: #selector(loginButtonDidTap(_:)), for: .touchUpInside)
         cell.registerButton.addTarget(self, action: #selector(registerButtonDidTap(_:)), for: .touchUpInside)
         return cell
     }
