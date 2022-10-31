@@ -79,28 +79,5 @@ class NotificationDataManager {
             }
         }
     }
-    // MARK: - 캘린더 알림 조회
-    func getCalenderNotificationDataManager(_ tableViewCell: CalenderNotiTableViewCell) {
-        AF.request(BaseURL + "/noti/calendar",
-                           method: .get,
-                           parameters: nil,
-                           headers: header)
-            .validate()
-            .responseDecodable(of: [NotificationModel].self) { response in
-            switch response.result {
-            case .success(let result):
-                tableViewCell.getCalenderNotificationAPISuccess(result)
-            case .failure(let error):
-                let statusCode = error.responseCode
-                switch statusCode {
-                case 429:
-                    tableViewCell.getCalenderNotificationAPIFail()
-                    print(error.responseCode)
-                default:
-                    print(error.responseCode)
-                }
-            }
-        }
-    }
 
 }

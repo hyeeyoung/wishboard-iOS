@@ -107,6 +107,7 @@ extension NotiTableViewCell {
     }
     // MARK: 캘린더 알림 조회 API 호출 후
     func setCalenderNotiCell(_ data: NotificationModel) {
+//        print("notidata:", data)
         if let image = data.item_img_url {
             self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
         }
@@ -119,7 +120,7 @@ extension NotiTableViewCell {
         }
         contentView.insertSubview(grayView, at: 0)
         grayView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().offset(-3)
             make.top.equalToSuperview().offset(3)
             make.height.equalTo(104)

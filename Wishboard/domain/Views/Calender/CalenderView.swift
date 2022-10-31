@@ -28,6 +28,7 @@ class CalenderView: UIView {
             $0.dataSource = dataSourceDelegate
             $0.register(CalenderTableViewCell.self, forCellReuseIdentifier: "CalenderTableViewCell")
             $0.register(CalenderNotiTableViewCell.self, forCellReuseIdentifier: "CalenderNotiTableViewCell")
+            $0.register(CalenderDateTableViewCell.self, forCellReuseIdentifier: "CalenderDateTableViewCell")
             
             // autoHeight
             $0.rowHeight = UITableView.automaticDimension
@@ -35,7 +36,7 @@ class CalenderView: UIView {
             $0.showsVerticalScrollIndicator = false
             $0.separatorStyle = .none
             
-//            $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
+            $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 56, right: 0)
         }
     }
     func setUpView() {

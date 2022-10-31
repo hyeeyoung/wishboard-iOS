@@ -195,6 +195,7 @@
 		23EC504C28E2670D00AAA57E /* MypageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504B28E2670D00AAA57E /* MypageDataManager.swift */; };
 		23F07F3E28E7CCBA0012D77D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */; };
 		23F07F4428E7D5930012D77D /* TitleCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */; };
+		23F1714B291056970016206A /* CalenderDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F1714A291056970016206A /* CalenderDateTableViewCell.swift */; };
 		23F69CAF28CC17F8001B8C7F /* UIBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */; };
 		23F69CB128CC1819001B8C7F /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CB028CC1819001B8C7F /* UIView.swift */; };
 		8FC34572B49CFC063CDC4619 /* Pods_WishboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 420154A5B1D7E2D7C5F49F42 /* Pods_WishboardTests.framework */; };
@@ -395,6 +396,7 @@
 		23EC504B28E2670D00AAA57E /* MypageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageDataManager.swift; sourceTree = "<group>"; };
 		23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCenterViewController.swift; sourceTree = "<group>"; };
+		23F1714A291056970016206A /* CalenderDateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderDateTableViewCell.swift; sourceTree = "<group>"; };
 		23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPath.swift; sourceTree = "<group>"; };
 		23F69CB028CC1819001B8C7F /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		420154A5B1D7E2D7C5F49F42 /* Pods_WishboardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WishboardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -622,6 +624,7 @@
 			children = (
 				23D7901528CB172900246109 /* CalenderNotiTableViewCell.swift */,
 				23D7901328CB0E5F00246109 /* CalenderTableViewCell.swift */,
+				23F1714A291056970016206A /* CalenderDateTableViewCell.swift */,
 			);
 			path = Calender;
 			sourceTree = "<group>";
@@ -1721,6 +1724,7 @@
 				23F69CB128CC1819001B8C7F /* UIView.swift in Sources */,
 				23E378E528D2F47E00C52F2D /* UploadItemViewController.swift in Sources */,
 				23F07F3E28E7CCBA0012D77D /* BaseViewController.swift in Sources */,
+				23F1714B291056970016206A /* CalenderDateTableViewCell.swift in Sources */,
 				23C8A1C528CA08B7003ABFE9 /* ItemDetailView.swift in Sources */,
 				2395FFF62902E1D7005A8D8F /* UploadItemBottomSheetTableViewCell.swift in Sources */,
 				23D5518328C6A3BD00D81B5F /* UIButton.swift in Sources */,

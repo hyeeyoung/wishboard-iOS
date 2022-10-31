@@ -103,7 +103,8 @@ class EmptyView {
         backView.snp.makeConstraints { make in
             make.height.greaterThanOrEqualTo(131)
             make.width.greaterThanOrEqualTo(226)
-            make.centerX.centerY.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-135)
         }
         
         tableView.backgroundView = backgroudView
