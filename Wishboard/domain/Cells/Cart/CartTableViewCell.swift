@@ -41,6 +41,7 @@ class CartTableViewCell: UITableViewCell {
     }
     let countLabel = UILabel().then{
         $0.text = "1"
+        $0.textAlignment = .center
         $0.font = UIFont.Suit(size: 14.58, family: .Regular)
     }
     let priceLabel = UILabel().then{
@@ -89,6 +90,7 @@ class CartTableViewCell: UITableViewCell {
             make.leading.equalTo(itemImage.snp.trailing)
         }
         countLabel.snp.makeConstraints { make in
+            make.width.equalTo(20)
             make.centerY.equalTo(minusButton)
             make.leading.equalTo(minusButton.snp.trailing)
         }
