@@ -182,14 +182,25 @@ class ItemDetailTableViewCell: UITableViewCell {
         if let itemPrice = data.item_price {self.priceLabel.text = FormatManager().strToPrice(numStr: itemPrice)}
         if let link = data.item_url {
             if link != "" {
+                // 링크O, 메모O
                 self.linkLabel.isHidden = false
-                self.seperatorLine2.isHidden = false
+                self.seperatorLine1.isHidden = false
                 // link 도메인만 보이게
                 var url = URL(string: link)
                 var domain = url?.host
                 self.linkLabel.text = domain
+                
+                if let memo = data.item_memo {
+                    if memo == "" {
+                        self.seperatorLine2.isHidden = true
+                        self.memoTitlelabel.isHidden = true
+                        self.memoContentLabel.isHidden = true
+                    }
+                }
             }
             else {
+                // 링크X, 메모X
+                
                 self.linkLabel.isHidden = true
                 self.seperatorLine2.isHidden = true
             }
@@ -218,10 +229,10 @@ class ItemDetailTableViewCell: UITableViewCell {
                     if link == "" {
                         self.seperatorLine1.isHidden = true
                         self.seperatorLine2.isHidden = true
-                        self.memoTitlelabel.isHidden = true
-                        self.memoContentLabel.isHidden = true
                     }
                 }
+                self.memoTitlelabel.isHidden = true
+                self.memoContentLabel.isHidden = true
             }
         }
     }
