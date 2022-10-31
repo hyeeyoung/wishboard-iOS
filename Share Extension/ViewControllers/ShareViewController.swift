@@ -229,6 +229,7 @@ extension ShareViewController {
     // MARK: 폴더 리스트 조회 API
     func getFolderListAPISuccess(_ result: [FolderListModel]) {
         self.folderListData = result
+        self.selectedFolderIdx = nil
         reloadDataAnimation()
     }
     func getFolderListAPIFail() {
@@ -259,7 +260,7 @@ extension ShareViewController {
         FolderDataManager().getFolderListDataManager(self)
     }
     func getItemDataAPIFail() {
-        
+        SnackBar(self, message: .failShoppingLink)
     }
     // MARK: 아이템 간편 등록
     func uploadItemAPISuccess(_ result: APIModel<ResultModel>) {

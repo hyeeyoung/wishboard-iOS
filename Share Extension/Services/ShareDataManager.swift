@@ -31,6 +31,8 @@ class ShareDataManager {
             case .failure(let error):
                 let statusCode = error.responseCode
                 switch statusCode {
+                case 404:
+                    viewcontroller.getItemDataAPIFail()
                 case 429:
                     viewcontroller.getFolderListAPIFail()
                 default:
