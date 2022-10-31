@@ -148,7 +148,7 @@ class ItemDetailTableViewCell: UITableViewCell {
         stack.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(priceLabel.snp.bottom).offset(16)
-            if CheckNotch().hasNotch() {make.bottom.equalToSuperview().offset(-78)}
+            if UIDevice.current.hasNotch {make.bottom.equalToSuperview().offset(-78)}
             else {make.bottom.equalToSuperview().offset(-44)}
         }
         seperatorLine2.snp.makeConstraints { make in

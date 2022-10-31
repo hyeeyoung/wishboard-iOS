@@ -92,7 +92,7 @@ class CartView: UIView {
         lowerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
-            if CheckNotch().hasNotch() {make.height.equalTo(78)}
+            if UIDevice.current.hasNotch {make.height.equalTo(78)}
             else {make.height.equalTo(50)}
         }
         total.snp.makeConstraints { make in

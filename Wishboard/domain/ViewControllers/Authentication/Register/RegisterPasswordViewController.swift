@@ -30,7 +30,7 @@ class RegisterPasswordViewController: KeyboardViewController {
         registerPWView.registerButton.addTarget(self, action: #selector(registerButtonDidTap), for: .touchUpInside)
         
         super.textfield = registerPWView.pwTextField
-        if !CheckNotch().hasNotch() {registerPWView.stack.isHidden = true}
+        if !UIDevice.current.hasNotch {registerPWView.stack.isHidden = true}
     }
 }
 extension RegisterPasswordViewController {

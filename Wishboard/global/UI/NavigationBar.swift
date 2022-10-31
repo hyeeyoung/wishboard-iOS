@@ -30,7 +30,7 @@ class NavigationBar {
         navigationView.addSubview(backButton)
         
         navigationView.snp.makeConstraints { make in
-            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
+            if UIDevice.current.hasNotch {make.top.equalToSuperview().offset(50)}
             else {make.top.equalToSuperview().offset(20)}
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(50)

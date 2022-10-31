@@ -95,7 +95,7 @@ class ItemDetailView: UIView {
         addSubview(itemDetailTableView)
         
         lowerView.snp.makeConstraints { make in
-            if CheckNotch().hasNotch() {make.height.equalTo(78)}
+            if UIDevice.current.hasNotch {make.height.equalTo(78)}
             else {make.height.equalTo(44)}
             make.leading.trailing.bottom.equalToSuperview()
         }
@@ -115,7 +115,7 @@ class ItemDetailView: UIView {
     }
     func setUpNavigationConstraint() {
         navigationView.snp.makeConstraints { make in
-            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
+            if UIDevice.current.hasNotch {make.top.equalToSuperview().offset(50)}
             else {make.top.equalToSuperview().offset(20)}
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(50)

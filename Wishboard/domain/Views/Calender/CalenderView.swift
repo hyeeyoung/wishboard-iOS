@@ -45,7 +45,7 @@ class CalenderView: UIView {
     func setUpConstraint() {
         calenderTableView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
+            if UIDevice.current.hasNotch {make.top.equalToSuperview().offset(50)}
             else {make.top.equalToSuperview().offset(20)}
         }
     }
