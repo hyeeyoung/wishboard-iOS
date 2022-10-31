@@ -39,6 +39,7 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
     var link: String!
     var tempLink: String!
     var isExit: Bool = true
+    var isFail: Bool = false
     
     var itemImgUrl: String?
     var itemName: String?
@@ -74,16 +75,33 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
             self.preVC.wishListData.item_url = self.link
             self.preVC.isValidContent()
             
-//            let indexPath0 = IndexPath(row: 0, section: 0)
             let indexPath1 = IndexPath(row: 0, section: 0)
             let indexPath2 = IndexPath(row: 1, section: 0)
             let indexPath5 = IndexPath(row: 4, section: 0)
             self.preVC.uploadItemView.uploadImageTableView.reloadData()
             self.preVC.uploadItemView.uploadContentTableView.reloadRows(at: [indexPath1, indexPath2, indexPath5], with: .automatic)
             self.preVC.isValidContent()
+            
             self.preVC.view.endEditing(true)
         } else {
-            self.preVC.view.endEditing(true)
+            if isExit {self.preVC.view.endEditing(true)}
+            else if isFail {
+                self.preVC.wishListData.item_img_url = nil
+                self.preVC.wishListData.item_name = nil
+                self.preVC.wishListData.item_price = nil
+                self.preVC.wishListData.item_url = ""
+                self.preVC.isValidContent()
+                
+                let indexPath1 = IndexPath(row: 0, section: 0)
+                let indexPath2 = IndexPath(row: 1, section: 0)
+                let indexPath5 = IndexPath(row: 4, section: 0)
+                self.preVC.uploadItemView.uploadImageTableView.reloadData()
+                self.preVC.uploadItemView.uploadContentTableView.reloadRows(at: [indexPath1, indexPath2, indexPath5], with: .automatic)
+                self.preVC.isValidContent()
+                
+                SnackBar(self.preVC, message: .failShoppingLink)
+                self.preVC.view.endEditing(true)
+            }
         }
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -199,11 +217,15 @@ extension ShoppingLinkViewController {
         self.dismiss(animated: true)
     }
     func getItemByLinkAPIFail() {
+        self.isFail = true
+        
         self.errorMessage.isHidden = false
         self.completeButton.isSelected = false
         self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .dialogMessageColor)
         self.completeButton.isEnabled = false
         self.lottieView.isHidden = true
+        
+        self.dismiss(animated: true)
     }
     func getItemByLinkAPIFail429() {
         ItemDataManager().getItemByLinkDataManager(self.link, self)
