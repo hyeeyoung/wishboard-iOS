@@ -97,8 +97,10 @@ class RegisterPasswordView: UIView {
             make.bottom.equalToSuperview().inset(16)
         }
         stack.snp.makeConstraints { make in
-            make.leading.trailing.lessThanOrEqualToSuperview().inset(16)
+            make.leading.greaterThanOrEqualToSuperview().offset(16)
+            make.trailing.lessThanOrEqualToSuperview().offset(-16)
             make.bottom.equalTo(registerButton.snp.top).offset(-5)
+            make.centerX.equalToSuperview()
         }
     }
     func setStackView() {
