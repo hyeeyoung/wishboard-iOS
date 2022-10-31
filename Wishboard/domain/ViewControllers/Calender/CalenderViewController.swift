@@ -35,8 +35,6 @@ class CalenderViewController: UIViewController {
         calenderView.setUpView()
         calenderView.setUpConstraint()
         
-        calenderView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        
         NotificationDataManager().getCalenderNotificationDataManager(self)
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -63,6 +61,7 @@ extension CalenderViewController: UITableViewDelegate, UITableViewDataSource {
             if let cellData = self.calenderData {
                 cell.setUpCalenderData(cellData)
             }
+            cell.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
             cell.selectionStyle = .none
             return cell
         default:

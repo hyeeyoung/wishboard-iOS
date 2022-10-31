@@ -12,6 +12,12 @@ class CalenderTableViewCell: UITableViewCell {
     var calender: FSCalendar!
     var events: [Date] = []
     
+    let backButton = UIButton().then{
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(named: "goBack")
+        config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        $0.configuration = config
+    }
     let weekSeperator = UIView().then{
         $0.backgroundColor = .wishboardDisabledGray
     }
@@ -24,8 +30,6 @@ class CalenderTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setCalender()
-        
-//        NotificationDataManager().getCalenderNotificationDataManager(self)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -59,12 +63,18 @@ class CalenderTableViewCell: UITableViewCell {
             $0.appearance.eventSelectionColor = .wishboardLightGreen
         }
         contentView.addSubview(calender)
+        contentView.addSubview(backButton)
         calender.addSubview(weekSeperator)
         calender.addSubview(underSeperator)
         
         calender.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalToSuperview()
             make.height.equalTo(385)
+        }
+        backButton.snp.makeConstraints { make in
+            make.width.height.equalTo(44)
+            make.leading.equalToSuperview().offset(6)
+            make.top.equalToSuperview().offset(6)
         }
         weekSeperator.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(80)
