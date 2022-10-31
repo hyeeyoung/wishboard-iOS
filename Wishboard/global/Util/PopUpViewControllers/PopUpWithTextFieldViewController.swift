@@ -46,6 +46,9 @@ class PopUpWithTextFieldViewController: UIViewController {
     }
     var completeButton: UIButton!
     // MARK: - Life Cycles
+    // keyboard
+    var restoreFrameValue: CGFloat = 0.0
+    
     convenience init(titleText: String? = nil,
                      placeholder: String? = nil,
                      prevText: String? = nil,
@@ -76,7 +79,6 @@ class PopUpWithTextFieldViewController: UIViewController {
         textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         quitButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -85,6 +87,7 @@ class PopUpWithTextFieldViewController: UIViewController {
             self?.popupView.transform = .identity
             self?.popupView.isHidden = false
         }
+        self.addKeyboardNotifications()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -94,6 +97,7 @@ class PopUpWithTextFieldViewController: UIViewController {
             self?.popupView.transform = .identity
             self?.popupView.isHidden = true
         }
+        self.removeKeyboardNotifications()
     }
     // MARK: - Actions
     @objc func goBack() {
@@ -171,4 +175,59 @@ class PopUpWithTextFieldViewController: UIViewController {
         }
     }
 
+}
+// MARK: - TextField & Keyboard Methods
+extension PopUpWithTextFieldViewController: UITextFieldDelegate {
+    func addKeyboardNotifications() {
+        // 키보드가 나타날 때 앱에게 알리는 메서드 추가
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillAppear(noti:)), name: UIResponder.keyboardWillShowNotification , object: nil)
+        // 키보드가 사라질 때 앱에게 알리는 메서드 추가
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillDisappear(noti:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    func removeKeyboardNotifications() {
+        // 키보드가 나타날 때 앱에게 알리는 메서드 제거
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
+        // 키보드가 사라질 때 앱에게 알리는 메서드 제거
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    @objc func keyboardWillAppear(noti: NSNotification) {
+        if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            let viewHeight = self.popupView.frame.origin.y
+            let dif = keyboardHeight - viewHeight
+            self.view.frame.origin.y -= (dif + 10)
+        }
+        print("keyboard Will appear Execute")
+    }
+    
+    @objc func keyboardWillDisappear(noti: NSNotification) {
+        if self.view.frame.origin.y != restoreFrameValue {
+            if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                let keyboardRectangle = keyboardFrame.cgRectValue
+                let keyboardHeight = keyboardRectangle.height
+                self.view.frame.origin.y += keyboardHeight
+            }
+            print("keyboard Will Disappear Execute")
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.frame.origin.y = restoreFrameValue
+        print("touches Began Execute")
+        self.view.endEditing(true)
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("textFieldShouldReturn Execute")
+        textField.resignFirstResponder()
+        return true
+    }
+
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        print("textFieldShouldEndEditing Execute")
+        self.view.frame.origin.y = self.restoreFrameValue
+        return true
+    }
+    
 }
