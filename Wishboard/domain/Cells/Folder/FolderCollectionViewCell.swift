@@ -15,6 +15,7 @@ class FolderCollectionViewCell: UICollectionViewCell {
         $0.backgroundColor = .systemGray6
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
+        $0.contentMode = .scaleAspectFill
     }
     let folderType = UILabel().then{
         $0.text = "folder"

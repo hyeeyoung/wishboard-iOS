@@ -13,6 +13,7 @@ class CartTableViewCell: UITableViewCell {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
         $0.isUserInteractionEnabled = true
+        $0.contentMode = .scaleAspectFill
     }
     let itemName = UILabel().then{
         $0.text = "itemName"

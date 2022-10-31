@@ -13,6 +13,8 @@ class WishListCollectionViewCell: UICollectionViewCell {
     
     let itemImage = UIImageView().then{
         $0.backgroundColor = .systemGray6
+        $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFill
     }
     let itemName = UILabel().then{
         $0.text = "itemName"
