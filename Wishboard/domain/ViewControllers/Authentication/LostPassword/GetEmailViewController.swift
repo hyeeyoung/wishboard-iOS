@@ -54,12 +54,20 @@ extension GetEmailViewController {
         self.checkValidCode()
     }
     @objc func loginButtonDidTap() {
-        let lottieView = getEmailView.loginButton.setHorizontalLottieView(getEmailView.loginButton)
-        getEmailView.loginButton.isSelected = true
-        lottieView.isHidden = false
-        lottieView.play { completion in
-            let lostPasswordInput = LostPasswordInput(verify: true, email: self.email)
-            LostPasswordDataManager().verifyCodeDataManager(lostPasswordInput, self)
+        if self.code != self.authCode {
+            getEmailView.messageLabel.isHidden = false
+            self.getEmailView.loginButton.then{
+                $0.defaultButton("로그인 하기", .wishboardDisabledGray, .black)
+                $0.isEnabled = false
+            }
+        } else {
+            let lottieView = getEmailView.loginButton.setHorizontalLottieView(getEmailView.loginButton)
+            getEmailView.loginButton.isSelected = true
+            lottieView.isHidden = false
+            lottieView.play { completion in
+                let lostPasswordInput = LostPasswordInput(verify: true, email: self.email)
+                LostPasswordDataManager().verifyCodeDataManager(lostPasswordInput, self)
+            }
         }
     }
     @objc func updateTime() {
@@ -80,8 +88,8 @@ extension GetEmailViewController {
     func checkValidCode() {
         let codeCount = self.code.count ?? 0
         var isValidCode = codeCount > 0 ? true : false
-        isValidCode = self.code == self.authCode ? true : false //인증코드가 맞을 때
         if isValidCode && self.isValidTime {
+            self.getEmailView.messageLabel.isHidden = true
             self.getEmailView.loginButton.then{
                 $0.defaultButton("로그인 하기", .wishboardGreen, .black)
                 $0.isEnabled = true
