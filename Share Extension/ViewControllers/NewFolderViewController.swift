@@ -126,7 +126,6 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
             let addFolderInput = AddFolderInput(folder_name: self.folderStr)
             FolderDataManager().addFolderDataManager(addFolderInput, self)
         }
-        
     }
     @objc func folderTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
@@ -161,6 +160,13 @@ extension NewFolderViewController {
         self.isAddSuccess = true
         self.viewDidLoad()
         self.dismiss(animated: true)
+        
+        self.textFieldCountLabel.textColor = .wishboardGray
+        self.errorMessage.isHidden = true
+        self.lottieView.isHidden = true
+        self.completeButton.isSelected = false
+        self.completeButton.defaultButton("추가", .wishboardGreen, .black)
+        self.completeButton.isEnabled = true
         
         print(result.message)
     }

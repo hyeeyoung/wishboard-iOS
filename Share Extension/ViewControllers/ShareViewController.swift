@@ -219,7 +219,8 @@ extension ShareViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let itemIdx = indexPath.item
         guard let folderId = self.folderListData[itemIdx].folder_id else {return}
-        self.selectedFolderIdx = folderId
+        if self.selectedFolderIdx == folderId {self.selectedFolderIdx = nil}
+        else {self.selectedFolderIdx = folderId}
         
         reloadDataAnimation()
     }
