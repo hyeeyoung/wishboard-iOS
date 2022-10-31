@@ -37,12 +37,12 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.text = "원"
         $0.font = UIFont.Suit(size: 14, family: .Regular)
     }
-    let seperatorLine1 = UIView().then{
-        $0.backgroundColor = .systemGray5
-    }
     let stack = UIStackView().then{
         $0.axis = .vertical
         $0.spacing = 16
+    }
+    let seperatorLine1 = UIView().then{
+        $0.backgroundColor = .systemGray5
     }
     let linkLabel = UILabel().then{
         $0.text = "w.musinsa.com"
@@ -101,9 +101,9 @@ class ItemDetailTableViewCell: UITableViewCell {
         contentView.addSubview(itemNameLabel)
         contentView.addSubview(priceLabel)
         contentView.addSubview(won)
-        contentView.addSubview(seperatorLine1)
         contentView.addSubview(stack)
         
+        stack.addArrangedSubview(seperatorLine1)
         stack.addArrangedSubview(linkLabel)
         stack.addArrangedSubview(seperatorLine2)
         stack.addArrangedSubview(memoTitlelabel)
@@ -144,12 +144,10 @@ class ItemDetailTableViewCell: UITableViewCell {
         }
         seperatorLine1.snp.makeConstraints { make in
             make.height.equalTo(1)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(priceLabel.snp.bottom).offset(20)
         }
         stack.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(seperatorLine1.snp.bottom).offset(16)
+            make.top.equalTo(priceLabel.snp.bottom).offset(16)
             if CheckNotch().hasNotch() {make.bottom.equalToSuperview().offset(-78)}
             else {make.bottom.equalToSuperview().offset(-44)}
         }
@@ -215,9 +213,15 @@ class ItemDetailTableViewCell: UITableViewCell {
                 }
             }
             else {
-                self.seperatorLine2.isHidden = true
-                self.memoTitlelabel.isHidden = true
-                self.memoContentLabel.isHidden = true
+                // 링크도 없고, 메모도 없고
+                if let link = data.item_url {
+                    if link == "" {
+                        self.seperatorLine1.isHidden = true
+                        self.seperatorLine2.isHidden = true
+                        self.memoTitlelabel.isHidden = true
+                        self.memoContentLabel.isHidden = true
+                    }
+                }
             }
         }
     }
