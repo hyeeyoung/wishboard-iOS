@@ -11,6 +11,7 @@ import FSCalendar
 class CalenderViewController: UIViewController {
     var calenderView: CalenderView!
     var selectedDate: String!
+    var calenderData: [NotificationModel]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,8 @@ class CalenderViewController: UIViewController {
         calenderView.setUpConstraint()
         
         calenderView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        
+        NotificationDataManager().getCalenderNotificationDataManager(self)
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
@@ -57,6 +60,9 @@ extension CalenderViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CalenderTableViewCell", for: indexPath) as? CalenderTableViewCell else { return UITableViewCell() }
             cell.setCalenderDelegate(dataSourceDelegate: self)
+            if let cellData = self.calenderData {
+                cell.setUpCalenderData(cellData)
+            }
             cell.selectionStyle = .none
             return cell
         default:
@@ -78,6 +84,17 @@ extension CalenderViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+// MARK: - API Success
+extension CalenderViewController {
+    func getCalenderNotificationAPISuccess(_ result: [NotificationModel]) {
+        self.calenderData = result
+        let indexPath = IndexPath(row: 0, section: 0)
+        calenderView.calenderTableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+    func getCalenderNotificationAPIFail() {
+        NotificationDataManager().getCalenderNotificationDataManager(self)
     }
 }
 // MARK: - Calender delegate

@@ -25,7 +25,7 @@ class CalenderTableViewCell: UITableViewCell {
         
         setCalender()
         
-        NotificationDataManager().getCalenderNotificationDataManager(self)
+//        NotificationDataManager().getCalenderNotificationDataManager(self)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -91,7 +91,7 @@ extension CalenderTableViewCell: FSCalendarDelegate, FSCalendarDataSource {
 }
 // MARK: - API Success
 extension CalenderTableViewCell {
-    func getCalenderNotificationAPISuccess(_ result: [NotificationModel]) {
+    func setUpCalenderData(_ result: [NotificationModel]) {
         events.removeAll()
         for data in result {
             guard let notificationDate = data.item_notification_date else {return}
@@ -106,8 +106,5 @@ extension CalenderTableViewCell {
             
             events.append(eventDate)
         }
-    }
-    func getCalenderNotificationAPIFail() {
-        NotificationDataManager().getCalenderNotificationDataManager(self)
     }
 }
