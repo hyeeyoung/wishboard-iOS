@@ -27,8 +27,9 @@ class MyPageViewController: TitleLeftViewController {
         self.view.addSubview(mypageView)
         
         mypageView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
             make.top.equalTo(super.navigationView.snp.bottom)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
         // DATA
         MypageDataManager().getUserInfoDataManager(self)

@@ -13,18 +13,18 @@ class BaseViewController: UIViewController {
     // 기본 초기화
     init(){
         super.init(nibName: nil, bundle: nil)
-        self.viewDidLoad()
+//        self.viewDidLoad()
     }
     // 제목 설정
     init(title: String){
         super.init(nibName: nil, bundle: nil)
-        self.viewDidLoad()
+//        self.viewDidLoad()
         self.rightPositionBtn = EtcButton(title: title)
     }
     // 상단 오른쪽 버튼 설정
     init(btnImage: UIImage){
         super.init(nibName: nil, bundle: nil)
-        self.viewDidLoad()
+//        self.viewDidLoad()
         self.rightPositionBtn = EtcButton(image: btnImage)
     }
     
