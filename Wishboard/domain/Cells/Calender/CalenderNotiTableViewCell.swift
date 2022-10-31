@@ -71,6 +71,7 @@ class CalenderNotiTableViewCell: UITableViewCell {
 extension CalenderNotiTableViewCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = notiData.count ?? 0
+        EmptyView().setNotificationEmptyView(self.noticeTableView, count)
         return count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
