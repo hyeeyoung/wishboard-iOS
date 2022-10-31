@@ -122,6 +122,7 @@ extension NotiTableViewCell {
             make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview().offset(-3)
             make.top.equalToSuperview().offset(3)
+            make.height.equalTo(104)
         }
         // 초록 동그라미는 보여주지 않는다.
         self.viewView.isHidden = true
