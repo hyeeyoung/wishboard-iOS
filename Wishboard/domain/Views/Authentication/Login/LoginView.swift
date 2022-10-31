@@ -25,7 +25,7 @@ class LoginView: UIView {
     }
     // 로그인하기 버튼
     let loginButton = UIButton().then{
-        $0.defaultButton("로그인하기", .wishboardDisabledGray, .black)
+        $0.defaultButton("로그인하기", .wishboardDisabledGray, .dialogMessageColor)
     }
     // 비밀번호를 잊으셨나요?
     let lostPasswordButton = UIButton().then{
