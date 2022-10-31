@@ -19,7 +19,7 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.setFolderButton("폴더를 지정해 보세요! > ")
     }
     let dateLabel = UILabel().then{
-        $0.text = "0주 전"
+        $0.text = ""
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .gray
     }
