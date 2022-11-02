@@ -25,8 +25,10 @@ class ModifyProfileViewController: TitleCenterViewController {
         $0.backgroundColor = .wishboardTextfieldGray
         $0.layer.cornerRadius = 5
         $0.font = UIFont.Suit(size: 16, family: .Regular)
-        $0.clearButtonMode = .whileEditing
+        $0.clearButtonMode = .always
         $0.textColor = .editTextFontColor
+        
+        $0.becomeFirstResponder()
     }
     let completeButton = UIButton().then{
         $0.defaultButton("완료", .wishboardGreen, .black)
@@ -69,6 +71,9 @@ class ModifyProfileViewController: TitleCenterViewController {
     override func viewDidAppear(_ animated: Bool) {
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
 // MARK: - Set Views
