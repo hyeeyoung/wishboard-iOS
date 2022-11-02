@@ -46,10 +46,8 @@ class UploadItemPhotoTableViewCell: UITableViewCell {
     }
     func setUpImage(_ url: String) {
         self.photoImage.kf.setImage(with: URL(string: url), placeholder: UIImage())
-        self.cameraImage.isHidden = true
     }
     func setUpImage(_ img: UIImage) {
         self.photoImage.image = img
-        self.cameraImage.isHidden = true
     }
 }
