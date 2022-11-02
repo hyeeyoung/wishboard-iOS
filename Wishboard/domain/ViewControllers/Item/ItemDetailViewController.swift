@@ -12,6 +12,8 @@ class ItemDetailViewController: UIViewController {
     var itemDetailView: ItemDetailView!
     var itemId: Int!
     var wishListData: WishListModel!
+    var preVC: UIViewController!
+    var isDeleted: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +36,17 @@ class ItemDetailViewController: UIViewController {
         ItemDataManager().getItemDetailDataManager(self.itemId, self)
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        if isDeleted {
+            guard let preVC = self.preVC else {return}
+            switch preVC {
+            case is HomeViewController:
+                break
+            default:
+                SnackBar(preVC, message: .deleteItem)
+            }
+        }
     }
     // MARK: - Actions
     @objc func goBack() {
@@ -114,8 +127,18 @@ extension ItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
 extension ItemDetailViewController {
     // MARK: 아이템 삭제
     func deleteItemAPISuccess(_ result: APIModel<ResultModel>) {
-        self.dismiss(animated: true)
-        ScreenManager().goMainPages(0, self, family: .itemDeleted)
+        self.dismiss(animated: false)
+        self.isDeleted = true
+        
+        guard let preVC = self.preVC else {return}
+        switch preVC {
+        case is HomeViewController:
+            ScreenManager().goMainPages(0, self, family: .itemDeleted)
+            break
+        default:
+            self.navigationController?.popViewController(animated: true)
+        }
+        // home o cart x folderdetail x calender x
         
         print(result.message)
     }

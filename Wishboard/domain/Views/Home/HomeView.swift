@@ -146,6 +146,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         let itemIdx = indexPath.item
         
         let vc = ItemDetailViewController()
+        vc.preVC = self.viewController
         vc.itemId = self.wishListData[itemIdx].item_id
         self.viewController.navigationController?.pushViewController(vc, animated: true)
     }

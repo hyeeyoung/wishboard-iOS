@@ -43,6 +43,8 @@ class CalenderViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
+        // DATA
+        NotificationDataManager().getCalenderNotificationDataManager(self)
     }
     @objc func goBack() {
         self.navigationController?.popViewController(animated: true)
@@ -94,6 +96,7 @@ extension CalenderViewController: UITableViewDelegate, UITableViewDataSource {
         let itemIdx = indexPath.item
         if itemIdx != 0 && itemIdx != 1 {
             let vc = ItemDetailViewController()
+            vc.preVC = self
             vc.itemId = self.notiData[itemIdx - 2].item_id
             self.navigationController?.pushViewController(vc, animated: true)
         }

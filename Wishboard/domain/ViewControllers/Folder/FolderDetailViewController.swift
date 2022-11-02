@@ -29,7 +29,7 @@ class FolderDetailViewController: TitleCenterViewController {
         
     }
     override func viewDidAppear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBar.isHidden = true
         // DATA
         if let folderName = self.folderName {super.navigationTitle.text = folderName}
         if let folderId = self.folderId {
@@ -93,6 +93,7 @@ extension FolderDetailViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let itemIdx = indexPath.item
         let itemDetailVC = ItemDetailViewController()
+        itemDetailVC.preVC = self
         itemDetailVC.itemId = self.wishListData[itemIdx].item_id
         self.navigationController?.pushViewController(itemDetailVC, animated: true)
     }

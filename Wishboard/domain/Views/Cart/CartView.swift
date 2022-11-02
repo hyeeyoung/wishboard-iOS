@@ -189,9 +189,9 @@ extension CartView {
     }
     // 상품 이미지, 상품명 클릭 (아이템 디테일 화면으로 이동)
     @objc func cartItemDidTap(_ sender: CartGesture) {
-        print("click")
         guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
         let vc = ItemDetailViewController()
+        vc.preVC = self.preVC
         vc.itemId = itemId
         self.preVC.navigationController?.pushViewController(vc, animated: true)
     }
