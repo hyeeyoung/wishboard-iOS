@@ -29,10 +29,17 @@ class PopUpDeleteUserViewController: UIViewController {
         $0.font = UIFont.Suit(size: 16, family: .Bold)
     }
     let messageLabel = UILabel().then{
-        $0.text = "message"
+        $0.text = "정말 탈퇴하시겠습니까?\n탈퇴 시 앱 내 모든 데이터가 사라집니다.\n서비스를 탈퇴하시려면 이메일을 입력해 주세요."
         $0.font = UIFont.Suit(size: 14, family: .Regular)
         $0.textColor = .dialogMessageColor
         $0.numberOfLines = 0
+        
+        let attrString = NSMutableAttributedString(string: $0.text!)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.18
+        attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
+        $0.attributedText = attrString
+        
         $0.textAlignment = .center
     }
     let horizontalSeperator = UIView().then{
@@ -61,7 +68,6 @@ class PopUpDeleteUserViewController: UIViewController {
     var restoreFrameValue: CGFloat = 0.0
     
     convenience init(titleText: String? = nil,
-                     messageText: String? = nil,
                      greenBtnText: String? = nil,
                      blackBtnText: String? = nil,
                      placeholder: String? = nil,
@@ -69,7 +75,6 @@ class PopUpDeleteUserViewController: UIViewController {
         self.init()
 
         self.titleText = titleText
-        self.messageText = messageText
         self.greenBtnText = greenBtnText
         self.blackBtnText = blackBtnText
         self.placeholder = placeholder
@@ -125,7 +130,6 @@ class PopUpDeleteUserViewController: UIViewController {
     // MARK: - Functions
     func setUpContent() {
         titleLabel.text = self.titleText
-        messageLabel.text = self.messageText
         cancelBtn = UIButton().then{
             var config = UIButton.Configuration.plain()
             var attText = AttributedString.init(self.greenBtnText!)
@@ -163,7 +167,7 @@ class PopUpDeleteUserViewController: UIViewController {
     func setUpConstraint() {
         popupView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(30)
-            make.height.equalTo(211)
+            make.height.equalTo(250)
             make.centerY.centerX.equalToSuperview()
         }
         titleLabel.snp.makeConstraints { make in

@@ -19,6 +19,13 @@ extension UILabel {
             self.attributedText = attrString
         }
     }
+    func setTextWithLineHeight(_ text: String){
+        let attrString = NSMutableAttributedString(string: text)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.18
+        attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
+        self.attributedText = attrString
+    }
     
     /// 라벨 내 특정 문자열의 CGRect 반환
     /// - Parameter subText: CGRect값을 알고 싶은 특정 문자열
