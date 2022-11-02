@@ -11,7 +11,7 @@ import FSCalendar
 class CalenderViewController: UIViewController {
     var calenderView: CalenderView!
     var selectedDate: String!
-    var calenderData: [NotificationModel]!
+    var calenderData: [NotificationModel] = []
     var notiData: [NotificationModel] = []
 
     
@@ -53,7 +53,7 @@ class CalenderViewController: UIViewController {
 extension CalenderViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = notiData.count ?? 0
-        EmptyView().setNotificationEmptyView(self.calenderView.calenderTableView, count)
+        EmptyView().setNotificationEmptyView(self.calenderView.calenderTableView, count, true)
         return count + 2
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -62,9 +62,7 @@ extension CalenderViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CalenderTableViewCell", for: indexPath) as? CalenderTableViewCell else { return UITableViewCell() }
             cell.setCalenderDelegate(dataSourceDelegate: self)
-            if let cellData = self.calenderData {
-                cell.setUpCalenderData(cellData)
-            }
+            cell.setUpCalenderData(self.calenderData)
             cell.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
             cell.selectionStyle = .none
             return cell

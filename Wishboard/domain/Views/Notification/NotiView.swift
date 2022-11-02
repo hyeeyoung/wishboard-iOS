@@ -59,7 +59,7 @@ class NotiView: UIView {
 extension NotiView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = self.notiData.count ?? 0
-        EmptyView().setEmptyView(self.emptyMessage, self.notificationTableView, count)
+        EmptyView().setNotificationEmptyView(self.notificationTableView, count, false)
         return count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

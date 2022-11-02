@@ -23,10 +23,10 @@ class EmptyView {
         if count == 0 {showEmptyView(tableView)}
         else {hideEmptyView(tableView)}
     }
-    func setNotificationEmptyView(_ tableView: UITableView, _ count: Int) {
+    func setNotificationEmptyView(_ tableView: UITableView, _ count: Int, _ isCalender: Bool) {
         self.message = "앗, 일정이 없어요!\n상품 일정을 지정하고 알림을 받아보세요!"
         
-        if count == 0 {showNotificationEmptyView(tableView)}
+        if count == 0 {showNotificationEmptyView(tableView, isCalender)}
         else {hideEmptyView(tableView)}
     }
     // Collectionview
@@ -71,7 +71,7 @@ class EmptyView {
         tableView.backgroundView = backgroudView
     }
     // Notification Table View
-    func showNotificationEmptyView(_ tableView: UITableView) {
+    func showNotificationEmptyView(_ tableView: UITableView, _ isCalender: Bool) {
         let backgroudView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: tableView.bounds.height))
         
         let messageLabel = UILabel().then{
@@ -104,9 +104,11 @@ class EmptyView {
             make.height.greaterThanOrEqualTo(131)
             make.width.greaterThanOrEqualTo(226)
             make.centerX.equalToSuperview()
+            if isCalender {make.bottom.equalToSuperview().offset(-135)}
+            else {make.centerY.equalToSuperview()}
 //            if UIDevice.current.hasNotch {make.bottom.equalToSuperview().offset(-135)}
 //            else {make.bottom.equalToSuperview().offset(-105)}
-            make.bottom.equalToSuperview().offset(-135)
+            
         }
         
         tableView.backgroundView = backgroudView

@@ -34,7 +34,10 @@ class OnBoardingViewController: UIViewController {
         // 자동 로그인
         checkRememberMe()
         // 탈퇴 후 스낵바
-        if self.deleteUser {SnackBar(self, message: .deleteUser)}
+        if self.deleteUser {
+            SnackBar(self, message: .deleteUser)
+            self.deleteUser.toggle()
+        }
     }
     func checkRememberMe() {
         if let token = UserDefaults.standard.string(forKey: "token") {
