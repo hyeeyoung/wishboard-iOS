@@ -10,7 +10,7 @@ import MessageUI
 
 class MyPageViewController: TitleLeftViewController {
     var mypageView: MyPageView!
-    let settingArray = ["설정", "알림 설정", "고객 지원", "문의하기", "서비스 정보", "위시보드 이용 방법", "이용약관", "개인정보처리방침", "오픈소스 라이브러리", "버전 정보", "계정 관리", "로그아웃", "회원 탈퇴"]
+    let settingArray = ["설정", "알림 설정", "고객 지원", "문의하기", "서비스 정보", "위시보드 이용 방법", "이용약관", "개인정보 처리방침", "오픈소스 라이브러리", "버전 정보", "계정 관리", "로그아웃", "회원 탈퇴"]
 
     var userInfoData: GetUserInfoModel!
     var nickName: String?
