@@ -56,6 +56,7 @@ class LostPasswordViewController: KeyboardViewController {
                 $0.defaultButton("인증메일 받기", .wishboardDisabledGray, .dialogMessageColor)
                 $0.isEnabled = false
             }
+            self.lostPasswordView.errorMessage.text = "이메일 주소를 정확하게 입력해주세요."
             self.lostPasswordView.errorMessage.isHidden = false
         }
     }
@@ -73,6 +74,12 @@ extension LostPasswordViewController {
         print(result)
     }
     func checkEmaiAPIFail() {
-        SnackBar(self, message: .login)
+        self.lostPasswordView.errorMessage.text = "앗, 가입되지 않은 계정이에요! 가입하기부터 진행해 주세요."
+        self.lostPasswordView.errorMessage.isHidden = false
+        
+        self.lostPasswordView.getEmailButton.then{
+            $0.defaultButton("인증메일 받기", .wishboardDisabledGray, .dialogMessageColor)
+            $0.isEnabled = false
+        }
     }
 }

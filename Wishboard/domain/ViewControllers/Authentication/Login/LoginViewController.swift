@@ -91,7 +91,7 @@ extension LoginViewController {
     func loginAPIFail() {
         SnackBar(self, message: .login)
         self.loginView.loginButton.then{
-            $0.defaultButton("로그인하기", .wishboardDisabledGray, .black)
+            $0.defaultButton("로그인하기", .wishboardDisabledGray, .dialogMessageColor)
             $0.isEnabled = false
         }
     }

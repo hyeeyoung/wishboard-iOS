@@ -40,7 +40,7 @@ class GetEmailView: UIView {
     }
     // 로그인하기 버튼
     let loginButton = UIButton().then{
-        $0.defaultButton("로그인하기", .wishboardDisabledGray, .black)
+        $0.defaultButton("로그인하기", .wishboardDisabledGray, .dialogMessageColor)
     }
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))

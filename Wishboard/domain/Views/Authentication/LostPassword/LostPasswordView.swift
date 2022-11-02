@@ -31,7 +31,7 @@ class LostPasswordView: UIView {
         $0.font = UIFont.Suit(size: 12, family: .Regular)
     }
     let getEmailButton = UIButton().then{
-        $0.defaultButton("인증메일 받기", .wishboardDisabledGray, .black)
+        $0.defaultButton("인증메일 받기", .wishboardDisabledGray, .dialogMessageColor)
     }
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
