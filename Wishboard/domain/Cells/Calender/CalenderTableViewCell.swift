@@ -79,11 +79,11 @@ class CalenderTableViewCell: UITableViewCell {
         weekSeperator.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(80)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(1)
+            make.height.equalTo(0.5)
         }
         underSeperator.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(1)
+            make.height.equalTo(0.5)
         }
     }
     

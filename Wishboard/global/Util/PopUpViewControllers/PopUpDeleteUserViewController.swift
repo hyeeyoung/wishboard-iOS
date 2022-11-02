@@ -180,12 +180,12 @@ class PopUpDeleteUserViewController: UIViewController {
             make.centerX.equalToSuperview()
         }
         horizontalSeperator.snp.makeConstraints { make in
-            make.height.equalTo(1)
+            make.height.equalTo(0.5)
             make.bottom.equalToSuperview().offset(-48)
             make.leading.trailing.equalToSuperview()
         }
         verticalSeperator.snp.makeConstraints { make in
-            make.width.equalTo(1)
+            make.width.equalTo(0.5)
             make.bottom.centerX.equalToSuperview()
             make.top.equalTo(horizontalSeperator.snp.bottom)
         }

@@ -42,7 +42,7 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.spacing = 16
     }
     let seperatorLine1 = UIView().then{
-        $0.backgroundColor = .systemGray5
+        $0.backgroundColor = .wishboardDisabledGray
     }
     let linkLabel = UILabel().then{
         $0.text = "w.musinsa.com"
@@ -51,7 +51,7 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.setTextWithLineHeight()
     }
     let seperatorLine2 = UIView().then{
-        $0.backgroundColor = .systemGray5
+        $0.backgroundColor = .wishboardDisabledGray
     }
     let memoTitlelabel = UILabel().then{
         $0.text = "메모"
@@ -143,7 +143,7 @@ class ItemDetailTableViewCell: UITableViewCell {
             make.centerY.equalTo(priceLabel)
         }
         seperatorLine1.snp.makeConstraints { make in
-            make.height.equalTo(1)
+            make.height.equalTo(0.5)
         }
         stack.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
@@ -152,7 +152,7 @@ class ItemDetailTableViewCell: UITableViewCell {
             else {make.bottom.equalToSuperview().offset(-44)}
         }
         seperatorLine2.snp.makeConstraints { make in
-            make.height.equalTo(1)
+            make.height.equalTo(0.5)
         }
     }
     // After API success

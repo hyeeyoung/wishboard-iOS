@@ -71,7 +71,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             cell.addSubview(separator)
             separator.snp.makeConstraints { make in
                 make.leading.trailing.equalToSuperview()
-                make.height.equalTo(1)
+                make.height.equalTo(0.5)
                 make.bottom.equalToSuperview()
             }
             return cell
