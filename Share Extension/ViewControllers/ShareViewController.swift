@@ -23,6 +23,7 @@ class ShareViewController: UIViewController {
     var selectedFolder: String?
     var selectedFolderIdx: Int?
     
+    // Item Contents
     var webURL: String?
     var itemImg: String?
     var itemName: String?
@@ -148,6 +149,12 @@ class ShareViewController: UIViewController {
     }
     // 위시리스트 추가 버튼
     @objc func completeButtonDidTap() {
+        // 만약 상품명 또는 가격이 비어있을 시
+        if self.itemName == nil || self.itemPrice == nil {
+            SnackBar(self, message: .emptyItemContent)
+            return
+        }
+        
         let lottieView = shareView.completeButton.setHorizontalLottieView(shareView.completeButton)
         shareView.completeButton.isSelected = true
         lottieView.isHidden = false

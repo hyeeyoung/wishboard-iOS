@@ -71,5 +71,6 @@ extension SnackBar {
         case deleteUser = "탈퇴 완료되었어요. 이용해주셔서 감사합니다!☺️"
         case ShoppingLink = "쇼핑몰 링크를 등록해 주세요!🛍️️"
         case failShoppingLink = "앗, 아이템 정보를 불러오지 못했어요🥲"
+        case emptyItemContent = "앗, 상품명과 가격을 입력해 주세요😁"
     }
 }
