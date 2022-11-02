@@ -44,6 +44,11 @@ class PopUpWithTextFieldViewController: UIViewController {
         $0.clearButtonMode = .whileEditing
         $0.textColor = .editTextFontColor
     }
+    let errorMessageLabel = UILabel().then{
+        $0.text = "동일이름의 폴더가 있어요!"
+        $0.textColor = .wishboardRed
+        $0.font = UIFont.Suit(size: 12, family: .Regular)
+    }
     var completeButton: UIButton!
     // MARK: - Life Cycles
     // keyboard
@@ -78,6 +83,8 @@ class PopUpWithTextFieldViewController: UIViewController {
         
         textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         quitButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        
+        errorMessageLabel.isHidden = true
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -121,6 +128,7 @@ class PopUpWithTextFieldViewController: UIViewController {
             self.countLabel.textColor = .wishboardGray
             completeButton.isEnabled = true
         }
+        errorMessageLabel.isHidden = true
     }
     // MARK: - Functions
     func setUpContent() {
@@ -141,6 +149,7 @@ class PopUpWithTextFieldViewController: UIViewController {
         popupView.addSubview(quitButton)
         popupView.addSubview(countLabel)
         popupView.addSubview(textField)
+        popupView.addSubview(errorMessageLabel)
         popupView.addSubview(completeButton)
     }
     func setUpConstraint() {
@@ -164,6 +173,10 @@ class PopUpWithTextFieldViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
         }
+        errorMessageLabel.snp.makeConstraints { make in
+            make.leading.equalTo(textField)
+            make.top.equalTo(textField.snp.bottom).offset(6)
+        }
         countLabel.snp.makeConstraints { make in
             make.trailing.equalTo(textField)
             make.top.equalTo(textField.snp.bottom).offset(6)
@@ -175,6 +188,15 @@ class PopUpWithTextFieldViewController: UIViewController {
         }
     }
 
+    func completeButtonDidTap() {
+        completeButton.isEnabled = false
+        completeButton.defaultButton("", .wishboardGreen, .black)
+    }
+    func sameFolderNameFail() {
+        errorMessageLabel.isHidden = false
+        completeButton.defaultButton(self.buttonTitle!, .wishboardDisabledGray, .dialogMessageColor)
+        completeButton.isEnabled = false
+    }
 }
 // MARK: - TextField & Keyboard Methods
 extension PopUpWithTextFieldViewController: UITextFieldDelegate {

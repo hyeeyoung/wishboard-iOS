@@ -60,8 +60,7 @@ class SnackBar {
 extension SnackBar {
     enum SnackBarMessage: String {
         case login = "아이디 또는 비밀번호를 다시 확인해 주세요."
-        case checkFolderName = "이미 존재하는 폴더명입니다."
-        case networkCheck = "네트워크 연결 상태를 확인해 주세요"
+        case networkCheck = "네트워크 연결 상태를 확인해 주세요."
         case addFolder = "폴더를 추가했어요!😉"
         case modifyFolder = "폴더명을 수정했어요!📁"
         case deleteFolder = "폴더를 삭제했어요!🗑"

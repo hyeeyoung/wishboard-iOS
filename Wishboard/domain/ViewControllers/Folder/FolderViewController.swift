@@ -14,6 +14,7 @@ class FolderViewController: TitleLeftViewController {
     var dialog: PopUpWithTextFieldViewController!
     var folderData: [FolderModel] = []
     var folderStr: String?
+    var lottieView: AnimationView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -146,9 +147,9 @@ extension FolderViewController {
     // 폴더명 수정 버튼 클릭
     @objc func completeModifyButtonDidTap(_ sender: CustomButton) {
         let folderId = sender.folderData?.folder_id
-        let lottieView = dialog.completeButton.setHorizontalLottieView(dialog.completeButton)
-        dialog.completeButton.isEnabled = false
-        dialog.completeButton.setTitle("", for: .normal)
+        lottieView = dialog.completeButton.setHorizontalLottieView(dialog.completeButton)
+        dialog.completeButtonDidTap()
+        
         lottieView.isHidden = false
         lottieView.play { completion in
             let addFolderInput = AddFolderInput(folder_name: self.folderStr)
@@ -157,9 +158,8 @@ extension FolderViewController {
     }
     // 폴더 추가 버튼 클릭
     @objc func completeAddButtonDidTap() {
-        let lottieView = dialog.completeButton.setHorizontalLottieView(dialog.completeButton)
-        dialog.completeButton.isEnabled = false
-        dialog.completeButton.setTitle("", for: .normal)
+        lottieView = dialog.completeButton.setHorizontalLottieView(dialog.completeButton)
+        dialog.completeButtonDidTap()
         
         lottieView.isHidden = false
         lottieView.play { completion in
@@ -229,8 +229,8 @@ extension FolderViewController {
         print(result.message)
     }
     func sameFolderNameFail() {
-        self.dismiss(animated: false)
-        SnackBar(self, message: .checkFolderName)
+        dialog.sameFolderNameFail()
+        lottieView.isHidden = true
     }
     // MARK: 폴더 삭제 API
     func deleteFolderAPISuccess(_ result: APIModel<ResultModel>) {
