@@ -33,7 +33,9 @@ class LostPasswordViewController: KeyboardViewController {
     // MARK: - Actions
     @objc func emailTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
-        self.email = text
+        let trimString = text.trimmingCharacters(in: .whitespaces)
+        self.lostPasswordView.emailTextField.text = trimString
+        self.email = trimString
         self.checkValidEmail(self.email)
     }
     @objc func getEmailButtonDidTap() {

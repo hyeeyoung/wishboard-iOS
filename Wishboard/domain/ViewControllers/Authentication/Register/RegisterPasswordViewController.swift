@@ -37,7 +37,9 @@ extension RegisterPasswordViewController {
     // MARK: - Actions
     @objc func pwTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
-        self.pw = text
+        let trimString = text.trimmingCharacters(in: .whitespaces)
+        self.registerPWView.pwTextField.text = trimString
+        self.pw = trimString
         self.checkValidPW(self.pw)
     }
     @objc func registerButtonDidTap() {

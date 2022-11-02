@@ -104,8 +104,9 @@ class EmptyView {
             make.height.greaterThanOrEqualTo(131)
             make.width.greaterThanOrEqualTo(226)
             make.centerX.equalToSuperview()
-            if UIDevice.current.hasNotch {make.bottom.equalToSuperview().offset(-135)}
-            else {make.bottom.equalToSuperview().offset(-105)}
+//            if UIDevice.current.hasNotch {make.bottom.equalToSuperview().offset(-135)}
+//            else {make.bottom.equalToSuperview().offset(-105)}
+            make.bottom.equalToSuperview().offset(-135)
         }
         
         tableView.backgroundView = backgroudView

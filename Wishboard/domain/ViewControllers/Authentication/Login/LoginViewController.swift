@@ -33,11 +33,15 @@ class LoginViewController: TitleCenterViewController {
     // MARK: - Actions
     @objc func emailTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
-        loginViewModel.emailTextFieldEditingChanged(text)
+        let trimString = text.trimmingCharacters(in: .whitespaces)
+        self.loginView.emailTextField.text = trimString
+        loginViewModel.emailTextFieldEditingChanged(trimString)
     }
     @objc func passwordTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
-        loginViewModel.passwordTextFieldEditingChanged(text)
+        let trimString = text.trimmingCharacters(in: .whitespaces)
+        self.loginView.passwordTextField.text = trimString
+        loginViewModel.passwordTextFieldEditingChanged(trimString)
     }
     @objc func loginButtonDidTap() {
         self.view.endEditing(true)

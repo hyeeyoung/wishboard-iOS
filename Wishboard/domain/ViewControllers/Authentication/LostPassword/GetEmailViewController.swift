@@ -50,7 +50,9 @@ extension GetEmailViewController {
     // MARK: - Actions
     @objc func codeTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
-        self.code = text
+        let trimString = text.trimmingCharacters(in: .whitespaces)
+        self.getEmailView.codeTextField.text = trimString
+        self.code = trimString
         self.checkValidCode()
     }
     @objc func loginButtonDidTap() {

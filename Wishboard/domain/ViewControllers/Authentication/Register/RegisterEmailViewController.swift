@@ -30,7 +30,9 @@ class RegisterEmailViewController: KeyboardViewController {
     // MARK: - Actions
     @objc func emailTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
-        self.email = text
+        let trimString = text.trimmingCharacters(in: .whitespaces)
+        self.registerEmailView.emailTextField.text = trimString
+        self.email = trimString
         self.checkValidEmail(self.email)
     }
     @objc func nextButtonDidTap() {
