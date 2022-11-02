@@ -59,7 +59,7 @@ extension GetEmailViewController {
         if self.code != self.authCode {
             getEmailView.messageLabel.isHidden = false
             self.getEmailView.loginButton.then{
-                $0.defaultButton("로그인 하기", .wishboardDisabledGray, .black)
+                $0.defaultButton("로그인 하기", .wishboardDisabledGray, .dialogMessageColor)
                 $0.isEnabled = false
             }
         } else {
@@ -98,7 +98,7 @@ extension GetEmailViewController {
             }
         } else {
             self.getEmailView.loginButton.then{
-                $0.defaultButton("로그인 하기", .wishboardDisabledGray, .black)
+                $0.defaultButton("로그인 하기", .wishboardDisabledGray, .dialogMessageColor)
                 $0.isEnabled = false
             }
         }

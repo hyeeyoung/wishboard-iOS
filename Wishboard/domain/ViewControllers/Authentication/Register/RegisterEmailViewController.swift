@@ -36,7 +36,6 @@ class RegisterEmailViewController: KeyboardViewController {
         self.checkValidEmail(self.email)
     }
     @objc func nextButtonDidTap() {
-        self.view.endEditing(true)
         let checkEmailInput = CheckEmailInput(email: self.email)
         RegisterDataManager().checkEmailDataManager(checkEmailInput, self)
     }
@@ -50,7 +49,7 @@ class RegisterEmailViewController: KeyboardViewController {
             }
         } else {
             self.registerEmailView.nextButton.then{
-                $0.defaultButton("다음", .wishboardDisabledGray, .black)
+                $0.defaultButton("다음", .wishboardDisabledGray, .dialogMessageColor)
                 $0.isEnabled = false
             }
         }
@@ -59,11 +58,17 @@ class RegisterEmailViewController: KeyboardViewController {
 // MARK: - API Success
 extension RegisterEmailViewController {
     func checkEmailAPISuccess(_ result: APIModel<ResultModel>) {
+        self.view.endEditing(true)
+        
         let registerVC = RegisterPasswordViewController(title: "2/2 단계")
         registerVC.email = self.email
         self.navigationController?.pushViewController(registerVC, animated: true)
     }
     func checkEmaiAPIFail() {
-        SnackBar(self, message: .checkEmail)
+        self.registerEmailView.errorMessageLabel.isHidden = false
+        self.registerEmailView.nextButton.then{
+            $0.defaultButton("다음", .wishboardDisabledGray, .dialogMessageColor)
+            $0.isEnabled = false
+        }
     }
 }

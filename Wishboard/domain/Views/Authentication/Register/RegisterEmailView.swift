@@ -25,6 +25,11 @@ class RegisterEmailView: UIView {
         $0.becomeFirstResponder()
         $0.textColor = .editTextFontColor
     }
+    let errorMessageLabel = UILabel().then{
+        $0.text = "앗, 이미 가입된 계정이에요! 로그인으로 진행해 주세요."
+        $0.textColor = .wishboardRed
+        $0.font = UIFont.Suit(size: 12, family: .Regular)
+    }
     let nextButton = UIButton().then{
         $0.defaultButton("다음", .wishboardDisabledGray, .black)
     }
@@ -39,6 +44,7 @@ class RegisterEmailView: UIView {
         setUpConstraint()
         
         emailTextField.inputAccessoryView = accessoryView // <-
+        errorMessageLabel.isHidden = true
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -48,6 +54,7 @@ class RegisterEmailView: UIView {
         addSubview(heartLetterImage)
         addSubview(subTitleLabel)
         addSubview(emailTextField)
+        addSubview(errorMessageLabel)
         
         accessoryView.addSubview(nextButton)
     }
@@ -65,6 +72,10 @@ class RegisterEmailView: UIView {
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(42)
             make.top.equalTo(subTitleLabel.snp.bottom).offset(32)
+        }
+        errorMessageLabel.snp.makeConstraints { make in
+            make.leading.equalTo(emailTextField)
+            make.top.equalTo(emailTextField.snp.bottom).offset(6)
         }
         nextButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)

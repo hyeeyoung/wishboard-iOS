@@ -53,7 +53,7 @@ class LostPasswordViewController: KeyboardViewController {
             self.lostPasswordView.errorMessage.isHidden = true
         } else {
             self.lostPasswordView.getEmailButton.then{
-                $0.defaultButton("인증메일 받기", .wishboardDisabledGray, .black)
+                $0.defaultButton("인증메일 받기", .wishboardDisabledGray, .dialogMessageColor)
                 $0.isEnabled = false
             }
             self.lostPasswordView.errorMessage.isHidden = false

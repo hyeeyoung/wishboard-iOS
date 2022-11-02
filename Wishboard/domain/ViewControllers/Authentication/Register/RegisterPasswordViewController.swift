@@ -64,7 +64,7 @@ extension RegisterPasswordViewController {
         } else {
             registerPWView.errorMessage.isHidden = false
             registerPWView.registerButton.then{
-                $0.defaultButton("가입하기", .wishboardDisabledGray, .black)
+                $0.defaultButton("가입하기", .wishboardDisabledGray, .dialogMessageColor)
                 $0.isEnabled = false
             }
         }
