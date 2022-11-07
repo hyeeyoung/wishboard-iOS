@@ -132,10 +132,11 @@ class ShareViewController: UIViewController {
         let text = sender.text ?? ""
         self.itemPrice = setPriceString(text)
         if let priceStr = self.itemPrice {
-            guard let price = Float(priceStr) else {return}
-            sender.text = numberFormatter.string(from: NSNumber(value: price))
+            if priceStr != "" {
+                guard let price = Float(priceStr) else {return}
+                sender.text = numberFormatter.string(from: NSNumber(value: price))
+            } else { self.itemPrice = "" }
         }
-//        print(self.itemPrice)
         setButton()
     }
     func setPriceString(_ str: String) -> String {
