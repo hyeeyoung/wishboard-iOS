@@ -57,6 +57,18 @@ class ShareViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
+        // Login Check
+        let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
+        let token = defaults?.string(forKey: "token") ?? ""
+        if token == "" {
+            shareView.completeButton.defaultButton("로그인 후 아이템을 추가해보세요!", .wishboardDisabledGray, .dialogMessageColor)
+            shareView.completeButton.isEnabled = false
+            shareView.itemNameTextField.isEnabled = false
+            shareView.itemPriceTextField.isEnabled = false
+            shareView.setNotificationButton.isEnabled = false
+            shareView.addFolderButton.isEnabled = false
+            return
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         self.addKeyboardNotifications()
@@ -255,17 +267,18 @@ extension ShareViewController {
     }
     // MARK: 아이템 정보 파싱
     func getItemDataAPISuccess(_ result: APIModel<ItemParsingModel>) {
-        guard let itemImg = result.data?.item_img else {return}
-        guard let itemName = result.data?.item_name else {return}
-        guard let itemPrice = result.data?.item_price else {return}
+        if let itemImg = result.data?.item_img {self.itemImg = itemImg}
+        if let itemName = result.data?.item_name {self.itemName = itemName}
+        if let itemPrice = result.data?.item_price {self.itemPrice = itemPrice}
         
-        self.itemImg = itemImg
-        self.itemName = itemName
-        self.itemPrice = itemPrice
+        if self.itemImg == nil && self.itemName == nil && self.itemPrice == nil {
+            SnackBar(self, message: .failShoppingLink)
+            return
+        }
         
-        self.shareView.itemImage.kf.setImage(with: URL(string: itemImg), placeholder: UIImage())
+        self.shareView.itemImage.kf.setImage(with: URL(string: itemImg ?? ""), placeholder: UIImage())
         self.shareView.itemNameTextField.text = self.itemName
-        self.shareView.itemPriceTextField.text = FormatManager().strToPrice(numStr: itemPrice)
+        self.shareView.itemPriceTextField.text = FormatManager().strToPrice(numStr: itemPrice ?? "")
         
         // reload data with animation
         UIView.transition(with: shareView,

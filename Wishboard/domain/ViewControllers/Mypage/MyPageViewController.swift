@@ -296,6 +296,7 @@ extension MyPageViewController {
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "password")
         UserDefaults.standard.set(false, forKey: "isFirstLogin")
+        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "token")
         
         let onboardingVC = OnBoardingViewController()
         self.navigationController?.pushViewController(onboardingVC, animated: true)

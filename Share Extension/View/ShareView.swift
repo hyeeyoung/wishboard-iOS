@@ -14,7 +14,7 @@ class ShareView: UIView {
         $0.backgroundColor = .systemGray6
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 40
-        $0.image = UIImage(named: "appLogo")
+        $0.image = UIImage(named: "blackLogo")
         $0.contentMode = .scaleAspectFill
     }
     let backgroundView = UIView().then{
