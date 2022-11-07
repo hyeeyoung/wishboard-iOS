@@ -274,6 +274,8 @@ extension ShareViewController {
         if self.itemImg == nil && self.itemName == nil && self.itemPrice == nil {
             SnackBar(self, message: .failShoppingLink)
             return
+        } else if self.itemPrice == nil {
+            self.itemPrice = "0"
         }
         
         self.shareView.itemImage.kf.setImage(with: URL(string: itemImg ?? ""), placeholder: UIImage())

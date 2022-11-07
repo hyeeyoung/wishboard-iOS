@@ -209,7 +209,7 @@ extension ShoppingLinkViewController {
         }
         if let itemPrice = result.data?.item_price {
             self.itemPrice = itemPrice
-        }
+        } else {self.itemPrice = "0"}
         self.viewDidLoad()
         self.isExit = false
         self.isFail = false
