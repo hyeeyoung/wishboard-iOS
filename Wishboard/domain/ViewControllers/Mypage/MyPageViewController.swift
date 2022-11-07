@@ -90,6 +90,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        UIDevice.vibrate()
+        
         let tag = indexPath.row
         switch tag {
         case 0:
@@ -158,6 +160,7 @@ extension MyPageViewController {
         notiSwitch.addTarget(self, action: #selector(onClickSwitch(_:)), for: UIControl.Event.valueChanged)
     }
     @objc func onClickSwitch(_ sender: UISwitch) {
+        UIDevice.vibrate()
         if sender.isOn {
             MypageDataManager().switchNotificationDataManager(true, self)
         } else {
@@ -198,10 +201,12 @@ extension MyPageViewController {
     @objc func logoutButtonDidTap() {
         self.dismiss(animated: false)
         MypageDataManager().logoutDataManager(self)
+        UIDevice.vibrate()
     }
     @objc func signOutButtonDidTap() {
         self.dismiss(animated: false)
         MypageDataManager().deleteUserDataManager(self)
+        UIDevice.vibrate()
     }
 }
 // MARK: - Email delegate

@@ -74,6 +74,8 @@ extension NotiView: UITableViewDelegate, UITableViewDataSource {
         return 115
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        UIDevice.vibrate()
+        
         let index = indexPath.item
         // 쇼핑몰 이동
         if let urlStr = self.notiData[index].item_url {

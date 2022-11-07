@@ -47,12 +47,14 @@ class HomeViewController: UIViewController {
     }
     // MARK: - Actions & Functions
     @objc func goToCart() {
+        UIDevice.vibrate()
         let cartVC = CartViewController()
         self.navigationController?.pushViewController(cartVC, animated: true)
     }
     @objc func goCalenderDidTap() {
         let calenderVC = CalenderViewController()
         self.navigationController?.pushViewController(calenderVC, animated: true)
+        UIDevice.vibrate()
     }
     func alertDialog() {
         let dialog = PopUpViewController(titleText: "알림 허용", messageText: "알림을 받아보시겠어요?\n직접 등록하신 아이템의 재입고 날짜 등의\n상품 일정 알림을 받으실 거에요.", greenBtnText: "나중에", blackBtnText: "허용")
@@ -66,11 +68,13 @@ class HomeViewController: UIViewController {
         // 앱 이용방법 더는 안 띄우게
         UserDefaults.standard.set(false, forKey: "isFirstLogin")
         MypageDataManager().switchNotificationDataManager(false, self)
+        UIDevice.vibrate()
     }
     @objc func okButtonDidTap() {
         // 앱 이용방법 더는 안 띄우게
         UserDefaults.standard.set(false, forKey: "isFirstLogin")
         MypageDataManager().switchNotificationDataManager(true, self)
+        UIDevice.vibrate()
     }
 }
 // MARK: - API Success

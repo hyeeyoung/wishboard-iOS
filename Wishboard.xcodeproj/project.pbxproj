@@ -60,6 +60,8 @@
 		2360096028DA2297001FB107 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360095F28DA2297001FB107 /* EmptyView.swift */; };
 		2360FF5C28DCB31600E481A6 /* SnackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360FF5B28DCB31600E481A6 /* SnackBar.swift */; };
 		2360FF5E28DCC64100E481A6 /* ScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360FF5D28DCC64100E481A6 /* ScreenManager.swift */; };
+		23630951291905E200E38885 /* Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23630950291905E200E38885 /* Vibrate.swift */; };
+		236309522919085600E38885 /* Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23630950291905E200E38885 /* Vibrate.swift */; };
 		236FE90428DF7BE0006142DB /* SUIT-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 236FE90128DF7BE0006142DB /* SUIT-Bold.ttf */; };
 		236FE90628DF7BE0006142DB /* SUIT-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 236FE90228DF7BE0006142DB /* SUIT-Regular.ttf */; };
 		236FE90828DF7BE0006142DB /* SUIT-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 236FE90328DF7BE0006142DB /* SUIT-Thin.ttf */; };
@@ -292,6 +294,7 @@
 		2360095F28DA2297001FB107 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		2360FF5B28DCB31600E481A6 /* SnackBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBar.swift; sourceTree = "<group>"; };
 		2360FF5D28DCC64100E481A6 /* ScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenManager.swift; sourceTree = "<group>"; };
+		23630950291905E200E38885 /* Vibrate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibrate.swift; sourceTree = "<group>"; };
 		236FE90128DF7BE0006142DB /* SUIT-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Bold.ttf"; sourceTree = "<group>"; };
 		236FE90228DF7BE0006142DB /* SUIT-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Regular.ttf"; sourceTree = "<group>"; };
 		236FE90328DF7BE0006142DB /* SUIT-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Thin.ttf"; sourceTree = "<group>"; };
@@ -944,8 +947,8 @@
 			children = (
 				2374789928D1DB2900CF941A /* CheckNotch.swift */,
 				2360FF5D28DCC64100E481A6 /* ScreenManager.swift */,
-				23A85F7C28E39FE800075667 /* FormatManager.swift */,
 				23CF158528FD630E000D012F /* UIDevice.swift */,
+				23A85F7C28E39FE800075667 /* FormatManager.swift */,
 			);
 			path = UtilManager;
 			sourceTree = "<group>";
@@ -1084,6 +1087,7 @@
 				23F69CB028CC1819001B8C7F /* UIView.swift */,
 				2374789B28D1EA1700CF941A /* PaddingLabel.swift */,
 				23E0ACC628E7A767008C35C2 /* UILabel.swift */,
+				23630950291905E200E38885 /* Vibrate.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1674,6 +1678,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23AADBC128DF8F9800AB75C6 /* NotificationSettingViewController.swift in Sources */,
+				236309522919085600E38885 /* Vibrate.swift in Sources */,
 				236FE91828DF8512006142DB /* SetLottie.swift in Sources */,
 				231B581028E8A33C0030D33E /* BaseViewController.swift in Sources */,
 				230DBFA828E106EE00E9AED6 /* ShareView.swift in Sources */,
@@ -1772,6 +1777,7 @@
 				23A85F8528E3AE6200075667 /* LostPasswordInput.swift in Sources */,
 				2375C1CA28C5C2550017BAF7 /* OnBoardingView.swift in Sources */,
 				2378280428D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift in Sources */,
+				23630951291905E200E38885 /* Vibrate.swift in Sources */,
 				23C9568D28C6812100D88536 /* UIColor.swift in Sources */,
 				23CF158628FD630E000D012F /* UIDevice.swift in Sources */,
 				23D7901628CB172900246109 /* CalenderNotiTableViewCell.swift in Sources */,

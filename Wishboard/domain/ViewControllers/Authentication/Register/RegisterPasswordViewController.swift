@@ -43,6 +43,7 @@ extension RegisterPasswordViewController {
         self.checkValidPW(self.pw)
     }
     @objc func registerButtonDidTap() {
+        UIDevice.vibrate()
         let lottieView = registerPWView.registerButton.setHorizontalLottieView(registerPWView.registerButton)
         registerPWView.registerButton.isSelected = true
         lottieView.isHidden = false

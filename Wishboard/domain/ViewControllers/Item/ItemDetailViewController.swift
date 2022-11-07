@@ -50,9 +50,11 @@ class ItemDetailViewController: UIViewController {
     }
     // MARK: - Actions
     @objc func goBack() {
+        UIDevice.vibrate()
         self.navigationController?.popViewController(animated: true)
     }
     @objc func alertDialog() {
+        UIDevice.vibrate()
         let dialog = PopUpViewController(titleText: "아이템 삭제", messageText: "정말 아이템을 삭제하시겠어요?\n삭제된 아이템은 다시 복구할 수 없어요!", greenBtnText: "취소", blackBtnText: "삭제")
         dialog.modalPresentationStyle = .overFullScreen
         self.present(dialog, animated: false, completion: nil)
@@ -62,8 +64,10 @@ class ItemDetailViewController: UIViewController {
     @objc func deleteButtonDidTap() {
         guard let itemId = self.wishListData.item_id else {return}
         ItemDataManager().deleteItemDataManager(itemId, self)
+        UIDevice.vibrate()
     }
     @objc func setFolder() {
+        UIDevice.vibrate()
         let vc = SetFolderBottomSheetViewController()
         vc.setPreViewController(self)
         vc.itemId = self.wishListData.item_id
@@ -76,6 +80,7 @@ class ItemDetailViewController: UIViewController {
         self.present(bottomSheet, animated: true, completion: nil)
     }
     @objc func goModify() {
+        UIDevice.vibrate()
         let modifyVC = UploadItemViewController().then{
             $0.isUploadItem = false
             $0.wishListModifyData = self.wishListData
@@ -100,6 +105,7 @@ extension ItemDetailViewController {
         itemDetailView.setUpConstraint()
     }
     @objc func linkButtonDidTap() {
+        UIDevice.vibrate()
         guard let urlStr = self.wishListData.item_url else {return}
         ScreenManager().linkTo(viewcontroller: self, urlStr)
     }

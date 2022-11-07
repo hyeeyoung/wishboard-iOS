@@ -37,6 +37,7 @@ class HowToViewController: UIViewController {
     }
     @objc func goBack() {
         self.dismiss(animated: true)
+        UIDevice.vibrate()
     }
     
 }

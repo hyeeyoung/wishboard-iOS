@@ -116,10 +116,12 @@ class NotificationSettingViewController: UIViewController {
     }
     // MARK: - Actions
     @objc func exit() {
+        UIDevice.vibrate()
         self.isExit = true
         self.dismiss(animated: true)
     }
     @objc func goUploadPage() {
+        UIDevice.vibrate()
         self.isExit = false
         if self.notiType == nil {self.notiType = "세일 마감"}
         if self.dateAndTime == nil {

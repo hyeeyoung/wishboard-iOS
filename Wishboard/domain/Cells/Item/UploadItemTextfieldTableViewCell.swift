@@ -11,7 +11,6 @@ class UploadItemTextfieldTableViewCell: UITableViewCell {
 
     var textfield = UITextField().then{
         $0.backgroundColor = .clear
-//            $0.placeholder = self.cellTitleArray[tag - 1]
         $0.font = UIFont.Suit(size: 14, family: .Regular)
         $0.addLeftPadding(16)
         $0.textColor = .editTextFontColor
@@ -52,16 +51,13 @@ class UploadItemTextfieldTableViewCell: UITableViewCell {
         switch tag {
         case 0:
             if let itemName = data.item_name {textfield.text = itemName}
-//            textfield.addTarget(self, action: #selector(itemNameTextfieldEditingField(_:)), for: .editingChanged)
         case 1:
             textfield.keyboardType = .numberPad
             if let price = data.item_price {
                 textfield.text = numberFormatter.string(from: NSNumber(value: Int(price)!))
             }
-//            textfield.addTarget(self, action: #selector(itemPriceTextfieldEditingField(_:)), for: .editingChanged)
         default:
             if let memo = data.item_memo {textfield.text = memo}
-//            textfield.addTarget(self, action: #selector(memoTextfieldEditingField(_:)), for: .editingChanged)
         }
     }
 }

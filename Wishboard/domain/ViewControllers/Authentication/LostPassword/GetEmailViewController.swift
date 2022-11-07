@@ -56,6 +56,7 @@ extension GetEmailViewController {
         self.checkValidCode()
     }
     @objc func loginButtonDidTap() {
+        UIDevice.vibrate()
         if self.code != self.authCode {
             getEmailView.messageLabel.isHidden = false
             self.getEmailView.loginButton.then{

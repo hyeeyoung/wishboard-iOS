@@ -39,6 +39,7 @@ class LostPasswordViewController: KeyboardViewController {
         self.checkValidEmail(self.email)
     }
     @objc func getEmailButtonDidTap() {
+        UIDevice.vibrate()
         let checkEmailInput = CheckEmailInput(email: self.email)
         LostPasswordDataManager().checkEmailDataManager(checkEmailInput, self)
     }

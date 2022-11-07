@@ -36,6 +36,7 @@ class RegisterEmailViewController: KeyboardViewController {
         self.checkValidEmail(self.email)
     }
     @objc func nextButtonDidTap() {
+        UIDevice.vibrate()
         let checkEmailInput = CheckEmailInput(email: self.email)
         RegisterDataManager().checkEmailDataManager(checkEmailInput, self)
     }

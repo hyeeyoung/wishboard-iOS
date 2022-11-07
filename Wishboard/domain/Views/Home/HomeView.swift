@@ -143,8 +143,9 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let itemIdx = indexPath.item
+        UIDevice.vibrate()
         
+        let itemIdx = indexPath.item
         let vc = ItemDetailViewController()
         vc.preVC = self.viewController
         vc.itemId = self.wishListData[itemIdx].item_id
@@ -154,6 +155,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 extension HomeView {
     // 장바구니 추가, 삭제
     @objc func cartButtonDidTap(_ sender: HomeCartGesture) {
+        UIDevice.vibrate()
         if let data = sender.data {
             if data.cart_state == 1 {
                 CartDataManager().deleteCartDataManager(data.item_id!, self, self.viewController)

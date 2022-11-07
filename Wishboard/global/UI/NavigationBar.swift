@@ -51,5 +51,6 @@ class NavigationBar {
     }
     @objc func goBack() {
         self.viewcontroller.dismiss(animated: true)
+        UIDevice.vibrate()
     }
 }

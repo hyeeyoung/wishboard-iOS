@@ -44,6 +44,7 @@ class LoginViewController: TitleCenterViewController {
         loginViewModel.passwordTextFieldEditingChanged(trimString)
     }
     @objc func loginButtonDidTap() {
+        UIDevice.vibrate()
         self.view.endEditing(true)
         let email = loginViewModel.email
         let pw = loginViewModel.password
@@ -51,6 +52,7 @@ class LoginViewController: TitleCenterViewController {
         LoginDataManager().loginDataManager(loginInput, self)
     }
     @objc func lostPasswordButtonDidTap() {
+        UIDevice.vibrate()
         let lostPwVC = LostPasswordViewController(title: "1/2 단계")
         self.navigationController?.pushViewController(lostPwVC, animated: true)
     }

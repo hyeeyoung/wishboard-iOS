@@ -158,10 +158,12 @@ class ShareViewController: UIViewController {
     }
     // X버튼 클릭
     @objc func quit() {
+        UIDevice.vibrate()
         self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
     }
     // 위시리스트 추가 버튼
     @objc func completeButtonDidTap() {
+        UIDevice.vibrate()
         // 만약 상품명 또는 가격이 비어있을 시
         if self.itemName == nil || self.itemPrice == nil {
             SnackBar(self, message: .emptyItemContent)
@@ -201,6 +203,7 @@ class ShareViewController: UIViewController {
     }
     // 알람 설정 BottomSheet
     @objc func showNotificationBottomSheet() {
+        UIDevice.vibrate()
         notivc.setPreViewController(self)
         let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: notivc)
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
@@ -210,6 +213,7 @@ class ShareViewController: UIViewController {
     }
     // 새 폴더 추가 BottomSheet
     @objc func showAddNewFolderBottomSheet() {
+        UIDevice.vibrate()
         newFoldervc.preVC = self
         let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: newFoldervc)
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
@@ -247,6 +251,8 @@ extension ShareViewController: UICollectionViewDelegate, UICollectionViewDataSou
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        UIDevice.vibrate()
+        
         let itemIdx = indexPath.item
         guard let folderId = self.folderListData[itemIdx].folder_id else {return}
         if self.selectedFolderIdx == folderId {self.selectedFolderIdx = nil}

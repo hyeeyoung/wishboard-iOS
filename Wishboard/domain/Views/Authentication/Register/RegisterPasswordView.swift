@@ -114,9 +114,11 @@ class RegisterPasswordView: UIView {
         privacyTermButton.addTarget(self, action: #selector(privacyButtonDidTap), for: .touchUpInside)
     }
     @objc func termButtonDidTap() {
+        UIDevice.vibrate()
         ScreenManager().linkTo(viewcontroller: preVC, "https://www.wishboard.xyz/terms.html")
     }
     @objc func privacyButtonDidTap() {
+        UIDevice.vibrate()
         ScreenManager().linkTo(viewcontroller: preVC, "https://www.wishboard.xyz/privacy-policy.html")
     }
 }

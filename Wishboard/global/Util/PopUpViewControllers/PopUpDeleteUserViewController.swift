@@ -175,7 +175,7 @@ class PopUpDeleteUserViewController: UIViewController {
             make.centerX.equalToSuperview()
         }
         messageLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(28)
+            make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(titleLabel.snp.bottom).offset(8)
             make.centerX.equalToSuperview()
         }

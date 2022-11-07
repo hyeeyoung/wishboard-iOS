@@ -48,9 +48,11 @@ class OnBoardingView: UIView {
     
     //MARK: Actions
     @objc func loginButtonDidTap(_ sender: UIButton) {
+        UIDevice.vibrate()
         onBoardingViewModel.goToLoginPage()
     }
     @objc func registerButtonDidTap(_ sender: UIButton) {
+        UIDevice.vibrate()
         onBoardingViewModel.goToRegisterPage()
     }
 }

@@ -48,6 +48,7 @@ class CalenderViewController: UIViewController {
     }
     @objc func goBack() {
         self.navigationController?.popViewController(animated: true)
+        UIDevice.vibrate()
     }
 
 }
@@ -93,6 +94,8 @@ extension CalenderViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        UIDevice.vibrate()
+        
         let itemIdx = indexPath.item
         if itemIdx != 0 && itemIdx != 1 {
             let vc = ItemDetailViewController()
@@ -138,6 +141,8 @@ extension CalenderViewController {
 // MARK: - Calender delegate
 extension CalenderViewController: FSCalendarDelegate {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        UIDevice.vibrate()
+        
         let myDateFormatter = DateFormatter()
         myDateFormatter.dateFormat = "MM월 dd일" // 2020년 08월 13일 오후 04시 30분
         myDateFormatter.locale = Locale(identifier:"ko_KR") // PM, AM을 언어에 맞게 setting (ex: PM -> 오후)

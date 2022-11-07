@@ -165,6 +165,7 @@ extension CartView: UITableViewDelegate, UITableViewDataSource {
 extension CartView {
     // (+) 버튼 클릭
     @objc func plusButtonDidTap(_ sender: CartGesture) {
+        UIDevice.vibrate()
         guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
         guard var itemCount = sender.cartItem?.cartItemInfo?.item_count else {return}
         itemCount = itemCount + 1
@@ -174,6 +175,7 @@ extension CartView {
     }
     // (-) 버튼 클릭
     @objc func minusButtonDidTap(_ sender: CartGesture) {
+        UIDevice.vibrate()
         guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
         guard var itemCount = sender.cartItem?.cartItemInfo?.item_count else {return}
         if itemCount == 1 {return}
@@ -184,11 +186,13 @@ extension CartView {
     }
     // (X) 버튼 클릭
     @objc func deleteButtonDidTap(_ sender: CartGesture) {
+        UIDevice.vibrate()
         guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
         CartDataManager().deleteCartDataManager(itemId, self)
     }
     // 상품 이미지, 상품명 클릭 (아이템 디테일 화면으로 이동)
     @objc func cartItemDidTap(_ sender: CartGesture) {
+        UIDevice.vibrate()
         guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
         let vc = ItemDetailViewController()
         vc.preVC = self.preVC

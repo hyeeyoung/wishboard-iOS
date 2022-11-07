@@ -143,13 +143,17 @@ extension ModifyProfileViewController {
     @objc func goAlbumImageDidTap(sender: UITapGestureRecognizer) {
         self.imagePickerController.sourceType = .photoLibrary
         self.present(imagePickerController, animated: true, completion: nil)
+        UIDevice.vibrate()
     }
     // 카메라 클릭 시
     @objc func goAlbumButtonDidTap() {
         self.imagePickerController.sourceType = .photoLibrary
         self.present(imagePickerController, animated: true, completion: nil)
+        UIDevice.vibrate()
     }
     @objc func completeButtonDidTap() {
+        UIDevice.vibrate()
+        
         let lottieView = self.completeButton.setHorizontalLottieView(self.completeButton)
         self.completeButton.isSelected = true
         lottieView.isHidden = false

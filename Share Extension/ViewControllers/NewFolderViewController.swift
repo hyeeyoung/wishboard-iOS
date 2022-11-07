@@ -116,9 +116,11 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
     }
     // MARK: - Actions
     @objc func goBack() {
+        UIDevice.vibrate()
         self.dismiss(animated: true)
     }
     @objc func addNewFolderButtonDidTap() {
+        UIDevice.vibrate()
         lottieView = self.completeButton.setHorizontalLottieView(self.completeButton)
         self.completeButton.isSelected = true
         lottieView.isHidden = false

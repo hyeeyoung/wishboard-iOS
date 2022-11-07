@@ -66,6 +66,7 @@ class SetFolderBottomSheetViewController: UIViewController {
         self.preItemDetailVC = preVC
     }
     @objc func goBack() {
+        UIDevice.vibrate()
         self.dismiss(animated: true)
     }
 }
@@ -96,6 +97,8 @@ extension SetFolderBottomSheetViewController: UITableViewDelegate, UITableViewDa
         return 56
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        UIDevice.vibrate()
+        
         let idx = indexPath.row
         self.selectedFolder = folderListData[idx].folder_name
         self.selectedFolderId = folderListData[idx].folder_id

@@ -147,10 +147,12 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
     }
     // MARK: - Actions
     @objc func exit() {
+        UIDevice.vibrate()
         self.isExit = true
         self.dismiss(animated: true)
     }
     @objc func completeButtonDidTap() {
+        UIDevice.vibrate()
         lottieView = self.completeButton.setHorizontalLottieView(self.completeButton)
         self.completeButton.isSelected = true
         lottieView.isHidden = false

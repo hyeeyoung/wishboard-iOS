@@ -71,6 +71,7 @@ class UploadItemViewController: UIViewController {
         }
     }
     @objc func goBack() {
+        UIDevice.vibrate()
         self.navigationController?.popViewController(animated: true)
     }
 }
@@ -142,6 +143,8 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
         else { return 54 }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        UIDevice.vibrate()
+        
         if tableView == uploadItemView.uploadImageTableView {
             // '사진 찍기' '사진 보관함' 팝업창
             alertCameraMenu()
@@ -202,6 +205,8 @@ extension UploadItemViewController {
     }
     // MARK: - 저장 버튼 클릭 시 (아이템 추가)
     @objc func saveButtonDidTap() {
+        UIDevice.vibrate()
+        
         uploadItemView.saveButton.isEnabled = false
         let lottieView = SetLottie().setSpinLottie(viewcontroller: self)
         lottieView.isHidden = false
@@ -241,6 +246,8 @@ extension UploadItemViewController {
     }
     // MARK: 저장 버튼 클릭 시 (아이템 수정)
     @objc func modifyButtonDidTap() {
+        UIDevice.vibrate()
+        
         uploadItemView.saveButton.isEnabled = false
         let lottieView = SetLottie().setSpinLottie(viewcontroller: self)
         lottieView.isHidden = false
