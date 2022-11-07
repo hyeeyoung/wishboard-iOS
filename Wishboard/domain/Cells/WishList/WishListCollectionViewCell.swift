@@ -13,6 +13,8 @@ class WishListCollectionViewCell: UICollectionViewCell {
     
     let itemImage = UIImageView().then{
         $0.backgroundColor = .systemGray6
+        $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFill
     }
     let itemName = UILabel().then{
         $0.text = "itemName"
@@ -64,18 +66,19 @@ class WishListCollectionViewCell: UICollectionViewCell {
         }
         itemName.snp.makeConstraints { make in
             make.top.equalTo(itemImage.snp.bottom).offset(10)
-            make.leading.trailing.equalToSuperview().offset(10)
+            make.leading.trailing.equalToSuperview().inset(10)
         }
         itemPrice.snp.makeConstraints { make in
-            make.top.equalTo(itemName.snp.bottom).offset(10)
+            make.top.equalTo(itemName.snp.bottom).offset(8)
             make.leading.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview().inset(20)
         }
         won.snp.makeConstraints { make in
             make.centerY.equalTo(itemPrice)
             make.leading.equalTo(itemPrice.snp.trailing).offset(2)
         }
         cartButton.snp.makeConstraints { make in
-            make.width.height.equalTo(41)
+            make.width.height.equalTo(40)
             make.bottom.trailing.equalTo(itemImage).inset(10)
         }
     }

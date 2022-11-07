@@ -30,17 +30,20 @@ class RegisterPasswordViewController: KeyboardViewController {
         registerPWView.registerButton.addTarget(self, action: #selector(registerButtonDidTap), for: .touchUpInside)
         
         super.textfield = registerPWView.pwTextField
-        if !CheckNotch().hasNotch() {registerPWView.stack.isHidden = true}
+        if !UIDevice.current.hasNotch {registerPWView.stack.isHidden = true}
     }
 }
 extension RegisterPasswordViewController {
     // MARK: - Actions
     @objc func pwTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
-        self.pw = text
+        let trimString = text.trimmingCharacters(in: .whitespaces)
+        self.registerPWView.pwTextField.text = trimString
+        self.pw = trimString
         self.checkValidPW(self.pw)
     }
     @objc func registerButtonDidTap() {
+        UIDevice.vibrate()
         let lottieView = registerPWView.registerButton.setHorizontalLottieView(registerPWView.registerButton)
         registerPWView.registerButton.isSelected = true
         lottieView.isHidden = false
@@ -62,7 +65,7 @@ extension RegisterPasswordViewController {
         } else {
             registerPWView.errorMessage.isHidden = false
             registerPWView.registerButton.then{
-                $0.defaultButton("가입하기", .wishboardDisabledGray, .black)
+                $0.defaultButton("가입하기", .wishboardDisabledGray, .dialogMessageColor)
                 $0.isEnabled = false
             }
         }
@@ -75,6 +78,20 @@ extension RegisterPasswordViewController {
         UserDefaults.standard.set(token, forKey: "token")
         UserDefaults.standard.set(true, forKey: "isFirstLogin")
         
+        // FCM
+        sendFCM()
+        // go main
         ScreenManager().goMain(self)
+    }
+    // MARK: FCM API
+    func sendFCM() {
+        // Send FCM token to server
+        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
+        print("device Token:", deviceToken)
+        let fcmInput = FCMInput(fcm_token: deviceToken)
+        FCMDataManager().fcmDataManager(fcmInput, self)
+    }
+    func fcmAPISuccess(_ result: APIModel<ResultModel>) {
+        print(result.message)
     }
 }

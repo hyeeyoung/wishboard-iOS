@@ -31,6 +31,7 @@ class TitleLeftViewController: UIViewController {
     lazy var navigationTitle = UILabel().then{
         $0.font = UIFont.Suit(size: 22, family: .Bold)
         $0.textColor = .black
+        $0.setTextWithLineHeight()
     }
     
     lazy var rightPositionBtn: EtcButton? = nil{

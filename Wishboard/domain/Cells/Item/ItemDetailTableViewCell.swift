@@ -16,10 +16,10 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.contentMode = .scaleAspectFill
     }
     var setFolderButton = UIButton().then{
-        $0.setFolderButton("폴더 지정하기 >")
+        $0.setFolderButton("폴더를 지정해 보세요! > ")
     }
     let dateLabel = UILabel().then{
-        $0.text = "0주 전"
+        $0.text = ""
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .gray
     }
@@ -27,6 +27,7 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.text = "itemName"
         $0.font = UIFont.Suit(size: 16, family: .Regular)
         $0.numberOfLines = 0
+        $0.setTextWithLineHeight()
     }
     let priceLabel = UILabel().then{
         $0.text = "0"
@@ -36,20 +37,21 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.text = "원"
         $0.font = UIFont.Suit(size: 14, family: .Regular)
     }
-    let seperatorLine1 = UIView().then{
-        $0.backgroundColor = .systemGray5
-    }
     let stack = UIStackView().then{
         $0.axis = .vertical
         $0.spacing = 16
+    }
+    let seperatorLine1 = UIView().then{
+        $0.backgroundColor = .wishboardDisabledGray
     }
     let linkLabel = UILabel().then{
         $0.text = "w.musinsa.com"
         $0.textColor = .wishboardGray
         $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.setTextWithLineHeight()
     }
     let seperatorLine2 = UIView().then{
-        $0.backgroundColor = .systemGray5
+        $0.backgroundColor = .wishboardDisabledGray
     }
     let memoTitlelabel = UILabel().then{
         $0.text = "메모"
@@ -59,6 +61,7 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.text = "memo"
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.numberOfLines = 0
+        $0.setTextWithLineHeight()
     }
     // 재입고 초록색
     let restockLabel = PaddingLabel().then{
@@ -98,9 +101,9 @@ class ItemDetailTableViewCell: UITableViewCell {
         contentView.addSubview(itemNameLabel)
         contentView.addSubview(priceLabel)
         contentView.addSubview(won)
-        contentView.addSubview(seperatorLine1)
         contentView.addSubview(stack)
         
+        stack.addArrangedSubview(seperatorLine1)
         stack.addArrangedSubview(linkLabel)
         stack.addArrangedSubview(seperatorLine2)
         stack.addArrangedSubview(memoTitlelabel)
@@ -140,18 +143,16 @@ class ItemDetailTableViewCell: UITableViewCell {
             make.centerY.equalTo(priceLabel)
         }
         seperatorLine1.snp.makeConstraints { make in
-            make.height.equalTo(1)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(priceLabel.snp.bottom).offset(20)
+            make.height.equalTo(0.5)
         }
         stack.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(seperatorLine1.snp.bottom).offset(16)
-            if CheckNotch().hasNotch() {make.bottom.equalToSuperview().offset(-78)}
+            make.top.equalTo(priceLabel.snp.bottom).offset(16)
+            if UIDevice.current.hasNotch {make.bottom.equalToSuperview().offset(-78)}
             else {make.bottom.equalToSuperview().offset(-44)}
         }
         seperatorLine2.snp.makeConstraints { make in
-            make.height.equalTo(1)
+            make.height.equalTo(0.5)
         }
     }
     // After API success
@@ -181,15 +182,58 @@ class ItemDetailTableViewCell: UITableViewCell {
         if let itemPrice = data.item_price {self.priceLabel.text = FormatManager().strToPrice(numStr: itemPrice)}
         if let link = data.item_url {
             if link != "" {
+                // 링크O, 메모O
                 self.linkLabel.isHidden = false
-                self.seperatorLine2.isHidden = false
-                self.linkLabel.text = link
+                self.seperatorLine1.isHidden = false
+                // link 도메인만 보이게
+                var url = URL(string: link)
+                var domain = url?.host
+                self.linkLabel.text = domain
+                
+                if let memo = data.item_memo {
+                    if memo == "" {
+                        self.seperatorLine2.isHidden = true
+                        self.memoTitlelabel.isHidden = true
+                        self.memoContentLabel.isHidden = true
+                    }
+                }
             }
             else {
+                // 링크X, 메모X
+                
                 self.linkLabel.isHidden = true
                 self.seperatorLine2.isHidden = true
             }
         }
-        if let memo = data.item_memo {self.memoContentLabel.text = memo}
+        if let memo = data.item_memo {
+            if memo != "" {
+                // 쇼핑몰 링크가 없고, 메모가 있는 경우
+                if let link = data.item_url {
+                    if link == "" {
+                        self.seperatorLine2.isHidden = true
+                        self.memoContentLabel.isHidden = false
+                        self.memoTitlelabel.isHidden = false
+                        self.memoContentLabel.text = memo
+                    } else {
+                        // 쇼핑몰 링크가 있고, 메모가 있는 경우
+                        self.memoContentLabel.isHidden = false
+                        self.seperatorLine2.isHidden = false
+                        self.memoTitlelabel.isHidden = false
+                        self.memoContentLabel.text = memo
+                    }
+                }
+            }
+            else {
+                // 링크도 없고, 메모도 없고
+                if let link = data.item_url {
+                    if link == "" {
+                        self.seperatorLine1.isHidden = true
+                        self.seperatorLine2.isHidden = true
+                    }
+                }
+                self.memoTitlelabel.isHidden = true
+                self.memoContentLabel.isHidden = true
+            }
+        }
     }
 }

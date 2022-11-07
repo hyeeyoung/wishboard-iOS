@@ -11,8 +11,8 @@ import UIKit
 
 final class NetworkCheck {
     static let shared = NetworkCheck()
-    private let queue = DispatchQueue.global()
-    private let monitor: NWPathMonitor
+    public let queue = DispatchQueue.global()
+    public let monitor: NWPathMonitor
     public private(set) var isConnected: Bool = false
     public private(set) var connectionType: ConnectionType = .unknown
 
@@ -25,12 +25,12 @@ final class NetworkCheck {
     }
 
     // monotior 초기화
-    private init() {
+    public init() {
         monitor = NWPathMonitor()
     }
 
     // Network Monitoring 시작
-    public func startMonitoring() {
+    public func startMonitoring(vc: UIViewController) {
         monitor.start(queue: queue)
         monitor.pathUpdateHandler = { [weak self] path in
 
@@ -41,8 +41,10 @@ final class NetworkCheck {
                 print("연결됨!")
             } else {
                 print("연결안됨!")
-                guard let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabBarViewController") as? UITabBarController else {return}
-//                SnackBar(tabBarController, message: .networkCheck)
+                DispatchQueue.main.async {
+                    SnackBar(vc, message: .networkCheck)
+                }
+                
             }
         }
     }
@@ -53,10 +55,12 @@ final class NetworkCheck {
     }
 
     // Network 연결 타입
-    private func getConnectionType(_ path: NWPath) {
+    public func getConnectionType(_ path: NWPath) {
         if path.usesInterfaceType(.wifi) {
+            print("wifi")
             connectionType = .wifi
         } else if path.usesInterfaceType(.cellular) {
+            print("cellular")
             connectionType = .cellular
         } else if path.usesInterfaceType(.wiredEthernet) {
             connectionType = .ethernet

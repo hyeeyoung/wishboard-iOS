@@ -21,7 +21,7 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
         $0.backgroundColor = .wishboardTextfieldGray
         $0.layer.cornerRadius = 5
         $0.font = UIFont.Suit(size: 16, family: .Regular)
-        $0.textColor = .wishboardGray
+        $0.textColor = .editTextFontColor
         $0.clearButtonMode = .whileEditing
         $0.placeholder = "폴더명"
     }
@@ -60,7 +60,7 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
         
         self.errorMessage.isHidden = true
         self.completeButton.isEnabled = false
-        self.completeButton.defaultButton("추가", .wishboardDisabledGray, .gray)
+        self.completeButton.defaultButton("추가", .wishboardDisabledGray, .dialogMessageColor)
         
         self.newFolderTextField.addTarget(self, action: #selector(folderTextFieldEditingChanged(_:)), for: .editingChanged)
         self.exitBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -69,7 +69,12 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
     override func viewDidDisappear(_ animated: Bool) {
         if let preVC = self.preVC {
             if isAddSuccess {FolderDataManager().getFolderListDataManager(preVC)}
+            preVC.view.endEditing(true)
         }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
     }
     // MARK: - Functions
     func setUpView() {
@@ -111,9 +116,11 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
     }
     // MARK: - Actions
     @objc func goBack() {
+        UIDevice.vibrate()
         self.dismiss(animated: true)
     }
     @objc func addNewFolderButtonDidTap() {
+        UIDevice.vibrate()
         lottieView = self.completeButton.setHorizontalLottieView(self.completeButton)
         self.completeButton.isSelected = true
         lottieView.isHidden = false
@@ -121,7 +128,6 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
             let addFolderInput = AddFolderInput(folder_name: self.folderStr)
             FolderDataManager().addFolderDataManager(addFolderInput, self)
         }
-        
     }
     @objc func folderTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
@@ -144,7 +150,7 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
             self.textFieldCountLabel.textColor = .wishboardRed
             self.errorMessage.isHidden = true
             self.completeButton.isSelected = false
-            self.completeButton.defaultButton("추가", .wishboardDisabledGray, .gray)
+            self.completeButton.defaultButton("추가", .wishboardDisabledGray, .dialogMessageColor)
             self.completeButton.isEnabled = false
         }
     }
@@ -157,13 +163,20 @@ extension NewFolderViewController {
         self.viewDidLoad()
         self.dismiss(animated: true)
         
+        self.textFieldCountLabel.textColor = .wishboardGray
+        self.errorMessage.isHidden = true
+        self.lottieView.isHidden = true
+        self.completeButton.isSelected = false
+        self.completeButton.defaultButton("추가", .wishboardGreen, .black)
+        self.completeButton.isEnabled = true
+        
         print(result.message)
     }
     func sameFolderNameFail() {
         self.lottieView.isHidden = true
         self.completeButton.reloadInputViews()
         self.errorMessage.isHidden = false
-        self.completeButton.defaultButton("추가", .wishboardDisabledGray, .gray)
+        self.completeButton.defaultButton("추가", .wishboardDisabledGray, .dialogMessageColor)
         self.completeButton.isEnabled = false
     }
     func addFolderAPIFail() {

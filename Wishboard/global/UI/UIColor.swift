@@ -74,5 +74,28 @@ extension UIColor{
         blue: 237/255,
         alpha: 1
     )
-
+    static let editTextFontColor = UIColor(
+        red: 41/255,
+        green: 41/255,
+        blue: 41/255,
+        alpha: 1
+    )
+    static let dialogMessageColor = UIColor(
+        red: 133/255,
+        green: 133/255,
+        blue: 133/255,
+        alpha: 1
+    )
+    static let unselectedTabColor = UIColor(
+        red: 193/255,
+        green: 193/255,
+        blue: 193/255,
+        alpha: 1
+    )
+    static let uploadPhotoBackground = UIColor(
+        red: 235/255,
+        green: 235/255,
+        blue: 235/255,
+        alpha: 1
+    )
 }

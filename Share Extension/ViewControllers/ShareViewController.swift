@@ -23,22 +23,60 @@ class ShareViewController: UIViewController {
     var selectedFolder: String?
     var selectedFolderIdx: Int?
     
+    // Item Contents
     var webURL: String?
     var itemImg: String?
     var itemName: String?
     var itemPrice: String?
     var notificationType: String?
     var notificationDate: String?
+    
+    var numberFormatter: NumberFormatter!
+    // keyboard
+    var restoreFrameValue: CGFloat = 0.0
+    var preKeyboardHeight: CGFloat = 0.0
+    
     //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .clear
         
+        // keyboard
+        self.restoreFrameValue = self.view.frame.origin.y
+        // itemPrice numberFormat
+        numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        
+        self.selectedFolderIdx = -1
         setUpShareView()
         
         DispatchQueue.main.async {
             self.getWebURL()
         }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
+        // Login Check
+        let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
+        let token = defaults?.string(forKey: "token") ?? ""
+        if token == "" {
+            shareView.completeButton.defaultButton("로그인 후 아이템을 추가해보세요!", .wishboardDisabledGray, .dialogMessageColor)
+            shareView.completeButton.isEnabled = false
+            shareView.itemNameTextField.isEnabled = false
+            shareView.itemPriceTextField.isEnabled = false
+            shareView.setNotificationButton.isEnabled = false
+            shareView.addFolderButton.isEnabled = false
+            return
+        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.addKeyboardNotifications()
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        self.removeKeyboardNotifications()
     }
     //MARK: - Functions
     func setUpShareView() {
@@ -55,6 +93,8 @@ class ShareViewController: UIViewController {
         notivc = NotificationSettingViewController()
         newFoldervc = NewFolderViewController()
         // Add Targets
+        shareView.itemNameTextField.addTarget(self, action: #selector(itemNameTextFieldEditingChanged(_:)), for: .editingChanged)
+        shareView.itemPriceTextField.addTarget(self, action: #selector(itemPriceTextFieldEditingChanged(_:)), for: .editingChanged)
         shareView.quitButton.addTarget(self, action: #selector(quit), for: .touchUpInside)
         shareView.completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
         shareView.setNotificationButton.addTarget(self, action: #selector(showNotificationBottomSheet), for: .touchUpInside)
@@ -80,11 +120,56 @@ class ShareViewController: UIViewController {
         }
     }
     // MARK: - Actions
+    // 상품명 편집
+    @objc func itemNameTextFieldEditingChanged(_ sender: UITextField) {
+        let text = sender.text ?? ""
+        self.itemName = text
+//        print(self.itemName)
+        setButton()
+    }
+    // 상품가격 편집
+    @objc func itemPriceTextFieldEditingChanged(_ sender: UITextField) {
+        let text = sender.text ?? ""
+        self.itemPrice = setPriceString(text)
+        if let priceStr = self.itemPrice {
+            if priceStr != "" {
+                guard let price = Float(priceStr) else {return}
+                sender.text = numberFormatter.string(from: NSNumber(value: price))
+            } else { self.itemPrice = "" }
+        }
+        setButton()
+    }
+    func setPriceString(_ str: String) -> String {
+        let myString = str.replacingOccurrences(of: ",", with: "")
+        return myString
+    }
+    func isValidContent() -> Bool {
+        if self.itemName != "" && self.itemPrice != "" {return true}
+        else {return false}
+    }
+    func setButton() {
+        if isValidContent() {
+            shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardGreen, .black)
+            shareView.completeButton.isEnabled = true
+        } else {
+            shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardDisabledGray, .dialogMessageColor)
+            shareView.completeButton.isEnabled = false
+        }
+    }
+    // X버튼 클릭
     @objc func quit() {
+        UIDevice.vibrate()
         self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
     }
     // 위시리스트 추가 버튼
     @objc func completeButtonDidTap() {
+        UIDevice.vibrate()
+        // 만약 상품명 또는 가격이 비어있을 시
+        if self.itemName == nil || self.itemPrice == nil {
+            SnackBar(self, message: .emptyItemContent)
+            return
+        }
+        
         let lottieView = shareView.completeButton.setHorizontalLottieView(shareView.completeButton)
         shareView.completeButton.isSelected = true
         lottieView.isHidden = false
@@ -95,19 +180,30 @@ class ShareViewController: UIViewController {
             let data = try? Data(contentsOf: url!)
             DispatchQueue.main.async {
                 selectedImage = UIImage(data: data!)
-                // 폴더 & 알림 날짜 설정까지 했을 경우
+                // 폴더O, 알림O
                 if var notificationDate = self.notificationDate {
                     notificationDate = FormatManager().koreanStrToDate(notificationDate)!
-                    ShareDataManager().uploadItemDataManager(self.selectedFolderIdx!, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self.notificationType!, notificationDate, self)
+                    if let selectedFolderIdx = self.selectedFolderIdx {
+                        ShareDataManager().uploadItemDataManager(selectedFolderIdx, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self.notificationType!, notificationDate + ":00", self)
+                    } else {
+                        // 폴더X, 알림O
+                        ShareDataManager().uploadItemDataManager(selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self.notificationType!, notificationDate + ":00", self)
+                    }
                 } else {
-                    // 폴더만 설정했을 경우
-                    ShareDataManager().uploadItemDataManager(self.selectedFolderIdx!, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self)
+                    // 폴더O, 알림X
+                    if let selectedFolderIdx = self.selectedFolderIdx {
+                        ShareDataManager().uploadItemDataManager(selectedFolderIdx, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self)
+                    } else {
+                        // 폴더X, 알림X
+                        ShareDataManager().uploadItemDataManager(selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self)
+                    }
                 }
             }
         }
     }
     // 알람 설정 BottomSheet
     @objc func showNotificationBottomSheet() {
+        UIDevice.vibrate()
         notivc.setPreViewController(self)
         let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: notivc)
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
@@ -117,6 +213,7 @@ class ShareViewController: UIViewController {
     }
     // 새 폴더 추가 BottomSheet
     @objc func showAddNewFolderBottomSheet() {
+        UIDevice.vibrate()
         newFoldervc.preVC = self
         let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: newFoldervc)
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
@@ -141,22 +238,25 @@ extension ShareViewController: UICollectionViewDelegate, UICollectionViewDataSou
         if let selectedFolderIdx = self.selectedFolderIdx {
             if selectedFolderIdx == self.folderListData[itemIdx].folder_id {
                 cell.setSelectedFolder(true)
+            } else if selectedFolderIdx == -1 && itemIdx == 0 {
+                cell.setSelectedFolder(true)
+                self.selectedFolderIdx = self.folderListData[itemIdx].folder_id
             } else {
                 cell.setSelectedFolder(false)
             }
         } else {
-            if itemIdx == 0 {
-                cell.setSelectedFolder(true)
-                self.selectedFolderIdx = self.folderListData[itemIdx].folder_id
-            }
-            else {cell.setSelectedFolder(false)}
+            cell.setSelectedFolder(false)
         }
         
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        UIDevice.vibrate()
+        
         let itemIdx = indexPath.item
-        self.selectedFolderIdx = self.folderListData[itemIdx].folder_id!
+        guard let folderId = self.folderListData[itemIdx].folder_id else {return}
+        if self.selectedFolderIdx == folderId {self.selectedFolderIdx = nil}
+        else {self.selectedFolderIdx = folderId}
         
         reloadDataAnimation()
     }
@@ -166,6 +266,7 @@ extension ShareViewController {
     // MARK: 폴더 리스트 조회 API
     func getFolderListAPISuccess(_ result: [FolderListModel]) {
         self.folderListData = result
+        self.selectedFolderIdx = -1
         reloadDataAnimation()
     }
     func getFolderListAPIFail() {
@@ -173,17 +274,20 @@ extension ShareViewController {
     }
     // MARK: 아이템 정보 파싱
     func getItemDataAPISuccess(_ result: APIModel<ItemParsingModel>) {
-        guard let itemImg = result.data?.item_img else {return}
-        guard let itemName = result.data?.item_name else {return}
-        guard let itemPrice = result.data?.item_price else {return}
+        if let itemImg = result.data?.item_img {self.itemImg = itemImg}
+        if let itemName = result.data?.item_name {self.itemName = itemName}
+        if let itemPrice = result.data?.item_price {self.itemPrice = itemPrice}
         
-        self.itemImg = itemImg
-        self.itemName = itemName
-        self.itemPrice = itemPrice
+        if self.itemImg == nil && self.itemName == nil && self.itemPrice == nil {
+            SnackBar(self, message: .failShoppingLink)
+            return
+        } else if self.itemPrice == nil {
+            self.itemPrice = "0"
+        }
         
-        self.shareView.itemImage.kf.setImage(with: URL(string: itemImg), placeholder: UIImage())
-        self.shareView.itemName.text = self.itemName
-        self.shareView.itemPrice.text = FormatManager().strToPrice(numStr: itemPrice)
+        self.shareView.itemImage.kf.setImage(with: URL(string: itemImg ?? ""), placeholder: UIImage())
+        self.shareView.itemNameTextField.text = self.itemName
+        self.shareView.itemPriceTextField.text = FormatManager().strToPrice(numStr: itemPrice ?? "")
         
         // reload data with animation
         UIView.transition(with: shareView,
@@ -196,7 +300,7 @@ extension ShareViewController {
         FolderDataManager().getFolderListDataManager(self)
     }
     func getItemDataAPIFail() {
-        
+        SnackBar(self, message: .failShoppingLink)
     }
     // MARK: 아이템 간편 등록
     func uploadItemAPISuccess(_ result: APIModel<ResultModel>) {
@@ -218,4 +322,68 @@ extension ShareViewController {
                               self.shareView.folderCollectionView.reloadData()},
                           completion: nil);
     }
+}
+// MARK: - TextField & Keyboard Methods
+extension ShareViewController: UITextFieldDelegate {
+    func addKeyboardNotifications() {
+        // 키보드가 나타날 때 앱에게 알리는 메서드 추가
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillAppear(noti:)), name: UIResponder.keyboardWillShowNotification , object: nil)
+        // 키보드가 사라질 때 앱에게 알리는 메서드 추가
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillDisappear(noti:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    func removeKeyboardNotifications() {
+        // 키보드가 나타날 때 앱에게 알리는 메서드 제거
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
+        // 키보드가 사라질 때 앱에게 알리는 메서드 제거
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    @objc func keyboardWillAppear(noti: NSNotification) {
+        if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            print("pre:", preKeyboardHeight, "curr:", keyboardHeight)
+            if preKeyboardHeight < keyboardHeight {
+                let dif = keyboardHeight - preKeyboardHeight
+                self.view.frame.origin.y -= dif
+                preKeyboardHeight = keyboardHeight
+            } else if preKeyboardHeight > keyboardHeight {
+                let dif = preKeyboardHeight - keyboardHeight
+                self.view.frame.origin.y += dif
+                preKeyboardHeight = keyboardHeight
+            }
+        }
+        print("keyboard Will appear Execute")
+    }
+    
+    @objc func keyboardWillDisappear(noti: NSNotification) {
+        if self.view.frame.origin.y != restoreFrameValue {
+            if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                let keyboardRectangle = keyboardFrame.cgRectValue
+                let keyboardHeight = keyboardRectangle.height
+                self.view.frame.origin.y += keyboardHeight
+            }
+            print("keyboard Will Disappear Execute")
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.frame.origin.y = restoreFrameValue
+        print("touches Began Execute")
+        self.view.endEditing(true)
+        self.preKeyboardHeight = 0.0
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("textFieldShouldReturn Execute")
+        textField.resignFirstResponder()
+        return true
+    }
+
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        print("textFieldShouldEndEditing Execute")
+        self.preKeyboardHeight = 0.0
+        self.view.frame.origin.y = self.restoreFrameValue
+        return true
+    }
+    
 }

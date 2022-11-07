@@ -10,7 +10,7 @@ import MessageUI
 
 class MyPageViewController: TitleLeftViewController {
     var mypageView: MyPageView!
-    let settingArray = ["설정", "알림 설정", "고객 지원", "문의하기", "서비스 정보", "위시보드 이용 방법", "이용약관", "버전 정보", "계정 관리", "로그아웃", "회원 탈퇴"]
+    let settingArray = ["설정", "알림 설정", "고객 지원", "문의하기", "서비스 정보", "위시보드 이용 방법", "이용약관", "개인정보 처리방침", "오픈소스 라이브러리", "버전 정보", "계정 관리", "로그아웃", "회원 탈퇴"]
 
     var userInfoData: GetUserInfoModel!
     var nickName: String?
@@ -27,8 +27,9 @@ class MyPageViewController: TitleLeftViewController {
         self.view.addSubview(mypageView)
         
         mypageView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
             make.top.equalTo(super.navigationView.snp.bottom)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
         // DATA
         MypageDataManager().getUserInfoDataManager(self)
@@ -45,7 +46,7 @@ class MyPageViewController: TitleLeftViewController {
 // MARK: - Main TableView delegate
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 12
+        return 14
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tag = indexPath.row
@@ -57,14 +58,22 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             let cell = UITableViewCell()
             cell.textLabel?.text = settingArray[tag - 1]
-            if tag == 1 || tag == 3 || tag == 5 || tag == 9 {self.setTitleConstraint(cell)}
+            if tag == 1 || tag == 3 || tag == 5 || tag == 11 {self.setTitleConstraint(cell)}
             else {
                 cell.textLabel?.font = UIFont.Suit(size: 12, family: .Regular)
                 cell.textLabel?.textColor = .black
                 if tag == 2 {self.setSwitch(cell)}
-                if tag == 8 {self.setVersionLabel(cell)}
+                if tag == 10 {self.setVersionLabel(cell)}
             }
-            
+            let separator = UIView().then {
+                $0.backgroundColor = .wishboardDisabledGray
+            }
+            cell.addSubview(separator)
+            separator.snp.makeConstraints { make in
+                make.leading.trailing.equalToSuperview()
+                make.height.equalTo(0.5)
+                make.bottom.equalToSuperview()
+            }
             return cell
         }
         
@@ -73,16 +82,16 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         let tag = indexPath.row
         switch tag {
         case 0:
-            return 184
-        case 1, 3, 5, 9:
+            return 193
+        case 1, 3, 5, 11:
             return 62
-        case 2:
-            return 76
         default:
             return 40
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        UIDevice.vibrate()
+        
         let tag = indexPath.row
         switch tag {
         case 0:
@@ -98,15 +107,26 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             vc.preVC = self
             self.navigationController?.pushViewController(vc, animated: true)
         case 4:
+            // 문의하기
             showSendEmail()
-        case 10:
+        case 12:
+            // 로그아웃
             showLogoutDialog()
-        case 11:
+        case 13:
+            // 회원탈퇴
             showSignoutDialog()
         case 6:
+            // 위시보드 이용 방법
             ScreenManager().linkTo(viewcontroller: self, "https://hushed-bolt-fd4.notion.site/383c308f256f4f189b7c0b68a8f68d9f")
         case 7:
+            // 이용약관
             ScreenManager().linkTo(viewcontroller: self, "https://www.wishboard.xyz/terms.html")
+        case 8:
+            // 개인정보처리방침
+            ScreenManager().linkTo(viewcontroller: self, "https://www.wishboard.xyz/privacy-policy.html")
+        case 9:
+            // 오픈소스 라이브러리
+            ScreenManager().linkTo(viewcontroller: self, "https://www.wishboard.xyz/opensource.html")
         default:
             tableView.deselectRow(at: indexPath, animated: true)
         }
@@ -129,27 +149,18 @@ extension MyPageViewController {
             if let pushState = self.pushState {$0.isOn = pushState}
             else {$0.isOn = false}
             $0.onTintColor = .wishboardGreen
-            $0.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
-        }
-        let subTitleLabel = UILabel().then{
-            $0.text = "알림 설정을 켜면 상품의 재입고, 프리오더 시작일 등 상품 일정을 알림 받을 수 있어요!"
-            $0.font = UIFont.Suit(size: 8, family: .Regular)
-            $0.textColor = .wishboardGray
+            $0.transform = CGAffineTransform(scaleX: 0.66, y: 0.65)
         }
         cell.addSubview(notiSwitch)
-        cell.addSubview(subTitleLabel)
         notiSwitch.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-16)
             make.centerY.equalToSuperview()
-        }
-        subTitleLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
-            make.bottom.equalToSuperview().offset(-10)
         }
         
         notiSwitch.addTarget(self, action: #selector(onClickSwitch(_:)), for: UIControl.Event.valueChanged)
     }
     @objc func onClickSwitch(_ sender: UISwitch) {
+        UIDevice.vibrate()
         if sender.isOn {
             MypageDataManager().switchNotificationDataManager(true, self)
         } else {
@@ -162,6 +173,7 @@ extension MyPageViewController {
             $0.text = "1.0.0"
             $0.font = UIFont.Suit(size: 12, family: .Bold)
             $0.textColor = .gray
+            $0.setTextWithLineHeight()
         }
         cell.addSubview(versionLabel)
         versionLabel.snp.makeConstraints { make in
@@ -172,7 +184,7 @@ extension MyPageViewController {
     // 로그아웃 팝업창
     func showLogoutDialog() {
         let dialog = PopUpViewController(titleText: "로그아웃", messageText: "정말 로그아웃 하시겠어요?", greenBtnText: "취소", blackBtnText: "로그아웃")
-        dialog.modalPresentationStyle = .overCurrentContext
+        dialog.modalPresentationStyle = .overFullScreen
         self.present(dialog, animated: false, completion: nil)
         
         dialog.okBtn.addTarget(self, action: #selector(logoutButtonDidTap), for: .touchUpInside)
@@ -180,8 +192,8 @@ extension MyPageViewController {
     // 회원 탈퇴 팝업창
     func showSignoutDialog() {
         guard let email = self.userInfoData.email else {return}
-        let dialog = PopUpDeleteUserViewController(titleText: "회원 탈퇴", messageText: "탈퇴하시면 회원정보는 7일 후 파기됩니다.", greenBtnText: "취소", blackBtnText: "탈퇴", placeholder: "이메일을 입력해주세요.", email: email)
-        dialog.modalPresentationStyle = .overCurrentContext
+        let dialog = PopUpDeleteUserViewController(titleText: "회원 탈퇴", greenBtnText: "취소", blackBtnText: "탈퇴", placeholder: "이메일을 입력해주세요.", email: email)
+        dialog.modalPresentationStyle = .overFullScreen
         self.present(dialog, animated: false, completion: nil)
         
         dialog.okBtn.addTarget(self, action: #selector(signOutButtonDidTap), for: .touchUpInside)
@@ -189,10 +201,12 @@ extension MyPageViewController {
     @objc func logoutButtonDidTap() {
         self.dismiss(animated: false)
         MypageDataManager().logoutDataManager(self)
+        UIDevice.vibrate()
     }
     @objc func signOutButtonDidTap() {
         self.dismiss(animated: false)
         MypageDataManager().deleteUserDataManager(self)
+        UIDevice.vibrate()
     }
 }
 // MARK: - Email delegate
@@ -274,8 +288,9 @@ extension MyPageViewController {
         UserDefaults.standard.removeObject(forKey: "isFirstLogin")
         
         let onboardingVC = OnBoardingViewController()
+        onboardingVC.deleteUser = true
         self.navigationController?.pushViewController(onboardingVC, animated: true)
-        SnackBar(onboardingVC, message: .deleteUser)
+//        SnackBar(onboardingVC, message: .deleteUser)
         
         print(result.message)
     }
@@ -286,6 +301,7 @@ extension MyPageViewController {
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "password")
         UserDefaults.standard.set(false, forKey: "isFirstLogin")
+        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "token")
         
         let onboardingVC = OnBoardingViewController()
         self.navigationController?.pushViewController(onboardingVC, animated: true)

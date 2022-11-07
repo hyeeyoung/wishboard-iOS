@@ -23,6 +23,7 @@ class NotificationSettingViewController: UIViewController {
         $0.text = "30분 전에 상품 일정을 알려드려요! 시간은 30분 단위로 설정할 수 있어요."
         $0.font = UIFont.Suit(size: 8, family: .Regular)
         $0.textColor = .wishboardGray
+        $0.setTextWithLineHeight()
     }
     let completeButton = UIButton().then{
         $0.defaultButton("완료", .wishboardGreen, .black)
@@ -44,7 +45,7 @@ class NotificationSettingViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         self.view.roundCornersDiffernt(topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0)
         
-        self.notiType = "세일 마감"
+        self.notiType = "재입고"
         let setNotificationDate = SetNotificationDate()
         self.date = setNotificationDate.currentYear + "년 " + setNotificationDate.currentMonth + "월 " + setNotificationDate.currentDay + "일"
         self.dateAndTime = self.date + " " + self.hour + ":" + self.minute
@@ -66,9 +67,16 @@ class NotificationSettingViewController: UIViewController {
             self.preVC.wishListData.item_notification_type = self.notiType
             self.preVC.wishListData.item_notification_date = FormatManager().koreanStrToDate(self.dateAndTime!)
             
-            let indexPath = IndexPath(row: 4, section: 0)
-            self.preVC.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
+            let indexPath = IndexPath(row: 3, section: 0)
+            self.preVC.uploadItemView.uploadContentTableView.reloadRows(at: [indexPath], with: .automatic)
+            self.preVC.view.endEditing(true)
+        } else {
+            self.preVC.view.endEditing(true)
         }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
     }
     // MARK: - Functions
     func setPreViewController(_ preVC: UploadItemViewController) {
@@ -108,10 +116,12 @@ class NotificationSettingViewController: UIViewController {
     }
     // MARK: - Actions
     @objc func exit() {
+        UIDevice.vibrate()
         self.isExit = true
         self.dismiss(animated: true)
     }
     @objc func goUploadPage() {
+        UIDevice.vibrate()
         self.isExit = false
         if self.notiType == nil {self.notiType = "세일 마감"}
         if self.dateAndTime == nil {
@@ -132,7 +142,7 @@ extension NotificationSettingViewController: UIPickerViewDelegate, UIPickerViewD
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component {
         case 0:
-            return 3
+            return 5
         case 1:
             return 90
         case 2:

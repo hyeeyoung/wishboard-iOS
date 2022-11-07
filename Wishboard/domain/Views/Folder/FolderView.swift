@@ -32,7 +32,7 @@ class FolderView: UIView {
             var width = bounds.size.width
             var itemWidth = ((width - 32) / 2) - 8
             
-            flowLayout.itemSize = CGSize(width: itemWidth, height: 210)
+            flowLayout.itemSize = CGSize(width: itemWidth, height: 225)
             flowLayout.scrollDirection = .vertical
             
             $0.collectionViewLayout = flowLayout

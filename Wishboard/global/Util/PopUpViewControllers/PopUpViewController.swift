@@ -29,15 +29,15 @@ class PopUpViewController: UIViewController {
     let messageLabel = UILabel().then{
         $0.text = "message"
         $0.font = UIFont.Suit(size: 14, family: .Regular)
-        $0.textColor = .wishboardGray
+        $0.textColor = .dialogMessageColor
         $0.numberOfLines = 0
         $0.textAlignment = .center
     }
     let horizontalSeperator = UIView().then{
-        $0.backgroundColor = .opaqueSeparator
+        $0.backgroundColor = .wishboardDisabledGray
     }
     let verticalSeperator = UIView().then{
-        $0.backgroundColor = .opaqueSeparator
+        $0.backgroundColor = .wishboardDisabledGray
     }
     var cancelBtn: UIButton!
     var okBtn: UIButton!
@@ -94,7 +94,7 @@ class PopUpViewController: UIViewController {
             var config = UIButton.Configuration.plain()
             var attText = AttributedString.init(self.greenBtnText!)
             
-            attText.font = UIFont.Suit(size: 14, family: .Regular)
+            attText.font = UIFont.Suit(size: 14, family: .Medium)
             attText.foregroundColor = UIColor.wishboardGreen
             config.attributedTitle = attText
             
@@ -104,7 +104,7 @@ class PopUpViewController: UIViewController {
             var config = UIButton.Configuration.plain()
             var attText = AttributedString.init(self.blackBtnText!)
             
-            attText.font = UIFont.Suit(size: 14, family: .Regular)
+            attText.font = UIFont.Suit(size: 14, family: .Medium)
             attText.foregroundColor = UIColor.black
             config.attributedTitle = attText
             
@@ -124,25 +124,26 @@ class PopUpViewController: UIViewController {
     func setUpConstraint() {
         popupView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(30)
-            make.height.equalTo(168)
+            make.height.greaterThanOrEqualTo(148)
             make.centerY.centerX.equalToSuperview()
         }
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(24)
             make.centerX.equalToSuperview()
         }
+        horizontalSeperator.snp.makeConstraints { make in
+            make.height.equalTo(0.5)
+            make.bottom.equalToSuperview().offset(-48)
+            make.leading.trailing.equalToSuperview()
+        }
         messageLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(28)
             make.top.equalTo(titleLabel.snp.bottom).offset(8)
             make.centerX.equalToSuperview()
-        }
-        horizontalSeperator.snp.makeConstraints { make in
-            make.height.equalTo(1)
-            make.bottom.equalToSuperview().offset(-48)
-            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(horizontalSeperator.snp.top).offset(-32)
         }
         verticalSeperator.snp.makeConstraints { make in
-            make.width.equalTo(1)
+            make.width.equalTo(0.5)
             make.bottom.centerX.equalToSuperview()
             make.top.equalTo(horizontalSeperator.snp.bottom)
         }

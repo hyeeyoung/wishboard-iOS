@@ -17,6 +17,7 @@ class RegisterPasswordView: UIView {
     let subTitleLabel = UILabel().then{
         $0.text = "마지막 비밀번호 입력 단계예요!\n입력된 비밀번호로 바로 가입되니 신중히 입력해 주세요."
         $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.setTextWithLineHeight()
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
@@ -24,6 +25,7 @@ class RegisterPasswordView: UIView {
         $0.defaultTextField("비밀번호")
         $0.becomeFirstResponder()
         $0.isSecureTextEntry = true
+        $0.textColor = .editTextFontColor
     }
     let errorMessage = UILabel().then{
         $0.text = "8자리 이상의 영문자, 숫자, 특수 문자 조합으로 입력해주세요."
@@ -35,7 +37,7 @@ class RegisterPasswordView: UIView {
         $0.spacing = 0
     }
     let registerButton = UIButton().then{
-        $0.defaultButton("가입하기", .wishboardDisabledGray, .black)
+        $0.defaultButton("가입하기", .wishboardDisabledGray, .dialogMessageColor)
     }
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 100.0))
@@ -95,24 +97,28 @@ class RegisterPasswordView: UIView {
             make.bottom.equalToSuperview().inset(16)
         }
         stack.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.leading.greaterThanOrEqualToSuperview().offset(16)
+            make.trailing.lessThanOrEqualToSuperview().offset(-16)
             make.bottom.equalTo(registerButton.snp.top).offset(-5)
+            make.centerX.equalToSuperview()
         }
     }
     func setStackView() {
         setLabel("가입 시 ")
         let termButton = setUnderLinedButton("이용약관")
         setLabel(" 및 ")
-        let privacyTermButton = setUnderLinedButton("개인정보 취급방침")
+        let privacyTermButton = setUnderLinedButton("개인정보 처리방침")
         setLabel("에 동의하는 것으로 간주합니다.")
         
         termButton.addTarget(self, action: #selector(termButtonDidTap), for: .touchUpInside)
         privacyTermButton.addTarget(self, action: #selector(privacyButtonDidTap), for: .touchUpInside)
     }
     @objc func termButtonDidTap() {
+        UIDevice.vibrate()
         ScreenManager().linkTo(viewcontroller: preVC, "https://www.wishboard.xyz/terms.html")
     }
     @objc func privacyButtonDidTap() {
+        UIDevice.vibrate()
         ScreenManager().linkTo(viewcontroller: preVC, "https://www.wishboard.xyz/privacy-policy.html")
     }
 }
@@ -123,12 +129,13 @@ extension RegisterPasswordView {
             $0.text = title
             $0.font = UIFont.Suit(size: 12, family: .Regular)
             $0.textColor  = .wishboardGray
+            $0.setTextWithLineHeight()
         }
         stack.addArrangedSubview(label)
     }
     func setUnderLinedButton(_ title: String) -> UIButton {
         let underlineButton = UIButton().then{
-            $0.setUnderline(title, .wishboardGreen)
+            $0.setUnderline(title, .wishboardGreen, UIFont.Suit(size: 12, family: .Medium))
         }
         stack.addArrangedSubview(underlineButton)
         return underlineButton

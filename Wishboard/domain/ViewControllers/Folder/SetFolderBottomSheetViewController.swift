@@ -40,9 +40,11 @@ class SetFolderBottomSheetViewController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         if let preVC = self.preUploadVC {
-            let indexPath = IndexPath(row: 3, section: 0)
+            let indexPath = IndexPath(row: 2, section: 0)
             preVC.wishListData.folder_id = self.selectedFolderId
-            preVC.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
+            preVC.wishListData.folder_name = self.selectedFolder
+            preVC.uploadItemView.uploadContentTableView.reloadRows(at: [indexPath], with: .automatic)
+            preVC.view.endEditing(true)
         }
         if let preVC = self.preItemDetailVC {
             if let itemId = self.itemId {
@@ -54,6 +56,8 @@ class SetFolderBottomSheetViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         FolderDataManager().getFolderListDataManager(self)
         print(self.selectedFolder, self.selectedFolderId)
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
     }
     func setPreViewController(_ preVC: UploadItemViewController) {
         self.preUploadVC = preVC
@@ -62,6 +66,7 @@ class SetFolderBottomSheetViewController: UIViewController {
         self.preItemDetailVC = preVC
     }
     @objc func goBack() {
+        UIDevice.vibrate()
         self.dismiss(animated: true)
     }
 }
@@ -92,6 +97,8 @@ extension SetFolderBottomSheetViewController: UITableViewDelegate, UITableViewDa
         return 56
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        UIDevice.vibrate()
+        
         let idx = indexPath.row
         self.selectedFolder = folderListData[idx].folder_name
         self.selectedFolderId = folderListData[idx].folder_id

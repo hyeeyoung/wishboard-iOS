@@ -21,10 +21,11 @@ class OnBoardingTableViewCell: UITableViewCell {
     }
     // Onbarding label
     let onboardingLabel = UILabel().then{
-        $0.text = "흩어져있는 위시리스트를 위시보드로 간편하게 통합 관리해 보세요!️"
+        $0.text = "흩어져있는 위시리스트를\n위시보드로 간편하게 통합 관리해 보세요!️"
         $0.font = UIFont.Suit()
-        $0.textAlignment = .center
         $0.numberOfLines = 0
+        $0.setTextWithLineHeight()
+        $0.textAlignment = .center
     }
     // 가입하기 버튼
     lazy var registerButton = UIButton().then{
@@ -32,10 +33,17 @@ class OnBoardingTableViewCell: UITableViewCell {
     }
     let loginStackView = UIStackView()
     // 이미 계정이 있으신가요?
-    let accountExistLabel = UILabel().then{
-        $0.text = "이미 계정이 있으신가요?"
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.numberOfLines = 0
+    let accountExistButton = UIButton().then{
+        var config = UIButton.Configuration.plain()
+        var attText = AttributedString.init("이미 계정이 있으신가요?")
+        
+        attText.font = UIFont.Suit(size: 12, family: .Regular)
+        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        attText.foregroundColor = UIColor.black
+        config.attributedTitle = attText
+        config.baseForegroundColor = .black
+        
+        $0.configuration = config
     }
     // 로그인
     let loginButton = UIButton().then{
@@ -65,7 +73,7 @@ class OnBoardingTableViewCell: UITableViewCell {
         contentView.addSubview(onboardingLabel)
         
         contentView.addSubview(loginStackView)
-        loginStackView.addSubview(accountExistLabel)
+        loginStackView.addSubview(accountExistButton)
         loginStackView.addSubview(loginButton)
         contentView.addSubview(registerButton)
     }
@@ -93,14 +101,14 @@ class OnBoardingTableViewCell: UITableViewCell {
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-34)
         }
-        self.accountExistLabel.snp.makeConstraints { make in
+        self.accountExistButton.snp.makeConstraints { make in
             make.height.equalTo(20)
             make.top.bottom.leading.equalToSuperview()
         }
         self.loginButton.snp.makeConstraints { make in
             make.height.equalTo(20)
             make.top.bottom.equalToSuperview()
-            make.leading.equalTo(accountExistLabel.snp.trailing).offset(5)
+            make.leading.equalTo(accountExistButton.snp.trailing).offset(5)
         }
         self.registerButton.snp.makeConstraints { make in
             make.height.equalTo(50)

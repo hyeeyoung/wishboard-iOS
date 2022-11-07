@@ -18,7 +18,10 @@ class ItemDetailView: UIView {
         $0.setImage(UIImage(named: "trash"), for: .normal)
     }
     let backButton = UIButton().then{
-        $0.setImage(UIImage(named: "goBack"), for: .normal)
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(named: "goBack")
+        config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        $0.configuration = config
     }
     
     // MARK: - Life Cycles
@@ -45,6 +48,7 @@ class ItemDetailView: UIView {
         itemDetailTableView.rowHeight = UITableView.automaticDimension
         itemDetailTableView.estimatedRowHeight = UITableView.automaticDimension
         itemDetailTableView.showsVerticalScrollIndicator = false
+        itemDetailTableView.separatorStyle = .none
     }
     func setUpNavigationView() {
         addSubview(navigationView)
@@ -65,7 +69,7 @@ class ItemDetailView: UIView {
         lowerView = UIView()
         lowerView.then{
             if isLinkExist {$0.backgroundColor = .black}
-            else {$0.backgroundColor = .white}
+            else {$0.backgroundColor = .wishboardDisabledGray}
         }
         lowerButton = UIButton().then{
             var config = UIButton.Configuration.plain()
@@ -78,9 +82,9 @@ class ItemDetailView: UIView {
                 config.background.backgroundColor = .black
                 $0.isEnabled = true
             } else {
-                attText.foregroundColor = .wishboardGray
+                attText.foregroundColor = .dialogMessageColor
                 config.attributedTitle = attText
-                config.background.backgroundColor = .white
+                config.background.backgroundColor = .wishboardDisabledGray
                 $0.isEnabled = false
             }
             
@@ -91,7 +95,7 @@ class ItemDetailView: UIView {
         addSubview(itemDetailTableView)
         
         lowerView.snp.makeConstraints { make in
-            if CheckNotch().hasNotch() {make.height.equalTo(78)}
+            if UIDevice.current.hasNotch {make.height.equalTo(78)}
             else {make.height.equalTo(44)}
             make.leading.trailing.bottom.equalToSuperview()
         }
@@ -111,7 +115,7 @@ class ItemDetailView: UIView {
     }
     func setUpNavigationConstraint() {
         navigationView.snp.makeConstraints { make in
-            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
+            if UIDevice.current.hasNotch {make.top.equalToSuperview().offset(50)}
             else {make.top.equalToSuperview().offset(20)}
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(50)
@@ -128,9 +132,8 @@ class ItemDetailView: UIView {
         }
         backButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.width.equalTo(18)
-            make.height.equalTo(14)
-            make.leading.equalToSuperview().offset(16)
+            make.width.height.equalTo(44)
+            make.leading.equalToSuperview().offset(6)
         }
     }
 }

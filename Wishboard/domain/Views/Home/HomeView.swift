@@ -30,6 +30,7 @@ class HomeView: UIView {
     var collectionView : UICollectionView!
     var wishListData: [WishListModel] = []
     let emptyMessage = "앗, 아이템이 없어요!\n갖고 싶은 아이템을 등록해보세요!"
+    var refreshControl = UIRefreshControl()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,6 +38,8 @@ class HomeView: UIView {
         setCollectionView()
         setUpView()
         setUpConstraint()
+        
+        initRefresh()
     }
     
     required init?(coder: NSCoder) {
@@ -78,7 +81,7 @@ class HomeView: UIView {
     }
     func setUpNavigationConstraint() {
         navigationView.snp.makeConstraints { make in
-            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
+            if UIDevice.current.hasNotch {make.top.equalToSuperview().offset(50)}
             else {make.top.equalToSuperview().offset(20)}
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(50)
@@ -140,9 +143,11 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let itemIdx = indexPath.item
+        UIDevice.vibrate()
         
+        let itemIdx = indexPath.item
         let vc = ItemDetailViewController()
+        vc.preVC = self.viewController
         vc.itemId = self.wishListData[itemIdx].item_id
         self.viewController.navigationController?.pushViewController(vc, animated: true)
     }
@@ -150,6 +155,7 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 extension HomeView {
     // 장바구니 추가, 삭제
     @objc func cartButtonDidTap(_ sender: HomeCartGesture) {
+        UIDevice.vibrate()
         if let data = sender.data {
             if data.cart_state == 1 {
                 CartDataManager().deleteCartDataManager(data.item_id!, self, self.viewController)
@@ -172,6 +178,27 @@ extension HomeView {
                                   animations: { () -> Void in
                                     self.collectionView.reloadData()},
                                 completion: nil);
+        refreshControl.endRefreshing()
+    }
+}
+// MARK: - Refresh
+extension HomeView {
+    func initRefresh() {
+        refreshControl.addTarget(self, action: #selector(refreshTable(refresh:)), for: .valueChanged)
+        
+        refreshControl.backgroundColor = .white
+        refreshControl.tintColor = .black
+        
+        collectionView.refreshControl = refreshControl
+    }
+    
+    @objc func refreshTable(refresh: UIRefreshControl) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            // DATA reload
+            WishListDataManager().wishListDataManager(self, self.viewController)
+            self.collectionView.reloadData()
+            refresh.endRefreshing()
+        }
     }
 }
 // MARK: - CartGesture

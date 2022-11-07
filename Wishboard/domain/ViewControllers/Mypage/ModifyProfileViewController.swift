@@ -14,6 +14,7 @@ class ModifyProfileViewController: TitleCenterViewController {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 53
         $0.contentMode = .scaleAspectFill
+        $0.isUserInteractionEnabled = true
     }
     let cameraButton = UIButton().then{
         $0.setImage(UIImage(named: "camera_gray"), for: .normal)
@@ -24,7 +25,10 @@ class ModifyProfileViewController: TitleCenterViewController {
         $0.backgroundColor = .wishboardTextfieldGray
         $0.layer.cornerRadius = 5
         $0.font = UIFont.Suit(size: 16, family: .Regular)
-        $0.clearButtonMode = .whileEditing
+        $0.clearButtonMode = .always
+        $0.textColor = .editTextFontColor
+        
+        $0.becomeFirstResponder()
     }
     let completeButton = UIButton().then{
         $0.defaultButton("완료", .wishboardGreen, .black)
@@ -63,6 +67,13 @@ class ModifyProfileViewController: TitleCenterViewController {
             SnackBar(preVC, message: .modifyProfile)
             MypageDataManager().getUserInfoDataManager(preVC)
         }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
 // MARK: - Set Views
@@ -106,6 +117,7 @@ extension ModifyProfileViewController {
 // MARK: Set Targets
 extension ModifyProfileViewController {
     func setTarget() {
+        self.profileImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(goAlbumImageDidTap)))
         self.cameraButton.addTarget(self, action: #selector(goAlbumButtonDidTap), for: .touchUpInside)
         self.nameTextField.addTarget(self, action: #selector(nameTextFieldEditingChanged(_:)), for: .editingChanged)
         self.completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
@@ -114,13 +126,34 @@ extension ModifyProfileViewController {
         self.isNicknameChanged = true
         let text = sender.text ?? ""
         self.nickname = text
+        isNicknameValid(nickname: self.nickname!)
+    }
+    // 닉네임 유효성 검사
+    func isNicknameValid(nickname: String) {
+        if nickname == "" {
+            self.completeButton.defaultButton("완료", .wishboardDisabledGray, .dialogMessageColor)
+            self.completeButton.isEnabled = false
+        } else {
+            self.completeButton.defaultButton("완료", .wishboardGreen, .black)
+            self.completeButton.isEnabled = true
+        }
     }
     // 앨범에서 사진/동영상 선택
+    // 프로필 이미지 클릭 시
+    @objc func goAlbumImageDidTap(sender: UITapGestureRecognizer) {
+        self.imagePickerController.sourceType = .photoLibrary
+        self.present(imagePickerController, animated: true, completion: nil)
+        UIDevice.vibrate()
+    }
+    // 카메라 클릭 시
     @objc func goAlbumButtonDidTap() {
         self.imagePickerController.sourceType = .photoLibrary
         self.present(imagePickerController, animated: true, completion: nil)
+        UIDevice.vibrate()
     }
     @objc func completeButtonDidTap() {
+        UIDevice.vibrate()
+        
         let lottieView = self.completeButton.setHorizontalLottieView(self.completeButton)
         self.completeButton.isSelected = true
         lottieView.isHidden = false

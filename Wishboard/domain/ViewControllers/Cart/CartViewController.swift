@@ -19,16 +19,17 @@ class CartViewController: TitleCenterViewController {
         self.view.addSubview(cartView)
         
         cartView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
             make.top.equalTo(super.navigationView.snp.bottom)
+            make.bottom.equalToSuperview()
         }
         cartView.preVC = self
-        // DATA
-        CartDataManager().getCartListDataManager(self.cartView)
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
         // DATA
         CartDataManager().getCartListDataManager(self.cartView)
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
     }
 }

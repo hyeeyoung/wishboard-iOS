@@ -27,6 +27,7 @@ class UploadItemViewController: UIViewController {
     var wishListData: WishListModel!
     // keyboard
     var restoreFrameValue: CGFloat = 0.0
+    var preKeyboardHeight: CGFloat = 0.0
     
     // MARK: - Life Cycles
     override func viewDidLoad() {
@@ -34,6 +35,9 @@ class UploadItemViewController: UIViewController {
 
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.view.backgroundColor = .white
+        self.tabBarController?.view.backgroundColor = .white
+        
         // keyboard
         self.restoreFrameValue = self.view.frame.origin.y
         
@@ -52,6 +56,8 @@ class UploadItemViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         self.addKeyboardNotifications()
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.removeKeyboardNotifications()
@@ -65,20 +71,20 @@ class UploadItemViewController: UIViewController {
         }
     }
     @objc func goBack() {
+        UIDevice.vibrate()
         self.navigationController?.popViewController(animated: true)
     }
 }
 // MARK: - TableView delegate
 extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        if tableView == uploadItemView.uploadImageTableView {return 1}
+        else {return 6}
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let tag = indexPath.row
-        // 사진 선택 Cell
-        if tag == 0 {
+        if tableView == uploadItemView.uploadImageTableView {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "UploadItemPhotoTableViewCell", for: indexPath) as? UploadItemPhotoTableViewCell else { return UITableViewCell() }
-            
+            cell.selectionStyle = .none
             // 만약 아이템 수정이라면 기존 이미지 출력
             if !isUploadItem {
                 if let itemImageURL = self.wishListData.item_img_url {
@@ -99,44 +105,66 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
         } else {
-            let cell = UITableViewCell()
+            let tag = indexPath.row
             // TextField가 있는 Cell
-            if tag == 1 || tag == 2 || tag == 6 {setTextFieldCell(cell, tag)}
-            // 클릭 시 bottomSheet 올라오는 Cell
-            if tag == 3 || tag == 4 || tag == 5 {setSelectCell(cell, tag)}
-            
-            cell.selectionStyle = .none
-            return cell
+            switch tag {
+            case 0, 1, 5:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "UploadItemTextfieldTableViewCell", for: indexPath) as? UploadItemTextfieldTableViewCell else { return UITableViewCell() }
+                cell.setTextfieldCell(dataSourceDelegate: self)
+                cell.setPlaceholder(tag: tag)
+                if let cellData = self.wishListData {
+                    cell.setUpData(tag: tag, data: cellData)
+                }
+                if tag == 0 {cell.textfield.addTarget(self, action: #selector(itemNameTextfieldEditingField(_:)), for: .editingChanged)}
+                else if tag == 1 {
+                    cell.textfield.addTarget(self, action: #selector(itemPriceTextfieldEditingField(_:)), for: .editingChanged)
+                }
+                else {
+                    cell.textfield.addTarget(self, action: #selector(memoTextfieldEditingField(_:)), for: .editingChanged)
+                }
+                cell.selectionStyle = .none
+                return cell
+            case 2, 3, 4:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "UploadItemBottomSheetTableViewCell", for: indexPath) as? UploadItemBottomSheetTableViewCell else { return UITableViewCell() }
+                cell.setBottomSheetCell(isUploadItem: self.isUploadItem, tag: tag)
+                if let cellData = self.wishListData {
+                    cell.setUpData(isUploadItem: self.isUploadItem, tag: tag, data: cellData)
+                }
+                cell.selectionStyle = .none
+                return cell
+            default:
+                fatalError()
+            }
         }
         
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let tag = indexPath.row
-        switch tag {
-        case 0:
-            return 251
-        default:
-            return 54
-        }
+        if tableView == uploadItemView.uploadImageTableView { return 251 }
+        else { return 54 }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let tag = indexPath.row
-        switch tag {
-        // '사진 찍기' '사진 보관함' 팝업창
-        case 0:
+        UIDevice.vibrate()
+        
+        if tableView == uploadItemView.uploadImageTableView {
+            // '사진 찍기' '사진 보관함' 팝업창
             alertCameraMenu()
-        // 폴더 설정 BottomSheet
-        case 3:
-            showFolderBottomSheet()
-        // 알람 설정 BottomSheet
-        case 4:
-            showNotificationBottomSheet()
-        // 쇼핑몰 링크 BottomSheet
-        case 5:
-            showLinkBottomSheet()
-        default:
-            tableView.deselectRow(at: indexPath, animated: true)
+        } else {
+            let tag = indexPath.row
+            switch tag {
+            // 폴더 설정 BottomSheet
+            case 2:
+                showFolderBottomSheet()
+            // 알람 설정 BottomSheet
+            case 3:
+                showNotificationBottomSheet()
+            // 쇼핑몰 링크 BottomSheet
+            case 4:
+                showLinkBottomSheet()
+            default:
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
         }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -144,7 +172,8 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
 extension UploadItemViewController {
     func setUploadItemView() {
         uploadItemView = UploadItemView()
-        uploadItemView.setTableView(dataSourceDelegate: self)
+        uploadItemView.setImageTableView(dataSourceDelegate: self)
+        uploadItemView.setContentTableView(dataSourceDelegate: self)
         uploadItemView.setUpView()
         uploadItemView.setUpConstraint()
         
@@ -152,7 +181,8 @@ extension UploadItemViewController {
         uploadItemView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview()
         }
-        uploadItemView.uploadItemTableView.keyboardDismissMode = .onDrag
+        uploadItemView.uploadImageTableView.keyboardDismissMode = .onDrag
+        uploadItemView.uploadContentTableView.keyboardDismissMode = .onDrag
         
         if isUploadItem {
             self.tabBarController?.tabBar.isHidden = false
@@ -175,6 +205,9 @@ extension UploadItemViewController {
     }
     // MARK: - 저장 버튼 클릭 시 (아이템 추가)
     @objc func saveButtonDidTap() {
+        UIDevice.vibrate()
+        
+        uploadItemView.saveButton.isEnabled = false
         let lottieView = SetLottie().setSpinLottie(viewcontroller: self)
         lottieView.isHidden = false
         lottieView.play { completion in
@@ -193,7 +226,7 @@ extension UploadItemViewController {
                 if let folderId = data?.folder_id {
                     // 모든 데이터가 존재하는 경우
                     if let notiType = data?.item_notification_type {
-                        ItemDataManager().uploadItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!, self)
+                        ItemDataManager().uploadItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!+":00", self)
                     } else {
                         // 알림 날짜 설정은 하지 않은 경우
                         ItemDataManager().uploadItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, self)
@@ -201,7 +234,7 @@ extension UploadItemViewController {
                 } else {
                     // 폴더가 없고, 알람설정은 한 경우
                     if let notiType = data?.item_notification_type {
-                        ItemDataManager().uploadItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!, self)
+                        ItemDataManager().uploadItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!+":00", self)
                     } else {
                         // 일부 데이터가 존재하는 경우
                         ItemDataManager().uploadItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, self)
@@ -213,6 +246,9 @@ extension UploadItemViewController {
     }
     // MARK: 저장 버튼 클릭 시 (아이템 수정)
     @objc func modifyButtonDidTap() {
+        UIDevice.vibrate()
+        
+        uploadItemView.saveButton.isEnabled = false
         let lottieView = SetLottie().setSpinLottie(viewcontroller: self)
         lottieView.isHidden = false
         lottieView.play { completion in
@@ -228,7 +264,7 @@ extension UploadItemViewController {
                 if let folderId = data?.folder_id {
                     // 모든 데이터가 존재하는 경우
                     if let notiType = data?.item_notification_type {
-                        ItemDataManager().modifyItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!, (data?.item_id)!, self)
+                        ItemDataManager().modifyItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!+":00", (data?.item_id)!, self)
                     } else {
                         // 알림 날짜 설정은 하지 않은 경우
                         ItemDataManager().modifyItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
@@ -236,7 +272,7 @@ extension UploadItemViewController {
                 } else {
                     // 폴더가 없고, 알람설정은 한 경우
                     if let notiType = data?.item_notification_type {
-                        ItemDataManager().modifyItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!, (data?.item_id)!, self)
+                        ItemDataManager().modifyItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!+":00", (data?.item_id)!, self)
                     } else {
                         // 폴더가 없고, 알람설정도 안 한 경우
                         ItemDataManager().modifyItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
@@ -248,110 +284,10 @@ extension UploadItemViewController {
 }
 // MARK: - Cell set & Actions
 extension UploadItemViewController {
-    // 클릭 시 bottomSheet 올라오는 Cell
-    func setSelectCell(_ cell: UITableViewCell, _ tag: Int) {
-        // 만약 아이템 수정이라면
-        if !isUploadItem {
-            switch tag {
-            case 3:
-                if let folder = self.wishListData.folder_name {cell.textLabel?.text = folder}
-                else {cell.textLabel?.text = cellTitleArray[tag - 1]}
-            case 4:
-                if let notiType = self.wishListData.item_notification_type {
-                    if let notiDate = self.wishListData.item_notification_date {
-                        cell.textLabel?.text = "[" + notiType + "] " + notiDate
-                    }
-                }
-                else {cell.textLabel?.text = cellTitleArray[tag - 1]}
-            case 5:
-                if let link = self.wishListData.item_url {
-                    if link != "" {cell.textLabel?.text = link}
-                    else {cell.textLabel?.text = cellTitleArray[tag - 1]}
-                }
-                else {cell.textLabel?.text = cellTitleArray[tag - 1]}
-            default:
-                fatalError()
-            }
-        } else {
-            // 새로 아이템 추가하는 경우라면 placeHolder 초기설정
-            cell.textLabel?.text = cellTitleArray[tag - 1]
-        }
-        cell.textLabel?.font = UIFont.Suit(size: 14, family: .Regular)
-        
-        let arrowImg = UIImageView().then{
-            $0.image = UIImage(named: "arrow_right")
-        }
-        cell.contentView.addSubview(arrowImg)
-        arrowImg.snp.makeConstraints { make in
-            make.width.height.equalTo(24)
-            make.trailing.equalToSuperview().offset(-16)
-            make.centerY.equalToSuperview()
-        }
-        // 쇼핑몰 링크 입력 셀
-        if tag == 5 {
-            let subTitle = UILabel().then{
-                $0.text = "복사한 링크로 아이템 정보를 불러올 수 있어요!"
-                $0.font = UIFont.Suit(size: 10, family: .Regular)
-                $0.textColor = .wishboardGreen
-            }
-            cell.contentView.addSubview(subTitle)
-            subTitle.snp.makeConstraints { make in
-                make.centerY.equalToSuperview()
-                make.trailing.equalTo(arrowImg.snp.leading)
-            }
-            if !isUploadItem {subTitle.isHidden = true}
-            // 만약 쇼핑몰 링크를 수정했다면 업데이트
-            if let link = linkvc.link {
-                cell.textLabel?.text = link
-                subTitle.isHidden = true
-            }
-        }
-        // 만약 알림 날짜를 재설정했다면 업데이트
-        if let type = notivc.notiType {
-            if let dateTime = notivc.dateAndTime {
-                if tag == 4 {cell.textLabel?.text = "[" + type + "] " + dateTime}
-                self.wishListData.item_notification_type = type
-                self.wishListData.item_notification_date = FormatManager().koreanStrToDate(dateTime)
-            }
-        }
-        // 만약 폴더를 재선택했다면 업데이트
-        if let selectedFolder = foldervc.selectedFolder {
-            if tag == 3 {cell.textLabel?.text = selectedFolder}
-        }
-    }
-    // TextField가 있는 Cell
-    func setTextFieldCell(_ cell: UITableViewCell, _ tag: Int) {
-        let textfield = UITextField().then{
-            $0.backgroundColor = .clear
-            $0.placeholder = self.cellTitleArray[tag - 1]
-            $0.font = UIFont.Suit(size: 14, family: .Regular)
-            $0.addLeftPadding(16)
-            $0.delegate = self
-        }
-        cell.contentView.addSubview(textfield)
-        textfield.snp.makeConstraints { make in
-            make.leading.top.bottom.trailing.equalToSuperview()
-        }
-        // Add target
-        switch tag {
-        case 1:
-            if let itemName = self.wishListData.item_name {textfield.text = itemName}
-            textfield.addTarget(self, action: #selector(itemNameTextfieldEditingField(_:)), for: .editingChanged)
-        case 2:
-            textfield.keyboardType = .numberPad
-            if let price = self.wishListData.item_price {
-                textfield.text = numberFormatter.string(from: NSNumber(value: Int(price)!))
-            }
-            textfield.addTarget(self, action: #selector(itemPriceTextfieldEditingField(_:)), for: .editingChanged)
-        default:
-            if let memo = self.wishListData.item_memo {textfield.text = memo}
-            textfield.addTarget(self, action: #selector(memoTextfieldEditingField(_:)), for: .editingChanged)
-        }
-        
-    }
+    
     // Actions
     @objc func itemNameTextfieldEditingField(_ sender: UITextField) {
-        let text = sender.text!
+        let text = sender.text ?? ""
         self.wishListData.item_name = text
         isValidContent()
     }
@@ -365,7 +301,7 @@ extension UploadItemViewController {
         }
     }
     @objc func memoTextfieldEditingField(_ sender: UITextField) {
-        let text = sender.text!
+        let text = sender.text ?? ""
         self.wishListData.item_memo = text
     }
     func setPriceString(_ str: String) -> String {
@@ -374,13 +310,13 @@ extension UploadItemViewController {
     }
     // 상품명, 가격 입력 여부에 따른 저장버튼 활성화 설정
     func isValidContent() {
-        guard let iN = self.wishListData.item_name else {return}
-        guard let iP = self.wishListData.item_price else {return}
-        if self.selectedImage != nil || self.wishListData.item_img_url != nil {
-            if (iN != "") && (iP != "") {uploadItemView.setSaveButton(true)}
-            else {uploadItemView.setSaveButton(false)}
-        }
-        print("URL???", self.wishListData.item_url)
+        if self.wishListData.item_name != nil && self.wishListData.item_price != nil {
+            if self.wishListData.item_name != "" && self.wishListData.item_price != "" {
+                if self.selectedImage != nil || self.wishListData.item_img_url != nil {
+                    uploadItemView.setSaveButton(true)
+                }
+            } else {uploadItemView.setSaveButton(false)}
+        } else {uploadItemView.setSaveButton(false)}
     }
     // '사진 찍기' '사진 보관함' 팝업창
     func alertCameraMenu() {
@@ -450,18 +386,14 @@ extension UploadItemViewController: UIImagePickerControllerDelegate, UINavigatio
             self.selectedImage = image
             isValidContent()
             
-            // 첫번째 셀만 reload
-            let indexPath = IndexPath(row: 0, section: 0)
-            self.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
+            self.uploadItemView.uploadImageTableView.reloadData()
         }
         // 카메라에서 사진 찍은 경우
         if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
             self.selectedImage = image
             isValidContent()
             
-            // 첫번째 셀만 reload
-            let indexPath = IndexPath(row: 0, section: 0)
-            self.uploadItemView.uploadItemTableView.reloadRows(at: [indexPath], with: .automatic)
+            self.uploadItemView.uploadImageTableView.reloadData()
         }
         picker.dismiss(animated: true, completion: nil)
     }
@@ -500,7 +432,16 @@ extension UploadItemViewController: UITextFieldDelegate {
         if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            self.view.frame.origin.y -= keyboardHeight
+            print("pre:", preKeyboardHeight, "curr:", keyboardHeight)
+            if preKeyboardHeight < keyboardHeight {
+                let dif = keyboardHeight - preKeyboardHeight
+                self.view.frame.origin.y -= dif / 1.2
+                preKeyboardHeight = keyboardHeight
+            } else if preKeyboardHeight > keyboardHeight {
+                let dif = preKeyboardHeight - keyboardHeight
+                self.view.frame.origin.y += dif / 1.2
+                preKeyboardHeight = keyboardHeight
+            }
         }
         print("keyboard Will appear Execute")
     }
@@ -510,7 +451,7 @@ extension UploadItemViewController: UITextFieldDelegate {
             if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
                 let keyboardRectangle = keyboardFrame.cgRectValue
                 let keyboardHeight = keyboardRectangle.height
-                self.view.frame.origin.y += keyboardHeight
+//                self.view.frame.origin.y += keyboardHeight
             }
             print("keyboard Will Disappear Execute")
         }
@@ -519,8 +460,7 @@ extension UploadItemViewController: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.frame.origin.y = restoreFrameValue
         print("touches Began Execute")
-        self.view.endEditing(true)
-    }
+        self.view.endEditing(true)    }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("textFieldShouldReturn Execute")
@@ -530,6 +470,7 @@ extension UploadItemViewController: UITextFieldDelegate {
 
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         print("textFieldShouldEndEditing Execute")
+        self.preKeyboardHeight = 0.0
         self.view.frame.origin.y = self.restoreFrameValue
         return true
     }

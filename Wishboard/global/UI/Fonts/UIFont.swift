@@ -11,7 +11,7 @@ import UIKit
 extension UIFont{
     
     enum Family: String {
-        case Bold, Regular, Light
+        case Bold, Regular, Light, Medium, ExtraBold
     }
     
     static func Suit(size: CGFloat = 14, family: Family = .Regular) -> UIFont! {

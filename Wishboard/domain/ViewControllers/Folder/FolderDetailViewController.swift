@@ -29,7 +29,7 @@ class FolderDetailViewController: TitleCenterViewController {
         
     }
     override func viewDidAppear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBar.isHidden = true
         // DATA
         if let folderName = self.folderName {super.navigationTitle.text = folderName}
         if let folderId = self.folderId {
@@ -62,9 +62,11 @@ extension FolderDetailViewController {
     }
     func setUpView() {
         self.view.addSubview(folderDetailCollectionView)
+        let tabBarHeight = self.tabBarController?.tabBar.frame.height ?? 0
         folderDetailCollectionView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(self.navigationView.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(super.navigationView.snp.bottom)
+            make.bottom.equalToSuperview().offset(-tabBarHeight)
         }
     }
 }
@@ -89,8 +91,11 @@ extension FolderDetailViewController: UICollectionViewDelegate, UICollectionView
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        UIDevice.vibrate()
+        
         let itemIdx = indexPath.item
         let itemDetailVC = ItemDetailViewController()
+        itemDetailVC.preVC = self
         itemDetailVC.itemId = self.wishListData[itemIdx].item_id
         self.navigationController?.pushViewController(itemDetailVC, animated: true)
     }
@@ -98,6 +103,7 @@ extension FolderDetailViewController: UICollectionViewDelegate, UICollectionView
 extension FolderDetailViewController {
     // MARK: 장바구니 버튼 클릭 이벤트
     @objc func cartButtonDidTap(_ sender: HomeCartGesture) {
+        UIDevice.vibrate()
         if let data = sender.data {
             // 장바구니 삭제
             if data.cart_state == 1 {

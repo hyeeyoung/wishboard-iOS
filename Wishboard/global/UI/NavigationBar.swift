@@ -19,6 +19,7 @@ class NavigationBar {
         let pageTitle = UILabel().then{
             $0.text = title
             $0.font = UIFont.Suit(size: 15, family: .Bold)
+            $0.setTextWithLineHeight()
         }
         let backButton = UIButton().then{
             $0.setImage(UIImage(named: "goBack"), for: .normal)
@@ -29,7 +30,7 @@ class NavigationBar {
         navigationView.addSubview(backButton)
         
         navigationView.snp.makeConstraints { make in
-            if CheckNotch().hasNotch() {make.top.equalToSuperview().offset(50)}
+            if UIDevice.current.hasNotch {make.top.equalToSuperview().offset(50)}
             else {make.top.equalToSuperview().offset(20)}
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(50)
@@ -50,5 +51,6 @@ class NavigationBar {
     }
     @objc func goBack() {
         self.viewcontroller.dismiss(animated: true)
+        UIDevice.vibrate()
     }
 }

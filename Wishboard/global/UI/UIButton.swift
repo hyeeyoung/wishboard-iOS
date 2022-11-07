@@ -51,7 +51,17 @@ extension UIButton {
                                       value: NSUnderlineStyle.single.rawValue,
                                       range: NSRange(location: 0, length: title.count)
         )
-        attributedString.addAttribute(.font, value: UIFont.Suit(size: 12, family: .Regular), range: NSRange(location: 0, length: title.count))
+        attributedString.addAttribute(.font, value: UIFont.Suit(size: 12, family: .Bold), range: NSRange(location: 0, length: title.count))
+        attributedString.addAttribute(.foregroundColor, value: color, range: NSRange(location: 0, length: title.count))
+        setAttributedTitle(attributedString, for: .normal)
+    }
+    func setUnderline(_ title: String, _ color: UIColor, _ font: UIFont) {
+        let attributedString = NSMutableAttributedString(string: title)
+        attributedString.addAttribute(.underlineStyle,
+                                      value: NSUnderlineStyle.single.rawValue,
+                                      range: NSRange(location: 0, length: title.count)
+        )
+        attributedString.addAttribute(.font, value: font, range: NSRange(location: 0, length: title.count))
         attributedString.addAttribute(.foregroundColor, value: color, range: NSRange(location: 0, length: title.count))
         setAttributedTitle(attributedString, for: .normal)
     }

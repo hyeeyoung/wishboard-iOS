@@ -13,18 +13,18 @@ class BaseViewController: UIViewController {
     // 기본 초기화
     init(){
         super.init(nibName: nil, bundle: nil)
-        self.viewDidLoad()
+//        self.viewDidLoad()
     }
     // 제목 설정
     init(title: String){
         super.init(nibName: nil, bundle: nil)
-        self.viewDidLoad()
+//        self.viewDidLoad()
         self.rightPositionBtn = EtcButton(title: title)
     }
     // 상단 오른쪽 버튼 설정
     init(btnImage: UIImage){
         super.init(nibName: nil, bundle: nil)
-        self.viewDidLoad()
+//        self.viewDidLoad()
         self.rightPositionBtn = EtcButton(image: btnImage)
     }
     
@@ -35,9 +35,13 @@ class BaseViewController: UIViewController {
     let navigationView = UIView()
     
     lazy var backBtn = UIButton().then{
-        $0.setImage(UIImage(named: "goBack"), for: .normal)
         $0.isUserInteractionEnabled = true
         $0.addTarget(self, action: #selector(backBtnDidClicked), for: .touchUpInside)
+        
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(named: "goBack")
+        config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        $0.configuration = config
     }
     
     lazy var navigationTitle = UILabel().then{
@@ -67,14 +71,10 @@ class BaseViewController: UIViewController {
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(50)
         }
-        if !NetworkCheck.shared.isConnected {SnackBar(self, message: .networkCheck)}
+        NetworkCheck.shared.startMonitoring(vc: self)
     }
     override func viewDidAppear(_ animated: Bool) {
-//        if !NetworkCheck.shared.isConnected {
-//            DispatchQueue.main.async {
-//                SnackBar(self, message: .networkCheck)
-//            }
-//        }
+        NetworkCheck.shared.startMonitoring(vc: self)
     }
     // MARK: - Actions
     @objc func backBtnDidClicked(){

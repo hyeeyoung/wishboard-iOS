@@ -13,6 +13,7 @@ class FolderListTableViewCell: UITableViewCell {
         $0.backgroundColor = .systemGray6
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 20
+        $0.contentMode = .scaleAspectFill
     }
     let folderName = UILabel().then{
         $0.text = "folderName"

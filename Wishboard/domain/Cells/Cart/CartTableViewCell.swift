@@ -8,27 +8,40 @@
 import UIKit
 
 class CartTableViewCell: UITableViewCell {
-    let itemImage = UIImageView().then{
+    lazy var itemImage = UIImageView().then{
         $0.backgroundColor = .systemGray6
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
+        $0.isUserInteractionEnabled = true
+        $0.contentMode = .scaleAspectFill
     }
     let itemName = UILabel().then{
         $0.text = "itemName"
         $0.font = UIFont.Suit(size: 12.5, family: .Regular)
-        $0.numberOfLines = 0
+        $0.numberOfLines = 2
+        $0.isUserInteractionEnabled = true
     }
     let deleteButton = UIButton().then{
-        $0.setImage(UIImage(named: "x"), for: .normal)
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(named: "x")
+        config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        $0.configuration = config
     }
     let minusButton = UIButton().then{
-        $0.setImage(UIImage(named: "ic_cart_minus"), for: .normal)
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(named: "ic_cart_minus")
+        config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        $0.configuration = config
     }
     let plusButton = UIButton().then{
-        $0.setImage(UIImage(named: "ic_cart_plus"), for: .normal)
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(named: "ic_cart_plus")
+        config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        $0.configuration = config
     }
     let countLabel = UILabel().then{
         $0.text = "1"
+        $0.textAlignment = .center
         $0.font = UIFont.Suit(size: 14.58, family: .Regular)
     }
     let priceLabel = UILabel().then{
@@ -67,23 +80,24 @@ class CartTableViewCell: UITableViewCell {
             make.leading.equalToSuperview().offset(16)
         }
         deleteButton.snp.makeConstraints { make in
-            make.width.height.equalTo(15)
-            make.top.equalTo(itemImage.snp.top)
-            make.trailing.equalToSuperview().offset(-19)
+            make.width.height.equalTo(44)
+            make.top.equalTo(itemImage.snp.top).offset(-10)
+            make.trailing.equalToSuperview().offset(-9)
         }
         minusButton.snp.makeConstraints { make in
-            make.width.height.equalTo(24)
-            make.bottom.equalTo(itemImage.snp.bottom)
-            make.leading.equalTo(itemImage.snp.trailing).offset(10)
+            make.width.height.equalTo(44)
+            make.bottom.equalTo(itemImage.snp.bottom).offset(10)
+            make.leading.equalTo(itemImage.snp.trailing)
         }
         countLabel.snp.makeConstraints { make in
+            make.width.equalTo(20)
             make.centerY.equalTo(minusButton)
-            make.leading.equalTo(minusButton.snp.trailing).offset(10)
+            make.leading.equalTo(minusButton.snp.trailing)
         }
         plusButton.snp.makeConstraints { make in
-            make.width.height.equalTo(24)
+            make.width.height.equalTo(44)
             make.centerY.equalTo(countLabel)
-            make.leading.equalTo(countLabel.snp.trailing).offset(10)
+            make.leading.equalTo(countLabel.snp.trailing)
         }
         won.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-10)
@@ -94,10 +108,10 @@ class CartTableViewCell: UITableViewCell {
             make.centerY.equalTo(won)
         }
         itemName.snp.makeConstraints { make in
-            make.top.equalTo(itemImage.snp.top)
+            make.top.equalTo(itemImage.snp.top).offset(5)
             make.leading.equalTo(itemImage.snp.trailing).offset(10)
-            make.trailing.equalTo(deleteButton.snp.leading).offset(-10)
-            make.bottom.equalTo(minusButton.snp.top).offset(-10)
+            make.trailing.equalTo(deleteButton.snp.leading)
+//            make.bottom.lessThanOrEqualTo(minusButton.snp.top).offset(-10)
         }
     }
 }

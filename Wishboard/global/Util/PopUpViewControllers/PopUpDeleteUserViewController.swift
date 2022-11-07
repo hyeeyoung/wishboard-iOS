@@ -29,17 +29,24 @@ class PopUpDeleteUserViewController: UIViewController {
         $0.font = UIFont.Suit(size: 16, family: .Bold)
     }
     let messageLabel = UILabel().then{
-        $0.text = "message"
+        $0.text = "정말 탈퇴하시겠습니까?\n탈퇴 시 앱 내 모든 데이터가 사라집니다.\n서비스를 탈퇴하시려면 이메일을 입력해 주세요."
         $0.font = UIFont.Suit(size: 14, family: .Regular)
-        $0.textColor = .wishboardGray
+        $0.textColor = .dialogMessageColor
         $0.numberOfLines = 0
+        
+        let attrString = NSMutableAttributedString(string: $0.text!)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.18
+        attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
+        $0.attributedText = attrString
+        
         $0.textAlignment = .center
     }
     let horizontalSeperator = UIView().then{
-        $0.backgroundColor = .opaqueSeparator
+        $0.backgroundColor = .wishboardDisabledGray
     }
     let verticalSeperator = UIView().then{
-        $0.backgroundColor = .opaqueSeparator
+        $0.backgroundColor = .wishboardDisabledGray
     }
     var cancelBtn: UIButton!
     var okBtn: UIButton!
@@ -49,6 +56,7 @@ class PopUpDeleteUserViewController: UIViewController {
         $0.layer.cornerRadius = 5
         $0.font = UIFont.Suit(size: 16, family: .Regular)
         $0.clearButtonMode = .whileEditing
+        $0.textColor = .editTextFontColor
     }
     let errorMessage = UILabel().then{
         $0.text = "이메일을 다시 확인해 주세요."
@@ -56,8 +64,10 @@ class PopUpDeleteUserViewController: UIViewController {
         $0.textColor = .wishboardRed
     }
     // MARK: - Life Cycles
+    // keyboard
+    var restoreFrameValue: CGFloat = 0.0
+    
     convenience init(titleText: String? = nil,
-                     messageText: String? = nil,
                      greenBtnText: String? = nil,
                      blackBtnText: String? = nil,
                      placeholder: String? = nil,
@@ -65,7 +75,6 @@ class PopUpDeleteUserViewController: UIViewController {
         self.init()
 
         self.titleText = titleText
-        self.messageText = messageText
         self.greenBtnText = greenBtnText
         self.blackBtnText = blackBtnText
         self.placeholder = placeholder
@@ -92,6 +101,7 @@ class PopUpDeleteUserViewController: UIViewController {
             self?.popupView.transform = .identity
             self?.popupView.isHidden = false
         }
+        self.addKeyboardNotifications()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -101,6 +111,7 @@ class PopUpDeleteUserViewController: UIViewController {
             self?.popupView.transform = .identity
             self?.popupView.isHidden = true
         }
+        self.removeKeyboardNotifications()
     }
     // MARK: - Actions
     @objc func goBack() {
@@ -119,7 +130,6 @@ class PopUpDeleteUserViewController: UIViewController {
     // MARK: - Functions
     func setUpContent() {
         titleLabel.text = self.titleText
-        messageLabel.text = self.messageText
         cancelBtn = UIButton().then{
             var config = UIButton.Configuration.plain()
             var attText = AttributedString.init(self.greenBtnText!)
@@ -157,7 +167,7 @@ class PopUpDeleteUserViewController: UIViewController {
     func setUpConstraint() {
         popupView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(30)
-            make.height.equalTo(211)
+            make.height.equalTo(250)
             make.centerY.centerX.equalToSuperview()
         }
         titleLabel.snp.makeConstraints { make in
@@ -165,17 +175,17 @@ class PopUpDeleteUserViewController: UIViewController {
             make.centerX.equalToSuperview()
         }
         messageLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(28)
+            make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(titleLabel.snp.bottom).offset(8)
             make.centerX.equalToSuperview()
         }
         horizontalSeperator.snp.makeConstraints { make in
-            make.height.equalTo(1)
+            make.height.equalTo(0.5)
             make.bottom.equalToSuperview().offset(-48)
             make.leading.trailing.equalToSuperview()
         }
         verticalSeperator.snp.makeConstraints { make in
-            make.width.equalTo(1)
+            make.width.equalTo(0.5)
             make.bottom.centerX.equalToSuperview()
             make.top.equalTo(horizontalSeperator.snp.bottom)
         }
@@ -201,4 +211,59 @@ class PopUpDeleteUserViewController: UIViewController {
             make.top.equalTo(textField.snp.bottom).offset(6)
         }
     }
+}
+// MARK: - TextField & Keyboard Methods
+extension PopUpDeleteUserViewController: UITextFieldDelegate {
+    func addKeyboardNotifications() {
+        // 키보드가 나타날 때 앱에게 알리는 메서드 추가
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillAppear(noti:)), name: UIResponder.keyboardWillShowNotification , object: nil)
+        // 키보드가 사라질 때 앱에게 알리는 메서드 추가
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillDisappear(noti:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    func removeKeyboardNotifications() {
+        // 키보드가 나타날 때 앱에게 알리는 메서드 제거
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
+        // 키보드가 사라질 때 앱에게 알리는 메서드 제거
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    @objc func keyboardWillAppear(noti: NSNotification) {
+        if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            let viewHeight = self.popupView.frame.origin.y
+            let dif = keyboardHeight - viewHeight
+            self.view.frame.origin.y -= (dif + 10)
+        }
+        print("keyboard Will appear Execute")
+    }
+    
+    @objc func keyboardWillDisappear(noti: NSNotification) {
+        if self.view.frame.origin.y != restoreFrameValue {
+            if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                let keyboardRectangle = keyboardFrame.cgRectValue
+                let keyboardHeight = keyboardRectangle.height
+                self.view.frame.origin.y += keyboardHeight
+            }
+            print("keyboard Will Disappear Execute")
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.frame.origin.y = restoreFrameValue
+        print("touches Began Execute")
+        self.view.endEditing(true)
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("textFieldShouldReturn Execute")
+        textField.resignFirstResponder()
+        return true
+    }
+
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        print("textFieldShouldEndEditing Execute")
+        self.view.frame.origin.y = self.restoreFrameValue
+        return true
+    }
+    
 }

@@ -17,22 +17,27 @@ class CartView: UIView {
     let total = UILabel().then{
         $0.text = "전체"
         $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.setTextWithLineHeight()
     }
     let countLabel = UILabel().then{
         $0.text = "0"
         $0.font = UIFont.monteserrat(size: 18, family: .Bold)
+        $0.setTextWithLineHeight()
     }
     let label = UILabel().then{
         $0.text = "개"
         $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.setTextWithLineHeight()
     }
     let price = UILabel().then{
         $0.text = "0"
         $0.font = UIFont.monteserrat(size: 18, family: .Bold)
+        $0.setTextWithLineHeight()
     }
     let won = UILabel().then{
         $0.text = "원"
         $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.setTextWithLineHeight()
     }
     // MARK: - Life Cycles
     var preVC: CartViewController!
@@ -62,6 +67,7 @@ class CartView: UIView {
         cartTableView.rowHeight = UITableView.automaticDimension
         cartTableView.estimatedRowHeight = UITableView.automaticDimension
         cartTableView.showsVerticalScrollIndicator = false
+        cartTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     func setUpView() {
         addSubview(lowerView)
@@ -86,7 +92,7 @@ class CartView: UIView {
         lowerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
-            if CheckNotch().hasNotch() {make.height.equalTo(78)}
+            if UIDevice.current.hasNotch {make.height.equalTo(78)}
             else {make.height.equalTo(50)}
         }
         total.snp.makeConstraints { make in
@@ -124,6 +130,7 @@ extension CartView: UITableViewDelegate, UITableViewDataSource {
         let itemIdx = indexPath.item
         cell.setUpData(self.cartData[itemIdx])
         
+        // 수량 변경 버튼 이벤트
         let plusGesture = CartGesture(target: self, action: #selector(plusButtonDidTap(_:)))
         let minusGesture = CartGesture(target: self, action: #selector(minusButtonDidTap(_:)))
         let deleteGesture = CartGesture(target: self, action: #selector(deleteButtonDidTap(_:)))
@@ -136,6 +143,15 @@ extension CartView: UITableViewDelegate, UITableViewDataSource {
         cell.minusButton.addGestureRecognizer(minusGesture)
         cell.deleteButton.addGestureRecognizer(deleteGesture)
         
+        // 장바구니 아이템 클릭 이벤트 (이미지, 상품명만)
+        let cartItemImageGesture = CartGesture(target: self, action: #selector(cartItemDidTap(_:)))
+        cartItemImageGesture.cartItem = self.cartData[itemIdx]
+        cell.itemImage.addGestureRecognizer(cartItemImageGesture)
+        
+        let cartItemNameGesture = CartGesture(target: self, action: #selector(cartItemDidTap(_:)))
+        cartItemNameGesture.cartItem = self.cartData[itemIdx]
+        cell.itemName.addGestureRecognizer(cartItemNameGesture)
+        
         cell.selectionStyle = .none
         return cell
     }
@@ -143,16 +159,13 @@ extension CartView: UITableViewDelegate, UITableViewDataSource {
         return 112
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let itemIdx = indexPath.item
-        let vc = ItemDetailViewController()
-        vc.itemId = self.cartData[itemIdx].wishItem?.item_id
-        self.preVC.navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 extension CartView {
     // (+) 버튼 클릭
     @objc func plusButtonDidTap(_ sender: CartGesture) {
+        UIDevice.vibrate()
         guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
         guard var itemCount = sender.cartItem?.cartItemInfo?.item_count else {return}
         itemCount = itemCount + 1
@@ -162,6 +175,7 @@ extension CartView {
     }
     // (-) 버튼 클릭
     @objc func minusButtonDidTap(_ sender: CartGesture) {
+        UIDevice.vibrate()
         guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
         guard var itemCount = sender.cartItem?.cartItemInfo?.item_count else {return}
         if itemCount == 1 {return}
@@ -172,8 +186,18 @@ extension CartView {
     }
     // (X) 버튼 클릭
     @objc func deleteButtonDidTap(_ sender: CartGesture) {
+        UIDevice.vibrate()
         guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
         CartDataManager().deleteCartDataManager(itemId, self)
+    }
+    // 상품 이미지, 상품명 클릭 (아이템 디테일 화면으로 이동)
+    @objc func cartItemDidTap(_ sender: CartGesture) {
+        UIDevice.vibrate()
+        guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
+        let vc = ItemDetailViewController()
+        vc.preVC = self.preVC
+        vc.itemId = itemId
+        self.preVC.navigationController?.pushViewController(vc, animated: true)
     }
     // MARK: 계산
     func calculate() {
@@ -209,13 +233,9 @@ extension CartView {
     }
     func noCartItem() {
         self.cartData = []
-        // reload data with animation
-        UIView.transition(with: cartTableView,
-                          duration: 0.35,
-                          options: .transitionCrossDissolve,
-                          animations: { () -> Void in
-                              self.cartTableView.reloadData()},
-                          completion: nil);
+        cartTableView.reloadData()
+        self.price.text = "0"
+        self.countLabel.text = "0"
     }
     // MARK: 장바구니 수량 변경 API
     func modifyCountAPISuccess(_ result: APIModel<ResultModel>) {

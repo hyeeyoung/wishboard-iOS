@@ -9,7 +9,7 @@ import Alamofire
 
 class LoginDataManager {
     let BaseURL = UserDefaults.standard.string(forKey: "url") ?? ""
-    //MARK: 회원가입
+    //MARK: 로그인
     func loginDataManager(_ parameter: LoginInput, _ viewcontroller: LoginViewController) {
         AF.request(BaseURL + "/auth/signin",
                    method: .post,

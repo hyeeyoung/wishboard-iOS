@@ -12,18 +12,24 @@ class CalenderTableViewCell: UITableViewCell {
     var calender: FSCalendar!
     var events: [Date] = []
     
+    let backButton = UIButton().then{
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(named: "goBack")
+        config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        $0.configuration = config
+    }
+    let weekSeperator = UIView().then{
+        $0.backgroundColor = .wishboardDisabledGray
+    }
+    let underSeperator = UIView().then{
+        $0.backgroundColor = .wishboardDisabledGray
+    }
+    
     //MARK: - Life Cycles
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setCalender()
-        
-        contentView.addSubview(calender)
-        calender.snp.makeConstraints { make in
-            make.top.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(385)
-        }
-        NotificationDataManager().getCalenderNotificationDataManager(self)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -42,19 +48,42 @@ class CalenderTableViewCell: UITableViewCell {
             
             $0.appearance.headerTitleColor = .black
             $0.appearance.weekdayTextColor = .black
-            $0.appearance.headerTitleFont = UIFont.Suit(size: 22, family: .Bold)
-            $0.appearance.titleFont = UIFont.Suit(size: 16, family: .Light)
-            $0.appearance.weekdayFont = UIFont.Suit(size: 16, family: .Light)
+            $0.appearance.headerTitleFont = UIFont.monteserrat(size: 20, family: .ExtraBold)
+            $0.appearance.titleFont = UIFont.Suit(size: 16, family: .Regular)
+            $0.appearance.weekdayFont = UIFont.monteserrat(size: 14, family: .Medium)
             $0.appearance.subtitleFont = UIFont.Suit(size: 16, family: .Bold)
             
             $0.appearance.todayColor = .wishboardGreen
             $0.appearance.titleTodayColor = .black
-            $0.appearance.selectionColor = .wishboardGreen
+            $0.appearance.selectionColor = .clear
             $0.appearance.todaySelectionColor = .wishboardGreen
             $0.appearance.titleSelectionColor = .black
             
             $0.appearance.eventDefaultColor = .wishboardLightGreen
             $0.appearance.eventSelectionColor = .wishboardLightGreen
+        }
+        contentView.addSubview(calender)
+        contentView.addSubview(backButton)
+        calender.addSubview(weekSeperator)
+        calender.addSubview(underSeperator)
+        
+        calender.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(385)
+        }
+        backButton.snp.makeConstraints { make in
+            make.width.height.equalTo(44)
+            make.leading.equalToSuperview().offset(6)
+            make.top.equalToSuperview().offset(6)
+        }
+        weekSeperator.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(80)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(0.5)
+        }
+        underSeperator.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(0.5)
         }
     }
     
@@ -72,7 +101,7 @@ extension CalenderTableViewCell: FSCalendarDelegate, FSCalendarDataSource {
 }
 // MARK: - API Success
 extension CalenderTableViewCell {
-    func getCalenderNotificationAPISuccess(_ result: [NotificationModel]) {
+    func setUpCalenderData(_ result: [NotificationModel]) {
         events.removeAll()
         for data in result {
             guard let notificationDate = data.item_notification_date else {return}
@@ -87,8 +116,5 @@ extension CalenderTableViewCell {
             
             events.append(eventDate)
         }
-    }
-    func getCalenderNotificationAPIFail() {
-        NotificationDataManager().getCalenderNotificationDataManager(self)
     }
 }

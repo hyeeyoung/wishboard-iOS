@@ -48,9 +48,11 @@ class OnBoardingView: UIView {
     
     //MARK: Actions
     @objc func loginButtonDidTap(_ sender: UIButton) {
+        UIDevice.vibrate()
         onBoardingViewModel.goToLoginPage()
     }
     @objc func registerButtonDidTap(_ sender: UIButton) {
+        UIDevice.vibrate()
         onBoardingViewModel.goToRegisterPage()
     }
 }
@@ -64,6 +66,7 @@ extension OnBoardingView: UITableViewDelegate, UITableViewDataSource {
 
         cell.selectionStyle = .none
         cell.loginButton.addTarget(self, action: #selector(loginButtonDidTap(_:)), for: .touchUpInside)
+        cell.accountExistButton.addTarget(self, action: #selector(loginButtonDidTap(_:)), for: .touchUpInside)
         cell.registerButton.addTarget(self, action: #selector(registerButtonDidTap(_:)), for: .touchUpInside)
         return cell
     }

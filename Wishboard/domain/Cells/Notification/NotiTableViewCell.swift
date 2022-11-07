@@ -13,6 +13,7 @@ class NotiTableViewCell: UITableViewCell {
         $0.backgroundColor = .systemGray6
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 40
+        $0.contentMode = .scaleAspectFill
     }
     let itemName = UILabel().then{
         $0.text = "itemName"
@@ -106,6 +107,7 @@ extension NotiTableViewCell {
     }
     // MARK: 캘린더 알림 조회 API 호출 후
     func setCalenderNotiCell(_ data: NotificationModel) {
+//        print("notidata:", data)
         if let image = data.item_img_url {
             self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
         }
@@ -118,19 +120,24 @@ extension NotiTableViewCell {
         }
         contentView.insertSubview(grayView, at: 0)
         grayView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().offset(-3)
             make.top.equalToSuperview().offset(3)
+            make.height.equalTo(104)
         }
         // 초록 동그라미는 보여주지 않는다.
         self.viewView.isHidden = true
         // 알람 시간 파싱 ('오전 0시 0분')
         let dateStr = data.item_notification_date
         let myDateFormatter = DateFormatter()
-        myDateFormatter.dateFormat = "a HH시 mm분" // 2020년 08월 13일 오후 04시 30분
+        myDateFormatter.dateFormat = "a h시 mm분" // 2020년 08월 13일 오후 04시 30분
         myDateFormatter.locale = Locale(identifier:"ko_KR")
-        let notificationTime = myDateFormatter.string(from: (dateStr?.toCreatedDate()!)!)
+        let notificationTimeStr = myDateFormatter.string(from: (dateStr?.toCreatedDate()!)!)
         
+        // 00분인지, 30분인지 구분
+        let minute = notificationTimeStr[notificationTimeStr.index(notificationTimeStr.endIndex, offsetBy: -3)]
+        var notificationTime = notificationTimeStr
+        if minute != "3" {notificationTime = String(notificationTimeStr.dropLast(3))}
         self.timeLabel.text = notificationTime
     }
 }

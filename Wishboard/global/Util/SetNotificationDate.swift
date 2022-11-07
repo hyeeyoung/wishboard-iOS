@@ -8,7 +8,7 @@
 import Foundation
 
 class SetNotificationDate {
-    let notificationData = ["세일 마감", "재입고", "프리오더 시작"]
+    let notificationData = ["재입고", "오픈", "프리오더", "세일 시작", "세일 마감"]
     var dateData: Array<String>! = []
     var hourData: Array<String>! = []
     var minuteData: Array<String>! = []
@@ -70,13 +70,13 @@ class SetNotificationDate {
                     dateMonth = dateMonth + 1
                 }
                 dateDay = dateDay + 1
-                dateData.append(currentYear + "년 " + setNumber(num: dateMonth) + "월 " + setNumber(num: dateDay) + "일")
+                dateData.append(setNumber(num: dateYear) + "년 " + setNumber(num: dateMonth) + "월 " + setNumber(num: dateDay) + "일")
                 break
             case 12:
                 if dateDay == 31 {
                     dateDay = 0
                     dateMonth = 1
-                    dateYear = 1
+                    dateYear = dateYear + 1
                 }
                 dateDay = dateDay + 1
                 dateData.append(setNumber(num: dateYear) + "년 " + setNumber(num: dateMonth) + "월 " + setNumber(num: dateDay) + "일")
@@ -87,7 +87,7 @@ class SetNotificationDate {
                     dateMonth = dateMonth + 1
                 }
                 dateDay = dateDay + 1
-                dateData.append(currentYear + "년 " + setNumber(num: dateMonth) + "월 " + setNumber(num: dateDay) + "일")
+                dateData.append(setNumber(num: dateYear) + "년 " + setNumber(num: dateMonth) + "월 " + setNumber(num: dateDay) + "일")
                 break
             default:
                 if dateDay == 30 {
@@ -95,7 +95,7 @@ class SetNotificationDate {
                     dateMonth = dateMonth + 1
                 }
                 dateDay = dateDay + 1
-                dateData.append(currentYear + "년 " + setNumber(num: dateMonth) + "월 " + setNumber(num: dateDay) + "일")
+                dateData.append(setNumber(num: dateYear) + "년 " + setNumber(num: dateMonth) + "월 " + setNumber(num: dateDay) + "일")
                 break
                 
             }

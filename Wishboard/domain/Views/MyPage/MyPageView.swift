@@ -23,6 +23,8 @@ class MyPageView: UIView {
     func setTableView(dataSourceDelegate: UITableViewDelegate & UITableViewDataSource) {
         mypageTableView = UITableView()
         mypageTableView.then{
+            $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
+            
             $0.delegate = dataSourceDelegate
             $0.dataSource = dataSourceDelegate
             $0.register(MypageProfileTableViewCell.self, forCellReuseIdentifier: "MypageProfileTableViewCell")
@@ -31,6 +33,7 @@ class MyPageView: UIView {
             $0.rowHeight = UITableView.automaticDimension
             $0.estimatedRowHeight = UITableView.automaticDimension
             $0.showsVerticalScrollIndicator = false
+            $0.separatorStyle = .none
         }
         
     }

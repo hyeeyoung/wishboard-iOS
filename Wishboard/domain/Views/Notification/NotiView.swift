@@ -39,6 +39,7 @@ class NotiView: UIView {
             $0.rowHeight = UITableView.automaticDimension
             $0.estimatedRowHeight = UITableView.automaticDimension
             $0.showsVerticalScrollIndicator = false
+            $0.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
     }
     func setUpView() {
@@ -58,7 +59,7 @@ class NotiView: UIView {
 extension NotiView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = self.notiData.count ?? 0
-        EmptyView().setEmptyView(self.emptyMessage, self.notificationTableView, count)
+        EmptyView().setNotificationEmptyView(self.notificationTableView, count, false)
         return count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -73,6 +74,8 @@ extension NotiView: UITableViewDelegate, UITableViewDataSource {
         return 115
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        UIDevice.vibrate()
+        
         let index = indexPath.item
         // 쇼핑몰 이동
         if let urlStr = self.notiData[index].item_url {

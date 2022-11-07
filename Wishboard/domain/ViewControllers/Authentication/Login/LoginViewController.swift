@@ -33,13 +33,18 @@ class LoginViewController: TitleCenterViewController {
     // MARK: - Actions
     @objc func emailTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
-        loginViewModel.emailTextFieldEditingChanged(text)
+        let trimString = text.trimmingCharacters(in: .whitespaces)
+        self.loginView.emailTextField.text = trimString
+        loginViewModel.emailTextFieldEditingChanged(trimString)
     }
     @objc func passwordTextFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
-        loginViewModel.passwordTextFieldEditingChanged(text)
+        let trimString = text.trimmingCharacters(in: .whitespaces)
+        self.loginView.passwordTextField.text = trimString
+        loginViewModel.passwordTextFieldEditingChanged(trimString)
     }
     @objc func loginButtonDidTap() {
+        UIDevice.vibrate()
         self.view.endEditing(true)
         let email = loginViewModel.email
         let pw = loginViewModel.password
@@ -47,7 +52,8 @@ class LoginViewController: TitleCenterViewController {
         LoginDataManager().loginDataManager(loginInput, self)
     }
     @objc func lostPasswordButtonDidTap() {
-        let lostPwVC = LostPasswordViewController()
+        UIDevice.vibrate()
+        let lostPwVC = LostPasswordViewController(title: "1/2 단계")
         self.navigationController?.pushViewController(lostPwVC, animated: true)
     }
     //MARK: - Methods
@@ -62,7 +68,7 @@ class LoginViewController: TitleCenterViewController {
                 
             } else {
                 self.loginView.loginButton.then{
-                    $0.defaultButton("로그인하기", .wishboardDisabledGray, .black)
+                    $0.defaultButton("로그인하기", .wishboardDisabledGray, .dialogMessageColor)
                     $0.isEnabled = false
                 }
             }
@@ -79,13 +85,27 @@ extension LoginViewController {
         UserDefaults.standard.set(loginViewModel.email, forKey: "email")
         UserDefaults.standard.set(loginViewModel.password, forKey: "password")
         
+        // FCM
+        sendFCM()
+        // go Main
         ScreenManager().goMain(self)
     }
     func loginAPIFail() {
         SnackBar(self, message: .login)
         self.loginView.loginButton.then{
-            $0.defaultButton("로그인하기", .wishboardDisabledGray, .black)
+            $0.defaultButton("로그인하기", .wishboardDisabledGray, .dialogMessageColor)
             $0.isEnabled = false
         }
+    }
+    // MARK: FCM API
+    func sendFCM() {
+        // Send FCM token to server
+        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
+        print("device Token:", deviceToken)
+        let fcmInput = FCMInput(fcm_token: deviceToken)
+        FCMDataManager().fcmDataManager(fcmInput, self)
+    }
+    func fcmAPISuccess(_ result: APIModel<ResultModel>) {
+        print(result.message)
     }
 }

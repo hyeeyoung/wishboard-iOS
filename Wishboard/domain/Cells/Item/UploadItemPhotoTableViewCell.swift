@@ -10,7 +10,7 @@ import Kingfisher
 
 class UploadItemPhotoTableViewCell: UITableViewCell {
     let photoImage = UIImageView().then{
-        $0.backgroundColor = .wishboardTextfieldGray
+        $0.backgroundColor = .uploadPhotoBackground
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 32
         $0.contentMode = .scaleAspectFit
@@ -46,10 +46,8 @@ class UploadItemPhotoTableViewCell: UITableViewCell {
     }
     func setUpImage(_ url: String) {
         self.photoImage.kf.setImage(with: URL(string: url), placeholder: UIImage())
-        self.cameraImage.isHidden = true
     }
     func setUpImage(_ img: UIImage) {
         self.photoImage.image = img
-        self.cameraImage.isHidden = true
     }
 }

@@ -63,7 +63,13 @@ class NotificationSettingViewController: UIViewController {
             self.preVC.shareView.setNotificationButton.setNotificationButton(dT + " " + nT, true)
             preVC.notificationType = nT
             preVC.notificationDate = dT
+            
+            preVC.view.endEditing(true)
         }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        // Network Check
+        NetworkCheck.shared.startMonitoring(vc: self)
     }
     // MARK: - Functions
     func setPreViewController(_ preVC: ShareViewController) {
@@ -103,12 +109,14 @@ class NotificationSettingViewController: UIViewController {
     }
     // MARK: - Actions
     @objc func exit() {
+        UIDevice.vibrate()
         self.isExit = true
         self.dismiss(animated: true)
     }
     @objc func goShareLinkPage() {
+        UIDevice.vibrate()
         self.isExit = false
-        if self.notiType == nil {self.notiType = "세일 마감"}
+        if self.notiType == nil {self.notiType = "재입고"}
         if self.dateAndTime == nil {
             let setNotificationDate = SetNotificationDate()
             self.date = setNotificationDate.currentYear + "년 " + setNotificationDate.currentMonth + "월 " + setNotificationDate.currentDay + "일"
@@ -127,7 +135,7 @@ extension NotificationSettingViewController: UIPickerViewDelegate, UIPickerViewD
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component {
         case 0:
-            return 3
+            return 5
         case 1:
             return 90
         case 2:
