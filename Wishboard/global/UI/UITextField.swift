@@ -19,8 +19,9 @@ extension UITextField {
     // MARK: 기본 TextField
     func defaultTextField(_ placeholder: String) {
         self.placeholder = placeholder
-        self.backgroundColor = UIColor(named: "TextFieldColor")
+        self.backgroundColor = .wishboardTextfieldGray
         self.layer.cornerRadius = 5
+        self.autocapitalizationType = .none
         self.addLeftPadding(10)
     }
 }

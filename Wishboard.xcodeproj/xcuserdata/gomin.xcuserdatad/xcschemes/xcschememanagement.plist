@@ -4,10 +4,20 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Share Extension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>29</integer>
+		</dict>
+		<key>WishBoard.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
 		<key>Wishboard.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>15</integer>
 		</dict>
 	</dict>
 </dict>

@@ -2,8 +2,29 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>LSMinimumSystemVersion</key>
+	<string>13.0.0</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>NSIncludesSubDomains</key>
+			<true/>
+			<key>http://3.39.165.250</key>
+			<dict>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Montserrat-Medium.ttf</string>
+		<string>Montserrat-ExtraBold.ttf</string>
+		<string>SUIT-Medium.ttf</string>
+		<string>Montserrat-Regular.ttf</string>
+		<string>Montserrat-Light.ttf</string>
+		<string>Montserrat-Bold.ttf</string>
 		<string>SUIT-Light.ttf</string>
 		<string>SUIT-Bold.ttf</string>
 		<string>SUIT-Regular.ttf</string>
@@ -27,5 +48,9 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>

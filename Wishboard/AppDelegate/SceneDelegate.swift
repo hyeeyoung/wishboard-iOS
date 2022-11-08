@@ -17,6 +17,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        // MARK: Navigation controller
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
+        let navigationController = UINavigationController(rootViewController: OnBoardingViewController())
+        window?.rootViewController = navigationController // 루트 뷰컨트롤러 생성
+        window?.makeKeyAndVisible()
+        
+        // MARK: Light mode
+        //iOS 13 부터 다크모드가 적용되므로 다음과 같은 조건문 성립.
+        if #available(iOS 13.0, *) {
+            // iOS 13 부터는 다크모드로만 제한.
+            self.window?.overrideUserInterfaceStyle = UIUserInterfaceStyle.light
+        } else {
+        // Fallback on earlier versions
+            self.window?.overrideUserInterfaceStyle = UIUserInterfaceStyle.light
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -29,6 +47,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        self.window?.endEditing(true)
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

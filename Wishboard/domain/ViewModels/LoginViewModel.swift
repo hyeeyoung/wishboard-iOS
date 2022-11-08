@@ -20,8 +20,8 @@ class LoginViewModel {
     }
     func emailTextFieldEditingChanged(_ text : String) {
         self.email = text
-        
-        if self.checkEmail(str: self.email!) {
+
+        if self.email?.checkEmail() == true {
             isValidEmail = true
         } else {
             isValidEmail = false
@@ -31,7 +31,7 @@ class LoginViewModel {
     func passwordTextFieldEditingChanged(_ text : String) {
         self.password = text
         
-        if self.checkPassword(str: self.password!) {
+        if self.password!.count > 0 {
             isValidPassword = true
         } else {
             isValidPassword = false
@@ -44,14 +44,5 @@ class LoginViewModel {
         } else {
             isValidID.value = false
         }
-    }
-    
-    func checkEmail(str: String) -> Bool {
-        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
-        return  NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: str)
-    }
-    func checkPassword(str: String) -> Bool {
-        let regex = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,50}" // 8자리 ~ 50자리 영어+숫자+특수문자
-        return  NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: str)
     }
 }

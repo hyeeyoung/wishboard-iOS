@@ -5,21 +5,97 @@
 //  Created by gomin on 2022/09/06.
 //
 
-import Foundation
 import UIKit
 
 extension UIColor{
-    
-    static func SignatureColor() -> UIColor! {
-        guard let color: UIColor = UIColor(named: "WishBoardColor") else{
-            return nil
-        }
-        return color
-    }
-    static func DisabledColor() -> UIColor! {
-        guard let color: UIColor = UIColor(named: "DisabledColor") else{
-            return nil
-        }
-        return color
-    }
+    static let wishboardGreen = UIColor(
+        red: 124/255,
+        green: 248/255,
+        blue: 133/255,
+        alpha: 1
+    )
+    static let wishboardLightGreen = UIColor(
+        red: 124/255,
+        green: 248/255,
+        blue: 133/255,
+        alpha: 0.25
+    )
+    static let wishboardGray = UIColor(
+        red: 170/255,
+        green: 170/255,
+        blue: 170/255,
+        alpha: 1
+    )
+    static let wishboardTextfieldGray = UIColor(
+        red: 248/255,
+        green: 248/255,
+        blue: 248/255,
+        alpha: 1
+    )
+    static let wishboardDisabledGray = UIColor(
+        red: 227/255,
+        green: 227/255,
+        blue: 227/255,
+        alpha: 1
+    )
+    static let popupBackground = UIColor(
+        red: 0/255,
+        green: 0/255,
+        blue: 0/255,
+        alpha: 0.4
+    )
+    static let wishboardRed = UIColor(
+        red: 250/255,
+        green: 93/255,
+        blue: 187/255,
+        alpha: 1
+    )
+    static let folderSelectedBackground = UIColor(
+        red: 0/255,
+        green: 0/255,
+        blue: 0/255,
+        alpha: 0.7
+    )
+    static let notificationBackgroundGray = UIColor(
+        red: 239/255,
+        green: 239/255,
+        blue: 239/255,
+        alpha: 1
+    )
+    static let notificationGray = UIColor(
+        red: 0/255,
+        green: 0/255,
+        blue: 0/255,
+        alpha: 0.3
+    )
+    static let howToBackground = UIColor(
+        red: 237/255,
+        green: 237/255,
+        blue: 237/255,
+        alpha: 1
+    )
+    static let editTextFontColor = UIColor(
+        red: 41/255,
+        green: 41/255,
+        blue: 41/255,
+        alpha: 1
+    )
+    static let dialogMessageColor = UIColor(
+        red: 133/255,
+        green: 133/255,
+        blue: 133/255,
+        alpha: 1
+    )
+    static let unselectedTabColor = UIColor(
+        red: 193/255,
+        green: 193/255,
+        blue: 193/255,
+        alpha: 1
+    )
+    static let uploadPhotoBackground = UIColor(
+        red: 235/255,
+        green: 235/255,
+        blue: 235/255,
+        alpha: 1
+    )
 }
