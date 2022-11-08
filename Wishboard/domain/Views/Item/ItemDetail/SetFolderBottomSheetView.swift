@@ -44,6 +44,8 @@ class SetFolderBottomSheetView: UIView {
             $0.estimatedRowHeight = UITableView.automaticDimension
             $0.showsVerticalScrollIndicator = false
             $0.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            
+            $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         }
     }
     func setUpView() {
