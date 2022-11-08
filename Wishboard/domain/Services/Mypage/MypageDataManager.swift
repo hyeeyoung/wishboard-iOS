@@ -69,8 +69,8 @@ class MypageDataManager {
     }
     // MARK: - 회원 탈퇴
     func deleteUserDataManager(_ viewcontroller: MyPageViewController) {
-        AF.request(BaseURL + "/user/active",
-                           method: .put,
+        AF.request(BaseURL + "/user",
+                           method: .delete,
                            parameters: nil,
                            headers: header)
             .validate()

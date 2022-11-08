@@ -19,12 +19,10 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.setFolderButton("폴더를 지정해 보세요! > ")
     }
     let dateLabel = UILabel().then{
-        $0.text = ""
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .gray
     }
     let itemNameLabel = UILabel().then{
-        $0.text = "itemName"
         $0.font = UIFont.Suit(size: 16, family: .Regular)
         $0.numberOfLines = 0
         $0.setTextWithLineHeight()
@@ -45,7 +43,6 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.backgroundColor = .wishboardDisabledGray
     }
     let linkLabel = UILabel().then{
-        $0.text = "w.musinsa.com"
         $0.textColor = .wishboardGray
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.setTextWithLineHeight()
@@ -58,14 +55,12 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.font = UIFont.Suit(size: 12, family: .Bold)
     }
     let memoContentLabel = UILabel().then{
-        $0.text = "memo"
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.numberOfLines = 0
         $0.setTextWithLineHeight()
     }
     // 재입고 초록색
     let restockLabel = PaddingLabel().then{
-        $0.text = "재입고"
         $0.textColor = .black
         $0.font = UIFont.Suit(size: 12, family: .Bold)
         $0.backgroundColor = .wishboardGreen
@@ -73,7 +68,6 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.layer.cornerRadius = 12
     }
     let restockDateLabel = PaddingLabel().then{
-        $0.text = "21년 4월 26일"
         $0.textColor = .black
         $0.font = UIFont.Suit(size: 12, family: .Bold)
         $0.backgroundColor = .wishboardGreen
