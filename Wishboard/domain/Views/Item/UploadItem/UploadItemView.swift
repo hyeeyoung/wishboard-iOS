@@ -25,8 +25,12 @@ class UploadItemView: UIView {
         $0.defaultButton("저장", .wishboardGreen, .black)
     }
     
+    let scrollView = UIScrollView().then{
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .white
+        $0.showsVerticalScrollIndicator = false
+    }
     // MARK: - Life Cycles
-//    var uploadItemTableView: UITableView!
     var uploadImageTableView: UITableView!
     var uploadContentTableView: UITableView!
     
@@ -64,6 +68,8 @@ class UploadItemView: UIView {
             // scroll disable
             $0.isScrollEnabled = false
             $0.isPagingEnabled = false
+            
+            $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
     func setContentTableView(dataSourceDelegate: UITableViewDelegate & UITableViewDataSource) {
@@ -78,6 +84,8 @@ class UploadItemView: UIView {
             $0.estimatedRowHeight = UITableView.automaticDimension
             $0.showsVerticalScrollIndicator = false
             $0.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            
+            $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
     func setUpView() {
@@ -86,20 +94,27 @@ class UploadItemView: UIView {
         navigationView.addSubview(backButton)
         navigationView.addSubview(saveButton)
         
-        addSubview(uploadImageTableView)
-        addSubview(uploadContentTableView)
+        addSubview(scrollView)
+        scrollView.addSubview(uploadImageTableView)
+        scrollView.addSubview(uploadContentTableView)
     }
     func setUpConstraint() {
         setUpNavigationConstraint()
         
-        uploadImageTableView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
+        scrollView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(navigationView.snp.bottom)
+        }
+        uploadImageTableView.snp.makeConstraints { make in
+            make.top.equalTo(scrollView)
+            make.width.equalTo(scrollView.snp.width)
             make.height.equalTo(251)
         }
         uploadContentTableView.snp.makeConstraints { make in
             make.top.equalTo(uploadImageTableView.snp.bottom)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.width.equalTo(scrollView.snp.width)
+            make.bottom.equalTo(scrollView)
+            make.height.equalTo(500)
         }
     }
     func setUpNavigationConstraint() {
