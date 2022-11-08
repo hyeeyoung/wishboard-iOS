@@ -97,7 +97,7 @@ extension ModifyProfileViewController {
         }
         cameraButton.snp.makeConstraints { make in
             make.width.equalTo(30)
-            make.height.equalTo(24)
+            make.height.equalTo(26.67)
             make.trailing.bottom.equalTo(profileImage)
         }
         nameTextField.snp.makeConstraints { make in
