@@ -36,8 +36,6 @@ class CalenderViewController: UIViewController {
         calenderView.setTableView(dataSourceDelegate: self)
         calenderView.setUpView()
         calenderView.setUpConstraint()
-        
-        NotificationDataManager().getCalenderNotificationDataManager(self)
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
