@@ -9,10 +9,9 @@ import Foundation
 import Alamofire
 
 class RegisterDataManager {
-    let BaseURL = UserDefaults.standard.string(forKey: "url") ?? ""
     //MARK: 회원가입
     func registerDataManager(_ parameter: RegisterInput, _ viewcontroller: RegisterPasswordViewController) {
-        AF.request(BaseURL + "/auth/signup",
+        AF.request(Storage().BaseURL + "/auth/signup",
                    method: .post,
                    parameters: parameter,
                    encoder: JSONParameterEncoder.default,
@@ -29,7 +28,7 @@ class RegisterDataManager {
     }
     //MARK: 이메일 인증 - 회원가입 시
     func checkEmailDataManager(_ parameter: CheckEmailInput, _ viewcontroller: RegisterEmailViewController) {
-        AF.request(BaseURL + "/auth/check-email",
+        AF.request(Storage().BaseURL + "/auth/check-email",
                    method: .post,
                    parameters: parameter,
                    encoder: JSONParameterEncoder.default,

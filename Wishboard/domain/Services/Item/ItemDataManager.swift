@@ -9,13 +9,12 @@ import Foundation
 import Alamofire
 
 class ItemDataManager {
-    let BaseURL = UserDefaults.standard.string(forKey: "url") ?? ""
     let multiHeader = APIManager().getMultipartHeader()
     let header = APIManager().getHeader()
     
     // MARK: - 아이템 상세 조회
     func getItemDetailDataManager(_ itemId: Int,_ viewcontroller: ItemDetailViewController) {
-        AF.request(BaseURL + "/item/\(itemId)",
+        AF.request(Storage().BaseURL + "/item/\(itemId)",
                            method: .get,
                            parameters: nil,
                            headers: header)
@@ -38,7 +37,7 @@ class ItemDataManager {
     
     // MARK: - 아이템 삭제
     func deleteItemDataManager(_ itemId: Int,_ viewcontroller: ItemDetailViewController) {
-        AF.request(BaseURL + "/item/\(itemId)",
+        AF.request(Storage().BaseURL + "/item/\(itemId)",
                            method: .delete,
                            parameters: nil,
                            headers: header)
@@ -60,7 +59,7 @@ class ItemDataManager {
     }
     // MARK: - 링크 복사로 불러오기
     func getItemByLinkDataManager(_ url: String, _ viewcontroller: ShoppingLinkViewController) {
-        AF.request(BaseURL + "/item/parse?site=\(url)",
+        AF.request(Storage().BaseURL + "/item/parse?site=\(url)",
                            method: .get,
                            parameters: nil,
                            headers: header)
@@ -94,7 +93,7 @@ class ItemDataManager {
                                _ itemNotificationDate: String,
                                _ viewcontroller: UploadItemViewController) {
         
-        let uploadItemUrl = BaseURL + "/item"
+        let uploadItemUrl = Storage().BaseURL + "/item"
         let body : Parameters = [
                         "folder_id" : folderId,
                         "item_name" : itemName,
@@ -142,7 +141,7 @@ class ItemDataManager {
                                _ itemMemo: String,
                                _ viewcontroller: UploadItemViewController) {
         
-        let uploadItemUrl = BaseURL + "/item"
+        let uploadItemUrl = Storage().BaseURL + "/item"
         let body : Parameters = [
                         "folder_id" : folderId,
                         "item_name" : itemName,
@@ -190,7 +189,7 @@ class ItemDataManager {
                                _ itemNotificationDate: String,
                                _ viewcontroller: UploadItemViewController) {
         
-        let uploadItemUrl = BaseURL + "/item"
+        let uploadItemUrl = Storage().BaseURL + "/item"
         let body : Parameters = [
                         "item_name" : itemName,
                         "item_price" : itemPrice,
@@ -237,7 +236,7 @@ class ItemDataManager {
                                _ itemMemo: String,
                                _ viewcontroller: UploadItemViewController) {
         
-        let uploadItemUrl = BaseURL + "/item"
+        let uploadItemUrl = Storage().BaseURL + "/item"
         let body : Parameters = [
                         "item_name" : itemName,
                         "item_price" : itemPrice,
@@ -287,7 +286,7 @@ class ItemDataManager {
                                _ itemId: Int,
                                _ viewcontroller: UploadItemViewController) {
         
-        let uploadItemUrl = BaseURL + "/item/\(itemId)"
+        let uploadItemUrl = Storage().BaseURL + "/item/\(itemId)"
         let body : Parameters = [
                         "folder_id" : folderId,
                         "item_name" : itemName,
@@ -336,7 +335,7 @@ class ItemDataManager {
                                _ itemId: Int,
                                _ viewcontroller: UploadItemViewController) {
         
-        let uploadItemUrl = BaseURL + "/item/\(itemId)"
+        let uploadItemUrl = Storage().BaseURL + "/item/\(itemId)"
         let body : Parameters = [
                         "folder_id" : folderId,
                         "item_name" : itemName,
@@ -385,7 +384,7 @@ class ItemDataManager {
                                _ itemId: Int,
                                _ viewcontroller: UploadItemViewController) {
         
-        let uploadItemUrl = BaseURL + "/item/\(itemId)"
+        let uploadItemUrl = Storage().BaseURL + "/item/\(itemId)"
         let body : Parameters = [
                         "item_name" : itemName,
                         "item_price" : itemPrice,
@@ -433,7 +432,7 @@ class ItemDataManager {
                                _ itemId: Int,
                                _ viewcontroller: UploadItemViewController) {
         
-        let uploadItemUrl = BaseURL + "/item/\(itemId)"
+        let uploadItemUrl = Storage().BaseURL + "/item/\(itemId)"
         let body : Parameters = [
                         "item_name" : itemName,
                         "item_price" : itemPrice,

@@ -9,12 +9,11 @@ import Foundation
 import Alamofire
 
 class CartDataManager {
-    let BaseURL = UserDefaults.standard.string(forKey: "url") ?? ""
     let header = APIManager().getHeader()
     
     // MARK: - 장바구니 조회
     func getCartListDataManager(_ cartView: CartView) {
-        AF.request(BaseURL + "/cart",
+        AF.request(Storage().BaseURL + "/cart",
                            method: .get,
                            parameters: nil,
                            headers: header)
@@ -38,7 +37,7 @@ class CartDataManager {
     }
     // MARK: - 장바구니 수량 변경
     func modifyCountDataManager(_ itemId: Int, _ parameter: CartModifyCountInput,_ cartView: CartView) {
-        AF.request(BaseURL + "/cart/\(itemId)",
+        AF.request(Storage().BaseURL + "/cart/\(itemId)",
                            method: .put,
                            parameters: parameter,
                            headers: header)
@@ -55,7 +54,7 @@ class CartDataManager {
     // MARK: - 장바구니 추가
     // 홈 페이지
     func addCartDataManager(_ parameter: AddCartInput,_ homeView: HomeView, _ viewcontroller: HomeViewController) {
-        AF.request(BaseURL + "/cart",
+        AF.request(Storage().BaseURL + "/cart",
                            method: .post,
                            parameters: parameter,
                            headers: header)
@@ -71,7 +70,7 @@ class CartDataManager {
     }
     // 폴더 디테일 페이지
     func addCartDataManager(_ parameter: AddCartInput, _ viewcontroller: FolderDetailViewController) {
-        AF.request(BaseURL + "/cart",
+        AF.request(Storage().BaseURL + "/cart",
                            method: .post,
                            parameters: parameter,
                            headers: header)
@@ -87,7 +86,7 @@ class CartDataManager {
     }
     // MARK: - 장바구니 삭제 : 장바구니 페이지
     func deleteCartDataManager(_ itemId: Int, _ cartView: CartView) {
-        AF.request(BaseURL + "/cart/\(itemId)",
+        AF.request(Storage().BaseURL + "/cart/\(itemId)",
                            method: .delete,
                            parameters: nil,
                            headers: header)
@@ -103,7 +102,7 @@ class CartDataManager {
     }
     // MARK: - 장바구니 삭제 : 홈 페이지
     func deleteCartDataManager(_ itemId: Int, _ homeView: HomeView, _ viewcontroller: HomeViewController) {
-        AF.request(BaseURL + "/cart/\(itemId)",
+        AF.request(Storage().BaseURL + "/cart/\(itemId)",
                            method: .delete,
                            parameters: nil,
                            headers: header)
@@ -119,7 +118,7 @@ class CartDataManager {
     }
     // MARK: - 장바구니 삭제 : 폴더 디테일 페이지
     func deleteCartDataManager(_ itemId: Int, _ viewcontroller: FolderDetailViewController) {
-        AF.request(BaseURL + "/cart/\(itemId)",
+        AF.request(Storage().BaseURL + "/cart/\(itemId)",
                            method: .delete,
                            parameters: nil,
                            headers: header)

@@ -24,10 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //        NetworkCheck.shared.startMonitoring()
         
         //MARK: UserDefaults
-        UserDefaults.standard.set("http://3.39.165.250:3000", forKey: "url")
+        UserDefaults.standard.set(Storage().BaseURL, forKey: "url")
         // MARK: UserDefaults for Share Extension
-        let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
-        defaults?.set("http://3.39.165.250:3000", forKey: "url")
+        let defaults = UserDefaults(suiteName: Storage().ShareExtension)
+        defaults?.set(Storage().BaseURL, forKey: "url")
         defaults?.synchronize()
         
         // MARK: Clean Cache

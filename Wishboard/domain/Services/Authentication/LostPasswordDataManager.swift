@@ -9,12 +9,11 @@ import Foundation
 import Alamofire
 
 class LostPasswordDataManager {
-    let BaseURL = UserDefaults.standard.string(forKey: "url") ?? ""
     let header = APIManager().getHeader()
     
     //MARK: 이메일 인증 - 회원가입 시
     func checkEmailDataManager(_ parameter: CheckEmailInput, _ viewcontroller: LostPasswordViewController) {
-        AF.request(BaseURL + "/auth/password-mail",
+        AF.request(Storage().BaseURL + "/auth/password-mail",
                    method: .post,
                    parameters: parameter,
                    encoder: JSONParameterEncoder.default,
@@ -38,7 +37,7 @@ class LostPasswordDataManager {
     }
     //MARK: 이메일 인증 - 회원가입 시
     func verifyCodeDataManager(_ parameter: LostPasswordInput, _ viewcontroller: GetEmailViewController) {
-        AF.request(BaseURL + "/auth/re-signin",
+        AF.request(Storage().BaseURL + "/auth/re-signin",
                    method: .post,
                    parameters: parameter,
                    encoder: JSONParameterEncoder.default,

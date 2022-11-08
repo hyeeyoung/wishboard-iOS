@@ -9,12 +9,11 @@ import Foundation
 import Alamofire
 
 class NotificationDataManager {
-    let BaseURL = UserDefaults.standard.string(forKey: "url") ?? ""
     let header = APIManager().getHeader()
     
     // MARK: - 알림 조회
     func getNotificationListDataManager(_ notiView: NotiView) {
-        AF.request(BaseURL + "/noti",
+        AF.request(Storage().BaseURL + "/noti",
                            method: .get,
                            parameters: nil,
                            headers: header)
@@ -36,7 +35,7 @@ class NotificationDataManager {
     }
     // MARK: - 알림 읽음 처리
     func readNotificationListDataManager(_ itemId: Int, _ notiView: NotiView) {
-        AF.request(BaseURL + "/noti/\(itemId)/read-state",
+        AF.request(Storage().BaseURL + "/noti/\(itemId)/read-state",
                            method: .put,
                            parameters: nil,
                            headers: header)
@@ -59,7 +58,7 @@ class NotificationDataManager {
     }
     // MARK: - 캘린더 알림 조회
     func getCalenderNotificationDataManager(_ viewcontroller: CalenderViewController) {
-        AF.request(BaseURL + "/noti/calendar",
+        AF.request(Storage().BaseURL + "/noti/calendar",
                            method: .get,
                            parameters: nil,
                            headers: header)
