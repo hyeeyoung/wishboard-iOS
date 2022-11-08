@@ -280,6 +280,7 @@ extension ShareViewController {
         
         if self.itemImg == nil && self.itemName == nil && self.itemPrice == nil {
             SnackBar(self, message: .failShoppingLink)
+            FolderDataManager().getFolderListDataManager(self)
             return
         } else if self.itemPrice == nil {
             self.itemPrice = "0"

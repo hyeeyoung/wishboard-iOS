@@ -62,8 +62,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             else {
                 cell.textLabel?.font = UIFont.Suit(size: 12, family: .Regular)
                 cell.textLabel?.textColor = .black
-                if tag == 2 {self.setSwitch(cell)}
-                if tag == 10 {self.setVersionLabel(cell)}
+                if tag == 2 {self.setSwitch(cell); cell.selectionStyle = .none}
+                if tag == 10 {self.setVersionLabel(cell); cell.selectionStyle = .none}
             }
             let separator = UIView().then {
                 $0.backgroundColor = .wishboardDisabledGray
@@ -90,11 +90,10 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        UIDevice.vibrate()
-        
         let tag = indexPath.row
         switch tag {
         case 0:
+            UIDevice.vibrate()
             let vc = ModifyProfileViewController()
             if let nickname = self.userInfoData.nickname {
                 vc.nameTextField.text = nickname
@@ -108,24 +107,31 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             self.navigationController?.pushViewController(vc, animated: true)
         case 4:
             // 문의하기
+            UIDevice.vibrate()
             showSendEmail()
         case 12:
             // 로그아웃
+            UIDevice.vibrate()
             showLogoutDialog()
         case 13:
             // 회원탈퇴
+            UIDevice.vibrate()
             showSignoutDialog()
         case 6:
             // 위시보드 이용 방법
+            UIDevice.vibrate()
             ScreenManager().linkTo(viewcontroller: self, "https://hushed-bolt-fd4.notion.site/383c308f256f4f189b7c0b68a8f68d9f")
         case 7:
             // 이용약관
+            UIDevice.vibrate()
             ScreenManager().linkTo(viewcontroller: self, "https://www.wishboard.xyz/terms.html")
         case 8:
             // 개인정보처리방침
+            UIDevice.vibrate()
             ScreenManager().linkTo(viewcontroller: self, "https://www.wishboard.xyz/privacy-policy.html")
         case 9:
             // 오픈소스 라이브러리
+            UIDevice.vibrate()
             ScreenManager().linkTo(viewcontroller: self, "https://www.wishboard.xyz/opensource.html")
         default:
             tableView.deselectRow(at: indexPath, animated: true)
@@ -169,8 +175,9 @@ extension MyPageViewController {
     }
     // 버전 정보 표시 (1.0.0)
     func setVersionLabel(_ cell: UITableViewCell) {
+        let appVersion = UserDefaults.standard.string(forKey: "appVersion") ?? ""
         let versionLabel = UILabel().then{
-            $0.text = "1.0.0"
+            $0.text = appVersion
             $0.font = UIFont.Suit(size: 12, family: .Bold)
             $0.textColor = .gray
             $0.setTextWithLineHeight()
@@ -286,11 +293,11 @@ extension MyPageViewController {
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "password")
         UserDefaults.standard.removeObject(forKey: "isFirstLogin")
+        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "token")
         
         let onboardingVC = OnBoardingViewController()
         onboardingVC.deleteUser = true
         self.navigationController?.pushViewController(onboardingVC, animated: true)
-//        SnackBar(onboardingVC, message: .deleteUser)
         
         print(result.message)
     }
