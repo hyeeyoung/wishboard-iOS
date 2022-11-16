@@ -105,4 +105,10 @@ extension UIColor{
         blue: 0/255,
         alpha: 0.05
     )
+    static let mypageTextColor = UIColor(
+        red: 71/255,
+        green: 71/255,
+        blue: 71/255,
+        alpha: 1
+    )
 }

@@ -60,8 +60,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = settingArray[tag - 1]
             if tag == 1 || tag == 3 || tag == 5 || tag == 11 {self.setTitleConstraint(cell)}
             else {
-                cell.textLabel?.font = UIFont.Suit(size: 12, family: .Regular)
-                cell.textLabel?.textColor = .black
+                cell.textLabel?.font = UIFont.Suit(size: 14, family: .Regular)
+                cell.textLabel?.textColor = .mypageTextColor
                 if tag == 2 {self.setSwitch(cell); cell.selectionStyle = .none}
                 if tag == 10 {self.setVersionLabel(cell); cell.selectionStyle = .none}
             }
@@ -84,9 +84,9 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             return 193
         case 1, 3, 5, 11:
-            return 62
+            return 58
         default:
-            return 40
+            return 38
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -146,7 +146,7 @@ extension MyPageViewController {
             make.bottom.equalToSuperview().offset(-10)
             make.leading.equalToSuperview().offset(16)
         }
-        cell.textLabel?.font = UIFont.Suit(size: 15, family: .Bold)
+        cell.textLabel?.font = UIFont.Suit(size: 14, family: .SemiBold)
         cell.selectionStyle = .none
     }
     // 알림 설정 - Switch 넣기
