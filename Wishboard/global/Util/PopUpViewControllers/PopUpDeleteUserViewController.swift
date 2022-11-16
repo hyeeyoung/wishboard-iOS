@@ -55,7 +55,7 @@ class PopUpDeleteUserViewController: UIViewController {
         $0.backgroundColor = .wishboardTextfieldGray
         $0.layer.cornerRadius = 5
         $0.font = UIFont.Suit(size: 16, family: .Regular)
-        $0.clearButtonMode = .whileEditing
+        $0.clearButtonMode = .always
         $0.textColor = .editTextFontColor
     }
     let errorMessage = UILabel().then{
@@ -134,7 +134,7 @@ class PopUpDeleteUserViewController: UIViewController {
             var config = UIButton.Configuration.plain()
             var attText = AttributedString.init(self.greenBtnText!)
             
-            attText.font = UIFont.Suit(size: 14, family: .Regular)
+            attText.font = UIFont.Suit(size: 14, family: .Medium)
             attText.foregroundColor = UIColor.wishboardGreen
             config.attributedTitle = attText
             
@@ -144,7 +144,7 @@ class PopUpDeleteUserViewController: UIViewController {
             var config = UIButton.Configuration.plain()
             var attText = AttributedString.init(self.blackBtnText!)
             
-            attText.font = UIFont.Suit(size: 14, family: .Regular)
+            attText.font = UIFont.Suit(size: 14, family: .Medium)
             attText.foregroundColor = UIColor.black
             config.attributedTitle = attText
             
@@ -167,7 +167,7 @@ class PopUpDeleteUserViewController: UIViewController {
     func setUpConstraint() {
         popupView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(30)
-            make.height.equalTo(250)
+            make.height.equalTo(260)
             make.centerY.centerX.equalToSuperview()
         }
         titleLabel.snp.makeConstraints { make in
@@ -204,7 +204,8 @@ class PopUpDeleteUserViewController: UIViewController {
         textField.snp.makeConstraints { make in
             make.height.equalTo(42)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalTo(horizontalSeperator.snp.top).offset(-33)
+            make.bottom.equalTo(horizontalSeperator.snp.top).offset(-32)
+//            make.top.equalTo(messageLabel.snp.bottom).offset(20)
         }
         errorMessage.snp.makeConstraints { make in
             make.leading.equalTo(textField)

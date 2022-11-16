@@ -22,7 +22,7 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
         $0.layer.cornerRadius = 5
         $0.font = UIFont.Suit(size: 16, family: .Regular)
         $0.textColor = .editTextFontColor
-        $0.clearButtonMode = .whileEditing
+        $0.clearButtonMode = .always
         $0.placeholder = "쇼핑몰 링크"
     }
     let errorMessage = UILabel().then{
