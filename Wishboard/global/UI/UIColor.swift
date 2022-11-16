@@ -54,19 +54,13 @@ extension UIColor{
         red: 0/255,
         green: 0/255,
         blue: 0/255,
-        alpha: 0.7
+        alpha: 0.65
     )
     static let notificationBackgroundGray = UIColor(
         red: 239/255,
         green: 239/255,
         blue: 239/255,
         alpha: 1
-    )
-    static let notificationGray = UIColor(
-        red: 0/255,
-        green: 0/255,
-        blue: 0/255,
-        alpha: 0.3
     )
     static let howToBackground = UIColor(
         red: 237/255,

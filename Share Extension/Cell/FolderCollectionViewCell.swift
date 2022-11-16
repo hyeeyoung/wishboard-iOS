@@ -6,18 +6,19 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FolderCollectionViewCell: UICollectionViewCell {
     static let identifier = "FolderCollectionViewCell"
     
     let folderImage = UIImageView().then{
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = .black_5
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
         $0.contentMode = .scaleAspectFill
     }
-    let folderBackground = UIView().then{
-        $0.backgroundColor = .notificationGray
+    let folderForeground = UIView().then{
+        $0.backgroundColor = .black_5
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
     }
@@ -57,7 +58,7 @@ class FolderCollectionViewCell: UICollectionViewCell {
     // MARK: - Functions
     func setUpView() {
         contentView.addSubview(folderImage)
-        folderImage.addSubview(folderBackground)
+        folderImage.addSubview(folderForeground)
         
         contentView.addSubview(selectedView)
         contentView.addSubview(folderName)
@@ -67,7 +68,7 @@ class FolderCollectionViewCell: UICollectionViewCell {
         folderImage.snp.makeConstraints { make in
             make.leading.top.trailing.bottom.equalToSuperview()
         }
-        folderBackground.snp.makeConstraints { make in
+        folderForeground.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalTo(folderImage)
         }
         folderName.snp.makeConstraints { make in
@@ -86,7 +87,8 @@ class FolderCollectionViewCell: UICollectionViewCell {
     
     func setUpData(_ data: FolderListModel) {
         if let image = data.folder_thumbnail {
-            self.folderImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
+            let processor = TintImageProcessor(tint: .black_5)
+            self.folderImage.kf.setImage(with: URL(string: image), placeholder: UIImage(), options: [.processor(processor), .transition(.fade(0.5))])
         }
         if let name = data.folder_name {self.folderName.text = name}
     }
