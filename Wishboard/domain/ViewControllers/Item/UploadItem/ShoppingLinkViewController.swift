@@ -106,6 +106,8 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
         }
         else {
             self.preVC.view.endEditing(true)
+            self.preVC.view.frame.origin.y = 0.0
+            self.preVC.preKeyboardHeight = 0.0
         }
     }
     override func viewDidAppear(_ animated: Bool) {
