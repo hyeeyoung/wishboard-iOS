@@ -50,6 +50,10 @@ class SnackBar {
             } completion: { finished in
                 UIView.animate(withDuration: 0.5, delay: 2.5) {
                     self.backgroundView.transform = .identity
+                } completion: { finish in
+                    if originView.extensionContext != nil {
+                        originView.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
+                    }
                 }
             }
         }
