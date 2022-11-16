@@ -8,10 +8,19 @@
 import UIKit
 
 class TabBarViewController: UITabBarController {
+    let seperator = UIView().then{
+        $0.backgroundColor = .wishboardDisabledGray
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBar.backgroundColor = .white
+        
+        self.tabBar.addSubview(seperator)
+        seperator.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(0.5)
+        }
         
        // 인스턴스화
         let wishListVC = HomeViewController()

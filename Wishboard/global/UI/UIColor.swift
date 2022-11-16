@@ -98,4 +98,11 @@ extension UIColor{
         blue: 235/255,
         alpha: 1
     )
+    // 투명도 5
+    static let black_5 = UIColor(
+        red: 0/255,
+        green: 0/255,
+        blue: 0/255,
+        alpha: 0.05
+    )
 }

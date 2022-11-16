@@ -10,7 +10,7 @@ import Kingfisher
 
 class FolderListTableViewCell: UITableViewCell {
     let image = UIImageView().then{
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = .black_5
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 20
         $0.contentMode = .scaleAspectFill
@@ -67,7 +67,8 @@ class FolderListTableViewCell: UITableViewCell {
     }
     func setUpData(_ data: FolderListModel) {
         if let image = data.folder_thumbnail {
-            self.image.kf.setImage(with: URL(string: image), placeholder: UIImage())
+            let processor = TintImageProcessor(tint: .black_5)
+            self.image.kf.setImage(with: URL(string: image), placeholder: UIImage(), options: [.processor(processor), .transition(.fade(0.5))])
         }
         if let foldername = data.folder_name {self.folderName.text = foldername}
     }
