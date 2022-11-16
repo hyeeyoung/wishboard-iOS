@@ -92,6 +92,9 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
             if !isUploadItem {
                 if let itemImageURL = self.wishListData.item_img_url {
                     cell.setUpImage(itemImageURL)
+                } else {
+                    cell.photoImage.image = UIImage()
+                    cell.cameraImage.isHidden = false
                 }
             } else { // 링크로 아이템 불러온 경우라면
                 if let itemImageURL = self.wishListData.item_img_url {

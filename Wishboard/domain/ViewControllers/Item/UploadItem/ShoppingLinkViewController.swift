@@ -208,10 +208,10 @@ extension ShoppingLinkViewController {
     func getItemByLinkAPISuccess(_ result: APIModel<ItemParsingModel>) {
         if let imageUrl = result.data?.item_img {
             self.itemImgUrl = imageUrl
-        }
+        } else {self.itemImgUrl = nil}
         if let itemName = result.data?.item_name {
             self.itemName = itemName
-        }
+        } else {self.itemName = nil}
         if let itemPrice = result.data?.item_price {
             self.itemPrice = itemPrice
         } else {self.itemPrice = "0"}
