@@ -83,8 +83,9 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
             self.preVC.isValidContent()
             
             self.preVC.view.endEditing(true)
+            self.preVC.view.frame.origin.y = 0.0
+            self.preVC.preKeyboardHeight = 0.0
         } else if isFail {
-            print("fail 뒤로가기")
             self.preVC.wishListData.item_img_url = nil
             self.preVC.wishListData.item_name = nil
             self.preVC.wishListData.item_price = nil
@@ -100,6 +101,8 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
             
             SnackBar(self.preVC, message: .failShoppingLink)
             self.preVC.view.endEditing(true)
+            self.preVC.view.frame.origin.y = 0.0
+            self.preVC.preKeyboardHeight = 0.0
         }
         else {
             self.preVC.view.endEditing(true)
