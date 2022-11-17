@@ -74,6 +74,9 @@ class UploadItemViewController: UIViewController {
         UIDevice.vibrate()
         self.navigationController?.popViewController(animated: true)
     }
+    @objc func MyTapMethod(sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
 }
 // MARK: - TableView delegate
 extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
@@ -89,13 +92,14 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
             if !isUploadItem {
                 if let itemImageURL = self.wishListData.item_img_url {
                     cell.setUpImage(itemImageURL)
+                } else {
+                    cell.photoImage.image = UIImage()
                 }
             } else { // 링크로 아이템 불러온 경우라면
                 if let itemImageURL = self.wishListData.item_img_url {
                     cell.setUpImage(itemImageURL)
                 } else { // 만약 새로 아이템을 추가하는 경우라면
-                    cell.photoImage.image = UIImage()
-                    cell.cameraImage.isHidden = false
+                    cell.photoImage.image = nil
                 }
             }
             // 새로 사진을 선택했다면
@@ -202,6 +206,14 @@ extension UploadItemViewController {
         foldervc =  SetFolderBottomSheetViewController()
         linkvc = ShoppingLinkViewController()
         notivc = NotificationSettingViewController()
+        
+        // 화면 터치 시 키보드 내리기
+        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MyTapMethod))
+        singleTapGestureRecognizer.numberOfTapsRequired = 1
+        singleTapGestureRecognizer.isEnabled = true
+        singleTapGestureRecognizer.cancelsTouchesInView = false
+        uploadItemView.scrollView.addGestureRecognizer(singleTapGestureRecognizer)
+        uploadItemView.scrollView.delegate = self
     }
     // MARK: - 저장 버튼 클릭 시 (아이템 추가)
     @objc func saveButtonDidTap() {
@@ -218,8 +230,9 @@ extension UploadItemViewController {
                 if self.selectedImage == nil {
                     if let imageUrl = data?.item_img_url {
                         let url = URL(string: imageUrl)
-                        let imgData = try? Data(contentsOf: url!)
-                        selectedImage = UIImage(data: imgData!)
+                        guard let url = url else {return}
+                        guard let imgData = try? Data(contentsOf: url) else {return}
+                        selectedImage = UIImage(data: imgData)
                     }
                 } else {selectedImage = self.selectedImage}
                
@@ -396,6 +409,12 @@ extension UploadItemViewController: UIImagePickerControllerDelegate, UINavigatio
             self.uploadItemView.uploadImageTableView.reloadData()
         }
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+// MARK: - ScrollView Delegate
+extension UploadItemViewController: UIScrollViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView){
+        self.view.endEditing(true)
     }
 }
 // MARK: - API Success

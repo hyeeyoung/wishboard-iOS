@@ -12,7 +12,7 @@ class WishListCollectionViewCell: UICollectionViewCell {
     static let identifier = "WishListCollectionViewCell"
     
     let itemImage = UIImageView().then{
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = .black_5
         $0.clipsToBounds = true
         $0.contentMode = .scaleAspectFill
     }
@@ -85,7 +85,8 @@ class WishListCollectionViewCell: UICollectionViewCell {
     
     func setUpData(_ data: WishListModel) {
         if let image = data.item_img_url {
-            self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
+            let processor = TintImageProcessor(tint: .black_5)
+            self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage(), options: [.processor(processor), .transition(.fade(0.5))])
         }
         if let name = data.item_name {self.itemName.text = name}
         if let price = data.item_price {self.itemPrice.text = FormatManager().strToPrice(numStr: price)}

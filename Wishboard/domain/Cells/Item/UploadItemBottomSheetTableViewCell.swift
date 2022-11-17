@@ -47,7 +47,6 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
     }
 
     func setUpData(isUploadItem: Bool, tag: Int, data: WishListModel) {
-        print("data:", isUploadItem, tag, data)
         switch tag {
         case 2:
             // 만약 폴더를 재선택했다면 업데이트

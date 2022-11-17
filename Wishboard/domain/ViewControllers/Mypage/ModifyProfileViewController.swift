@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ModifyProfileViewController: TitleCenterViewController {
     // profile
@@ -85,7 +86,8 @@ extension ModifyProfileViewController {
         self.view.addSubview(completeButton)
         
         if let image = self.preProfileImg {
-            self.profileImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
+            let processor = TintImageProcessor(tint: .black_5)
+            self.profileImage.kf.setImage(with: URL(string: image), placeholder: UIImage(), options: [.processor(processor)])
         }
         nameTextField.text = self.preNickName
     }
@@ -97,7 +99,7 @@ extension ModifyProfileViewController {
         }
         cameraButton.snp.makeConstraints { make in
             make.width.equalTo(30)
-            make.height.equalTo(24)
+            make.height.equalTo(26.67)
             make.trailing.bottom.equalTo(profileImage)
         }
         nameTextField.snp.makeConstraints { make in
@@ -178,7 +180,7 @@ extension ModifyProfileViewController : UIImagePickerControllerDelegate, UINavig
         self.selectedPhoto = UIImage()
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.selectedPhoto = image
-            self.profileImage.image = image
+            self.profileImage.image = image.withTintColor(.black_5, renderingMode: .alwaysTemplate)
             self.isPhotoSelected = true
         }
         self.dismiss(animated: true, completion: nil)

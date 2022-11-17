@@ -45,7 +45,8 @@ class UploadItemPhotoTableViewCell: UITableViewCell {
         }
     }
     func setUpImage(_ url: String) {
-        self.photoImage.kf.setImage(with: URL(string: url), placeholder: UIImage())
+        let processor = TintImageProcessor(tint: .black_5)
+        self.photoImage.kf.setImage(with: URL(string: url), placeholder: UIImage(), options: [.processor(processor), .transition(.fade(0.5))])
     }
     func setUpImage(_ img: UIImage) {
         self.photoImage.image = img

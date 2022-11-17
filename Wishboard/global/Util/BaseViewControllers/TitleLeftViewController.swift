@@ -13,12 +13,12 @@ class TitleLeftViewController: UIViewController {
     // 기본 초기화
     init(){
         super.init(nibName: nil, bundle: nil)
-        self.viewDidLoad()
+//        self.viewDidLoad()
     }
     // 상단 오른쪽 버튼 설정
     init(btnImage: UIImage){
         super.init(nibName: nil, bundle: nil)
-        self.viewDidLoad()
+//        self.viewDidLoad()
         self.rightPositionBtn = EtcButton(image: btnImage)
     }
     

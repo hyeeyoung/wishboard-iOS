@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ItemDetailTableViewCell: UITableViewCell {
     // MARK: - Properties
     let itemImage = UIImageView().then{
-        $0.backgroundColor = .wishboardTextfieldGray
+        $0.backgroundColor = .black_5
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 32
         $0.contentMode = .scaleAspectFill
@@ -152,7 +153,8 @@ class ItemDetailTableViewCell: UITableViewCell {
     // After API success
     func setUpData(_ data: WishListModel) {
         if let url = data.item_img_url {
-            self.itemImage.kf.setImage(with: URL(string: url), placeholder: UIImage())
+            let processor = TintImageProcessor(tint: .black_5)
+            self.itemImage.kf.setImage(with: URL(string: url), placeholder: UIImage(), options: [.processor(processor), .transition(.fade(0.5))])
         }
         if let notificationType = data.item_notification_type {
             if let notificationDate = data.item_notification_date {
