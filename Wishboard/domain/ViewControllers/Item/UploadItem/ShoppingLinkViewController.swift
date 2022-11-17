@@ -73,6 +73,7 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
             self.preVC.wishListData.item_name = self.itemName
             self.preVC.wishListData.item_price = self.itemPrice
             self.preVC.wishListData.item_url = self.link
+            self.preVC.selectedImage = nil
             self.preVC.isValidContent()
             
             let indexPath1 = IndexPath(row: 0, section: 0)
@@ -223,11 +224,11 @@ extension ShoppingLinkViewController {
         self.lottieView.isHidden = true
         self.completeButton.isSelected = false
         
+        print("parsing::", result)
         self.dismiss(animated: true)
     }
     func getItemByLinkAPIFail() {
         self.isFail = true
-        print("isfail")
         
         self.errorMessage.isHidden = false
         self.completeButton.isSelected = false

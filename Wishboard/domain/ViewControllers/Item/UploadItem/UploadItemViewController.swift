@@ -94,14 +94,12 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.setUpImage(itemImageURL)
                 } else {
                     cell.photoImage.image = UIImage()
-                    cell.cameraImage.isHidden = false
                 }
             } else { // 링크로 아이템 불러온 경우라면
                 if let itemImageURL = self.wishListData.item_img_url {
                     cell.setUpImage(itemImageURL)
                 } else { // 만약 새로 아이템을 추가하는 경우라면
-                    cell.photoImage.image = UIImage()
-                    cell.cameraImage.isHidden = false
+                    cell.photoImage.image = nil
                 }
             }
             // 새로 사진을 선택했다면
@@ -232,8 +230,9 @@ extension UploadItemViewController {
                 if self.selectedImage == nil {
                     if let imageUrl = data?.item_img_url {
                         let url = URL(string: imageUrl)
-                        let imgData = try? Data(contentsOf: url!)
-                        selectedImage = UIImage(data: imgData!)
+                        guard let url = url else {return}
+                        guard let imgData = try? Data(contentsOf: url) else {return}
+                        selectedImage = UIImage(data: imgData)
                     }
                 } else {selectedImage = self.selectedImage}
                
