@@ -20,6 +20,7 @@ class ShareViewController: UIViewController {
     var folderListData: [FolderListModel] = []
     var notivc: NotificationSettingViewController!
     var newFoldervc: NewFolderViewController!
+    var lottieView: AnimationView!
     
     var selectedFolder: String?
     var selectedFolderIdx: Int?
@@ -100,6 +101,8 @@ class ShareViewController: UIViewController {
         shareView.completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
         shareView.setNotificationButton.addTarget(self, action: #selector(showNotificationBottomSheet), for: .touchUpInside)
         shareView.addFolderButton.addTarget(self, action: #selector(showAddNewFolderBottomSheet), for: .touchUpInside)
+        // Set up lottieView
+        lottieView = shareView.completeButton.setHorizontalLottieView(shareView.completeButton)
     }
     func getWebURL() {
         let extensionItems = extensionContext?.inputItems as! [NSExtensionItem]
@@ -171,7 +174,6 @@ class ShareViewController: UIViewController {
             return
         }
         
-        let lottieView = shareView.completeButton.setHorizontalLottieView(shareView.completeButton)
         shareView.completeButton.isSelected = true
         lottieView.isHidden = false
         lottieView.play { completion in
@@ -311,6 +313,10 @@ extension ShareViewController {
     }
     // MARK: 아이템 간편 등록
     func uploadItemAPISuccess(_ result: APIModel<ResultModel>) {
+        shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardGreen, .black)
+        shareView.completeButton.isEnabled = false
+        lottieView.isHidden = true
+        
         SnackBar(self, message: .addItem)
         print(result.message)
     }

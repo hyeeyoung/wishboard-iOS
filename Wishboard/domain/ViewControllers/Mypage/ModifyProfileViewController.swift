@@ -160,17 +160,19 @@ extension ModifyProfileViewController {
         self.completeButton.isSelected = true
         lottieView.isHidden = false
         lottieView.play { completion in
-            if self.isPhotoSelected && self.isNicknameChanged {
-                ModifyProfileDataManager().modifyProfileDataManager(self.nickname!, self.selectedPhoto, self)
-            } else if self.isNicknameChanged {
-                let modifyProfileInput = ModifyProfileInputNickname(nickname: self.nickname)
-                ModifyProfileDataManager().modifyProfileDataManager(modifyProfileInput, self)
-            } else if self.isPhotoSelected {
-                ModifyProfileDataManager().modifyProfileDataManager(self.selectedPhoto, self)
-            } else {
-                self.navigationController?.popViewController(animated: true)
+            lottieView.loopMode = .loop
+            DispatchQueue.main.async {
+                if self.isPhotoSelected && self.isNicknameChanged {
+                    ModifyProfileDataManager().modifyProfileDataManager(self.nickname!, self.selectedPhoto, self)
+                } else if self.isNicknameChanged {
+                    let modifyProfileInput = ModifyProfileInputNickname(nickname: self.nickname)
+                    ModifyProfileDataManager().modifyProfileDataManager(modifyProfileInput, self)
+                } else if self.isPhotoSelected {
+                    ModifyProfileDataManager().modifyProfileDataManager(self.selectedPhoto, self)
+                } else {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
-            
         }
     }
 }
