@@ -268,11 +268,14 @@ extension UploadItemViewController {
             let data = self.wishListData
             DispatchQueue.main.async {
                 // 이미지 uri를 UIImage로 변환
-                let url = URL(string: (data?.item_img_url!)!)
-                let imgData = try? Data(contentsOf: url!)
                 var selectedImage : UIImage?
-                if self.selectedImage == nil {selectedImage = UIImage(data: imgData!)}
-                else {selectedImage = self.selectedImage}
+                if let imageUrl = data?.item_img_url {
+                    let url = URL(string: imageUrl)
+                    guard let url = url else {return}
+                    guard let imgData = try? Data(contentsOf: url) else {return}
+                    selectedImage = UIImage(data: imgData)
+                }
+                if self.selectedImage != nil {selectedImage = self.selectedImage}
                 
                 if let folderId = data?.folder_id {
                     // 모든 데이터가 존재하는 경우
@@ -323,11 +326,15 @@ extension UploadItemViewController {
     }
     // 상품명, 가격 입력 여부에 따른 저장버튼 활성화 설정
     func isValidContent() {
+        print("isValidContent")
         if self.wishListData.item_name != nil && self.wishListData.item_price != nil {
+            print("상품명ㅇ, 가격ㅇ")
             if self.wishListData.item_name != "" && self.wishListData.item_price != "" {
+                print("상품명 비어있지 않고, 가격도 비어있지 않고")
                 if self.selectedImage != nil || self.wishListData.item_img_url != nil {
+                    print("사진 선택되어있거나, 사진url이 nil이 아닐때")
                     uploadItemView.setSaveButton(true)
-                }
+                } else {uploadItemView.setSaveButton(false)}
             } else {uploadItemView.setSaveButton(false)}
         } else {uploadItemView.setSaveButton(false)}
     }
