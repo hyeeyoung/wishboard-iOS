@@ -19,7 +19,7 @@ class FolderCollectionViewCell: UICollectionViewCell {
     }
     let folderType = UILabel().then{
         $0.text = "folder"
-        $0.font = UIFont.Suit(size: 16, family: .Bold)
+        $0.font = UIFont.Suit(size: 14, family: .Bold)
         $0.numberOfLines = 1
     }
     let countLabel = UILabel().then{

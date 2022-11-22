@@ -280,7 +280,6 @@ extension ShareViewController {
         if let itemImg = result.data?.item_img {self.itemImg = itemImg}
         if let itemName = result.data?.item_name {self.itemName = itemName}
         if let itemPrice = result.data?.item_price {self.itemPrice = itemPrice}
-        print("itemprice::", self.itemPrice)
         
         if self.itemImg == nil && self.itemName == nil && self.itemPrice == nil {
             SnackBar(self, message: .failShoppingLink)
