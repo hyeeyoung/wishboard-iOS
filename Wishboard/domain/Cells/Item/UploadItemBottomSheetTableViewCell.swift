@@ -50,14 +50,12 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
         switch tag {
         case 2:
             // 만약 폴더를 재선택했다면 업데이트
-            if let folder = data.folder_name {self.textLabel?.text = folder}
+            if let folder = data.folder_name.nilIfEmpty {self.textLabel?.text = folder}
             else {self.textLabel?.text = "폴더"}
         case 3:
             // 만약 알림 날짜를 재설정했다면 업데이트
             if let notiType = data.item_notification_type {
                 if let notiDate = data.item_notification_date {
-//                    print("이전 날짜:",notiDate)
-//                    print("이후 날짜:", FormatManager().notiDateToKoreanStr(notiDate))
                     guard let notiDateStr = FormatManager().notiDateToKoreanStr(notiDate) else {return}
                     self.textLabel?.text = "[" + notiType + "] " + notiDateStr
                 }
@@ -66,14 +64,9 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
             
         case 4:
             // 만약 쇼핑몰 링크를 수정했다면 업데이트
-            if let link = data.item_url {
-                if link != "" {
-                    self.textLabel?.text = link
-                    subTitle.isHidden = true
-                } else {
-                    self.textLabel?.text = "쇼핑몰 링크"
-                    subTitle.isHidden = false
-                }
+            if let link = data.item_url.nilIfEmpty {
+                self.textLabel?.text = link
+                subTitle.isHidden = true
             } else {
                 self.textLabel?.text = "쇼핑몰 링크"
                 subTitle.isHidden = false
@@ -101,7 +94,7 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
         switch tag {
         case 2:
             // 만약 폴더를 재선택했다면 업데이트
-            if let folder = data.folder_name {self.textLabel?.text = folder}
+            if let folder = data.folder_name.nilIfEmpty {self.textLabel?.text = folder}
             else {self.textLabel?.text = "폴더"}
         case 3:
             // 만약 알림 날짜를 재설정했다면 업데이트
@@ -114,14 +107,9 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
             
         case 4:
             // 만약 쇼핑몰 링크를 수정했다면 업데이트
-            if let link = data.item_url {
-                if link != "" {
-                    self.textLabel?.text = link
-                    subTitle.isHidden = true
-                } else {
-                    self.textLabel?.text = "쇼핑몰 링크"
-                    subTitle.isHidden = false
-                }
+            if let link = data.item_url.nilIfEmpty {
+                self.textLabel?.text = link
+                subTitle.isHidden = true
             } else {
                 self.textLabel?.text = "쇼핑몰 링크"
                 subTitle.isHidden = false

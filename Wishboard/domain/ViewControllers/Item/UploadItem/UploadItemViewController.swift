@@ -326,13 +326,9 @@ extension UploadItemViewController {
     }
     // 상품명, 가격 입력 여부에 따른 저장버튼 활성화 설정
     func isValidContent() {
-        print("isValidContent")
         if self.wishListData.item_name != nil && self.wishListData.item_price != nil {
-            print("상품명ㅇ, 가격ㅇ")
             if self.wishListData.item_name != "" && self.wishListData.item_price != "" {
-                print("상품명 비어있지 않고, 가격도 비어있지 않고")
                 if self.selectedImage != nil || self.wishListData.item_img_url != nil {
-                    print("사진 선택되어있거나, 사진url이 nil이 아닐때")
                     uploadItemView.setSaveButton(true)
                 } else {uploadItemView.setSaveButton(false)}
             } else {uploadItemView.setSaveButton(false)}
