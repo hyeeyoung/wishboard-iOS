@@ -168,7 +168,10 @@ class ItemDetailTableViewCell: UITableViewCell {
             self.restockLabel.isHidden = true
             self.restockDateLabel.isHidden = true
         }
-        if let folderName = data.folder_name {self.setFolderButton.setFolderButton(folderName)}
+        if let folderName = data.folder_name {
+            if folderName != "" {self.setFolderButton.setFolderButton(folderName)}
+            else {self.setFolderButton.setFolderButton("폴더를 지정해 보세요! > ")}
+        }
         if let createdDate = data.create_at {
             if let dateStr = FormatManager().createdDateToKoreanStr(createdDate) {
                 self.dateLabel.text = dateStr
