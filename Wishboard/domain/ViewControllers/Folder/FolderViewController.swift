@@ -15,6 +15,8 @@ class FolderViewController: TitleLeftViewController {
     var folderData: [FolderModel] = []
     var folderStr: String?
     var lottieView: AnimationView!
+    
+    var refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +90,8 @@ extension FolderViewController {
         folderView.setCollectionView(self)
         folderView.setUpView()
         folderView.setUpConstraint()
+        
+        initRefresh()
     }
     // 폴더 메뉴 하단 팝업창
     @objc func alertFolderMenu(_ sender: CustomButton) {
@@ -208,6 +212,7 @@ extension FolderViewController {
                           animations: { () -> Void in
                               self.folderView.folderCollectionView.reloadData()},
                           completion: nil);
+        refreshControl.endRefreshing()
     }
     func getFolderAPIFail() {
         FolderDataManager().getFolderDataManager(self)
@@ -248,6 +253,25 @@ extension FolderViewController {
         SnackBar(self, message: .deleteFolder)
         FolderDataManager().getFolderDataManager(self)
         print(result.message)
+    }
+}
+extension FolderViewController {
+    func initRefresh() {
+        refreshControl.addTarget(self, action: #selector(refreshTable(refresh:)), for: .valueChanged)
+        
+        refreshControl.backgroundColor = .white
+        refreshControl.tintColor = .black
+        
+        folderView.folderCollectionView.refreshControl = refreshControl
+    }
+    
+    @objc func refreshTable(refresh: UIRefreshControl) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            // DATA reload
+            FolderDataManager().getFolderDataManager(self)
+            self.folderView.folderCollectionView.reloadData()
+            refresh.endRefreshing()
+        }
     }
 }
 // MARK: - 버튼 클릭 Gesture Recognizer
