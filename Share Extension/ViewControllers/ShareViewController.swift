@@ -148,7 +148,10 @@ class ShareViewController: UIViewController {
         return myString
     }
     func isValidContent() -> Bool {
-        if self.itemName != "" && self.itemPrice != "" && self.itemName != nil && self.itemPrice != nil {return true}
+        if self.itemName != "" && self.itemPrice != ""
+            && self.itemName != nil && self.itemPrice != nil
+            && self.itemImg != nil
+            {return true}
         else {return false}
     }
     func setButton() {
