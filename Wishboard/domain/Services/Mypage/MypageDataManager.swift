@@ -99,4 +99,21 @@ class MypageDataManager {
             }
         }
     }
+    // MARK: - 빌드 시 로그아웃
+    func logoutDataManager(_ viewcontroller: AppDelegate) {
+        let logoutInput = FCMInput(fcm_token: nil)
+        AF.request(Storage().BaseURL + "/user/fcm",
+                           method: .put,
+                           parameters: logoutInput,
+                           headers: header)
+            .validate()
+            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            switch response.result {
+            case .success(let result):
+                viewcontroller.logoutAPISuccess(result)
+            case .failure(let error):
+                print(error.responseCode)
+            }
+        }
+    }
 }
