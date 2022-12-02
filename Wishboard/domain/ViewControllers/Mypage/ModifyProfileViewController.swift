@@ -182,7 +182,7 @@ extension ModifyProfileViewController : UIImagePickerControllerDelegate, UINavig
         self.selectedPhoto = UIImage()
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.selectedPhoto = image
-            self.profileImage.image = image.withTintColor(.black_5, renderingMode: .alwaysTemplate)
+            self.profileImage.image = image
             self.isPhotoSelected = true
         }
         self.dismiss(animated: true, completion: nil)

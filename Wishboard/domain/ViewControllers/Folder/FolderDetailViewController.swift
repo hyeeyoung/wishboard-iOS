@@ -15,11 +15,15 @@ class FolderDetailViewController: TitleCenterViewController {
     var folderId: Int!
     var folderDetailCollectionView: UICollectionView!
     var wishListData: [WishListModel] = []
+    
+    var refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpCollectionView()
         setUpView()
+        initRefresh()
 
         // DATA
         if let folderName = self.folderName {super.navigationTitle.text = folderName}
@@ -142,6 +146,7 @@ extension FolderDetailViewController {
                           animations: { () -> Void in
                               self.folderDetailCollectionView.reloadData()},
                           completion: nil);
+        refreshControl.endRefreshing()
     }
     func getFolderDetailAPIFail() {
         FolderDataManager().getFolderDetailDataManager(self.folderId, self)
@@ -155,5 +160,24 @@ extension FolderDetailViewController {
                           animations: { () -> Void in
                               self.folderDetailCollectionView.reloadData()},
                           completion: nil);
+    }
+}
+extension FolderDetailViewController {
+    func initRefresh() {
+        refreshControl.addTarget(self, action: #selector(refreshTable(refresh:)), for: .valueChanged)
+        
+        refreshControl.backgroundColor = .white
+        refreshControl.tintColor = .black
+        
+        folderDetailCollectionView.refreshControl = refreshControl
+    }
+    
+    @objc func refreshTable(refresh: UIRefreshControl) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            // DATA reload
+            FolderDataManager().getFolderDetailDataManager(self.folderId, self)
+            self.folderDetailCollectionView.reloadData()
+            refresh.endRefreshing()
+        }
     }
 }

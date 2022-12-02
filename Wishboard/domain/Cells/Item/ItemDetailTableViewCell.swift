@@ -168,7 +168,10 @@ class ItemDetailTableViewCell: UITableViewCell {
             self.restockLabel.isHidden = true
             self.restockDateLabel.isHidden = true
         }
-        if let folderName = data.folder_name {self.setFolderButton.setFolderButton(folderName)}
+        if let folderName = data.folder_name.nilIfEmpty {
+            self.setFolderButton.setFolderButton(folderName)
+        }
+        
         if let createdDate = data.create_at {
             if let dateStr = FormatManager().createdDateToKoreanStr(createdDate) {
                 self.dateLabel.text = dateStr
@@ -176,60 +179,27 @@ class ItemDetailTableViewCell: UITableViewCell {
         }
         if let itemName = data.item_name {self.itemNameLabel.text = itemName}
         if let itemPrice = data.item_price {self.priceLabel.text = FormatManager().strToPrice(numStr: itemPrice)}
-        if let link = data.item_url {
-            if link != "" {
-                // 링크O, 메모O
-                self.linkLabel.isHidden = false
-                self.seperatorLine1.isHidden = false
-                // link 도메인만 보이게
-                var url = URL(string: link)
-                var domain = url?.host
-                self.linkLabel.text = domain
-                
-                if let memo = data.item_memo {
-                    if memo == "" {
-                        self.seperatorLine2.isHidden = true
-                        self.memoTitlelabel.isHidden = true
-                        self.memoContentLabel.isHidden = true
-                    }
-                }
-            }
-            else {
-                // 링크X, 메모X
-                
-                self.linkLabel.isHidden = true
-                self.seperatorLine2.isHidden = true
-            }
+        if let link = data.item_url.nilIfEmpty {
+            // link 도메인만 보이게
+            var url = URL(string: link)
+            var domain = url?.host
+            
+            self.linkLabel.isHidden = false
+            self.seperatorLine1.isHidden = false
+            self.linkLabel.text = domain
+        } else {
+            self.linkLabel.isHidden = true
+            self.seperatorLine1.isHidden = true
         }
-        if let memo = data.item_memo {
-            if memo != "" {
-                // 쇼핑몰 링크가 없고, 메모가 있는 경우
-                if let link = data.item_url {
-                    if link == "" {
-                        self.seperatorLine2.isHidden = true
-                        self.memoContentLabel.isHidden = false
-                        self.memoTitlelabel.isHidden = false
-                        self.memoContentLabel.text = memo
-                    } else {
-                        // 쇼핑몰 링크가 있고, 메모가 있는 경우
-                        self.memoContentLabel.isHidden = false
-                        self.seperatorLine2.isHidden = false
-                        self.memoTitlelabel.isHidden = false
-                        self.memoContentLabel.text = memo
-                    }
-                }
-            }
-            else {
-                // 링크도 없고, 메모도 없고
-                if let link = data.item_url {
-                    if link == "" {
-                        self.seperatorLine1.isHidden = true
-                        self.seperatorLine2.isHidden = true
-                    }
-                }
-                self.memoTitlelabel.isHidden = true
-                self.memoContentLabel.isHidden = true
-            }
+        if let memo = data.item_memo.nilIfEmpty {
+            self.seperatorLine2.isHidden = false
+            self.memoTitlelabel.isHidden = false
+            self.memoContentLabel.isHidden = false
+            self.memoContentLabel.text = memo
+        } else {
+            self.seperatorLine2.isHidden = true
+            self.memoTitlelabel.isHidden = true
+            self.memoContentLabel.isHidden = true
         }
     }
 }

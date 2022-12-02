@@ -148,7 +148,10 @@ class ShareViewController: UIViewController {
         return myString
     }
     func isValidContent() -> Bool {
-        if self.itemName != "" && self.itemPrice != "" && self.itemName != nil && self.itemPrice != nil {return true}
+        if self.itemName != "" && self.itemPrice != ""
+            && self.itemName != nil && self.itemPrice != nil
+            && self.itemImg != nil
+            {return true}
         else {return false}
     }
     func setButton() {
@@ -280,7 +283,7 @@ extension ShareViewController {
         if let itemImg = result.data?.item_img {self.itemImg = itemImg}
         if let itemName = result.data?.item_name {self.itemName = itemName}
         if let itemPrice = result.data?.item_price {self.itemPrice = itemPrice}
-        print("itemprice::", self.itemPrice)
+        
         
         if self.itemImg == nil && self.itemName == nil && self.itemPrice == nil {
             SnackBar(self, message: .failShoppingLink)
@@ -289,7 +292,6 @@ extension ShareViewController {
             shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardDisabledGray, .dialogMessageColor)
             shareView.completeButton.isEnabled = false
             
-            return
         } else if self.itemPrice == nil {
             self.itemPrice = "0"
         }
@@ -310,6 +312,9 @@ extension ShareViewController {
     }
     func getItemDataAPIFail() {
         SnackBar(self, message: .failShoppingLink)
+        
+        shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardDisabledGray, .dialogMessageColor)
+        shareView.completeButton.isEnabled = false
     }
     // MARK: 아이템 간편 등록
     func uploadItemAPISuccess(_ result: APIModel<ResultModel>) {

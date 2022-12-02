@@ -48,8 +48,9 @@ class SetFolderBottomSheetViewController: UIViewController {
         }
         if let preVC = self.preItemDetailVC {
             if let itemId = self.itemId {
+                print("itemId o")
                 ItemDataManager().getItemDetailDataManager(itemId, preVC)
-            }
+            } else {print("itemId x")}
             preVC.itemDetailView.itemDetailTableView.reloadData()
         }
     }

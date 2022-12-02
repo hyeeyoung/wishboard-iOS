@@ -117,9 +117,11 @@
 		238EF90928CB070700ECA606 /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90828CB070700ECA606 /* CalenderView.swift */; };
 		23933AC6290322A500FAC80A /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23933AC5290322A500FAC80A /* Montserrat-ExtraBold.ttf */; };
 		23933AC82903233A00FAC80A /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23933AC72903233A00FAC80A /* Montserrat-Medium.ttf */; };
+		239422E6292FEFCB0024CEBD /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239422E5292FEFCB0024CEBD /* Optional.swift */; };
 		2395FFF42902E1C1005A8D8F /* UploadItemTextfieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2395FFF32902E1C1005A8D8F /* UploadItemTextfieldTableViewCell.swift */; };
 		2395FFF62902E1D7005A8D8F /* UploadItemBottomSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2395FFF52902E1D7005A8D8F /* UploadItemBottomSheetTableViewCell.swift */; };
 		239ED94C28E5D8A500CBCCAD /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239ED94B28E5D8A500CBCCAD /* NetworkCheck.swift */; };
+		239F93682939322C008AC5AB /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239F93672939322C008AC5AB /* Bundle.swift */; };
 		23A32DB928F5816300A791F5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 23A32DB828F5816300A791F5 /* GoogleService-Info.plist */; };
 		23A32DBA28F5816300A791F5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 23A32DB828F5816300A791F5 /* GoogleService-Info.plist */; };
 		23A48E6F28E9137100FD77A7 /* TitleLeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A48E6E28E9137100FD77A7 /* TitleLeftViewController.swift */; };
@@ -317,9 +319,11 @@
 		238EF90828CB070700ECA606 /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
 		23933AC5290322A500FAC80A /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		23933AC72903233A00FAC80A /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		239422E5292FEFCB0024CEBD /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
 		2395FFF32902E1C1005A8D8F /* UploadItemTextfieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemTextfieldTableViewCell.swift; sourceTree = "<group>"; };
 		2395FFF52902E1D7005A8D8F /* UploadItemBottomSheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemBottomSheetTableViewCell.swift; sourceTree = "<group>"; };
 		239ED94B28E5D8A500CBCCAD /* NetworkCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheck.swift; sourceTree = "<group>"; };
+		239F93672939322C008AC5AB /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		23A32DB828F5816300A791F5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		23A48E6E28E9137100FD77A7 /* TitleLeftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLeftViewController.swift; sourceTree = "<group>"; };
 		23A85F7C28E39FE800075667 /* FormatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatManager.swift; sourceTree = "<group>"; };
@@ -1006,6 +1010,8 @@
 			isa = PBXGroup;
 			children = (
 				23D5518A28C6B45C00D81B5F /* String.swift */,
+				239422E5292FEFCB0024CEBD /* Optional.swift */,
+				239F93672939322C008AC5AB /* Bundle.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1385,6 +1391,7 @@
 				23DC04A828C58B5200ABB0CF /* Resources */,
 				1728BC10DD37A7BE1700D3CA /* [CP] Embed Pods Frameworks */,
 				23C3114A28DF680300A636F6 /* Embed App Extensions */,
+				239F936A29393568008AC5AB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1567,6 +1574,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Wishboard/Pods-Wishboard-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		239F936A29393568008AC5AB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
 		};
 		28A7602479E0201EEF8B1041 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1778,6 +1802,7 @@
 				23E0ACC528E79F09008C35C2 /* KeyboardViewController.swift in Sources */,
 				23279A0E28E4981100CAD1CA /* CartDataManager.swift in Sources */,
 				23A85F8528E3AE6200075667 /* LostPasswordInput.swift in Sources */,
+				239422E6292FEFCB0024CEBD /* Optional.swift in Sources */,
 				2375C1CA28C5C2550017BAF7 /* OnBoardingView.swift in Sources */,
 				2378280428D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift in Sources */,
 				23630951291905E200E38885 /* Vibrate.swift in Sources */,
@@ -1786,6 +1811,7 @@
 				23D7901628CB172900246109 /* CalenderNotiTableViewCell.swift in Sources */,
 				23D4C66428D8E96700EA7F98 /* LostPasswordViewController.swift in Sources */,
 				23C5AB4928CAA23300A7E977 /* MyPageView.swift in Sources */,
+				239F93682939322C008AC5AB /* Bundle.swift in Sources */,
 				23D4C66028D8E87B00EA7F98 /* GetEmailView.swift in Sources */,
 				232174DB28E1BE81008C155D /* RegisterDataManager.swift in Sources */,
 				23A48E6F28E9137100FD77A7 /* TitleLeftViewController.swift in Sources */,
@@ -1914,7 +1940,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Share Extension/Info.plist";
@@ -1942,7 +1968,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Share Extension/Info.plist";
@@ -2088,7 +2114,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Wishboard/Wishboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wishboard/Info.plist;
@@ -2121,7 +2147,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Wishboard/Wishboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wishboard/Info.plist;
@@ -2151,7 +2177,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 40;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MARKETING_VERSION = 1.0;
@@ -2171,7 +2197,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 40;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MARKETING_VERSION = 1.0;
@@ -2190,7 +2216,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 40;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = gomin.WishboardUITests;
@@ -2208,7 +2234,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 40;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = gomin.WishboardUITests;
