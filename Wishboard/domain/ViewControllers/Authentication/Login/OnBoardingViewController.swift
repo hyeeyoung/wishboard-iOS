@@ -40,6 +40,7 @@ class OnBoardingViewController: UIViewController {
         }
     }
     func checkRememberMe() {
+        print("checkRememberMe")
         if let token = UserDefaults.standard.string(forKey: "token") {
             let email = UserDefaults.standard.string(forKey: "email")
             let password = UserDefaults.standard.string(forKey: "password")
