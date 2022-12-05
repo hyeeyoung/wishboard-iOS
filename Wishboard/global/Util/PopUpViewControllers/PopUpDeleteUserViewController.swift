@@ -90,7 +90,7 @@ class PopUpDeleteUserViewController: UIViewController {
         self.errorMessage.isHidden = true
         
         cancelBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        textField.addTarget(self, action: #selector(emailTextFieldEditingChanged(_:)), for: .editingChanged)
+        textField.addTarget(self, action: #selector(emailTextFieldEditingChanged(_:)), for: .allEditingEvents)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -149,6 +149,7 @@ class PopUpDeleteUserViewController: UIViewController {
             config.attributedTitle = attText
             
             $0.configuration = config
+            $0.isEnabled = false
         }
         textField.placeholder = self.placeholder
     }

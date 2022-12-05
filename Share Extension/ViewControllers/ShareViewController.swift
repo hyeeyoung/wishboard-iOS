@@ -184,21 +184,21 @@ class ShareViewController: UIViewController {
             let url = URL(string: self.itemImg!)
             var selectedImage : UIImage?
             let data = try? Data(contentsOf: url!)
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [self] in
                 selectedImage = UIImage(data: data!)
                 // 폴더O, 알림O
                 if var notificationDate = self.notificationDate {
                     notificationDate = FormatManager().koreanStrToDate(notificationDate)!
-                    if let selectedFolderIdx = self.selectedFolderIdx {
-                        ShareDataManager().uploadItemDataManager(selectedFolderIdx, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self.notificationType!, notificationDate + ":00", self)
+                    if (self.selectedFolderIdx != nil) && (self.selectedFolderIdx != -1) {
+                        ShareDataManager().uploadItemDataManager(self.selectedFolderIdx!, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self.notificationType!, notificationDate + ":00", self)
                     } else {
                         // 폴더X, 알림O
                         ShareDataManager().uploadItemDataManager(selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self.notificationType!, notificationDate + ":00", self)
                     }
                 } else {
                     // 폴더O, 알림X
-                    if let selectedFolderIdx = self.selectedFolderIdx {
-                        ShareDataManager().uploadItemDataManager(selectedFolderIdx, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self)
+                    if (self.selectedFolderIdx != nil) && (self.selectedFolderIdx != -1) {
+                        ShareDataManager().uploadItemDataManager(self.selectedFolderIdx!, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self)
                     } else {
                         // 폴더X, 알림X
                         ShareDataManager().uploadItemDataManager(selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self)
@@ -318,12 +318,29 @@ extension ShareViewController {
     }
     // MARK: 아이템 간편 등록
     func uploadItemAPISuccess(_ result: APIModel<ResultModel>) {
+        guard let success = result.success else {return}
+        
+        if success {
+            uploadItemAPIFunc()
+        } else {
+            uploadItem500Error()
+        }
+        print("아이템 등록 🔥", result.message)
+    }
+    func uploadItemAPIFunc() {
         shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardGreen, .black)
         shareView.completeButton.isEnabled = false
         lottieView.isHidden = true
         
         SnackBar(self, message: .addItem)
-        print(result.message)
+    }
+    func uploadItem500Error() {
+        lottieView.isHidden = true
+        shareView.completeButton.isSelected = false
+        shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardGreen, .black)
+        shareView.completeButton.isEnabled = true
+        
+        ErrorBar(self)
     }
     func reloadDataAnimation() {
         // reload data with animation

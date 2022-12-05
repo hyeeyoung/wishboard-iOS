@@ -49,7 +49,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if Bundle.appBuildVersion != prevBuildVersion {
             // Build Version 올라갈 때마다 로그아웃API 호출
             UserDefaults.standard.set(Bundle.appBuildVersion, forKey: "appBuildVersion")
-            MypageDataManager().logoutDataManager(self)
+            // delete UserInfo
+            UserDefaults.standard.removeObject(forKey: "token")
+            UserDefaults.standard.removeObject(forKey: "email")
+            UserDefaults.standard.removeObject(forKey: "password")
+            UserDefaults.standard.set(false, forKey: "isFirstLogin")
+            UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "token")
         }
         
         
@@ -111,19 +116,6 @@ extension AppDelegate {
 //    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
 //        print("Received data message: \(remoteMessage.appData)")
 //    }
-}
-// MARK: - logout api success
-extension AppDelegate {
-    func logoutAPISuccess(_ result: APIModel<ResultModel>) {
-        // delete UserInfo
-        UserDefaults.standard.removeObject(forKey: "token")
-        UserDefaults.standard.removeObject(forKey: "email")
-        UserDefaults.standard.removeObject(forKey: "password")
-        UserDefaults.standard.set(false, forKey: "isFirstLogin")
-        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "token")
-        
-        print(result.message)
-    }
 }
 // MARK: - Notification
 extension AppDelegate {
