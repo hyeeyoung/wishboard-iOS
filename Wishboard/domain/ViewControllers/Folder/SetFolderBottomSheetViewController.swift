@@ -55,7 +55,6 @@ class SetFolderBottomSheetViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         FolderDataManager().getFolderListDataManager(self)
-        print(self.selectedFolder, self.selectedFolderId)
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
     }
@@ -128,7 +127,10 @@ extension SetFolderBottomSheetViewController {
     }
     // MARK: 아이템의 폴더 수정
     func modifyItemFolderAPISuccess(_ result: APIModel<ResultModel>) {
-        self.dismiss(animated: true)
         print(result.message)
+        if let preVC = self.preItemDetailVC {
+            ItemDataManager().getItemDetailDataManager(itemId!, preVC)
+        }
+        self.dismiss(animated: true)
     }
 }
