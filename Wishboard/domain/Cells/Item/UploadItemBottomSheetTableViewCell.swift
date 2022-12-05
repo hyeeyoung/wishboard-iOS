@@ -13,6 +13,7 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
         $0.font = UIFont.Suit(size: 10, family: .Regular)
         $0.textColor = .wishboardGreen
         $0.setTextWithLineHeight()
+        $0.isHidden = true
     }
     //MARK: - Life Cycles
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

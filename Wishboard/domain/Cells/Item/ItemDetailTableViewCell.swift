@@ -169,6 +169,7 @@ class ItemDetailTableViewCell: UITableViewCell {
             self.restockDateLabel.isHidden = true
         }
         if let folderName = data.folder_name.nilIfEmpty {
+            print("🏖 folderName:", folderName)
             self.setFolderButton.setFolderButton(folderName)
         }
         

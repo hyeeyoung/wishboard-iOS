@@ -318,12 +318,29 @@ extension ShareViewController {
     }
     // MARK: 아이템 간편 등록
     func uploadItemAPISuccess(_ result: APIModel<ResultModel>) {
+        guard let success = result.success else {return}
+        
+        if success {
+            uploadItemAPIFunc()
+        } else {
+            uploadItem500Error()
+        }
+        print("아이템 등록 🔥", result.message)
+    }
+    func uploadItemAPIFunc() {
         shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardGreen, .black)
         shareView.completeButton.isEnabled = false
         lottieView.isHidden = true
         
         SnackBar(self, message: .addItem)
-        print(result.message)
+    }
+    func uploadItem500Error() {
+        lottieView.isHidden = true
+        shareView.completeButton.isSelected = false
+        shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardGreen, .black)
+        shareView.completeButton.isEnabled = true
+        
+        SnackBar(self)
     }
     func reloadDataAnimation() {
         // reload data with animation
