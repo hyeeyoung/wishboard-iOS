@@ -33,6 +33,7 @@ class ItemDetailViewController: UIViewController {
         ItemDataManager().getItemDetailDataManager(self.itemId, self)
     }
     override func viewDidAppear(_ animated: Bool) {
+        ItemDataManager().getItemDetailDataManager(self.itemId, self)
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
     }
