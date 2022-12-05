@@ -340,7 +340,7 @@ extension ShareViewController {
         shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardGreen, .black)
         shareView.completeButton.isEnabled = true
         
-        SnackBar(self)
+        ErrorBar(self)
     }
     func reloadDataAnimation() {
         // reload data with animation
