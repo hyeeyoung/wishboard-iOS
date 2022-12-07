@@ -12,14 +12,14 @@ class FolderCollectionViewCell: UICollectionViewCell {
     static let identifier = "FolderCollectionViewCell"
     
     let folderImage = UIImageView().then{
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = .black_5
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
         $0.contentMode = .scaleAspectFill
     }
     let folderType = UILabel().then{
         $0.text = "folder"
-        $0.font = UIFont.Suit(size: 16, family: .Bold)
+        $0.font = UIFont.Suit(size: 14, family: .Bold)
         $0.numberOfLines = 1
     }
     let countLabel = UILabel().then{
@@ -95,7 +95,8 @@ class FolderCollectionViewCell: UICollectionViewCell {
     // API
     func setUpData(_ data: FolderModel) {
         if let image = data.folder_thumbnail {
-            self.folderImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
+            let processor = TintImageProcessor(tint: .black_5)
+            self.folderImage.kf.setImage(with: URL(string: image), placeholder: UIImage(), options: [.processor(processor), .transition(.fade(0.5))])
         }
         if let folderName = data.folder_name {folderType.text = folderName}
         if let itemCount = data.item_count {countLabel.text = String(itemCount)}

@@ -64,8 +64,8 @@ class MypageProfileTableViewCell: UITableViewCell {
             make.top.equalToSuperview().offset(20)
         }
         cameraButton.snp.makeConstraints { make in
-            make.width.equalTo(23)
-            make.height.equalTo(22)
+            make.width.equalTo(25)
+            make.height.equalTo(25)
             make.trailing.bottom.equalTo(profileImage)
         }
         userNameLabel.snp.makeConstraints { make in

@@ -9,13 +9,12 @@ import Foundation
 import Alamofire
 
 class ModifyProfileDataManager {
-    let BaseURL = UserDefaults.standard.string(forKey: "url") ?? ""
     let header = APIManager().getHeader()
     
     // MARK: - 사용자 프로필 변경
     // MARK: 닉네임만 수정
     func modifyProfileDataManager(_ parameter: ModifyProfileInputNickname, _ viewcontroller: ModifyProfileViewController) {
-        AF.request(BaseURL + "/user",
+        AF.request(Storage().BaseURL + "/user",
                            method: .put,
                            parameters: parameter,
                            encoder: JSONParameterEncoder.default,
@@ -35,7 +34,7 @@ class ModifyProfileDataManager {
     // MARK: 닉네임 & 프로필 사진
     let multiHeader = APIManager().getMultipartHeader()
     func modifyProfileDataManager(_ nickname: String, _ photo: UIImage, _ viewcontroller: ModifyProfileViewController) {
-        let modifyUrl = BaseURL + "/user"
+        let modifyUrl = Storage().BaseURL + "/user"
         let body : Parameters = [
                         "nickname" : nickname,
                     ]    //PUT 함수로 전달할 String 데이터, 이미지 데이터는 제외하고 구성
@@ -70,7 +69,7 @@ class ModifyProfileDataManager {
     }
     // MARK: 프로필 이미지만 수정
     func modifyProfileDataManager(_ photo: UIImage, _ viewcontroller: ModifyProfileViewController) {
-        let modifyUrl = BaseURL + "/user"
+        let modifyUrl = Storage().BaseURL + "/user"
         AF.upload(multipartFormData: { (multipart) in
             if let imageData = photo.jpegData(compressionQuality: 0.5) {
                 multipart.append(imageData, withName: "profile_img", fileName: "photo.jpg", mimeType: "image/jpeg")

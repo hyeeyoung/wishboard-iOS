@@ -25,7 +25,7 @@ class OnBoardingViewController: UIViewController {
         view.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview()
         }
-        checkRememberMe()
+//        checkRememberMe()
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true

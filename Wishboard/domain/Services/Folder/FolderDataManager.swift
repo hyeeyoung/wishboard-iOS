@@ -9,12 +9,11 @@ import Foundation
 import Alamofire
 
 class FolderDataManager {
-    let BaseURL = UserDefaults.standard.string(forKey: "url") ?? ""
     let header = APIManager().getHeader()
     
     // MARK: - 폴더 조회
     func getFolderDataManager(_ viewcontroller: FolderViewController) {
-        AF.request(BaseURL + "/folder",
+        AF.request(Storage().BaseURL + "/folder",
                            method: .get,
                            parameters: nil,
                            headers: header)
@@ -38,7 +37,7 @@ class FolderDataManager {
     }
     // MARK: - 폴더 추가
     func addFolderDataManager(_ parameter: AddFolderInput, _ viewcontroller: FolderViewController) {
-        AF.request(BaseURL + "/folder",
+        AF.request(Storage().BaseURL + "/folder",
                            method: .post,
                            parameters: parameter,
                            headers: header)
@@ -61,7 +60,7 @@ class FolderDataManager {
     }
     // MARK: - 폴더명 수정
     func modifyFolderDataManager(_ folderId: Int, _ parameter: AddFolderInput, _ viewcontroller: FolderViewController) {
-        AF.request(BaseURL + "/folder/\(folderId)",
+        AF.request(Storage().BaseURL + "/folder/\(folderId)",
                            method: .put,
                            parameters: parameter,
                            headers: header)
@@ -84,7 +83,7 @@ class FolderDataManager {
     }
     // MARK: - 폴더 삭제
     func deleteFolderDataManager(_ folderId: Int, _ viewcontroller: FolderViewController) {
-        AF.request(BaseURL + "/folder/\(folderId)",
+        AF.request(Storage().BaseURL + "/folder/\(folderId)",
                            method: .delete,
                            parameters: nil,
                            headers: header)
@@ -100,7 +99,7 @@ class FolderDataManager {
     }
     // MARK: - 폴더 리스트 조회
     func getFolderListDataManager(_ viewcontroller: SetFolderBottomSheetViewController) {
-        AF.request(BaseURL + "/folder/list",
+        AF.request(Storage().BaseURL + "/folder/list",
                            method: .get,
                            parameters: nil,
                            headers: header)
@@ -122,7 +121,7 @@ class FolderDataManager {
     }
     // MARK: - 폴더 내 아이템 조회
     func getFolderDetailDataManager(_ folderId: Int, _ viewcontroller: FolderDetailViewController) {
-        AF.request(BaseURL + "/folder/item/\(folderId)",
+        AF.request(Storage().BaseURL + "/folder/item/\(folderId)",
                            method: .get,
                            parameters: nil,
                            headers: header)
@@ -146,7 +145,7 @@ class FolderDataManager {
     }
     // MARK: - 아이템의 폴더 수정
     func modifyItemFolderDataManager(_ itemId: Int, _ folderId: Int, _ viewcontroller: SetFolderBottomSheetViewController) {
-        AF.request(BaseURL + "/item/\(itemId)/folder/\(folderId)",
+        AF.request(Storage().BaseURL + "/item/\(itemId)/folder/\(folderId)",
                            method: .put,
                            parameters: nil,
                            headers: header)

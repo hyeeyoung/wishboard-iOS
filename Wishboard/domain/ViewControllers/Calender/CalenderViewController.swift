@@ -36,15 +36,15 @@ class CalenderViewController: UIViewController {
         calenderView.setTableView(dataSourceDelegate: self)
         calenderView.setUpView()
         calenderView.setUpConstraint()
-        
-        NotificationDataManager().getCalenderNotificationDataManager(self)
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
         // DATA
-        NotificationDataManager().getCalenderNotificationDataManager(self)
+        DispatchQueue.main.async {
+            NotificationDataManager().getCalenderNotificationDataManager(self)
+        }
     }
     @objc func goBack() {
         self.navigationController?.popViewController(animated: true)
@@ -71,7 +71,7 @@ extension CalenderViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CalenderDateTableViewCell", for: indexPath) as? CalenderDateTableViewCell else { return UITableViewCell() }
-            if let date = self.selectedDate {cell.setSelectedDate(date); cell.selectedDate = date}
+            if let date = self.selectedDate {cell.setSelectedDate(date)}
             cell.selectionStyle = .none
             return cell
         default:

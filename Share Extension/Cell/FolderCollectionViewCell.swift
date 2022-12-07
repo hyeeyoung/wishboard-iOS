@@ -6,17 +6,19 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FolderCollectionViewCell: UICollectionViewCell {
     static let identifier = "FolderCollectionViewCell"
     
     let folderImage = UIImageView().then{
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = .black_5
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
+        $0.contentMode = .scaleAspectFill
     }
-    let folderBackground = UIView().then{
-        $0.backgroundColor = .notificationGray
+    let folderForeground = UIView().then{
+        $0.backgroundColor = .black_5
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
     }
@@ -56,7 +58,7 @@ class FolderCollectionViewCell: UICollectionViewCell {
     // MARK: - Functions
     func setUpView() {
         contentView.addSubview(folderImage)
-        folderImage.addSubview(folderBackground)
+        folderImage.addSubview(folderForeground)
         
         contentView.addSubview(selectedView)
         contentView.addSubview(folderName)
@@ -66,7 +68,7 @@ class FolderCollectionViewCell: UICollectionViewCell {
         folderImage.snp.makeConstraints { make in
             make.leading.top.trailing.bottom.equalToSuperview()
         }
-        folderBackground.snp.makeConstraints { make in
+        folderForeground.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalTo(folderImage)
         }
         folderName.snp.makeConstraints { make in
@@ -85,7 +87,12 @@ class FolderCollectionViewCell: UICollectionViewCell {
     
     func setUpData(_ data: FolderListModel) {
         if let image = data.folder_thumbnail {
-            self.folderImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
+            let tintProcessor = TintImageProcessor(tint: .black_5)
+            // Cropping
+            let cropProcessor = CenterCropImageProcessor()
+            let scale = UIScreen.main.scale
+            let resizingProcessor = ResizingImageProcessor(referenceSize: CGSize(width: 80.0 * scale, height: 80.0 * scale))
+            self.folderImage.kf.setImage(with: URL(string: image), placeholder: UIImage(), options: [.processor(tintProcessor), .processor(resizingProcessor), .transition(.fade(0.5))])
         }
         if let name = data.folder_name {self.folderName.text = name}
     }
@@ -98,4 +105,60 @@ class FolderCollectionViewCell: UICollectionViewCell {
             self.selectedIcon.isHidden = true
         }
     }
+}
+import Foundation
+import Kingfisher
+
+/// Processor for cropping the center of an image
+public struct CenterCropImageProcessor: ImageProcessor {
+    public func process(item: ImageProcessItem, options: KingfisherParsedOptionsInfo) -> KFCrossPlatformImage? {
+        switch item {
+        case .image(let image):
+            
+            var imageHeight = image.size.height
+            var imageWidth = image.size.width
+                        
+            if imageHeight > imageWidth {
+                imageHeight = imageWidth
+            }
+            else {
+                imageWidth = imageHeight
+            }
+                        
+            let size = CGSize(width: imageWidth, height: imageHeight)
+                        
+            let refWidth : CGFloat = CGFloat(image.cgImage!.width)
+            let refHeight : CGFloat = CGFloat(image.cgImage!.height)
+                        
+            let x = (refWidth - size.width) / 2
+            let y = (refHeight - size.height) / 2
+                        
+            let cropRect = CGRect(x: x, y: y, width: size.height, height: size.width)
+            if let imageRef = image.cgImage!.cropping(to: cropRect) {
+                return UIImage(cgImage: imageRef, scale: 0, orientation: image.imageOrientation)
+            }
+            
+            return nil
+            
+        case .data(_):
+            return self.process(item: item, options: options)
+        }
+    }
+    
+        public let identifier: String
+        
+        /// Center point to crop to.
+        public var centerPoint: CGFloat = 0.0
+        
+        /// Initialize a `CenterCropImageProcessor`
+        ///
+        /// - parameter centerPoint: The center point to crop to.
+        ///
+        /// - returns: An initialized `CenterCropImageProcessor`.
+        public init(centerPoint: CGFloat? = nil) {
+            if let center = centerPoint {
+                self.centerPoint = center
+            }
+            self.identifier = "com.l4grange.CenterCropImageProcessor(\(centerPoint))"
+        }
 }

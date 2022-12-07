@@ -20,7 +20,7 @@ class SetLottie {
     func setSpinLottie(viewcontroller: UIViewController) -> AnimationView {
         viewcontroller.view.addSubview(spinView)
         spinView.snp.makeConstraints { make in
-            make.width.height.equalTo(50)
+            make.width.height.equalTo(100)
             make.centerY.centerX.equalToSuperview()
         }
         return spinView

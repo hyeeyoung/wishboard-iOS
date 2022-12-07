@@ -8,10 +8,9 @@
 import Alamofire
 
 class LoginDataManager {
-    let BaseURL = UserDefaults.standard.string(forKey: "url") ?? ""
     //MARK: 로그인
     func loginDataManager(_ parameter: LoginInput, _ viewcontroller: LoginViewController) {
-        AF.request(BaseURL + "/auth/signin",
+        AF.request(Storage().BaseURL + "/auth/signin",
                    method: .post,
                    parameters: parameter,
                    encoder: JSONParameterEncoder.default,

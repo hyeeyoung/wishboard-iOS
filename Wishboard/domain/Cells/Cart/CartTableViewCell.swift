@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CartTableViewCell: UITableViewCell {
     lazy var itemImage = UIImageView().then{
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = .black_5
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
         $0.isUserInteractionEnabled = true
@@ -118,7 +119,8 @@ class CartTableViewCell: UITableViewCell {
 extension CartTableViewCell {
     func setUpData(_ data: CartListModel) {
         if let image = data.wishItem?.item_img {
-            self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
+            let processor = TintImageProcessor(tint: .black_5)
+            self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage(), options: [.processor(processor), .transition(.fade(0.5))])
         }
         if let name = data.wishItem?.item_name {self.itemName.text = name}
         guard let count = data.cartItemInfo?.item_count else {return}

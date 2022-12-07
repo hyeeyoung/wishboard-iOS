@@ -9,12 +9,11 @@ import Foundation
 import Alamofire
 
 class WishListDataManager {
-    let BaseURL = UserDefaults.standard.string(forKey: "url") ?? ""
     let header = APIManager().getHeader()
     
     // MARK: - 홈화면 위시리스트 조회 + 상세 조회
     func wishListDataManager(_ homeView: HomeView, _ viewcontroller: HomeViewController) {
-        AF.request(BaseURL + "/item",
+        AF.request(Storage().BaseURL + "/item",
                            method: .get,
                            parameters: nil,
                            headers: header)

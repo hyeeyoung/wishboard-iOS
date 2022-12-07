@@ -1,0 +1,4 @@
+# file: .gitignore
+Info.plist
+GoogleService-Info.plist
+Storage.swift

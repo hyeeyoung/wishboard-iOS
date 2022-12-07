@@ -62,6 +62,7 @@
 		2360FF5E28DCC64100E481A6 /* ScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360FF5D28DCC64100E481A6 /* ScreenManager.swift */; };
 		23630951291905E200E38885 /* Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23630950291905E200E38885 /* Vibrate.swift */; };
 		236309522919085600E38885 /* Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23630950291905E200E38885 /* Vibrate.swift */; };
+		236AC9F0291A6AB700E1474C /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236AC9EF291A6AB700E1474C /* Storage.swift */; };
 		236FE90428DF7BE0006142DB /* SUIT-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 236FE90128DF7BE0006142DB /* SUIT-Bold.ttf */; };
 		236FE90628DF7BE0006142DB /* SUIT-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 236FE90228DF7BE0006142DB /* SUIT-Regular.ttf */; };
 		236FE90828DF7BE0006142DB /* SUIT-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 236FE90328DF7BE0006142DB /* SUIT-Thin.ttf */; };
@@ -116,9 +117,11 @@
 		238EF90928CB070700ECA606 /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90828CB070700ECA606 /* CalenderView.swift */; };
 		23933AC6290322A500FAC80A /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23933AC5290322A500FAC80A /* Montserrat-ExtraBold.ttf */; };
 		23933AC82903233A00FAC80A /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23933AC72903233A00FAC80A /* Montserrat-Medium.ttf */; };
+		239422E6292FEFCB0024CEBD /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239422E5292FEFCB0024CEBD /* Optional.swift */; };
 		2395FFF42902E1C1005A8D8F /* UploadItemTextfieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2395FFF32902E1C1005A8D8F /* UploadItemTextfieldTableViewCell.swift */; };
 		2395FFF62902E1D7005A8D8F /* UploadItemBottomSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2395FFF52902E1D7005A8D8F /* UploadItemBottomSheetTableViewCell.swift */; };
 		239ED94C28E5D8A500CBCCAD /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239ED94B28E5D8A500CBCCAD /* NetworkCheck.swift */; };
+		239F93682939322C008AC5AB /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239F93672939322C008AC5AB /* Bundle.swift */; };
 		23A32DB928F5816300A791F5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 23A32DB828F5816300A791F5 /* GoogleService-Info.plist */; };
 		23A32DBA28F5816300A791F5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 23A32DB828F5816300A791F5 /* GoogleService-Info.plist */; };
 		23A48E6F28E9137100FD77A7 /* TitleLeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A48E6E28E9137100FD77A7 /* TitleLeftViewController.swift */; };
@@ -128,6 +131,7 @@
 		23A85F8328E3AB1D00075667 /* LostPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F8228E3AB1D00075667 /* LostPasswordModel.swift */; };
 		23A85F8528E3AE6200075667 /* LostPasswordInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F8428E3AE6200075667 /* LostPasswordInput.swift */; };
 		23AADBC128DF8F9800AB75C6 /* NotificationSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AADBC028DF8F9800AB75C6 /* NotificationSettingViewController.swift */; };
+		23B1FA4B294017F200832425 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 23B1FA4D294017F200832425 /* InfoPlist.strings */; };
 		23B885EC28E5A9B400142FFA /* UploadItemInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233CDED228E4FE0A004E12BC /* UploadItemInput.swift */; };
 		23BB603328E27001007EA1EF /* ModifyProfileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB603228E27001007EA1EF /* ModifyProfileDataManager.swift */; };
 		23BB603528E2709C007EA1EF /* ModifyProfileInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB603428E2709C007EA1EF /* ModifyProfileInput.swift */; };
@@ -198,6 +202,7 @@
 		23F07F3E28E7CCBA0012D77D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */; };
 		23F07F4428E7D5930012D77D /* TitleCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */; };
 		23F1714B291056970016206A /* CalenderDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F1714A291056970016206A /* CalenderDateTableViewCell.swift */; };
+		23F1F21C293D7E7D0074C4D0 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E0ACC628E7A767008C35C2 /* UILabel.swift */; };
 		23F69CAF28CC17F8001B8C7F /* UIBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */; };
 		23F69CB128CC1819001B8C7F /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CB028CC1819001B8C7F /* UIView.swift */; };
 		8FC34572B49CFC063CDC4619 /* Pods_WishboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 420154A5B1D7E2D7C5F49F42 /* Pods_WishboardTests.framework */; };
@@ -295,6 +300,7 @@
 		2360FF5B28DCB31600E481A6 /* SnackBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBar.swift; sourceTree = "<group>"; };
 		2360FF5D28DCC64100E481A6 /* ScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenManager.swift; sourceTree = "<group>"; };
 		23630950291905E200E38885 /* Vibrate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibrate.swift; sourceTree = "<group>"; };
+		236AC9EF291A6AB700E1474C /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		236FE90128DF7BE0006142DB /* SUIT-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Bold.ttf"; sourceTree = "<group>"; };
 		236FE90228DF7BE0006142DB /* SUIT-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Regular.ttf"; sourceTree = "<group>"; };
 		236FE90328DF7BE0006142DB /* SUIT-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Thin.ttf"; sourceTree = "<group>"; };
@@ -315,9 +321,11 @@
 		238EF90828CB070700ECA606 /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
 		23933AC5290322A500FAC80A /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		23933AC72903233A00FAC80A /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		239422E5292FEFCB0024CEBD /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
 		2395FFF32902E1C1005A8D8F /* UploadItemTextfieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemTextfieldTableViewCell.swift; sourceTree = "<group>"; };
 		2395FFF52902E1D7005A8D8F /* UploadItemBottomSheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemBottomSheetTableViewCell.swift; sourceTree = "<group>"; };
 		239ED94B28E5D8A500CBCCAD /* NetworkCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheck.swift; sourceTree = "<group>"; };
+		239F93672939322C008AC5AB /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		23A32DB828F5816300A791F5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		23A48E6E28E9137100FD77A7 /* TitleLeftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLeftViewController.swift; sourceTree = "<group>"; };
 		23A85F7C28E39FE800075667 /* FormatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatManager.swift; sourceTree = "<group>"; };
@@ -325,6 +333,11 @@
 		23A85F8228E3AB1D00075667 /* LostPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostPasswordModel.swift; sourceTree = "<group>"; };
 		23A85F8428E3AE6200075667 /* LostPasswordInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostPasswordInput.swift; sourceTree = "<group>"; };
 		23AADBC028DF8F9800AB75C6 /* NotificationSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingViewController.swift; sourceTree = "<group>"; };
+		23B1FA4C294017F200832425 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		23B1FA4E2940184100832425 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
+		23B1FA4F2940184100832425 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		23B1FA502940184100832425 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		23B1FA512940184200832425 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		23BB603228E27001007EA1EF /* ModifyProfileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyProfileDataManager.swift; sourceTree = "<group>"; };
 		23BB603428E2709C007EA1EF /* ModifyProfileInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyProfileInput.swift; sourceTree = "<group>"; };
 		23C2378328C9CEE000CE3200 /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
@@ -1004,6 +1017,8 @@
 			isa = PBXGroup;
 			children = (
 				23D5518A28C6B45C00D81B5F /* String.swift */,
+				239422E5292FEFCB0024CEBD /* Optional.swift */,
+				239F93672939322C008AC5AB /* Bundle.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1236,6 +1251,8 @@
 			children = (
 				23DC04AD28C58B5200ABB0CF /* AppDelegate.swift */,
 				23DC04AF28C58B5200ABB0CF /* SceneDelegate.swift */,
+				236AC9EF291A6AB700E1474C /* Storage.swift */,
+				23B1FA4D294017F200832425 /* InfoPlist.strings */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -1465,6 +1482,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 23DC04A128C58B5200ABB0CF;
 			productRefGroup = 23DC04AB28C58B5200ABB0CF /* Products */;
@@ -1509,6 +1527,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				236FE90628DF7BE0006142DB /* SUIT-Regular.ttf in Resources */,
+				23B1FA4B294017F200832425 /* InfoPlist.strings in Resources */,
 				2331867F28DA92EE00F17CBF /* loading_spin.json in Resources */,
 				236FE90828DF7BE0006142DB /* SUIT-Thin.ttf in Resources */,
 				23C9569E28C68D7A00D88536 /* SUIT-Medium.ttf in Resources */,
@@ -1689,6 +1708,7 @@
 				236FE91D28DF8592006142DB /* PaddingLabel.swift in Sources */,
 				23E0ACC828E7B563008C35C2 /* KeyboardViewController.swift in Sources */,
 				235129DA28F67BAE00489CAD /* BottomSheetKeyboardViewController.swift in Sources */,
+				23F1F21C293D7E7D0074C4D0 /* UILabel.swift in Sources */,
 				236FE94028DF85B3006142DB /* APIModel.swift in Sources */,
 				236FE91128DF83E6006142DB /* UIFont.swift in Sources */,
 				230180E928E50C0B001034FC /* FolderInput.swift in Sources */,
@@ -1775,6 +1795,7 @@
 				23E0ACC528E79F09008C35C2 /* KeyboardViewController.swift in Sources */,
 				23279A0E28E4981100CAD1CA /* CartDataManager.swift in Sources */,
 				23A85F8528E3AE6200075667 /* LostPasswordInput.swift in Sources */,
+				239422E6292FEFCB0024CEBD /* Optional.swift in Sources */,
 				2375C1CA28C5C2550017BAF7 /* OnBoardingView.swift in Sources */,
 				2378280428D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift in Sources */,
 				23630951291905E200E38885 /* Vibrate.swift in Sources */,
@@ -1783,6 +1804,7 @@
 				23D7901628CB172900246109 /* CalenderNotiTableViewCell.swift in Sources */,
 				23D4C66428D8E96700EA7F98 /* LostPasswordViewController.swift in Sources */,
 				23C5AB4928CAA23300A7E977 /* MyPageView.swift in Sources */,
+				239F93682939322C008AC5AB /* Bundle.swift in Sources */,
 				23D4C66028D8E87B00EA7F98 /* GetEmailView.swift in Sources */,
 				232174DB28E1BE81008C155D /* RegisterDataManager.swift in Sources */,
 				23A48E6F28E9137100FD77A7 /* TitleLeftViewController.swift in Sources */,
@@ -1797,6 +1819,7 @@
 				23C2378428C9CEE000CE3200 /* FolderViewController.swift in Sources */,
 				23A85F7F28E3AA5400075667 /* LostPasswordDataManager.swift in Sources */,
 				23EC504C28E2670D00AAA57E /* MypageDataManager.swift in Sources */,
+				236AC9F0291A6AB700E1474C /* Storage.swift in Sources */,
 				23279A1428E4A12300CAD1CA /* CartInput.swift in Sources */,
 				234F838D28C9857000C4EB41 /* CartTableViewCell.swift in Sources */,
 				23D4C66628D8ECF300EA7F98 /* GetEmailViewController.swift in Sources */,
@@ -1877,10 +1900,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		23B1FA4D294017F200832425 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				23B1FA4C294017F200832425 /* en */,
+				23B1FA512940184200832425 /* ko */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		23C3114028DF680300A636F6 /* MainInterface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				23C3114128DF680300A636F6 /* Base */,
+				23B1FA502940184100832425 /* ko */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -1889,6 +1922,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				23DC04B428C58B5200ABB0CF /* Base */,
+				23B1FA4E2940184100832425 /* ko */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1897,6 +1931,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				23DC04B928C58B5500ABB0CF /* Base */,
+				23B1FA4F2940184100832425 /* ko */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1910,18 +1945,20 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Share Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Share Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "gomin.Wishboard.Share-Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1937,18 +1974,20 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Share Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Share Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "gomin.Wishboard.Share-Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1962,6 +2001,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -2022,6 +2062,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -2082,11 +2123,12 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Wishboard/Wishboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wishboard/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Wishboard는 사용자의 카메라를 이용합니다.";
+				INFOPLIST_KEY_NSCameraUsageDescription = NSCameraUsageDescription;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = NSPhotoLibraryUsageDescription;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -2096,7 +2138,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = gomin.Wishboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2115,11 +2157,12 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Wishboard/Wishboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wishboard/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Wishboard는 사용자의 카메라를 이용합니다.";
+				INFOPLIST_KEY_NSCameraUsageDescription = NSCameraUsageDescription;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = NSPhotoLibraryUsageDescription;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -2129,7 +2172,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = gomin.Wishboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2145,7 +2188,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 40;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MARKETING_VERSION = 1.0;
@@ -2165,7 +2208,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 40;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MARKETING_VERSION = 1.0;
@@ -2184,7 +2227,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 40;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = gomin.WishboardUITests;
@@ -2202,7 +2245,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 40;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = gomin.WishboardUITests;

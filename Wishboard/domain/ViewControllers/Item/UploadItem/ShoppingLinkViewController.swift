@@ -22,7 +22,7 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
         $0.layer.cornerRadius = 5
         $0.font = UIFont.Suit(size: 16, family: .Regular)
         $0.textColor = .editTextFontColor
-        $0.clearButtonMode = .whileEditing
+        $0.clearButtonMode = .always
         $0.placeholder = "쇼핑몰 링크"
     }
     let errorMessage = UILabel().then{
@@ -73,6 +73,7 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
             self.preVC.wishListData.item_name = self.itemName
             self.preVC.wishListData.item_price = self.itemPrice
             self.preVC.wishListData.item_url = self.link
+            self.preVC.selectedImage = nil
             self.preVC.isValidContent()
             
             let indexPath1 = IndexPath(row: 0, section: 0)
@@ -83,8 +84,9 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
             self.preVC.isValidContent()
             
             self.preVC.view.endEditing(true)
+            self.preVC.view.frame.origin.y = 0.0
+            self.preVC.preKeyboardHeight = 0.0
         } else if isFail {
-            print("fail 뒤로가기")
             self.preVC.wishListData.item_img_url = nil
             self.preVC.wishListData.item_name = nil
             self.preVC.wishListData.item_price = nil
@@ -100,9 +102,13 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
             
             SnackBar(self.preVC, message: .failShoppingLink)
             self.preVC.view.endEditing(true)
+            self.preVC.view.frame.origin.y = 0.0
+            self.preVC.preKeyboardHeight = 0.0
         }
         else {
             self.preVC.view.endEditing(true)
+            self.preVC.view.frame.origin.y = 0.0
+            self.preVC.preKeyboardHeight = 0.0
         }
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -205,10 +211,10 @@ extension ShoppingLinkViewController {
     func getItemByLinkAPISuccess(_ result: APIModel<ItemParsingModel>) {
         if let imageUrl = result.data?.item_img {
             self.itemImgUrl = imageUrl
-        }
+        } else {self.itemImgUrl = nil}
         if let itemName = result.data?.item_name {
             self.itemName = itemName
-        }
+        } else {self.itemName = nil}
         if let itemPrice = result.data?.item_price {
             self.itemPrice = itemPrice
         } else {self.itemPrice = "0"}
@@ -218,11 +224,11 @@ extension ShoppingLinkViewController {
         self.lottieView.isHidden = true
         self.completeButton.isSelected = false
         
+        print("parsing::", result)
         self.dismiss(animated: true)
     }
     func getItemByLinkAPIFail() {
         self.isFail = true
-        print("isfail")
         
         self.errorMessage.isHidden = false
         self.completeButton.isSelected = false

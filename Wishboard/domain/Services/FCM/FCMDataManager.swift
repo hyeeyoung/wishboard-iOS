@@ -9,13 +9,12 @@ import Foundation
 import Alamofire
 
 class FCMDataManager {
-    let BaseURL = UserDefaults.standard.string(forKey: "url") ?? ""
     let header = APIManager().getHeader()
     
     // MARK: - FCM
     // 회원가입 이후
     func fcmDataManager(_ parameter: FCMInput, _ viewcontroller: RegisterPasswordViewController) {
-        AF.request(BaseURL + "/user/fcm",
+        AF.request(Storage().BaseURL + "/user/fcm",
                            method: .put,
                            parameters: parameter,
                            headers: header)
@@ -40,7 +39,7 @@ class FCMDataManager {
     }
     // 로그인 이후
     func fcmDataManager(_ parameter: FCMInput, _ viewcontroller: LoginViewController) {
-        AF.request(BaseURL + "/user/fcm",
+        AF.request(Storage().BaseURL + "/user/fcm",
                            method: .put,
                            parameters: parameter,
                            headers: header)
@@ -65,7 +64,7 @@ class FCMDataManager {
     }
     // 자동 로그인 이후
     func fcmDataManager(_ parameter: FCMInput, _ viewcontroller: OnBoardingViewController) {
-        AF.request(BaseURL + "/user/fcm",
+        AF.request(Storage().BaseURL + "/user/fcm",
                            method: .put,
                            parameters: parameter,
                            headers: header)

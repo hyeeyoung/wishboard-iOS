@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import Kingfisher
 
 class NotiTableViewCell: UITableViewCell {
     // MARK: - Views
     let itemImage = UIImageView().then{
-        $0.backgroundColor = .systemGray6
+        $0.backgroundColor = .black_5
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 40
         $0.contentMode = .scaleAspectFill
@@ -92,7 +93,8 @@ extension NotiTableViewCell {
     // MARK: 알람탭 페이지 조회 API 호출 후
     func setUpData(_ data: NotificationModel) {
         if let image = data.item_img_url {
-            self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
+            let processor = TintImageProcessor(tint: .black_5)
+            self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage(), options: [.processor(processor), .transition(.fade(0.5))])
         }
         if let notiType = data.item_notification_type {self.notificationTypeLabel.text = notiType}
         if let name = data.item_name {self.itemName.text = name}
@@ -109,7 +111,8 @@ extension NotiTableViewCell {
     func setCalenderNotiCell(_ data: NotificationModel) {
 //        print("notidata:", data)
         if let image = data.item_img_url {
-            self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage())
+            let processor = TintImageProcessor(tint: .black_5)
+            self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage(), options: [.processor(processor), .transition(.fade(0.5))])
         }
         if let notiType = data.item_notification_type {self.notificationTypeLabel.text = notiType}
         if let name = data.item_name {self.itemName.text = name}

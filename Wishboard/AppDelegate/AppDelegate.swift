@@ -24,16 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //        NetworkCheck.shared.startMonitoring()
         
         //MARK: UserDefaults
-        UserDefaults.standard.set("http://3.39.165.250:3000", forKey: "url")
+        UserDefaults.standard.set(Storage().BaseURL, forKey: "url")
         // MARK: UserDefaults for Share Extension
-        let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
-        defaults?.set("http://3.39.165.250:3000", forKey: "url")
+        let defaults = UserDefaults(suiteName: Storage().ShareExtension)
+        defaults?.set(Storage().BaseURL, forKey: "url")
         defaults?.synchronize()
         
         // MARK: Clean Cache
-        let cache = ImageCache.default
-        cache.clearMemoryCache()
-        cache.clearDiskCache()
+//        let cache = ImageCache.default
+//        cache.clearMemoryCache()
+//        cache.clearDiskCache()
         
         // MARK: Device Model
         // device model
@@ -43,9 +43,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         var systemVersion = UIDevice.current.systemVersion
         UserDefaults.standard.set(systemVersion, forKey: "OSVersion")
         // App version
-        if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            UserDefaults.standard.set(appVersion, forKey: "appVersion")
+        UserDefaults.standard.set(Bundle.appVersion, forKey: "appVersion")
+        // App Build Version
+        let prevBuildVersion = UserDefaults.standard.string(forKey: "appBuildVersion") ?? ""
+        if Bundle.appBuildVersion != prevBuildVersion {
+            // Build Version 올라갈 때마다 로그아웃API 호출
+            UserDefaults.standard.set(Bundle.appBuildVersion, forKey: "appBuildVersion")
+            // delete UserInfo
+            UserDefaults.standard.removeObject(forKey: "token")
+            UserDefaults.standard.removeObject(forKey: "email")
+            UserDefaults.standard.removeObject(forKey: "password")
+            UserDefaults.standard.set(false, forKey: "isFirstLogin")
+            UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "token")
         }
+        
         
         // MARK: Firebase
         FirebaseApp.configure()
@@ -68,12 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         return UIInterfaceOrientationMask.portrait
     }
-//    // MARK: Device Token
-//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-//        let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
-//        print("device token:", deviceTokenString)
-//        UserDefaults.standard.set(deviceTokenString, forKey: "deviceToken")
-//    }
+    
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
@@ -90,26 +96,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 
 }
-
+// MARK: - FCM Messaging
 extension AppDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("파이어베이스 토큰: \(fcmToken)")
         
         // 디바이스가 변경되었을 때에만 (기존의 디바이스 토큰과 지금 얻은 디바이스 토큰값이 다를 때에만)
         let preDeviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
-        print("이전 토큰:", preDeviceToken)
         if preDeviceToken != fcmToken {
-            print("다르다!")
+            // 디바이스 토큰 변경 시
             DispatchQueue.main.async {
                 UserDefaults.standard.set(fcmToken, forKey: "deviceToken")
             }
-        } else {print("같다")}
+        } else {
+            // 디바이스 토큰 그대로일 때
+        }
         
     }
 //    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
 //        print("Received data message: \(remoteMessage.appData)")
 //    }
 }
+// MARK: - Notification
 extension AppDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,willPresent notification: UNNotification,withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .badge, .sound])

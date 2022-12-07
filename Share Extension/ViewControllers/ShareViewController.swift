@@ -12,6 +12,7 @@ import Then
 import MaterialComponents.MaterialBottomSheet
 import Lottie
 import MobileCoreServices
+import SnackBar_swift
 
 class ShareViewController: UIViewController {
     //MARK: - Properties
@@ -19,6 +20,7 @@ class ShareViewController: UIViewController {
     var folderListData: [FolderListModel] = []
     var notivc: NotificationSettingViewController!
     var newFoldervc: NewFolderViewController!
+    var lottieView: AnimationView!
     
     var selectedFolder: String?
     var selectedFolderIdx: Int?
@@ -99,6 +101,8 @@ class ShareViewController: UIViewController {
         shareView.completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
         shareView.setNotificationButton.addTarget(self, action: #selector(showNotificationBottomSheet), for: .touchUpInside)
         shareView.addFolderButton.addTarget(self, action: #selector(showAddNewFolderBottomSheet), for: .touchUpInside)
+        // Set up lottieView
+        lottieView = shareView.completeButton.setHorizontalLottieView(shareView.completeButton)
     }
     func getWebURL() {
         let extensionItems = extensionContext?.inputItems as! [NSExtensionItem]
@@ -144,7 +148,10 @@ class ShareViewController: UIViewController {
         return myString
     }
     func isValidContent() -> Bool {
-        if self.itemName != "" && self.itemPrice != "" {return true}
+        if self.itemName != "" && self.itemPrice != ""
+            && self.itemName != nil && self.itemPrice != nil
+            && self.itemImg != nil
+            {return true}
         else {return false}
     }
     func setButton() {
@@ -170,7 +177,6 @@ class ShareViewController: UIViewController {
             return
         }
         
-        let lottieView = shareView.completeButton.setHorizontalLottieView(shareView.completeButton)
         shareView.completeButton.isSelected = true
         lottieView.isHidden = false
         lottieView.play { completion in
@@ -178,21 +184,21 @@ class ShareViewController: UIViewController {
             let url = URL(string: self.itemImg!)
             var selectedImage : UIImage?
             let data = try? Data(contentsOf: url!)
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [self] in
                 selectedImage = UIImage(data: data!)
                 // 폴더O, 알림O
                 if var notificationDate = self.notificationDate {
                     notificationDate = FormatManager().koreanStrToDate(notificationDate)!
-                    if let selectedFolderIdx = self.selectedFolderIdx {
-                        ShareDataManager().uploadItemDataManager(selectedFolderIdx, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self.notificationType!, notificationDate + ":00", self)
+                    if (self.selectedFolderIdx != nil) && (self.selectedFolderIdx != -1) {
+                        ShareDataManager().uploadItemDataManager(self.selectedFolderIdx!, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self.notificationType!, notificationDate + ":00", self)
                     } else {
                         // 폴더X, 알림O
                         ShareDataManager().uploadItemDataManager(selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self.notificationType!, notificationDate + ":00", self)
                     }
                 } else {
                     // 폴더O, 알림X
-                    if let selectedFolderIdx = self.selectedFolderIdx {
-                        ShareDataManager().uploadItemDataManager(selectedFolderIdx, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self)
+                    if (self.selectedFolderIdx != nil) && (self.selectedFolderIdx != -1) {
+                        ShareDataManager().uploadItemDataManager(self.selectedFolderIdx!, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self)
                     } else {
                         // 폴더X, 알림X
                         ShareDataManager().uploadItemDataManager(selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self)
@@ -278,10 +284,14 @@ extension ShareViewController {
         if let itemName = result.data?.item_name {self.itemName = itemName}
         if let itemPrice = result.data?.item_price {self.itemPrice = itemPrice}
         
+        
         if self.itemImg == nil && self.itemName == nil && self.itemPrice == nil {
             SnackBar(self, message: .failShoppingLink)
             FolderDataManager().getFolderListDataManager(self)
-            return
+            
+            shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardDisabledGray, .dialogMessageColor)
+            shareView.completeButton.isEnabled = false
+            
         } else if self.itemPrice == nil {
             self.itemPrice = "0"
         }
@@ -302,17 +312,35 @@ extension ShareViewController {
     }
     func getItemDataAPIFail() {
         SnackBar(self, message: .failShoppingLink)
+        
+        shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardDisabledGray, .dialogMessageColor)
+        shareView.completeButton.isEnabled = false
     }
     // MARK: 아이템 간편 등록
     func uploadItemAPISuccess(_ result: APIModel<ResultModel>) {
-        self.extensionContext?.completeRequest(returningItems: nil, completionHandler: { result in
-            DispatchQueue.main.async {
-                SnackBar(self, message: .addItem)
-            }
-        })
-//        self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
-//        SnackBar(self, message: .addItem)
-        print(result.message)
+        guard let success = result.success else {return}
+        
+        if success {
+            uploadItemAPIFunc()
+        } else {
+            uploadItem500Error()
+        }
+        print("아이템 등록 🔥", result.message)
+    }
+    func uploadItemAPIFunc() {
+        shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardGreen, .black)
+        shareView.completeButton.isEnabled = false
+        lottieView.isHidden = true
+        
+        SnackBar(self, message: .addItem)
+    }
+    func uploadItem500Error() {
+        lottieView.isHidden = true
+        shareView.completeButton.isSelected = false
+        shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardGreen, .black)
+        shareView.completeButton.isEnabled = true
+        
+        ErrorBar(self)
     }
     func reloadDataAnimation() {
         // reload data with animation

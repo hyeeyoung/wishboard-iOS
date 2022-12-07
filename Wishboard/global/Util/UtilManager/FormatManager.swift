@@ -24,6 +24,7 @@ class FormatManager {
         return dateToWeek(dateNum: useTime)
     }
     func dateToWeek(dateNum: Int) -> String {
+        if dateNum < 0 {return "방금 전"}
         switch dateNum {
         case 0...59:
             return "방금 전"
