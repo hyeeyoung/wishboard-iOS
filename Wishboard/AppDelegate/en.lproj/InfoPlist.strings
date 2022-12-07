@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  Wishboard
+
+  Created by gomin on 2022/12/07.
+  
+*/
+
+CFBundleDisplayName = "WishBoard";
+NSPhotoLibraryUsageDescription = "This app is trying to access your photos.\nUse to upload wishlists or profile pictures.";
+NSCameraUsageDescription = "This app is trying to access your camera.\nUse to upload wishlists.";
