@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  Wishboard
+
+  Created by gomin on 2022/12/07.
+  
+*/
+
+CFBundleDisplayName = "위시보드";
+NSPhotoLibraryUsageDescription = "'위시보드'이(가) 사용자의 사진에 접근하려고 합니다.\n위시리스트나 프로필 사진을 업로드 할때 사용합니다.";
+NSCameraUsageDescription = "'위시보드'이(가) 사용자의 카메라에 접근하려고 합니다.\n위시리스트를 업로드 할때 사용합니다.";
