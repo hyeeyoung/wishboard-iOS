@@ -181,11 +181,12 @@ class ShareViewController: UIViewController {
         lottieView.isHidden = false
         lottieView.play { completion in
             // 이미지 uri를 UIImage로 변환
-            let url = URL(string: self.itemImg!)
+            guard let itemImg = self.itemImg else {return}
+            guard let url = URL(string: itemImg) else {return}
             var selectedImage : UIImage?
-            let data = try? Data(contentsOf: url!)
+            guard let data = try? Data(contentsOf: url) else {return}
             DispatchQueue.main.async { [self] in
-                selectedImage = UIImage(data: data!)
+                selectedImage = UIImage(data: data)
                 // 폴더O, 알림O
                 if var notificationDate = self.notificationDate {
                     notificationDate = FormatManager().koreanStrToDate(notificationDate)!
@@ -280,12 +281,11 @@ extension ShareViewController {
     }
     // MARK: 아이템 정보 파싱
     func getItemDataAPISuccess(_ result: APIModel<ItemParsingModel>) {
-        if let itemImg = result.data?.item_img {self.itemImg = itemImg}
-        if let itemName = result.data?.item_name {self.itemName = itemName}
-        if let itemPrice = result.data?.item_price {self.itemPrice = itemPrice}
+        if let itemImg = result.data?.item_img.nilIfEmpty {self.itemImg = itemImg}
+        if let itemName = result.data?.item_name.nilIfEmpty {self.itemName = itemName}
+        if let itemPrice = result.data?.item_price.nilIfEmpty {self.itemPrice = itemPrice}
         
-        
-        if self.itemImg == nil && self.itemName == nil && self.itemPrice == nil {
+        if self.itemImg == nil || self.itemName == nil && self.itemPrice == nil {
             SnackBar(self, message: .failShoppingLink)
             FolderDataManager().getFolderListDataManager(self)
             
@@ -296,7 +296,7 @@ extension ShareViewController {
             self.itemPrice = "0"
         }
         
-        self.shareView.itemImage.kf.setImage(with: URL(string: itemImg ?? ""), placeholder: UIImage())
+        self.shareView.itemImage.kf.setImage(with: URL(string: itemImg ?? ""), placeholder: UIImage(named: "blackLogo"))
         self.shareView.itemNameTextField.text = self.itemName
         self.shareView.itemPriceTextField.text = FormatManager().strToPrice(numStr: itemPrice ?? "")
         
