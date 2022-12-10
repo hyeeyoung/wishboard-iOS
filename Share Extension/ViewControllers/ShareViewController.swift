@@ -379,6 +379,9 @@ extension ShareViewController: UITextFieldDelegate {
                 let dif = preKeyboardHeight - keyboardHeight
                 self.view.frame.origin.y += dif
                 preKeyboardHeight = keyboardHeight
+            } else if preKeyboardHeight == keyboardHeight {
+                self.view.endEditing(true)
+                self.preKeyboardHeight = 0.0
             }
         }
         print("keyboard Will appear Execute")
@@ -405,6 +408,7 @@ extension ShareViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("textFieldShouldReturn Execute")
         textField.resignFirstResponder()
+        self.view.endEditing(true)
         return true
     }
 
