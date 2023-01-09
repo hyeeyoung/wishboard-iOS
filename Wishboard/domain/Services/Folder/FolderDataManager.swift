@@ -29,6 +29,10 @@ class FolderDataManager {
                     viewcontroller.getFolderAPIFail()
                 case 404:
                     viewcontroller.noFolder()
+                case 500:
+                    DispatchQueue.main.async {
+                        ErrorBar(viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -51,6 +55,10 @@ class FolderDataManager {
                 switch statusCode {
                 case 409:
                     viewcontroller.sameFolderNameFail()
+                case 500:
+                    DispatchQueue.main.async {
+                        ErrorBar(viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -74,6 +82,10 @@ class FolderDataManager {
                 switch statusCode {
                 case 400, 409:
                     viewcontroller.sameFolderNameFail()
+                case 500:
+                    DispatchQueue.main.async {
+                        ErrorBar(viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -93,7 +105,15 @@ class FolderDataManager {
             case .success(let result):
                 viewcontroller.deleteFolderAPISuccess(result)
             case .failure(let error):
-                print(error.responseCode)
+                let statusCode = error.responseCode
+                switch statusCode {
+                case 500:
+                    DispatchQueue.main.async {
+                        ErrorBar(viewcontroller)
+                    }
+                default:
+                    print(error.responseCode)
+                }
             }
         }
     }
@@ -113,6 +133,10 @@ class FolderDataManager {
                 switch statusCode {
                 case 429:
                     viewcontroller.getFolderListAPIFail()
+                case 500:
+                    DispatchQueue.main.async {
+                        ErrorBar(viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -137,6 +161,10 @@ class FolderDataManager {
                     viewcontroller.getFolderDetailAPIFail()
                 case 404:
                     viewcontroller.noWishList()
+                case 500:
+                    DispatchQueue.main.async {
+                        ErrorBar(viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -155,7 +183,15 @@ class FolderDataManager {
             case .success(let result):
                 viewcontroller.modifyItemFolderAPISuccess(result)
             case .failure(let error):
-                print(error.responseCode)
+                let statusCode = error.responseCode
+                switch statusCode {
+                case 500:
+                    DispatchQueue.main.async {
+                        ErrorBar(viewcontroller)
+                    }
+                default:
+                    print(error.responseCode)
+                }
             }
         }
     }

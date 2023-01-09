@@ -22,7 +22,15 @@ class RegisterDataManager {
             case .success(let result):
                 if result.success! {viewcontroller.registerAPISuccess(result)}
             case .failure(let error):
-                print(error.localizedDescription)
+                let statusCode = error.responseCode
+                switch statusCode {
+                case 500:
+                   DispatchQueue.main.async {
+                       ErrorBar(viewcontroller)
+                   }
+                default:
+                    print(error.responseCode)
+                }
             }
         }
     }
@@ -43,6 +51,10 @@ class RegisterDataManager {
                     switch statusCode {
                     case 409:
                         viewcontroller.checkEmaiAPIFail()
+                    case 500:
+                       DispatchQueue.main.async {
+                           ErrorBar(viewcontroller)
+                       }
                     default:
                         print(statusCode)
                     }

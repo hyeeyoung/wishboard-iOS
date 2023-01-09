@@ -25,6 +25,10 @@ class LoginDataManager {
                     switch statusCode {
                     case 400, 204:
                         viewcontroller.loginAPIFail()
+                    case 500:
+                       DispatchQueue.main.async {
+                           ErrorBar(viewcontroller)
+                       }
                     default:
                         print(statusCode)
                     }

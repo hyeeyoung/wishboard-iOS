@@ -27,6 +27,10 @@ class WishListDataManager {
                 switch statusCode {
                 case 429:
                     viewcontroller.wishListAPIFail()
+                case 500:
+                    DispatchQueue.main.async {
+                        ErrorBar(viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }

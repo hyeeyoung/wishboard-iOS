@@ -30,6 +30,10 @@ class FCMDataManager {
                     DispatchQueue.main.async {
                         viewcontroller.sendFCM()
                     }
+                case 500:
+                    DispatchQueue.main.async {
+                        ErrorBar(viewcontroller)
+                    }
                 default:
                     print(error.localizedDescription)
                 }
@@ -55,6 +59,10 @@ class FCMDataManager {
                     DispatchQueue.main.async {
                         viewcontroller.sendFCM()
                     }
+                case 500:
+                    DispatchQueue.main.async {
+                        ErrorBar(viewcontroller)
+                    }
                 default:
                     print(error.localizedDescription)
                 }
@@ -79,6 +87,10 @@ class FCMDataManager {
                 case 429:
                     DispatchQueue.main.async {
                         viewcontroller.sendFCM()
+                    }
+                case 500:
+                    DispatchQueue.main.async {
+                        ErrorBar(viewcontroller)
                     }
                 default:
                     print(error.localizedDescription)
