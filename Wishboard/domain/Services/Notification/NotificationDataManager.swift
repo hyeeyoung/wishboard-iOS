@@ -72,6 +72,10 @@ class NotificationDataManager {
                 switch statusCode {
                 case 429:
                     viewcontroller.getCalenderNotificationAPIFail()
+                case 500:
+                    DispatchQueue.main.async {
+                        ErrorBar(viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }

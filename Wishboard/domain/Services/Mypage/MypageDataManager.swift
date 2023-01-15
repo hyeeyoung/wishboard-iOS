@@ -27,6 +27,10 @@ class MypageDataManager {
                 switch statusCode {
                 case 429:
                     viewcontroller.getUserInfoAPIFail()
+                case 500:
+                   DispatchQueue.main.async {
+                       ErrorBar(viewcontroller)
+                   }
                 default:
                     print(error.responseCode)
                 }
@@ -46,7 +50,15 @@ class MypageDataManager {
             case .success(let result):
                 viewcontroller.switchNotificationAPISuccess(result)
             case .failure(let error):
-                print(error.responseCode)
+                let statusCode = error.responseCode
+                switch statusCode {
+                    case 500:
+                       DispatchQueue.main.async {
+                           ErrorBar(viewcontroller)
+                       }
+                    default:
+                       print(error.responseCode)
+                }
             }
         }
     }
@@ -62,7 +74,15 @@ class MypageDataManager {
             case .success(let result):
                 viewcontroller.switchNotificationAPISuccess(result)
             case .failure(let error):
-                print(error.responseCode)
+                let statusCode = error.responseCode
+                switch statusCode {
+                    case 500:
+                       DispatchQueue.main.async {
+                           ErrorBar(viewcontroller)
+                       }
+                    default:
+                       print(error.responseCode)
+                }
             }
         }
     }
@@ -78,7 +98,15 @@ class MypageDataManager {
             case .success(let result):
                 viewcontroller.deleteUserAPISuccess(result)
             case .failure(let error):
-                print(error.responseCode)
+                let statusCode = error.responseCode
+                switch statusCode {
+                    case 500:
+                       DispatchQueue.main.async {
+                           ErrorBar(viewcontroller)
+                       }
+                    default:
+                       print(error.responseCode)
+                }
             }
         }
     }
@@ -95,7 +123,15 @@ class MypageDataManager {
             case .success(let result):
                 viewcontroller.logoutAPISuccess(result)
             case .failure(let error):
-                print(error.responseCode)
+                let statusCode = error.responseCode
+                switch statusCode {
+                    case 500:
+                       DispatchQueue.main.async {
+                           ErrorBar(viewcontroller)
+                       }
+                    default:
+                       print(error.responseCode)
+                }
             }
         }
     }

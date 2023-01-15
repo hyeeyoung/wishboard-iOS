@@ -135,6 +135,7 @@
 		23B885EC28E5A9B400142FFA /* UploadItemInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233CDED228E4FE0A004E12BC /* UploadItemInput.swift */; };
 		23BB603328E27001007EA1EF /* ModifyProfileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB603228E27001007EA1EF /* ModifyProfileDataManager.swift */; };
 		23BB603528E2709C007EA1EF /* ModifyProfileInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB603428E2709C007EA1EF /* ModifyProfileInput.swift */; };
+		23BDC2452944E7B1004338E0 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239422E5292FEFCB0024CEBD /* Optional.swift */; };
 		23C2378428C9CEE000CE3200 /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2378328C9CEE000CE3200 /* FolderViewController.swift */; };
 		23C2378628C9CEE800CE3200 /* FolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2378528C9CEE800CE3200 /* FolderView.swift */; };
 		23C2378928C9CF0400CE3200 /* FolderListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2378828C9CF0400CE3200 /* FolderListModel.swift */; };
@@ -1713,6 +1714,7 @@
 				236FE91128DF83E6006142DB /* UIFont.swift in Sources */,
 				230180E928E50C0B001034FC /* FolderInput.swift in Sources */,
 				236FE93A28DF85A4006142DB /* SetNotificationDate.swift in Sources */,
+				23BDC2452944E7B1004338E0 /* Optional.swift in Sources */,
 				236FE92128DF8592006142DB /* UIColor.swift in Sources */,
 				235D550728EBD2CE00314D62 /* ItemParsingModel.swift in Sources */,
 				236FE94228DF888A006142DB /* FolderCollectionViewCell.swift in Sources */,
@@ -1945,7 +1947,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Share Extension/Info.plist";
@@ -1958,7 +1960,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "gomin.Wishboard.Share-Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1974,7 +1976,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Share Extension/Info.plist";
@@ -1987,7 +1989,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "gomin.Wishboard.Share-Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2123,7 +2125,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Wishboard/Wishboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wishboard/Info.plist;
@@ -2138,7 +2140,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = gomin.Wishboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2157,7 +2159,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Wishboard/Wishboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wishboard/Info.plist;
@@ -2172,7 +2174,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = gomin.Wishboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

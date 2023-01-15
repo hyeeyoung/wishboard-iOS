@@ -95,7 +95,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             UIDevice.vibrate()
             let vc = ModifyProfileViewController()
-            if let nickname = self.userInfoData.nickname {
+            if let nickname = self.nickName {
                 vc.nameTextField.text = nickname
                 vc.preNickName = self.userInfoData.nickname
             }
@@ -263,6 +263,7 @@ extension MyPageViewController {
     func getUserInfoAPISuccess(_ result: [GetUserInfoModel]) {
         self.userInfoData = result[0]
         self.nickName = self.userInfoData.nickname
+        
         switch self.userInfoData.push_state {
         case 1:
             self.pushState = true

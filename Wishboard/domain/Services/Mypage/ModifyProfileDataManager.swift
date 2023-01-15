@@ -25,7 +25,15 @@ class ModifyProfileDataManager {
             case .success(let result):
                 viewcontroller.modifyProfileAPISuccess(result)
             case .failure(let error):
-                print(error.responseCode)
+                let statusCode = error.responseCode
+                switch statusCode {
+                case 500:
+                   DispatchQueue.main.async {
+                       ErrorBar(viewcontroller)
+                   }
+                default:
+                    print(error.responseCode)
+                }
             }
         }
     }

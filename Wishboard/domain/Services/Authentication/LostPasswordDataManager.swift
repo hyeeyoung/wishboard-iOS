@@ -28,6 +28,10 @@ class LostPasswordDataManager {
                     switch statusCode {
                     case 404:   //존재하지 않는 유저
                         viewcontroller.checkEmaiAPIFail()
+                    case 500:
+                       DispatchQueue.main.async {
+                           ErrorBar(viewcontroller)
+                       }
                     default:
                         print(statusCode)
                     }
@@ -52,6 +56,10 @@ class LostPasswordDataManager {
                     switch statusCode {
                     case 404:   //존재하지 않는 유저
                         print("유효하지 않은 인증번호")
+                    case 500:
+                       DispatchQueue.main.async {
+                           ErrorBar(viewcontroller)
+                       }
                     default:
                         print(statusCode)
                     }

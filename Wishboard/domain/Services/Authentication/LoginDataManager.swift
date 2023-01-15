@@ -19,12 +19,16 @@ class LoginDataManager {
             .responseDecodable(of: APIModel<ResultModel>.self) { response in
             switch response.result {
             case .success(let result):
-                if result.success! {viewcontroller.loginAPISuccess(result)}
+                if result.success! {viewcontroller.loginAPISuccess(result); print(result)}
             case .failure(let error):
                 if let statusCode = error.responseCode {
                     switch statusCode {
                     case 400, 204:
                         viewcontroller.loginAPIFail()
+                    case 500:
+                       DispatchQueue.main.async {
+                           ErrorBar(viewcontroller)
+                       }
                     default:
                         print(statusCode)
                     }

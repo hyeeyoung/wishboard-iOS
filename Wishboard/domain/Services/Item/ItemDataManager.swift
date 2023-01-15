@@ -28,6 +28,10 @@ class ItemDataManager {
                 switch statusCode {
                 case 429:
                     viewcontroller.getItemDetailAPIFail()
+                case 500:
+                    DispatchQueue.main.async {
+                        ErrorBar(viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -51,6 +55,10 @@ class ItemDataManager {
                 switch statusCode {
                 case 429:
                     viewcontroller.deleteItemAPIFail()
+                case 500:
+                    DispatchQueue.main.async {
+                        ErrorBar(viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -71,10 +79,14 @@ class ItemDataManager {
             case .failure(let error):
                 let statusCode = error.responseCode
                 switch statusCode {
-                case 404:
+                case 404, 204:
                     viewcontroller.getItemByLinkAPIFail()
                 case 429:
                     viewcontroller.getItemByLinkAPIFail429()
+                case 500:
+                    DispatchQueue.main.async {
+                        ErrorBar(viewcontroller)
+                    }
                 default:
                     print(error.localizedDescription)
                     print(error.responseCode)
