@@ -12,4 +12,5 @@ struct LostPasswordModel: Decodable {
 struct VerifyCodeModel: Decodable {
     let token: String?
     let pushState: Int?
+    let tempNickname: String?
 }

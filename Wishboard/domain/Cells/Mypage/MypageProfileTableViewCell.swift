@@ -83,6 +83,7 @@ class MypageProfileTableViewCell: UITableViewCell {
             profileImage.kf.setImage(with: URL(string: profileUrl), placeholder: UIImage(named: "defaultProfile"))
         }
         if let nickname = data.nickname {userNameLabel.text = nickname}
+        else {userNameLabel.text = UserDefaults.standard.string(forKey: "tempNickname") ?? ""}
         if let email = data.email {emailLabel.text = email}
     }
 }

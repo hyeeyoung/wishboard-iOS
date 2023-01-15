@@ -75,8 +75,11 @@ extension RegisterPasswordViewController {
 extension RegisterPasswordViewController {
     func registerAPISuccess(_ result: APIModel<ResultModel>) {
         let token = result.data?.token
+        let tempNickname = result.data?.tempNickname
+        
         UserDefaults.standard.set(token, forKey: "token")
         UserDefaults.standard.set(true, forKey: "isFirstLogin")
+        UserDefaults.standard.set(tempNickname, forKey: "tempNickname")
         
         // FCM
         sendFCM()

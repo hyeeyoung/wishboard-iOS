@@ -12,4 +12,5 @@ struct APIModel<T: Decodable>: Decodable {
 }
 struct ResultModel: Decodable {
     let token: String?
+    let tempNickname: String?
 }

@@ -111,9 +111,12 @@ extension GetEmailViewController {
         let token = result.data?.token
         let email = self.email
         let pushState = result.data?.pushState
+        let tempNickname = result.data?.tempNickname
+        
         UserDefaults.standard.set(token, forKey: "token")
         UserDefaults.standard.set(false, forKey: "isFirstLogin")
         UserDefaults.standard.set(email, forKey: "email")
+        UserDefaults.standard.set(tempNickname, forKey: "tempNickname")
         
         ScreenManager().goMain(self)
         

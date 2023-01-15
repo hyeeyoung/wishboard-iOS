@@ -80,10 +80,13 @@ class LoginViewController: TitleCenterViewController {
 extension LoginViewController {
     func loginAPISuccess(_ result: APIModel<ResultModel>) {
         let token = result.data?.token
+        let tempNickname = result.data?.tempNickname
+        
         UserDefaults.standard.set(token, forKey: "token")
         UserDefaults.standard.set(false, forKey: "isFirstLogin")
         UserDefaults.standard.set(loginViewModel.email, forKey: "email")
         UserDefaults.standard.set(loginViewModel.password, forKey: "password")
+        UserDefaults.standard.set(tempNickname, forKey: "tempNickname")
         
         // FCM
         sendFCM()
