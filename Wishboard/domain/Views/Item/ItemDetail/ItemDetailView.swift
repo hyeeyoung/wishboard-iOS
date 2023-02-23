@@ -12,14 +12,14 @@ class ItemDetailView: UIView {
     // MARK: - Properties
     let navigationView = UIView()
     let modifyButton = UIButton().then{
-        $0.setImage(UIImage(named: "pencil"), for: .normal)
+        $0.setImage(Image.pencil, for: .normal)
     }
     let deleteButton = UIButton().then{
-        $0.setImage(UIImage(named: "trash"), for: .normal)
+        $0.setImage(Image.trash, for: .normal)
     }
     let backButton = UIButton().then{
         var config = UIButton.Configuration.plain()
-        config.image = UIImage(named: "goBack")
+        config.image = Image.goBack
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         $0.configuration = config
     }

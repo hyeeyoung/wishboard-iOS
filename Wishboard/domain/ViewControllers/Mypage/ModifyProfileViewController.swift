@@ -11,14 +11,14 @@ import Kingfisher
 class ModifyProfileViewController: TitleCenterViewController {
     // profile
     var profileImage = UIImageView().then{
-        $0.image = UIImage(named: "defaultProfile")
+        $0.image = Image.defaultProfile
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 53
         $0.contentMode = .scaleAspectFill
         $0.isUserInteractionEnabled = true
     }
     let cameraButton = UIButton().then{
-        $0.setImage(UIImage(named: "camera_gray"), for: .normal)
+        $0.setImage(Image.cameraGray, for: .normal)
     }
     var nameTextField = UITextField().then{
         $0.placeholder = "닉네임을 수정해주세요."

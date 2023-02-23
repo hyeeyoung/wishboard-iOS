@@ -12,7 +12,7 @@ import SafariServices
 class RegisterPasswordView: UIView {
     // MARK: - View
     let lockedImage = UIImageView().then{
-        $0.image = UIImage(named: "locked")
+        $0.image = Image.locked
     }
     let subTitleLabel = UILabel().then{
         $0.text = "마지막 비밀번호 입력 단계예요!\n입력된 비밀번호로 바로 가입되니 신중히 입력해 주세요."

@@ -24,19 +24,19 @@ class CartTableViewCell: UITableViewCell {
     }
     let deleteButton = UIButton().then{
         var config = UIButton.Configuration.plain()
-        config.image = UIImage(named: "x")
+        config.image = Image.quit
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         $0.configuration = config
     }
     let minusButton = UIButton().then{
         var config = UIButton.Configuration.plain()
-        config.image = UIImage(named: "ic_cart_minus")
+        config.image = Image.cartMinus
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         $0.configuration = config
     }
     let plusButton = UIButton().then{
         var config = UIButton.Configuration.plain()
-        config.image = UIImage(named: "ic_cart_plus")
+        config.image = Image.cartPlus
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         $0.configuration = config
     }

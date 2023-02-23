@@ -16,7 +16,7 @@ class UploadItemPhotoTableViewCell: UITableViewCell {
         $0.contentMode = .scaleAspectFit
     }
     let cameraImage = UIImageView().then{
-        $0.image = UIImage(named: "camera_gray")
+        $0.image = Image.cameraGray
     }
 
     //MARK: - Life Cycles

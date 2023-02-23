@@ -109,7 +109,7 @@ extension UIButton {
         attText.font = UIFont.Suit(size: 12, family: .Regular)
         attText.foregroundColor = UIColor.black
         config.attributedTitle = attText
-        config.image = UIImage(named: "ic_noti")
+        config.image = Image.noti
         
         self.configuration = config
     }

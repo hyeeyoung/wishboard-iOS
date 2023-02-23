@@ -22,7 +22,7 @@ class NavigationBar {
             $0.setTextWithLineHeight()
         }
         let backButton = UIButton().then{
-            $0.setImage(UIImage(named: "goBack"), for: .normal)
+            $0.setImage(Image.goBack, for: .normal)
         }
         
         view.addSubview(navigationView)

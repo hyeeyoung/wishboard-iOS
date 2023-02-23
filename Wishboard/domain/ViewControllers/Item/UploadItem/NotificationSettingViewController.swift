@@ -14,7 +14,7 @@ class NotificationSettingViewController: UIViewController {
         $0.font = UIFont.Suit(size: 14, family: .Bold)
     }
     let exitBtn = UIButton().then{
-        $0.setImage(UIImage(named: "x"), for: .normal)
+        $0.setImage(Image.quit, for: .normal)
     }
     let notificationPickerView = UIPickerView().then{
         $0.tintColor = .black

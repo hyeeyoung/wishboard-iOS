@@ -21,7 +21,7 @@ class FolderListTableViewCell: UITableViewCell {
         $0.numberOfLines = 1
     }
     let checkIcon = UIImageView().then{
-        $0.image = UIImage(named: "check")
+        $0.image = Image.checkGreen
         $0.isHidden = true
     }
 

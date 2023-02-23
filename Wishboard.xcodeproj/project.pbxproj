@@ -53,6 +53,8 @@
 		2350FADF28DB9BEA00981B8F /* SetNotificationDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2350FADE28DB9BEA00981B8F /* SetNotificationDate.swift */; };
 		235129D928F679C900489CAD /* BottomSheetKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235129D828F679C900489CAD /* BottomSheetKeyboardViewController.swift */; };
 		235129DA28F67BAE00489CAD /* BottomSheetKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235129D828F679C900489CAD /* BottomSheetKeyboardViewController.swift */; };
+		2351859929A6F40B0004FCB4 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2351859829A6F40B0004FCB4 /* Image.swift */; };
+		2351859A29A6F8540004FCB4 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2351859829A6F40B0004FCB4 /* Image.swift */; };
 		235204CE28E2690F004F5DC6 /* GetUserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235204CD28E2690F004F5DC6 /* GetUserInfoModel.swift */; };
 		235D550628EBD2C700314D62 /* ItemParsingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235D550528EBD2C700314D62 /* ItemParsingModel.swift */; };
 		235D550728EBD2CE00314D62 /* ItemParsingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235D550528EBD2C700314D62 /* ItemParsingModel.swift */; };
@@ -294,6 +296,7 @@
 		234F838E28C987CB00C4EB41 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		2350FADE28DB9BEA00981B8F /* SetNotificationDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNotificationDate.swift; sourceTree = "<group>"; };
 		235129D828F679C900489CAD /* BottomSheetKeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetKeyboardViewController.swift; sourceTree = "<group>"; };
+		2351859829A6F40B0004FCB4 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		235204CD28E2690F004F5DC6 /* GetUserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserInfoModel.swift; sourceTree = "<group>"; };
 		235D550528EBD2C700314D62 /* ItemParsingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemParsingModel.swift; sourceTree = "<group>"; };
 		2360095D28DA1829001FB107 /* FolderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDetailViewController.swift; sourceTree = "<group>"; };
@@ -919,6 +922,15 @@
 			path = Cart;
 			sourceTree = "<group>";
 		};
+		2351859729A6F3E80004FCB4 /* Namespace */ = {
+			isa = PBXGroup;
+			children = (
+				23C9568C28C6812100D88536 /* UIColor.swift */,
+				2351859829A6F40B0004FCB4 /* Image.swift */,
+			);
+			path = Namespace;
+			sourceTree = "<group>";
+		};
 		235204CC28E26902004F5DC6 /* MypageModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -1093,9 +1105,9 @@
 		23C9567C28C67FC900D88536 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				2351859729A6F3E80004FCB4 /* Namespace */,
 				2331867C28DA92DF00F17CBF /* Lottie */,
 				23C9567E28C67FD900D88536 /* Fonts */,
-				23C9568C28C6812100D88536 /* UIColor.swift */,
 				23D5518028C69E2900D81B5F /* UITextField.swift */,
 				23D5518228C6A3BD00D81B5F /* UIButton.swift */,
 				23C8A1BF28C9F23E003ABFE9 /* NavigationBar.swift */,
@@ -1716,6 +1728,7 @@
 				236FE93A28DF85A4006142DB /* SetNotificationDate.swift in Sources */,
 				23BDC2452944E7B1004338E0 /* Optional.swift in Sources */,
 				236FE92128DF8592006142DB /* UIColor.swift in Sources */,
+				2351859A29A6F8540004FCB4 /* Image.swift in Sources */,
 				235D550728EBD2CE00314D62 /* ItemParsingModel.swift in Sources */,
 				236FE94228DF888A006142DB /* FolderCollectionViewCell.swift in Sources */,
 				236FE93928DF85A4006142DB /* SnackBar.swift in Sources */,
@@ -1791,6 +1804,7 @@
 				2328C5A728CABF300065ABB2 /* NotiView.swift in Sources */,
 				235204CE28E2690F004F5DC6 /* GetUserInfoModel.swift in Sources */,
 				2360095E28DA1829001FB107 /* FolderDetailViewController.swift in Sources */,
+				2351859929A6F40B0004FCB4 /* Image.swift in Sources */,
 				23F07F4428E7D5930012D77D /* TitleCenterViewController.swift in Sources */,
 				23C2378928C9CF0400CE3200 /* FolderListModel.swift in Sources */,
 				237478A428D20DB600CF941A /* FolderListTableViewCell.swift in Sources */,

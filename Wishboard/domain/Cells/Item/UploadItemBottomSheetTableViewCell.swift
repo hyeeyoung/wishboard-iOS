@@ -27,7 +27,7 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
     
     func setBottomSheetCell(isUploadItem: Bool, tag: Int) {
         let arrowImg = UIImageView().then{
-            $0.image = UIImage(named: "arrow_right")
+            $0.image = Image.arrowRight
         }
         self.contentView.addSubview(arrowImg)
         arrowImg.snp.makeConstraints { make in

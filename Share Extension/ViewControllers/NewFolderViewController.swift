@@ -14,7 +14,7 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
         $0.font = UIFont.Suit(size: 14, family: .Bold)
     }
     let exitBtn = UIButton().then{
-        $0.setImage(UIImage(named: "x"), for: .normal)
+        $0.setImage(Image.quit, for: .normal)
     }
     let newFolderTextField = UITextField().then{
         $0.addLeftPadding(10)

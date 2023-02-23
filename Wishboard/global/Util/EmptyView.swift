@@ -84,7 +84,7 @@ class EmptyView {
         }
         let backView = UIView()
         let notiImage = UIImageView().then{
-            $0.image = UIImage(named: "noti_large")
+            $0.image = Image.notiLarge
         }
         
         backgroudView.addSubview(backView)

@@ -13,11 +13,11 @@ class OnBoardingTableViewCell: UITableViewCell {
 
     // 흔드는 손 Image
     let handImage = UIImageView().then{
-        $0.image = UIImage(named: "twemoji_waving-hand")
+        $0.image = Image.wavingHand
     }
     // Wish Board Logo Image
     let logoImage = UIImageView().then{
-        $0.image = UIImage(named: "WishBoardLogo")
+        $0.image = Image.wishboardLogo
     }
     // Onbarding label
     let onboardingLabel = UILabel().then{

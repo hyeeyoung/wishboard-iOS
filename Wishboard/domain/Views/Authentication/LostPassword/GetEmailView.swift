@@ -11,7 +11,7 @@ import UIKit
 class GetEmailView: UIView {
     // MARK: - Views
     let lockedImage = UIImageView().then{
-        $0.image = UIImage(named: "locked")
+        $0.image = Image.locked
     }
     let subTitleLabel = UILabel().then{
         $0.text = "인증코드가 전송되었어요!\n이메일을 확인해주세요."

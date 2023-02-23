@@ -11,7 +11,7 @@ import UIKit
 class LostPasswordView: UIView {
     // MARK: - View
     let heartLetterImage = UIImageView().then{
-        $0.image = UIImage(named: "love-letter")
+        $0.image = Image.loveLetter
     }
     let subTitleLabel = UILabel().then{
         $0.text = "가입하신 이메일을 입력해주세요!\n로그인을 위해 인증코드가 포함된 이메일을 보내드려요."

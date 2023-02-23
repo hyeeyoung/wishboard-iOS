@@ -11,7 +11,7 @@ import UIKit
 class RegisterEmailView: UIView {
     // MARK: - View
     let heartLetterImage = UIImageView().then{
-        $0.image = UIImage(named: "love-letter")
+        $0.image = Image.loveLetter
     }
     let subTitleLabel = UILabel().then{
         $0.text = "이메일 인증으로 비밀번호를 찾을 수 있어요.\n실제 사용될 이메일로 입력해주세요!"

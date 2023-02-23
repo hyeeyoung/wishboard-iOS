@@ -15,13 +15,13 @@ class MypageProfileTableViewCell: UITableViewCell {
         $0.backgroundColor = .black
     }
     let profileImage = UIImageView().then{
-        $0.image = UIImage(named: "defaultProfile")
+        $0.image = Image.defaultProfile
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 45
         $0.contentMode = .scaleAspectFill
     }
     let cameraButton = UIButton().then{
-        $0.setImage(UIImage(named: "camera_green"), for: .normal)
+        $0.setImage(Image.cameraGreen, for: .normal)
     }
     let userNameLabel = UILabel().then{
         $0.text = "닉네임을 정해주세요"
@@ -80,7 +80,7 @@ class MypageProfileTableViewCell: UITableViewCell {
     }
     func setUpData(_ data: GetUserInfoModel) {
         if let profileUrl = data.profile_img_url {
-            profileImage.kf.setImage(with: URL(string: profileUrl), placeholder: UIImage(named: "defaultProfile"))
+            profileImage.kf.setImage(with: URL(string: profileUrl), placeholder: Image.defaultProfile)
         }
         if let nickname = data.nickname {userNameLabel.text = nickname}
         else {userNameLabel.text = UserDefaults.standard.string(forKey: "tempNickname") ?? ""}

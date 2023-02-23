@@ -35,7 +35,7 @@ class FolderCollectionViewCell: UICollectionViewCell {
         $0.layer.cornerRadius = 10
     }
     let selectedIcon = UIImageView().then{
-        $0.image = UIImage(named: "check_white")
+        $0.image = Image.checkWhite
     }
     
     // MARK: - Life Cycles

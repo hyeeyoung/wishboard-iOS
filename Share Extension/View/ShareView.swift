@@ -14,7 +14,7 @@ class ShareView: UIView {
         $0.backgroundColor = .systemGray6
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 40
-        $0.image = UIImage(named: "blackLogo")
+        $0.image = Image.blackLogo
         $0.contentMode = .scaleAspectFill
     }
     let backgroundView = UIView().then{
@@ -22,7 +22,7 @@ class ShareView: UIView {
         $0.layer.cornerRadius = 20
     }
     lazy var quitButton = UIButton().then{
-        $0.setImage(UIImage(named: "x"), for: .normal)
+        $0.setImage(Image.quit, for: .normal)
     }
     let itemNameTextField = UITextField().then{
         $0.borderStyle = .none
@@ -41,7 +41,7 @@ class ShareView: UIView {
         $0.setNotificationButton("", false)
     }
     let addFolderButton = UIButton().then{
-        $0.setImage(UIImage(named: "addFolder"), for: .normal)
+        $0.setImage(Image.addFolder, for: .normal)
     }
     let completeButton = UIButton().then{
         $0.defaultButton("위시리스트에 추가", .wishboardGreen, .black)

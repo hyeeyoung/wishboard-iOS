@@ -297,7 +297,7 @@ extension ShareViewController {
             self.itemPrice = "0"
         }
         
-        self.shareView.itemImage.kf.setImage(with: URL(string: itemImg ?? ""), placeholder: UIImage(named: "blackLogo"))
+        self.shareView.itemImage.kf.setImage(with: URL(string: itemImg ?? ""), placeholder: Image.blackLogo)
         self.shareView.itemNameTextField.text = self.itemName
         self.shareView.itemPriceTextField.text = FormatManager().strToPrice(numStr: itemPrice ?? "")
         
