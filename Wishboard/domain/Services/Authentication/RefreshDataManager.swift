@@ -29,9 +29,6 @@ class RefreshDataManager {
             case .failure(let error):
                 if let statusCode = error.responseCode {
                     print("token refresh fail:", statusCode)
-                    if statusCode == 401 {
-                        RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
-                    }
                 }
             }
         }
