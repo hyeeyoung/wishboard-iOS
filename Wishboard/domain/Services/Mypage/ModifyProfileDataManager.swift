@@ -31,6 +31,8 @@ class ModifyProfileDataManager {
                    DispatchQueue.main.async {
                        ErrorBar(viewcontroller)
                    }
+                case 401:
+                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
                 default:
                     print(error.responseCode)
                 }
@@ -71,7 +73,10 @@ class ModifyProfileDataManager {
                         print("error", data)
                     }
                 case let .failure(error): // 요청 x
-                print(error.responseCode)
+                    print(error.responseCode)
+                    if error.responseCode == 401 {
+                        RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    }
             }
         }
     }
@@ -99,6 +104,9 @@ class ModifyProfileDataManager {
                         print("error", data)
                     }
                 case let .failure(error): // 요청 x
+                    if error.responseCode == 401 {
+                        RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    }
                 print(error.responseCode)
             }
         }

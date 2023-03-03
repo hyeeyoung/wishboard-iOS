@@ -60,6 +60,8 @@ class LostPasswordDataManager {
                        DispatchQueue.main.async {
                            ErrorBar(viewcontroller)
                        }
+                    case 401:
+                        RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
                     default:
                         print(statusCode)
                     }

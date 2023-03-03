@@ -27,6 +27,8 @@ class NotificationDataManager {
                 switch statusCode {
                 case 429:
                     notiView.getNotificationListAPIFail()
+                case 401:
+                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
                 default:
                     print(error.responseCode)
                 }
@@ -45,13 +47,13 @@ class NotificationDataManager {
             case .success(let result):
                 notiView.readNotificationAPISuccess(result)
             case .failure(let error):
-//                let statusCode = error.responseCode
-//                switch statusCode {
-//                case 429:
-//                    notiView.getNotificationListAPIFail()
-//                default:
-//                    print(error.responseCode)
-//                }
+                let statusCode = error.responseCode
+                switch statusCode {
+                case 401:
+                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                default:
+                    print(error.responseCode)
+                }
                 print(error.responseCode)
             }
         }
@@ -76,6 +78,8 @@ class NotificationDataManager {
                     DispatchQueue.main.async {
                         ErrorBar(viewcontroller)
                     }
+                case 401:
+                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
                 default:
                     print(error.responseCode)
                 }

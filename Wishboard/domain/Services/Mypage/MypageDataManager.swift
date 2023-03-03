@@ -31,6 +31,8 @@ class MypageDataManager {
                    DispatchQueue.main.async {
                        ErrorBar(viewcontroller)
                    }
+                case 401:
+                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
                 default:
                     print(error.responseCode)
                 }
@@ -52,6 +54,8 @@ class MypageDataManager {
             case .failure(let error):
                 let statusCode = error.responseCode
                 switch statusCode {
+                    case 401:
+                        RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
                     case 500:
                        DispatchQueue.main.async {
                            ErrorBar(viewcontroller)
@@ -80,6 +84,8 @@ class MypageDataManager {
                        DispatchQueue.main.async {
                            ErrorBar(viewcontroller)
                        }
+                    case 401:
+                        RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
                     default:
                        print(error.responseCode)
                 }
@@ -104,6 +110,8 @@ class MypageDataManager {
                        DispatchQueue.main.async {
                            ErrorBar(viewcontroller)
                        }
+                    case 401:
+                        RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
                     default:
                        print(error.responseCode)
                 }
@@ -127,6 +135,8 @@ class MypageDataManager {
                        DispatchQueue.main.async {
                            ErrorBar(viewcontroller)
                        }
+                    case 401:
+                        RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
                     default:
                        print(error.responseCode)
                 }
