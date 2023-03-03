@@ -61,7 +61,7 @@ class ShareViewController: UIViewController {
         NetworkCheck.shared.startMonitoring(vc: self)
         // Login Check
         let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
-        let token = defaults?.string(forKey: "token") ?? ""
+        let token = defaults?.string(forKey: "accessToken") ?? ""
         if token == "" {
             shareView.completeButton.defaultButton("로그인 후 아이템을 추가해보세요!", .wishboardDisabledGray, .dialogMessageColor)
             shareView.completeButton.isEnabled = false
