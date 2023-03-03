@@ -283,14 +283,15 @@ extension MyPageViewController {
         MypageDataManager().getUserInfoDataManager(self)
     }
     // MARK: 알림 토글 수정 API
-    func switchNotificationAPISuccess(_ result: APIModel<ResultModel>) {
+    func switchNotificationAPISuccess(_ result: APIModel<TokenResultModel>) {
         pushState?.toggle()
         print(result.message)
     }
     // MARK: 회원 탈퇴 API
-    func deleteUserAPISuccess(_ result: APIModel<ResultModel>) {
+    func deleteUserAPISuccess(_ result: APIModel<TokenResultModel>) {
         // delete UserInfo
-        UserDefaults.standard.removeObject(forKey: "token")
+        UserDefaults.standard.removeObject(forKey: "accessToken")
+        UserDefaults.standard.removeObject(forKey: "refreshToken")
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "password")
         UserDefaults.standard.removeObject(forKey: "isFirstLogin")
@@ -303,9 +304,10 @@ extension MyPageViewController {
         print(result.message)
     }
     // MARK: 로그아웃 API
-    func logoutAPISuccess(_ result: APIModel<ResultModel>) {
+    func logoutAPISuccess(_ result: APIModel<TokenResultModel>) {
         // delete UserInfo
-        UserDefaults.standard.removeObject(forKey: "token")
+        UserDefaults.standard.removeObject(forKey: "accessToken")
+        UserDefaults.standard.removeObject(forKey: "refreshToken")
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "password")
         UserDefaults.standard.set(false, forKey: "isFirstLogin")

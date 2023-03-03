@@ -20,7 +20,7 @@ class ModifyProfileDataManager {
                            encoder: JSONParameterEncoder.default,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 viewcontroller.modifyProfileAPISuccess(result)
@@ -64,7 +64,7 @@ class ModifyProfileDataManager {
                 case let .success(data):
                     do {
                         let decoder = JSONDecoder()
-                        let result = try decoder.decode(APIModel<ResultModel>.self, from: data)
+                        let result = try decoder.decode(APIModel<TokenResultModel>.self, from: data)
                         viewcontroller.modifyProfileAPISuccess(result)
                         print(result)
                     } catch {
@@ -92,7 +92,7 @@ class ModifyProfileDataManager {
                 case let .success(data):
                     do {
                         let decoder = JSONDecoder()
-                        let result = try decoder.decode(APIModel<ResultModel>.self, from: data)
+                        let result = try decoder.decode(APIModel<TokenResultModel>.self, from: data)
                         viewcontroller.modifyProfileAPISuccess(result)
                         print(result)
                     } catch {

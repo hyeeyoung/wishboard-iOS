@@ -73,11 +73,13 @@ extension RegisterPasswordViewController {
 }
 // MARK: - API Success
 extension RegisterPasswordViewController {
-    func registerAPISuccess(_ result: APIModel<ResultModel>) {
-        let token = result.data?.token
+    func registerAPISuccess(_ result: APIModel<TokenResultModel>) {
+        let accessToken = result.data?.token.accessToken
+        let refreshToken = result.data?.token.refreshToken
         let tempNickname = result.data?.tempNickname
         
-        UserDefaults.standard.set(token, forKey: "token")
+        UserDefaults.standard.set(accessToken, forKey: "accessToken")
+        UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
         UserDefaults.standard.set(true, forKey: "isFirstLogin")
         UserDefaults.standard.set(tempNickname, forKey: "tempNickname")
         
@@ -94,7 +96,7 @@ extension RegisterPasswordViewController {
         let fcmInput = FCMInput(fcm_token: deviceToken)
         FCMDataManager().fcmDataManager(fcmInput, self)
     }
-    func fcmAPISuccess(_ result: APIModel<ResultModel>) {
+    func fcmAPISuccess(_ result: APIModel<TokenResultModel>) {
         print(result.message)
     }
 }

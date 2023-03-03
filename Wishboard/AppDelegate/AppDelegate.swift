@@ -50,7 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             // Build Version 올라갈 때마다 로그아웃API 호출
             UserDefaults.standard.set(Bundle.appBuildVersion, forKey: "appBuildVersion")
             // delete UserInfo
-            UserDefaults.standard.removeObject(forKey: "token")
+            UserDefaults.standard.removeObject(forKey: "accessToken")
+            UserDefaults.standard.removeObject(forKey: "refreshToken")
             UserDefaults.standard.removeObject(forKey: "email")
             UserDefaults.standard.removeObject(forKey: "password")
             UserDefaults.standard.set(false, forKey: "isFirstLogin")

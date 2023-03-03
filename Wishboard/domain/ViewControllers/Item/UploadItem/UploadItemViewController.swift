@@ -423,13 +423,13 @@ extension UploadItemViewController: UIScrollViewDelegate {
 // MARK: - API Success
 extension UploadItemViewController {
     // MARK: 아이템 추가 API
-    func uploadItemAPISuccess(_ result: APIModel<ResultModel>) {
+    func uploadItemAPISuccess(_ result: APIModel<TokenResultModel>) {
         self.viewDidLoad()
         ScreenManager().goMainPages(0, self, family: .itemUpload)
         print(result.message)
     }
     // MARK: 아이템 수정 API
-    func modifyItemAPISuccess(_ result: APIModel<ResultModel>) {
+    func modifyItemAPISuccess(_ result: APIModel<TokenResultModel>) {
         self.viewDidLoad()
         self.navigationController?.popViewController(animated: true)
         isModified = true

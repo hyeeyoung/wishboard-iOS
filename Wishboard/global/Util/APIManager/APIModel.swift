@@ -11,6 +11,13 @@ struct APIModel<T: Decodable>: Decodable {
     let data: T?
 }
 struct ResultModel: Decodable {
-    let token: String?
+    let data: String?
+}
+struct TokenResultModel: Decodable {
+    let token: TokenModel
     let tempNickname: String?
+}
+struct TokenModel: Decodable {
+    let accessToken: String
+    let refreshToken: String
 }

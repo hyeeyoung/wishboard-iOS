@@ -32,7 +32,7 @@ enum Image{
     public static let cartMinus = UIImage(named: "ic_cart_minus")!
     
     public static let goBack = UIImage(named: "goBack")!
-    public static let calender = UIImage(named: "ic_calender")!
+    public static let calender = UIImage(named: "ic_calendar")!
     
     // menu
     public static let menu = UIImage(named: "ic_menu")!

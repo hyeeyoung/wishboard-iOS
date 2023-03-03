@@ -46,7 +46,7 @@ class ItemDataManager {
                            parameters: nil,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 viewcontroller.deleteItemAPISuccess(result)
@@ -133,7 +133,7 @@ class ItemDataManager {
                 case let .success(data):
                     do {
                         let decoder = JSONDecoder()
-                        let result = try decoder.decode(APIModel<ResultModel>.self, from: data)
+                        let result = try decoder.decode(APIModel<TokenResultModel>.self, from: data)
                         viewcontroller.uploadItemAPISuccess(result)
                         print(result)
                     } catch {
@@ -179,7 +179,7 @@ class ItemDataManager {
                 case let .success(data):
                     do {
                         let decoder = JSONDecoder()
-                        let result = try decoder.decode(APIModel<ResultModel>.self, from: data)
+                        let result = try decoder.decode(APIModel<TokenResultModel>.self, from: data)
                         viewcontroller.uploadItemAPISuccess(result)
                         print(result)
                     } catch {
@@ -228,7 +228,7 @@ class ItemDataManager {
                 case let .success(data):
                     do {
                         let decoder = JSONDecoder()
-                        let result = try decoder.decode(APIModel<ResultModel>.self, from: data)
+                        let result = try decoder.decode(APIModel<TokenResultModel>.self, from: data)
                         viewcontroller.uploadItemAPISuccess(result)
                         print(result)
                     } catch {
@@ -273,7 +273,7 @@ class ItemDataManager {
                 case let .success(data):
                     do {
                         let decoder = JSONDecoder()
-                        let result = try decoder.decode(APIModel<ResultModel>.self, from: data)
+                        let result = try decoder.decode(APIModel<TokenResultModel>.self, from: data)
                         viewcontroller.uploadItemAPISuccess(result)
                         print(result)
                     } catch {
@@ -326,7 +326,7 @@ class ItemDataManager {
                 case let .success(data):
                     do {
                         let decoder = JSONDecoder()
-                        let result = try decoder.decode(APIModel<ResultModel>.self, from: data)
+                        let result = try decoder.decode(APIModel<TokenResultModel>.self, from: data)
                         viewcontroller.modifyItemAPISuccess(result)
                         print(result)
                     } catch {
@@ -373,7 +373,7 @@ class ItemDataManager {
                 case let .success(data):
                     do {
                         let decoder = JSONDecoder()
-                        let result = try decoder.decode(APIModel<ResultModel>.self, from: data)
+                        let result = try decoder.decode(APIModel<TokenResultModel>.self, from: data)
                         viewcontroller.modifyItemAPISuccess(result)
                         print(result)
                     } catch {
@@ -423,7 +423,7 @@ class ItemDataManager {
                 case let .success(data):
                     do {
                         let decoder = JSONDecoder()
-                        let result = try decoder.decode(APIModel<ResultModel>.self, from: data)
+                        let result = try decoder.decode(APIModel<TokenResultModel>.self, from: data)
                         viewcontroller.modifyItemAPISuccess(result)
                         print(result)
                     } catch {
@@ -469,7 +469,7 @@ class ItemDataManager {
                 case let .success(data):
                     do {
                         let decoder = JSONDecoder()
-                        let result = try decoder.decode(APIModel<ResultModel>.self, from: data)
+                        let result = try decoder.decode(APIModel<TokenResultModel>.self, from: data)
                         viewcontroller.modifyItemAPISuccess(result)
                         print(result)
                     } catch {

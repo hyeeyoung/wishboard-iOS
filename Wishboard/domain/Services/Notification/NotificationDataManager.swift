@@ -40,7 +40,7 @@ class NotificationDataManager {
                            parameters: nil,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 notiView.readNotificationAPISuccess(result)

@@ -45,7 +45,7 @@ class MypageDataManager {
                            parameters: nil,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 viewcontroller.switchNotificationAPISuccess(result)
@@ -69,7 +69,7 @@ class MypageDataManager {
                            parameters: nil,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 viewcontroller.switchNotificationAPISuccess(result)
@@ -93,7 +93,7 @@ class MypageDataManager {
                            parameters: nil,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 viewcontroller.deleteUserAPISuccess(result)
@@ -118,7 +118,7 @@ class MypageDataManager {
                            parameters: logoutInput,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 viewcontroller.logoutAPISuccess(result)

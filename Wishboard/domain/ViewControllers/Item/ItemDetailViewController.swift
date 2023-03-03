@@ -132,7 +132,7 @@ extension ItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - API Success
 extension ItemDetailViewController {
     // MARK: 아이템 삭제
-    func deleteItemAPISuccess(_ result: APIModel<ResultModel>) {
+    func deleteItemAPISuccess(_ result: APIModel<TokenResultModel>) {
         self.dismiss(animated: false)
         self.isDeleted = true
         

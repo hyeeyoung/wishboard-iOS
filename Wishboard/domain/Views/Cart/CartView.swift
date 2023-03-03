@@ -238,12 +238,12 @@ extension CartView {
         self.countLabel.text = "0"
     }
     // MARK: 장바구니 수량 변경 API
-    func modifyCountAPISuccess(_ result: APIModel<ResultModel>) {
+    func modifyCountAPISuccess(_ result: APIModel<TokenResultModel>) {
         CartDataManager().getCartListDataManager(self)
         print(result.message)
     }
     // MARK: 장바구니 삭제 API
-    func deleteCartAPISuccess(_ result: APIModel<ResultModel>) {
+    func deleteCartAPISuccess(_ result: APIModel<TokenResultModel>) {
         CartDataManager().getCartListDataManager(self)
         print(result.message)
     }

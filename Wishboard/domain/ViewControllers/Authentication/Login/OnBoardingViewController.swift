@@ -40,7 +40,7 @@ class OnBoardingViewController: UIViewController {
         }
     }
     func checkRememberMe() {
-        if let token = UserDefaults.standard.string(forKey: "token") {
+        if let token = UserDefaults.standard.string(forKey: "accessToken") {
             let email = UserDefaults.standard.string(forKey: "email")
             let password = UserDefaults.standard.string(forKey: "password")
             print(email, password, token)
@@ -59,7 +59,7 @@ class OnBoardingViewController: UIViewController {
         let fcmInput = FCMInput(fcm_token: deviceToken)
         FCMDataManager().fcmDataManager(fcmInput, self)
     }
-    func fcmAPISuccess(_ result: APIModel<ResultModel>) {
+    func fcmAPISuccess(_ result: APIModel<TokenResultModel>) {
         print("FCMAPI::", result.message)
     }
 }

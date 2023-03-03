@@ -118,7 +118,7 @@ extension NotiView {
         NotificationDataManager().getNotificationListDataManager(self)
     }
     // MARK: 알림 읽음 처리 API
-    func readNotificationAPISuccess(_ result: APIModel<ResultModel>) {
+    func readNotificationAPISuccess(_ result: APIModel<TokenResultModel>) {
         NotificationDataManager().getNotificationListDataManager(self)
         print(result.message)
     }

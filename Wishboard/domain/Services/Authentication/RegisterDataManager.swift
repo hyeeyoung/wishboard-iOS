@@ -17,7 +17,7 @@ class RegisterDataManager {
                    encoder: JSONParameterEncoder.default,
                    headers: nil)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 if result.success! {viewcontroller.registerAPISuccess(result)}
@@ -42,7 +42,7 @@ class RegisterDataManager {
                    encoder: JSONParameterEncoder.default,
                    headers: nil)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 if result.success! {viewcontroller.checkEmailAPISuccess(result)}

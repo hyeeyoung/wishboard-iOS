@@ -42,7 +42,7 @@ class CartDataManager {
                            parameters: parameter,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 cartView.modifyCountAPISuccess(result)
@@ -59,7 +59,7 @@ class CartDataManager {
                            parameters: parameter,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 viewcontroller.addCartAPISuccess(result)
@@ -75,7 +75,7 @@ class CartDataManager {
                            parameters: parameter,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 viewcontroller.addCartAPISuccess(result)
@@ -91,7 +91,7 @@ class CartDataManager {
                            parameters: nil,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 cartView.deleteCartAPISuccess(result)
@@ -107,7 +107,7 @@ class CartDataManager {
                            parameters: nil,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 viewcontroller.deleteCartAPISuccess(result)
@@ -123,7 +123,7 @@ class CartDataManager {
                            parameters: nil,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 viewcontroller.deleteCartAPISuccess(result)

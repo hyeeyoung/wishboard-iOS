@@ -120,14 +120,14 @@ extension FolderDetailViewController {
         }
     }
     // MARK: 장바구니 추가 API
-    func addCartAPISuccess(_ result: APIModel<ResultModel>) {
+    func addCartAPISuccess(_ result: APIModel<TokenResultModel>) {
         if let folderId = self.folderId {
             FolderDataManager().getFolderDetailDataManager(self.folderId, self)
         }
         print(result.message)
     }
     // MARK: 장바구니 삭제 API
-    func deleteCartAPISuccess(_ result: APIModel<ResultModel>) {
+    func deleteCartAPISuccess(_ result: APIModel<TokenResultModel>) {
         if let folderId = self.folderId {
             FolderDataManager().getFolderDetailDataManager(self.folderId, self)
         }

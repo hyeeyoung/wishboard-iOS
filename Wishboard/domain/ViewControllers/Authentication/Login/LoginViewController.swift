@@ -78,11 +78,13 @@ class LoginViewController: TitleCenterViewController {
 }
 // MARK: - API Success
 extension LoginViewController {
-    func loginAPISuccess(_ result: APIModel<ResultModel>) {
-        let token = result.data?.token
+    func loginAPISuccess(_ result: APIModel<TokenResultModel>) {
+        let accessToken = result.data?.token.accessToken
+        let refreshToken = result.data?.token.refreshToken
         let tempNickname = result.data?.tempNickname
         
-        UserDefaults.standard.set(token, forKey: "token")
+        UserDefaults.standard.set(accessToken, forKey: "accessToken")
+        UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
         UserDefaults.standard.set(false, forKey: "isFirstLogin")
         UserDefaults.standard.set(loginViewModel.email, forKey: "email")
         UserDefaults.standard.set(loginViewModel.password, forKey: "password")
@@ -108,7 +110,7 @@ extension LoginViewController {
         let fcmInput = FCMInput(fcm_token: deviceToken)
         FCMDataManager().fcmDataManager(fcmInput, self)
     }
-    func fcmAPISuccess(_ result: APIModel<ResultModel>) {
+    func fcmAPISuccess(_ result: APIModel<TokenResultModel>) {
         print(result.message)
     }
 }

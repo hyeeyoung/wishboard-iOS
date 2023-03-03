@@ -202,7 +202,7 @@ extension ModifyProfileViewController: UITextFieldDelegate {
 }
 // MARK: - API Success
 extension ModifyProfileViewController {
-    func modifyProfileAPISuccess(_ result: APIModel<ResultModel>) {
+    func modifyProfileAPISuccess(_ result: APIModel<TokenResultModel>) {
         if result.success! {
             self.modified = true
             self.navigationController?.popViewController(animated: true)
