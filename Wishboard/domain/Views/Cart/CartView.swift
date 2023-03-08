@@ -187,8 +187,19 @@ extension CartView {
     // (X) 버튼 클릭
     @objc func deleteButtonDidTap(_ sender: CartGesture) {
         UIDevice.vibrate()
+        let dialog = PopUpViewController(titleText: "장바구니에서 삭제", messageText: "정말 장바구니에서 아이템을 삭제하시겠어요?", greenBtnText: "취소", blackBtnText: "삭제")
+        dialog.modalPresentationStyle = .overFullScreen
+        self.preVC.present(dialog, animated: false, completion: nil)
+        
+        let deleteGesture = CartGesture(target: self, action: #selector(deleteItem(_:)))
+        deleteGesture.cartItem = sender.cartItem
+        dialog.okBtn.addGestureRecognizer(deleteGesture)
+    }
+    @objc func deleteItem(_ sender: CartGesture) {
+        UIDevice.vibrate()
         guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
         CartDataManager().deleteCartDataManager(itemId, self)
+        
     }
     // 상품 이미지, 상품명 클릭 (아이템 디테일 화면으로 이동)
     @objc func cartItemDidTap(_ sender: CartGesture) {
@@ -244,6 +255,7 @@ extension CartView {
     }
     // MARK: 장바구니 삭제 API
     func deleteCartAPISuccess(_ result: APIModel<TokenResultModel>) {
+        self.preVC.dismiss(animated: false)
         CartDataManager().getCartListDataManager(self)
         print(result.message)
     }
