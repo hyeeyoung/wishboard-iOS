@@ -92,7 +92,7 @@ extension LoginViewController {
         UserDefaults.standard.set(tempNickname, forKey: "tempNickname")
         
         // FCM
-        sendFCM()
+//        sendFCM()
         // go Main
         ScreenManager().goMain(self)
     }
@@ -103,15 +103,15 @@ extension LoginViewController {
             $0.isEnabled = false
         }
     }
-    // MARK: FCM API
-    func sendFCM() {
-        // Send FCM token to server
-        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
-        print("device Token:", deviceToken)
-        let fcmInput = FCMInput(fcm_token: deviceToken)
-        FCMDataManager().fcmDataManager(fcmInput, self)
-    }
-    func fcmAPISuccess(_ result: APIModel<TokenResultModel>) {
-        print(result.message)
-    }
+//    // MARK: FCM API
+//    func sendFCM() {
+//        // Send FCM token to server
+//        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
+//        print("device Token:", deviceToken)
+//        let fcmInput = FCMInput(fcm_token: deviceToken)
+//        FCMDataManager().fcmDataManager(fcmInput, self)
+//    }
+//    func fcmAPISuccess(_ result: APIModel<TokenResultModel>) {
+//        print(result.message)
+//    }
 }
