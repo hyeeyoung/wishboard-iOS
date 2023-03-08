@@ -7,6 +7,7 @@
 
 
 struct LoginInput: Encodable {
-    let email: String?
-    let password: String?
+    let email: String
+    let password: String
+    let fcmToken: String
 }

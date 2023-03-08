@@ -49,7 +49,8 @@ extension RegisterPasswordViewController {
         lottieView.isHidden = false
         lottieView.play { completion in
             self.view.endEditing(true)
-            let registerInput = RegisterInput(email: self.email, password: self.pw)
+            let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
+            let registerInput = RegisterInput(email: self.email, password: self.pw, fcmToken: deviceToken)
             RegisterDataManager().registerDataManager(registerInput, self)
         }
     }

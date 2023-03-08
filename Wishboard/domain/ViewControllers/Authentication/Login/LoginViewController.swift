@@ -46,9 +46,10 @@ class LoginViewController: TitleCenterViewController {
     @objc func loginButtonDidTap() {
         UIDevice.vibrate()
         self.view.endEditing(true)
-        let email = loginViewModel.email
-        let pw = loginViewModel.password
-        let loginInput = LoginInput(email: email, password: pw)
+        let email = loginViewModel.email ?? ""
+        let pw = loginViewModel.password ?? ""
+        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
+        let loginInput = LoginInput(email: email, password: pw, fcmToken: deviceToken)
         LoginDataManager().loginDataManager(loginInput, self)
     }
     @objc func lostPasswordButtonDidTap() {
