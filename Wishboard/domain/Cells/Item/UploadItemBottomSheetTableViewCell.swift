@@ -20,6 +20,15 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         subTitle.isHidden = true
+        
+        self.textLabel?.snp.makeConstraints({ make in
+            make.leading.equalToSuperview().offset(16)
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-47)
+        })
+        self.textLabel?.then{
+            $0.textAlignment = .left
+        }
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
