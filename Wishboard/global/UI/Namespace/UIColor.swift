@@ -9,9 +9,15 @@ import UIKit
 
 extension UIColor{
     static let wishboardGreen = UIColor(
-        red: 124/255,
-        green: 248/255,
-        blue: 133/255,
+        red: 149/255,
+        green: 251/255,
+        blue: 157/255,
+        alpha: 1
+    )
+    static let dialogGreenTxt = UIColor(
+        red: 104/255,
+        green: 235/255,
+        blue: 114/255,
         alpha: 1
     )
     static let wishboardLightGreen = UIColor(
