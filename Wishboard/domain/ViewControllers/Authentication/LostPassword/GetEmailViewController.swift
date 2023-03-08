@@ -111,7 +111,6 @@ extension GetEmailViewController {
         let accessToken = result.data?.token.accessToken
         let refreshToken = result.data?.token.refreshToken
         let email = self.email
-        let pushState = result.data?.pushState
         let tempNickname = result.data?.tempNickname
         
         UserDefaults.standard.set(accessToken, forKey: "accessToken")
