@@ -9,8 +9,16 @@ import Foundation
 import UIKit
 
 class EmptyView {
+    // MARK: - Views
     var message: String!
-    
+    let messageLabel = UILabel().then{
+        $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.textColor = .wishboardGray
+        $0.textAlignment = .center
+        $0.numberOfLines = 0
+        $0.sizeToFit()
+    }
+    // MARK: - Methods
     func setEmptyView(_ message: String, _ collectionView: UICollectionView, _ count: Int) {
         self.message = message
         
@@ -29,38 +37,17 @@ class EmptyView {
         if count == 0 {showNotificationEmptyView(tableView, isCalender)}
         else {hideEmptyView(tableView)}
     }
-    // Collectionview
-    func showEmptyView(_ collectionView: UICollectionView) {
-        let messageLabel = UILabel().then{
-            $0.font = UIFont.Suit(size: 14, family: .Regular)
-            $0.textColor = .wishboardGray
-            $0.textAlignment = .center
-            $0.text = self.message
-            $0.numberOfLines = 0
-            $0.sizeToFit()
-        }
+    // MARK: - Layout
+    func hierachy(_ collectionView: UICollectionView) {
         let backgroudView = UIView(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: collectionView.bounds.height))
         backgroudView.addSubview(messageLabel)
-        
         messageLabel.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
         
         collectionView.backgroundView = backgroudView
     }
-    func hideEmptyView(_ collectionView: UICollectionView) {
-        collectionView.backgroundView?.isHidden = true
-    }
-    // Tableview
-    func showEmptyView(_ tableView: UITableView) {
-        let messageLabel = UILabel().then{
-            $0.font = UIFont.Suit(size: 14, family: .Regular)
-            $0.textColor = .wishboardGray
-            $0.textAlignment = .center
-            $0.text = self.message
-            $0.numberOfLines = 0
-            $0.sizeToFit()
-        }
+    func hierachy(_ tableView: UITableView) {
         let backgroudView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: tableView.bounds.height))
         backgroudView.addSubview(messageLabel)
         
@@ -70,6 +57,27 @@ class EmptyView {
         
         tableView.backgroundView = backgroudView
     }
+    
+    // MARK: - Show/Hide Methods
+    // Collectionview
+    func showEmptyView(_ collectionView: UICollectionView) {
+        messageLabel.text = self.message
+        
+        hierachy(collectionView)
+    }
+    func hideEmptyView(_ collectionView: UICollectionView) {
+        collectionView.backgroundView?.isHidden = true
+    }
+    // Tableview
+    func showEmptyView(_ tableView: UITableView) {
+        messageLabel.text = self.message
+        
+        hierachy(tableView)
+    }
+    func hideEmptyView(_ tableView: UITableView) {
+        tableView.backgroundView?.isHidden = true
+    }
+    // MARK: - Notification Page Empty View
     // Notification Table View
     func showNotificationEmptyView(_ tableView: UITableView, _ isCalender: Bool) {
         let backgroudView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: tableView.bounds.height))
@@ -106,14 +114,25 @@ class EmptyView {
             make.centerX.equalToSuperview()
             if isCalender {make.bottom.equalToSuperview().offset(-135)}
             else {make.centerY.equalToSuperview()}
-//            if UIDevice.current.hasNotch {make.bottom.equalToSuperview().offset(-135)}
-//            else {make.bottom.equalToSuperview().offset(-105)}
             
         }
         
         tableView.backgroundView = backgroudView
     }
-    func hideEmptyView(_ tableView: UITableView) {
-        tableView.backgroundView?.isHidden = true
+    // MARK: - Folder Set Tableview Empty View
+    func showFolderTableViewEmptyView(_ tableView: UITableView, _ message: String, _ count: Int) {
+        messageLabel.text = message
+        
+        let backgroudView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: tableView.bounds.height))
+        backgroudView.addSubview(messageLabel)
+        
+        messageLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-(317/2))
+        }
+        
+        tableView.backgroundView = backgroudView
+        
+        if count != 0 {hideEmptyView(tableView)}
     }
 }
