@@ -22,7 +22,6 @@ class PopUpWithTextFieldViewController: UIViewController {
         $0.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
     }
     let titleLabel = UILabel().then{
-        $0.text = "title"
         $0.font = UIFont.Suit(size: 16, family: .Bold)
     }
     let quitButton = UIButton().then{
@@ -32,7 +31,7 @@ class PopUpWithTextFieldViewController: UIViewController {
         $0.configuration = config
     }
     let countLabel = UILabel().then{
-        $0.text = "(0/10)자"
+        $0.text = Message.count
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .wishboardGray
     }
@@ -45,7 +44,7 @@ class PopUpWithTextFieldViewController: UIViewController {
         $0.textColor = .editTextFontColor
     }
     let errorMessageLabel = UILabel().then{
-        $0.text = "동일이름의 폴더가 있어요!"
+        $0.text = ErrorMessage.sameFolderName
         $0.textColor = .wishboardRed
         $0.font = UIFont.Suit(size: 12, family: .Regular)
     }

@@ -18,7 +18,7 @@ class MyPageViewController: TitleLeftViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.navigationTitle.text = "마이페이지"
+        super.navigationTitle.text = Title.mypage
         
         mypageView = MyPageView()
         mypageView.setTableView(dataSourceDelegate: self)
@@ -199,7 +199,7 @@ extension MyPageViewController {
     // 회원 탈퇴 팝업창
     func showSignoutDialog() {
         guard let email = self.userInfoData.email else {return}
-        let dialog = PopUpDeleteUserViewController(titleText: "회원 탈퇴", greenBtnText: "취소", blackBtnText: "탈퇴", placeholder: "이메일을 입력해주세요.", email: email)
+        let dialog = PopUpDeleteUserViewController(titleText: "회원 탈퇴", greenBtnText: "취소", blackBtnText: "탈퇴", placeholder: Placeholder.email, email: email)
         dialog.modalPresentationStyle = .overFullScreen
         self.present(dialog, animated: false, completion: nil)
         

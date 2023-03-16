@@ -24,12 +24,12 @@ class MypageProfileTableViewCell: UITableViewCell {
         $0.setImage(Image.cameraGreen, for: .normal)
     }
     let userNameLabel = UILabel().then{
-        $0.text = "닉네임을 정해주세요"
+        $0.text = ""
         $0.font = UIFont.Suit(size: 18, family: .Bold)
         $0.textColor = .white
     }
     let emailLabel = UILabel().then{
-        $0.text = "email@email.com"
+        $0.text = ""
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .lightGray
     }

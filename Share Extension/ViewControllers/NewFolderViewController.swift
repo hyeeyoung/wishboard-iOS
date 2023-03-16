@@ -10,7 +10,7 @@ import Lottie
 
 class NewFolderViewController: BottomSheetKeyboardViewController {
     let titleLabel = UILabel().then{
-        $0.text = "새 폴더 추가"
+        $0.text = Title.addFolder
         $0.font = UIFont.Suit(size: 14, family: .Bold)
     }
     let exitBtn = UIButton().then{
@@ -23,20 +23,20 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
         $0.font = UIFont.Suit(size: 16, family: .Regular)
         $0.textColor = .editTextFontColor
         $0.clearButtonMode = .whileEditing
-        $0.placeholder = "폴더명을 입력해 주세요."
+        $0.placeholder = Placeholder.folder
     }
     let textFieldCountLabel = UILabel().then{
-        $0.text = "(0/10)자"
+        $0.text = Message.count
         $0.textColor = .wishboardGray
         $0.font = UIFont.Suit(size: 12, family: .Regular)
     }
     let errorMessage = UILabel().then{
-        $0.text = "동일이름의 폴더가 있어요!"
+        $0.text = ErrorMessage.sameFolderName
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .wishboardRed
     }
     let completeButton = UIButton().then{
-        $0.defaultButton("추가", .wishboardGreen, .black)
+        $0.defaultButton(Button.add, .wishboardGreen, .black)
     }
     // MARK: - Life Cycles
     var folderStr: String!
@@ -60,7 +60,7 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
         
         self.errorMessage.isHidden = true
         self.completeButton.isEnabled = false
-        self.completeButton.defaultButton("추가", .wishboardDisabledGray, .dialogMessageColor)
+        self.completeButton.defaultButton(Button.add, .wishboardDisabledGray, .dialogMessageColor)
         
         self.newFolderTextField.addTarget(self, action: #selector(folderTextFieldEditingChanged(_:)), for: .editingChanged)
         self.exitBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -143,14 +143,14 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
             self.textFieldCountLabel.textColor = .wishboardGray
             self.errorMessage.isHidden = true
             self.completeButton.isSelected = false
-            self.completeButton.defaultButton("추가", .wishboardGreen, .black)
+            self.completeButton.defaultButton(Button.add, .wishboardGreen, .black)
             self.completeButton.isEnabled = true
             self.folderStr = self.tempFolderStr
         } else {
             self.textFieldCountLabel.textColor = .wishboardRed
             self.errorMessage.isHidden = true
             self.completeButton.isSelected = false
-            self.completeButton.defaultButton("추가", .wishboardDisabledGray, .dialogMessageColor)
+            self.completeButton.defaultButton(Button.add, .wishboardDisabledGray, .dialogMessageColor)
             self.completeButton.isEnabled = false
         }
     }
@@ -167,7 +167,7 @@ extension NewFolderViewController {
         self.errorMessage.isHidden = true
         self.lottieView.isHidden = true
         self.completeButton.isSelected = false
-        self.completeButton.defaultButton("추가", .wishboardGreen, .black)
+        self.completeButton.defaultButton(Button.add, .wishboardGreen, .black)
         self.completeButton.isEnabled = true
         
         print(result.message)
@@ -176,7 +176,7 @@ extension NewFolderViewController {
         self.lottieView.isHidden = true
         self.completeButton.reloadInputViews()
         self.errorMessage.isHidden = false
-        self.completeButton.defaultButton("추가", .wishboardDisabledGray, .dialogMessageColor)
+        self.completeButton.defaultButton(Button.add, .wishboardDisabledGray, .dialogMessageColor)
         self.completeButton.isEnabled = false
     }
     func addFolderAPIFail() {

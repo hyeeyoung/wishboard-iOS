@@ -23,7 +23,6 @@ class FolderCollectionViewCell: UICollectionViewCell {
         $0.layer.cornerRadius = 10
     }
     let folderName = UILabel().then{
-        $0.text = "folderName"
         $0.textColor = .white
         $0.font = UIFont.Suit(size: 11, family: .Bold)
         $0.numberOfLines = 1

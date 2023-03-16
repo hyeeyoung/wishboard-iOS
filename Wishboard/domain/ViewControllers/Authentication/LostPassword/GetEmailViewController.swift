@@ -23,7 +23,7 @@ class GetEmailViewController: KeyboardViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.navigationTitle.text = "이메일로 로그인하기"
+        super.navigationTitle.text = Title.loginByEmail
         
         setGetEmailView()
     }
@@ -60,7 +60,7 @@ extension GetEmailViewController {
         if self.code != self.authCode {
             getEmailView.messageLabel.isHidden = false
             self.getEmailView.loginButton.then{
-                $0.defaultButton("로그인 하기", .wishboardDisabledGray, .dialogMessageColor)
+                $0.defaultButton(Button.login, .wishboardDisabledGray, .dialogMessageColor)
                 $0.isEnabled = false
             }
         } else {
@@ -94,12 +94,12 @@ extension GetEmailViewController {
         if isValidCode && self.isValidTime {
             self.getEmailView.messageLabel.isHidden = true
             self.getEmailView.loginButton.then{
-                $0.defaultButton("로그인 하기", .wishboardGreen, .black)
+                $0.defaultButton(Button.login, .wishboardGreen, .black)
                 $0.isEnabled = true
             }
         } else {
             self.getEmailView.loginButton.then{
-                $0.defaultButton("로그인 하기", .wishboardDisabledGray, .dialogMessageColor)
+                $0.defaultButton(Button.login, .wishboardDisabledGray, .dialogMessageColor)
                 $0.isEnabled = false
             }
         }

@@ -22,21 +22,19 @@ class CalenderNotiTableViewCell: UITableViewCell {
         $0.contentMode = .scaleAspectFill
     }
     let itemName = UILabel().then{
-        $0.text = "itemName"
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.numberOfLines = 2
     }
     // '재입고 알림'
     let notificationTypeLabel = UILabel().then{
-        $0.text = "재입고"
+        $0.text = Notification.restock
         $0.font = UIFont.Suit(size: 13, family: .Bold)
     }
     let label = UILabel().then{
-        $0.text = " 알림"
+        $0.text = Notification.notification
         $0.font = UIFont.Suit(size: 13, family: .Bold)
     }
     let timeLabel = UILabel().then{
-        $0.text = ""
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .gray
     }

@@ -58,6 +58,8 @@
 		2351859929A6F40B0004FCB4 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2351859829A6F40B0004FCB4 /* Image.swift */; };
 		2351859A29A6F8540004FCB4 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2351859829A6F40B0004FCB4 /* Image.swift */; };
 		235204CE28E2690F004F5DC6 /* GetUserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235204CD28E2690F004F5DC6 /* GetUserInfoModel.swift */; };
+		2353A8D829C351FE0042575E /* StringEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2353A8D729C351FE0042575E /* StringEnum.swift */; };
+		2353A8D929C353950042575E /* StringEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2353A8D729C351FE0042575E /* StringEnum.swift */; };
 		235D550628EBD2C700314D62 /* ItemParsingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235D550528EBD2C700314D62 /* ItemParsingModel.swift */; };
 		235D550728EBD2CE00314D62 /* ItemParsingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235D550528EBD2C700314D62 /* ItemParsingModel.swift */; };
 		2360095E28DA1829001FB107 /* FolderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360095D28DA1829001FB107 /* FolderDetailViewController.swift */; };
@@ -302,6 +304,7 @@
 		235129D828F679C900489CAD /* BottomSheetKeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetKeyboardViewController.swift; sourceTree = "<group>"; };
 		2351859829A6F40B0004FCB4 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		235204CD28E2690F004F5DC6 /* GetUserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserInfoModel.swift; sourceTree = "<group>"; };
+		2353A8D729C351FE0042575E /* StringEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringEnum.swift; sourceTree = "<group>"; };
 		235D550528EBD2C700314D62 /* ItemParsingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemParsingModel.swift; sourceTree = "<group>"; };
 		2360095D28DA1829001FB107 /* FolderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDetailViewController.swift; sourceTree = "<group>"; };
 		2360095F28DA2297001FB107 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
@@ -933,6 +936,7 @@
 			children = (
 				23C9568C28C6812100D88536 /* UIColor.swift */,
 				2351859829A6F40B0004FCB4 /* Image.swift */,
+				2353A8D729C351FE0042575E /* StringEnum.swift */,
 			);
 			path = Namespace;
 			sourceTree = "<group>";
@@ -1754,6 +1758,7 @@
 				230180E728E50BC1001034FC /* APIManager.swift in Sources */,
 				236FE93828DF85A4006142DB /* EmptyView.swift in Sources */,
 				236FE91C28DF8592006142DB /* UIButton.swift in Sources */,
+				2353A8D929C353950042575E /* StringEnum.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1828,6 +1833,7 @@
 				23D4C66428D8E96700EA7F98 /* LostPasswordViewController.swift in Sources */,
 				23134D3F29B222BF00238536 /* RefreshDataManager.swift in Sources */,
 				23C5AB4928CAA23300A7E977 /* MyPageView.swift in Sources */,
+				2353A8D829C351FE0042575E /* StringEnum.swift in Sources */,
 				239F93682939322C008AC5AB /* Bundle.swift in Sources */,
 				23D4C66028D8E87B00EA7F98 /* GetEmailView.swift in Sources */,
 				232174DB28E1BE81008C155D /* RegisterDataManager.swift in Sources */,

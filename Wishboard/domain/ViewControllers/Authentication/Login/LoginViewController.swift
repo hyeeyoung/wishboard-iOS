@@ -15,7 +15,7 @@ class LoginViewController: TitleCenterViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.navigationTitle.text = "로그인하기"
+        super.navigationTitle.text = Title.login
 
         self.view.addSubview(loginView)
         
@@ -63,13 +63,13 @@ class LoginViewController: TitleCenterViewController {
             guard let isValid = isValidID else {return}
             if isValid {
                 self.loginView.loginButton.then{
-                    $0.defaultButton("로그인하기", .wishboardGreen, .black)
+                    $0.defaultButton(Button.login, .wishboardGreen, .black)
                     $0.isEnabled = true
                 }
                 
             } else {
                 self.loginView.loginButton.then{
-                    $0.defaultButton("로그인하기", .wishboardDisabledGray, .dialogMessageColor)
+                    $0.defaultButton(Button.login, .wishboardDisabledGray, .dialogMessageColor)
                     $0.isEnabled = false
                 }
             }
@@ -99,7 +99,7 @@ extension LoginViewController {
     func loginAPIFail() {
         SnackBar(self, message: .login)
         self.loginView.loginButton.then{
-            $0.defaultButton("로그인하기", .wishboardDisabledGray, .dialogMessageColor)
+            $0.defaultButton(Button.login, .wishboardDisabledGray, .dialogMessageColor)
             $0.isEnabled = false
         }
     }

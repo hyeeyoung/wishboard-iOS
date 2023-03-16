@@ -12,7 +12,7 @@ class UploadItemView: UIView {
     // MARK: - View
     let navigationView = UIView()
     let pageTitle = UILabel().then{
-        $0.text = "아이템 추가"
+        $0.text = Title.addItem
         $0.font = UIFont.Suit(size: 15, family: .Bold)
     }
     let backButton = UIButton().then{
@@ -22,7 +22,7 @@ class UploadItemView: UIView {
         $0.configuration = config
     }
     var saveButton = UIButton().then{
-        $0.defaultButton("저장", .wishboardGreen, .black)
+        $0.defaultButton(Button.save, .wishboardGreen, .black)
     }
     
     let scrollView = UIScrollView().then{
@@ -46,11 +46,11 @@ class UploadItemView: UIView {
     // 저장버튼 Enabled 여부
     func setSaveButton(_ isEnable: Bool) {
         if isEnable {
-            saveButton.defaultButton("저장", .wishboardGreen, .black)
+            saveButton.defaultButton(Button.save, .wishboardGreen, .black)
             saveButton.isEnabled = true
         }
         else {
-            saveButton.defaultButton("저장", .wishboardDisabledGray, .dialogMessageColor)
+            saveButton.defaultButton(Button.save, .wishboardDisabledGray, .dialogMessageColor)
             saveButton.isEnabled = false
         }
     }

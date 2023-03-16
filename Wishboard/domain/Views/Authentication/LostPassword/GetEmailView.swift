@@ -14,7 +14,7 @@ class GetEmailView: UIView {
         $0.image = Image.locked
     }
     let subTitleLabel = UILabel().then{
-        $0.text = "인증코드가 전송되었어요!\n이메일을 확인해주세요."
+        $0.text = Message.sendedEmail
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.setTextWithLineHeight()
         $0.textAlignment = .center
@@ -22,25 +22,25 @@ class GetEmailView: UIView {
     }
     // 인증코드 TextField
     var codeTextField = UITextField().then{
-        $0.defaultTextField("인증코드를 입력해주세요.")
+        $0.defaultTextField(Placeholder.authcode)
         $0.becomeFirstResponder()
         $0.isSecureTextEntry = true
         $0.textColor = .editTextFontColor
     }
     var timerLabel = UILabel().then{
-        $0.text = "5:00"
+        $0.text = Message.timer
         $0.font = UIFont.Suit(size: 14, family: .Regular)
         $0.textColor = .wishboardRed
     }
     let messageLabel = UILabel().then{
-        $0.text = "인증코드를 다시 확인해 주세요."
+        $0.text = ErrorMessage.authcode
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .wishboardRed
         $0.numberOfLines = 1
     }
     // 로그인하기 버튼
     let loginButton = UIButton().then{
-        $0.defaultButton("로그인하기", .wishboardDisabledGray, .dialogMessageColor)
+        $0.defaultButton(Button.login, .wishboardDisabledGray, .dialogMessageColor)
         $0.isEnabled = false
     }
     lazy var accessoryView: UIView = {

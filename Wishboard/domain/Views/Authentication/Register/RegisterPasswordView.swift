@@ -15,20 +15,20 @@ class RegisterPasswordView: UIView {
         $0.image = Image.locked
     }
     let subTitleLabel = UILabel().then{
-        $0.text = "마지막 비밀번호 입력 단계예요!\n입력된 비밀번호로 바로 가입되니 신중히 입력해 주세요."
+        $0.text = Message.password
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.setTextWithLineHeight()
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
     var pwTextField = UITextField().then{
-        $0.defaultTextField("비밀번호를 입력해주세요.")
+        $0.defaultTextField(Placeholder.password)
         $0.becomeFirstResponder()
         $0.isSecureTextEntry = true
         $0.textColor = .editTextFontColor
     }
     let errorMessage = UILabel().then{
-        $0.text = "8자리 이상의 영문자, 숫자, 특수 문자 조합으로 입력해주세요."
+        $0.text = ErrorMessage.password
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .wishboardRed
     }
@@ -37,7 +37,7 @@ class RegisterPasswordView: UIView {
         $0.spacing = 0
     }
     let registerButton = UIButton().then{
-        $0.defaultButton("가입하기", .wishboardDisabledGray, .dialogMessageColor)
+        $0.defaultButton(Button.register, .wishboardDisabledGray, .dialogMessageColor)
         $0.isEnabled = false
     }
     lazy var accessoryView: UIView = {

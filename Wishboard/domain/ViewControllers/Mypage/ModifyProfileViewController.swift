@@ -21,7 +21,7 @@ class ModifyProfileViewController: TitleCenterViewController {
         $0.setImage(Image.cameraGray, for: .normal)
     }
     var nameTextField = UITextField().then{
-        $0.placeholder = "닉네임을 입력해주세요."
+        $0.placeholder = Placeholder.nickname
         $0.addLeftPadding(10)
         $0.backgroundColor = .wishboardTextfieldGray
         $0.layer.cornerRadius = 5
@@ -32,7 +32,7 @@ class ModifyProfileViewController: TitleCenterViewController {
         $0.becomeFirstResponder()
     }
     let completeButton = UIButton().then{
-        $0.defaultButton("완료", .wishboardGreen, .black)
+        $0.defaultButton(Button.complete, .wishboardGreen, .black)
     }
     // MARK: - Life Cycles
     // 앨범 선택 image picker
@@ -52,7 +52,7 @@ class ModifyProfileViewController: TitleCenterViewController {
 
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
-        super.navigationTitle.text = "프로필 수정"
+        super.navigationTitle.text = Title.modifyProfile
         
         // imagePicker delegate
         imagePickerController.delegate = self
@@ -133,10 +133,10 @@ extension ModifyProfileViewController {
     // 닉네임 유효성 검사
     func isNicknameValid(nickname: String) {
         if nickname == "" {
-            self.completeButton.defaultButton("완료", .wishboardDisabledGray, .dialogMessageColor)
+            self.completeButton.defaultButton(Button.complete, .wishboardDisabledGray, .dialogMessageColor)
             self.completeButton.isEnabled = false
         } else {
-            self.completeButton.defaultButton("완료", .wishboardGreen, .black)
+            self.completeButton.defaultButton(Button.complete, .wishboardGreen, .black)
             self.completeButton.isEnabled = true
         }
     }

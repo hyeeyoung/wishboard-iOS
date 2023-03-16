@@ -28,14 +28,14 @@ class ShareView: UIView {
         $0.borderStyle = .none
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textAlignment = .center
-        $0.placeholder = "상품명을 입력해 주세요."
+        $0.placeholder = Placeholder.shareItemName
     }
     let itemPriceTextField = UITextField().then{
         $0.borderStyle = .none
         $0.font = .systemFont(ofSize: 12, weight: .bold)
         $0.keyboardType = .numberPad
         $0.textAlignment = .center
-        $0.placeholder = "가격을 입력해 주세요."
+        $0.placeholder = Placeholder.shareItemPrice
     }
     var setNotificationButton = UIButton().then{
         $0.setNotificationButton("", false)
@@ -44,7 +44,7 @@ class ShareView: UIView {
         $0.setImage(Image.addFolder, for: .normal)
     }
     let completeButton = UIButton().then{
-        $0.defaultButton("위시리스트에 추가", .wishboardGreen, .black)
+        $0.defaultButton(Button.addToWishList, .wishboardGreen, .black)
     }
     //MARK: - Life Cycles
     var folderCollectionView: UICollectionView!

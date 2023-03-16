@@ -14,7 +14,7 @@ class NotificationViewController: TitleLeftViewController {
     // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.navigationTitle.text = "알림"
+        super.navigationTitle.text = Title.notification
         
         notiView = NotiView()
         self.view.addSubview(notiView)

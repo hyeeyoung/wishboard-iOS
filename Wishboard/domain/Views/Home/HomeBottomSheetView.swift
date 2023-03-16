@@ -11,7 +11,7 @@ import UIKit
 class HomeBottomSheetView: UIView {
     // MARK: - Properties
     let okButton = UIButton().then{
-        $0.defaultButton("네! 알겠어요", .black, .white)
+        $0.defaultButton(Button.howTo, .black, .white)
     }
     private let pageControl = UIPageControl().then{
         $0.hidesForSinglePage = true

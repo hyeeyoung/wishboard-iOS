@@ -15,7 +15,7 @@ class RegisterPasswordViewController: KeyboardViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.navigationTitle.text = "가입하기"
+        super.navigationTitle.text = Title.register
         
         registerPWView = RegisterPasswordView()
         self.view.addSubview(registerPWView)
@@ -60,13 +60,13 @@ extension RegisterPasswordViewController {
         if isValid {
             registerPWView.errorMessage.isHidden = true
             registerPWView.registerButton.then{
-                $0.defaultButton("가입하기", .wishboardGreen, .black)
+                $0.defaultButton(Button.register, .wishboardGreen, .black)
                 $0.isEnabled = true
             }
         } else {
             registerPWView.errorMessage.isHidden = false
             registerPWView.registerButton.then{
-                $0.defaultButton("가입하기", .wishboardDisabledGray, .dialogMessageColor)
+                $0.defaultButton(Button.register, .wishboardDisabledGray, .dialogMessageColor)
                 $0.isEnabled = false
             }
         }

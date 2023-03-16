@@ -38,11 +38,11 @@ class UploadItemTextfieldTableViewCell: UITableViewCell {
     func setPlaceholder(tag: Int) {
         switch tag {
         case 0:
-            textfield.placeholder = "상품명(필수)"
+            textfield.placeholder = Placeholder.uploadItemName
         case 1:
-            textfield.placeholder = "₩ 가격(필수)"
+            textfield.placeholder = Placeholder.uploadItemPrice
         case 5:
-            textfield.placeholder = "브랜드, 사이즈, 컬러 등 아이템 정보를 메모로 남겨보세요!😉"
+            textfield.placeholder = Placeholder.uploadItemMemo
         default:
             fatalError()
         }

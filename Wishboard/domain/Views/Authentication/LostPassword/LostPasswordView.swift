@@ -14,24 +14,24 @@ class LostPasswordView: UIView {
         $0.image = Image.loveLetter
     }
     let subTitleLabel = UILabel().then{
-        $0.text = "가입하신 이메일을 입력해주세요!\n로그인을 위해 인증코드가 포함된 이메일을 보내드려요."
+        $0.text = Message.lostPassword
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.setTextWithLineHeight()
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
     var emailTextField = UITextField().then{
-        $0.defaultTextField("이메일")
+        $0.defaultTextField(Placeholder.email)
         $0.becomeFirstResponder()
         $0.textColor = .editTextFontColor
     }
     let errorMessage = UILabel().then{
-        $0.text = "이메일 주소를 정확하게 입력해주세요."
+        $0.text = ErrorMessage.email
         $0.textColor = .wishboardRed
         $0.font = UIFont.Suit(size: 12, family: .Regular)
     }
     let getEmailButton = UIButton().then{
-        $0.defaultButton("인증메일 받기", .wishboardDisabledGray, .dialogMessageColor)
+        $0.defaultButton(Button.getEmail, .wishboardDisabledGray, .dialogMessageColor)
         $0.isEnabled = false
     }
     lazy var accessoryView: UIView = {

@@ -10,7 +10,7 @@ import Lottie
 
 class FolderViewController: TitleLeftViewController {
     var folderView : FolderView!
-    let emptyMessage = "앗, 폴더가 없어요!\n폴더를 추가해서 아이템을 정리해 보세요!"
+    let emptyMessage = EmptyMessage.folder
     var dialog: PopUpWithTextFieldViewController!
     var folderData: [FolderModel] = []
     var folderStr: String?
@@ -20,7 +20,7 @@ class FolderViewController: TitleLeftViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.navigationTitle.text = "폴더"
+        super.navigationTitle.text = Title.folder
 
         setFolderView()
         FolderDataManager().getFolderDataManager(self)
@@ -118,7 +118,7 @@ extension FolderViewController {
     // 폴더 추가 팝업창
     func alertAddDialog() {
         UIDevice.vibrate()
-        dialog = PopUpWithTextFieldViewController(titleText: "새 폴더 추가", placeholder: "폴더명을 입력해 주세요.", prevText: nil, buttonTitle: "추가")
+        dialog = PopUpWithTextFieldViewController(titleText: "새 폴더 추가", placeholder: Placeholder.folder, prevText: nil, buttonTitle: "추가")
         dialog.modalPresentationStyle = .overFullScreen
         dialog.completeButton.addTarget(self, action: #selector(completeAddButtonDidTap), for: .touchUpInside)
         dialog.textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
@@ -129,7 +129,7 @@ extension FolderViewController {
     // 폴더명 수정 팝업창
     func alertModifyDialog(folderData: FolderModel) {
         UIDevice.vibrate()
-        dialog = PopUpWithTextFieldViewController(titleText: "폴더명 수정", placeholder: "폴더명을 입력해 주세요.", prevText: folderData.folder_name, buttonTitle: "수정")
+        dialog = PopUpWithTextFieldViewController(titleText: "폴더명 수정", placeholder: Placeholder.folder, prevText: folderData.folder_name, buttonTitle: "수정")
         dialog.modalPresentationStyle = .overFullScreen
         let folderMenuGesture = CustomButton(target: self, action: #selector(completeModifyButtonDidTap(_:)))
         folderMenuGesture.folderData = folderData

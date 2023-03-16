@@ -63,7 +63,7 @@ class ShareViewController: UIViewController {
         let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
         let token = defaults?.string(forKey: "accessToken") ?? ""
         if token == "" {
-            shareView.completeButton.defaultButton("로그인 후 아이템을 추가해보세요!", .wishboardDisabledGray, .dialogMessageColor)
+            shareView.completeButton.defaultButton(Button.doLogin, .wishboardDisabledGray, .dialogMessageColor)
             shareView.completeButton.isEnabled = false
             shareView.itemNameTextField.isEnabled = false
             shareView.itemPriceTextField.isEnabled = false
@@ -156,10 +156,10 @@ class ShareViewController: UIViewController {
     }
     func setButton() {
         if isValidContent() {
-            shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardGreen, .black)
+            shareView.completeButton.defaultButton(Button.addToWishList, .wishboardGreen, .black)
             shareView.completeButton.isEnabled = true
         } else {
-            shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardDisabledGray, .dialogMessageColor)
+            shareView.completeButton.defaultButton(Button.addToWishList, .wishboardDisabledGray, .dialogMessageColor)
             shareView.completeButton.isEnabled = false
         }
     }
@@ -290,7 +290,7 @@ extension ShareViewController {
             SnackBar(self, message: .failShoppingLink)
             FolderDataManager().getFolderListDataManager(self)
             
-            shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardDisabledGray, .dialogMessageColor)
+            shareView.completeButton.defaultButton(Button.addToWishList, .wishboardDisabledGray, .dialogMessageColor)
             shareView.completeButton.isEnabled = false
             
         } else if self.itemPrice == nil {
@@ -314,7 +314,7 @@ extension ShareViewController {
     func getItemDataAPIFail() {
         SnackBar(self, message: .failShoppingLink)
         
-        shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardDisabledGray, .dialogMessageColor)
+        shareView.completeButton.defaultButton(Button.addToWishList, .wishboardDisabledGray, .dialogMessageColor)
         shareView.completeButton.isEnabled = false
     }
     // MARK: 아이템 간편 등록
@@ -330,7 +330,7 @@ extension ShareViewController {
     }
     func uploadItemAPIFunc() {
         lottieView.stop()
-        shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardGreen, .black)
+        shareView.completeButton.defaultButton(Button.addToWishList, .wishboardGreen, .black)
         shareView.completeButton.isEnabled = false
         lottieView.isHidden = true
         
@@ -339,7 +339,7 @@ extension ShareViewController {
     func uploadItem500Error() {
         lottieView.isHidden = true
         shareView.completeButton.isSelected = false
-        shareView.completeButton.defaultButton("위시리스트에 추가", .wishboardGreen, .black)
+        shareView.completeButton.defaultButton(Button.addToWishList, .wishboardGreen, .black)
         shareView.completeButton.isEnabled = true
         
         ErrorBar(self)

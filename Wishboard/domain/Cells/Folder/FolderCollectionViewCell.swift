@@ -18,17 +18,15 @@ class FolderCollectionViewCell: UICollectionViewCell {
         $0.contentMode = .scaleAspectFill
     }
     let folderType = UILabel().then{
-        $0.text = "folder"
         $0.font = UIFont.Suit(size: 14, family: .Bold)
         $0.numberOfLines = 1
     }
     let countLabel = UILabel().then{
-        $0.text = "0"
         $0.font = UIFont.Suit(size: 12.5, family: .Regular)
         $0.textColor = .lightGray
     }
     let itemLabel = UILabel().then{
-        $0.text = "아이템"
+        $0.text = Message.item
         $0.font = UIFont.Suit(size: 12.5, family: .Regular)
         $0.textColor = .lightGray
     }

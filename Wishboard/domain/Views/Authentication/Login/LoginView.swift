@@ -14,23 +14,23 @@ class LoginView: UIView {
     // MARK: - Views
     // 이메일 TextField
     let emailTextField = UITextField().then{
-        $0.defaultTextField("이메일을 입력해주세요.")
+        $0.defaultTextField(Placeholder.email)
         $0.textColor = .editTextFontColor
     }
     // 비밀번호 TextField
     let passwordTextField = UITextField().then{
-        $0.defaultTextField("비밀번호를 입력해주세요.")
+        $0.defaultTextField(Placeholder.password)
         $0.isSecureTextEntry = true
         $0.textColor = .editTextFontColor
     }
     // 로그인하기 버튼
     let loginButton = UIButton().then{
-        $0.defaultButton("로그인하기", .wishboardDisabledGray, .dialogMessageColor)
+        $0.defaultButton(Button.login, .wishboardDisabledGray, .dialogMessageColor)
         $0.isEnabled = false
     }
     // 비밀번호를 잊으셨나요?
     let lostPasswordButton = UIButton().then{
-        $0.setUnderline("비밀번호를 잊으셨나요?", UIColor.systemGray)
+        $0.setUnderline(Button.lostPassword, UIColor.systemGray)
     }
     // MARK: - Functions
     override init(frame: CGRect) {

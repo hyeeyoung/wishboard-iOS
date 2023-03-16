@@ -95,7 +95,7 @@ class ErrorBar {
     // MARK: - Life Cycles
     // Error SnackBar (두 줄)
     init(_ originView: UIViewController) {
-        title.text = "예상하지 못한 오류가 발생했어요!\n잠시후 다시 시도해주세요."
+        title.text = ErrorMessage.fiveHundredError
         title.setTextWithLineHeight()
         title.textAlignment = .center
         

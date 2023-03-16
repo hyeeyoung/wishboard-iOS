@@ -9,7 +9,7 @@ import UIKit
 
 class FolderDetailViewController: TitleCenterViewController {
     // MARK: - View
-    let emptyMessage = "앗, 아이템이 없어요!\n갖고 싶은 아이템을 등록해보세요!"
+    let emptyMessage = EmptyMessage.item
     // MARK: - Life Cycles
     var folderName: String!
     var folderId: Int!

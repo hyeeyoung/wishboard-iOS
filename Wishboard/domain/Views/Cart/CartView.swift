@@ -15,27 +15,27 @@ class CartView: UIView {
         $0.backgroundColor = .wishboardGreen
     }
     let total = UILabel().then{
-        $0.text = "전체"
+        $0.text = Item.total
         $0.font = UIFont.Suit(size: 14, family: .Regular)
         $0.setTextWithLineHeight()
     }
     let countLabel = UILabel().then{
-        $0.text = "0"
+        $0.text = Item.zero
         $0.font = UIFont.monteserrat(size: 18, family: .Bold)
         $0.setTextWithLineHeight()
     }
     let label = UILabel().then{
-        $0.text = "개"
+        $0.text = Item.count
         $0.font = UIFont.Suit(size: 14, family: .Regular)
         $0.setTextWithLineHeight()
     }
     let price = UILabel().then{
-        $0.text = "0"
+        $0.text = Item.zero
         $0.font = UIFont.monteserrat(size: 18, family: .Bold)
         $0.setTextWithLineHeight()
     }
     let won = UILabel().then{
-        $0.text = "원"
+        $0.text = Item.won
         $0.font = UIFont.Suit(size: 14, family: .Regular)
         $0.setTextWithLineHeight()
     }
@@ -44,7 +44,7 @@ class CartView: UIView {
     var cartTableView: UITableView!
     var cartData: [CartListModel] = []
     var itemPrice = 0
-    let emptyMessage = "앗, 장바구니가 비어있어요!\n구매할 아이템을 장바구니에 담아보세요!"
+    let emptyMessage = EmptyMessage.cart
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -245,8 +245,8 @@ extension CartView {
     func noCartItem() {
         self.cartData = []
         cartTableView.reloadData()
-        self.price.text = "0"
-        self.countLabel.text = "0"
+        self.price.text = Item.zero
+        self.countLabel.text = Item.zero
     }
     // MARK: 장바구니 수량 변경 API
     func modifyCountAPISuccess(_ result: APIModel<TokenResultModel>) {

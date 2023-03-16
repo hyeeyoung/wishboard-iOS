@@ -10,7 +10,7 @@ import Lottie
 
 class ShoppingLinkViewController: BottomSheetKeyboardViewController {
     let titleLabel = UILabel().then{
-        $0.text = "쇼핑몰 링크"
+        $0.text = Title.shoppingMallLink
         $0.font = UIFont.Suit(size: 14, family: .Bold)
     }
     let exitBtn = UIButton().then{
@@ -23,16 +23,16 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
         $0.font = UIFont.Suit(size: 16, family: .Regular)
         $0.textColor = .editTextFontColor
         $0.clearButtonMode = .always
-        $0.placeholder = "쇼핑몰 링크를 입력해 주세요."
+        $0.placeholder = Placeholder.shoppingLink
     }
     let errorMessage = UILabel().then{
-        $0.text = "쇼핑몰 링크를 다시 확인해 주세요."
+        $0.text = ErrorMessage.shoppingLink
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .wishboardRed
         $0.setTextWithLineHeight()
     }
     let completeButton = UIButton().then{
-        $0.defaultButton("아이템 불러오기", .wishboardGreen, .black)
+        $0.defaultButton(Button.item, .wishboardGreen, .black)
     }
     // MARK: - Life Cycles
     var preVC: UploadItemViewController!
@@ -61,7 +61,7 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
         
         self.errorMessage.isHidden = true
         self.completeButton.isEnabled = false
-        self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .dialogMessageColor)
+        self.completeButton.defaultButton(Button.item, .wishboardDisabledGray, .dialogMessageColor)
         
         self.shoppingLinkTextField.addTarget(self, action: #selector(LinkTextFieldEditingChanged(_:)), for: .editingChanged)
         self.exitBtn.addTarget(self, action: #selector(exit), for: .touchUpInside)
@@ -178,19 +178,19 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
             if link == "" {self.errorMessage.isHidden = true}
             else {
                 self.errorMessage.isHidden = false
-                self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .dialogMessageColor)
+                self.completeButton.defaultButton(Button.item, .wishboardDisabledGray, .dialogMessageColor)
                 self.completeButton.isEnabled = false
             }
         } else {
             self.errorMessage.isHidden = true
-            self.completeButton.defaultButton("아이템 불러오기", .wishboardGreen, .black)
+            self.completeButton.defaultButton(Button.item, .wishboardGreen, .black)
             self.completeButton.isEnabled = true
             self.link = self.tempLink
         }
     }
     // url 유효성 검사
     func verifyURL(url: String) -> Bool {
-        let urlRegEx = "^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$"
+        let urlRegEx = RegularExpression.shoppingLink
         let urlTest = NSPredicate(format:"SELF MATCHES %@", urlRegEx)
         if urlTest.evaluate(with: url) {
             return true
@@ -232,7 +232,7 @@ extension ShoppingLinkViewController {
         
         self.errorMessage.isHidden = false
         self.completeButton.isSelected = false
-        self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .dialogMessageColor)
+        self.completeButton.defaultButton(Button.item, .wishboardDisabledGray, .dialogMessageColor)
         self.completeButton.isEnabled = false
         self.lottieView.isHidden = true
         
