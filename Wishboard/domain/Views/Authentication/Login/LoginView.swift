@@ -14,12 +14,12 @@ class LoginView: UIView {
     // MARK: - Views
     // 이메일 TextField
     let emailTextField = UITextField().then{
-        $0.defaultTextField("이메일")
+        $0.defaultTextField("이메일을 입력해주세요.")
         $0.textColor = .editTextFontColor
     }
     // 비밀번호 TextField
     let passwordTextField = UITextField().then{
-        $0.defaultTextField("비밀번호")
+        $0.defaultTextField("비밀번호를 입력해주세요.")
         $0.isSecureTextEntry = true
         $0.textColor = .editTextFontColor
     }

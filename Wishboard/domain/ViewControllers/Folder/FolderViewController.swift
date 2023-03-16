@@ -118,7 +118,7 @@ extension FolderViewController {
     // 폴더 추가 팝업창
     func alertAddDialog() {
         UIDevice.vibrate()
-        dialog = PopUpWithTextFieldViewController(titleText: "새 폴더 추가", placeholder: "폴더명", prevText: nil, buttonTitle: "추가")
+        dialog = PopUpWithTextFieldViewController(titleText: "새 폴더 추가", placeholder: "폴더명을 입력해 주세요.", prevText: nil, buttonTitle: "추가")
         dialog.modalPresentationStyle = .overFullScreen
         dialog.completeButton.addTarget(self, action: #selector(completeAddButtonDidTap), for: .touchUpInside)
         dialog.textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
@@ -129,7 +129,7 @@ extension FolderViewController {
     // 폴더명 수정 팝업창
     func alertModifyDialog(folderData: FolderModel) {
         UIDevice.vibrate()
-        dialog = PopUpWithTextFieldViewController(titleText: "폴더명 수정", placeholder: "폴더명", prevText: folderData.folder_name, buttonTitle: "수정")
+        dialog = PopUpWithTextFieldViewController(titleText: "폴더명 수정", placeholder: "폴더명을 입력해 주세요.", prevText: folderData.folder_name, buttonTitle: "수정")
         dialog.modalPresentationStyle = .overFullScreen
         let folderMenuGesture = CustomButton(target: self, action: #selector(completeModifyButtonDidTap(_:)))
         folderMenuGesture.folderData = folderData

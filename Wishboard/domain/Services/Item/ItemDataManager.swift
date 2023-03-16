@@ -33,7 +33,7 @@ class ItemDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    RefreshDataManager().refreshDataManager()
                 default:
                     print(error.responseCode)
                 }
@@ -62,7 +62,7 @@ class ItemDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    RefreshDataManager().refreshDataManager()
                 default:
                     print(error.responseCode)
                 }
@@ -92,7 +92,7 @@ class ItemDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    RefreshDataManager().refreshDataManager()
                 default:
                     print(error.localizedDescription)
                     print(error.responseCode)
@@ -194,7 +194,7 @@ class ItemDataManager {
                     }
                 case let .failure(error): // 요청 x
                 if error.responseCode == 401 {
-                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    RefreshDataManager().refreshDataManager()
                 }
                 print(error.responseCode)
             }
@@ -247,7 +247,7 @@ class ItemDataManager {
                 case let .failure(error): // 요청 x
                     print(error.responseCode)
                     if error.responseCode == 401 {
-                        RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                        RefreshDataManager().refreshDataManager()
                     }
             }
         }
@@ -295,7 +295,7 @@ class ItemDataManager {
                     }
                 case let .failure(error): // 요청 x
                     if error.responseCode == 401 {
-                        RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                        RefreshDataManager().refreshDataManager()
                     }
                 print(error.responseCode)
             }
@@ -349,7 +349,7 @@ class ItemDataManager {
                     }
                 case let .failure(error): // 요청 x
                     if error.responseCode == 401 {
-                        RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                        RefreshDataManager().refreshDataManager()
                     }
                 print(error.responseCode)
             }
@@ -400,7 +400,7 @@ class ItemDataManager {
                     }
                 case let .failure(error): // 요청 x
                     if error.responseCode == 401 {
-                        RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                        RefreshDataManager().refreshDataManager()
                     }
                 print(error.responseCode)
             }
@@ -453,7 +453,7 @@ class ItemDataManager {
                     }
                 case let .failure(error): // 요청 x
                     if error.responseCode == 401 {
-                        RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                        RefreshDataManager().refreshDataManager()
                     }
                 print(error.responseCode)
             }
@@ -501,9 +501,9 @@ class ItemDataManager {
                         let str = String(decoding: data, as: UTF8.self)
                         print("error", str)
                     }
-                case let .failure(error): // 요청 x
+                case let .failure(error):
                     if error.responseCode == 401 {
-                        RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                        RefreshDataManager().refreshDataManager()
                     }
                 print(error.responseCode)
             }

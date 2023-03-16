@@ -30,7 +30,7 @@ class CartDataManager {
                 case 404:
                     cartView.noCartItem()
                 case 401:
-                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    RefreshDataManager().refreshDataManager()
                 default:
                     print(error.responseCode)
                 }
@@ -50,7 +50,7 @@ class CartDataManager {
                 cartView.modifyCountAPISuccess(result)
             case .failure(let error):
                 if error.responseCode == 401 {
-                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    RefreshDataManager().refreshDataManager()
                 }
                 print(error.responseCode)
             }
@@ -70,7 +70,7 @@ class CartDataManager {
                 viewcontroller.addCartAPISuccess(result)
             case .failure(let error):
                 if error.responseCode == 401 {
-                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    RefreshDataManager().refreshDataManager()
                 }
                 print(error.responseCode)
             }
@@ -89,7 +89,7 @@ class CartDataManager {
                 viewcontroller.addCartAPISuccess(result)
             case .failure(let error):
                 if error.responseCode == 401 {
-                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    RefreshDataManager().refreshDataManager()
                 }
                 print(error.responseCode)
             }
@@ -108,7 +108,7 @@ class CartDataManager {
                 cartView.deleteCartAPISuccess(result)
             case .failure(let error):
                 if error.responseCode == 401 {
-                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    RefreshDataManager().refreshDataManager()
                 }
                 print(error.responseCode)
             }
@@ -127,7 +127,7 @@ class CartDataManager {
                 viewcontroller.deleteCartAPISuccess(result)
             case .failure(let error):
                 if error.responseCode == 401 {
-                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    RefreshDataManager().refreshDataManager()
                 }
                 print(error.responseCode)
             }
@@ -146,7 +146,7 @@ class CartDataManager {
                 viewcontroller.deleteCartAPISuccess(result)
             case .failure(let error):
                 if error.responseCode == 401 {
-                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    RefreshDataManager().refreshDataManager()
                 }
                 print(error.responseCode)
             }

@@ -21,7 +21,7 @@ class ModifyProfileViewController: TitleCenterViewController {
         $0.setImage(Image.cameraGray, for: .normal)
     }
     var nameTextField = UITextField().then{
-        $0.placeholder = "닉네임을 수정해주세요."
+        $0.placeholder = "닉네임을 입력해주세요."
         $0.addLeftPadding(10)
         $0.backgroundColor = .wishboardTextfieldGray
         $0.layer.cornerRadius = 5

@@ -22,7 +22,7 @@ class GetEmailView: UIView {
     }
     // 인증코드 TextField
     var codeTextField = UITextField().then{
-        $0.defaultTextField("인증코드")
+        $0.defaultTextField("인증코드를 입력해주세요.")
         $0.becomeFirstResponder()
         $0.isSecureTextEntry = true
         $0.textColor = .editTextFontColor

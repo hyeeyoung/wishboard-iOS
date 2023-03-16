@@ -22,7 +22,7 @@ class RegisterPasswordView: UIView {
         $0.numberOfLines = 0
     }
     var pwTextField = UITextField().then{
-        $0.defaultTextField("비밀번호")
+        $0.defaultTextField("비밀번호를 입력해주세요.")
         $0.becomeFirstResponder()
         $0.isSecureTextEntry = true
         $0.textColor = .editTextFontColor

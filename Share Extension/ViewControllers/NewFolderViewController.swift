@@ -23,7 +23,7 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
         $0.font = UIFont.Suit(size: 16, family: .Regular)
         $0.textColor = .editTextFontColor
         $0.clearButtonMode = .whileEditing
-        $0.placeholder = "폴더명"
+        $0.placeholder = "폴더명을 입력해 주세요."
     }
     let textFieldCountLabel = UILabel().then{
         $0.text = "(0/10)자"

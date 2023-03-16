@@ -21,7 +21,7 @@ class RegisterEmailView: UIView {
         $0.numberOfLines = 0
     }
     var emailTextField = UITextField().then{
-        $0.defaultTextField("이메일")
+        $0.defaultTextField("이메일을 입력해주세요.")
         $0.becomeFirstResponder()
         $0.textColor = .editTextFontColor
     }

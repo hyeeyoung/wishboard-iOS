@@ -34,7 +34,7 @@ class FolderDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    RefreshDataManager().refreshDataManager()
                 default:
                     print(error.responseCode)
                 }
@@ -62,7 +62,7 @@ class FolderDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    RefreshDataManager().refreshDataManager()
                 default:
                     print(error.responseCode)
                 }
@@ -91,7 +91,7 @@ class FolderDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    RefreshDataManager().refreshDataManager()
                 default:
                     print(error.responseCode)
                 }
@@ -118,7 +118,7 @@ class FolderDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    RefreshDataManager().refreshDataManager()
                 default:
                     print(error.responseCode)
                 }
@@ -146,7 +146,7 @@ class FolderDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    RefreshDataManager().refreshDataManager()
                 default:
                     print(error.responseCode)
                 }
@@ -176,7 +176,7 @@ class FolderDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    RefreshDataManager().refreshDataManager()
                 default:
                     print(error.responseCode)
                 }
@@ -202,7 +202,7 @@ class FolderDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager(RefreshInput(accessToken: UserDefaults.standard.string(forKey: "accessToken") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? ""))
+                    RefreshDataManager().refreshDataManager()
                 default:
                     print(error.responseCode)
                 }

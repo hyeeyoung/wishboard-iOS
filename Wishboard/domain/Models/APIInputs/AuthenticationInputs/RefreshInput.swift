@@ -8,6 +8,5 @@
 import Foundation
 
 struct RefreshInput: Encodable {
-    let accessToken: String
     let refreshToken: String
 }
