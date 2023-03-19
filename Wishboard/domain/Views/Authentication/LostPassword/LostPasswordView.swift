@@ -11,29 +11,24 @@ import UIKit
 class LostPasswordView: UIView {
     // MARK: - View
     let heartLetterImage = UIImageView().then{
-        $0.image = UIImage(named: "love-letter")
+        $0.image = Image.loveLetter
     }
     let subTitleLabel = UILabel().then{
-        $0.text = "가입하신 이메일을 입력해주세요!\n로그인을 위해 인증코드가 포함된 이메일을 보내드려요."
+        $0.text = Message.lostPassword
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.setTextWithLineHeight()
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
-    var emailTextField = UITextField().then{
-        $0.defaultTextField("이메일")
+    var emailTextField = DefaultTextField(Placeholder.email).then{
         $0.becomeFirstResponder()
-        $0.textColor = .editTextFontColor
     }
     let errorMessage = UILabel().then{
-        $0.text = "이메일 주소를 정확하게 입력해주세요."
+        $0.text = ErrorMessage.email
         $0.textColor = .wishboardRed
         $0.font = UIFont.Suit(size: 12, family: .Regular)
     }
-    let getEmailButton = UIButton().then{
-        $0.defaultButton("인증메일 받기", .wishboardDisabledGray, .dialogMessageColor)
-        $0.isEnabled = false
-    }
+    let getEmailButton = DefaultButton(titleStr: Button.getEmail)
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
     }()

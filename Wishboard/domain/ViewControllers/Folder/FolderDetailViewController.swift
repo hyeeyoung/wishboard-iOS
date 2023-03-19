@@ -9,7 +9,7 @@ import UIKit
 
 class FolderDetailViewController: TitleCenterViewController {
     // MARK: - View
-    let emptyMessage = "앗, 아이템이 없어요!\n갖고 싶은 아이템을 등록해보세요!"
+    let emptyMessage = EmptyMessage.item
     // MARK: - Life Cycles
     var folderName: String!
     var folderId: Int!
@@ -120,14 +120,14 @@ extension FolderDetailViewController {
         }
     }
     // MARK: 장바구니 추가 API
-    func addCartAPISuccess(_ result: APIModel<ResultModel>) {
+    func addCartAPISuccess(_ result: APIModel<TokenResultModel>) {
         if let folderId = self.folderId {
             FolderDataManager().getFolderDetailDataManager(self.folderId, self)
         }
         print(result.message)
     }
     // MARK: 장바구니 삭제 API
-    func deleteCartAPISuccess(_ result: APIModel<ResultModel>) {
+    func deleteCartAPISuccess(_ result: APIModel<TokenResultModel>) {
         if let folderId = self.folderId {
             FolderDataManager().getFolderDetailDataManager(self.folderId, self)
         }

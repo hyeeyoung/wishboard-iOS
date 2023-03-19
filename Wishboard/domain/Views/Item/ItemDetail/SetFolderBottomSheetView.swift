@@ -10,11 +10,11 @@ import UIKit
 
 class SetFolderBottomSheetView: UIView {
     let titleLabel = UILabel().then{
-        $0.text = "폴더 설정"
+        $0.text = Title.folder
         $0.font = UIFont.Suit(size: 14, family: .Bold)
     }
     let exitBtn = UIButton().then{
-        $0.setImage(UIImage(named: "x"), for: .normal)
+        $0.setImage(Image.quit, for: .normal)
     }
     
     // MARK: - Life Cycles

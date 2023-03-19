@@ -11,7 +11,7 @@ import Alamofire
 class WishListDataManager {
     let header = APIManager().getHeader()
     
-    // MARK: - 홈화면 위시리스트 조회 + 상세 조회
+    // MARK: - 홈화면 위시리스트 조회
     func wishListDataManager(_ homeView: HomeView, _ viewcontroller: HomeViewController) {
         AF.request(Storage().BaseURL + "/item",
                            method: .get,
@@ -30,6 +30,13 @@ class WishListDataManager {
                 case 500:
                     DispatchQueue.main.async {
                         ErrorBar(viewcontroller)
+                    }
+                case 401:
+                    print("status code: 401")
+                    print("refresh api 요청")
+                    RefreshDataManager().refreshDataManager()
+                    defer {
+                        self.wishListDataManager(homeView, viewcontroller)
                     }
                 default:
                     print(error.responseCode)

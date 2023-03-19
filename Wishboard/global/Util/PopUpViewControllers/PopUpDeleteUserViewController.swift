@@ -29,7 +29,7 @@ class PopUpDeleteUserViewController: UIViewController {
         $0.font = UIFont.Suit(size: 16, family: .Bold)
     }
     let messageLabel = UILabel().then{
-        $0.text = "정말 탈퇴하시겠습니까?\n탈퇴 시 앱 내 모든 데이터가 사라집니다.\n서비스를 탈퇴하시려면 이메일을 입력해 주세요."
+        $0.text = Message.deleteUser
         $0.font = UIFont.Suit(size: 14, family: .Regular)
         $0.textColor = .dialogMessageColor
         $0.numberOfLines = 0
@@ -50,16 +50,11 @@ class PopUpDeleteUserViewController: UIViewController {
     }
     var cancelBtn: UIButton!
     var okBtn: UIButton!
-    var textField = UITextField().then{
-        $0.addLeftPadding(10)
-        $0.backgroundColor = .wishboardTextfieldGray
-        $0.layer.cornerRadius = 5
-        $0.font = UIFont.Suit(size: 16, family: .Regular)
+    var textField = DefaultTextField("").then{
         $0.clearButtonMode = .always
-        $0.textColor = .editTextFontColor
     }
     let errorMessage = UILabel().then{
-        $0.text = "이메일을 다시 확인해 주세요."
+        $0.text = ErrorMessage.email
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .wishboardRed
     }
@@ -135,7 +130,7 @@ class PopUpDeleteUserViewController: UIViewController {
             var attText = AttributedString.init(self.greenBtnText!)
             
             attText.font = UIFont.Suit(size: 14, family: .Medium)
-            attText.foregroundColor = UIColor.wishboardGreen
+            attText.foregroundColor = UIColor.dialogGreenTxt
             config.attributedTitle = attText
             
             $0.configuration = config

@@ -14,7 +14,7 @@ class ShareDataManager {
     // MARK: - 아이템 정보 파싱
     func getItemDataDataManager(_ url: String, _ viewcontroller: ShareViewController) {
         let BaseURL = defaults?.string(forKey: "url") ?? ""
-        let token = defaults?.string(forKey: "token") ?? ""
+        let token = defaults?.string(forKey: "accessToken") ?? ""
         let header: HTTPHeaders = [
             "Authorization": "Bearer " + token,
             "Accept": "application/json"
@@ -54,7 +54,7 @@ class ShareDataManager {
                                _ itemNotificationDate: String,
                                _ viewcontroller: ShareViewController) {
         let BaseURL = defaults?.string(forKey: "url") ?? ""
-        let token = defaults?.string(forKey: "token") ?? ""
+        let token = defaults?.string(forKey: "accessToken") ?? ""
         let multiHeader: HTTPHeaders = [
             "Content-type": "multipart/form-data",
             "Authorization": "Bearer " + token
@@ -109,7 +109,7 @@ class ShareDataManager {
                                _ itemNotificationDate: String,
                                _ viewcontroller: ShareViewController) {
         let BaseURL = defaults?.string(forKey: "url") ?? ""
-        let token = defaults?.string(forKey: "token") ?? ""
+        let token = defaults?.string(forKey: "accessToken") ?? ""
         let multiHeader: HTTPHeaders = [
             "Content-type": "multipart/form-data",
             "Authorization": "Bearer " + token
@@ -162,7 +162,7 @@ class ShareDataManager {
                                _ itemMemo: String,
                                _ viewcontroller: ShareViewController) {
         let BaseURL = defaults?.string(forKey: "url") ?? ""
-        let token = defaults?.string(forKey: "token") ?? ""
+        let token = defaults?.string(forKey: "accessToken") ?? ""
         let multiHeader: HTTPHeaders = [
             "Content-type": "multipart/form-data",
             "Authorization": "Bearer " + token
@@ -214,7 +214,7 @@ class ShareDataManager {
                                _ itemMemo: String,
                                _ viewcontroller: ShareViewController) {
         let BaseURL = defaults?.string(forKey: "url") ?? ""
-        let token = defaults?.string(forKey: "token") ?? ""
+        let token = defaults?.string(forKey: "accessToken") ?? ""
         let multiHeader: HTTPHeaders = [
             "Content-type": "multipart/form-data",
             "Authorization": "Bearer " + token

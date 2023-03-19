@@ -10,29 +10,23 @@ import Lottie
 
 class ShoppingLinkViewController: BottomSheetKeyboardViewController {
     let titleLabel = UILabel().then{
-        $0.text = "쇼핑몰 링크"
+        $0.text = Title.shoppingMallLink
         $0.font = UIFont.Suit(size: 14, family: .Bold)
     }
     let exitBtn = UIButton().then{
-        $0.setImage(UIImage(named: "x"), for: .normal)
+        $0.setImage(Image.quit, for: .normal)
     }
-    let shoppingLinkTextField = UITextField().then{
-        $0.addLeftPadding(10)
-        $0.backgroundColor = .wishboardTextfieldGray
-        $0.layer.cornerRadius = 5
-        $0.font = UIFont.Suit(size: 16, family: .Regular)
-        $0.textColor = .editTextFontColor
+    let shoppingLinkTextField = DefaultTextField(Placeholder.shoppingLink).then{
         $0.clearButtonMode = .always
-        $0.placeholder = "쇼핑몰 링크"
     }
     let errorMessage = UILabel().then{
-        $0.text = "쇼핑몰 링크를 다시 확인해 주세요."
+        $0.text = ErrorMessage.shoppingLink
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .wishboardRed
         $0.setTextWithLineHeight()
     }
-    let completeButton = UIButton().then{
-        $0.defaultButton("아이템 불러오기", .wishboardGreen, .black)
+    let completeButton = DefaultButton(titleStr: Button.item).then{
+        $0.isActivate = true
     }
     // MARK: - Life Cycles
     var preVC: UploadItemViewController!
@@ -60,8 +54,7 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
         setUpConstraint()
         
         self.errorMessage.isHidden = true
-        self.completeButton.isEnabled = false
-        self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .dialogMessageColor)
+        self.completeButton.isActivate = false
         
         self.shoppingLinkTextField.addTarget(self, action: #selector(LinkTextFieldEditingChanged(_:)), for: .editingChanged)
         self.exitBtn.addTarget(self, action: #selector(exit), for: .touchUpInside)
@@ -159,9 +152,7 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
     }
     @objc func completeButtonDidTap() {
         UIDevice.vibrate()
-        lottieView = self.completeButton.setHorizontalLottieView(self.completeButton)
-        self.completeButton.isSelected = true
-        lottieView.isHidden = false
+        lottieView = self.completeButton.setLottieView()
         lottieView.play { completion in
             ItemDataManager().getItemByLinkDataManager(self.link, self)
         }
@@ -178,19 +169,17 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
             if link == "" {self.errorMessage.isHidden = true}
             else {
                 self.errorMessage.isHidden = false
-                self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .dialogMessageColor)
-                self.completeButton.isEnabled = false
+                self.completeButton.isActivate = false
             }
         } else {
             self.errorMessage.isHidden = true
-            self.completeButton.defaultButton("아이템 불러오기", .wishboardGreen, .black)
-            self.completeButton.isEnabled = true
+            self.completeButton.isActivate = true
             self.link = self.tempLink
         }
     }
     // url 유효성 검사
     func verifyURL(url: String) -> Bool {
-        let urlRegEx = "^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$"
+        let urlRegEx = RegularExpression.shoppingLink
         let urlTest = NSPredicate(format:"SELF MATCHES %@", urlRegEx)
         if urlTest.evaluate(with: url) {
             return true
@@ -231,10 +220,10 @@ extension ShoppingLinkViewController {
         self.isFail = true
         
         self.errorMessage.isHidden = false
-        self.completeButton.isSelected = false
-        self.completeButton.defaultButton("아이템 불러오기", .wishboardDisabledGray, .dialogMessageColor)
-        self.completeButton.isEnabled = false
-        self.lottieView.isHidden = true
+        self.completeButton.then{
+            $0.isActivate = false
+            $0.inActivateLottieView()
+        }
         
         self.dismiss(animated: true)
     }

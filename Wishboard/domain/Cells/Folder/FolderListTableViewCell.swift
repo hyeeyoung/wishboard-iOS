@@ -16,12 +16,11 @@ class FolderListTableViewCell: UITableViewCell {
         $0.contentMode = .scaleAspectFill
     }
     let folderName = UILabel().then{
-        $0.text = "folderName"
         $0.font = UIFont.Suit(size: 14, family: .Regular)
         $0.numberOfLines = 1
     }
     let checkIcon = UIImageView().then{
-        $0.image = UIImage(named: "check")
+        $0.image = Image.checkGreen
         $0.isHidden = true
     }
 

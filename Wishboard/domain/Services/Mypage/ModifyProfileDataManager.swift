@@ -20,7 +20,7 @@ class ModifyProfileDataManager {
                            encoder: JSONParameterEncoder.default,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 viewcontroller.modifyProfileAPISuccess(result)
@@ -31,6 +31,8 @@ class ModifyProfileDataManager {
                    DispatchQueue.main.async {
                        ErrorBar(viewcontroller)
                    }
+                case 401:
+                    RefreshDataManager().refreshDataManager()
                 default:
                     print(error.responseCode)
                 }
@@ -64,14 +66,17 @@ class ModifyProfileDataManager {
                 case let .success(data):
                     do {
                         let decoder = JSONDecoder()
-                        let result = try decoder.decode(APIModel<ResultModel>.self, from: data)
+                        let result = try decoder.decode(APIModel<TokenResultModel>.self, from: data)
                         viewcontroller.modifyProfileAPISuccess(result)
                         print(result)
                     } catch {
                         print("error", data)
                     }
                 case let .failure(error): // 요청 x
-                print(error.responseCode)
+                    print(error.responseCode)
+                    if error.responseCode == 401 {
+                        RefreshDataManager().refreshDataManager()
+                    }
             }
         }
     }
@@ -92,13 +97,16 @@ class ModifyProfileDataManager {
                 case let .success(data):
                     do {
                         let decoder = JSONDecoder()
-                        let result = try decoder.decode(APIModel<ResultModel>.self, from: data)
+                        let result = try decoder.decode(APIModel<TokenResultModel>.self, from: data)
                         viewcontroller.modifyProfileAPISuccess(result)
                         print(result)
                     } catch {
                         print("error", data)
                     }
                 case let .failure(error): // 요청 x
+                    if error.responseCode == 401 {
+                        RefreshDataManager().refreshDataManager()
+                    }
                 print(error.responseCode)
             }
         }

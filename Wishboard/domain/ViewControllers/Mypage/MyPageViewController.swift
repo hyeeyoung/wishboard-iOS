@@ -18,7 +18,7 @@ class MyPageViewController: TitleLeftViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.navigationTitle.text = "마이페이지"
+        super.navigationTitle.text = Title.mypage
         
         mypageView = MyPageView()
         mypageView.setTableView(dataSourceDelegate: self)
@@ -199,7 +199,7 @@ extension MyPageViewController {
     // 회원 탈퇴 팝업창
     func showSignoutDialog() {
         guard let email = self.userInfoData.email else {return}
-        let dialog = PopUpDeleteUserViewController(titleText: "회원 탈퇴", greenBtnText: "취소", blackBtnText: "탈퇴", placeholder: "이메일을 입력해주세요.", email: email)
+        let dialog = PopUpDeleteUserViewController(titleText: "회원 탈퇴", greenBtnText: "취소", blackBtnText: "탈퇴", placeholder: Placeholder.email, email: email)
         dialog.modalPresentationStyle = .overFullScreen
         self.present(dialog, animated: false, completion: nil)
         
@@ -283,18 +283,19 @@ extension MyPageViewController {
         MypageDataManager().getUserInfoDataManager(self)
     }
     // MARK: 알림 토글 수정 API
-    func switchNotificationAPISuccess(_ result: APIModel<ResultModel>) {
+    func switchNotificationAPISuccess(_ result: APIModel<TokenResultModel>) {
         pushState?.toggle()
         print(result.message)
     }
     // MARK: 회원 탈퇴 API
-    func deleteUserAPISuccess(_ result: APIModel<ResultModel>) {
+    func deleteUserAPISuccess(_ result: APIModel<TokenResultModel>) {
         // delete UserInfo
-        UserDefaults.standard.removeObject(forKey: "token")
+        UserDefaults.standard.removeObject(forKey: "accessToken")
+        UserDefaults.standard.removeObject(forKey: "refreshToken")
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "password")
         UserDefaults.standard.removeObject(forKey: "isFirstLogin")
-        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "token")
+        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "accessToken")
         
         let onboardingVC = OnBoardingViewController()
         onboardingVC.deleteUser = true
@@ -305,11 +306,12 @@ extension MyPageViewController {
     // MARK: 로그아웃 API
     func logoutAPISuccess(_ result: APIModel<ResultModel>) {
         // delete UserInfo
-        UserDefaults.standard.removeObject(forKey: "token")
+        UserDefaults.standard.removeObject(forKey: "accessToken")
+        UserDefaults.standard.removeObject(forKey: "refreshToken")
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "password")
         UserDefaults.standard.set(false, forKey: "isFirstLogin")
-        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "token")
+        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "accessToken")
         
         let onboardingVC = OnBoardingViewController()
         self.navigationController?.pushViewController(onboardingVC, animated: true)

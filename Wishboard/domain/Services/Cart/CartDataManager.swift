@@ -29,6 +29,8 @@ class CartDataManager {
                     cartView.getCartListAPIFail()
                 case 404:
                     cartView.noCartItem()
+                case 401:
+                    RefreshDataManager().refreshDataManager()
                 default:
                     print(error.responseCode)
                 }
@@ -42,11 +44,14 @@ class CartDataManager {
                            parameters: parameter,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 cartView.modifyCountAPISuccess(result)
             case .failure(let error):
+                if error.responseCode == 401 {
+                    RefreshDataManager().refreshDataManager()
+                }
                 print(error.responseCode)
             }
         }
@@ -59,11 +64,14 @@ class CartDataManager {
                            parameters: parameter,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 viewcontroller.addCartAPISuccess(result)
             case .failure(let error):
+                if error.responseCode == 401 {
+                    RefreshDataManager().refreshDataManager()
+                }
                 print(error.responseCode)
             }
         }
@@ -75,11 +83,14 @@ class CartDataManager {
                            parameters: parameter,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 viewcontroller.addCartAPISuccess(result)
             case .failure(let error):
+                if error.responseCode == 401 {
+                    RefreshDataManager().refreshDataManager()
+                }
                 print(error.responseCode)
             }
         }
@@ -91,11 +102,14 @@ class CartDataManager {
                            parameters: nil,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 cartView.deleteCartAPISuccess(result)
             case .failure(let error):
+                if error.responseCode == 401 {
+                    RefreshDataManager().refreshDataManager()
+                }
                 print(error.responseCode)
             }
         }
@@ -107,11 +121,14 @@ class CartDataManager {
                            parameters: nil,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 viewcontroller.deleteCartAPISuccess(result)
             case .failure(let error):
+                if error.responseCode == 401 {
+                    RefreshDataManager().refreshDataManager()
+                }
                 print(error.responseCode)
             }
         }
@@ -123,11 +140,14 @@ class CartDataManager {
                            parameters: nil,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 viewcontroller.deleteCartAPISuccess(result)
             case .failure(let error):
+                if error.responseCode == 401 {
+                    RefreshDataManager().refreshDataManager()
+                }
                 print(error.responseCode)
             }
         }

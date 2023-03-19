@@ -13,29 +13,29 @@ class OnBoardingTableViewCell: UITableViewCell {
 
     // 흔드는 손 Image
     let handImage = UIImageView().then{
-        $0.image = UIImage(named: "twemoji_waving-hand")
+        $0.image = Image.wavingHand
     }
     // Wish Board Logo Image
     let logoImage = UIImageView().then{
-        $0.image = UIImage(named: "WishBoardLogo")
+        $0.image = Image.wishboardLogo
     }
     // Onbarding label
     let onboardingLabel = UILabel().then{
-        $0.text = "흩어져있는 위시리스트를\n위시보드로 간편하게 통합 관리해 보세요!️"
+        $0.text = Message.onboarding
         $0.font = UIFont.Suit()
         $0.numberOfLines = 0
         $0.setTextWithLineHeight()
         $0.textAlignment = .center
     }
     // 가입하기 버튼
-    lazy var registerButton = UIButton().then{
-        $0.defaultButton("가입하기", .wishboardGreen, .black)
+    lazy var registerButton = DefaultButton(titleStr: Button.register).then{
+        $0.isActivate = true
     }
     let loginStackView = UIStackView()
     // 이미 계정이 있으신가요?
     let accountExistButton = UIButton().then{
         var config = UIButton.Configuration.plain()
-        var attText = AttributedString.init("이미 계정이 있으신가요?")
+        var attText = AttributedString.init(Message.toLogin)
         
         attText.font = UIFont.Suit(size: 12, family: .Regular)
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
@@ -47,7 +47,7 @@ class OnBoardingTableViewCell: UITableViewCell {
     }
     // 로그인
     let loginButton = UIButton().then{
-        $0.setUnderline("로그인", .wishboardGreen)
+        $0.setUnderline(Message.login, .wishboardGreen)
     }
     
     override func awakeFromNib() {

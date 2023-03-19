@@ -80,7 +80,7 @@ class HomeViewController: UIViewController {
 // MARK: - API Success
 extension HomeViewController {
     // MARK: 알림 허용 팝업창
-    func switchNotificationAPISuccess(_ result: APIModel<ResultModel>) {
+    func switchNotificationAPISuccess(_ result: APIModel<TokenResultModel>) {
         self.dismiss(animated: false)
         print(result.message)
     }
@@ -88,12 +88,12 @@ extension HomeViewController {
         WishListDataManager().wishListDataManager(self.homeView, self)
     }
     // MARK: 카트 추가 API
-    func addCartAPISuccess(_ result: APIModel<ResultModel>) {
+    func addCartAPISuccess(_ result: APIModel<TokenResultModel>) {
         WishListDataManager().wishListDataManager(self.homeView, self)
         print(result.message)
     }
     // MARK: 장바구니 삭제 API
-    func deleteCartAPISuccess(_ result: APIModel<ResultModel>) {
+    func deleteCartAPISuccess(_ result: APIModel<TokenResultModel>) {
         WishListDataManager().wishListDataManager(self.homeView, self)
         print(result.message)
     }
@@ -101,9 +101,9 @@ extension HomeViewController {
 // MARK: - Token User Defaults for Share Extension
 extension HomeViewController {
     func setToken() {
-        let token = UserDefaults.standard.string(forKey: "token") ?? ""
+        let token = UserDefaults.standard.string(forKey: "accessToken") ?? ""
         let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
-        defaults?.set(token, forKey: "token")
+        defaults?.set(token, forKey: "accessToken")
         defaults?.synchronize()
     }
 }

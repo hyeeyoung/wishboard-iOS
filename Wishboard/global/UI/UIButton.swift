@@ -10,33 +10,6 @@ import UIKit
 import Lottie
 
 extension UIButton {
-    // MARK: Button
-    func defaultButton(_ title: String, _ backgroundColor: UIColor, _ titleColor: UIColor) {
-        var config = UIButton.Configuration.tinted()
-        var attText = AttributedString.init(title)
-        
-        attText.font = UIFont.Suit(size: 14, family: .Bold)
-        attText.foregroundColor = titleColor
-        config.attributedTitle = attText
-        config.background.backgroundColor = backgroundColor
-        config.baseForegroundColor = .black
-        config.cornerStyle = .capsule
-        
-        self.configuration = config
-        self.setTitle("", for: .selected)
-    }
-    func setHorizontalLottieView(_ button: UIButton) -> AnimationView {
-        let lottieView = SetLottie().horizontalBlackView
-        button.addSubview(lottieView)
-        lottieView.isHidden = true
-        
-        lottieView.snp.makeConstraints { make in
-            make.width.equalTo(50)
-            make.height.equalToSuperview()
-            make.centerY.centerX.equalToSuperview()
-        }
-        return lottieView
-    }
     func clearButton(_ button: UIButton) {
         var config = UIButton.Configuration.plain()
         config.background.backgroundColor = .clear
@@ -109,7 +82,7 @@ extension UIButton {
         attText.font = UIFont.Suit(size: 12, family: .Regular)
         attText.foregroundColor = UIColor.black
         config.attributedTitle = attText
-        config.image = UIImage(named: "ic_noti")
+        config.image = Image.noti
         
         self.configuration = config
     }

@@ -15,7 +15,7 @@ class RegisterPasswordViewController: KeyboardViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.navigationTitle.text = "가입하기"
+        super.navigationTitle.text = Title.register
         
         registerPWView = RegisterPasswordView()
         self.view.addSubview(registerPWView)
@@ -44,57 +44,48 @@ extension RegisterPasswordViewController {
     }
     @objc func registerButtonDidTap() {
         UIDevice.vibrate()
-        let lottieView = registerPWView.registerButton.setHorizontalLottieView(registerPWView.registerButton)
-        registerPWView.registerButton.isSelected = true
-        lottieView.isHidden = false
+        let lottieView = registerPWView.registerButton.setLottieView()
         lottieView.play { completion in
             self.view.endEditing(true)
-            let registerInput = RegisterInput(email: self.email, password: self.pw)
+            let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
+            let registerInput = RegisterInput(email: self.email, password: self.pw, fcmToken: deviceToken)
             RegisterDataManager().registerDataManager(registerInput, self)
         }
     }
     // MARK: - Functions
     func checkValidPW(_ pw: String) {
         let isValid = self.pw.checkPassword()
-        if isValid {
-            registerPWView.errorMessage.isHidden = true
-            registerPWView.registerButton.then{
-                $0.defaultButton("가입하기", .wishboardGreen, .black)
-                $0.isEnabled = true
-            }
-        } else {
-            registerPWView.errorMessage.isHidden = false
-            registerPWView.registerButton.then{
-                $0.defaultButton("가입하기", .wishboardDisabledGray, .dialogMessageColor)
-                $0.isEnabled = false
-            }
-        }
+        
+        registerPWView.registerButton.isActivate = isValid ? true : false
+        registerPWView.errorMessage.isHidden = isValid ? true : false
     }
 }
 // MARK: - API Success
 extension RegisterPasswordViewController {
-    func registerAPISuccess(_ result: APIModel<ResultModel>) {
-        let token = result.data?.token
+    func registerAPISuccess(_ result: APIModel<TokenResultModel>) {
+        let accessToken = result.data?.token.accessToken
+        let refreshToken = result.data?.token.refreshToken
         let tempNickname = result.data?.tempNickname
         
-        UserDefaults.standard.set(token, forKey: "token")
+        UserDefaults.standard.set(accessToken, forKey: "accessToken")
+        UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
         UserDefaults.standard.set(true, forKey: "isFirstLogin")
         UserDefaults.standard.set(tempNickname, forKey: "tempNickname")
         
-        // FCM
-        sendFCM()
+//         FCM
+//        sendFCM()
         // go main
         ScreenManager().goMain(self)
     }
-    // MARK: FCM API
-    func sendFCM() {
-        // Send FCM token to server
-        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
-        print("device Token:", deviceToken)
-        let fcmInput = FCMInput(fcm_token: deviceToken)
-        FCMDataManager().fcmDataManager(fcmInput, self)
-    }
-    func fcmAPISuccess(_ result: APIModel<ResultModel>) {
-        print(result.message)
-    }
+//    // MARK: FCM API
+//    func sendFCM() {
+//        // Send FCM token to server
+//        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
+//        print("device Token:", deviceToken)
+//        let fcmInput = FCMInput(fcm_token: deviceToken)
+//        FCMDataManager().fcmDataManager(fcmInput, self)
+//    }
+//    func fcmAPISuccess(_ result: APIModel<TokenResultModel>) {
+//        print(result.message)
+//    }
 }

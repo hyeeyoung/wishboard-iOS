@@ -14,7 +14,7 @@ class ShareView: UIView {
         $0.backgroundColor = .systemGray6
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 40
-        $0.image = UIImage(named: "blackLogo")
+        $0.image = Image.blackLogo
         $0.contentMode = .scaleAspectFill
     }
     let backgroundView = UIView().then{
@@ -22,29 +22,29 @@ class ShareView: UIView {
         $0.layer.cornerRadius = 20
     }
     lazy var quitButton = UIButton().then{
-        $0.setImage(UIImage(named: "x"), for: .normal)
+        $0.setImage(Image.quit, for: .normal)
     }
     let itemNameTextField = UITextField().then{
         $0.borderStyle = .none
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textAlignment = .center
-        $0.placeholder = "상품명을 입력해 주세요."
+        $0.placeholder = Placeholder.shareItemName
     }
     let itemPriceTextField = UITextField().then{
         $0.borderStyle = .none
         $0.font = .systemFont(ofSize: 12, weight: .bold)
         $0.keyboardType = .numberPad
         $0.textAlignment = .center
-        $0.placeholder = "가격을 입력해 주세요."
+        $0.placeholder = Placeholder.shareItemPrice
     }
     var setNotificationButton = UIButton().then{
         $0.setNotificationButton("", false)
     }
     let addFolderButton = UIButton().then{
-        $0.setImage(UIImage(named: "addFolder"), for: .normal)
+        $0.setImage(Image.addFolder, for: .normal)
     }
-    let completeButton = UIButton().then{
-        $0.defaultButton("위시리스트에 추가", .wishboardGreen, .black)
+    let completeButton = DefaultButton(titleStr: Button.addToWishList).then{
+        $0.isActivate = true
     }
     //MARK: - Life Cycles
     var folderCollectionView: UICollectionView!

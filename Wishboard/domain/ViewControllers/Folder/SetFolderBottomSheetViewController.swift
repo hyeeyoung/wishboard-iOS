@@ -15,6 +15,8 @@ class SetFolderBottomSheetViewController: UIViewController {
     var preUploadVC: UploadItemViewController!
     var preItemDetailVC: ItemDetailViewController!
     var itemId: Int?    // 아이템 폴더 수정 시 itemId
+    
+    let emptyMessage = "앗, 폴더가 없어요!\n폴더를 추가해서 아이템을 정리해 보세요!"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +75,7 @@ class SetFolderBottomSheetViewController: UIViewController {
 extension SetFolderBottomSheetViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = self.folderListData.count ?? 0
+        EmptyView().showFolderTableViewEmptyView(self.setFolderBottomSheetView.folderTableView, self.emptyMessage, count)
         return count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

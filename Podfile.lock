@@ -123,6 +123,18 @@ PODS:
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
     - MaterialComponents/ShadowLayer
+  - Moya (15.0.0):
+    - Moya/Core (= 15.0.0)
+  - Moya/Combine (15.0.0):
+    - Moya/Core
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
+  - Moya/ReactiveSwift (15.0.0):
+    - Moya/Core
+    - ReactiveSwift (~> 6.6.1)
+  - Moya/RxSwift (15.0.0):
+    - Moya/Core
+    - RxSwift (~> 6.0)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
     - nanopb/encode (= 2.30909.0)
@@ -130,6 +142,7 @@ PODS:
   - nanopb/encode (2.30909.0)
   - Pageboy (3.6.2)
   - PromisesObjC (2.1.1)
+  - ReactiveSwift (6.6.1)
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
@@ -151,6 +164,10 @@ DEPENDENCIES:
   - Kingfisher
   - lottie-ios
   - MaterialComponents/BottomSheet
+  - Moya
+  - Moya/Combine
+  - Moya/ReactiveSwift
+  - Moya/RxSwift
   - RxCocoa
   - RxSwift
   - SnackBar.swift
@@ -174,9 +191,11 @@ SPEC REPOS:
     - Kingfisher
     - lottie-ios
     - MaterialComponents
+    - Moya
     - nanopb
     - Pageboy
     - PromisesObjC
+    - ReactiveSwift
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -200,9 +219,11 @@ SPEC CHECKSUMS:
   Kingfisher: 184d4d1a8c36666e663caf8e08abe87898595c53
   lottie-ios: 9ae750cdc7820fecbd3c2f0cfc493038208fcdc4
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   Pageboy: cf121b9dd48c63f3f281b2a9ec93d02e0f23879b
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
+  ReactiveSwift: fab34244ad908808dc822bae352a058c8837c4ca
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
@@ -211,6 +232,6 @@ SPEC CHECKSUMS:
   Tabman: 447a50447ed2869c39ab3b1a779327e43e067c4e
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: 6c0c43ec45e7ab92d2198d9d75e2a785a6e72672
+PODFILE CHECKSUM: d68588f6867a70e1ef34d8bb0a58633c5ce7024d
 
 COCOAPODS: 1.11.3

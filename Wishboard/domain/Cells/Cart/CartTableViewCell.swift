@@ -17,40 +17,37 @@ class CartTableViewCell: UITableViewCell {
         $0.contentMode = .scaleAspectFill
     }
     let itemName = UILabel().then{
-        $0.text = "itemName"
         $0.font = UIFont.Suit(size: 12.5, family: .Regular)
         $0.numberOfLines = 2
         $0.isUserInteractionEnabled = true
     }
     let deleteButton = UIButton().then{
         var config = UIButton.Configuration.plain()
-        config.image = UIImage(named: "x")
+        config.image = Image.quit
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         $0.configuration = config
     }
     let minusButton = UIButton().then{
         var config = UIButton.Configuration.plain()
-        config.image = UIImage(named: "ic_cart_minus")
+        config.image = Image.cartMinus
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         $0.configuration = config
     }
     let plusButton = UIButton().then{
         var config = UIButton.Configuration.plain()
-        config.image = UIImage(named: "ic_cart_plus")
+        config.image = Image.cartPlus
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         $0.configuration = config
     }
     let countLabel = UILabel().then{
-        $0.text = "1"
         $0.textAlignment = .center
         $0.font = UIFont.Suit(size: 14.58, family: .Regular)
     }
     let priceLabel = UILabel().then{
-        $0.text = "1111"
         $0.font = UIFont.monteserrat(size: 18.75, family: .Bold)
     }
     let won = UILabel().then{
-        $0.text = "원"
+        $0.text = Item.won
         $0.font = UIFont.Suit(size: 14.58, family: .Regular)
     }
     //MARK: - Life Cycles

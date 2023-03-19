@@ -13,7 +13,7 @@ class RegisterEmailViewController: KeyboardViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.navigationTitle.text = "가입하기"
+        super.navigationTitle.text = Title.register
         
         registerEmailView = RegisterEmailView()
         self.view.addSubview(registerEmailView)
@@ -43,22 +43,12 @@ class RegisterEmailViewController: KeyboardViewController {
     // MARK: - Functions
     func checkValidEmail(_ email: String) {
         let isValid = self.email.checkEmail()
-        if isValid {
-            self.registerEmailView.nextButton.then{
-                $0.defaultButton("다음", .wishboardGreen, .black)
-                $0.isEnabled = true
-            }
-        } else {
-            self.registerEmailView.nextButton.then{
-                $0.defaultButton("다음", .wishboardDisabledGray, .dialogMessageColor)
-                $0.isEnabled = false
-            }
-        }
+        self.registerEmailView.nextButton.isActivate = isValid ? true : false
     }
 }
 // MARK: - API Success
 extension RegisterEmailViewController {
-    func checkEmailAPISuccess(_ result: APIModel<ResultModel>) {
+    func checkEmailAPISuccess(_ result: APIModel<TokenResultModel>) {
         self.view.endEditing(true)
         
         let registerVC = RegisterPasswordViewController(title: "2/2 단계")
@@ -68,8 +58,7 @@ extension RegisterEmailViewController {
     func checkEmaiAPIFail() {
         self.registerEmailView.errorMessageLabel.isHidden = false
         self.registerEmailView.nextButton.then{
-            $0.defaultButton("다음", .wishboardDisabledGray, .dialogMessageColor)
-            $0.isEnabled = false
+            $0.isActivate = false
         }
     }
 }

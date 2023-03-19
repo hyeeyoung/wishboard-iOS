@@ -11,7 +11,7 @@ import Alamofire
 class LostPasswordDataManager {
     let header = APIManager().getHeader()
     
-    //MARK: 이메일 인증 - 회원가입 시
+    //MARK: 이메일 전송 - 비밀번호 없이 로그인
     func checkEmailDataManager(_ parameter: CheckEmailInput, _ viewcontroller: LostPasswordViewController) {
         AF.request(Storage().BaseURL + "/auth/password-mail",
                    method: .post,
@@ -22,7 +22,7 @@ class LostPasswordDataManager {
             .responseDecodable(of: APIModel<LostPasswordModel>.self) { response in
             switch response.result {
             case .success(let result):
-                if result.success! {viewcontroller.checkEmailAPISuccess(result)}
+                if result.success {viewcontroller.checkEmailAPISuccess(result)}
             case .failure(let error):
                 if let statusCode = error.responseCode {
                     switch statusCode {
@@ -39,7 +39,7 @@ class LostPasswordDataManager {
             }
         }
     }
-    //MARK: 이메일 인증 - 회원가입 시
+    //MARK: 이메일 인증번호 확인 - 비밀번호 없이 로그인
     func verifyCodeDataManager(_ parameter: LostPasswordInput, _ viewcontroller: GetEmailViewController) {
         AF.request(Storage().BaseURL + "/auth/re-signin",
                    method: .post,
@@ -50,7 +50,7 @@ class LostPasswordDataManager {
             .responseDecodable(of: APIModel<VerifyCodeModel>.self) { response in
             switch response.result {
             case .success(let result):
-                if result.success! {viewcontroller.verifyCodeAPISuccess(result)}
+                if result.success {viewcontroller.verifyCodeAPISuccess(result)}
             case .failure(let error):
                 if let statusCode = error.responseCode {
                     switch statusCode {
@@ -60,6 +60,8 @@ class LostPasswordDataManager {
                        DispatchQueue.main.async {
                            ErrorBar(viewcontroller)
                        }
+                    case 401:
+                        RefreshDataManager().refreshDataManager()
                     default:
                         print(statusCode)
                     }

@@ -10,34 +10,26 @@ import Lottie
 
 class NewFolderViewController: BottomSheetKeyboardViewController {
     let titleLabel = UILabel().then{
-        $0.text = "새 폴더 추가"
+        $0.text = Title.addFolder
         $0.font = UIFont.Suit(size: 14, family: .Bold)
     }
     let exitBtn = UIButton().then{
-        $0.setImage(UIImage(named: "x"), for: .normal)
+        $0.setImage(Image.quit, for: .normal)
     }
-    let newFolderTextField = UITextField().then{
-        $0.addLeftPadding(10)
-        $0.backgroundColor = .wishboardTextfieldGray
-        $0.layer.cornerRadius = 5
-        $0.font = UIFont.Suit(size: 16, family: .Regular)
-        $0.textColor = .editTextFontColor
+    let newFolderTextField = DefaultTextField(Placeholder.folder).then{
         $0.clearButtonMode = .whileEditing
-        $0.placeholder = "폴더명"
     }
     let textFieldCountLabel = UILabel().then{
-        $0.text = "(0/10)자"
+        $0.text = Message.count
         $0.textColor = .wishboardGray
         $0.font = UIFont.Suit(size: 12, family: .Regular)
     }
     let errorMessage = UILabel().then{
-        $0.text = "동일이름의 폴더가 있어요!"
+        $0.text = ErrorMessage.sameFolderName
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .wishboardRed
     }
-    let completeButton = UIButton().then{
-        $0.defaultButton("추가", .wishboardGreen, .black)
-    }
+    let completeButton = DefaultButton(titleStr: Button.add)
     // MARK: - Life Cycles
     var folderStr: String!
     var tempFolderStr: String!
@@ -59,8 +51,7 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
         setUpConstraint()
         
         self.errorMessage.isHidden = true
-        self.completeButton.isEnabled = false
-        self.completeButton.defaultButton("추가", .wishboardDisabledGray, .dialogMessageColor)
+        self.completeButton.isActivate = false
         
         self.newFolderTextField.addTarget(self, action: #selector(folderTextFieldEditingChanged(_:)), for: .editingChanged)
         self.exitBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -121,9 +112,7 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
     }
     @objc func addNewFolderButtonDidTap() {
         UIDevice.vibrate()
-        lottieView = self.completeButton.setHorizontalLottieView(self.completeButton)
-        self.completeButton.isSelected = true
-        lottieView.isHidden = false
+        lottieView = self.completeButton.setLottieView()
         lottieView.play { completion in
             let addFolderInput = AddFolderInput(folder_name: self.folderStr)
             FolderDataManager().addFolderDataManager(addFolderInput, self)
@@ -142,16 +131,14 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
         if isValidCount {
             self.textFieldCountLabel.textColor = .wishboardGray
             self.errorMessage.isHidden = true
-            self.completeButton.isSelected = false
-            self.completeButton.defaultButton("추가", .wishboardGreen, .black)
-            self.completeButton.isEnabled = true
+//            self.completeButton.isSelected = false
+            self.completeButton.isActivate = true
             self.folderStr = self.tempFolderStr
         } else {
             self.textFieldCountLabel.textColor = .wishboardRed
             self.errorMessage.isHidden = true
-            self.completeButton.isSelected = false
-            self.completeButton.defaultButton("추가", .wishboardDisabledGray, .dialogMessageColor)
-            self.completeButton.isEnabled = false
+//            self.completeButton.isSelected = false
+            self.completeButton.isActivate = false
         }
     }
 }
@@ -165,19 +152,15 @@ extension NewFolderViewController {
         
         self.textFieldCountLabel.textColor = .wishboardGray
         self.errorMessage.isHidden = true
-        self.lottieView.isHidden = true
-        self.completeButton.isSelected = false
-        self.completeButton.defaultButton("추가", .wishboardGreen, .black)
-        self.completeButton.isEnabled = true
+        self.completeButton.inActivateLottieView()
+        self.completeButton.isActivate = true
         
         print(result.message)
     }
     func sameFolderNameFail() {
-        self.lottieView.isHidden = true
         self.completeButton.reloadInputViews()
         self.errorMessage.isHidden = false
-        self.completeButton.defaultButton("추가", .wishboardDisabledGray, .dialogMessageColor)
-        self.completeButton.isEnabled = false
+        self.completeButton.inActivateLottieView()
     }
     func addFolderAPIFail() {
         let addFolderInput = AddFolderInput(folder_name: self.folderStr)

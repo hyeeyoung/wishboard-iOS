@@ -16,13 +16,13 @@ class HomeView: UIView {
     // Navigation Views
     let navigationView = UIView()
     let logo = UIImageView().then{
-        $0.image = UIImage(named: "WishBoardLogo")
+        $0.image = Image.wishboardLogo
     }
     let cartButton = UIButton().then{
-        $0.setImage(UIImage(named: "cart"), for: .normal)
+        $0.setImage(Image.cartIcon, for: .normal)
     }
     let calenderButton = UIButton().then{
-        $0.setImage(UIImage(named: "ic_calendar"), for: .normal)
+        $0.setImage(Image.calender, for: .normal)
     }
     
     // MARK: - Life Cycles

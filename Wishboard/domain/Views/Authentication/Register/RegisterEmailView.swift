@@ -11,29 +11,24 @@ import UIKit
 class RegisterEmailView: UIView {
     // MARK: - View
     let heartLetterImage = UIImageView().then{
-        $0.image = UIImage(named: "love-letter")
+        $0.image = Image.loveLetter
     }
     let subTitleLabel = UILabel().then{
-        $0.text = "이메일 인증으로 비밀번호를 찾을 수 있어요.\n실제 사용될 이메일로 입력해주세요!"
+        $0.text = Message.email
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.setTextWithLineHeight()
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
-    var emailTextField = UITextField().then{
-        $0.defaultTextField("이메일")
+    var emailTextField = DefaultTextField(Placeholder.email).then{
         $0.becomeFirstResponder()
-        $0.textColor = .editTextFontColor
     }
     let errorMessageLabel = UILabel().then{
-        $0.text = "앗, 이미 가입된 계정이에요! 로그인으로 진행해 주세요."
+        $0.text = ErrorMessage.nonExistAccount
         $0.textColor = .wishboardRed
         $0.font = UIFont.Suit(size: 12, family: .Regular)
     }
-    let nextButton = UIButton().then{
-        $0.defaultButton("다음", .wishboardDisabledGray, .dialogMessageColor)
-        $0.isEnabled = false
-    }
+    let nextButton = DefaultButton(titleStr: Button.next)
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
     }()

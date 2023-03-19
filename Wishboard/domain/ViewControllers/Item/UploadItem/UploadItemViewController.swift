@@ -191,13 +191,13 @@ extension UploadItemViewController {
         if isUploadItem {
             self.tabBarController?.tabBar.isHidden = false
             uploadItemView.backButton.isHidden = true
-            uploadItemView.pageTitle.text = "아이템 추가"
+            uploadItemView.pageTitle.text = Title.addItem
             uploadItemView.saveButton.addTarget(self, action: #selector(saveButtonDidTap), for: .touchUpInside)
             uploadItemView.setSaveButton(false)
         } else {
             self.tabBarController?.tabBar.isHidden = true
             uploadItemView.backButton.isHidden = false
-            uploadItemView.pageTitle.text = "아이템 수정"
+            uploadItemView.pageTitle.text = Title.modifyItem
             uploadItemView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
             uploadItemView.saveButton.addTarget(self, action: #selector(modifyButtonDidTap), for: .touchUpInside)
             uploadItemView.setSaveButton(true)
@@ -338,7 +338,7 @@ extension UploadItemViewController {
     func alertCameraMenu() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        let cameraAction =  UIAlertAction(title: "사진 찍기", style: UIAlertAction.Style.default){(_) in
+        let cameraAction =  UIAlertAction(title: Title.camera, style: UIAlertAction.Style.default){(_) in
             let camera = UIImagePickerController()
             camera.sourceType = .camera
             camera.allowsEditing = true
@@ -347,13 +347,13 @@ extension UploadItemViewController {
             camera.delegate = self
             self.present(camera, animated: true, completion: nil)
         }
-        let albumAction =  UIAlertAction(title: "사진 보관함", style: UIAlertAction.Style.default){(_) in
+        let albumAction =  UIAlertAction(title: Title.album, style: UIAlertAction.Style.default){(_) in
             let album = UIImagePickerController()
             album.delegate = self
             album.sourceType = .photoLibrary
             self.present(album, animated: true, completion: nil)
         }
-        let cancelAction = UIAlertAction(title: "취소", style: UIAlertAction.Style.cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: Title.cancel, style: UIAlertAction.Style.cancel, handler: nil)
         
         alert.view.tintColor = .black
         alert.addAction(cameraAction)
@@ -423,13 +423,13 @@ extension UploadItemViewController: UIScrollViewDelegate {
 // MARK: - API Success
 extension UploadItemViewController {
     // MARK: 아이템 추가 API
-    func uploadItemAPISuccess(_ result: APIModel<ResultModel>) {
+    func uploadItemAPISuccess(_ result: APIModel<TokenResultModel>) {
         self.viewDidLoad()
         ScreenManager().goMainPages(0, self, family: .itemUpload)
         print(result.message)
     }
     // MARK: 아이템 수정 API
-    func modifyItemAPISuccess(_ result: APIModel<ResultModel>) {
+    func modifyItemAPISuccess(_ result: APIModel<TokenResultModel>) {
         self.viewDidLoad()
         self.navigationController?.popViewController(animated: true)
         isModified = true

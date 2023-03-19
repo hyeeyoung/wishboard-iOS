@@ -23,7 +23,7 @@ class GetEmailViewController: KeyboardViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.navigationTitle.text = "이메일로 로그인하기"
+        super.navigationTitle.text = Title.loginByEmail
         
         setGetEmailView()
     }
@@ -59,14 +59,9 @@ extension GetEmailViewController {
         UIDevice.vibrate()
         if self.code != self.authCode {
             getEmailView.messageLabel.isHidden = false
-            self.getEmailView.loginButton.then{
-                $0.defaultButton("로그인 하기", .wishboardDisabledGray, .dialogMessageColor)
-                $0.isEnabled = false
-            }
+            self.getEmailView.loginButton.isActivate = false
         } else {
-            let lottieView = getEmailView.loginButton.setHorizontalLottieView(getEmailView.loginButton)
-            getEmailView.loginButton.isSelected = true
-            lottieView.isHidden = false
+            let lottieView = getEmailView.loginButton.setLottieView()
             lottieView.play { completion in
                 let lostPasswordInput = LostPasswordInput(verify: true, email: self.email)
                 LostPasswordDataManager().verifyCodeDataManager(lostPasswordInput, self)
@@ -93,27 +88,22 @@ extension GetEmailViewController {
         var isValidCode = codeCount > 0 ? true : false
         if isValidCode && self.isValidTime {
             self.getEmailView.messageLabel.isHidden = true
-            self.getEmailView.loginButton.then{
-                $0.defaultButton("로그인 하기", .wishboardGreen, .black)
-                $0.isEnabled = true
-            }
+            self.getEmailView.loginButton.isActivate = true
         } else {
-            self.getEmailView.loginButton.then{
-                $0.defaultButton("로그인 하기", .wishboardDisabledGray, .dialogMessageColor)
-                $0.isEnabled = false
-            }
+            self.getEmailView.loginButton.isActivate = false
         }
     }
 }
 // MARK: - API Success
 extension GetEmailViewController {
     func verifyCodeAPISuccess(_ result: APIModel<VerifyCodeModel>) {
-        let token = result.data?.token
+        let accessToken = result.data?.token.accessToken
+        let refreshToken = result.data?.token.refreshToken
         let email = self.email
-        let pushState = result.data?.pushState
         let tempNickname = result.data?.tempNickname
         
-        UserDefaults.standard.set(token, forKey: "token")
+        UserDefaults.standard.set(accessToken, forKey: "accessToken")
+        UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
         UserDefaults.standard.set(false, forKey: "isFirstLogin")
         UserDefaults.standard.set(email, forKey: "email")
         UserDefaults.standard.set(tempNickname, forKey: "tempNickname")

@@ -22,34 +22,28 @@ class PopUpWithTextFieldViewController: UIViewController {
         $0.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
     }
     let titleLabel = UILabel().then{
-        $0.text = "title"
         $0.font = UIFont.Suit(size: 16, family: .Bold)
     }
     let quitButton = UIButton().then{
         var config = UIButton.Configuration.plain()
-        config.image = UIImage(named: "x")
+        config.image = Image.quit
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         $0.configuration = config
     }
     let countLabel = UILabel().then{
-        $0.text = "(0/10)자"
+        $0.text = Message.count
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .wishboardGray
     }
-    var textField = UITextField().then{
-        $0.addLeftPadding(10)
-        $0.backgroundColor = .wishboardTextfieldGray
-        $0.layer.cornerRadius = 5
-        $0.font = UIFont.Suit(size: 16, family: .Regular)
+    var textField = DefaultTextField("").then{
         $0.clearButtonMode = .always
-        $0.textColor = .editTextFontColor
     }
     let errorMessageLabel = UILabel().then{
-        $0.text = "동일이름의 폴더가 있어요!"
+        $0.text = ErrorMessage.sameFolderName
         $0.textColor = .wishboardRed
         $0.font = UIFont.Suit(size: 12, family: .Regular)
     }
-    var completeButton: UIButton!
+    var completeButton: DefaultButton!
     // MARK: - Life Cycles
     // keyboard
     var restoreFrameValue: CGFloat = 0.0
@@ -68,10 +62,8 @@ class PopUpWithTextFieldViewController: UIViewController {
         if let prevText = self.prevText {
             self.countLabel.text = "(" + String(prevText.count) + "/10)자"
         }
-        completeButton = UIButton().then{
-            $0.defaultButton(self.buttonTitle!, .wishboardDisabledGray, .dialogMessageColor)
-            $0.isEnabled = false
-        }
+        completeButton = DefaultButton(titleStr: self.buttonTitle!)
+        completeButton.isActivate = self.titleText?.isEmpty ?? true ? false : true
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,17 +108,14 @@ class PopUpWithTextFieldViewController: UIViewController {
         self.countLabel.text = "(" + String(textLength) + "/10)자"
         
         if textLength > 10 {
-            completeButton.defaultButton(self.buttonTitle!, .wishboardDisabledGray, .dialogMessageColor)
+            completeButton.isActivate = false
             self.countLabel.textColor = .wishboardRed
-            completeButton.isEnabled = false
         } else if textLength == 0 {
-            completeButton.defaultButton(self.buttonTitle!, .wishboardDisabledGray, .dialogMessageColor)
+            completeButton.isActivate = false
             self.countLabel.textColor = .wishboardGray
-            completeButton.isEnabled = false
         } else {
-            completeButton.defaultButton(self.buttonTitle!, .wishboardGreen, .black)
+            completeButton.isActivate = true
             self.countLabel.textColor = .wishboardGray
-            completeButton.isEnabled = true
         }
         errorMessageLabel.isHidden = true
     }
@@ -136,11 +125,7 @@ class PopUpWithTextFieldViewController: UIViewController {
         textField.placeholder = self.placeholder
         guard let prevText = prevText else {return}
         textField.text = prevText
-
-        completeButton.then{
-            $0.defaultButton(self.buttonTitle!, .wishboardGreen, .black)
-            $0.isEnabled = true
-        }
+        completeButton.isActivate = true
     }
     func setUpView() {
         self.view.addSubview(popupView)
@@ -189,13 +174,12 @@ class PopUpWithTextFieldViewController: UIViewController {
     }
 
     func completeButtonDidTap() {
+        completeButton.isActivate = true
         completeButton.isEnabled = false
-        completeButton.defaultButton("", .wishboardGreen, .black)
     }
     func sameFolderNameFail() {
         errorMessageLabel.isHidden = false
-        completeButton.defaultButton(self.buttonTitle!, .wishboardDisabledGray, .dialogMessageColor)
-        completeButton.isEnabled = false
+        completeButton.isActivate = false
     }
 }
 // MARK: - TextField & Keyboard Methods

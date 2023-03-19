@@ -27,6 +27,8 @@ class NotificationDataManager {
                 switch statusCode {
                 case 429:
                     notiView.getNotificationListAPIFail()
+                case 401:
+                    RefreshDataManager().refreshDataManager()
                 default:
                     print(error.responseCode)
                 }
@@ -40,18 +42,18 @@ class NotificationDataManager {
                            parameters: nil,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 notiView.readNotificationAPISuccess(result)
             case .failure(let error):
-//                let statusCode = error.responseCode
-//                switch statusCode {
-//                case 429:
-//                    notiView.getNotificationListAPIFail()
-//                default:
-//                    print(error.responseCode)
-//                }
+                let statusCode = error.responseCode
+                switch statusCode {
+                case 401:
+                    RefreshDataManager().refreshDataManager()
+                default:
+                    print(error.responseCode)
+                }
                 print(error.responseCode)
             }
         }
@@ -76,6 +78,8 @@ class NotificationDataManager {
                     DispatchQueue.main.async {
                         ErrorBar(viewcontroller)
                     }
+                case 401:
+                    RefreshDataManager().refreshDataManager()
                 default:
                     print(error.responseCode)
                 }

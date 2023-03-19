@@ -12,17 +12,17 @@ class UploadItemView: UIView {
     // MARK: - View
     let navigationView = UIView()
     let pageTitle = UILabel().then{
-        $0.text = "아이템 추가"
+        $0.text = Title.addItem
         $0.font = UIFont.Suit(size: 15, family: .Bold)
     }
     let backButton = UIButton().then{
         var config = UIButton.Configuration.plain()
-        config.image = UIImage(named: "goBack")
+        config.image = Image.goBack
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         $0.configuration = config
     }
-    var saveButton = UIButton().then{
-        $0.defaultButton("저장", .wishboardGreen, .black)
+    var saveButton = DefaultButton(titleStr: Button.save).then{
+        $0.isActivate = true
     }
     
     let scrollView = UIScrollView().then{
@@ -45,14 +45,7 @@ class UploadItemView: UIView {
     // MARK: - Functions
     // 저장버튼 Enabled 여부
     func setSaveButton(_ isEnable: Bool) {
-        if isEnable {
-            saveButton.defaultButton("저장", .wishboardGreen, .black)
-            saveButton.isEnabled = true
-        }
-        else {
-            saveButton.defaultButton("저장", .wishboardDisabledGray, .dialogMessageColor)
-            saveButton.isEnabled = false
-        }
+        saveButton.isActivate = isEnable ? true : false
     }
     func setImageTableView(dataSourceDelegate: UITableViewDelegate & UITableViewDataSource) {
         uploadImageTableView = UITableView().then{

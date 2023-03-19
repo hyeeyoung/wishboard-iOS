@@ -14,7 +14,7 @@ class CalenderTableViewCell: UITableViewCell {
     
     let backButton = UIButton().then{
         var config = UIButton.Configuration.plain()
-        config.image = UIImage(named: "goBack")
+        config.image = Image.goBack
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         $0.configuration = config
     }

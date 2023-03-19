@@ -14,7 +14,7 @@ class FolderDataManager {
     // MARK: - 폴더 리스트 조회
     func getFolderListDataManager(_ viewcontroller: ShareViewController) {
         let BaseURL = defaults?.string(forKey: "url") ?? ""
-        let token = defaults?.string(forKey: "token") ?? ""
+        let token = defaults?.string(forKey: "accessToken") ?? ""
         let header: HTTPHeaders = [
             "Authorization": "Bearer " + token,
             "Accept": "application/json"
@@ -43,7 +43,7 @@ class FolderDataManager {
     // MARK: - 폴더 추가
     func addFolderDataManager(_ parameter: AddFolderInput, _ viewcontroller: NewFolderViewController) {
         let BaseURL = defaults?.string(forKey: "url") ?? ""
-        let token = defaults?.string(forKey: "token") ?? ""
+        let token = defaults?.string(forKey: "accessToken") ?? ""
         let header: HTTPHeaders = [
             "Authorization": "Bearer " + token,
             "Accept": "application/json"

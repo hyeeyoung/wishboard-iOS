@@ -31,6 +31,8 @@ class MypageDataManager {
                    DispatchQueue.main.async {
                        ErrorBar(viewcontroller)
                    }
+                case 401:
+                    RefreshDataManager().refreshDataManager()
                 default:
                     print(error.responseCode)
                 }
@@ -45,13 +47,15 @@ class MypageDataManager {
                            parameters: nil,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 viewcontroller.switchNotificationAPISuccess(result)
             case .failure(let error):
                 let statusCode = error.responseCode
                 switch statusCode {
+                    case 401:
+                    RefreshDataManager().refreshDataManager()
                     case 500:
                        DispatchQueue.main.async {
                            ErrorBar(viewcontroller)
@@ -69,7 +73,7 @@ class MypageDataManager {
                            parameters: nil,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 viewcontroller.switchNotificationAPISuccess(result)
@@ -80,6 +84,8 @@ class MypageDataManager {
                        DispatchQueue.main.async {
                            ErrorBar(viewcontroller)
                        }
+                    case 401:
+                    RefreshDataManager().refreshDataManager()
                     default:
                        print(error.responseCode)
                 }
@@ -93,7 +99,7 @@ class MypageDataManager {
                            parameters: nil,
                            headers: header)
             .validate()
-            .responseDecodable(of: APIModel<ResultModel>.self) { response in
+            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
             case .success(let result):
                 viewcontroller.deleteUserAPISuccess(result)
@@ -104,6 +110,8 @@ class MypageDataManager {
                        DispatchQueue.main.async {
                            ErrorBar(viewcontroller)
                        }
+                    case 401:
+                    RefreshDataManager().refreshDataManager()
                     default:
                        print(error.responseCode)
                 }
@@ -112,10 +120,8 @@ class MypageDataManager {
     }
     // MARK: - 로그아웃
     func logoutDataManager(_ viewcontroller: MyPageViewController) {
-        let logoutInput = FCMInput(fcm_token: nil)
-        AF.request(Storage().BaseURL + "/user/fcm",
-                           method: .put,
-                           parameters: logoutInput,
+        AF.request(Storage().BaseURL + "/auth/logout",
+                           method: .post,
                            headers: header)
             .validate()
             .responseDecodable(of: APIModel<ResultModel>.self) { response in
@@ -129,6 +135,8 @@ class MypageDataManager {
                        DispatchQueue.main.async {
                            ErrorBar(viewcontroller)
                        }
+                    case 401:
+                    RefreshDataManager().refreshDataManager()
                     default:
                        print(error.responseCode)
                 }

@@ -29,11 +29,11 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.setTextWithLineHeight()
     }
     let priceLabel = UILabel().then{
-        $0.text = "0"
+        $0.text = Item.zero
         $0.font = UIFont.monteserrat(size: 18, family: .Bold)
     }
     let won = UILabel().then{
-        $0.text = "원"
+        $0.text = Item.won
         $0.font = UIFont.Suit(size: 14, family: .Regular)
     }
     let stack = UIStackView().then{
@@ -52,7 +52,6 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.backgroundColor = .wishboardDisabledGray
     }
     let memoTitlelabel = UILabel().then{
-        $0.text = "메모"
         $0.font = UIFont.Suit(size: 12, family: .Bold)
     }
     let memoContentLabel = UILabel().then{

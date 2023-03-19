@@ -13,7 +13,7 @@ class LostPasswordViewController: KeyboardViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.navigationTitle.text = "이메일로 로그인하기"
+        super.navigationTitle.text = Title.loginByEmail
         
         lostPasswordView = LostPasswordView()
         self.view.addSubview(lostPasswordView)
@@ -47,17 +47,11 @@ class LostPasswordViewController: KeyboardViewController {
     func checkValidEmail(_ email: String) {
         let isValid = self.email.checkEmail()
         if isValid {
-            self.lostPasswordView.getEmailButton.then{
-                $0.defaultButton("인증메일 받기", .wishboardGreen, .black)
-                $0.isEnabled = true
-            }
+            self.lostPasswordView.getEmailButton.isActivate = true
             self.lostPasswordView.errorMessage.isHidden = true
         } else {
-            self.lostPasswordView.getEmailButton.then{
-                $0.defaultButton("인증메일 받기", .wishboardDisabledGray, .dialogMessageColor)
-                $0.isEnabled = false
-            }
-            self.lostPasswordView.errorMessage.text = "이메일 주소를 정확하게 입력해주세요."
+            self.lostPasswordView.getEmailButton.isActivate = false
+            self.lostPasswordView.errorMessage.text = ErrorMessage.email
             self.lostPasswordView.errorMessage.isHidden = false
         }
     }
@@ -67,7 +61,7 @@ extension LostPasswordViewController {
     func checkEmailAPISuccess(_ result: APIModel<LostPasswordModel>) {
         let authCode = result.data?.verificationCode
         
-        let getEmailVC = GetEmailViewController(title: "2/2 단계")
+        let getEmailVC = GetEmailViewController(title: Title.stepTwo)
         getEmailVC.authCode = authCode
         getEmailVC.email = self.email
         
@@ -75,12 +69,9 @@ extension LostPasswordViewController {
         print(result)
     }
     func checkEmaiAPIFail() {
-        self.lostPasswordView.errorMessage.text = "앗, 가입되지 않은 계정이에요! 가입하기부터 진행해 주세요."
+        self.lostPasswordView.errorMessage.text = ErrorMessage.nonExistAccount
         self.lostPasswordView.errorMessage.isHidden = false
         
-        self.lostPasswordView.getEmailButton.then{
-            $0.defaultButton("인증메일 받기", .wishboardDisabledGray, .dialogMessageColor)
-            $0.isEnabled = false
-        }
+        self.lostPasswordView.getEmailButton.isActivate = false
     }
 }

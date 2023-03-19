@@ -15,27 +15,27 @@ class CartView: UIView {
         $0.backgroundColor = .wishboardGreen
     }
     let total = UILabel().then{
-        $0.text = "전체"
+        $0.text = Item.total
         $0.font = UIFont.Suit(size: 14, family: .Regular)
         $0.setTextWithLineHeight()
     }
     let countLabel = UILabel().then{
-        $0.text = "0"
+        $0.text = Item.zero
         $0.font = UIFont.monteserrat(size: 18, family: .Bold)
         $0.setTextWithLineHeight()
     }
     let label = UILabel().then{
-        $0.text = "개"
+        $0.text = Item.count
         $0.font = UIFont.Suit(size: 14, family: .Regular)
         $0.setTextWithLineHeight()
     }
     let price = UILabel().then{
-        $0.text = "0"
+        $0.text = Item.zero
         $0.font = UIFont.monteserrat(size: 18, family: .Bold)
         $0.setTextWithLineHeight()
     }
     let won = UILabel().then{
-        $0.text = "원"
+        $0.text = Item.won
         $0.font = UIFont.Suit(size: 14, family: .Regular)
         $0.setTextWithLineHeight()
     }
@@ -44,7 +44,7 @@ class CartView: UIView {
     var cartTableView: UITableView!
     var cartData: [CartListModel] = []
     var itemPrice = 0
-    let emptyMessage = "앗, 장바구니가 비어있어요!\n구매할 아이템을 장바구니에 담아보세요!"
+    let emptyMessage = EmptyMessage.cart
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -187,8 +187,19 @@ extension CartView {
     // (X) 버튼 클릭
     @objc func deleteButtonDidTap(_ sender: CartGesture) {
         UIDevice.vibrate()
+        let dialog = PopUpViewController(titleText: "장바구니에서 삭제", messageText: "정말 장바구니에서 아이템을 삭제하시겠어요?", greenBtnText: "취소", blackBtnText: "삭제")
+        dialog.modalPresentationStyle = .overFullScreen
+        self.preVC.present(dialog, animated: false, completion: nil)
+        
+        let deleteGesture = CartGesture(target: self, action: #selector(deleteItem(_:)))
+        deleteGesture.cartItem = sender.cartItem
+        dialog.okBtn.addGestureRecognizer(deleteGesture)
+    }
+    @objc func deleteItem(_ sender: CartGesture) {
+        UIDevice.vibrate()
         guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
         CartDataManager().deleteCartDataManager(itemId, self)
+        
     }
     // 상품 이미지, 상품명 클릭 (아이템 디테일 화면으로 이동)
     @objc func cartItemDidTap(_ sender: CartGesture) {
@@ -234,16 +245,17 @@ extension CartView {
     func noCartItem() {
         self.cartData = []
         cartTableView.reloadData()
-        self.price.text = "0"
-        self.countLabel.text = "0"
+        self.price.text = Item.zero
+        self.countLabel.text = Item.zero
     }
     // MARK: 장바구니 수량 변경 API
-    func modifyCountAPISuccess(_ result: APIModel<ResultModel>) {
+    func modifyCountAPISuccess(_ result: APIModel<TokenResultModel>) {
         CartDataManager().getCartListDataManager(self)
         print(result.message)
     }
     // MARK: 장바구니 삭제 API
-    func deleteCartAPISuccess(_ result: APIModel<ResultModel>) {
+    func deleteCartAPISuccess(_ result: APIModel<TokenResultModel>) {
+        self.preVC.dismiss(animated: false)
         CartDataManager().getCartListDataManager(self)
         print(result.message)
     }

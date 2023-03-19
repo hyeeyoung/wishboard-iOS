@@ -11,29 +11,20 @@ import Kingfisher
 class ModifyProfileViewController: TitleCenterViewController {
     // profile
     var profileImage = UIImageView().then{
-        $0.image = UIImage(named: "defaultProfile")
+        $0.image = Image.defaultProfile
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 53
         $0.contentMode = .scaleAspectFill
         $0.isUserInteractionEnabled = true
     }
     let cameraButton = UIButton().then{
-        $0.setImage(UIImage(named: "camera_gray"), for: .normal)
+        $0.setImage(Image.cameraGray, for: .normal)
     }
-    var nameTextField = UITextField().then{
-        $0.placeholder = "닉네임을 수정해주세요."
-        $0.addLeftPadding(10)
-        $0.backgroundColor = .wishboardTextfieldGray
-        $0.layer.cornerRadius = 5
-        $0.font = UIFont.Suit(size: 16, family: .Regular)
+    var nameTextField = DefaultTextField(Placeholder.nickname).then{
         $0.clearButtonMode = .always
-        $0.textColor = .editTextFontColor
-        
         $0.becomeFirstResponder()
     }
-    let completeButton = UIButton().then{
-        $0.defaultButton("완료", .wishboardGreen, .black)
-    }
+    let completeButton = DefaultButton(titleStr: Button.complete)
     // MARK: - Life Cycles
     // 앨범 선택 image picker
     var isPhotoSelected = false
@@ -52,7 +43,7 @@ class ModifyProfileViewController: TitleCenterViewController {
 
         self.view.backgroundColor = .white
         self.navigationController?.isNavigationBarHidden = true
-        super.navigationTitle.text = "프로필 수정"
+        super.navigationTitle.text = Title.modifyProfile
         
         // imagePicker delegate
         imagePickerController.delegate = self
@@ -132,13 +123,7 @@ extension ModifyProfileViewController {
     }
     // 닉네임 유효성 검사
     func isNicknameValid(nickname: String) {
-        if nickname == "" {
-            self.completeButton.defaultButton("완료", .wishboardDisabledGray, .dialogMessageColor)
-            self.completeButton.isEnabled = false
-        } else {
-            self.completeButton.defaultButton("완료", .wishboardGreen, .black)
-            self.completeButton.isEnabled = true
-        }
+        self.completeButton.isActivate = nickname == "" ? false : true
     }
     // 앨범에서 사진/동영상 선택
     // 프로필 이미지 클릭 시
@@ -156,7 +141,7 @@ extension ModifyProfileViewController {
     @objc func completeButtonDidTap() {
         UIDevice.vibrate()
         
-        let lottieView = self.completeButton.setHorizontalLottieView(self.completeButton)
+        let lottieView = self.completeButton.setLottieView()
         self.completeButton.isSelected = true
         lottieView.isHidden = false
         lottieView.play { completion in
@@ -202,8 +187,8 @@ extension ModifyProfileViewController: UITextFieldDelegate {
 }
 // MARK: - API Success
 extension ModifyProfileViewController {
-    func modifyProfileAPISuccess(_ result: APIModel<ResultModel>) {
-        if result.success! {
+    func modifyProfileAPISuccess(_ result: APIModel<TokenResultModel>) {
+        if result.success {
             self.modified = true
             self.navigationController?.popViewController(animated: true)
         } else {}

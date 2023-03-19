@@ -9,7 +9,7 @@ import UIKit
 
 class UploadItemBottomSheetTableViewCell: UITableViewCell {
     let subTitle = UILabel().then{
-        $0.text = "복사한 링크로 아이템 정보를 불러올 수 있어요!"
+        $0.text = Message.shoppingLink
         $0.font = UIFont.Suit(size: 10, family: .Regular)
         $0.textColor = .wishboardGreen
         $0.setTextWithLineHeight()
@@ -20,6 +20,15 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         subTitle.isHidden = true
+        
+        self.textLabel?.snp.makeConstraints({ make in
+            make.leading.equalToSuperview().offset(16)
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-47)
+        })
+        self.textLabel?.then{
+            $0.textAlignment = .left
+        }
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -27,7 +36,7 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
     
     func setBottomSheetCell(isUploadItem: Bool, tag: Int) {
         let arrowImg = UIImageView().then{
-            $0.image = UIImage(named: "arrow_right")
+            $0.image = Image.arrowRight
         }
         self.contentView.addSubview(arrowImg)
         arrowImg.snp.makeConstraints { make in
@@ -52,7 +61,7 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
         case 2:
             // 만약 폴더를 재선택했다면 업데이트
             if let folder = data.folder_name.nilIfEmpty {self.textLabel?.text = folder}
-            else {self.textLabel?.text = "폴더"}
+            else {self.textLabel?.text = Title.folder}
         case 3:
             // 만약 알림 날짜를 재설정했다면 업데이트
             if let notiType = data.item_notification_type {
@@ -61,7 +70,7 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
                     self.textLabel?.text = "[" + notiType + "] " + notiDateStr
                 }
             }
-            else {self.textLabel?.text = "상품 일정 알림"}
+            else {self.textLabel?.text = Title.notificationItem}
             
         case 4:
             // 만약 쇼핑몰 링크를 수정했다면 업데이트
@@ -69,7 +78,7 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
                 self.textLabel?.text = link
                 subTitle.isHidden = true
             } else {
-                self.textLabel?.text = "쇼핑몰 링크"
+                self.textLabel?.text = Title.shoppingMallLink
                 subTitle.isHidden = false
             }
         default:
@@ -80,11 +89,11 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
         // 만약 아이템 추가라면
         switch tag {
         case 2:
-            self.textLabel?.text = "폴더"
+            self.textLabel?.text = Title.folder
         case 3:
-            self.textLabel?.text = "상품 일정 알림"
+            self.textLabel?.text = Title.notificationItem
         case 4:
-            self.textLabel?.text = "쇼핑몰 링크"
+            self.textLabel?.text = Title.shoppingMallLink
             subTitle.isHidden = false
         default:
             fatalError()
@@ -96,7 +105,7 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
         case 2:
             // 만약 폴더를 재선택했다면 업데이트
             if let folder = data.folder_name.nilIfEmpty {self.textLabel?.text = folder}
-            else {self.textLabel?.text = "폴더"}
+            else {self.textLabel?.text = Title.folder}
         case 3:
             // 만약 알림 날짜를 재설정했다면 업데이트
             if let notiType = data.item_notification_type {
@@ -104,7 +113,7 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
                     self.textLabel?.text = "[" + notiType + "] " + notiDate
                 }
             }
-            else {self.textLabel?.text = "상품 일정 알림"}
+            else {self.textLabel?.text = Title.notificationItem}
             
         case 4:
             // 만약 쇼핑몰 링크를 수정했다면 업데이트
@@ -112,7 +121,7 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
                 self.textLabel?.text = link
                 subTitle.isHidden = true
             } else {
-                self.textLabel?.text = "쇼핑몰 링크"
+                self.textLabel?.text = Title.shoppingMallLink
                 subTitle.isHidden = false
             }
         default:
