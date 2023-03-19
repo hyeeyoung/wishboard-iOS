@@ -5,6 +5,19 @@
 //  Created by gomin on 2022/09/25.
 //
 
+enum NetworkResult<T>{
+    typealias Code = String
+    typealias Message = String
+    case success(T)
+    case invalidSuccess(Code, Message)
+    case failure(Error?)
+}
+
+struct StatusResponseModel: Decodable{
+    let success: Bool
+    let message: String
+}
+
 struct APIModel<T: Decodable>: Decodable {
     let success: Bool?
     let message: String?

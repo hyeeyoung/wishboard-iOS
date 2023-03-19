@@ -40,6 +40,12 @@
 		233C34B229C73E2F005DFA39 /* DefaultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233C34B029C73B30005DFA39 /* DefaultButton.swift */; };
 		233C34B429C754DF005DFA39 /* DefaultTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233C34B329C754DF005DFA39 /* DefaultTextField.swift */; };
 		233C34B529C754EC005DFA39 /* DefaultTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233C34B329C754DF005DFA39 /* DefaultTextField.swift */; };
+		233C34BA29C75AC7005DFA39 /* HTTPMethodURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233C34B929C75AC7005DFA39 /* HTTPMethodURL.swift */; };
+		233C34BC29C75AEF005DFA39 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233C34BB29C75AEF005DFA39 /* BaseRouter.swift */; };
+		233C34BE29C75B10005DFA39 /* MultiMoyaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233C34BD29C75B10005DFA39 /* MultiMoyaService.swift */; };
+		233C34C029C75B7F005DFA39 /* UserRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233C34BF29C75B7F005DFA39 /* UserRouter.swift */; };
+		233C34C229C75B95005DFA39 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233C34C129C75B95005DFA39 /* UserService.swift */; };
+		233C34C429C7602D005DFA39 /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233C34C329C7602D005DFA39 /* MoyaLoggerPlugin.swift */; };
 		233CDED328E4FE0A004E12BC /* UploadItemInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233CDED228E4FE0A004E12BC /* UploadItemInput.swift */; };
 		2340CEAA28CB6173007C362F /* HomeBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEA928CB6173007C362F /* HomeBottomSheetView.swift */; };
 		2340CEAC28CB6252007C362F /* HowToCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEAB28CB6252007C362F /* HowToCollectionViewCell.swift */; };
@@ -290,6 +296,12 @@
 		2339D4FE28E3CFF900E636FD /* FolderInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderInput.swift; sourceTree = "<group>"; };
 		233C34B029C73B30005DFA39 /* DefaultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultButton.swift; sourceTree = "<group>"; };
 		233C34B329C754DF005DFA39 /* DefaultTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTextField.swift; sourceTree = "<group>"; };
+		233C34B929C75AC7005DFA39 /* HTTPMethodURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethodURL.swift; sourceTree = "<group>"; };
+		233C34BB29C75AEF005DFA39 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
+		233C34BD29C75B10005DFA39 /* MultiMoyaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiMoyaService.swift; sourceTree = "<group>"; };
+		233C34BF29C75B7F005DFA39 /* UserRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRouter.swift; sourceTree = "<group>"; };
+		233C34C129C75B95005DFA39 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		233C34C329C7602D005DFA39 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
 		233CDED228E4FE0A004E12BC /* UploadItemInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemInput.swift; sourceTree = "<group>"; };
 		2340CEA928CB6173007C362F /* HomeBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomSheetView.swift; sourceTree = "<group>"; };
 		2340CEAB28CB6252007C362F /* HowToCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -717,6 +729,8 @@
 				232174E528E1D469008C155D /* LoginDataManager.swift */,
 				23A85F7E28E3AA5400075667 /* LostPasswordDataManager.swift */,
 				23134D3E29B222BF00238536 /* RefreshDataManager.swift */,
+				233C34BF29C75B7F005DFA39 /* UserRouter.swift */,
+				233C34C129C75B95005DFA39 /* UserService.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -858,6 +872,17 @@
 				233C34B329C754DF005DFA39 /* DefaultTextField.swift */,
 			);
 			path = Default;
+			sourceTree = "<group>";
+		};
+		233C34B829C75AAB005DFA39 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				233C34B929C75AC7005DFA39 /* HTTPMethodURL.swift */,
+				233C34BB29C75AEF005DFA39 /* BaseRouter.swift */,
+				233C34BD29C75B10005DFA39 /* MultiMoyaService.swift */,
+				233C34C329C7602D005DFA39 /* MoyaLoggerPlugin.swift */,
+			);
+			path = Foundation;
 			sourceTree = "<group>";
 		};
 		233CDED128E4FDFB004E12BC /* UploadItemInput */ = {
@@ -1031,6 +1056,7 @@
 		23C3113128DF62C100A636F6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				233C34B829C75AAB005DFA39 /* Foundation */,
 				23DF699D28E5F33300F7FBD0 /* FCM */,
 				23D0824C28E4DC2A00CE541E /* Item */,
 				230A3F5728E4B5BE00966682 /* Notification */,
@@ -1790,6 +1816,7 @@
 				23134D3D29B2216700238536 /* RefreshInput.swift in Sources */,
 				2344949B28D78F7000CF3BD9 /* RegisterPasswordView.swift in Sources */,
 				23C2378628C9CEE800CE3200 /* FolderView.swift in Sources */,
+				233C34C229C75B95005DFA39 /* UserService.swift in Sources */,
 				23BB603328E27001007EA1EF /* ModifyProfileDataManager.swift in Sources */,
 				23F69CB128CC1819001B8C7F /* UIView.swift in Sources */,
 				23E378E528D2F47E00C52F2D /* UploadItemViewController.swift in Sources */,
@@ -1804,12 +1831,14 @@
 				234F837428C9627700C4EB41 /* HomeViewController.swift in Sources */,
 				234F838F28C987CB00C4EB41 /* CartViewController.swift in Sources */,
 				23DC04AE28C58B5200ABB0CF /* AppDelegate.swift in Sources */,
+				233C34BA29C75AC7005DFA39 /* HTTPMethodURL.swift in Sources */,
 				23A85F7D28E39FE800075667 /* FormatManager.swift in Sources */,
 				23F69CAF28CC17F8001B8C7F /* UIBezierPath.swift in Sources */,
 				23DC04E928C591E600ABB0CF /* ViewController.swift in Sources */,
 				234F838B28C983CE00C4EB41 /* CartView.swift in Sources */,
 				235129D928F679C900489CAD /* BottomSheetKeyboardViewController.swift in Sources */,
 				23E378E928D303B500C52F2D /* ShoppingLinkViewController.swift in Sources */,
+				233C34BC29C75AEF005DFA39 /* BaseRouter.swift in Sources */,
 				2344949928D78F6300CF3BD9 /* RegisterPasswordViewController.swift in Sources */,
 				2374789A28D1DB2900CF941A /* CheckNotch.swift in Sources */,
 				2339D4FC28E3CD3800E636FD /* FolderModel.swift in Sources */,
@@ -1881,12 +1910,14 @@
 				23C8A1C028C9F23E003ABFE9 /* NavigationBar.swift in Sources */,
 				23C9567B28C67B9D00D88536 /* OnBoardingTableViewCell.swift in Sources */,
 				237478A228D2008300CF941A /* SetFolderBottomSheetViewController.swift in Sources */,
+				233C34BE29C75B10005DFA39 /* MultiMoyaService.swift in Sources */,
 				23C5AB4B28CAA24300A7E977 /* MyPageViewController.swift in Sources */,
 				2339D4F928E3CCE300E636FD /* FolderDataManager.swift in Sources */,
 				23DC04EB28C591F400ABB0CF /* OnBoardingViewController.swift in Sources */,
 				23BB603528E2709C007EA1EF /* ModifyProfileInput.swift in Sources */,
 				23E0ACC728E7A767008C35C2 /* UILabel.swift in Sources */,
 				23C2378B28C9CF1D00CE3200 /* FolderCollectionViewCell.swift in Sources */,
+				233C34C429C7602D005DFA39 /* MoyaLoggerPlugin.swift in Sources */,
 				232174E628E1D469008C155D /* LoginDataManager.swift in Sources */,
 				234F838828C97BF900C4EB41 /* WishListModel.swift in Sources */,
 				23C8A1C728CA0AC9003ABFE9 /* ItemDetailTableViewCell.swift in Sources */,
@@ -1899,6 +1930,7 @@
 				23EC504228E25DAC00AAA57E /* CheckEmailInput.swift in Sources */,
 				237478A028D1FF0400CF941A /* SetFolderBottomSheetView.swift in Sources */,
 				233CDED328E4FE0A004E12BC /* UploadItemInput.swift in Sources */,
+				233C34C029C75B7F005DFA39 /* UserRouter.swift in Sources */,
 				2344949728D78AB500CF3BD9 /* RegisterEmailView.swift in Sources */,
 				23C3113728DF633D00A636F6 /* APIModel.swift in Sources */,
 				23D5518128C69E2900D81B5F /* UITextField.swift in Sources */,

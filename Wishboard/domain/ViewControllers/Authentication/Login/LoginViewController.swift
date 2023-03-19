@@ -62,7 +62,7 @@ class LoginViewController: TitleCenterViewController {
         let pw = loginViewModel.password ?? ""
         let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
         let loginInput = LoginInput(email: email, password: pw, fcmToken: deviceToken)
-        LoginDataManager().loginDataManager(loginInput, self)
+        self.signIn(model: loginInput)
     }
     @objc func lostPasswordButtonDidTap() {
         UIDevice.vibrate()
@@ -87,40 +87,39 @@ class LoginViewController: TitleCenterViewController {
 }
 // MARK: - API Success
 extension LoginViewController {
-    func loginAPISuccess(_ result: APIModel<TokenResultModel>) {
-        let accessToken = result.data?.token.accessToken
-        let refreshToken = result.data?.token.refreshToken
-        let tempNickname = result.data?.tempNickname
-        
-        UserDefaults.standard.set(accessToken, forKey: "accessToken")
-        UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
-        UserDefaults.standard.set(false, forKey: "isFirstLogin")
-        UserDefaults.standard.set(loginViewModel.email, forKey: "email")
-        UserDefaults.standard.set(loginViewModel.password, forKey: "password")
-        UserDefaults.standard.set(tempNickname, forKey: "tempNickname")
-        
-        // FCM
-//        sendFCM()
-        // go Main
-        ScreenManager().goMain(self)
+    private func signIn(model: LoginInput){
+        UserService.shared.signIn(model: model) { result in
+            switch result {
+                case .success(let data):
+                print("로그인 성공 by moya")
+                let accessToken = data.data?.token.accessToken
+                let refreshToken = data.data?.token.refreshToken
+                let tempNickname = data.data?.tempNickname
+                
+                UserDefaults.standard.set(accessToken, forKey: "accessToken")
+                UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
+                UserDefaults.standard.set(false, forKey: "isFirstLogin")
+                UserDefaults.standard.set(self.loginViewModel.email, forKey: "email")
+                UserDefaults.standard.set(self.loginViewModel.password, forKey: "password")
+                UserDefaults.standard.set(tempNickname, forKey: "tempNickname")
+                
+                // go Main
+                ScreenManager().goMain(self)
+                
+                break
+            default:
+                self.loginAPIFail()
+                break
+            }
+        }
     }
+    
     func loginAPIFail() {
         SnackBar(self, message: .login)
         for loginButton in [self.loginView.loginButton, self.loginView.loginButtonKeyboard] {
             loginButton.isActivate = false
         }
     }
-//    // MARK: FCM API
-//    func sendFCM() {
-//        // Send FCM token to server
-//        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
-//        print("device Token:", deviceToken)
-//        let fcmInput = FCMInput(fcm_token: deviceToken)
-//        FCMDataManager().fcmDataManager(fcmInput, self)
-//    }
-//    func fcmAPISuccess(_ result: APIModel<TokenResultModel>) {
-//        print(result.message)
-//    }
 }
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
