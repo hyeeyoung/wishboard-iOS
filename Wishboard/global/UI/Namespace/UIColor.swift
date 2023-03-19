@@ -39,9 +39,9 @@ extension UIColor{
         alpha: 1
     )
     static let wishboardDisabledGray = UIColor(
-        red: 227/255,
-        green: 227/255,
-        blue: 227/255,
+        red: 232/255,
+        green: 232/255,
+        blue: 232/255,
         alpha: 1
     )
     static let popupBackground = UIColor(

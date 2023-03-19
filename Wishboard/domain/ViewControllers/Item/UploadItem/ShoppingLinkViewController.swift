@@ -31,8 +31,8 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
         $0.textColor = .wishboardRed
         $0.setTextWithLineHeight()
     }
-    let completeButton = UIButton().then{
-        $0.defaultButton(Button.item, .wishboardGreen, .black)
+    let completeButton = DefaultButton(titleStr: Button.item).then{
+        $0.isActivate = true
     }
     // MARK: - Life Cycles
     var preVC: UploadItemViewController!
@@ -60,8 +60,7 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
         setUpConstraint()
         
         self.errorMessage.isHidden = true
-        self.completeButton.isEnabled = false
-        self.completeButton.defaultButton(Button.item, .wishboardDisabledGray, .dialogMessageColor)
+        self.completeButton.isActivate = false
         
         self.shoppingLinkTextField.addTarget(self, action: #selector(LinkTextFieldEditingChanged(_:)), for: .editingChanged)
         self.exitBtn.addTarget(self, action: #selector(exit), for: .touchUpInside)
@@ -159,9 +158,7 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
     }
     @objc func completeButtonDidTap() {
         UIDevice.vibrate()
-        lottieView = self.completeButton.setHorizontalLottieView(self.completeButton)
-        self.completeButton.isSelected = true
-        lottieView.isHidden = false
+        lottieView = self.completeButton.setLottieView()
         lottieView.play { completion in
             ItemDataManager().getItemByLinkDataManager(self.link, self)
         }
@@ -178,13 +175,11 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
             if link == "" {self.errorMessage.isHidden = true}
             else {
                 self.errorMessage.isHidden = false
-                self.completeButton.defaultButton(Button.item, .wishboardDisabledGray, .dialogMessageColor)
-                self.completeButton.isEnabled = false
+                self.completeButton.isActivate = false
             }
         } else {
             self.errorMessage.isHidden = true
-            self.completeButton.defaultButton(Button.item, .wishboardGreen, .black)
-            self.completeButton.isEnabled = true
+            self.completeButton.isActivate = true
             self.link = self.tempLink
         }
     }
@@ -231,10 +226,10 @@ extension ShoppingLinkViewController {
         self.isFail = true
         
         self.errorMessage.isHidden = false
-        self.completeButton.isSelected = false
-        self.completeButton.defaultButton(Button.item, .wishboardDisabledGray, .dialogMessageColor)
-        self.completeButton.isEnabled = false
-        self.lottieView.isHidden = true
+        self.completeButton.then{
+            $0.isActivate = false
+            $0.inActivateLottieView()
+        }
         
         self.dismiss(animated: true)
     }

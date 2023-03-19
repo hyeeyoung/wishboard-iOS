@@ -25,8 +25,8 @@ class NotificationSettingViewController: UIViewController {
         $0.textColor = .wishboardGray
         $0.setTextWithLineHeight()
     }
-    let completeButton = UIButton().then{
-        $0.defaultButton(Button.complete, .wishboardGreen, .black)
+    let completeButton = DefaultButton(titleStr: Button.complete).then{
+        $0.isActivate = true
     }
     // MARK: - Life Cycles
     var notiType: String?

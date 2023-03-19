@@ -24,9 +24,7 @@ class NotificationSettingViewController: UIViewController {
         $0.font = UIFont.Suit(size: 8, family: .Regular)
         $0.textColor = .wishboardGray
     }
-    let completeButton = UIButton().then{
-        $0.defaultButton(Button.complete, .wishboardGreen, .black)
-    }
+    let completeButton = DefaultButton(titleStr: Button.complete)
     // MARK: - Life Cycles
     var notiType: String?
     var dateAndTime: String?

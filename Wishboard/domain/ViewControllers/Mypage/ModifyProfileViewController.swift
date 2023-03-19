@@ -31,9 +31,7 @@ class ModifyProfileViewController: TitleCenterViewController {
         
         $0.becomeFirstResponder()
     }
-    let completeButton = UIButton().then{
-        $0.defaultButton(Button.complete, .wishboardGreen, .black)
-    }
+    let completeButton = DefaultButton(titleStr: Button.complete)
     // MARK: - Life Cycles
     // 앨범 선택 image picker
     var isPhotoSelected = false
@@ -132,13 +130,7 @@ extension ModifyProfileViewController {
     }
     // 닉네임 유효성 검사
     func isNicknameValid(nickname: String) {
-        if nickname == "" {
-            self.completeButton.defaultButton(Button.complete, .wishboardDisabledGray, .dialogMessageColor)
-            self.completeButton.isEnabled = false
-        } else {
-            self.completeButton.defaultButton(Button.complete, .wishboardGreen, .black)
-            self.completeButton.isEnabled = true
-        }
+        self.completeButton.isActivate = nickname == "" ? false : true
     }
     // 앨범에서 사진/동영상 선택
     // 프로필 이미지 클릭 시
@@ -156,7 +148,7 @@ extension ModifyProfileViewController {
     @objc func completeButtonDidTap() {
         UIDevice.vibrate()
         
-        let lottieView = self.completeButton.setHorizontalLottieView(self.completeButton)
+        let lottieView = self.completeButton.setLottieView()
         self.completeButton.isSelected = true
         lottieView.isHidden = false
         lottieView.play { completion in

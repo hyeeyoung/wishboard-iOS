@@ -36,6 +36,8 @@
 		2339D4F928E3CCE300E636FD /* FolderDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339D4F828E3CCE300E636FD /* FolderDataManager.swift */; };
 		2339D4FC28E3CD3800E636FD /* FolderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339D4FB28E3CD3800E636FD /* FolderModel.swift */; };
 		2339D4FF28E3CFF900E636FD /* FolderInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339D4FE28E3CFF900E636FD /* FolderInput.swift */; };
+		233C34B129C73B30005DFA39 /* DefaultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233C34B029C73B30005DFA39 /* DefaultButton.swift */; };
+		233C34B229C73E2F005DFA39 /* DefaultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233C34B029C73B30005DFA39 /* DefaultButton.swift */; };
 		233CDED328E4FE0A004E12BC /* UploadItemInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233CDED228E4FE0A004E12BC /* UploadItemInput.swift */; };
 		2340CEAA28CB6173007C362F /* HomeBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEA928CB6173007C362F /* HomeBottomSheetView.swift */; };
 		2340CEAC28CB6252007C362F /* HowToCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEAB28CB6252007C362F /* HowToCollectionViewCell.swift */; };
@@ -284,6 +286,7 @@
 		2339D4F828E3CCE300E636FD /* FolderDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDataManager.swift; sourceTree = "<group>"; };
 		2339D4FB28E3CD3800E636FD /* FolderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderModel.swift; sourceTree = "<group>"; };
 		2339D4FE28E3CFF900E636FD /* FolderInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderInput.swift; sourceTree = "<group>"; };
+		233C34B029C73B30005DFA39 /* DefaultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultButton.swift; sourceTree = "<group>"; };
 		233CDED228E4FE0A004E12BC /* UploadItemInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemInput.swift; sourceTree = "<group>"; };
 		2340CEA928CB6173007C362F /* HomeBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomSheetView.swift; sourceTree = "<group>"; };
 		2340CEAB28CB6252007C362F /* HowToCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -845,6 +848,14 @@
 			path = FolderInput;
 			sourceTree = "<group>";
 		};
+		233C34AF29C73B16005DFA39 /* Default */ = {
+			isa = PBXGroup;
+			children = (
+				233C34B029C73B30005DFA39 /* DefaultButton.swift */,
+			);
+			path = Default;
+			sourceTree = "<group>";
+		};
 		233CDED128E4FDFB004E12BC /* UploadItemInput */ = {
 			isa = PBXGroup;
 			children = (
@@ -1115,6 +1126,7 @@
 		23C9567C28C67FC900D88536 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				233C34AF29C73B16005DFA39 /* Default */,
 				2351859729A6F3E80004FCB4 /* Namespace */,
 				2331867C28DA92DF00F17CBF /* Lottie */,
 				23C9567E28C67FD900D88536 /* Fonts */,
@@ -1732,6 +1744,7 @@
 				23E0ACC828E7B563008C35C2 /* KeyboardViewController.swift in Sources */,
 				235129DA28F67BAE00489CAD /* BottomSheetKeyboardViewController.swift in Sources */,
 				23F1F21C293D7E7D0074C4D0 /* UILabel.swift in Sources */,
+				233C34B229C73E2F005DFA39 /* DefaultButton.swift in Sources */,
 				236FE94028DF85B3006142DB /* APIModel.swift in Sources */,
 				236FE91128DF83E6006142DB /* UIFont.swift in Sources */,
 				230180E928E50C0B001034FC /* FolderInput.swift in Sources */,
@@ -1845,6 +1858,7 @@
 				2340CEAC28CB6252007C362F /* HowToCollectionViewCell.swift in Sources */,
 				235D550628EBD2C700314D62 /* ItemParsingModel.swift in Sources */,
 				23E378E328D2F16900C52F2D /* UploadItemPhotoTableViewCell.swift in Sources */,
+				233C34B129C73B30005DFA39 /* DefaultButton.swift in Sources */,
 				23C5AB4D28CAA54600A7E977 /* MypageProfileTableViewCell.swift in Sources */,
 				23C2378428C9CEE000CE3200 /* FolderViewController.swift in Sources */,
 				23A85F7F28E3AA5400075667 /* LostPasswordDataManager.swift in Sources */,

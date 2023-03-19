@@ -63,8 +63,7 @@ class ShareViewController: UIViewController {
         let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
         let token = defaults?.string(forKey: "accessToken") ?? ""
         if token == "" {
-            shareView.completeButton.defaultButton(Button.doLogin, .wishboardDisabledGray, .dialogMessageColor)
-            shareView.completeButton.isEnabled = false
+            shareView.completeButton.isActivate = false
             shareView.itemNameTextField.isEnabled = false
             shareView.itemPriceTextField.isEnabled = false
             shareView.setNotificationButton.isEnabled = false
@@ -101,8 +100,6 @@ class ShareViewController: UIViewController {
         shareView.completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
         shareView.setNotificationButton.addTarget(self, action: #selector(showNotificationBottomSheet), for: .touchUpInside)
         shareView.addFolderButton.addTarget(self, action: #selector(showAddNewFolderBottomSheet), for: .touchUpInside)
-        // Set up lottieView
-        lottieView = shareView.completeButton.setHorizontalLottieView(shareView.completeButton)
     }
     func getWebURL() {
         let extensionItems = extensionContext?.inputItems as! [NSExtensionItem]
@@ -156,10 +153,10 @@ class ShareViewController: UIViewController {
     }
     func setButton() {
         if isValidContent() {
-            shareView.completeButton.defaultButton(Button.addToWishList, .wishboardGreen, .black)
+            shareView.completeButton.isActivate = true
             shareView.completeButton.isEnabled = true
         } else {
-            shareView.completeButton.defaultButton(Button.addToWishList, .wishboardDisabledGray, .dialogMessageColor)
+            shareView.completeButton.isActivate = false
             shareView.completeButton.isEnabled = false
         }
     }
@@ -177,8 +174,8 @@ class ShareViewController: UIViewController {
             return
         }
         
-        shareView.completeButton.isSelected = true
-        lottieView.isHidden = false
+        // Set up lottieView
+        lottieView = shareView.completeButton.setLottieView()
         lottieView.loopMode = .loop
         lottieView.play()
         
@@ -290,8 +287,7 @@ extension ShareViewController {
             SnackBar(self, message: .failShoppingLink)
             FolderDataManager().getFolderListDataManager(self)
             
-            shareView.completeButton.defaultButton(Button.addToWishList, .wishboardDisabledGray, .dialogMessageColor)
-            shareView.completeButton.isEnabled = false
+            shareView.completeButton.isActivate = false
             
         } else if self.itemPrice == nil {
             self.itemPrice = "0"
@@ -314,8 +310,7 @@ extension ShareViewController {
     func getItemDataAPIFail() {
         SnackBar(self, message: .failShoppingLink)
         
-        shareView.completeButton.defaultButton(Button.addToWishList, .wishboardDisabledGray, .dialogMessageColor)
-        shareView.completeButton.isEnabled = false
+        shareView.completeButton.isActivate = false
     }
     // MARK: 아이템 간편 등록
     func uploadItemAPISuccess(_ result: APIModel<ResultModel>) {
@@ -330,8 +325,7 @@ extension ShareViewController {
     }
     func uploadItemAPIFunc() {
         lottieView.stop()
-        shareView.completeButton.defaultButton(Button.addToWishList, .wishboardGreen, .black)
-        shareView.completeButton.isEnabled = false
+        shareView.completeButton.isActivate = true
         lottieView.isHidden = true
         
         SnackBar(self, message: .addItem)
@@ -339,8 +333,7 @@ extension ShareViewController {
     func uploadItem500Error() {
         lottieView.isHidden = true
         shareView.completeButton.isSelected = false
-        shareView.completeButton.defaultButton(Button.addToWishList, .wishboardGreen, .black)
-        shareView.completeButton.isEnabled = true
+        shareView.completeButton.isActivate = true
         
         ErrorBar(self)
     }

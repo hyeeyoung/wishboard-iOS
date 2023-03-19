@@ -35,9 +35,7 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = .wishboardRed
     }
-    let completeButton = UIButton().then{
-        $0.defaultButton(Button.add, .wishboardGreen, .black)
-    }
+    let completeButton = DefaultButton(titleStr: Button.add)
     // MARK: - Life Cycles
     var folderStr: String!
     var tempFolderStr: String!
@@ -59,8 +57,7 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
         setUpConstraint()
         
         self.errorMessage.isHidden = true
-        self.completeButton.isEnabled = false
-        self.completeButton.defaultButton(Button.add, .wishboardDisabledGray, .dialogMessageColor)
+        self.completeButton.isActivate = false
         
         self.newFolderTextField.addTarget(self, action: #selector(folderTextFieldEditingChanged(_:)), for: .editingChanged)
         self.exitBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -121,9 +118,7 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
     }
     @objc func addNewFolderButtonDidTap() {
         UIDevice.vibrate()
-        lottieView = self.completeButton.setHorizontalLottieView(self.completeButton)
-        self.completeButton.isSelected = true
-        lottieView.isHidden = false
+        lottieView = self.completeButton.setLottieView()
         lottieView.play { completion in
             let addFolderInput = AddFolderInput(folder_name: self.folderStr)
             FolderDataManager().addFolderDataManager(addFolderInput, self)
@@ -142,16 +137,14 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
         if isValidCount {
             self.textFieldCountLabel.textColor = .wishboardGray
             self.errorMessage.isHidden = true
-            self.completeButton.isSelected = false
-            self.completeButton.defaultButton(Button.add, .wishboardGreen, .black)
-            self.completeButton.isEnabled = true
+//            self.completeButton.isSelected = false
+            self.completeButton.isActivate = true
             self.folderStr = self.tempFolderStr
         } else {
             self.textFieldCountLabel.textColor = .wishboardRed
             self.errorMessage.isHidden = true
-            self.completeButton.isSelected = false
-            self.completeButton.defaultButton(Button.add, .wishboardDisabledGray, .dialogMessageColor)
-            self.completeButton.isEnabled = false
+//            self.completeButton.isSelected = false
+            self.completeButton.isActivate = false
         }
     }
 }
@@ -165,19 +158,15 @@ extension NewFolderViewController {
         
         self.textFieldCountLabel.textColor = .wishboardGray
         self.errorMessage.isHidden = true
-        self.lottieView.isHidden = true
-        self.completeButton.isSelected = false
-        self.completeButton.defaultButton(Button.add, .wishboardGreen, .black)
-        self.completeButton.isEnabled = true
+        self.completeButton.inActivateLottieView()
+        self.completeButton.isActivate = true
         
         print(result.message)
     }
     func sameFolderNameFail() {
-        self.lottieView.isHidden = true
         self.completeButton.reloadInputViews()
         self.errorMessage.isHidden = false
-        self.completeButton.defaultButton(Button.add, .wishboardDisabledGray, .dialogMessageColor)
-        self.completeButton.isEnabled = false
+        self.completeButton.inActivateLottieView()
     }
     func addFolderAPIFail() {
         let addFolderInput = AddFolderInput(folder_name: self.folderStr)

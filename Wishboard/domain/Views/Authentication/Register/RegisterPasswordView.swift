@@ -36,10 +36,7 @@ class RegisterPasswordView: UIView {
         $0.axis = .horizontal
         $0.spacing = 0
     }
-    let registerButton = UIButton().then{
-        $0.defaultButton(Button.register, .wishboardDisabledGray, .dialogMessageColor)
-        $0.isEnabled = false
-    }
+    let registerButton = DefaultButton(titleStr: Button.register)
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 100.0))
     }()

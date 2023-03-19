@@ -44,9 +44,7 @@ extension RegisterPasswordViewController {
     }
     @objc func registerButtonDidTap() {
         UIDevice.vibrate()
-        let lottieView = registerPWView.registerButton.setHorizontalLottieView(registerPWView.registerButton)
-        registerPWView.registerButton.isSelected = true
-        lottieView.isHidden = false
+        let lottieView = registerPWView.registerButton.setLottieView()
         lottieView.play { completion in
             self.view.endEditing(true)
             let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
@@ -57,19 +55,9 @@ extension RegisterPasswordViewController {
     // MARK: - Functions
     func checkValidPW(_ pw: String) {
         let isValid = self.pw.checkPassword()
-        if isValid {
-            registerPWView.errorMessage.isHidden = true
-            registerPWView.registerButton.then{
-                $0.defaultButton(Button.register, .wishboardGreen, .black)
-                $0.isEnabled = true
-            }
-        } else {
-            registerPWView.errorMessage.isHidden = false
-            registerPWView.registerButton.then{
-                $0.defaultButton(Button.register, .wishboardDisabledGray, .dialogMessageColor)
-                $0.isEnabled = false
-            }
-        }
+        
+        registerPWView.registerButton.isActivate = isValid ? true : false
+        registerPWView.errorMessage.isHidden = isValid ? true : false
     }
 }
 // MARK: - API Success

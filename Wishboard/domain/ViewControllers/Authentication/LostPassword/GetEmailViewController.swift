@@ -59,14 +59,9 @@ extension GetEmailViewController {
         UIDevice.vibrate()
         if self.code != self.authCode {
             getEmailView.messageLabel.isHidden = false
-            self.getEmailView.loginButton.then{
-                $0.defaultButton(Button.login, .wishboardDisabledGray, .dialogMessageColor)
-                $0.isEnabled = false
-            }
+            self.getEmailView.loginButton.isActivate = false
         } else {
-            let lottieView = getEmailView.loginButton.setHorizontalLottieView(getEmailView.loginButton)
-            getEmailView.loginButton.isSelected = true
-            lottieView.isHidden = false
+            let lottieView = getEmailView.loginButton.setLottieView()
             lottieView.play { completion in
                 let lostPasswordInput = LostPasswordInput(verify: true, email: self.email)
                 LostPasswordDataManager().verifyCodeDataManager(lostPasswordInput, self)
@@ -93,15 +88,9 @@ extension GetEmailViewController {
         var isValidCode = codeCount > 0 ? true : false
         if isValidCode && self.isValidTime {
             self.getEmailView.messageLabel.isHidden = true
-            self.getEmailView.loginButton.then{
-                $0.defaultButton(Button.login, .wishboardGreen, .black)
-                $0.isEnabled = true
-            }
+            self.getEmailView.loginButton.isActivate = true
         } else {
-            self.getEmailView.loginButton.then{
-                $0.defaultButton(Button.login, .wishboardDisabledGray, .dialogMessageColor)
-                $0.isEnabled = false
-            }
+            self.getEmailView.loginButton.isActivate = false
         }
     }
 }

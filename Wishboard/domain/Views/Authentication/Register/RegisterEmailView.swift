@@ -30,10 +30,7 @@ class RegisterEmailView: UIView {
         $0.textColor = .wishboardRed
         $0.font = UIFont.Suit(size: 12, family: .Regular)
     }
-    let nextButton = UIButton().then{
-        $0.defaultButton(Button.next, .wishboardDisabledGray, .dialogMessageColor)
-        $0.isEnabled = false
-    }
+    let nextButton = DefaultButton(titleStr: Button.next)
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
     }()

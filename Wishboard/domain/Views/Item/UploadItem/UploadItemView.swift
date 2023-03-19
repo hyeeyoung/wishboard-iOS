@@ -21,8 +21,8 @@ class UploadItemView: UIView {
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         $0.configuration = config
     }
-    var saveButton = UIButton().then{
-        $0.defaultButton(Button.save, .wishboardGreen, .black)
+    var saveButton = DefaultButton(titleStr: Button.save).then{
+        $0.isActivate = true
     }
     
     let scrollView = UIScrollView().then{
@@ -45,14 +45,7 @@ class UploadItemView: UIView {
     // MARK: - Functions
     // 저장버튼 Enabled 여부
     func setSaveButton(_ isEnable: Bool) {
-        if isEnable {
-            saveButton.defaultButton(Button.save, .wishboardGreen, .black)
-            saveButton.isEnabled = true
-        }
-        else {
-            saveButton.defaultButton(Button.save, .wishboardDisabledGray, .dialogMessageColor)
-            saveButton.isEnabled = false
-        }
+        saveButton.isActivate = isEnable ? true : false
     }
     func setImageTableView(dataSourceDelegate: UITableViewDelegate & UITableViewDataSource) {
         uploadImageTableView = UITableView().then{

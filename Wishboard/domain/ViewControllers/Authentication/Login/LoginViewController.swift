@@ -64,24 +64,12 @@ class LoginViewController: TitleCenterViewController {
         loginViewModel.isValidID.bind { isValidID in
             guard let isValid = isValidID else {return}
             if isValid {
-                self.loginView.loginButton.then{
-                    $0.defaultButton(Button.login, .wishboardGreen, .black)
-                    $0.isEnabled = true
-                }
-                self.loginView.loginButtonKeyboard.then{
-                    $0.defaultButton(Button.login, .wishboardGreen, .black)
-                    $0.isEnabled = true
-                }
+                self.loginView.loginButton.isActivate = true
+                self.loginView.loginButtonKeyboard.isActivate = true
                 
             } else {
-                self.loginView.loginButton.then{
-                    $0.defaultButton(Button.login, .wishboardDisabledGray, .dialogMessageColor)
-                    $0.isEnabled = false
-                }
-                self.loginView.loginButtonKeyboard.then{
-                    $0.defaultButton(Button.login, .wishboardDisabledGray, .dialogMessageColor)
-                    $0.isEnabled = false
-                }
+                self.loginView.loginButton.isActivate = false
+                self.loginView.loginButtonKeyboard.isActivate = false
             }
         }
 
@@ -109,10 +97,7 @@ extension LoginViewController {
     func loginAPIFail() {
         SnackBar(self, message: .login)
         for loginButton in [self.loginView.loginButton, self.loginView.loginButtonKeyboard] {
-            loginButton.then{
-                $0.defaultButton(Button.login, .wishboardDisabledGray, .dialogMessageColor)
-                $0.isEnabled = false
-            }
+            loginButton.isActivate = false
         }
     }
 //    // MARK: FCM API

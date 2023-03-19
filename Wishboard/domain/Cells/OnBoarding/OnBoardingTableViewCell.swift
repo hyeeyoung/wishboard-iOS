@@ -28,8 +28,8 @@ class OnBoardingTableViewCell: UITableViewCell {
         $0.textAlignment = .center
     }
     // 가입하기 버튼
-    lazy var registerButton = UIButton().then{
-        $0.defaultButton(Button.register, .wishboardGreen, .black)
+    lazy var registerButton = DefaultButton(titleStr: Button.register).then{
+        $0.isActivate = true
     }
     let loginStackView = UIStackView()
     // 이미 계정이 있으신가요?

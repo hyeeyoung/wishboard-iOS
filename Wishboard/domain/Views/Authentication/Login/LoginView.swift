@@ -36,9 +36,8 @@ class LoginView: UIView {
         $0.font = UIFont.Suit(size: 16, family: .Regular)
     }
     // 로그인하기 버튼
-    let loginButton = UIButton().then{
-        $0.defaultButton(Button.login, .wishboardDisabledGray, .dialogMessageColor)
-        $0.isEnabled = false
+    let loginButton = DefaultButton(titleStr: Button.login).then{
+        $0.isActivate = false
     }
     // 비밀번호를 잊으셨나요?
     let lostPasswordButton = UIButton().then{
@@ -49,9 +48,8 @@ class LoginView: UIView {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 100.0))
     }()
     // 로그인하기 버튼
-    let loginButtonKeyboard = UIButton().then{
-        $0.defaultButton(Button.login, .wishboardDisabledGray, .dialogMessageColor)
-        $0.isEnabled = false
+    let loginButtonKeyboard = DefaultButton(titleStr: Button.login).then{
+        $0.isActivate = false
     }
     // 비밀번호를 잊으셨나요?
     let lostPasswordButtonKeyboard = UIButton().then{
