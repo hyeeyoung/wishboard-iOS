@@ -19,7 +19,7 @@ struct StatusResponseModel: Decodable{
 }
 
 struct APIModel<T: Decodable>: Decodable {
-    let success: Bool?
+    let success: Bool
     let message: String?
     let data: T?
 }

@@ -314,9 +314,7 @@ extension ShareViewController {
     }
     // MARK: 아이템 간편 등록
     func uploadItemAPISuccess(_ result: APIModel<ResultModel>) {
-        guard let success = result.success else {return}
-        
-        if success {
+        if result.success {
             uploadItemAPIFunc()
         } else {
             uploadItem500Error()

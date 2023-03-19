@@ -18,7 +18,6 @@
 		231B581028E8A33C0030D33E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */; };
 		232174DB28E1BE81008C155D /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174DA28E1BE81008C155D /* RegisterDataManager.swift */; };
 		232174E428E1BF1C008C155D /* RegisterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E328E1BF1C008C155D /* RegisterInput.swift */; };
-		232174E628E1D469008C155D /* LoginDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E528E1D469008C155D /* LoginDataManager.swift */; };
 		232174E828E1D4AF008C155D /* LoginInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E728E1D4AF008C155D /* LoginInput.swift */; };
 		23279A0E28E4981100CAD1CA /* CartDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23279A0D28E4981000CAD1CA /* CartDataManager.swift */; };
 		23279A1128E4989900CAD1CA /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23279A1028E4989900CAD1CA /* CartModel.swift */; };
@@ -276,7 +275,6 @@
 		23134D3E29B222BF00238536 /* RefreshDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshDataManager.swift; sourceTree = "<group>"; };
 		232174DA28E1BE81008C155D /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
 		232174E328E1BF1C008C155D /* RegisterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInput.swift; sourceTree = "<group>"; };
-		232174E528E1D469008C155D /* LoginDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDataManager.swift; sourceTree = "<group>"; };
 		232174E728E1D4AF008C155D /* LoginInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInput.swift; sourceTree = "<group>"; };
 		23279A0D28E4981000CAD1CA /* CartDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartDataManager.swift; sourceTree = "<group>"; };
 		23279A1028E4989900CAD1CA /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
@@ -726,7 +724,6 @@
 			isa = PBXGroup;
 			children = (
 				232174DA28E1BE81008C155D /* RegisterDataManager.swift */,
-				232174E528E1D469008C155D /* LoginDataManager.swift */,
 				23A85F7E28E3AA5400075667 /* LostPasswordDataManager.swift */,
 				23134D3E29B222BF00238536 /* RefreshDataManager.swift */,
 				233C34BF29C75B7F005DFA39 /* UserRouter.swift */,
@@ -1918,7 +1915,6 @@
 				23E0ACC728E7A767008C35C2 /* UILabel.swift in Sources */,
 				23C2378B28C9CF1D00CE3200 /* FolderCollectionViewCell.swift in Sources */,
 				233C34C429C7602D005DFA39 /* MoyaLoggerPlugin.swift in Sources */,
-				232174E628E1D469008C155D /* LoginDataManager.swift in Sources */,
 				234F838828C97BF900C4EB41 /* WishListModel.swift in Sources */,
 				23C8A1C728CA0AC9003ABFE9 /* ItemDetailTableViewCell.swift in Sources */,
 				23D5518B28C6B45C00D81B5F /* String.swift in Sources */,

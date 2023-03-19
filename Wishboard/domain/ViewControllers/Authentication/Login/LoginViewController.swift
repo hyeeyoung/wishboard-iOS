@@ -91,24 +91,39 @@ extension LoginViewController {
         UserService.shared.signIn(model: model) { result in
             switch result {
                 case .success(let data):
-                print("로그인 성공 by moya")
-                let accessToken = data.data?.token.accessToken
-                let refreshToken = data.data?.token.refreshToken
-                let tempNickname = data.data?.tempNickname
-                
-                UserDefaults.standard.set(accessToken, forKey: "accessToken")
-                UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
-                UserDefaults.standard.set(false, forKey: "isFirstLogin")
-                UserDefaults.standard.set(self.loginViewModel.email, forKey: "email")
-                UserDefaults.standard.set(self.loginViewModel.password, forKey: "password")
-                UserDefaults.standard.set(tempNickname, forKey: "tempNickname")
-                
-                // go Main
-                ScreenManager().goMain(self)
-                
-                break
+                if data.success {
+                    print("로그인 성공 by moya")
+                    let accessToken = data.data?.token.accessToken
+                    let refreshToken = data.data?.token.refreshToken
+                    let tempNickname = data.data?.tempNickname
+                    
+                    UserDefaults.standard.set(accessToken, forKey: "accessToken")
+                    UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
+                    UserDefaults.standard.set(false, forKey: "isFirstLogin")
+                    UserDefaults.standard.set(self.loginViewModel.email, forKey: "email")
+                    UserDefaults.standard.set(self.loginViewModel.password, forKey: "password")
+                    UserDefaults.standard.set(tempNickname, forKey: "tempNickname")
+                    
+                    // go Main
+                    ScreenManager().goMain(self)
+                }
+                    
+                    break
+            case .failure(let error):
+                print(error.localizedDescription)
+//                if let statusCode = error.responseCode {
+//                    switch statusCode {
+//                    case 400, 204:
+//                        self.loginAPIFail()
+//                    case 500:
+//                       DispatchQueue.main.async {
+//                           ErrorBar(self)
+//                       }
+//                    default:
+//                        print(statusCode)
+//                    }
+//                }
             default:
-                self.loginAPIFail()
                 break
             }
         }

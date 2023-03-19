@@ -22,7 +22,7 @@ class LostPasswordDataManager {
             .responseDecodable(of: APIModel<LostPasswordModel>.self) { response in
             switch response.result {
             case .success(let result):
-                if result.success! {viewcontroller.checkEmailAPISuccess(result)}
+                if result.success {viewcontroller.checkEmailAPISuccess(result)}
             case .failure(let error):
                 if let statusCode = error.responseCode {
                     switch statusCode {
@@ -50,7 +50,7 @@ class LostPasswordDataManager {
             .responseDecodable(of: APIModel<VerifyCodeModel>.self) { response in
             switch response.result {
             case .success(let result):
-                if result.success! {viewcontroller.verifyCodeAPISuccess(result)}
+                if result.success {viewcontroller.verifyCodeAPISuccess(result)}
             case .failure(let error):
                 if let statusCode = error.responseCode {
                     switch statusCode {
