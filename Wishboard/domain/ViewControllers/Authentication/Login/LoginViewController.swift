@@ -22,7 +22,9 @@ class LoginViewController: TitleCenterViewController {
         loginView.emailTextField.addTarget(self, action: #selector(emailTextFieldEditingChanged), for: .editingChanged)
         loginView.passwordTextField.addTarget(self, action: #selector(passwordTextFieldEditingChanged), for: .editingChanged)
         loginView.loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
+        loginView.loginButtonKeyboard.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
         loginView.lostPasswordButton.addTarget(self, action: #selector(lostPasswordButtonDidTap), for: .touchUpInside)
+        loginView.lostPasswordButtonKeyboard.addTarget(self, action: #selector(lostPasswordButtonDidTap), for: .touchUpInside)
         
         loginView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
@@ -66,9 +68,17 @@ class LoginViewController: TitleCenterViewController {
                     $0.defaultButton(Button.login, .wishboardGreen, .black)
                     $0.isEnabled = true
                 }
+                self.loginView.loginButtonKeyboard.then{
+                    $0.defaultButton(Button.login, .wishboardGreen, .black)
+                    $0.isEnabled = true
+                }
                 
             } else {
                 self.loginView.loginButton.then{
+                    $0.defaultButton(Button.login, .wishboardDisabledGray, .dialogMessageColor)
+                    $0.isEnabled = false
+                }
+                self.loginView.loginButtonKeyboard.then{
                     $0.defaultButton(Button.login, .wishboardDisabledGray, .dialogMessageColor)
                     $0.isEnabled = false
                 }
@@ -98,9 +108,11 @@ extension LoginViewController {
     }
     func loginAPIFail() {
         SnackBar(self, message: .login)
-        self.loginView.loginButton.then{
-            $0.defaultButton(Button.login, .wishboardDisabledGray, .dialogMessageColor)
-            $0.isEnabled = false
+        for loginButton in [self.loginView.loginButton, self.loginView.loginButtonKeyboard] {
+            loginButton.then{
+                $0.defaultButton(Button.login, .wishboardDisabledGray, .dialogMessageColor)
+                $0.isEnabled = false
+            }
         }
     }
 //    // MARK: FCM API

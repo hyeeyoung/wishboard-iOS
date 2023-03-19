@@ -20,7 +20,7 @@ extension UITextField {
     func defaultTextField(_ placeholder: String) {
         self.placeholder = placeholder
         self.backgroundColor = .wishboardTextfieldGray
-        self.layer.cornerRadius = 5
+        self.layer.cornerRadius = 6
         self.autocapitalizationType = .none
         self.addLeftPadding(10)
     }
