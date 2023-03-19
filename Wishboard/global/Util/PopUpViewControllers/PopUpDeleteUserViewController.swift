@@ -50,13 +50,8 @@ class PopUpDeleteUserViewController: UIViewController {
     }
     var cancelBtn: UIButton!
     var okBtn: UIButton!
-    var textField = UITextField().then{
-        $0.addLeftPadding(10)
-        $0.backgroundColor = .wishboardTextfieldGray
-        $0.layer.cornerRadius = 5
-        $0.font = UIFont.Suit(size: 16, family: .Regular)
+    var textField = DefaultTextField("").then{
         $0.clearButtonMode = .always
-        $0.textColor = .editTextFontColor
     }
     let errorMessage = UILabel().then{
         $0.text = ErrorMessage.email

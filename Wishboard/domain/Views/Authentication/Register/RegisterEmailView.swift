@@ -20,10 +20,8 @@ class RegisterEmailView: UIView {
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
-    var emailTextField = UITextField().then{
-        $0.defaultTextField(Placeholder.email)
+    var emailTextField = DefaultTextField(Placeholder.email).then{
         $0.becomeFirstResponder()
-        $0.textColor = .editTextFontColor
     }
     let errorMessageLabel = UILabel().then{
         $0.text = ErrorMessage.nonExistAccount

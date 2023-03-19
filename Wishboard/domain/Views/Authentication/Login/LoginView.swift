@@ -18,22 +18,15 @@ class LoginView: UIView {
         $0.font = UIFont.Suit(size: 14, family: .Medium)
     }
     // 이메일 TextField
-    let emailTextField = UITextField().then{
-        $0.defaultTextField(Placeholder.email)
-        $0.textColor = .editTextFontColor
-        $0.font = UIFont.Suit(size: 16, family: .Regular)
-    }
+    let emailTextField = DefaultTextField(Placeholder.email)
     // 비밀번호 Label
     let passwordLabel = UILabel().then{
         $0.text = Title.password
         $0.font = UIFont.Suit(size: 14, family: .Medium)
     }
     // 비밀번호 TextField
-    let passwordTextField = UITextField().then{
-        $0.defaultTextField(Placeholder.password)
+    let passwordTextField = DefaultTextField(Placeholder.password).then{
         $0.isSecureTextEntry = true
-        $0.textColor = .editTextFontColor
-        $0.font = UIFont.Suit(size: 16, family: .Regular)
     }
     // 로그인하기 버튼
     let loginButton = DefaultButton(titleStr: Button.login).then{

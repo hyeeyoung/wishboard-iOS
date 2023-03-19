@@ -20,15 +20,8 @@ class ModifyProfileViewController: TitleCenterViewController {
     let cameraButton = UIButton().then{
         $0.setImage(Image.cameraGray, for: .normal)
     }
-    var nameTextField = UITextField().then{
-        $0.placeholder = Placeholder.nickname
-        $0.addLeftPadding(10)
-        $0.backgroundColor = .wishboardTextfieldGray
-        $0.layer.cornerRadius = 5
-        $0.font = UIFont.Suit(size: 16, family: .Regular)
+    var nameTextField = DefaultTextField(Placeholder.nickname).then{
         $0.clearButtonMode = .always
-        $0.textColor = .editTextFontColor
-        
         $0.becomeFirstResponder()
     }
     let completeButton = DefaultButton(titleStr: Button.complete)

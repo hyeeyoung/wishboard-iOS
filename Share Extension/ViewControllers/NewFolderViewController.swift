@@ -16,14 +16,8 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
     let exitBtn = UIButton().then{
         $0.setImage(Image.quit, for: .normal)
     }
-    let newFolderTextField = UITextField().then{
-        $0.addLeftPadding(10)
-        $0.backgroundColor = .wishboardTextfieldGray
-        $0.layer.cornerRadius = 5
-        $0.font = UIFont.Suit(size: 16, family: .Regular)
-        $0.textColor = .editTextFontColor
+    let newFolderTextField = DefaultTextField(Placeholder.folder).then{
         $0.clearButtonMode = .whileEditing
-        $0.placeholder = Placeholder.folder
     }
     let textFieldCountLabel = UILabel().then{
         $0.text = Message.count

@@ -16,14 +16,8 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
     let exitBtn = UIButton().then{
         $0.setImage(Image.quit, for: .normal)
     }
-    let shoppingLinkTextField = UITextField().then{
-        $0.addLeftPadding(10)
-        $0.backgroundColor = .wishboardTextfieldGray
-        $0.layer.cornerRadius = 5
-        $0.font = UIFont.Suit(size: 16, family: .Regular)
-        $0.textColor = .editTextFontColor
+    let shoppingLinkTextField = DefaultTextField(Placeholder.shoppingLink).then{
         $0.clearButtonMode = .always
-        $0.placeholder = Placeholder.shoppingLink
     }
     let errorMessage = UILabel().then{
         $0.text = ErrorMessage.shoppingLink

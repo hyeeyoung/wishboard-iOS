@@ -16,12 +16,4 @@ extension UITextField {
         self.leftView = paddingView
         self.leftViewMode = ViewMode.always
     }
-    // MARK: 기본 TextField
-    func defaultTextField(_ placeholder: String) {
-        self.placeholder = placeholder
-        self.backgroundColor = .wishboardTextfieldGray
-        self.layer.cornerRadius = 6
-        self.autocapitalizationType = .none
-        self.addLeftPadding(10)
-    }
 }

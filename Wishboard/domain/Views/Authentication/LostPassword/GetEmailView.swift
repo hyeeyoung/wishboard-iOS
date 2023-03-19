@@ -21,11 +21,9 @@ class GetEmailView: UIView {
         $0.numberOfLines = 0
     }
     // 인증코드 TextField
-    var codeTextField = UITextField().then{
-        $0.defaultTextField(Placeholder.authcode)
+    var codeTextField = DefaultTextField(Placeholder.authcode).then{
         $0.becomeFirstResponder()
         $0.isSecureTextEntry = true
-        $0.textColor = .editTextFontColor
     }
     var timerLabel = UILabel().then{
         $0.text = Message.timer

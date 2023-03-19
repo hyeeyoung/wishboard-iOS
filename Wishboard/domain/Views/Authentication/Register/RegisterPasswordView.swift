@@ -21,11 +21,9 @@ class RegisterPasswordView: UIView {
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
-    var pwTextField = UITextField().then{
-        $0.defaultTextField(Placeholder.password)
+    var pwTextField = DefaultTextField(Placeholder.password).then{
         $0.becomeFirstResponder()
         $0.isSecureTextEntry = true
-        $0.textColor = .editTextFontColor
     }
     let errorMessage = UILabel().then{
         $0.text = ErrorMessage.password
