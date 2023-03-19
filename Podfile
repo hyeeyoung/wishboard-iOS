@@ -21,6 +21,11 @@ target 'Wishboard' do
 	pod 'Firebase/Analytics'
 	pod 'Firebase/Messaging'
 
+	pod 'Moya'
+	pod 'Moya/RxSwift'
+	pod 'Moya/ReactiveSwift'
+	pod 'Moya/Combine'
+
   target 'WishboardTests' do
     inherit! :search_paths
     # Pods for testing

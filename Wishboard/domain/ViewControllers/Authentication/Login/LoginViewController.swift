@@ -18,19 +18,29 @@ class LoginViewController: TitleCenterViewController {
         super.navigationTitle.text = Title.login
 
         self.view.addSubview(loginView)
-        
-        loginView.emailTextField.addTarget(self, action: #selector(emailTextFieldEditingChanged), for: .editingChanged)
-        loginView.passwordTextField.addTarget(self, action: #selector(passwordTextFieldEditingChanged), for: .editingChanged)
-        loginView.loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
-        loginView.loginButtonKeyboard.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
-        loginView.lostPasswordButton.addTarget(self, action: #selector(lostPasswordButtonDidTap), for: .touchUpInside)
-        loginView.lostPasswordButtonKeyboard.addTarget(self, action: #selector(lostPasswordButtonDidTap), for: .touchUpInside)
-        
         loginView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(super.navigationView.snp.bottom)
         }
+        
+        setUpTextField()
+        setUpButton()
+        
         bind()
+    }
+    // MARK: - Set Up
+    func setUpTextField() {
+        loginView.emailTextField.addTarget(self, action: #selector(emailTextFieldEditingChanged), for: .editingChanged)
+        loginView.passwordTextField.addTarget(self, action: #selector(passwordTextFieldEditingChanged), for: .editingChanged)
+        
+        loginView.emailTextField.delegate = self
+        loginView.passwordTextField.delegate = self
+    }
+    func setUpButton() {
+        loginView.loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
+        loginView.loginButtonKeyboard.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
+        loginView.lostPasswordButton.addTarget(self, action: #selector(lostPasswordButtonDidTap), for: .touchUpInside)
+        loginView.lostPasswordButtonKeyboard.addTarget(self, action: #selector(lostPasswordButtonDidTap), for: .touchUpInside)
     }
     // MARK: - Actions
     @objc func emailTextFieldEditingChanged(_ sender: UITextField) {
@@ -111,4 +121,10 @@ extension LoginViewController {
 //    func fcmAPISuccess(_ result: APIModel<TokenResultModel>) {
 //        print(result.message)
 //    }
+}
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
