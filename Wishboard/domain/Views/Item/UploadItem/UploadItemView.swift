@@ -23,6 +23,7 @@ class UploadItemView: UIView {
     }
     var saveButton = DefaultButton(titleStr: Button.save).then{
         $0.isActivate = true
+        $0.layer.cornerRadius = 15
     }
     
     let scrollView = UIScrollView().then{
@@ -127,6 +128,8 @@ class UploadItemView: UIView {
         }
         saveButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
+            make.width.equalTo(57)
+            make.height.equalTo(30)
             make.trailing.equalToSuperview().offset(-16)
         }
     }
