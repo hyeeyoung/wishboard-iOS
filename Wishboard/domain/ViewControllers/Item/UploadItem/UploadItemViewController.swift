@@ -236,23 +236,15 @@ extension UploadItemViewController {
                     }
                 } else {selectedImage = self.selectedImage}
                
-                if let folderId = data?.folder_id {
-                    // 모든 데이터가 존재하는 경우
-                    if let notiType = data?.item_notification_type {
-                        ItemDataManager().uploadItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!+":00", self)
-                    } else {
-                        // 알림 날짜 설정은 하지 않은 경우
-                        ItemDataManager().uploadItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, self)
-                    }
-                } else {
-                    // 폴더가 없고, 알람설정은 한 경우
-                    if let notiType = data?.item_notification_type {
-                        ItemDataManager().uploadItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!+":00", self)
-                    } else {
-                        // 일부 데이터가 존재하는 경우
-                        ItemDataManager().uploadItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, self)
-                    }
-                }
+                let moyaItemInput = MoyaItemInput(folderId: data?.folder_id,
+                                                  photo: selectedImage ?? UIImage(),
+                                                  itemName: data?.item_name ?? "",
+                                                  itemPrice: data?.item_price ?? "",
+                                                  itemURL: data?.item_url,
+                                                  itemMemo: data?.item_memo,
+                                                  itemNotificationType: data?.item_notification_type,
+                                                  itemNotificationDate: data?.item_notification_date)
+                self.uploadItemWithMoya(model: moyaItemInput)
             }
             
         }
@@ -277,23 +269,16 @@ extension UploadItemViewController {
                 }
                 if self.selectedImage != nil {selectedImage = self.selectedImage}
                 
-                if let folderId = data?.folder_id {
-                    // 모든 데이터가 존재하는 경우
-                    if let notiType = data?.item_notification_type {
-                        ItemDataManager().modifyItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!+":00", (data?.item_id)!, self)
-                    } else {
-                        // 알림 날짜 설정은 하지 않은 경우
-                        ItemDataManager().modifyItemDataManager(folderId, selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
-                    }
-                } else {
-                    // 폴더가 없고, 알람설정은 한 경우
-                    if let notiType = data?.item_notification_type {
-                        ItemDataManager().modifyItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, notiType, (data?.item_notification_date)!+":00", (data?.item_id)!, self)
-                    } else {
-                        // 폴더가 없고, 알람설정도 안 한 경우
-                        ItemDataManager().modifyItemDataManager(selectedImage!, (data?.item_name)!, (data?.item_price)!, (data?.item_url)!, (data?.item_memo)!, (data?.item_id)!, self)
-                    }
-                }
+                let moyaItemInput = MoyaItemInput(folderId: data?.folder_id,
+                                                  photo: selectedImage ?? UIImage(),
+                                                  itemName: data?.item_name ?? "",
+                                                  itemPrice: data?.item_price ?? "",
+                                                  itemURL: data?.item_url,
+                                                  itemMemo: data?.item_memo,
+                                                  itemNotificationType: data?.item_notification_type,
+                                                  itemNotificationDate: data?.item_notification_date)
+                self.modifyItemWithMoya(model: moyaItemInput, id: data?.item_id ?? -1)
+                
             }
         }
     }
@@ -423,17 +408,48 @@ extension UploadItemViewController: UIScrollViewDelegate {
 // MARK: - API Success
 extension UploadItemViewController {
     // MARK: 아이템 추가 API
-    func uploadItemAPISuccess(_ result: APIModel<TokenResultModel>) {
-        self.viewDidLoad()
-        ScreenManager().goMainPages(0, self, family: .itemUpload)
-        print(result.message)
+    func uploadItemWithMoya(model: MoyaItemInput) {
+        ItemService.shared.uploadItem(model: model) { result in
+            switch result {
+                case .success(let data):
+                    if data.success {
+                        print("아이템 등록 성공 by moya:", data.message)
+                        self.viewDidLoad()
+                        ScreenManager().goMainPages(0, self, family: .itemUpload)
+                    }
+                    break
+            case .failure(let error):
+                self.viewDidLoad()
+                ScreenManager().goMainPages(0, self, family: .itemUpload)
+                print("moya item upload error", error.localizedDescription)
+            default:
+                print("default error")
+                break
+            }
+        }
     }
     // MARK: 아이템 수정 API
-    func modifyItemAPISuccess(_ result: APIModel<TokenResultModel>) {
-        self.viewDidLoad()
-        self.navigationController?.popViewController(animated: true)
-        isModified = true
-        print(result.message)
+    func modifyItemWithMoya(model: MoyaItemInput, id: Int) {
+        ItemService.shared.modifyItem(model: model, id: id) { result in
+            switch result {
+                case .success(let data):
+                    if data.success {
+                        print("아이템 수정 성공 by moya:", data.message)
+                        self.viewDidLoad()
+                        self.navigationController?.popViewController(animated: true)
+                        self.isModified = true
+                    }
+                    break
+            case .failure(let error):
+                self.viewDidLoad()
+                self.navigationController?.popViewController(animated: true)
+                self.isModified = true
+                print("moya item modify error", error.localizedDescription)
+            default:
+                print("default error")
+                break
+            }
+        }
     }
 }
 // MARK: - TextField & Keyboard Methods

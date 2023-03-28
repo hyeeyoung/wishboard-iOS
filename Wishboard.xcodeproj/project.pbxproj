@@ -128,6 +128,8 @@
 		2378280428D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2378280328D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift */; };
 		2385582728E51DD000E6A09E /* ShareDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2385582628E51DD000E6A09E /* ShareDataManager.swift */; };
 		2385582B28E51F7500E6A09E /* FormatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F7C28E39FE800075667 /* FormatManager.swift */; };
+		238AA72B29CD720D0086DF76 /* ItemRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238AA72A29CD720D0086DF76 /* ItemRouter.swift */; };
+		238AA72D29CD72150086DF76 /* ItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238AA72C29CD72150086DF76 /* ItemService.swift */; };
 		238EF90628CB06F800ECA606 /* CalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90528CB06F800ECA606 /* CalenderViewController.swift */; };
 		238EF90928CB070700ECA606 /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90828CB070700ECA606 /* CalenderView.swift */; };
 		23933AC6290322A500FAC80A /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23933AC5290322A500FAC80A /* Montserrat-ExtraBold.ttf */; };
@@ -344,6 +346,8 @@
 		2375C1C928C5C2550017BAF7 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		2378280328D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWithTextFieldViewController.swift; sourceTree = "<group>"; };
 		2385582628E51DD000E6A09E /* ShareDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDataManager.swift; sourceTree = "<group>"; };
+		238AA72A29CD720D0086DF76 /* ItemRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRouter.swift; sourceTree = "<group>"; };
+		238AA72C29CD72150086DF76 /* ItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemService.swift; sourceTree = "<group>"; };
 		238EF90528CB06F800ECA606 /* CalenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderViewController.swift; sourceTree = "<group>"; };
 		238EF90828CB070700ECA606 /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
 		23933AC5290322A500FAC80A /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -1218,6 +1222,8 @@
 			isa = PBXGroup;
 			children = (
 				23D0824D28E4DC3A00CE541E /* ItemDataManager.swift */,
+				238AA72A29CD720D0086DF76 /* ItemRouter.swift */,
+				238AA72C29CD72150086DF76 /* ItemService.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -1856,6 +1862,7 @@
 				23D5518728C6AFFF00D81B5F /* LoginViewModel.swift in Sources */,
 				232174E828E1D4AF008C155D /* LoginInput.swift in Sources */,
 				23EC504628E2664D00AAA57E /* APIManager.swift in Sources */,
+				238AA72B29CD720D0086DF76 /* ItemRouter.swift in Sources */,
 				234F837928C9629800C4EB41 /* HomeView.swift in Sources */,
 				2360096028DA2297001FB107 /* EmptyView.swift in Sources */,
 				2328C5A728CABF300065ABB2 /* NotiView.swift in Sources */,
@@ -1878,6 +1885,7 @@
 				23D4C66428D8E96700EA7F98 /* LostPasswordViewController.swift in Sources */,
 				23134D3F29B222BF00238536 /* RefreshDataManager.swift in Sources */,
 				23C5AB4928CAA23300A7E977 /* MyPageView.swift in Sources */,
+				238AA72D29CD72150086DF76 /* ItemService.swift in Sources */,
 				2353A8D829C351FE0042575E /* StringEnum.swift in Sources */,
 				239F93682939322C008AC5AB /* Bundle.swift in Sources */,
 				23D4C66028D8E87B00EA7F98 /* GetEmailView.swift in Sources */,
