@@ -77,6 +77,13 @@
 		2360FF5E28DCC64100E481A6 /* ScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360FF5D28DCC64100E481A6 /* ScreenManager.swift */; };
 		23630951291905E200E38885 /* Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23630950291905E200E38885 /* Vibrate.swift */; };
 		236309522919085600E38885 /* Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23630950291905E200E38885 /* Vibrate.swift */; };
+		2364B79E29D40426006459EF /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2364B79D29D40426006459EF /* Montserrat-SemiBold.ttf */; };
+		2364B79F29D40426006459EF /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2364B79D29D40426006459EF /* Montserrat-SemiBold.ttf */; };
+		2364B7A429D40F61006459EF /* ModifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364B7A329D40F61006459EF /* ModifyPasswordViewController.swift */; };
+		2364B7A529D40F61006459EF /* ModifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364B7A329D40F61006459EF /* ModifyPasswordViewController.swift */; };
+		2364B7A829D40F8F006459EF /* ModifyPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364B7A729D40F8F006459EF /* ModifyPasswordView.swift */; };
+		2364B7A929D40F8F006459EF /* ModifyPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364B7A729D40F8F006459EF /* ModifyPasswordView.swift */; };
+		2364B7AA29D41E1F006459EF /* TitleCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */; };
 		236AC9F0291A6AB700E1474C /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236AC9EF291A6AB700E1474C /* Storage.swift */; };
 		236FE90428DF7BE0006142DB /* SUIT-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 236FE90128DF7BE0006142DB /* SUIT-Bold.ttf */; };
 		236FE90628DF7BE0006142DB /* SUIT-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 236FE90228DF7BE0006142DB /* SUIT-Regular.ttf */; };
@@ -329,6 +336,9 @@
 		2360FF5B28DCB31600E481A6 /* SnackBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBar.swift; sourceTree = "<group>"; };
 		2360FF5D28DCC64100E481A6 /* ScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenManager.swift; sourceTree = "<group>"; };
 		23630950291905E200E38885 /* Vibrate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibrate.swift; sourceTree = "<group>"; };
+		2364B79D29D40426006459EF /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		2364B7A329D40F61006459EF /* ModifyPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyPasswordViewController.swift; sourceTree = "<group>"; };
+		2364B7A729D40F8F006459EF /* ModifyPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyPasswordView.swift; sourceTree = "<group>"; };
 		236AC9EF291A6AB700E1474C /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		236FE90128DF7BE0006142DB /* SUIT-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Bold.ttf"; sourceTree = "<group>"; };
 		236FE90228DF7BE0006142DB /* SUIT-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Regular.ttf"; sourceTree = "<group>"; };
@@ -506,6 +516,7 @@
 		2307A23D28DE545F00E00005 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				2364B7A229D40F3F006459EF /* ModifyPassword */,
 				2307A24428DE54BE00E00005 /* LostPassword */,
 				2307A23F28DE547600E00005 /* Register */,
 				2307A23E28DE546F00E00005 /* Login */,
@@ -614,6 +625,7 @@
 		2307A24C28DE554400E00005 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				2364B7A629D40F82006459EF /* ModifyPassword */,
 				234F837628C9628300C4EB41 /* Login */,
 				2344949528D78AA400CF3BD9 /* Register */,
 				23D4C65C28D8E83700EA7F98 /* LostPassword */,
@@ -947,6 +959,7 @@
 		234F837D28C9677500C4EB41 /* monteserrat */ = {
 			isa = PBXGroup;
 			children = (
+				2364B79D29D40426006459EF /* Montserrat-SemiBold.ttf */,
 				23933AC72903233A00FAC80A /* Montserrat-Medium.ttf */,
 				23933AC5290322A500FAC80A /* Montserrat-ExtraBold.ttf */,
 				2374789328D1C9D600CF941A /* Montserrat-Bold.ttf */,
@@ -996,6 +1009,22 @@
 				235D550528EBD2C700314D62 /* ItemParsingModel.swift */,
 			);
 			path = ItemModel;
+			sourceTree = "<group>";
+		};
+		2364B7A229D40F3F006459EF /* ModifyPassword */ = {
+			isa = PBXGroup;
+			children = (
+				2364B7A329D40F61006459EF /* ModifyPasswordViewController.swift */,
+			);
+			path = ModifyPassword;
+			sourceTree = "<group>";
+		};
+		2364B7A629D40F82006459EF /* ModifyPassword */ = {
+			isa = PBXGroup;
+			children = (
+				2364B7A729D40F8F006459EF /* ModifyPasswordView.swift */,
+			);
+			path = ModifyPassword;
 			sourceTree = "<group>";
 		};
 		238EF90728CB06FC00ECA606 /* Calender */ = {
@@ -1576,6 +1605,7 @@
 				236FE91628DF850D006142DB /* loading_horizontal_black.json in Resources */,
 				236FE93128DF8599006142DB /* SUIT-Bold.ttf in Resources */,
 				236FE91728DF8510006142DB /* loading_spin.json in Resources */,
+				2364B79F29D40426006459EF /* Montserrat-SemiBold.ttf in Resources */,
 				236FE92928DF8599006142DB /* SUIT-Thin.ttf in Resources */,
 				236FE92D28DF8599006142DB /* SUIT-Heavy.ttf in Resources */,
 				236FE93228DF859D006142DB /* Montserrat-Bold.ttf in Resources */,
@@ -1606,6 +1636,7 @@
 				2374789628D1C9D600CF941A /* Montserrat-Bold.ttf in Resources */,
 				23C9569728C68D7A00D88536 /* SUIT-Heavy.ttf in Resources */,
 				23C9569F28C68D7A00D88536 /* SUIT-SemiBold.ttf in Resources */,
+				2364B79E29D40426006459EF /* Montserrat-SemiBold.ttf in Resources */,
 				23C9569A28C68D7A00D88536 /* SUIT-ExtraBold.ttf in Resources */,
 				23A32DB928F5816300A791F5 /* GoogleService-Info.plist in Resources */,
 				23C9569B28C68D7A00D88536 /* SUIT-Light.ttf in Resources */,
@@ -1773,8 +1804,10 @@
 				23A48E7128E92E7D00FD77A7 /* NetworkCheck.swift in Sources */,
 				236FE92228DF8592006142DB /* UITextField.swift in Sources */,
 				236FE93F28DF85B0006142DB /* PopUpWithTextFieldViewController.swift in Sources */,
+				2364B7A929D40F8F006459EF /* ModifyPasswordView.swift in Sources */,
 				236FE91D28DF8592006142DB /* PaddingLabel.swift in Sources */,
 				23E0ACC828E7B563008C35C2 /* KeyboardViewController.swift in Sources */,
+				2364B7A529D40F61006459EF /* ModifyPasswordViewController.swift in Sources */,
 				235129DA28F67BAE00489CAD /* BottomSheetKeyboardViewController.swift in Sources */,
 				23F1F21C293D7E7D0074C4D0 /* UILabel.swift in Sources */,
 				233C34B229C73E2F005DFA39 /* DefaultButton.swift in Sources */,
@@ -1793,6 +1826,7 @@
 				236FE93528DF85A4006142DB /* ScreenManager.swift in Sources */,
 				236FE91F28DF8592006142DB /* UIView.swift in Sources */,
 				236FE93D28DF85B0006142DB /* PopUpDeleteUserViewController.swift in Sources */,
+				2364B7AA29D41E1F006459EF /* TitleCenterViewController.swift in Sources */,
 				236FE91E28DF8592006142DB /* UIBezierPath.swift in Sources */,
 				236FE93C28DF85AA006142DB /* String.swift in Sources */,
 				233C34B529C754EC005DFA39 /* DefaultTextField.swift in Sources */,
@@ -1818,6 +1852,7 @@
 				23D5518928C6B02400D81B5F /* Observable.swift in Sources */,
 				23134D3D29B2216700238536 /* RefreshInput.swift in Sources */,
 				2344949B28D78F7000CF3BD9 /* RegisterPasswordView.swift in Sources */,
+				2364B7A829D40F8F006459EF /* ModifyPasswordView.swift in Sources */,
 				23C2378628C9CEE800CE3200 /* FolderView.swift in Sources */,
 				233C34C229C75B95005DFA39 /* UserService.swift in Sources */,
 				23BB603328E27001007EA1EF /* ModifyProfileDataManager.swift in Sources */,
@@ -1840,6 +1875,7 @@
 				23DC04E928C591E600ABB0CF /* ViewController.swift in Sources */,
 				234F838B28C983CE00C4EB41 /* CartView.swift in Sources */,
 				235129D928F679C900489CAD /* BottomSheetKeyboardViewController.swift in Sources */,
+				2364B7A429D40F61006459EF /* ModifyPasswordViewController.swift in Sources */,
 				23E378E928D303B500C52F2D /* ShoppingLinkViewController.swift in Sources */,
 				233C34BC29C75AEF005DFA39 /* BaseRouter.swift in Sources */,
 				2344949928D78F6300CF3BD9 /* RegisterPasswordViewController.swift in Sources */,

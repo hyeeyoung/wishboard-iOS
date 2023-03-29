@@ -20,11 +20,19 @@ class ModifyProfileViewController: TitleCenterViewController {
     let cameraButton = UIButton().then{
         $0.setImage(Image.cameraGray, for: .normal)
     }
+    let nicknameLabel = UILabel().then{
+        $0.text = Message.nickName
+        $0.font = UIFont.Suit(size: 14, family: .Medium)
+    }
     var nameTextField = DefaultTextField(Placeholder.nickname).then{
         $0.clearButtonMode = .always
         $0.becomeFirstResponder()
     }
     let completeButton = DefaultButton(titleStr: Button.complete)
+    let completeKeyboardButton = DefaultButton(titleStr: Button.complete)
+    lazy var accessoryView: UIView = {
+        return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
+    }()
     // MARK: - Life Cycles
     // 앨범 선택 image picker
     var isPhotoSelected = false
@@ -52,6 +60,8 @@ class ModifyProfileViewController: TitleCenterViewController {
         setUpConstraint()
         setTarget()
         
+        nameTextField.inputAccessoryView = accessoryView // <-
+        
         self.nameTextField.delegate = self
     }
     override func viewDidDisappear(_ animated: Bool) {
@@ -73,8 +83,11 @@ extension ModifyProfileViewController {
     func setUpView() {
         self.view.addSubview(profileImage)
         self.view.addSubview(cameraButton)
+        self.view.addSubview(nicknameLabel)
         self.view.addSubview(nameTextField)
         self.view.addSubview(completeButton)
+        
+        accessoryView.addSubview(completeKeyboardButton)
         
         if let image = self.preProfileImg {
             let processor = TintImageProcessor(tint: .black_5)
@@ -93,17 +106,27 @@ extension ModifyProfileViewController {
             make.height.equalTo(26.67)
             make.trailing.bottom.equalTo(profileImage)
         }
+        nicknameLabel.snp.makeConstraints { make in
+            make.top.equalTo(profileImage.snp.bottom).offset(32)
+            make.leading.equalToSuperview().offset(16)
+        }
         nameTextField.snp.makeConstraints { make in
             make.height.equalTo(42)
-            make.top.equalTo(profileImage.snp.bottom).offset(24)
+            make.top.equalTo(nicknameLabel.snp.bottom).offset(8)
             make.leading.trailing.equalToSuperview().inset(16)
             make.centerX.equalToSuperview()
         }
         completeButton.snp.makeConstraints { make in
             make.height.equalTo(50)
-            make.top.equalTo(nameTextField.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview().inset(16)
             make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-34)
+        }
+        completeKeyboardButton.snp.makeConstraints { make in
+            make.height.equalTo(50)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-16)
         }
     }
 }

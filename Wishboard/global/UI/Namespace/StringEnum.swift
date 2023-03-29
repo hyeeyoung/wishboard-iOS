@@ -31,6 +31,7 @@ enum ErrorMessage {
     // MARK: Authentication
     public static let email = "이메일 주소를 정확하게 입력해주세요."
     public static let password = "8자리 이상의 영문자, 숫자, 특수 문자 조합으로 입력해주세요."
+    public static let passwordRewrite = "비밀번호가 일치하지 않아요!"
     public static let authcode = "인증코드를 다시 확인해 주세요."
     public static let nonExistAccount = "앗, 가입되지 않은 계정이에요! 가입하기부터 진행해 주세요."
     
@@ -50,12 +51,13 @@ enum Message {
     public static let sendedEmail = "인증코드가 전송되었어요!\n이메일을 확인해주세요."
     public static let lostPassword = "가입하신 이메일을 입력해주세요!\n로그인을 위해 인증코드가 포함된 이메일을 보내드려요."
     
-    // MARK: Nouns
+    // MARK: Label
     public static let login = "로그인"
     public static let item = "아이템"
     public static let folder = "폴더"
     public static let timer = "5:00"
     public static let count = "(0/10)자"
+    public static let nickName = "닉네임"
     
     // MARK: Item
     public static let itemNotification = "30분 전에 상품 일정을 알려드려요! 시간은 30분 단위로 설정할 수 있어요."
@@ -71,6 +73,10 @@ enum Title {
     public static let loginByEmail = "이메일로 로그인하기"
     public static let email = "이메일"
     public static let password = "비밀번호"
+    public static let modifyPassword = "비밀번호 변경"
+    
+    public static let newPassword = "새 비밀번호"
+    public static let passwordRewrite = "새 비밀번호 재입력"
     
     // MARK: Camera
     public static let camera = "사진 찍기"
@@ -127,6 +133,7 @@ enum EmptyMessage {
 
 enum RegularExpression {
     public static let shoppingLink = "^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$"
+    public static let password = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,50}"
 }
 
 enum Item {
