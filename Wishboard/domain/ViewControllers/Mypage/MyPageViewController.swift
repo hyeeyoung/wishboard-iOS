@@ -10,7 +10,7 @@ import MessageUI
 
 class MyPageViewController: TitleLeftViewController {
     var mypageView: MyPageView!
-    let settingArray = ["설정", "알림 설정", "고객 지원", "문의하기", "서비스 정보", "위시보드 이용 방법", "이용약관", "개인정보 처리방침", "오픈소스 라이브러리", "버전 정보", "계정 관리", "로그아웃", "회원 탈퇴"]
+    let settingArray = ["", "알림 설정", "비밀번호 변경", "", "문의하기", "위시보드 이용 방법", "이용약관", "개인정보 처리방침", "오픈소스 라이브러리", "버전 정보", "", "로그아웃", "탈퇴하기"]
 
     var userInfoData: GetUserInfoModel!
     var nickName: String?
@@ -50,43 +50,42 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tag = indexPath.row
-        if tag == 0 {
+        
+        let cell = UITableViewCell()
+        
+        switch tag {
+        case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "MypageProfileTableViewCell", for: indexPath) as? MypageProfileTableViewCell else { return UITableViewCell() }
             if let cellData = self.userInfoData {cell.setUpData(cellData)}
-            cell.selectionStyle = .none
+            cell.modifyButton.addTarget(self, action: #selector(moveToModifyProfile), for: .touchUpInside)
             return cell
-        } else {
-            let cell = UITableViewCell()
+        case 1, 4, 11:
+            cell.backgroundColor = .wishboardTextfieldGray
+        case 2:
             cell.textLabel?.text = settingArray[tag - 1]
-            if tag == 1 || tag == 3 || tag == 5 || tag == 11 {self.setTitleConstraint(cell)}
-            else {
-                cell.textLabel?.font = UIFont.Suit(size: 14, family: .Regular)
-                cell.textLabel?.textColor = .mypageTextColor
-                if tag == 2 {self.setSwitch(cell); cell.selectionStyle = .none}
-                if tag == 10 {self.setVersionLabel(cell); cell.selectionStyle = .none}
-            }
-            let separator = UIView().then {
-                $0.backgroundColor = .wishboardDisabledGray
-            }
-            cell.addSubview(separator)
-            separator.snp.makeConstraints { make in
-                make.leading.trailing.equalToSuperview()
-                make.height.equalTo(0.5)
-                make.bottom.equalToSuperview()
-            }
-            return cell
+            self.setSwitch(cell)
+        case 10:
+            cell.textLabel?.text = settingArray[tag - 1]
+            self.setVersionLabel(cell)
+        default:
+            cell.textLabel?.text = settingArray[tag - 1]
         }
         
+        cell.textLabel?.font = UIFont.Suit(size: 16, family: .Regular)
+        cell.textLabel?.textColor = .mypageTextColor
+        cell.selectionStyle = .none
+        
+        return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let tag = indexPath.row
         switch tag {
         case 0:
-            return 193
-        case 1, 3, 5, 11:
-            return 58
+            return 156
+        case 1, 4, 11:
+            return 6
         default:
-            return 38
+            return 48
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -94,18 +93,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         switch tag {
         case 0:
             UIDevice.vibrate()
-            let vc = ModifyProfileViewController()
-            if let nickname = self.nickName {
-                vc.nameTextField.text = nickname
-                vc.preNickName = self.userInfoData.nickname
-            }
-            if let profileImg = self.userInfoData.profile_img_url {
-                vc.profileImage.kf.setImage(with: URL(string: profileImg), placeholder: UIImage())
-                vc.preProfileImg = self.userInfoData.profile_img_url
-            }
-            vc.preVC = self
-            self.navigationController?.pushViewController(vc, animated: true)
-        case 4:
+        case 5:
             // 문의하기
             UIDevice.vibrate()
             showSendEmail()
@@ -141,21 +129,28 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
 }
 // MARK: setting cell set & Functions
 extension MyPageViewController {
-    func setTitleConstraint(_ cell: UITableViewCell) {
-        cell.textLabel!.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-10)
-            make.leading.equalToSuperview().offset(16)
+    // 프로필 수정 페이지 이동
+    @objc func moveToModifyProfile() {
+        let vc = ModifyProfileViewController()
+        if let nickname = self.nickName {
+            vc.nameTextField.text = nickname
+            vc.preNickName = self.userInfoData.nickname
         }
-        cell.textLabel?.font = UIFont.Suit(size: 14, family: .SemiBold)
-        cell.selectionStyle = .none
+        if let profileImg = self.userInfoData.profile_img_url {
+            vc.profileImage.kf.setImage(with: URL(string: profileImg), placeholder: UIImage())
+            vc.preProfileImg = self.userInfoData.profile_img_url
+        }
+        vc.preVC = self
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     // 알림 설정 - Switch 넣기
     func setSwitch(_ cell: UITableViewCell) {
+        // Switch 기본 크기: 가로51, 세로31
         var notiSwitch = UISwitch().then{
             if let pushState = self.pushState {$0.isOn = pushState}
             else {$0.isOn = false}
             $0.onTintColor = .wishboardGreen
-            $0.transform = CGAffineTransform(scaleX: 0.66, y: 0.65)
+            $0.transform = CGAffineTransform(scaleX: 0.8, y: 0.645)
         }
         cell.addSubview(notiSwitch)
         notiSwitch.snp.makeConstraints { make in
@@ -178,8 +173,8 @@ extension MyPageViewController {
         let appVersion = UserDefaults.standard.string(forKey: "appVersion") ?? ""
         let versionLabel = UILabel().then{
             $0.text = appVersion
-            $0.font = UIFont.Suit(size: 12, family: .Bold)
-            $0.textColor = .gray
+            $0.font = UIFont.monteserrat(size: 14, family: .SemiBold)
+            $0.textColor = .dialogMessageColor
             $0.setTextWithLineHeight()
         }
         cell.addSubview(versionLabel)

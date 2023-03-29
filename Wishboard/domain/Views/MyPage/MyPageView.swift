@@ -42,9 +42,7 @@ class MyPageView: UIView {
     }
     func setUpConstraint() {
         mypageTableView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
-            make.leading.trailing.equalToSuperview()
-            make.top.equalToSuperview()
+            make.leading.trailing.top.bottom.equalToSuperview()
         }
     }
 }
