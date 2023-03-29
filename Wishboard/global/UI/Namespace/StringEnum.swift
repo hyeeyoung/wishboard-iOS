@@ -50,12 +50,13 @@ enum Message {
     public static let sendedEmail = "인증코드가 전송되었어요!\n이메일을 확인해주세요."
     public static let lostPassword = "가입하신 이메일을 입력해주세요!\n로그인을 위해 인증코드가 포함된 이메일을 보내드려요."
     
-    // MARK: Nouns
+    // MARK: Label
     public static let login = "로그인"
     public static let item = "아이템"
     public static let folder = "폴더"
     public static let timer = "5:00"
     public static let count = "(0/10)자"
+    public static let nickName = "닉네임"
     
     // MARK: Item
     public static let itemNotification = "30분 전에 상품 일정을 알려드려요! 시간은 30분 단위로 설정할 수 있어요."
