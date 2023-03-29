@@ -93,6 +93,9 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         switch tag {
         case 0:
             UIDevice.vibrate()
+        case 3:
+            // 비밀번호 변경
+            self.navigationController?.pushViewController(ModifyPasswordViewController(), animated: true)
         case 5:
             // 문의하기
             UIDevice.vibrate()

@@ -31,6 +31,7 @@ enum ErrorMessage {
     // MARK: Authentication
     public static let email = "이메일 주소를 정확하게 입력해주세요."
     public static let password = "8자리 이상의 영문자, 숫자, 특수 문자 조합으로 입력해주세요."
+    public static let passwordRewrite = "비밀번호가 일치하지 않아요!"
     public static let authcode = "인증코드를 다시 확인해 주세요."
     public static let nonExistAccount = "앗, 가입되지 않은 계정이에요! 가입하기부터 진행해 주세요."
     
@@ -72,6 +73,10 @@ enum Title {
     public static let loginByEmail = "이메일로 로그인하기"
     public static let email = "이메일"
     public static let password = "비밀번호"
+    public static let modifyPassword = "비밀번호 변경"
+    
+    public static let newPassword = "새 비밀번호"
+    public static let passwordRewrite = "새 비밀번호 재입력"
     
     // MARK: Camera
     public static let camera = "사진 찍기"
@@ -128,6 +133,7 @@ enum EmptyMessage {
 
 enum RegularExpression {
     public static let shoppingLink = "^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$"
+    public static let password = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,50}"
 }
 
 enum Item {
