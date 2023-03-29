@@ -61,7 +61,7 @@ class ModifyPasswordViewController: TitleCenterViewController {
         UIDevice.vibrate()
         self.view.endEditing(true)
         
-        self.navigationController?.popViewController(animated: true)
+        self.modifyPassword(pw: self.passwordInput ?? "")
     }
     //MARK: - Methods
     private func isValidPassword(_ pw: String) -> Bool {
@@ -94,6 +94,37 @@ extension ModifyPasswordViewController {
 //        SnackBar(self, message: .login)
         for completeButton in [self.modifyPasswordView.completeButton, self.modifyPasswordView.completeButtonKeyboard] {
             completeButton.isActivate = false
+        }
+    }
+    
+    private func modifyPassword(pw: String){
+        UserService.shared.modifyPassword(pw: pw) { result in
+            switch result {
+                case .success(let data):
+                if data.success {
+                    print("비밀번호 변경 성공 by moya")
+                    // 화면 이동
+                    self.navigationController?.popViewController(animated: true)
+                }
+                    
+                    break
+            case .failure(let error):
+                print(error.localizedDescription)
+//                if let statusCode = error.responseCode {
+//                    switch statusCode {
+//                    case 400, 204:
+//                        self.loginAPIFail()
+//                    case 500:
+//                       DispatchQueue.main.async {
+//                           ErrorBar(self)
+//                       }
+//                    default:
+//                        print(statusCode)
+//                    }
+//                }
+            default:
+                break
+            }
         }
     }
 }

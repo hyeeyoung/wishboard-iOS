@@ -9,20 +9,22 @@ import Foundation
 
 enum HTTPMethodURL {
     
-    static let userURL = "/auth"
+    static let authURL = "/auth"
     static let itemURL = "/item"
+    static let userURL = "/user"
     
     struct GET {
-        static let user = HTTPMethodURL.userURL
+        static let user = HTTPMethodURL.authURL
     }
     
     struct POST {
-        static let signIn = HTTPMethodURL.userURL + "/signin"
+        static let signIn = HTTPMethodURL.authURL + "/signin"
         static let uploadItem = HTTPMethodURL.itemURL
     }
     
     struct PUT {
         static let modifyITem = HTTPMethodURL.itemURL
+        static let modifyPassword = HTTPMethodURL.userURL + "/re-passwd"
     }
     
     struct DELETE {
