@@ -80,7 +80,6 @@
 		2364B79E29D40426006459EF /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2364B79D29D40426006459EF /* Montserrat-SemiBold.ttf */; };
 		2364B79F29D40426006459EF /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2364B79D29D40426006459EF /* Montserrat-SemiBold.ttf */; };
 		2364B7A429D40F61006459EF /* ModifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364B7A329D40F61006459EF /* ModifyPasswordViewController.swift */; };
-		2364B7A529D40F61006459EF /* ModifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364B7A329D40F61006459EF /* ModifyPasswordViewController.swift */; };
 		2364B7A829D40F8F006459EF /* ModifyPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364B7A729D40F8F006459EF /* ModifyPasswordView.swift */; };
 		2364B7A929D40F8F006459EF /* ModifyPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364B7A729D40F8F006459EF /* ModifyPasswordView.swift */; };
 		2364B7AA29D41E1F006459EF /* TitleCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */; };
@@ -1807,7 +1806,6 @@
 				2364B7A929D40F8F006459EF /* ModifyPasswordView.swift in Sources */,
 				236FE91D28DF8592006142DB /* PaddingLabel.swift in Sources */,
 				23E0ACC828E7B563008C35C2 /* KeyboardViewController.swift in Sources */,
-				2364B7A529D40F61006459EF /* ModifyPasswordViewController.swift in Sources */,
 				235129DA28F67BAE00489CAD /* BottomSheetKeyboardViewController.swift in Sources */,
 				23F1F21C293D7E7D0074C4D0 /* UILabel.swift in Sources */,
 				233C34B229C73E2F005DFA39 /* DefaultButton.swift in Sources */,
