@@ -32,7 +32,9 @@ class MypageDataManager {
                        ErrorBar(viewcontroller)
                    }
                 case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        self.getUserInfoDataManager(viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -55,7 +57,9 @@ class MypageDataManager {
                 let statusCode = error.responseCode
                 switch statusCode {
                     case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        self.switchNotificationDataManager(isOn, viewcontroller)
+                    }
                     case 500:
                        DispatchQueue.main.async {
                            ErrorBar(viewcontroller)
@@ -85,7 +89,9 @@ class MypageDataManager {
                            ErrorBar(viewcontroller)
                        }
                     case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        self.switchNotificationDataManager(isOn, viewcontroller)
+                    }
                     default:
                        print(error.responseCode)
                 }
@@ -111,7 +117,9 @@ class MypageDataManager {
                            ErrorBar(viewcontroller)
                        }
                     case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        self.deleteUserDataManager(viewcontroller)
+                    }
                     default:
                        print(error.responseCode)
                 }
@@ -136,7 +144,9 @@ class MypageDataManager {
                            ErrorBar(viewcontroller)
                        }
                     case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        self.logoutDataManager(viewcontroller)
+                    }
                     default:
                        print(error.responseCode)
                 }

@@ -34,7 +34,9 @@ class FolderDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        self.getFolderDataManager(viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -62,7 +64,9 @@ class FolderDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        self.addFolderDataManager(parameter, viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -91,7 +95,9 @@ class FolderDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        self.modifyFolderDataManager(folderId, parameter, viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -118,7 +124,9 @@ class FolderDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        self.deleteFolderDataManager(folderId, viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -146,7 +154,9 @@ class FolderDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        self.getFolderListDataManager(viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -176,7 +186,9 @@ class FolderDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        self.getFolderDetailDataManager(folderId, viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -202,7 +214,9 @@ class FolderDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        self.modifyItemFolderDataManager(itemId, folderId, viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }

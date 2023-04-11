@@ -34,7 +34,9 @@ class WishListDataManager {
                 case 401:
                     print("status code: 401")
                     print("refresh api 요청")
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        self.wishListDataManager(homeView, viewcontroller)
+                    }
                     defer {
                         self.wishListDataManager(homeView, viewcontroller)
                     }

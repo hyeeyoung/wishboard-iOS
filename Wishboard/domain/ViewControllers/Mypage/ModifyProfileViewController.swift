@@ -71,6 +71,7 @@ class ModifyProfileViewController: TitleCenterViewController {
         }
     }
     override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
     }
