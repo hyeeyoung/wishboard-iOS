@@ -15,7 +15,7 @@ class DefaultButton: UIButton {
             isActivate ? activateButton() : inactivateButton()
         }
     }
-    var lottieView: AnimationView!
+    var lottieView: LottieAnimationView!
     var titleStr: String?
     var titleColor: UIColor?
     
@@ -70,7 +70,7 @@ class DefaultButton: UIButton {
         self.isEnabled = false
     }
     // MARK: Lottie View
-    func setLottieView() -> AnimationView {
+    func setLottieView() -> LottieAnimationView {
         self.lottieView = SetLottie().horizontalBlackView
         self.addSubview(lottieView)
         

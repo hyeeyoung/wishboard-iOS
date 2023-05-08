@@ -39,7 +39,7 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
     var itemName: String?
     var itemPrice: String?
     
-    var lottieView: AnimationView!
+    var lottieView: LottieAnimationView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

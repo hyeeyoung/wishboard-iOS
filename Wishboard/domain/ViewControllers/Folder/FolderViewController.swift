@@ -14,7 +14,7 @@ class FolderViewController: TitleLeftViewController {
     var dialog: PopUpWithTextFieldViewController!
     var folderData: [FolderModel] = []
     var folderStr: String?
-    var lottieView: AnimationView!
+    var lottieView: LottieAnimationView!
     
     var refreshControl = UIRefreshControl()
 

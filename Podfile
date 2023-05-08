@@ -6,7 +6,7 @@ target 'Wishboard' do
 
   # Pods for Wishboard
 	pod 'Alamofire'
-	pod 'Kingfisher'
+	pod 'Kingfisher', '~> 7.6.1'
 	pod 'SnapKit', '~> 5.6.0'
 	pod 'MaterialComponents/BottomSheet'
 	pod 'Tabman', '~> 2.9'
@@ -41,4 +41,13 @@ target 'Wishboard' do
 	pod 'SnapKit', '~> 5.6.0'
 	pod 'MaterialComponents/BottomSheet'
   end
+end
+post_install do |installer|
+    installer.generated_projects.each do |project|
+          project.targets.each do |target|
+              target.build_configurations.each do |config|
+                  config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+               end
+          end
+   end
 end
