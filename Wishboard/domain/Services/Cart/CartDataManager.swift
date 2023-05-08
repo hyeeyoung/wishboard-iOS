@@ -66,6 +66,7 @@ class CartDataManager {
         AF.request(Storage().BaseURL + "/cart",
                            method: .post,
                            parameters: parameter,
+                           encoder: JSONParameterEncoder.default,
                            headers: header)
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
@@ -87,6 +88,7 @@ class CartDataManager {
         AF.request(Storage().BaseURL + "/cart",
                            method: .post,
                            parameters: parameter,
+                           encoder: JSONParameterEncoder.default,
                            headers: header)
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in

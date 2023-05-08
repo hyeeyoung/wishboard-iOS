@@ -6,5 +6,5 @@
 //
 
 struct AddFolderInput: Encodable {
-    let folder_name: String?
+    let folder_name: String
 }

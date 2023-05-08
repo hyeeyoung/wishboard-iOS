@@ -160,11 +160,12 @@ extension FolderViewController {
     @objc func completeModifyButtonDidTap(_ sender: CustomButton) {
         UIDevice.vibrate()
         let folderId = sender.folderData?.folder_id
-        dialog.completeButtonDidTap()
+//        dialog.completeButtonDidTap()
         
         lottieView = dialog.completeButton.setLottieView()
         lottieView.play { completion in
-            let addFolderInput = AddFolderInput(folder_name: self.folderStr)
+            self.dialog.completeButton.isEnabled = false
+            let addFolderInput = AddFolderInput(folder_name: self.folderStr!)
             FolderDataManager().modifyFolderDataManager(folderId!, addFolderInput, self)
         }
     }
@@ -172,10 +173,11 @@ extension FolderViewController {
     @objc func completeAddButtonDidTap() {
         UIDevice.vibrate()
         lottieView = dialog.completeButton.setLottieView()
-        dialog.completeButtonDidTap()
+//        dialog.completeButtonDidTap()
         
         lottieView.play { completion in
-            let addFolderInput = AddFolderInput(folder_name: self.folderStr)
+            self.dialog.completeButton.isEnabled = false
+            let addFolderInput = AddFolderInput(folder_name: self.folderStr!)
             FolderDataManager().addFolderDataManager(addFolderInput, self)
         }
     }

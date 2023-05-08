@@ -36,6 +36,7 @@ class DefaultButton: UIButton {
         self.layer.cornerRadius = 22
         
         self.setTitle("", for: .selected)
+        self.isEnabled = false
     }
     
     // 제목, 배경색, 글씨색 설정

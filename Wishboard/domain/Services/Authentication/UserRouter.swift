@@ -53,7 +53,7 @@ extension UserRouter{
             let token = UserDefaults.standard.string(forKey: "accessToken") ?? ""
             let header = [
                 "Content-Type": "application/json",
-                "Authorization": "Bearer Token " + token]
+                "Authorization": "Bearer " + token]
             return header
         }
         

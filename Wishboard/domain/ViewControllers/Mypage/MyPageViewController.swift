@@ -33,6 +33,8 @@ class MyPageViewController: TitleLeftViewController {
         }
         // DATA
         MypageDataManager().getUserInfoDataManager(self)
+        
+        self.tabBarController?.tabBar.isHidden = false
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
@@ -95,7 +97,9 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             UIDevice.vibrate()
         case 3:
             // 비밀번호 변경
-            self.navigationController?.pushViewController(ModifyPasswordViewController(), animated: true)
+            let vc = ModifyPasswordViewController()
+            vc.preVC = self
+            self.navigationController?.pushViewController(vc, animated: true)
         case 5:
             // 문의하기
             UIDevice.vibrate()

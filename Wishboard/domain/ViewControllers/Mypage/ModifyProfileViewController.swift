@@ -66,6 +66,8 @@ class ModifyProfileViewController: TitleCenterViewController {
     }
     override func viewDidDisappear(_ animated: Bool) {
         if modified {
+            print("modify profile")
+            preVC.tabBarController?.tabBar.isHidden = false
             SnackBar(preVC, message: .modifyProfile)
             MypageDataManager().getUserInfoDataManager(preVC)
         }
@@ -138,6 +140,7 @@ extension ModifyProfileViewController {
         self.cameraButton.addTarget(self, action: #selector(goAlbumButtonDidTap), for: .touchUpInside)
         self.nameTextField.addTarget(self, action: #selector(nameTextFieldEditingChanged(_:)), for: .editingChanged)
         self.completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
+        self.completeKeyboardButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
     }
     @objc func nameTextFieldEditingChanged(_ sender: UITextField) {
         self.isNicknameChanged = true
@@ -148,6 +151,7 @@ extension ModifyProfileViewController {
     // 닉네임 유효성 검사
     func isNicknameValid(nickname: String) {
         self.completeButton.isActivate = nickname == "" ? false : true
+        self.completeKeyboardButton.isActivate = nickname == "" ? false : true
     }
     // 앨범에서 사진/동영상 선택
     // 프로필 이미지 클릭 시
@@ -165,9 +169,14 @@ extension ModifyProfileViewController {
     @objc func completeButtonDidTap() {
         UIDevice.vibrate()
         
-        let lottieView = self.completeButton.setLottieView()
+        var lottieView = self.completeButton.setLottieView()
         self.completeButton.isSelected = true
+        
+        lottieView = self.completeKeyboardButton.setLottieView()
+        self.completeKeyboardButton.isSelected = true
+        
         lottieView.isHidden = false
+        
         lottieView.play { completion in
             lottieView.loopMode = .loop
             DispatchQueue.main.async {

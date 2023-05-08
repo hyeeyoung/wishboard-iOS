@@ -48,6 +48,7 @@ class FolderDataManager {
         AF.request(Storage().BaseURL + "/folder",
                            method: .post,
                            parameters: parameter,
+                           encoder: JSONParameterEncoder.default,
                            headers: header)
             .validate()
             .responseDecodable(of: APIModel<ResultModel>.self) { response in
@@ -79,6 +80,7 @@ class FolderDataManager {
         AF.request(Storage().BaseURL + "/folder/\(folderId)",
                            method: .put,
                            parameters: parameter,
+                           encoder: JSONParameterEncoder.default,
                            headers: header)
             .validate()
             .responseDecodable(of: APIModel<ResultModel>.self) { response in

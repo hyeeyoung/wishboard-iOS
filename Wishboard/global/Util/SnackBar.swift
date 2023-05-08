@@ -29,8 +29,10 @@ class SnackBar {
         
         // 만약 하단바가 존재할 때
         if (originView.tabBarController?.tabBar.isHidden == false) {
+            print("만약 하단바가 존재할 때")
             originView.tabBarController?.tabBar.addSubview(backgroundView)
         } else {
+            print("만약 하단바가 존재하지 않을 때")
             originView.view.addSubview(backgroundView)
         }
         
@@ -72,6 +74,7 @@ extension SnackBar {
         case modifyItem = "아이템을 수정했어요!✍️️"
         case deleteItem = "아이템을 위시리스트에서 삭제했어요!🗑"
         case modifyProfile = "프로필이 수정되었어요!👩‍🎤"
+        case modifyPassword = "비밀번호가 변경되었어요!👩‍🎤"
         case deleteUser = "탈퇴 완료되었어요. 이용해주셔서 감사합니다!☺️"
         case ShoppingLink = "쇼핑몰 링크를 등록해 주세요!🛍️️"
         case failShoppingLink = "앗, 아이템 정보를 불러오지 못했어요🥲"
@@ -124,7 +127,7 @@ class ErrorBar {
                 self.backgroundView.transform = CGAffineTransform(translationX: 0, y: -81)
             } completion: { finished in
                 UIView.animate(withDuration: 0.5, delay: 2.5) {
-                    self.backgroundView.transform = .identity
+                    self.backgroundView.transform = CGAffineTransform(translationX: 0, y: 81)
                 } completion: { finish in
                     if originView.extensionContext != nil {
                         originView.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)

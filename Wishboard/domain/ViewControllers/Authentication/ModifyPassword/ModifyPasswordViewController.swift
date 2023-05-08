@@ -14,6 +14,8 @@ class ModifyPasswordViewController: TitleCenterViewController {
     let modifyPasswordView = ModifyPasswordView()
     var passwordInput: String?
     var passwordRewriteInput: String?
+    var preVC: MyPageViewController!
+    var modified: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +35,13 @@ class ModifyPasswordViewController: TitleCenterViewController {
         self.tabBarController?.tabBar.isHidden = true
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        if modified {
+            print("modify password")
+            preVC.tabBarController?.tabBar.isHidden = false
+            SnackBar(preVC, message: .modifyPassword)
+        }
     }
     // MARK: - Set Up
     func setUpTextField() {
@@ -103,6 +112,7 @@ extension ModifyPasswordViewController {
                 case .success(let data):
                 if data.success {
                     print("비밀번호 변경 성공 by moya")
+                    self.modified = true
                     // 화면 이동
                     self.navigationController?.popViewController(animated: true)
                 }
