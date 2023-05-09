@@ -10,7 +10,7 @@ import UIKit
 import Lottie
 
 class DefaultButton: UIButton {
-    var isActivate = false{
+    var isActivate: Bool = false {
         didSet{
             isActivate ? activateButton() : inactivateButton()
         }
@@ -36,7 +36,6 @@ class DefaultButton: UIButton {
         self.layer.cornerRadius = 22
         
         self.setTitle("", for: .selected)
-        self.isEnabled = false
     }
     
     // 제목, 배경색, 글씨색 설정
@@ -62,12 +61,12 @@ class DefaultButton: UIButton {
     // MARK: - Function
     func activateButton() {
         self.backgroundColor = UIColor.wishboardGreen
-        self.titleLabel?.textColor = UIColor.black
+        self.setTitleColor(UIColor.black, for: .normal)
         self.isEnabled = true
     }
     func inactivateButton() {
         self.backgroundColor = UIColor.wishboardDisabledGray
-        self.titleLabel?.textColor = UIColor.dialogMessageColor
+        self.setTitleColor(UIColor.dialogMessageColor, for: .normal)
         self.isEnabled = false
     }
     // MARK: Lottie View
