@@ -33,6 +33,8 @@ class MyPageViewController: TitleLeftViewController {
         }
         // DATA
         MypageDataManager().getUserInfoDataManager(self)
+        
+        self.tabBarController?.tabBar.isHidden = false
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
@@ -95,7 +97,9 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             UIDevice.vibrate()
         case 3:
             // 비밀번호 변경
-            self.navigationController?.pushViewController(ModifyPasswordViewController(), animated: true)
+            let vc = ModifyPasswordViewController()
+            vc.preVC = self
+            self.navigationController?.pushViewController(vc, animated: true)
         case 5:
             // 문의하기
             UIDevice.vibrate()
@@ -111,19 +115,27 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         case 6:
             // 위시보드 이용 방법
             UIDevice.vibrate()
-            ScreenManager().linkTo(viewcontroller: self, "https://hushed-bolt-fd4.notion.site/383c308f256f4f189b7c0b68a8f68d9f")
+            
+            let link = "https://hushed-bolt-fd4.notion.site/383c308f256f4f189b7c0b68a8f68d9f"
+            self.moveToWebVC(link, "위시보드 이용 방법")
         case 7:
             // 이용약관
             UIDevice.vibrate()
-            ScreenManager().linkTo(viewcontroller: self, "https://www.wishboard.xyz/terms.html")
+            
+            let link = "https://www.wishboard.xyz/terms.html"
+            self.moveToWebVC(link, "이용약관")
         case 8:
             // 개인정보처리방침
             UIDevice.vibrate()
-            ScreenManager().linkTo(viewcontroller: self, "https://www.wishboard.xyz/privacy-policy.html")
+            
+            let link = "https://www.wishboard.xyz/privacy-policy.html"
+            self.moveToWebVC(link, "개인정보 처리방침")
         case 9:
             // 오픈소스 라이브러리
             UIDevice.vibrate()
-            ScreenManager().linkTo(viewcontroller: self, "https://www.wishboard.xyz/opensource.html")
+            
+            let link = "https://www.wishboard.xyz/opensource.html"
+            self.moveToWebVC(link, "오픈소스 라이브러리")
         default:
             tableView.deselectRow(at: indexPath, animated: true)
         }
@@ -153,7 +165,7 @@ extension MyPageViewController {
             if let pushState = self.pushState {$0.isOn = pushState}
             else {$0.isOn = false}
             $0.onTintColor = .wishboardGreen
-            $0.transform = CGAffineTransform(scaleX: 0.8, y: 0.645)
+            $0.transform = CGAffineTransform(scaleX: 0.8, y: 0.75)
         }
         cell.addSubview(notiSwitch)
         notiSwitch.snp.makeConstraints { make in
@@ -253,6 +265,14 @@ extension MyPageViewController: MFMailComposeViewControllerDelegate {
     }
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
+    }
+    // MARK: move to link
+    func moveToWebVC(_ link: String, _ title: String) {
+        let vc = WebViewController()
+        vc.webURL = link
+        vc.setUpTitle(title)
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 // MARK: - API Success

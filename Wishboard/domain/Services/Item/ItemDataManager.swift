@@ -33,7 +33,9 @@ class ItemDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        self.getItemDetailDataManager(itemId, viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -62,7 +64,9 @@ class ItemDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        self.deleteItemDataManager(itemId, viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -92,7 +96,9 @@ class ItemDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        self.getItemByLinkDataManager(url, viewcontroller)
+                    }
                 default:
                     print(error.localizedDescription)
                     print(error.responseCode)

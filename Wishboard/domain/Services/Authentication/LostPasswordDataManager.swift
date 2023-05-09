@@ -61,7 +61,9 @@ class LostPasswordDataManager {
                            ErrorBar(viewcontroller)
                        }
                     case 401:
-                        RefreshDataManager().refreshDataManager()
+                        RefreshDataManager().refreshDataManager() {
+                            self.verifyCodeDataManager(parameter, viewcontroller)
+                        }
                     default:
                         print(statusCode)
                     }

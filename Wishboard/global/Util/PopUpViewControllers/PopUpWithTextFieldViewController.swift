@@ -63,7 +63,7 @@ class PopUpWithTextFieldViewController: UIViewController {
             self.countLabel.text = "(" + String(prevText.count) + "/10)자"
         }
         completeButton = DefaultButton(titleStr: self.buttonTitle!)
-        completeButton.isActivate = self.titleText?.isEmpty ?? true ? false : true
+        completeButton.isActivate = self.prevText?.isEmpty ?? true ? false : true
     }
     override func viewDidLoad() {
         super.viewDidLoad()

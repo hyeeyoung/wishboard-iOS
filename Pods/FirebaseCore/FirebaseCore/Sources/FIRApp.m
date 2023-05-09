@@ -822,6 +822,7 @@ static FIRApp *sDefaultApp;
   // Dictionary of class names that conform to `FIRLibrary` and their user agents. These should only
   // be SDKs that are written in Swift but still visible to ObjC.
   NSDictionary<NSString *, NSString *> *swiftComponents = @{
+    @"FIRSessions" : @"fire-ses",
     @"FIRFunctionsComponent" : @"fire-fun",
     @"FIRStorageComponent" : @"fire-str",
   };
@@ -875,6 +876,9 @@ static FIRApp *sDefaultApp;
 
 - (void)appDidBecomeActive:(NSNotification *)notification {
   if ([self isDataCollectionDefaultEnabled]) {
+    // If changing the below line, consult with the Games team to ensure they
+    // are not negatively impacted. For more details, see
+    // go/firebase-game-sdk-user-agent-register-timing.
     [self.heartbeatLogger log];
   }
 }

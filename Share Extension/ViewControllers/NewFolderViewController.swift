@@ -36,7 +36,7 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
     var isAddSuccess: Bool = false
     var preVC: ShareViewController!
     
-    var lottieView: AnimationView!
+    var lottieView: LottieAnimationView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

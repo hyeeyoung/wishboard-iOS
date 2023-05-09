@@ -1898,7 +1898,7 @@ SOFTWARE.
 			<key>FooterText</key>
 			<string>MIT License
 
-Copyright (c) 2020 UI At Six
+Copyright (c) 2022 UI At Six
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2131,7 +2131,7 @@ SOFTWARE.
    limitations under the License.
 </string>
 			<key>License</key>
-			<string>Apache</string>
+			<string>Apache-2.0</string>
 			<key>Title</key>
 			<string>PromisesObjC</string>
 			<key>Type</key>
@@ -2285,7 +2285,7 @@ THE SOFTWARE.
 			<key>FooterText</key>
 			<string>MIT License
 
-Copyright (c) 2020 UI At Six
+Copyright (c) 2022 UI At Six
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

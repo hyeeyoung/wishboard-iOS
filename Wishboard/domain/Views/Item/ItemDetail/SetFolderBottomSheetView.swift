@@ -10,7 +10,7 @@ import UIKit
 
 class SetFolderBottomSheetView: UIView {
     let titleLabel = UILabel().then{
-        $0.text = Title.folder
+        $0.text = Title.folderSetting
         $0.font = UIFont.Suit(size: 14, family: .Bold)
     }
     let exitBtn = UIButton().then{

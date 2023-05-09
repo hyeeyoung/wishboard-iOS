@@ -89,13 +89,13 @@ enum Title {
     
     // MARK: Item
     public static let notification = "알림"
-    public static let shoppingMallLink = "쇼핑몰 링크"
+    public static let shoppingMallLink = "쇼핑몰 링크로 아이템 불러오기"
     public static let addItem = "아이템 추가"
     public static let modifyItem = "아이템 수정"
     
     // MARK: Folder
     public static let folder = "폴더"
-    public static let folderSetting = "폴더 설정"
+    public static let folderSetting = "폴더 선택"
     public static let addFolder = "새 폴더 추가"
     
     // MARK: Notification

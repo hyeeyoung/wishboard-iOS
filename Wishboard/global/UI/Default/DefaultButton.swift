@@ -10,12 +10,12 @@ import UIKit
 import Lottie
 
 class DefaultButton: UIButton {
-    var isActivate = false{
+    var isActivate: Bool = false {
         didSet{
             isActivate ? activateButton() : inactivateButton()
         }
     }
-    var lottieView: AnimationView!
+    var lottieView: LottieAnimationView!
     var titleStr: String?
     var titleColor: UIColor?
     
@@ -61,16 +61,16 @@ class DefaultButton: UIButton {
     // MARK: - Function
     func activateButton() {
         self.backgroundColor = UIColor.wishboardGreen
-        self.titleLabel?.textColor = UIColor.black
+        self.setTitleColor(UIColor.black, for: .normal)
         self.isEnabled = true
     }
     func inactivateButton() {
         self.backgroundColor = UIColor.wishboardDisabledGray
-        self.titleLabel?.textColor = UIColor.dialogMessageColor
+        self.setTitleColor(UIColor.dialogMessageColor, for: .normal)
         self.isEnabled = false
     }
     // MARK: Lottie View
-    func setLottieView() -> AnimationView {
+    func setLottieView() -> LottieAnimationView {
         self.lottieView = SetLottie().horizontalBlackView
         self.addSubview(lottieView)
         

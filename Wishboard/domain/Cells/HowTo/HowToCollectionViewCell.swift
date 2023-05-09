@@ -63,7 +63,7 @@ class HowToCollectionViewCell: UICollectionViewCell {
     }
     func setCellData(_ itemIdx: Int) {
         let howToUseImage = [Image.how1, Image.how2, Image.how3]
-        let howToUseTitle = ["아이템 저장", "폴더 설정", "알림 설정"]
+        let howToUseTitle = ["아이템 저장", "폴더 지정", "알림 설정"]
         let howToUseSubtitle = ["웹 브라우저에서 사고 싶은 아이템이 있다면\n“공유하기”를 통해 아이템을 위시보드에 저장해보세요!",
                         "아이템에 폴더를 지정해보세요!\n원하는 폴더가 없다면 새 폴더를 추가할 수 있어요.",
                         "상품의 재입고, 프리오더, 세일 알림을 설정해 보세요.\n설정한 시간 30분 전에 알림 보내드려요!"]

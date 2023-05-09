@@ -164,6 +164,6 @@ extension ItemDetailViewController {
         itemDetailView.lowerButton.addTarget(self, action: #selector(linkButtonDidTap), for: .touchUpInside)
     }
     func getItemDetailAPIFail() {
-        ItemDataManager().getItemDetailDataManager(self.itemId, self)
+//        ItemDataManager().getItemDetailDataManager(self.itemId, self)
     }
 }
