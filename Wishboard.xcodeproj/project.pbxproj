@@ -140,6 +140,7 @@
 		238EF90928CB070700ECA606 /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EF90828CB070700ECA606 /* CalenderView.swift */; };
 		23933AC6290322A500FAC80A /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23933AC5290322A500FAC80A /* Montserrat-ExtraBold.ttf */; };
 		23933AC82903233A00FAC80A /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23933AC72903233A00FAC80A /* Montserrat-Medium.ttf */; };
+		23938A762A09CFE5006EB405 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23938A752A09CFE5006EB405 /* WebViewController.swift */; };
 		239422E6292FEFCB0024CEBD /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239422E5292FEFCB0024CEBD /* Optional.swift */; };
 		2395FFF42902E1C1005A8D8F /* UploadItemTextfieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2395FFF32902E1C1005A8D8F /* UploadItemTextfieldTableViewCell.swift */; };
 		2395FFF62902E1D7005A8D8F /* UploadItemBottomSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2395FFF52902E1D7005A8D8F /* UploadItemBottomSheetTableViewCell.swift */; };
@@ -361,6 +362,7 @@
 		238EF90828CB070700ECA606 /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
 		23933AC5290322A500FAC80A /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		23933AC72903233A00FAC80A /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		23938A752A09CFE5006EB405 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		239422E5292FEFCB0024CEBD /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
 		2395FFF32902E1C1005A8D8F /* UploadItemTextfieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemTextfieldTableViewCell.swift; sourceTree = "<group>"; };
 		2395FFF52902E1D7005A8D8F /* UploadItemBottomSheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemBottomSheetTableViewCell.swift; sourceTree = "<group>"; };
@@ -1043,6 +1045,7 @@
 				23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */,
 				23A48E6E28E9137100FD77A7 /* TitleLeftViewController.swift */,
 				235129D828F679C900489CAD /* BottomSheetKeyboardViewController.swift */,
+				23938A752A09CFE5006EB405 /* WebViewController.swift */,
 			);
 			path = BaseViewControllers;
 			sourceTree = "<group>";
@@ -1873,6 +1876,7 @@
 				23DC04E928C591E600ABB0CF /* ViewController.swift in Sources */,
 				234F838B28C983CE00C4EB41 /* CartView.swift in Sources */,
 				235129D928F679C900489CAD /* BottomSheetKeyboardViewController.swift in Sources */,
+				23938A762A09CFE5006EB405 /* WebViewController.swift in Sources */,
 				2364B7A429D40F61006459EF /* ModifyPasswordViewController.swift in Sources */,
 				23E378E928D303B500C52F2D /* ShoppingLinkViewController.swift in Sources */,
 				233C34BC29C75AEF005DFA39 /* BaseRouter.swift in Sources */,

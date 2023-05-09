@@ -111,11 +111,15 @@ class RegisterPasswordView: UIView {
     }
     @objc func termButtonDidTap() {
         UIDevice.vibrate()
-        ScreenManager().linkTo(viewcontroller: preVC, "https://www.wishboard.xyz/terms.html")
+        
+        let link = "https://www.wishboard.xyz/terms.html"
+        self.moveToWebVC(link, "이용약관")
     }
     @objc func privacyButtonDidTap() {
         UIDevice.vibrate()
-        ScreenManager().linkTo(viewcontroller: preVC, "https://www.wishboard.xyz/privacy-policy.html")
+        
+        let link = "https://www.wishboard.xyz/privacy-policy.html"
+        self.moveToWebVC(link, "개인정보 처리방침")
     }
 }
 
@@ -135,5 +139,13 @@ extension RegisterPasswordView {
         }
         stack.addArrangedSubview(underlineButton)
         return underlineButton
+    }
+    // MARK: move to link
+    func moveToWebVC(_ link: String, _ title: String) {
+        let vc = WebViewController()
+        vc.webURL = link
+        vc.setUpTitle(title)
+        
+        self.preVC.navigationController?.pushViewController(vc, animated: true)
     }
 }
