@@ -95,7 +95,7 @@ enum Title {
     
     // MARK: Folder
     public static let folder = "폴더"
-    public static let folderSetting = "폴더 설정"
+    public static let folderSetting = "폴더 선택"
     public static let addFolder = "새 폴더 추가"
     
     // MARK: Notification
