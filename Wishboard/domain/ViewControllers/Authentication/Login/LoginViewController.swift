@@ -111,6 +111,7 @@ extension LoginViewController {
                     break
             case .failure(let error):
                 print(error.localizedDescription)
+                self.loginAPIFail()
 //                if let statusCode = error.responseCode {
 //                    switch statusCode {
 //                    case 400, 204:

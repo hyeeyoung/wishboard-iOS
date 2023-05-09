@@ -11,7 +11,7 @@ import SafariServices
 
 class ScreenManager {
     enum Family: String {
-        case itemDeleted, profileModified, itemUpload, itemModified
+        case itemDeleted, profileModified, passwordModified, itemUpload, itemModified
     }
     func goMain(_ viewcontroller: UIViewController) {
         // 첫화면으로 전환
@@ -33,16 +33,18 @@ class ScreenManager {
         viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
         
         switch family {
-        case .itemDeleted:
-            SnackBar(tabBarController, message: .deleteItem)
-        case .profileModified:
-            SnackBar(tabBarController, message: .modifyProfile)
-        case .itemUpload:
-            SnackBar(tabBarController, message: .addItem)
-        case .itemModified:
-            SnackBar(tabBarController, message: .modifyItem)
-        default:
-            viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
+            case .itemDeleted:
+                SnackBar(tabBarController, message: .deleteItem)
+            case .profileModified:
+                SnackBar(tabBarController, message: .modifyProfile)
+            case .passwordModified:
+                SnackBar(tabBarController, message: .modifyPassword)
+            case .itemUpload:
+                SnackBar(tabBarController, message: .addItem)
+            case .itemModified:
+                SnackBar(tabBarController, message: .modifyItem)
+            default:
+                viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
         }
     }
     // MARK: 링크 이동
