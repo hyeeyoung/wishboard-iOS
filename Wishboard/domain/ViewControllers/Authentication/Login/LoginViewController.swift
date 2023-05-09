@@ -110,7 +110,7 @@ extension LoginViewController {
                     
                     break
             case .failure(let error):
-                print(error.localizedDescription)
+                print("sign in failure", error.localizedDescription)
                 self.loginAPIFail()
 //                if let statusCode = error.responseCode {
 //                    switch statusCode {
@@ -125,8 +125,11 @@ extension LoginViewController {
 //                    }
 //                }
             default:
+                print("sign in default??")
+                self.loginAPIFail()
                 break
             }
+            print("sign in ??")
         }
     }
     
