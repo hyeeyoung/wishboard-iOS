@@ -29,7 +29,7 @@ class CartDataManager {
                     cartView.noCartItem()
                 case 401:
                     RefreshDataManager().refreshDataManager() {
-                        self.getCartListDataManager(cartView)
+                        !$0 ? ScreenManager().goToOnboarding(cartView.preVC) : self.getCartListDataManager(cartView)
                     }
                 default:
                     print(error.responseCode)
@@ -42,6 +42,7 @@ class CartDataManager {
         AF.request(Storage().BaseURL + "/cart/\(itemId)",
                            method: .put,
                            parameters: parameter,
+                           encoder: JSONParameterEncoder.default,
                            headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
@@ -51,7 +52,7 @@ class CartDataManager {
             case .failure(let error):
                 if error.responseCode == 401 {
                     RefreshDataManager().refreshDataManager() {
-                        self.modifyCountDataManager(itemId, parameter, cartView)
+                        !$0 ? ScreenManager().goToOnboarding(cartView.preVC) : self.modifyCountDataManager(itemId, parameter, cartView)
                     }
                 }
                 print(error.responseCode)
@@ -74,7 +75,7 @@ class CartDataManager {
             case .failure(let error):
                 if error.responseCode == 401 {
                     RefreshDataManager().refreshDataManager() {
-                        self.addCartDataManager(parameter, homeView, viewcontroller)
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.addCartDataManager(parameter, homeView, viewcontroller)
                     }
                 }
                 print(error.responseCode)
@@ -96,7 +97,7 @@ class CartDataManager {
             case .failure(let error):
                 if error.responseCode == 401 {
                     RefreshDataManager().refreshDataManager() {
-                        self.addCartDataManager(parameter, viewcontroller)
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.addCartDataManager(parameter, viewcontroller)
                     }
                 }
                 print(error.responseCode)
@@ -117,7 +118,7 @@ class CartDataManager {
             case .failure(let error):
                 if error.responseCode == 401 {
                     RefreshDataManager().refreshDataManager() {
-                        self.deleteCartDataManager(itemId, cartView)
+                        !$0 ? ScreenManager().goToOnboarding(cartView.preVC) : self.deleteCartDataManager(itemId, cartView)
                     }
                 }
                 print(error.responseCode)
@@ -138,7 +139,7 @@ class CartDataManager {
             case .failure(let error):
                 if error.responseCode == 401 {
                     RefreshDataManager().refreshDataManager() {
-                        self.deleteCartDataManager(itemId, homeView, viewcontroller)
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.deleteCartDataManager(itemId, homeView, viewcontroller)
                     }
                 }
                 print(error.responseCode)
@@ -159,7 +160,7 @@ class CartDataManager {
             case .failure(let error):
                 if error.responseCode == 401 {
                     RefreshDataManager().refreshDataManager() {
-                        self.deleteCartDataManager(itemId, viewcontroller)
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.deleteCartDataManager(itemId, viewcontroller)
                     }
                 }
                 print(error.responseCode)

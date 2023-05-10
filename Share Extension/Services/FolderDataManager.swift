@@ -51,6 +51,7 @@ class FolderDataManager {
         AF.request(BaseURL + "/folder",
                            method: .post,
                            parameters: parameter,
+                           encoder: JSONParameterEncoder.default,
                            headers: header)
             .validate()
             .responseDecodable(of: APIModel<ResultModel>.self) { response in

@@ -33,7 +33,7 @@ class ItemDataManager {
                     }
                 case 401:
                     RefreshDataManager().refreshDataManager() {
-                        self.getItemDetailDataManager(itemId, viewcontroller)
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.getItemDetailDataManager(itemId, viewcontroller)
                     }
                 default:
                     print(error.responseCode)
@@ -64,7 +64,7 @@ class ItemDataManager {
                     }
                 case 401:
                     RefreshDataManager().refreshDataManager() {
-                        self.deleteItemDataManager(itemId, viewcontroller)
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.deleteItemDataManager(itemId, viewcontroller)
                     }
                 default:
                     print(error.responseCode)
@@ -96,7 +96,7 @@ class ItemDataManager {
                     }
                 case 401:
                     RefreshDataManager().refreshDataManager() {
-                        self.getItemByLinkDataManager(url, viewcontroller)
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.getItemByLinkDataManager(url, viewcontroller)
                     }
                 default:
                     print(error.localizedDescription)
