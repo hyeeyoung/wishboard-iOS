@@ -33,7 +33,7 @@ class MypageDataManager {
                    }
                 case 401:
                     RefreshDataManager().refreshDataManager() {
-                        self.getUserInfoDataManager(viewcontroller)
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.getUserInfoDataManager(viewcontroller)
                     }
                 default:
                     print(error.responseCode)
@@ -58,7 +58,7 @@ class MypageDataManager {
                 switch statusCode {
                     case 401:
                     RefreshDataManager().refreshDataManager() {
-                        self.switchNotificationDataManager(isOn, viewcontroller)
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.switchNotificationDataManager(isOn, viewcontroller)
                     }
                     case 500:
                        DispatchQueue.main.async {
@@ -90,7 +90,7 @@ class MypageDataManager {
                        }
                     case 401:
                     RefreshDataManager().refreshDataManager() {
-                        self.switchNotificationDataManager(isOn, viewcontroller)
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.switchNotificationDataManager(isOn, viewcontroller)
                     }
                     default:
                        print(error.responseCode)
@@ -118,7 +118,7 @@ class MypageDataManager {
                        }
                     case 401:
                     RefreshDataManager().refreshDataManager() {
-                        self.deleteUserDataManager(viewcontroller)
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.deleteUserDataManager(viewcontroller)
                     }
                     default:
                        print(error.responseCode)
@@ -145,7 +145,7 @@ class MypageDataManager {
                        }
                     case 401:
                     RefreshDataManager().refreshDataManager() {
-                        self.logoutDataManager(viewcontroller)
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.logoutDataManager(viewcontroller)
                     }
                     default:
                        print(error.responseCode)

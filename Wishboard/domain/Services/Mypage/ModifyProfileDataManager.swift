@@ -33,7 +33,7 @@ class ModifyProfileDataManager {
                    }
                 case 401:
                     RefreshDataManager().refreshDataManager() {
-                        self.modifyProfileDataManager(parameter, viewcontroller)
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.modifyProfileDataManager(parameter, viewcontroller)
                     }
                 default:
                     print(error.responseCode)
@@ -78,7 +78,7 @@ class ModifyProfileDataManager {
                     print(error.responseCode)
                     if error.responseCode == 401 {
                         RefreshDataManager().refreshDataManager() {
-                            self.modifyProfileDataManager(nickname, photo, viewcontroller)
+                            !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.modifyProfileDataManager(nickname, photo, viewcontroller)
                         }
                     }
             }
@@ -110,7 +110,7 @@ class ModifyProfileDataManager {
                 case let .failure(error): // 요청 x
                     if error.responseCode == 401 {
                         RefreshDataManager().refreshDataManager() {
-                            self.modifyProfileDataManager(photo, viewcontroller)
+                            !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.modifyProfileDataManager(photo, viewcontroller)
                         }
                     }
                 print(error.responseCode)

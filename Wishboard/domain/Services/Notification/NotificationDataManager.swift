@@ -27,7 +27,7 @@ class NotificationDataManager {
 //                    notiView.getNotificationListAPIFail()
                 case 401:
                     RefreshDataManager().refreshDataManager() {
-                        self.getNotificationListDataManager(notiView)
+                        !$0 ? ScreenManager().goToOnboarding(notiView.preVC) : self.getNotificationListDataManager(notiView)
                     }
                 default:
                     print(error.responseCode)
@@ -51,7 +51,7 @@ class NotificationDataManager {
                 switch statusCode {
                 case 401:
                     RefreshDataManager().refreshDataManager() {
-                        self.readNotificationListDataManager(itemId, notiView)
+                        !$0 ? ScreenManager().goToOnboarding(notiView.preVC) : self.readNotificationListDataManager(itemId, notiView)
                     }
                 default:
                     print(error.responseCode)
@@ -82,7 +82,7 @@ class NotificationDataManager {
                     }
                 case 401:
                     RefreshDataManager().refreshDataManager() {
-                        self.getCalenderNotificationDataManager(viewcontroller)
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.getCalenderNotificationDataManager(viewcontroller)
                     }
                 default:
                     print(error.responseCode)

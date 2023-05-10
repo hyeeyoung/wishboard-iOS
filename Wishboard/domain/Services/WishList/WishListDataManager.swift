@@ -33,7 +33,7 @@ class WishListDataManager {
                     }
                 case 401:
                     RefreshDataManager().refreshDataManager() {
-                        self.wishListDataManager(homeView, viewcontroller)
+                        $0 ? self.wishListDataManager(homeView, viewcontroller) : ScreenManager().goToOnboarding(viewcontroller)
                     }
                     
                 default:
