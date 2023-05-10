@@ -16,6 +16,9 @@ class MyPageViewController: TitleLeftViewController {
     var nickName: String?
     var pushState: Bool?
     
+    var isProfileModified: Bool = false
+    var isPasswordModified: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         super.navigationTitle.text = Title.mypage
@@ -43,6 +46,8 @@ class MyPageViewController: TitleLeftViewController {
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         // DATA
         MypageDataManager().getUserInfoDataManager(self)
+        // Check if userdata modified
+        checkIfUserdataModified()
     }
 }
 // MARK: - Main TableView delegate
@@ -273,6 +278,19 @@ extension MyPageViewController: MFMailComposeViewControllerDelegate {
         vc.setUpTitle(title)
         
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    // Check if userdata modified
+    func checkIfUserdataModified() {
+        // 프로필이 변경되었을 때 스낵바 출력
+        if isProfileModified {
+            SnackBar(self, message: .modifyProfile)
+            isProfileModified.toggle()
+        }
+        // 비밀번호 변경되었을 때 스낵바 출력
+        if isPasswordModified {
+            SnackBar(self, message: .modifyPassword)
+            isPasswordModified.toggle()
+        }
     }
 }
 // MARK: - API Success

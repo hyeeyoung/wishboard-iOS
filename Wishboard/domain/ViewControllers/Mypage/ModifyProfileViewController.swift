@@ -65,13 +65,11 @@ class ModifyProfileViewController: TitleCenterViewController {
         self.nameTextField.delegate = self
     }
     override func viewDidDisappear(_ animated: Bool) {
-//        if modified {
-//            print("modify profile")
-//            preVC.tabBarController?.tabBar.isHidden = false
+        if modified {
+            preVC.isProfileModified = true
+            MypageDataManager().getUserInfoDataManager(preVC)
 //            SnackBar(preVC, message: .modifyProfile)
-//            MypageDataManager().getUserInfoDataManager(preVC)
-//        }
-        MypageDataManager().getUserInfoDataManager(preVC)
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
@@ -223,9 +221,9 @@ extension ModifyProfileViewController: UITextFieldDelegate {
 extension ModifyProfileViewController {
     func modifyProfileAPISuccess(_ result: APIModel<TokenResultModel>) {
         if result.success {
-//            self.modified = true
-//            self.navigationController?.popViewController(animated: true)
-            ScreenManager().goMainPages(2, self, family: .profileModified)
+            self.modified = true
+            self.navigationController?.popViewController(animated: true)
+//            ScreenManager().goMainPages(4, self, family: .profileModified)
             print(result.message)
         }
     }
