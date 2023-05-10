@@ -42,6 +42,7 @@ class CartDataManager {
         AF.request(Storage().BaseURL + "/cart/\(itemId)",
                            method: .put,
                            parameters: parameter,
+                           encoder: JSONParameterEncoder.default,
                            headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
