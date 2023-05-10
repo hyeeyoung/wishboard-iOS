@@ -66,10 +66,9 @@ class ModifyProfileViewController: TitleCenterViewController {
     }
     override func viewDidDisappear(_ animated: Bool) {
         if modified {
-            print("modify profile")
-            preVC.tabBarController?.tabBar.isHidden = false
-            SnackBar(preVC, message: .modifyProfile)
+            preVC.isProfileModified = true
             MypageDataManager().getUserInfoDataManager(preVC)
+//            SnackBar(preVC, message: .modifyProfile)
         }
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -224,8 +223,8 @@ extension ModifyProfileViewController {
         if result.success {
             self.modified = true
             self.navigationController?.popViewController(animated: true)
-        } else {}
-        
-        print(result.message)
+//            ScreenManager().goMainPages(4, self, family: .profileModified)
+            print(result.message)
+        }
     }
 }

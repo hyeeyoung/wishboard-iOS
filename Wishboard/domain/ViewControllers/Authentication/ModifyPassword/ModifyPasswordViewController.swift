@@ -38,9 +38,8 @@ class ModifyPasswordViewController: TitleCenterViewController {
     }
     override func viewDidDisappear(_ animated: Bool) {
         if modified {
-            print("modify password")
-            preVC.tabBarController?.tabBar.isHidden = false
-            SnackBar(preVC, message: .modifyPassword)
+            preVC.isPasswordModified = true
+            MypageDataManager().getUserInfoDataManager(preVC)
         }
     }
     // MARK: - Set Up
@@ -115,6 +114,7 @@ extension ModifyPasswordViewController {
                     self.modified = true
                     // 화면 이동
                     self.navigationController?.popViewController(animated: true)
+//                    ScreenManager().goMainPages(4, self, family: .passwordModified)
                 }
                     
                     break

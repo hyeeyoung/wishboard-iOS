@@ -70,6 +70,7 @@ extension SnackBar {
         case addFolder = "폴더를 추가했어요!😉"
         case modifyFolder = "폴더명을 수정했어요!📁"
         case deleteFolder = "폴더를 삭제했어요!🗑"
+        case deleteCartItem = "장바구니에서 아이템을 삭제했어요! 🗑"
         case addItem = "아이템을 위시리스트에 추가했어요!👜"
         case modifyItem = "아이템을 수정했어요!✍️️"
         case deleteItem = "아이템을 위시리스트에서 삭제했어요!🗑"

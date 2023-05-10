@@ -9,14 +9,12 @@ import Foundation
 import Alamofire
 
 class NotificationDataManager {
-    let header = APIManager().getHeader()
-    
     // MARK: - 알림 조회
     func getNotificationListDataManager(_ notiView: NotiView) {
         AF.request(Storage().BaseURL + "/noti",
                            method: .get,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: [NotificationModel].self) { response in
             switch response.result {
@@ -25,8 +23,8 @@ class NotificationDataManager {
             case .failure(let error):
                 let statusCode = error.responseCode
                 switch statusCode {
-                case 429:
-                    notiView.getNotificationListAPIFail()
+//                case 429:
+//                    notiView.getNotificationListAPIFail()
                 case 401:
                     RefreshDataManager().refreshDataManager() {
                         self.getNotificationListDataManager(notiView)
@@ -42,7 +40,7 @@ class NotificationDataManager {
         AF.request(Storage().BaseURL + "/noti/\(itemId)/read-state",
                            method: .put,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
@@ -67,7 +65,7 @@ class NotificationDataManager {
         AF.request(Storage().BaseURL + "/noti/calendar",
                            method: .get,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: [NotificationModel].self) { response in
             switch response.result {
@@ -76,8 +74,8 @@ class NotificationDataManager {
             case .failure(let error):
                 let statusCode = error.responseCode
                 switch statusCode {
-                case 429:
-                    viewcontroller.getCalenderNotificationAPIFail()
+//                case 429:
+//                    viewcontroller.getCalenderNotificationAPIFail()
                 case 500:
                     DispatchQueue.main.async {
                         ErrorBar(viewcontroller)

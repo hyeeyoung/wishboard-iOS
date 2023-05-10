@@ -33,8 +33,8 @@ class ShareDataManager {
                 switch statusCode {
                 case 404:
                     viewcontroller.getItemDataAPIFail()
-                case 429:
-                    viewcontroller.getFolderListAPIFail()
+//                case 429:
+//                    viewcontroller.getFolderListAPIFail()
                 default:
                     print(error.localizedDescription)
                     print(error.responseCode)

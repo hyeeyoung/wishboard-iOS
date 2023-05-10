@@ -9,14 +9,14 @@ import Foundation
 import Alamofire
 
 class FolderDataManager {
-    let header = APIManager().getHeader()
     
     // MARK: - 폴더 조회
     func getFolderDataManager(_ viewcontroller: FolderViewController) {
+        print("폴더 조회 호출")
         AF.request(Storage().BaseURL + "/folder",
                            method: .get,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: [FolderModel].self) { response in
             switch response.result {
@@ -25,8 +25,8 @@ class FolderDataManager {
             case .failure(let error):
                 let statusCode = error.responseCode
                 switch statusCode {
-                case 429:
-                    viewcontroller.getFolderAPIFail()
+//                case 429:
+//                    viewcontroller.getFolderAPIFail()
                 case 404:
                     viewcontroller.noFolder()
                 case 500:
@@ -36,6 +36,7 @@ class FolderDataManager {
                 case 401:
                     RefreshDataManager().refreshDataManager() {
                         self.getFolderDataManager(viewcontroller)
+                        return
                     }
                 default:
                     print(error.responseCode)
@@ -49,7 +50,7 @@ class FolderDataManager {
                            method: .post,
                            parameters: parameter,
                            encoder: JSONParameterEncoder.default,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<ResultModel>.self) { response in
             switch response.result {
@@ -81,7 +82,7 @@ class FolderDataManager {
                            method: .put,
                            parameters: parameter,
                            encoder: JSONParameterEncoder.default,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<ResultModel>.self) { response in
             switch response.result {
@@ -112,7 +113,7 @@ class FolderDataManager {
         AF.request(Storage().BaseURL + "/folder/\(folderId)",
                            method: .delete,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<ResultModel>.self) { response in
             switch response.result {
@@ -140,7 +141,7 @@ class FolderDataManager {
         AF.request(Storage().BaseURL + "/folder/list",
                            method: .get,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: [FolderListModel].self) { response in
             switch response.result {
@@ -149,8 +150,8 @@ class FolderDataManager {
             case .failure(let error):
                 let statusCode = error.responseCode
                 switch statusCode {
-                case 429:
-                    viewcontroller.getFolderListAPIFail()
+//                case 429:
+//                    viewcontroller.getFolderListAPIFail()
                 case 500:
                     DispatchQueue.main.async {
                         ErrorBar(viewcontroller)
@@ -170,7 +171,7 @@ class FolderDataManager {
         AF.request(Storage().BaseURL + "/folder/item/\(folderId)",
                            method: .get,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: [WishListModel].self) { response in
             switch response.result {
@@ -179,8 +180,8 @@ class FolderDataManager {
             case .failure(let error):
                 let statusCode = error.responseCode
                 switch statusCode {
-                case 429:
-                    viewcontroller.getFolderDetailAPIFail()
+//                case 429:
+//                    viewcontroller.getFolderDetailAPIFail()
                 case 404:
                     viewcontroller.noWishList()
                 case 500:
@@ -202,7 +203,7 @@ class FolderDataManager {
         AF.request(Storage().BaseURL + "/item/\(itemId)/folder/\(folderId)",
                            method: .put,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<ResultModel>.self) { response in
             switch response.result {

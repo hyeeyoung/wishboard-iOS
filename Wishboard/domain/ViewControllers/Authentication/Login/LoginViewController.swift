@@ -106,24 +106,16 @@ extension LoginViewController {
                     
                     // go Main
                     ScreenManager().goMain(self)
+                } else {
+                    self.loginAPIFail()
                 }
-                    
-                    break
+                break
+                
             case .failure(let error):
                 print(error.localizedDescription)
-//                if let statusCode = error.responseCode {
-//                    switch statusCode {
-//                    case 400, 204:
-//                        self.loginAPIFail()
-//                    case 500:
-//                       DispatchQueue.main.async {
-//                           ErrorBar(self)
-//                       }
-//                    default:
-//                        print(statusCode)
-//                    }
-//                }
+                self.loginAPIFail()
             default:
+                self.loginAPIFail()
                 break
             }
         }
