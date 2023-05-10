@@ -16,7 +16,7 @@ class MypageDataManager {
         AF.request(Storage().BaseURL + "/user",
                            method: .get,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: [GetUserInfoModel].self) { response in
             switch response.result {
@@ -25,8 +25,8 @@ class MypageDataManager {
             case .failure(let error):
                 let statusCode = error.responseCode
                 switch statusCode {
-                case 429:
-                    viewcontroller.getUserInfoAPIFail()
+//                case 429:
+//                    viewcontroller.getUserInfoAPIFail()
                 case 500:
                    DispatchQueue.main.async {
                        ErrorBar(viewcontroller)
@@ -47,7 +47,7 @@ class MypageDataManager {
         AF.request(Storage().BaseURL + "/user/push-state/\(isOn)",
                            method: .put,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
@@ -75,7 +75,7 @@ class MypageDataManager {
         AF.request(Storage().BaseURL + "/user/push-state/\(isOn)",
                            method: .put,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
@@ -103,7 +103,7 @@ class MypageDataManager {
         AF.request(Storage().BaseURL + "/user",
                            method: .delete,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
@@ -130,7 +130,7 @@ class MypageDataManager {
     func logoutDataManager(_ viewcontroller: MyPageViewController) {
         AF.request(Storage().BaseURL + "/auth/logout",
                            method: .post,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<ResultModel>.self) { response in
             switch response.result {

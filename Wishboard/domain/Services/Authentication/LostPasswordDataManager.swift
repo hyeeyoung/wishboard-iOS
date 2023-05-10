@@ -17,7 +17,7 @@ class LostPasswordDataManager {
                    method: .post,
                    parameters: parameter,
                    encoder: JSONParameterEncoder.default,
-                   headers: header)
+                   headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<LostPasswordModel>.self) { response in
             switch response.result {
@@ -45,7 +45,7 @@ class LostPasswordDataManager {
                    method: .post,
                    parameters: parameter,
                    encoder: JSONParameterEncoder.default,
-                   headers: header)
+                   headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<VerifyCodeModel>.self) { response in
             switch response.result {

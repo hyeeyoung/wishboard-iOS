@@ -9,14 +9,12 @@ import Foundation
 import Alamofire
 
 class CartDataManager {
-    let header = APIManager().getHeader()
-    
     // MARK: - 장바구니 조회
     func getCartListDataManager(_ cartView: CartView) {
         AF.request(Storage().BaseURL + "/cart",
                            method: .get,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: [CartListModel].self) { response in
             switch response.result {
@@ -25,8 +23,8 @@ class CartDataManager {
             case .failure(let error):
                 let statusCode = error.responseCode
                 switch statusCode {
-                case 429:
-                    cartView.getCartListAPIFail()
+//                case 429:
+//                    cartView.getCartListAPIFail()
                 case 404:
                     cartView.noCartItem()
                 case 401:
@@ -44,7 +42,7 @@ class CartDataManager {
         AF.request(Storage().BaseURL + "/cart/\(itemId)",
                            method: .put,
                            parameters: parameter,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
@@ -67,7 +65,7 @@ class CartDataManager {
                            method: .post,
                            parameters: parameter,
                            encoder: JSONParameterEncoder.default,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
@@ -89,7 +87,7 @@ class CartDataManager {
                            method: .post,
                            parameters: parameter,
                            encoder: JSONParameterEncoder.default,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
@@ -110,7 +108,7 @@ class CartDataManager {
         AF.request(Storage().BaseURL + "/cart/\(itemId)",
                            method: .delete,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
@@ -131,7 +129,7 @@ class CartDataManager {
         AF.request(Storage().BaseURL + "/cart/\(itemId)",
                            method: .delete,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
@@ -152,7 +150,7 @@ class CartDataManager {
         AF.request(Storage().BaseURL + "/cart/\(itemId)",
                            method: .delete,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {

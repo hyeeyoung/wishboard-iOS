@@ -23,18 +23,19 @@ class FolderViewController: TitleLeftViewController {
         super.navigationTitle.text = Title.folder
 
         setFolderView()
-        FolderDataManager().getFolderDataManager(self)
+//        FolderDataManager().getFolderDataManager(self)
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         self.navigationController?.isNavigationBarHidden = true
+        // DATA
         FolderDataManager().getFolderDataManager(self)
     }
-    override func viewWillAppear(_ animated: Bool) {
-        FolderDataManager().getFolderDataManager(self)
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        FolderDataManager().getFolderDataManager(self)
+//    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }

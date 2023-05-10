@@ -18,7 +18,7 @@ class ModifyProfileDataManager {
                            method: .put,
                            parameters: parameter,
                            encoder: JSONParameterEncoder.default,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {

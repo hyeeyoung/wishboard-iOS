@@ -27,7 +27,7 @@ class NotificationViewController: TitleLeftViewController {
             make.bottom.equalToSuperview().offset(-tabBarHeight)
         }
         // DATA
-        NotificationDataManager().getNotificationListDataManager(self.notiView)
+//        NotificationDataManager().getNotificationListDataManager(self.notiView)
         refreshControl.endRefreshing()
         // Refresh
         initRefresh()

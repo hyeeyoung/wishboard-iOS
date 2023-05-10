@@ -35,7 +35,7 @@ class MyPageViewController: TitleLeftViewController {
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
         // DATA
-        MypageDataManager().getUserInfoDataManager(self)
+//        MypageDataManager().getUserInfoDataManager(self)
         
         self.tabBarController?.tabBar.isHidden = false
     }
