@@ -18,7 +18,9 @@ class ModifyPasswordView: UIView {
         $0.font = UIFont.Suit(size: 14, family: .Medium)
     }
     // 새 비밀번호 TextField
-    let newPasswordTextField = DefaultTextField(Placeholder.email)
+    let newPasswordTextField = DefaultTextField(Placeholder.email).then{
+        $0.isSecureTextEntry = true
+    }
     let newPasswordErrorMessageLabel = UILabel().then{
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.textColor = UIColor.wishboardRed
