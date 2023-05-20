@@ -171,6 +171,8 @@ extension MyPageViewController {
             else {$0.isOn = false}
             $0.onTintColor = .wishboardGreen
             $0.transform = CGAffineTransform(scaleX: 0.8, y: 0.75)
+            $0.backgroundColor = UIColor.dialogMessageColor
+            $0.layer.cornerRadius = 16.5
         }
         cell.addSubview(notiSwitch)
         notiSwitch.snp.makeConstraints { make in
