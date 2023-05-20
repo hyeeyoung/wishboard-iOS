@@ -9,18 +9,18 @@ import Foundation
 
 enum Placeholder {
     // MARK: Authentication
-    public static let email = "이메일을 입력해주세요."
-    public static let password = "비밀번호를 입력해주세요."
-    public static let authcode = "인증코드를 입력해주세요."
-    public static let nickname = "닉네임을 입력해주세요."
+    public static let email = "이메일을 입력해 주세요."
+    public static let password = "비밀번호를 입력해 주세요."
+    public static let authcode = "인증코드를 입력해 주세요."
+    public static let nickname = "닉네임을 입력해 주세요."
     
     // MARK: Item
-    public static let shoppingLink = "쇼핑몰 링크를 입력해주세요."
-    public static let folder = "폴더명을 입력해주세요."
+    public static let shoppingLink = "쇼핑몰 링크를 입력해 주세요."
+    public static let folder = "폴더명을 입력해 주세요."
     
     // MARK: Upload Item
-    public static let shareItemName = "상품명을 입력해주세요."
-    public static let shareItemPrice = "가격을 입력해주세요."
+    public static let shareItemName = "상품명을 입력해 주세요."
+    public static let shareItemPrice = "가격을 입력해 주세요."
     
     public static let uploadItemName = "상품명"
     public static let uploadItemPrice = "₩ 가격(필수)"
@@ -29,8 +29,8 @@ enum Placeholder {
 
 enum ErrorMessage {
     // MARK: Authentication
-    public static let email = "이메일 주소를 정확하게 입력해주세요."
-    public static let password = "8자리 이상의 영문자, 숫자, 특수 문자 조합으로 입력해주세요."
+    public static let email = "이메일 주소를 정확하게 입력해 주세요."
+    public static let password = "8자리 이상의 영문자, 숫자, 특수 문자 조합으로 입력해 주세요."
     public static let passwordRewrite = "비밀번호가 일치하지 않아요!"
     public static let authcode = "인증코드를 다시 확인해 주세요."
     public static let nonExistAccount = "앗, 가입되지 않은 계정이에요! 가입하기부터 진행해 주세요."
@@ -44,12 +44,12 @@ enum ErrorMessage {
 
 enum Message {
     // MARK: Authentication
-    public static let email = "이메일 인증으로 비밀번호를 찾을 수 있어요.\n실제 사용될 이메일로 입력해주세요!"
+    public static let email = "이메일 인증으로 비밀번호를 찾을 수 있어요.\n실제 사용될 이메일로 입력해 주세요!"
     public static let password = "마지막 비밀번호 입력 단계예요!\n입력된 비밀번호로 바로 가입되니 신중히 입력해 주세요."
     public static let deleteUser = "정말 탈퇴하시겠습니까?\n탈퇴 시 앱 내 모든 데이터가 사라집니다.\n서비스를 탈퇴하시려면 이메일을 입력해 주세요."
     public static let toLogin = "이미 계정이 있으신가요?"
-    public static let sendedEmail = "인증코드가 전송되었어요!\n이메일을 확인해주세요."
-    public static let lostPassword = "가입하신 이메일을 입력해주세요!\n로그인을 위해 인증코드가 포함된 이메일을 보내드려요."
+    public static let sendedEmail = "인증코드가 전송되었어요!\n이메일을 확인해 주세요."
+    public static let lostPassword = "가입하신 이메일을 입력해 주세요!\n로그인을 위해 인증코드가 포함된 이메일을 보내드려요."
     
     // MARK: Label
     public static let login = "로그인"
