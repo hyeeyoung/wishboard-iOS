@@ -42,7 +42,8 @@ class FormatManager {
             return "\(dateNum / 31536000)년 전"
         }
     }
-    // 서버에서 받은 notification_date를 "YY년 MM월 dd일 HH:mm"로 변환
+    // MARK: 아이템 일반 등록 뷰
+    // 상품 알림 설정 후 출력되는 날짜 Text
     func notiDateToKoreanStr(_ date: String) -> String? {
         let dateToDate = date.toNotiDate() //YYYY-MM-dd HH:mm
         let dateformatter = DateFormatter()
@@ -50,6 +51,45 @@ class FormatManager {
         if let dateToDate = dateToDate {
             return dateformatter.string(from: dateToDate)
         } else {return nil}
+    }
+    // MARK: 아이템 상세 뷰
+    // 서버에서 받은 notification_date를 변환
+    // YYYY-MM-dd HH:mm -> YY년 MM월 dd일 HH:mm
+    func showNotificationDateInItemDetail(_ date: String) -> String? {
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd HH:mm"
+        format.locale = Locale(identifier: "ko_KR")
+
+        guard let startTime = format.date(from: date) else {return "?"}
+        guard let endTime = format.date(from: Date().toString()) else {return "?"}
+
+        var diffTime = Int(startTime.timeIntervalSince(endTime))
+        
+        return dDayFormat(diffTime, startTime)
+    }
+    // 상품 일정 디데이 포맷
+    func dDayFormat(_ diffTime: Int, _ date: Date) -> String? {
+        /*
+         - 디데이 당일 오늘 15시 30분
+         - 디데이 경과 전 D-6
+         - 디데이 경과 후 21년 1월 1일
+         */
+        print("시간 차이:", diffTime)
+        switch diffTime {
+        case 0...86400:
+            let dateformatter = DateFormatter()
+            dateformatter.dateFormat = "HH시 mm분"
+            let todayTime = dateformatter.string(from: date)
+            
+            return "오늘 \(todayTime)"
+        case 86400...:
+            return "D-\(diffTime / 86400)"
+        default:
+            let dateformatter = DateFormatter()
+            dateformatter.dateFormat = "YY년 MM월 dd일"
+            let todayTime = dateformatter.string(from: date)
+            return "\(todayTime)"
+        }
     }
     // "YY년 MM월 dd일 HH:mm"을 "YYYY-MM-dd HH:mm:ss"로 변환
     // 2022-9-20 1:30

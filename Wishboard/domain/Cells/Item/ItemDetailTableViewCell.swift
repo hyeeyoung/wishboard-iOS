@@ -159,7 +159,8 @@ class ItemDetailTableViewCell: UITableViewCell {
             if let notificationDate = data.item_notification_date {
                 self.restockLabel.isHidden = false
                 self.restockDateLabel.isHidden = false
-                let notiDateStr = FormatManager().notiDateToKoreanStr(notificationDate)
+                let notiDateStr = FormatManager().showNotificationDateInItemDetail(notificationDate)
+//                let notiDateStr = FormatManager().notiDateToKoreanStr(notificationDate)
                 self.restockLabel.text = notificationType
                 self.restockDateLabel.text = notiDateStr
             }
