@@ -24,7 +24,7 @@ extension UIButton {
                                       value: NSUnderlineStyle.single.rawValue,
                                       range: NSRange(location: 0, length: title.count)
         )
-        attributedString.addAttribute(.font, value: UIFont.Suit(size: 12, family: .Bold), range: NSRange(location: 0, length: title.count))
+        attributedString.addAttribute(.font, value: UIFont.Suit(size: 12, family: .Medium), range: NSRange(location: 0, length: title.count))
         attributedString.addAttribute(.foregroundColor, value: color, range: NSRange(location: 0, length: title.count))
         setAttributedTitle(attributedString, for: .normal)
     }
