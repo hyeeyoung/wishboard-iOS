@@ -69,7 +69,7 @@ class BaseViewController: UIViewController {
         navigationView.snp.makeConstraints{ make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(50)
+            make.height.equalTo(40)
         }
         NetworkCheck.shared.startMonitoring(vc: self)
     }
