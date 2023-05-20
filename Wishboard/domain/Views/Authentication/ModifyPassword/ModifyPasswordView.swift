@@ -52,6 +52,7 @@ class ModifyPasswordView: UIView {
     let completeButtonKeyboard = DefaultButton(titleStr: Button.complete).then{
         $0.isActivate = false
     }
+    var intervalConstraint: Constraint? = nil
     
     // MARK: - Functions
     override init(frame: CGRect) {
@@ -82,7 +83,7 @@ class ModifyPasswordView: UIView {
     func setUpConstraint() {
         self.newPasswordLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
-            make.top.equalToSuperview().offset(44)
+            make.top.equalToSuperview().offset(32)
         }
         self.newPasswordTextField.snp.makeConstraints { make in
             make.height.equalTo(42)
@@ -95,7 +96,8 @@ class ModifyPasswordView: UIView {
             make.top.equalTo(newPasswordTextField.snp.bottom).offset(6)
         }
         self.passwordRewriteLabel.snp.makeConstraints { make in
-            make.top.equalTo(newPasswordErrorMessageLabel.snp.bottom).offset(32)
+            self.intervalConstraint = make.top.equalTo(newPasswordTextField.snp.bottom).offset(32).constraint
+//            make.top.equalTo(newPasswordTextField.snp.bottom).offset(32)
             make.leading.equalTo(newPasswordTextField)
         }
         self.passwordRewriteTextField.snp.makeConstraints { make in

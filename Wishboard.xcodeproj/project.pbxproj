@@ -81,7 +81,6 @@
 		2364B79F29D40426006459EF /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2364B79D29D40426006459EF /* Montserrat-SemiBold.ttf */; };
 		2364B7A429D40F61006459EF /* ModifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364B7A329D40F61006459EF /* ModifyPasswordViewController.swift */; };
 		2364B7A829D40F8F006459EF /* ModifyPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364B7A729D40F8F006459EF /* ModifyPasswordView.swift */; };
-		2364B7A929D40F8F006459EF /* ModifyPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364B7A729D40F8F006459EF /* ModifyPasswordView.swift */; };
 		2364B7AA29D41E1F006459EF /* TitleCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */; };
 		236AC9F0291A6AB700E1474C /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236AC9EF291A6AB700E1474C /* Storage.swift */; };
 		236FE90428DF7BE0006142DB /* SUIT-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 236FE90128DF7BE0006142DB /* SUIT-Bold.ttf */; };
@@ -1805,7 +1804,6 @@
 				23A48E7128E92E7D00FD77A7 /* NetworkCheck.swift in Sources */,
 				236FE92228DF8592006142DB /* UITextField.swift in Sources */,
 				236FE93F28DF85B0006142DB /* PopUpWithTextFieldViewController.swift in Sources */,
-				2364B7A929D40F8F006459EF /* ModifyPasswordView.swift in Sources */,
 				236FE91D28DF8592006142DB /* PaddingLabel.swift in Sources */,
 				23E0ACC828E7B563008C35C2 /* KeyboardViewController.swift in Sources */,
 				235129DA28F67BAE00489CAD /* BottomSheetKeyboardViewController.swift in Sources */,
