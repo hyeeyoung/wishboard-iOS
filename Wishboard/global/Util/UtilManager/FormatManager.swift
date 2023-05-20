@@ -74,7 +74,6 @@ class FormatManager {
          - 디데이 경과 전 D-6
          - 디데이 경과 후 21년 1월 1일
          */
-        print("시간 차이:", diffTime)
         switch diffTime {
         case 0...86400:
             let dateformatter = DateFormatter()

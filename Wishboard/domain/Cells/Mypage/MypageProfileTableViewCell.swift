@@ -55,13 +55,14 @@ class MypageProfileTableViewCell: UITableViewCell {
     }
     func setUpConstraint() {
         profileImage.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-48)
+            make.top.equalToSuperview().offset(34)
             make.width.height.equalTo(60)
             make.leading.equalToSuperview().offset(16)
         }
         userNameLabel.snp.makeConstraints { make in
             make.leading.equalTo(profileImage.snp.trailing).offset(16)
-            make.top.equalToSuperview().offset(59)
+            make.top.equalToSuperview().offset(45)
         }
         emailLabel.snp.makeConstraints { make in
             make.top.equalTo(userNameLabel.snp.bottom).offset(8)
@@ -70,7 +71,7 @@ class MypageProfileTableViewCell: UITableViewCell {
         modifyButton.snp.makeConstraints { make in
             make.width.equalTo(45)
             make.height.equalTo(24)
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(52)
             make.trailing.equalToSuperview().offset(-16)
         }
     }

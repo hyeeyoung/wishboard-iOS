@@ -88,7 +88,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         let tag = indexPath.row
         switch tag {
         case 0:
-            return 156
+            return 142
         case 1, 4, 11:
             return 6
         default:
