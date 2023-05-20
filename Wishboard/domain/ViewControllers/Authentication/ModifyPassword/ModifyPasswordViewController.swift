@@ -76,7 +76,9 @@ class ModifyPasswordViewController: TitleCenterViewController {
         let pwRegEx = RegularExpression.password
         let pwTest = NSPredicate(format:"SELF MATCHES %@", pwRegEx)
         
-        modifyPasswordView.newPasswordErrorMessageLabel.isHidden = pw == "" || pwTest.evaluate(with: pw) ? true : false
+        var errorMessageHidden = pw == "" || pwTest.evaluate(with: pw)
+        modifyPasswordView.newPasswordErrorMessageLabel.isHidden = errorMessageHidden
+        errorMessageHidden ? modifyPasswordView.intervalConstraint?.update(offset: 32) : modifyPasswordView.intervalConstraint?.update(offset: 50)
         
         return pwTest.evaluate(with: pw) ? true : false
     }

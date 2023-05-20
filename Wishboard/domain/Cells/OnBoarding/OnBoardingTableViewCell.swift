@@ -47,7 +47,7 @@ class OnBoardingTableViewCell: UITableViewCell {
     }
     // 로그인
     let loginButton = UIButton().then{
-        $0.setUnderline(Message.login, .wishboardGreen)
+        $0.setUnderline(Message.login, .dialogGreenTxt)
     }
     
     override func awakeFromNib() {

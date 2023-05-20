@@ -78,7 +78,7 @@ class LoginView: UIView {
     func setUpConstraint() {
         self.emailLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
-            make.top.equalToSuperview().offset(44)
+            make.top.equalToSuperview().offset(32)
         }
         self.emailTextField.snp.makeConstraints { make in
             make.height.equalTo(42)

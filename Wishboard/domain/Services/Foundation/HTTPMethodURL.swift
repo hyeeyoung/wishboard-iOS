@@ -25,6 +25,7 @@ enum HTTPMethodURL {
     struct PUT {
         static let modifyITem = HTTPMethodURL.itemURL
         static let modifyPassword = HTTPMethodURL.userURL + "/re-passwd"
+        static let modifyProfile = HTTPMethodURL.userURL
     }
     
     struct DELETE {

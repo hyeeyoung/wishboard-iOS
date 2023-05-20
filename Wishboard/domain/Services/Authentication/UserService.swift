@@ -26,5 +26,10 @@ extension UserService{
             completion(response)
         }
     }
+    func modifyProfile(model: MoyaProfileInput, completion: @escaping (Result<APIModel<TokenResultModel>, Error>) -> Void) {
+        provider.requestDecoded(UserRouter.modifyProfile(param: model)) { response in
+            completion(response)
+        }
+    }
 }
 

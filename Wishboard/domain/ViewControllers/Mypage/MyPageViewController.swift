@@ -65,6 +65,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "MypageProfileTableViewCell", for: indexPath) as? MypageProfileTableViewCell else { return UITableViewCell() }
             if let cellData = self.userInfoData {cell.setUpData(cellData)}
             cell.modifyButton.addTarget(self, action: #selector(moveToModifyProfile), for: .touchUpInside)
+            cell.selectionStyle = .none
             return cell
         case 1, 4, 11:
             cell.backgroundColor = .wishboardTextfieldGray
@@ -88,7 +89,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         let tag = indexPath.row
         switch tag {
         case 0:
-            return 156
+            return 142
         case 1, 4, 11:
             return 6
         default:
@@ -171,6 +172,8 @@ extension MyPageViewController {
             else {$0.isOn = false}
             $0.onTintColor = .wishboardGreen
             $0.transform = CGAffineTransform(scaleX: 0.8, y: 0.75)
+            $0.backgroundColor = UIColor.dialogMessageColor
+            $0.layer.cornerRadius = 16.5
         }
         cell.addSubview(notiSwitch)
         notiSwitch.snp.makeConstraints { make in
