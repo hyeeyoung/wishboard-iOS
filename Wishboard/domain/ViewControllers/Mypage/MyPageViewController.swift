@@ -65,6 +65,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "MypageProfileTableViewCell", for: indexPath) as? MypageProfileTableViewCell else { return UITableViewCell() }
             if let cellData = self.userInfoData {cell.setUpData(cellData)}
             cell.modifyButton.addTarget(self, action: #selector(moveToModifyProfile), for: .touchUpInside)
+            cell.selectionStyle = .none
             return cell
         case 1, 4, 11:
             cell.backgroundColor = .wishboardTextfieldGray
