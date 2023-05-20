@@ -111,4 +111,12 @@ extension UIColor{
         blue: 71/255,
         alpha: 1
     )
+    
+    // 웹뷰 상단바 구분선
+    static let webViewOperatorColor = UIColor(
+        red: 227/255,
+        green: 227/255,
+        blue: 227/255,
+        alpha: 1
+    )
 }

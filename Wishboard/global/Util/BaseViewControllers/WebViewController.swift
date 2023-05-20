@@ -18,6 +18,9 @@ class WebViewController: UIViewController, WKUIDelegate {
     let navigationBar = UIView().then{
         $0.backgroundColor = .white
     }
+    let operatorLine = UIView().then{
+        $0.backgroundColor = UIColor.webViewOperatorColor
+    }
     let titleLabel = UILabel().then{
         $0.font = UIFont.Suit(size: 14, family: .Bold)
         $0.setTextWithLineHeight()
@@ -63,6 +66,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     // MARK: - Functions
     func setUpView() {
         self.backView.addSubview(navigationBar)
+        self.backView.addSubview(operatorLine)
         self.backView.addSubview(webView)
         
         navigationBar.addSubview(titleLabel)
@@ -72,6 +76,11 @@ class WebViewController: UIViewController, WKUIDelegate {
             make.height.equalTo(51)
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide)
+        }
+        operatorLine.snp.makeConstraints { make in
+            make.height.equalTo(0.5)
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(navigationBar.snp.bottom)
         }
         titleLabel.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
@@ -84,7 +93,7 @@ class WebViewController: UIViewController, WKUIDelegate {
         }
         webView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(self.navigationBar.snp.bottom)
+            make.top.equalTo(operatorLine.snp.bottom)
         }
     }
     
