@@ -20,6 +20,7 @@ target 'Wishboard' do
 
 	pod 'Firebase/Analytics'
 	pod 'Firebase/Messaging'
+	pod 'Firebase/Crashlytics'
 
 	pod 'Moya'
 	pod 'Moya/RxSwift'
