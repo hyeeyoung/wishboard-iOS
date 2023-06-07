@@ -29,7 +29,7 @@ class FolderCollectionViewCell: UICollectionViewCell {
         $0.textAlignment = .center
     }
     let selectedView = UIView().then{
-        $0.backgroundColor = .folderSelectedBackground
+        $0.backgroundColor = .black_7
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
     }
@@ -86,7 +86,7 @@ class FolderCollectionViewCell: UICollectionViewCell {
     
     func setUpData(_ data: FolderListModel) {
         if let image = data.folder_thumbnail {
-            let tintProcessor = TintImageProcessor(tint: .black_5)
+            let tintProcessor = TintImageProcessor(tint: .black_3)
             // Cropping
             let cropProcessor = CenterCropImageProcessor()
             let scale = UIScreen.main.scale

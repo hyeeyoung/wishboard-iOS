@@ -12,7 +12,7 @@ class CalenderNotiTableViewCell: UITableViewCell {
     // MARK: - Views
     // 뒷배경 뷰 추가
     let grayView = UIView().then{
-        $0.backgroundColor = .notificationBackgroundGray
+        $0.backgroundColor = .gray_50
         $0.layer.cornerRadius = 24
     }
     let itemImage = UIImageView().then{
