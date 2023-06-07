@@ -8,30 +8,10 @@
 import UIKit
 
 extension UIColor{
-    static let notificationBackgroundGray = UIColor(
-        red: 239/255,
-        green: 239/255,
-        blue: 239/255,
-        alpha: 1
-    )
     static let howToBackground = UIColor(
         red: 237/255,
         green: 237/255,
         blue: 237/255,
-        alpha: 1
-    )
-    static let unselectedTabColor = UIColor(
-        red: 193/255,
-        green: 193/255,
-        blue: 193/255,
-        alpha: 1
-    )
-    
-    // 웹뷰 상단바 구분선
-    static let webViewOperatorColor = UIColor(
-        red: 227/255,
-        green: 227/255,
-        blue: 227/255,
         alpha: 1
     )
 }
