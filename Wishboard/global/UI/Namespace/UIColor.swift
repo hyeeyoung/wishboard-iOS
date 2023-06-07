@@ -7,20 +7,9 @@
 
 import UIKit
 
-extension UIColor{
-    static let howToBackground = UIColor(
-        red: 237/255,
-        green: 237/255,
-        blue: 237/255,
-        alpha: 1
-    )
-}
-
-
 /*
- 디자인 변경 이후
+ 디자인 ver.2
  */
-
 
 extension UIColor{
     // MARK: Gray
@@ -45,4 +34,7 @@ extension UIColor{
     static let black_4 = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.4)
     static let black_5 = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.05)
     static let black_7 = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.7)
+    
+    // 앱 이용방법 > 목업 이미지 배경
+    static let EDEDED = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 1)
 }
