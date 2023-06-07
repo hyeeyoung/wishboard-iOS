@@ -59,8 +59,8 @@ class CalenderTableViewCell: UITableViewCell {
             $0.appearance.todaySelectionColor = .green_500
             $0.appearance.titleSelectionColor = .gray_700
             
-            $0.appearance.eventDefaultColor = .wishboardLightGreen
-            $0.appearance.eventSelectionColor = .wishboardLightGreen
+            $0.appearance.eventDefaultColor = .green_200
+            $0.appearance.eventSelectionColor = .green_500
         }
         contentView.addSubview(calender)
         contentView.addSubview(backButton)
