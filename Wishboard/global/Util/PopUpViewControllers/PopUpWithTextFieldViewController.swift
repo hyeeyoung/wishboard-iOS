@@ -67,7 +67,7 @@ class PopUpWithTextFieldViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .popupBackground
+        self.view.backgroundColor = .black_4
         
         setUpContent()
         setUpView()

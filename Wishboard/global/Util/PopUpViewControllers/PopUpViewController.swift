@@ -59,7 +59,7 @@ class PopUpViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .popupBackground
+        self.view.backgroundColor = .black_4
 
         cancelBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }

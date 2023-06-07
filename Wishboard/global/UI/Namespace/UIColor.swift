@@ -8,12 +8,6 @@
 import UIKit
 
 extension UIColor{
-    static let popupBackground = UIColor(
-        red: 0/255,
-        green: 0/255,
-        blue: 0/255,
-        alpha: 0.4
-    )
     static let notificationBackgroundGray = UIColor(
         red: 239/255,
         green: 239/255,
@@ -68,6 +62,7 @@ extension UIColor{
     
     // MARK: 투명도
     static let black_3 = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.3)
+    static let black_4 = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.4)
     static let black_5 = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.05)
     static let black_7 = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.7)
 }
