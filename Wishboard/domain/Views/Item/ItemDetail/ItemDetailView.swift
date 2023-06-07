@@ -69,7 +69,7 @@ class ItemDetailView: UIView {
         lowerView = UIView()
         lowerView.then{
             if isLinkExist {$0.backgroundColor = .gray_700}
-            else {$0.backgroundColor = .wishboardDisabledGray}
+            else {$0.backgroundColor = .gray_100}
         }
         lowerButton = UIButton().then{
             var config = UIButton.Configuration.plain()
@@ -84,7 +84,7 @@ class ItemDetailView: UIView {
             } else {
                 attText.foregroundColor = .gray_300
                 config.attributedTitle = attText
-                config.background.backgroundColor = .wishboardDisabledGray
+                config.background.backgroundColor = .gray_100
                 $0.isEnabled = false
             }
             

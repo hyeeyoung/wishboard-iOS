@@ -19,10 +19,10 @@ class CalenderTableViewCell: UITableViewCell {
         $0.configuration = config
     }
     let weekSeperator = UIView().then{
-        $0.backgroundColor = .wishboardDisabledGray
+        $0.backgroundColor = .gray_100
     }
     let underSeperator = UIView().then{
-        $0.backgroundColor = .wishboardDisabledGray
+        $0.backgroundColor = .gray_100
     }
     
     //MARK: - Life Cycles

@@ -41,7 +41,7 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.spacing = 16
     }
     let seperatorLine1 = UIView().then{
-        $0.backgroundColor = .wishboardDisabledGray
+        $0.backgroundColor = .gray_100
     }
     let linkLabel = UILabel().then{
         $0.textColor = .gray_200
@@ -49,7 +49,7 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.setTextWithLineHeight()
     }
     let seperatorLine2 = UIView().then{
-        $0.backgroundColor = .wishboardDisabledGray
+        $0.backgroundColor = .gray_100
     }
     let memoTitlelabel = UILabel().then{
         $0.font = UIFont.Suit(size: 12, family: .Bold)

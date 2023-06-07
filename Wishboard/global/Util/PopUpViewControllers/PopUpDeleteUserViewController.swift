@@ -43,10 +43,10 @@ class PopUpDeleteUserViewController: UIViewController {
         $0.textAlignment = .center
     }
     let horizontalSeperator = UIView().then{
-        $0.backgroundColor = .wishboardDisabledGray
+        $0.backgroundColor = .gray_100
     }
     let verticalSeperator = UIView().then{
-        $0.backgroundColor = .wishboardDisabledGray
+        $0.backgroundColor = .gray_100
     }
     var cancelBtn: UIButton!
     var okBtn: UIButton!

@@ -30,7 +30,7 @@ class DefaultButton: UIButton {
         self.setTitle(titleStr, for: .normal)
         self.setTitleColor(UIColor.gray_300, for: .normal)
         self.titleLabel?.font = UIFont.Suit(size: 14, family: .Bold)
-        self.backgroundColor = UIColor.wishboardDisabledGray
+        self.backgroundColor = UIColor.gray_100
         
         self.clipsToBounds = true
         self.layer.cornerRadius = 22
@@ -65,7 +65,7 @@ class DefaultButton: UIButton {
         self.isEnabled = true
     }
     func inactivateButton() {
-        self.backgroundColor = UIColor.wishboardDisabledGray
+        self.backgroundColor = UIColor.gray_100
         self.setTitleColor(UIColor.gray_300, for: .normal)
         self.isEnabled = false
     }

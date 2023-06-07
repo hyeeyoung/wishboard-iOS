@@ -9,7 +9,7 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
     let seperator = UIView().then{
-        $0.backgroundColor = .wishboardDisabledGray
+        $0.backgroundColor = .gray_100
     }
 
     override func viewDidLoad() {

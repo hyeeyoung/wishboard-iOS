@@ -8,18 +8,6 @@
 import UIKit
 
 extension UIColor{
-    static let wishboardLightGreen = UIColor(
-        red: 124/255,
-        green: 248/255,
-        blue: 133/255,
-        alpha: 0.25
-    )
-    static let wishboardDisabledGray = UIColor(
-        red: 232/255,
-        green: 232/255,
-        blue: 232/255,
-        alpha: 1
-    )
     static let popupBackground = UIColor(
         red: 0/255,
         green: 0/255,
