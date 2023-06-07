@@ -21,18 +21,18 @@ class ItemDetailTableViewCell: UITableViewCell {
     }
     let dateLabel = UILabel().then{
         $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.textColor = .gray
+        $0.textColor = .gray_300
     }
-    let itemNameLabel = UILabel().then{
+    let itemNameLabel = DefaultLabel().then{
         $0.font = UIFont.Suit(size: 16, family: .Regular)
         $0.numberOfLines = 0
         $0.setTextWithLineHeight()
     }
-    let priceLabel = UILabel().then{
+    let priceLabel = DefaultLabel().then{
         $0.text = Item.zero
         $0.font = UIFont.monteserrat(size: 18, family: .Bold)
     }
-    let won = UILabel().then{
+    let won = DefaultLabel().then{
         $0.text = Item.won
         $0.font = UIFont.Suit(size: 14, family: .Regular)
     }
@@ -51,10 +51,10 @@ class ItemDetailTableViewCell: UITableViewCell {
     let seperatorLine2 = UIView().then{
         $0.backgroundColor = .gray_100
     }
-    let memoTitlelabel = UILabel().then{
+    let memoTitlelabel = DefaultLabel().then{
         $0.font = UIFont.Suit(size: 12, family: .Bold)
     }
-    let memoContentLabel = UILabel().then{
+    let memoContentLabel = DefaultLabel().then{
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.numberOfLines = 0
         $0.setTextWithLineHeight()

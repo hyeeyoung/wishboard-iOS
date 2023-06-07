@@ -16,14 +16,13 @@ class MypageProfileTableViewCell: UITableViewCell {
         $0.layer.cornerRadius = 30
         $0.contentMode = .scaleAspectFill
     }
-    let userNameLabel = UILabel().then{
+    let userNameLabel = DefaultLabel().then{
         $0.font = UIFont.Suit(size: 18, family: .Bold)
-        $0.textColor = .gray_700
     }
     let emailLabel = UILabel().then{
         $0.text = ""
         $0.font = UIFont.Suit(size: 14, family: .Medium)
-        $0.textColor = .lightGray
+        $0.textColor = .gray_200
     }
     let modifyButton = UIButton().then{
         $0.setTitle("편집", for: .normal)

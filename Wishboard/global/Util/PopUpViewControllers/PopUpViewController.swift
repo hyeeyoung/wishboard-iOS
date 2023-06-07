@@ -22,7 +22,7 @@ class PopUpViewController: UIViewController {
         
         $0.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
     }
-    let titleLabel = UILabel().then{
+    let titleLabel = DefaultLabel().then{
         $0.text = "title"
         $0.font = UIFont.Suit(size: 16, family: .Bold)
     }

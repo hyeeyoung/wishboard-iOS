@@ -9,7 +9,7 @@ import UIKit
 
 class NotificationSettingViewController: UIViewController {
     
-    let titleLabel = UILabel().then{
+    let titleLabel = DefaultLabel().then{
         $0.text = Title.notificationSetting
         $0.font = UIFont.Suit(size: 14, family: .Bold)
     }

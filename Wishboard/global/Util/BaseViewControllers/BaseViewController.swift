@@ -44,9 +44,8 @@ class BaseViewController: UIViewController {
         $0.configuration = config
     }
     
-    lazy var navigationTitle = UILabel().then{
+    lazy var navigationTitle = DefaultLabel().then{
         $0.font = UIFont.Suit(size: 14, family: .Bold)
-        $0.textColor = .gray_700
     }
     
     lazy var rightPositionBtn: EtcButton? = nil{

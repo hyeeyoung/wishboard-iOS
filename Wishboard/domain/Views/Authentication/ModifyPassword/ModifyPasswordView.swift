@@ -13,7 +13,7 @@ import SnapKit
 class ModifyPasswordView: UIView {
     // MARK: - Views
     // 새 비밀번호 Label
-    let newPasswordLabel = UILabel().then{
+    let newPasswordLabel = DefaultLabel().then{
         $0.text = Title.newPassword
         $0.font = UIFont.Suit(size: 14, family: .Medium)
     }
@@ -28,7 +28,7 @@ class ModifyPasswordView: UIView {
         $0.isHidden = true
     }
     // 비밀번호 재입력 Label
-    let passwordRewriteLabel = UILabel().then{
+    let passwordRewriteLabel = DefaultLabel().then{
         $0.text = Title.passwordRewrite
         $0.font = UIFont.Suit(size: 14, family: .Medium)
     }

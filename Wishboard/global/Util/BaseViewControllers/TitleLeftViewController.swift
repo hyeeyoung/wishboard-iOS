@@ -28,9 +28,8 @@ class TitleLeftViewController: UIViewController {
     // MARK: Views
     let navigationView = UIView()
     
-    lazy var navigationTitle = UILabel().then{
+    lazy var navigationTitle = DefaultLabel().then{
         $0.font = UIFont.Suit(size: 22, family: .Bold)
-        $0.textColor = .gray_700
         $0.setTextWithLineHeight()
     }
     

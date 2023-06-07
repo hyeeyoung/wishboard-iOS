@@ -13,7 +13,7 @@ class GetEmailView: UIView {
     let lockedImage = UIImageView().then{
         $0.image = Image.locked
     }
-    let subTitleLabel = UILabel().then{
+    let subTitleLabel = DefaultLabel().then{
         $0.text = Message.sendedEmail
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.setTextWithLineHeight()

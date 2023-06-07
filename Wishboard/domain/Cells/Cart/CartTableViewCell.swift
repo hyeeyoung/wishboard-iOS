@@ -16,7 +16,7 @@ class CartTableViewCell: UITableViewCell {
         $0.isUserInteractionEnabled = true
         $0.contentMode = .scaleAspectFill
     }
-    let itemName = UILabel().then{
+    let itemName = DefaultLabel().then{
         $0.font = UIFont.Suit(size: 12.5, family: .Regular)
         $0.numberOfLines = 2
         $0.isUserInteractionEnabled = true
@@ -39,14 +39,14 @@ class CartTableViewCell: UITableViewCell {
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         $0.configuration = config
     }
-    let countLabel = UILabel().then{
+    let countLabel = DefaultLabel().then{
         $0.textAlignment = .center
         $0.font = UIFont.Suit(size: 14.58, family: .Regular)
     }
-    let priceLabel = UILabel().then{
+    let priceLabel = DefaultLabel().then{
         $0.font = UIFont.monteserrat(size: 18.75, family: .Bold)
     }
-    let won = UILabel().then{
+    let won = DefaultLabel().then{
         $0.text = Item.won
         $0.font = UIFont.Suit(size: 14.58, family: .Regular)
     }

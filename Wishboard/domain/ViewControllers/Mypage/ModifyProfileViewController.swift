@@ -20,7 +20,7 @@ class ModifyProfileViewController: TitleCenterViewController {
     let cameraButton = UIButton().then{
         $0.setImage(Image.cameraGray, for: .normal)
     }
-    let nicknameLabel = UILabel().then{
+    let nicknameLabel = DefaultLabel().then{
         $0.text = Message.nickName
         $0.font = UIFont.Suit(size: 14, family: .Medium)
     }

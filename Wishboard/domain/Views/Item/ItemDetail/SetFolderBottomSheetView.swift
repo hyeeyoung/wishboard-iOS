@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class SetFolderBottomSheetView: UIView {
-    let titleLabel = UILabel().then{
+    let titleLabel = DefaultLabel().then{
         $0.text = BottomSheetTitle.folderSetting
         $0.font = UIFont.Suit(size: 14, family: .Bold)
     }

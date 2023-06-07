@@ -16,7 +16,7 @@ class NavigationBar {
         self.viewcontroller = viewController
         
         let navigationView = UIView()
-        let pageTitle = UILabel().then{
+        let pageTitle = DefaultLabel().then{
             $0.text = title
             $0.font = UIFont.Suit(size: 15, family: .Bold)
             $0.setTextWithLineHeight()

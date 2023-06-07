@@ -16,16 +16,16 @@ class NotiTableViewCell: UITableViewCell {
         $0.layer.cornerRadius = 40
         $0.contentMode = .scaleAspectFill
     }
-    let itemName = UILabel().then{
+    let itemName = DefaultLabel().then{
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.numberOfLines = 2
     }
     // '재입고 알림'
-    let notificationTypeLabel = UILabel().then{
+    let notificationTypeLabel = DefaultLabel().then{
         $0.text = Notification.restock
         $0.font = UIFont.Suit(size: 13, family: .Bold)
     }
-    let label = UILabel().then{
+    let label = DefaultLabel().then{
         $0.text = Notification.notification
         $0.font = UIFont.Suit(size: 13, family: .Bold)
     }
@@ -37,7 +37,7 @@ class NotiTableViewCell: UITableViewCell {
     let timeLabel = UILabel().then{
         $0.text = ""
         $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.textColor = .gray
+        $0.textColor = .gray_300
     }
     //MARK: - Life Cycles
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

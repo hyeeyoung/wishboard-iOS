@@ -9,7 +9,7 @@ import UIKit
 import Lottie
 
 class ShoppingLinkViewController: BottomSheetKeyboardViewController {
-    let titleLabel = UILabel().then{
+    let titleLabel = DefaultLabel().then{
         $0.text = BottomSheetTitle.shoppingMallLink
         $0.font = UIFont.Suit(size: 14, family: .Bold)
     }

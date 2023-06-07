@@ -9,7 +9,7 @@ import UIKit
 import Lottie
 
 class NewFolderViewController: BottomSheetKeyboardViewController {
-    let titleLabel = UILabel().then{
+    let titleLabel = DefaultLabel().then{
         $0.text = Title.addFolder
         $0.font = UIFont.Suit(size: 14, family: .Bold)
     }

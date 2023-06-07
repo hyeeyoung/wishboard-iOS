@@ -14,11 +14,11 @@ class HowToCollectionViewCell: UICollectionViewCell {
         $0.backgroundColor = .EDEDED
     }
     let phoneImage = UIImageView()
-    let title = UILabel().then{
+    let title = DefaultLabel().then{
         $0.text = ""
         $0.font = UIFont.Suit(size: 22, family: .Bold)
     }
-    let subTitle = UILabel().then{
+    let subTitle = DefaultLabel().then{
         $0.font = UIFont.Suit(size: 14, family: .Regular)
         $0.numberOfLines = 0
         $0.setTextWithLineHeight()

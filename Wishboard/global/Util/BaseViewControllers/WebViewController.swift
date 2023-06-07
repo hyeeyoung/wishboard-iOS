@@ -21,7 +21,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     let operatorLine = UIView().then{
         $0.backgroundColor = .gray_100
     }
-    let titleLabel = UILabel().then{
+    let titleLabel = DefaultLabel().then{
         $0.font = UIFont.Suit(size: 14, family: .Bold)
         $0.setTextWithLineHeight()
     }

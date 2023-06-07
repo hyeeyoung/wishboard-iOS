@@ -15,7 +15,7 @@ class FolderListTableViewCell: UITableViewCell {
         $0.layer.cornerRadius = 20
         $0.contentMode = .scaleAspectFill
     }
-    let folderName = UILabel().then{
+    let folderName = DefaultLabel().then{
         $0.font = UIFont.Suit(size: 14, family: .Regular)
         $0.numberOfLines = 1
     }

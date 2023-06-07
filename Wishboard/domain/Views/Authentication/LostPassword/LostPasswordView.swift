@@ -13,7 +13,7 @@ class LostPasswordView: UIView {
     let heartLetterImage = UIImageView().then{
         $0.image = Image.loveLetter
     }
-    let subTitleLabel = UILabel().then{
+    let subTitleLabel = DefaultLabel().then{
         $0.text = Message.lostPassword
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.setTextWithLineHeight()

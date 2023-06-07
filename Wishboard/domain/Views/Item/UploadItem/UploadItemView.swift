@@ -11,7 +11,7 @@ import UIKit
 class UploadItemView: UIView {
     // MARK: - View
     let navigationView = UIView()
-    let pageTitle = UILabel().then{
+    let pageTitle = DefaultLabel().then{
         $0.text = Title.addItem
         $0.font = UIFont.Suit(size: 15, family: .Bold)
     }

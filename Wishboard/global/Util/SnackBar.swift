@@ -29,10 +29,8 @@ class SnackBar {
         
         // 만약 하단바가 존재할 때
         if (originView.tabBarController?.tabBar.isHidden == false) {
-            print("만약 하단바가 존재할 때")
             originView.tabBarController?.tabBar.addSubview(backgroundView)
         } else {
-            print("만약 하단바가 존재하지 않을 때")
             originView.view.addSubview(backgroundView)
         }
         

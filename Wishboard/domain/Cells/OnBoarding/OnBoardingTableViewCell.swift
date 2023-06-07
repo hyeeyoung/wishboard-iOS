@@ -20,7 +20,7 @@ class OnBoardingTableViewCell: UITableViewCell {
         $0.image = Image.wishboardLogo
     }
     // Onbarding label
-    let onboardingLabel = UILabel().then{
+    let onboardingLabel = DefaultLabel().then{
         $0.text = Message.onboarding
         $0.font = UIFont.Suit()
         $0.numberOfLines = 0

@@ -17,18 +17,18 @@ class FolderCollectionViewCell: UICollectionViewCell {
         $0.layer.cornerRadius = 10
         $0.contentMode = .scaleAspectFill
     }
-    let folderType = UILabel().then{
+    let folderType = DefaultLabel().then{
         $0.font = UIFont.Suit(size: 14, family: .Bold)
         $0.numberOfLines = 1
     }
     let countLabel = UILabel().then{
         $0.font = UIFont.Suit(size: 12.5, family: .Regular)
-        $0.textColor = .lightGray
+        $0.textColor = .gray_300
     }
     let itemLabel = UILabel().then{
         $0.text = Message.item
         $0.font = UIFont.Suit(size: 12.5, family: .Regular)
-        $0.textColor = .lightGray
+        $0.textColor = .gray_300
     }
     let moreButton = UIButton().then{
         var config = UIButton.Configuration.plain()
