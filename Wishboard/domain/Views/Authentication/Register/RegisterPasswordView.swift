@@ -28,7 +28,7 @@ class RegisterPasswordView: UIView {
     let errorMessage = UILabel().then{
         $0.text = ErrorMessage.password
         $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.textColor = .wishboardRed
+        $0.textColor = .pink_700
     }
     let stack = UIStackView().then{
         $0.axis = .horizontal
@@ -128,14 +128,14 @@ extension RegisterPasswordView {
         let label = UILabel().then{
             $0.text = title
             $0.font = UIFont.Suit(size: 12, family: .Regular)
-            $0.textColor  = .wishboardGray
+            $0.textColor  = .gray_200
             $0.setTextWithLineHeight()
         }
         stack.addArrangedSubview(label)
     }
     func setUnderLinedButton(_ title: String) -> UIButton {
         let underlineButton = UIButton().then{
-            $0.setUnderline(title, .wishboardGreen, UIFont.Suit(size: 12, family: .Medium))
+            $0.setUnderline(title, .green_500, UIFont.Suit(size: 12, family: .Medium))
         }
         stack.addArrangedSubview(underlineButton)
         return underlineButton

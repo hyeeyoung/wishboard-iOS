@@ -11,7 +11,7 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
     let subTitle = UILabel().then{
         $0.text = Message.shoppingLink
         $0.font = UIFont.Suit(size: 10, family: .Regular)
-        $0.textColor = .wishboardGreen
+        $0.textColor = .green_500
         $0.setTextWithLineHeight()
         $0.isHidden = true
     }

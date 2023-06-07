@@ -22,7 +22,7 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
     let errorMessage = UILabel().then{
         $0.text = ErrorMessage.shoppingLink
         $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.textColor = .wishboardRed
+        $0.textColor = .pink_700
         $0.setTextWithLineHeight()
     }
     let completeButton = DefaultButton(titleStr: Button.item).then{

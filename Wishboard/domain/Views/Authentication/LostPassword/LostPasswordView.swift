@@ -25,7 +25,7 @@ class LostPasswordView: UIView {
     }
     let errorMessage = UILabel().then{
         $0.text = ErrorMessage.email
-        $0.textColor = .wishboardRed
+        $0.textColor = .pink_700
         $0.font = UIFont.Suit(size: 12, family: .Regular)
     }
     let getEmailButton = DefaultButton(titleStr: Button.getEmail)

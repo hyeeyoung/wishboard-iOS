@@ -44,7 +44,7 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.backgroundColor = .wishboardDisabledGray
     }
     let linkLabel = UILabel().then{
-        $0.textColor = .wishboardGray
+        $0.textColor = .gray_200
         $0.font = UIFont.Suit(size: 12, family: .Regular)
         $0.setTextWithLineHeight()
     }
@@ -63,14 +63,14 @@ class ItemDetailTableViewCell: UITableViewCell {
     let restockLabel = PaddingLabel().then{
         $0.textColor = .black
         $0.font = UIFont.Suit(size: 12, family: .Bold)
-        $0.backgroundColor = .wishboardGreen
+        $0.backgroundColor = .green_500
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 12
     }
     let restockDateLabel = PaddingLabel().then{
         $0.textColor = .black
         $0.font = UIFont.Suit(size: 12, family: .Bold)
-        $0.backgroundColor = .wishboardGreen
+        $0.backgroundColor = .green_500
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 12
     }

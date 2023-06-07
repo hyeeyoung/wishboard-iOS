@@ -74,6 +74,8 @@ extension OnBoardingView: UITableViewDelegate, UITableViewDataSource {
         return tableView.frame.size.height - 50
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let numbers = [0]
+//        let _ = numbers[1]
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

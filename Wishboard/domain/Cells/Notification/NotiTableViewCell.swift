@@ -31,7 +31,7 @@ class NotiTableViewCell: UITableViewCell {
     }
     // 읽음 표시
     let viewView = UIView().then{
-        $0.backgroundColor = .wishboardGreen
+        $0.backgroundColor = .green_500
         $0.layer.cornerRadius = 4
     }
     let timeLabel = UILabel().then{

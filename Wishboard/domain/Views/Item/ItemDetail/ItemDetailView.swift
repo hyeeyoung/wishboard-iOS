@@ -82,7 +82,7 @@ class ItemDetailView: UIView {
                 config.background.backgroundColor = .black
                 $0.isEnabled = true
             } else {
-                attText.foregroundColor = .dialogMessageColor
+                attText.foregroundColor = .gray_300
                 config.attributedTitle = attText
                 config.background.backgroundColor = .wishboardDisabledGray
                 $0.isEnabled = false

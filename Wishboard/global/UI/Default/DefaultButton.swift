@@ -28,7 +28,7 @@ class DefaultButton: UIButton {
         self.titleStr = titleStr
         
         self.setTitle(titleStr, for: .normal)
-        self.setTitleColor(UIColor.dialogMessageColor, for: .normal)
+        self.setTitleColor(UIColor.gray_300, for: .normal)
         self.titleLabel?.font = UIFont.Suit(size: 14, family: .Bold)
         self.backgroundColor = UIColor.wishboardDisabledGray
         
@@ -60,13 +60,13 @@ class DefaultButton: UIButton {
     
     // MARK: - Function
     func activateButton() {
-        self.backgroundColor = UIColor.wishboardGreen
+        self.backgroundColor = UIColor.green_500
         self.setTitleColor(UIColor.black, for: .normal)
         self.isEnabled = true
     }
     func inactivateButton() {
         self.backgroundColor = UIColor.wishboardDisabledGray
-        self.setTitleColor(UIColor.dialogMessageColor, for: .normal)
+        self.setTitleColor(UIColor.gray_300, for: .normal)
         self.isEnabled = false
     }
     // MARK: Lottie View

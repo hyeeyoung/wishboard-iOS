@@ -31,7 +31,7 @@ class PopUpDeleteUserViewController: UIViewController {
     let messageLabel = UILabel().then{
         $0.text = Message.deleteUser
         $0.font = UIFont.Suit(size: 14, family: .Regular)
-        $0.textColor = .dialogMessageColor
+        $0.textColor = .gray_300
         $0.numberOfLines = 0
         
         let attrString = NSMutableAttributedString(string: $0.text!)
@@ -56,7 +56,7 @@ class PopUpDeleteUserViewController: UIViewController {
     let errorMessage = UILabel().then{
         $0.text = ErrorMessage.email
         $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.textColor = .wishboardRed
+        $0.textColor = .pink_700
     }
     // MARK: - Life Cycles
     // keyboard
@@ -130,7 +130,7 @@ class PopUpDeleteUserViewController: UIViewController {
             var attText = AttributedString.init(self.greenBtnText!)
             
             attText.font = UIFont.Suit(size: 14, family: .Medium)
-            attText.foregroundColor = UIColor.dialogGreenTxt
+            attText.foregroundColor = UIColor.green_700
             config.attributedTitle = attText
             
             $0.configuration = config

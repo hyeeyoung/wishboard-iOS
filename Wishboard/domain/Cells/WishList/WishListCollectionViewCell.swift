@@ -89,7 +89,7 @@ class WishListCollectionViewCell: UICollectionViewCell {
         if let name = data.item_name {self.itemName.text = name}
         if let price = data.item_price {self.itemPrice.text = FormatManager().strToPrice(numStr: price)}
         if let isCart = data.cart_state {
-            if isCart == 1 {self.cartButton.cartButton(.wishboardGreen)}
+            if isCart == 1 {self.cartButton.cartButton(.green_500)}
             else {self.cartButton.cartButton(.white)}
         }
     }

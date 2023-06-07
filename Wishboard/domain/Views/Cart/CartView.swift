@@ -12,7 +12,7 @@ class CartView: UIView {
     // MARK: - Properties
     // lower View
     let lowerView = UIView().then{
-        $0.backgroundColor = .wishboardGreen
+        $0.backgroundColor = .green_500
     }
     let total = UILabel().then{
         $0.text = Item.total

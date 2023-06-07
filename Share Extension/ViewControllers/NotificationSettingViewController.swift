@@ -22,7 +22,7 @@ class NotificationSettingViewController: UIViewController {
     let message = UILabel().then{
         $0.text = Message.itemNotification
         $0.font = UIFont.Suit(size: 8, family: .Regular)
-        $0.textColor = .wishboardGray
+        $0.textColor = .gray_200
     }
     let completeButton = DefaultButton(titleStr: Button.complete)
     // MARK: - Life Cycles

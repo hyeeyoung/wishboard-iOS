@@ -13,7 +13,7 @@ class UploadItemTextfieldTableViewCell: UITableViewCell {
         $0.backgroundColor = .clear
         $0.font = UIFont.Suit(size: 14, family: .Regular)
         $0.addLeftPadding(16)
-        $0.textColor = .editTextFontColor
+        $0.textColor = .gray_700
     }
     
     //MARK: - Life Cycles

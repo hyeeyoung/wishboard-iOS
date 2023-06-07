@@ -29,7 +29,7 @@ class PopUpViewController: UIViewController {
     let messageLabel = UILabel().then{
         $0.text = "message"
         $0.font = UIFont.Suit(size: 14, family: .Regular)
-        $0.textColor = .dialogMessageColor
+        $0.textColor = .gray_300
         $0.numberOfLines = 0
         $0.textAlignment = .center
     }
@@ -95,7 +95,7 @@ class PopUpViewController: UIViewController {
             var attText = AttributedString.init(self.greenBtnText!)
             
             attText.font = UIFont.Suit(size: 14, family: .Medium)
-            attText.foregroundColor = UIColor.dialogGreenTxt
+            attText.foregroundColor = UIColor.green_700
             config.attributedTitle = attText
             
             $0.configuration = config

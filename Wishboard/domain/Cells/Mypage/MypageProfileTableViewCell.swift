@@ -27,9 +27,9 @@ class MypageProfileTableViewCell: UITableViewCell {
     }
     let modifyButton = UIButton().then{
         $0.setTitle("편집", for: .normal)
-        $0.setTitleColor(UIColor.mypageTextColor, for: .normal)
+        $0.setTitleColor(UIColor.gray_600, for: .normal)
         $0.titleLabel?.font = UIFont.Suit(size: 14, family: .Medium)
-        $0.backgroundColor = UIColor.uploadPhotoBackground
+        $0.backgroundColor = UIColor.gray_100
         
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 12

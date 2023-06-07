@@ -33,14 +33,14 @@ class PopUpWithTextFieldViewController: UIViewController {
     let countLabel = UILabel().then{
         $0.text = Message.count
         $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.textColor = .wishboardGray
+        $0.textColor = .gray_200
     }
     var textField = DefaultTextField("").then{
         $0.clearButtonMode = .always
     }
     let errorMessageLabel = UILabel().then{
         $0.text = ErrorMessage.sameFolderName
-        $0.textColor = .wishboardRed
+        $0.textColor = .pink_700
         $0.font = UIFont.Suit(size: 12, family: .Regular)
     }
     var completeButton: DefaultButton!
@@ -109,13 +109,13 @@ class PopUpWithTextFieldViewController: UIViewController {
         
         if textLength > 10 {
             completeButton.isActivate = false
-            self.countLabel.textColor = .wishboardRed
+            self.countLabel.textColor = .pink_700
         } else if textLength == 0 {
             completeButton.isActivate = false
-            self.countLabel.textColor = .wishboardGray
+            self.countLabel.textColor = .gray_200
         } else {
             completeButton.isActivate = true
-            self.countLabel.textColor = .wishboardGray
+            self.countLabel.textColor = .gray_200
         }
         errorMessageLabel.isHidden = true
     }
