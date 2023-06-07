@@ -128,14 +128,14 @@ extension RegisterPasswordView {
         let label = UILabel().then{
             $0.text = title
             $0.font = UIFont.Suit(size: 12, family: .Regular)
-            $0.textColor  = .gray_200
+            $0.textColor  = .gray_300
             $0.setTextWithLineHeight()
         }
         stack.addArrangedSubview(label)
     }
     func setUnderLinedButton(_ title: String) -> UIButton {
         let underlineButton = UIButton().then{
-            $0.setUnderline(title, .green_500, UIFont.Suit(size: 12, family: .Medium))
+            $0.setUnderline(title, .green_700, UIFont.Suit(size: 12, family: .Medium))
         }
         stack.addArrangedSubview(underlineButton)
         return underlineButton
