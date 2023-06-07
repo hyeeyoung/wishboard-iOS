@@ -61,7 +61,7 @@ class DefaultButton: UIButton {
     // MARK: - Function
     func activateButton() {
         self.backgroundColor = UIColor.green_500
-        self.setTitleColor(UIColor.black, for: .normal)
+        self.setTitleColor(UIColor.gray_700, for: .normal)
         self.isEnabled = true
     }
     func inactivateButton() {

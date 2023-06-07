@@ -140,7 +140,7 @@ class PopUpDeleteUserViewController: UIViewController {
             var attText = AttributedString.init(self.blackBtnText!)
             
             attText.font = UIFont.Suit(size: 14, family: .Medium)
-            attText.foregroundColor = UIColor.black
+            attText.foregroundColor = UIColor.gray_700
             config.attributedTitle = attText
             
             $0.configuration = config

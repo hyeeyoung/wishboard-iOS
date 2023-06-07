@@ -46,7 +46,7 @@ class BaseViewController: UIViewController {
     
     lazy var navigationTitle = UILabel().then{
         $0.font = UIFont.Suit(size: 14, family: .Bold)
-        $0.textColor = .black
+        $0.textColor = .gray_700
     }
     
     lazy var rightPositionBtn: EtcButton? = nil{
@@ -105,7 +105,7 @@ class EtcButton: UIButton{
         self.setTitle(title, for: .normal)
         self.titleLabel?.textAlignment = .center
         self.titleLabel?.font = UIFont.Suit(size: 14, family: .Regular)
-        self.setTitleColor(.black, for: .normal)
+        self.setTitleColor(.gray_700, for: .normal)
         self.titleEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 4, right: 0)
     }
     

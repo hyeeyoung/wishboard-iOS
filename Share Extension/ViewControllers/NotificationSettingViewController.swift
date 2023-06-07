@@ -17,7 +17,7 @@ class NotificationSettingViewController: UIViewController {
         $0.setImage(Image.quit, for: .normal)
     }
     let notificationPickerView = UIPickerView().then{
-        $0.tintColor = .black
+        $0.tintColor = .gray_700
     }
     let message = UILabel().then{
         $0.text = Message.itemNotification

@@ -344,7 +344,7 @@ extension UploadItemViewController {
         }
         let cancelAction = UIAlertAction(title: Title.cancel, style: UIAlertAction.Style.cancel, handler: nil)
         
-        alert.view.tintColor = .black
+        alert.view.tintColor = .gray_700
         alert.addAction(cameraAction)
         alert.addAction(albumAction)
         alert.addAction(cancelAction)

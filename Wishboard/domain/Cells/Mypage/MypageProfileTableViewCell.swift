@@ -18,7 +18,7 @@ class MypageProfileTableViewCell: UITableViewCell {
     }
     let userNameLabel = UILabel().then{
         $0.font = UIFont.Suit(size: 18, family: .Bold)
-        $0.textColor = .black
+        $0.textColor = .gray_700
     }
     let emailLabel = UILabel().then{
         $0.text = ""

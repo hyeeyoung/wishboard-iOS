@@ -45,10 +45,10 @@ extension UIButton {
         
         attText.font = UIFont.Suit(size: 11.46, family: .Regular)
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        attText.foregroundColor = UIColor.black
+        attText.foregroundColor = UIColor.gray_700
         config.attributedTitle = attText
         config.background.backgroundColor = color
-        config.baseForegroundColor = .black
+        config.baseForegroundColor = .gray_700
         config.cornerStyle = .capsule
         
         self.configuration = config
@@ -80,7 +80,7 @@ extension UIButton {
             attText = AttributedString.init(" 상품 알림 설정하기")
         }
         attText.font = UIFont.Suit(size: 12, family: .Regular)
-        attText.foregroundColor = UIColor.black
+        attText.foregroundColor = UIColor.gray_700
         config.attributedTitle = attText
         config.image = Image.noti
         

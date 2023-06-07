@@ -11,7 +11,7 @@ import UIKit
 class SnackBar {
     // MARK: - Views
     let backgroundView = UIView().then{
-        $0.backgroundColor = .black
+        $0.backgroundColor = .gray_700
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 25
     }
@@ -86,7 +86,7 @@ extension SnackBar {
 class ErrorBar {
     // MARK: - Views
     let backgroundView = UIView().then{
-        $0.backgroundColor = .black
+        $0.backgroundColor = .gray_700
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 25
     }

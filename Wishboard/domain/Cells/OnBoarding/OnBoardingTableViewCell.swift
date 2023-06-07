@@ -39,9 +39,9 @@ class OnBoardingTableViewCell: UITableViewCell {
         
         attText.font = UIFont.Suit(size: 12, family: .Regular)
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        attText.foregroundColor = UIColor.black
+        attText.foregroundColor = UIColor.gray_700
         config.attributedTitle = attText
-        config.baseForegroundColor = .black
+        config.baseForegroundColor = .gray_700
         
         $0.configuration = config
     }

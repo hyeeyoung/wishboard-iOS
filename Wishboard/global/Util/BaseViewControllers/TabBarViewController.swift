@@ -43,7 +43,7 @@ class TabBarViewController: UITabBarController {
         noticeVC.tabBarItem.title = "NOTICE"
         profileVC.tabBarItem.title = "MY"
         
-        self.tabBar.tintColor = .black
+        self.tabBar.tintColor = .gray_700
         self.tabBar.unselectedItemTintColor = .unselectedTabColor
         let fontAttributes = [NSAttributedString.Key.font: UIFont.monteserrat(size: 9, family: .Regular)]
         UITabBarItem.appearance().setTitleTextAttributes(fontAttributes, for: .normal)

@@ -61,14 +61,14 @@ class ItemDetailTableViewCell: UITableViewCell {
     }
     // 재입고 초록색
     let restockLabel = PaddingLabel().then{
-        $0.textColor = .black
+        $0.textColor = .gray_700
         $0.font = UIFont.Suit(size: 12, family: .Bold)
         $0.backgroundColor = .green_500
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 12
     }
     let restockDateLabel = PaddingLabel().then{
-        $0.textColor = .black
+        $0.textColor = .gray_700
         $0.font = UIFont.Suit(size: 12, family: .Bold)
         $0.backgroundColor = .green_500
         $0.clipsToBounds = true

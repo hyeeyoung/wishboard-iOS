@@ -45,7 +45,7 @@ extension NotificationViewController {
         refreshControl.addTarget(self, action: #selector(refreshTable(refresh:)), for: .valueChanged)
         
         refreshControl.backgroundColor = .white
-        refreshControl.tintColor = .black
+        refreshControl.tintColor = .gray_700
         
         self.notiView.notificationTableView.refreshControl = refreshControl
     }
