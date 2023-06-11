@@ -12,7 +12,7 @@ class EmptyView {
     // MARK: - Views
     var message: String!
     let messageLabel = UILabel().then{
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.textColor = .gray_200
         $0.textAlignment = .center
         $0.numberOfLines = 0
@@ -83,7 +83,7 @@ class EmptyView {
         let backgroudView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: tableView.bounds.height))
         
         let messageLabel = UILabel().then{
-            $0.font = UIFont.Suit(size: 14, family: .Regular)
+            $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
             $0.textColor = .gray_200
             $0.textAlignment = .center
             $0.text = self.message

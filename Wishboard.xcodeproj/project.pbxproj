@@ -16,6 +16,7 @@
 		230A3F5928E4B5CA00966682 /* NotificationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230A3F5828E4B5CA00966682 /* NotificationDataManager.swift */; };
 		230DBFA828E106EE00E9AED6 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230DBFA728E106EE00E9AED6 /* ShareView.swift */; };
 		23127C842A361DDB008452FD /* TypoStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23127C832A361DDB008452FD /* TypoStyle.swift */; };
+		23127C852A3636C1008452FD /* TypoStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23127C832A361DDB008452FD /* TypoStyle.swift */; };
 		23134D3D29B2216700238536 /* RefreshInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23134D3C29B2216700238536 /* RefreshInput.swift */; };
 		23134D3F29B222BF00238536 /* RefreshDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23134D3E29B222BF00238536 /* RefreshDataManager.swift */; };
 		231B581028E8A33C0030D33E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */; };
@@ -1806,6 +1807,7 @@
 				236FE93B28DF85A7006142DB /* Observable.swift in Sources */,
 				236FE93E28DF85B0006142DB /* PopUpViewController.swift in Sources */,
 				23C3113F28DF680300A636F6 /* ShareViewController.swift in Sources */,
+				23127C852A3636C1008452FD /* TypoStyle.swift in Sources */,
 				230180E728E50BC1001034FC /* APIManager.swift in Sources */,
 				236FE93828DF85A4006142DB /* EmptyView.swift in Sources */,
 				236FE91C28DF8592006142DB /* UIButton.swift in Sources */,

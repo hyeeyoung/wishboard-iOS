@@ -22,8 +22,7 @@ class WebViewController: UIViewController, WKUIDelegate {
         $0.backgroundColor = .gray_100
     }
     let titleLabel = DefaultLabel().then{
-        $0.font = UIFont.Suit(size: 14, family: .Bold)
-        $0.setTextWithLineHeight()
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
     }
     let backButton = UIButton().then{
         $0.setImage(Image.goBack, for: .normal)

@@ -15,8 +15,7 @@ class RegisterEmailView: UIView {
     }
     let subTitleLabel = DefaultLabel().then{
         $0.text = Message.email
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.setTextWithLineHeight()
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
@@ -26,7 +25,7 @@ class RegisterEmailView: UIView {
     let errorMessageLabel = UILabel().then{
         $0.text = ErrorMessage.existAccount
         $0.textColor = .pink_700
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
     }
     let nextButton = DefaultButton(titleStr: Button.next)
     lazy var accessoryView: UIView = {

@@ -79,7 +79,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = settingArray[tag - 1]
         }
         
-        cell.textLabel?.font = UIFont.Suit(size: 16, family: .Regular)
+        cell.textLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitD1)
         cell.textLabel?.textColor = .gray_600
         cell.selectionStyle = .none
         
@@ -196,9 +196,8 @@ extension MyPageViewController {
         let appVersion = UserDefaults.standard.string(forKey: "appVersion") ?? ""
         let versionLabel = UILabel().then{
             $0.text = appVersion
-            $0.font = UIFont.monteserrat(size: 14, family: .SemiBold)
+            $0.setTypoStyleWithSingleLine(typoStyle: .MontserratB1)
             $0.textColor = .gray_300
-            $0.setTextWithLineHeight()
         }
         cell.addSubview(versionLabel)
         versionLabel.snp.makeConstraints { make in

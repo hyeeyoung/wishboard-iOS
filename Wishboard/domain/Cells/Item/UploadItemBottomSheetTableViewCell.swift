@@ -10,9 +10,8 @@ import UIKit
 class UploadItemBottomSheetTableViewCell: UITableViewCell {
     let subTitle = UILabel().then{
         $0.text = Message.shoppingLink
-        $0.font = UIFont.Suit(size: 10, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
         $0.textColor = .green_500
-        $0.setTextWithLineHeight()
         $0.isHidden = true
     }
     //MARK: - Life Cycles
@@ -45,7 +44,7 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
             make.centerY.equalToSuperview()
         }
         
-        self.textLabel?.font = UIFont.Suit(size: 14, family: .Regular)
+        self.textLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
         if tag == 4 {
             subTitle.isHidden = false
             self.contentView.addSubview(subTitle)

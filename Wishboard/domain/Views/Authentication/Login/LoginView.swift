@@ -15,14 +15,14 @@ class LoginView: UIView {
     // 이메일 Label
     let emailLabel = DefaultLabel().then{
         $0.text = Title.email
-        $0.font = UIFont.Suit(size: 14, family: .Medium)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
     }
     // 이메일 TextField
     let emailTextField = DefaultTextField(Placeholder.email)
     // 비밀번호 Label
     let passwordLabel = DefaultLabel().then{
         $0.text = Title.password
-        $0.font = UIFont.Suit(size: 14, family: .Medium)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
     }
     // 비밀번호 TextField
     let passwordTextField = DefaultTextField(Placeholder.password).then{

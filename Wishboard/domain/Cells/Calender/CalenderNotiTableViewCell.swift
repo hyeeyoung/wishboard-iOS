@@ -22,20 +22,20 @@ class CalenderNotiTableViewCell: UITableViewCell {
         $0.contentMode = .scaleAspectFill
     }
     let itemName = DefaultLabel().then{
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD3)
         $0.numberOfLines = 2
     }
     // '재입고 알림'
     let notificationTypeLabel = DefaultLabel().then{
         $0.text = Notification.restock
-        $0.font = UIFont.Suit(size: 13, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB4)
     }
     let label = DefaultLabel().then{
         $0.text = Notification.notification
-        $0.font = UIFont.Suit(size: 13, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB4)
     }
     let timeLabel = DefaultLabel().then{
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
         $0.textColor = .gray_300
     }
     //MARK: - Life Cycles

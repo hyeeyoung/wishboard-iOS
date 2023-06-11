@@ -17,15 +17,15 @@ class WishListCollectionViewCell: UICollectionViewCell {
         $0.contentMode = .scaleAspectFill
     }
     let itemName = DefaultLabel().then{
-        $0.font = UIFont.Suit(size: 12.5, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
         $0.numberOfLines = 1
     }
     let itemPrice = DefaultLabel().then{
-        $0.font = UIFont.monteserrat(size: 14.58, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .MontserratH3)
     }
     let won = DefaultLabel().then{
         $0.text = Item.won
-        $0.font = UIFont.Suit(size: 11.46, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
     }
     let cartButton = UIButton().then{
         $0.cartButton(.white)

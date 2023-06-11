@@ -29,7 +29,7 @@ class DefaultButton: UIButton {
         
         self.setTitle(titleStr, for: .normal)
         self.setTitleColor(UIColor.gray_300, for: .normal)
-        self.titleLabel?.font = UIFont.Suit(size: 14, family: .Bold)
+        self.titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
         self.backgroundColor = UIColor.gray_100
         
         self.clipsToBounds = true
@@ -46,7 +46,7 @@ class DefaultButton: UIButton {
         
         self.setTitle(titleStr, for: .normal)
         self.setTitleColor(titleColor, for: .normal)
-        self.titleLabel?.font = UIFont.Suit(size: 14, family: .Bold)
+        self.titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
         self.backgroundColor = backgroundColor
         
         self.clipsToBounds = true

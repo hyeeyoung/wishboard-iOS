@@ -24,7 +24,7 @@ class FolderCollectionViewCell: UICollectionViewCell {
     }
     let folderName = UILabel().then{
         $0.textColor = .white
-        $0.font = UIFont.Suit(size: 11, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH6)
         $0.numberOfLines = 1
         $0.textAlignment = .center
     }

@@ -11,7 +11,7 @@ import UIKit
 class SetFolderBottomSheetView: UIView {
     let titleLabel = DefaultLabel().then{
         $0.text = BottomSheetTitle.folderSetting
-        $0.font = UIFont.Suit(size: 14, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
     }
     let exitBtn = UIButton().then{
         $0.setImage(Image.quit, for: .normal)

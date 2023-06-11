@@ -15,13 +15,11 @@ class HowToCollectionViewCell: UICollectionViewCell {
     }
     let phoneImage = UIImageView()
     let title = DefaultLabel().then{
-        $0.text = ""
-        $0.font = UIFont.Suit(size: 22, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH1)
     }
     let subTitle = DefaultLabel().then{
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.numberOfLines = 0
-        $0.setTextWithLineHeight()
         $0.textAlignment = .center
     }
     // MARK: - Life Cycles

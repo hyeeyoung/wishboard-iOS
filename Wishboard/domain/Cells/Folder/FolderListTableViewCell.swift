@@ -16,7 +16,7 @@ class FolderListTableViewCell: UITableViewCell {
         $0.contentMode = .scaleAspectFill
     }
     let folderName = DefaultLabel().then{
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD2)
         $0.numberOfLines = 1
     }
     let checkIcon = UIImageView().then{

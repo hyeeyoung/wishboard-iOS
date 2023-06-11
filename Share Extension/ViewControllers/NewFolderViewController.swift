@@ -11,7 +11,7 @@ import Lottie
 class NewFolderViewController: BottomSheetKeyboardViewController {
     let titleLabel = DefaultLabel().then{
         $0.text = Title.addFolder
-        $0.font = UIFont.Suit(size: 14, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
     }
     let exitBtn = UIButton().then{
         $0.setImage(Image.quit, for: .normal)
@@ -22,11 +22,11 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
     let textFieldCountLabel = UILabel().then{
         $0.text = Message.count
         $0.textColor = .gray_200
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
     }
     let errorMessage = UILabel().then{
         $0.text = ErrorMessage.sameFolderName
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
         $0.textColor = .pink_700
     }
     let completeButton = DefaultButton(titleStr: Button.add)

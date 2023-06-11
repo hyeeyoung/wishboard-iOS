@@ -15,7 +15,7 @@ class ModifyPasswordView: UIView {
     // 새 비밀번호 Label
     let newPasswordLabel = DefaultLabel().then{
         $0.text = Title.newPassword
-        $0.font = UIFont.Suit(size: 14, family: .Medium)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
     }
     // 새 비밀번호 TextField
     let newPasswordTextField = DefaultTextField(Placeholder.email).then{
@@ -30,7 +30,7 @@ class ModifyPasswordView: UIView {
     // 비밀번호 재입력 Label
     let passwordRewriteLabel = DefaultLabel().then{
         $0.text = Title.passwordRewrite
-        $0.font = UIFont.Suit(size: 14, family: .Medium)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
     }
     // 비밀번호 재입력 TextField
     let passwordRewriteTextField = DefaultTextField(Placeholder.password).then{

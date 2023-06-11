@@ -11,7 +11,7 @@ import Lottie
 class ShoppingLinkViewController: BottomSheetKeyboardViewController {
     let titleLabel = DefaultLabel().then{
         $0.text = BottomSheetTitle.shoppingMallLink
-        $0.font = UIFont.Suit(size: 14, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
     }
     let exitBtn = UIButton().then{
         $0.setImage(Image.quit, for: .normal)
@@ -21,9 +21,8 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
     }
     let errorMessage = UILabel().then{
         $0.text = ErrorMessage.shoppingLink
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
         $0.textColor = .pink_700
-        $0.setTextWithLineHeight()
     }
     let completeButton = DefaultButton(titleStr: Button.item).then{
         $0.isActivate = true

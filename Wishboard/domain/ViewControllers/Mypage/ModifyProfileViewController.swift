@@ -22,7 +22,7 @@ class ModifyProfileViewController: TitleCenterViewController {
     }
     let nicknameLabel = DefaultLabel().then{
         $0.text = Message.nickName
-        $0.font = UIFont.Suit(size: 14, family: .Medium)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
     }
     var nameTextField = DefaultTextField(Placeholder.nickname).then{
         $0.clearButtonMode = .always

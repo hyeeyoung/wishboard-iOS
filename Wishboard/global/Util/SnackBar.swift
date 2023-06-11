@@ -17,7 +17,7 @@ class SnackBar {
     }
     var title = UILabel().then{
         $0.textColor = .white
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD2)
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
@@ -90,7 +90,7 @@ class ErrorBar {
     }
     var title = UILabel().then{
         $0.textColor = .white
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }

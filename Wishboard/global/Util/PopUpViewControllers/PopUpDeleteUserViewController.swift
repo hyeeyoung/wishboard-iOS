@@ -25,22 +25,21 @@ class PopUpDeleteUserViewController: UIViewController {
         $0.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
     }
     let titleLabel = DefaultLabel().then{
-        $0.text = "title"
-        $0.font = UIFont.Suit(size: 16, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
     }
     let messageLabel = UILabel().then{
         $0.text = Message.deleteUser
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.textColor = .gray_300
         $0.numberOfLines = 0
         
-        let attrString = NSMutableAttributedString(string: $0.text!)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.18
-        attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
-        $0.attributedText = attrString
-        
-        $0.textAlignment = .center
+//        let attrString = NSMutableAttributedString(string: $0.text!)
+//        let paragraphStyle = NSMutableParagraphStyle()
+//        paragraphStyle.lineHeightMultiple = 1.18
+//        attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
+//        $0.attributedText = attrString
+//
+//        $0.textAlignment = .center
     }
     let horizontalSeperator = UIView().then{
         $0.backgroundColor = .gray_100

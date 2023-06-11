@@ -45,7 +45,7 @@ class TabBarViewController: UITabBarController {
         
         self.tabBar.tintColor = .gray_700
         self.tabBar.unselectedItemTintColor = .gray_150
-        let fontAttributes = [NSAttributedString.Key.font: UIFont.monteserrat(size: 9, family: .Regular)]
+        let fontAttributes = [NSAttributedString.Key.font: TypoStyle.MontserratD1.font]
         UITabBarItem.appearance().setTitleTextAttributes(fontAttributes, for: .normal)
         
        // navigationController의 root view 설정

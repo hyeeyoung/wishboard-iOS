@@ -17,7 +17,7 @@ class CartTableViewCell: UITableViewCell {
         $0.contentMode = .scaleAspectFill
     }
     let itemName = DefaultLabel().then{
-        $0.font = UIFont.Suit(size: 12.5, family: .Regular)
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.numberOfLines = 2
         $0.isUserInteractionEnabled = true
     }
@@ -41,14 +41,14 @@ class CartTableViewCell: UITableViewCell {
     }
     let countLabel = DefaultLabel().then{
         $0.textAlignment = .center
-        $0.font = UIFont.Suit(size: 14.58, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD2)
     }
     let priceLabel = DefaultLabel().then{
-        $0.font = UIFont.monteserrat(size: 18.75, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .MontserratH2)
     }
     let won = DefaultLabel().then{
         $0.text = Item.won
-        $0.font = UIFont.Suit(size: 14.58, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD2)
     }
     //MARK: - Life Cycles
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

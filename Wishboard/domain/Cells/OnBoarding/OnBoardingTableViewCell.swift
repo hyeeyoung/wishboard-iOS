@@ -22,7 +22,7 @@ class OnBoardingTableViewCell: UITableViewCell {
     // Onbarding label
     let onboardingLabel = DefaultLabel().then{
         $0.text = Message.onboarding
-        $0.font = UIFont.Suit()
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.numberOfLines = 0
         $0.setTextWithLineHeight()
         $0.textAlignment = .center
@@ -37,7 +37,7 @@ class OnBoardingTableViewCell: UITableViewCell {
         var config = UIButton.Configuration.plain()
         var attText = AttributedString.init(Message.toLogin)
         
-        attText.font = UIFont.Suit(size: 12, family: .Regular)
+        attText.font = TypoStyle.SuitD2.font
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         attText.foregroundColor = UIColor.gray_700
         config.attributedTitle = attText
@@ -47,7 +47,7 @@ class OnBoardingTableViewCell: UITableViewCell {
     }
     // 로그인
     let loginButton = UIButton().then{
-        $0.setUnderline(Message.login, .green_700)
+        $0.setUnderline(Message.login, .green_700, TypoStyle.SuitH4.font)
     }
     
     override func awakeFromNib() {

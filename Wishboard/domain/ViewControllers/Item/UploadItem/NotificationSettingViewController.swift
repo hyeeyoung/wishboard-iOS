@@ -11,7 +11,7 @@ class NotificationSettingViewController: UIViewController {
     
     let titleLabel = DefaultLabel().then{
         $0.text = Title.notificationSetting
-        $0.font = UIFont.Suit(size: 14, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
     }
     let exitBtn = UIButton().then{
         $0.setImage(Image.quit, for: .normal)
@@ -21,9 +21,8 @@ class NotificationSettingViewController: UIViewController {
     }
     let message = UILabel().then{
         $0.text = Message.itemNotification
-        $0.font = UIFont.Suit(size: 8, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
         $0.textColor = .gray_200
-        $0.setTextWithLineHeight()
     }
     let completeButton = DefaultButton(titleStr: Button.complete).then{
         $0.isActivate = true
@@ -174,7 +173,7 @@ extension NotificationSettingViewController: UIPickerViewDelegate, UIPickerViewD
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         var label = UILabel()
         if let v = view as? UILabel { label = v }
-        label.font = UIFont.Suit(size: 14, family: .Regular)
+        label.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
         label.textAlignment = .center
         
         switch component {

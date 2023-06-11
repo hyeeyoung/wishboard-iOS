@@ -15,8 +15,7 @@ class LostPasswordView: UIView {
     }
     let subTitleLabel = DefaultLabel().then{
         $0.text = Message.lostPassword
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.setTextWithLineHeight()
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
@@ -26,7 +25,7 @@ class LostPasswordView: UIView {
     let errorMessage = UILabel().then{
         $0.text = ErrorMessage.email
         $0.textColor = .pink_700
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
     }
     let getEmailButton = DefaultButton(titleStr: Button.getEmail)
     lazy var accessoryView: UIView = {

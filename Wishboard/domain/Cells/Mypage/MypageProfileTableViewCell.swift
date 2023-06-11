@@ -17,17 +17,16 @@ class MypageProfileTableViewCell: UITableViewCell {
         $0.contentMode = .scaleAspectFill
     }
     let userNameLabel = DefaultLabel().then{
-        $0.font = UIFont.Suit(size: 18, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH2)
     }
     let emailLabel = UILabel().then{
-        $0.text = ""
-        $0.font = UIFont.Suit(size: 14, family: .Medium)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
         $0.textColor = .gray_200
     }
     let modifyButton = UIButton().then{
         $0.setTitle("편집", for: .normal)
         $0.setTitleColor(UIColor.gray_600, for: .normal)
-        $0.titleLabel?.font = UIFont.Suit(size: 14, family: .Medium)
+        $0.titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
         $0.backgroundColor = UIColor.gray_100
         
         $0.clipsToBounds = true

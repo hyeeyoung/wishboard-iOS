@@ -75,7 +75,7 @@ class ItemDetailView: UIView {
             var config = UIButton.Configuration.plain()
             var attText = AttributedString.init("쇼핑몰로 이동하기")
             
-            attText.font = .Suit(size: 16, family: .Bold)
+            attText.font = TypoStyle.SuitB3.font
             if isLinkExist {
                 attText.foregroundColor = UIColor.white
                 config.attributedTitle = attText

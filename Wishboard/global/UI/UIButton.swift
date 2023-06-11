@@ -24,7 +24,7 @@ extension UIButton {
                                       value: NSUnderlineStyle.single.rawValue,
                                       range: NSRange(location: 0, length: title.count)
         )
-        attributedString.addAttribute(.font, value: UIFont.Suit(size: 12, family: .Medium), range: NSRange(location: 0, length: title.count))
+        attributedString.addAttribute(.font, value: TypoStyle.SuitB4.font, range: NSRange(location: 0, length: title.count))
         attributedString.addAttribute(.foregroundColor, value: color, range: NSRange(location: 0, length: title.count))
         setAttributedTitle(attributedString, for: .normal)
     }
@@ -79,7 +79,7 @@ extension UIButton {
         else {
             attText = AttributedString.init(" 상품 알림 설정하기")
         }
-        attText.font = UIFont.Suit(size: 12, family: .Regular)
+        attText.font = TypoStyle.SuitD3.font
         attText.foregroundColor = UIColor.gray_700
         config.attributedTitle = attText
         config.image = Image.noti
@@ -91,7 +91,7 @@ extension UIButton {
         var config = UIButton.Configuration.plain()
         var attText = AttributedString.init(title)
         
-        attText.font = .systemFont(ofSize: 12)
+        attText.font = TypoStyle.SuitD3.font
         attText.foregroundColor = UIColor.gray
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         config.attributedTitle = attText
