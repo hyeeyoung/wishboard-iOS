@@ -167,7 +167,7 @@ extension FolderDetailViewController {
         refreshControl.addTarget(self, action: #selector(refreshTable(refresh:)), for: .valueChanged)
         
         refreshControl.backgroundColor = .white
-        refreshControl.tintColor = .black
+        refreshControl.tintColor = .gray_700
         
         folderDetailCollectionView.refreshControl = refreshControl
     }

@@ -28,9 +28,9 @@ class DefaultButton: UIButton {
         self.titleStr = titleStr
         
         self.setTitle(titleStr, for: .normal)
-        self.setTitleColor(UIColor.dialogMessageColor, for: .normal)
-        self.titleLabel?.font = UIFont.Suit(size: 14, family: .Bold)
-        self.backgroundColor = UIColor.wishboardDisabledGray
+        self.setTitleColor(UIColor.gray_300, for: .normal)
+        self.titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
+        self.backgroundColor = UIColor.gray_100
         
         self.clipsToBounds = true
         self.layer.cornerRadius = 22
@@ -46,7 +46,7 @@ class DefaultButton: UIButton {
         
         self.setTitle(titleStr, for: .normal)
         self.setTitleColor(titleColor, for: .normal)
-        self.titleLabel?.font = UIFont.Suit(size: 14, family: .Bold)
+        self.titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
         self.backgroundColor = backgroundColor
         
         self.clipsToBounds = true
@@ -60,13 +60,13 @@ class DefaultButton: UIButton {
     
     // MARK: - Function
     func activateButton() {
-        self.backgroundColor = UIColor.wishboardGreen
-        self.setTitleColor(UIColor.black, for: .normal)
+        self.backgroundColor = UIColor.green_500
+        self.setTitleColor(UIColor.gray_700, for: .normal)
         self.isEnabled = true
     }
     func inactivateButton() {
-        self.backgroundColor = UIColor.wishboardDisabledGray
-        self.setTitleColor(UIColor.dialogMessageColor, for: .normal)
+        self.backgroundColor = UIColor.gray_100
+        self.setTitleColor(UIColor.gray_300, for: .normal)
         self.isEnabled = false
     }
     // MARK: Lottie View

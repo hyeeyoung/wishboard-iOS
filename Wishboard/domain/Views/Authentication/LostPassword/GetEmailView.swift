@@ -13,10 +13,9 @@ class GetEmailView: UIView {
     let lockedImage = UIImageView().then{
         $0.image = Image.locked
     }
-    let subTitleLabel = UILabel().then{
+    let subTitleLabel = DefaultLabel().then{
         $0.text = Message.sendedEmail
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.setTextWithLineHeight()
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
@@ -27,13 +26,13 @@ class GetEmailView: UIView {
     }
     var timerLabel = UILabel().then{
         $0.text = Message.timer
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
-        $0.textColor = .wishboardRed
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD2)
+        $0.textColor = .pink_700
     }
     let messageLabel = UILabel().then{
         $0.text = ErrorMessage.authcode
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.textColor = .wishboardRed
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
+        $0.textColor = .pink_700
         $0.numberOfLines = 1
     }
     // 로그인하기 버튼

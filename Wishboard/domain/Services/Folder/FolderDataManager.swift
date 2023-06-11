@@ -12,7 +12,7 @@ class FolderDataManager {
     
     // MARK: - 폴더 조회
     func getFolderDataManager(_ viewcontroller: FolderViewController) {
-        print("폴더 조회 호출")
+//        print("폴더 조회 호출")
         AF.request(Storage().BaseURL + "/folder",
                            method: .get,
                            parameters: nil,

@@ -26,13 +26,13 @@ class ShareView: UIView {
     }
     let itemNameTextField = UITextField().then{
         $0.borderStyle = .none
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.font = TypoStyle.SuitD2.font
         $0.textAlignment = .center
         $0.placeholder = Placeholder.shareItemName
     }
     let itemPriceTextField = UITextField().then{
         $0.borderStyle = .none
-        $0.font = .systemFont(ofSize: 12, weight: .bold)
+        $0.font = TypoStyle.MontserratB1.font
         $0.keyboardType = .numberPad
         $0.textAlignment = .center
         $0.placeholder = Placeholder.shareItemPrice

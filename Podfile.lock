@@ -7,6 +7,9 @@ PODS:
     - FirebaseAnalytics (~> 10.0.0)
   - Firebase/CoreOnly (10.0.0):
     - FirebaseCore (= 10.0.0)
+  - Firebase/Crashlytics (10.0.0):
+    - Firebase/CoreOnly
+    - FirebaseCrashlytics (~> 10.0.0)
   - Firebase/Messaging (10.0.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 10.0.0)
@@ -34,6 +37,13 @@ PODS:
     - GoogleUtilities/Logger (~> 7.8)
   - FirebaseCoreInternal (10.0.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
+  - FirebaseCrashlytics (10.0.0):
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - GoogleDataTransport (~> 9.2)
+    - GoogleUtilities/Environment (~> 7.8)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+    - PromisesObjC (~> 2.1)
   - FirebaseInstallations (10.0.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
@@ -159,6 +169,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Firebase/Analytics
+  - Firebase/Crashlytics
   - Firebase/Messaging
   - FSCalendar
   - Kingfisher (~> 7.6.1)
@@ -182,6 +193,7 @@ SPEC REPOS:
     - FirebaseAnalytics
     - FirebaseCore
     - FirebaseCoreInternal
+    - FirebaseCrashlytics
     - FirebaseInstallations
     - FirebaseMessaging
     - FSCalendar
@@ -210,6 +222,7 @@ SPEC CHECKSUMS:
   FirebaseAnalytics: 9921a52739f4ab66099da31b6e0243db78a3ac0a
   FirebaseCore: 97f48a3a567a72b8d4daa0f03c3aadb78df4e995
   FirebaseCoreInternal: 5eb3960335da5ea30115d57d39db6988c4ad06f3
+  FirebaseCrashlytics: 6b0613b548fe096221b5ba6d2f7a9732b451233b
   FirebaseInstallations: 7f1c9ae6bd9df6abe9c74124b38fa8740aba5df4
   FirebaseMessaging: 8916bf5edb1dbfac74665a181e4d1ab3a78a08a2
   FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
@@ -232,6 +245,6 @@ SPEC CHECKSUMS:
   Tabman: 447a50447ed2869c39ab3b1a779327e43e067c4e
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: f162d73f52ac006db514f09badf176f786ec6e30
+PODFILE CHECKSUM: b4de7cb88f20dfda144d58d93b8461e2ee2555ec
 
 COCOAPODS: 1.12.1

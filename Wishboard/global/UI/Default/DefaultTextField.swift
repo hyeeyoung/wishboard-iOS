@@ -14,10 +14,10 @@ class DefaultTextField: UITextField {
         super.init(frame: CGRect.zero)
         
         self.placeholder = placeholder
-        self.font = UIFont.Suit(size: 16, family: .Regular)
-        self.textColor = .editTextFontColor
+        self.font = TypoStyle.SuitD1.font
+        self.textColor = .gray_700
         
-        self.backgroundColor = .wishboardTextfieldGray
+        self.backgroundColor = .gray_50
         self.layer.cornerRadius = 6
         self.autocapitalizationType = .none
         

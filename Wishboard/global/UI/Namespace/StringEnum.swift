@@ -34,6 +34,7 @@ enum ErrorMessage {
     public static let passwordRewrite = "비밀번호가 일치하지 않아요!"
     public static let authcode = "인증코드를 다시 확인해 주세요."
     public static let nonExistAccount = "앗, 가입되지 않은 계정이에요! 가입하기부터 진행해 주세요."
+    public static let existAccount = "앗, 이미 가입된 계정이에요! 로그인으로 진행해 주세요."
     
     // MARK: 500 Error
     public static let fiveHundredError = "예상하지 못한 오류가 발생했어요!\n잠시후 다시 시도해주세요."

@@ -11,17 +11,15 @@ class HowToCollectionViewCell: UICollectionViewCell {
     static let identifier = "HowToCollectionViewCell"
     // MARK: - Properties
     let backGroundView = UIView().then{
-        $0.backgroundColor = .howToBackground
+        $0.backgroundColor = .EDEDED
     }
     let phoneImage = UIImageView()
-    let title = UILabel().then{
-        $0.text = ""
-        $0.font = UIFont.Suit(size: 22, family: .Bold)
+    let title = DefaultLabel().then{
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH1)
     }
-    let subTitle = UILabel().then{
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
+    let subTitle = DefaultLabel().then{
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.numberOfLines = 0
-        $0.setTextWithLineHeight()
         $0.textAlignment = .center
     }
     // MARK: - Life Cycles

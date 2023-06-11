@@ -1,0 +1,51 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+  desc "build app and upload to testflight"
+  lane :beta do
+    match(type: "appstore")
+    clear_derived_data
+    increment_build_number(
+        build_number: latest_testflight_build_number + 1
+    )
+    gym(
+     clean: true,
+     export_method: "app-store"
+    )
+    upload_to_testflight(
+	    api_key_path: "fastlane/key.json",
+	    distribute_external: true,
+	    groups: ["WishboardTester"],
+	    changelog: "- 수출 규정 문서 추가
+			- fastlane 에서 테스트 세부사항 작성"
+    )
+    slack(
+      message: "Testflight 배포 성공",
+      slack_url: "https://hooks.slack.com/services/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"
+    )
+end
+
+platform :ios do
+
+  error do |lane, exception, options|
+    slack(
+      message: "에러 발생 : #{exception}",
+      success: false,
+      slack_url: "https://hooks.slack.com/services/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"
+)
+  end
+end

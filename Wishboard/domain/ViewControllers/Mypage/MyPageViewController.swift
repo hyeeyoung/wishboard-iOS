@@ -68,7 +68,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             return cell
         case 1, 4, 11:
-            cell.backgroundColor = .wishboardTextfieldGray
+            cell.backgroundColor = .gray_50
         case 2:
             cell.textLabel?.text = settingArray[tag - 1]
             self.setSwitch(cell)
@@ -79,8 +79,8 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = settingArray[tag - 1]
         }
         
-        cell.textLabel?.font = UIFont.Suit(size: 16, family: .Regular)
-        cell.textLabel?.textColor = .mypageTextColor
+        cell.textLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitD1)
+        cell.textLabel?.textColor = .gray_600
         cell.selectionStyle = .none
         
         return cell
@@ -170,9 +170,9 @@ extension MyPageViewController {
         var notiSwitch = UISwitch().then{
             if let pushState = self.pushState {$0.isOn = pushState}
             else {$0.isOn = false}
-            $0.onTintColor = .wishboardGreen
+            $0.onTintColor = .green_500
             $0.transform = CGAffineTransform(scaleX: 0.8, y: 0.75)
-            $0.backgroundColor = UIColor.dialogMessageColor
+            $0.backgroundColor = UIColor.gray_300
             $0.layer.cornerRadius = 16.5
         }
         cell.addSubview(notiSwitch)
@@ -196,9 +196,8 @@ extension MyPageViewController {
         let appVersion = UserDefaults.standard.string(forKey: "appVersion") ?? ""
         let versionLabel = UILabel().then{
             $0.text = appVersion
-            $0.font = UIFont.monteserrat(size: 14, family: .SemiBold)
-            $0.textColor = .dialogMessageColor
-            $0.setTextWithLineHeight()
+            $0.setTypoStyleWithSingleLine(typoStyle: .MontserratB1)
+            $0.textColor = .gray_300
         }
         cell.addSubview(versionLabel)
         versionLabel.snp.makeConstraints { make in

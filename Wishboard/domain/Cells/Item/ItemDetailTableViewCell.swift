@@ -20,57 +20,54 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.setFolderButton("폴더를 지정해 보세요! > ")
     }
     let dateLabel = UILabel().then{
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.textColor = .gray
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
+        $0.textColor = .gray_300
     }
-    let itemNameLabel = UILabel().then{
-        $0.font = UIFont.Suit(size: 16, family: .Regular)
+    let itemNameLabel = DefaultLabel().then{
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitB1)
         $0.numberOfLines = 0
-        $0.setTextWithLineHeight()
     }
-    let priceLabel = UILabel().then{
+    let priceLabel = DefaultLabel().then{
         $0.text = Item.zero
-        $0.font = UIFont.monteserrat(size: 18, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .MontserratH2)
     }
-    let won = UILabel().then{
+    let won = DefaultLabel().then{
         $0.text = Item.won
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD2)
     }
     let stack = UIStackView().then{
         $0.axis = .vertical
         $0.spacing = 16
     }
     let seperatorLine1 = UIView().then{
-        $0.backgroundColor = .wishboardDisabledGray
+        $0.backgroundColor = .gray_100
     }
     let linkLabel = UILabel().then{
-        $0.textColor = .wishboardGray
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.setTextWithLineHeight()
+        $0.textColor = .gray_200
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
     }
     let seperatorLine2 = UIView().then{
-        $0.backgroundColor = .wishboardDisabledGray
+        $0.backgroundColor = .gray_100
     }
-    let memoTitlelabel = UILabel().then{
-        $0.font = UIFont.Suit(size: 12, family: .Bold)
+    let memoTitlelabel = DefaultLabel().then{
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB2)
     }
-    let memoContentLabel = UILabel().then{
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
+    let memoContentLabel = DefaultLabel().then{
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.numberOfLines = 0
-        $0.setTextWithLineHeight()
     }
     // 재입고 초록색
     let restockLabel = PaddingLabel().then{
-        $0.textColor = .black
-        $0.font = UIFont.Suit(size: 12, family: .Bold)
-        $0.backgroundColor = .wishboardGreen
+        $0.textColor = .gray_700
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB5)
+        $0.backgroundColor = .green_500
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 12
     }
     let restockDateLabel = PaddingLabel().then{
-        $0.textColor = .black
-        $0.font = UIFont.Suit(size: 12, family: .Bold)
-        $0.backgroundColor = .wishboardGreen
+        $0.textColor = .gray_700
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB5)
+        $0.backgroundColor = .green_500
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 12
     }

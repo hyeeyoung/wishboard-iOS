@@ -16,20 +16,18 @@ class MypageProfileTableViewCell: UITableViewCell {
         $0.layer.cornerRadius = 30
         $0.contentMode = .scaleAspectFill
     }
-    let userNameLabel = UILabel().then{
-        $0.font = UIFont.Suit(size: 18, family: .Bold)
-        $0.textColor = .black
+    let userNameLabel = DefaultLabel().then{
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH2)
     }
     let emailLabel = UILabel().then{
-        $0.text = ""
-        $0.font = UIFont.Suit(size: 14, family: .Medium)
-        $0.textColor = .lightGray
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
+        $0.textColor = .gray_200
     }
     let modifyButton = UIButton().then{
         $0.setTitle("편집", for: .normal)
-        $0.setTitleColor(UIColor.mypageTextColor, for: .normal)
-        $0.titleLabel?.font = UIFont.Suit(size: 14, family: .Medium)
-        $0.backgroundColor = UIColor.uploadPhotoBackground
+        $0.setTitleColor(UIColor.gray_600, for: .normal)
+        $0.titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
+        $0.backgroundColor = UIColor.gray_100
         
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 12

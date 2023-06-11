@@ -9,9 +9,9 @@ import UIKit
 import Lottie
 
 class NewFolderViewController: BottomSheetKeyboardViewController {
-    let titleLabel = UILabel().then{
+    let titleLabel = DefaultLabel().then{
         $0.text = Title.addFolder
-        $0.font = UIFont.Suit(size: 14, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
     }
     let exitBtn = UIButton().then{
         $0.setImage(Image.quit, for: .normal)
@@ -21,13 +21,13 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
     }
     let textFieldCountLabel = UILabel().then{
         $0.text = Message.count
-        $0.textColor = .wishboardGray
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.textColor = .gray_200
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
     }
     let errorMessage = UILabel().then{
         $0.text = ErrorMessage.sameFolderName
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.textColor = .wishboardRed
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
+        $0.textColor = .pink_700
     }
     let completeButton = DefaultButton(titleStr: Button.add)
     // MARK: - Life Cycles
@@ -129,13 +129,13 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
     func checkValidFolder(_ folder: String, _ isValidCount: Bool) {
         // TODO: 유효한 폴더명인 지 확인 필요
         if isValidCount {
-            self.textFieldCountLabel.textColor = .wishboardGray
+            self.textFieldCountLabel.textColor = .gray_200
             self.errorMessage.isHidden = true
 //            self.completeButton.isSelected = false
             self.completeButton.isActivate = true
             self.folderStr = self.tempFolderStr
         } else {
-            self.textFieldCountLabel.textColor = .wishboardRed
+            self.textFieldCountLabel.textColor = .pink_700
             self.errorMessage.isHidden = true
 //            self.completeButton.isSelected = false
             self.completeButton.isActivate = false
@@ -150,7 +150,7 @@ extension NewFolderViewController {
         self.viewDidLoad()
         self.dismiss(animated: true)
         
-        self.textFieldCountLabel.textColor = .wishboardGray
+        self.textFieldCountLabel.textColor = .gray_200
         self.errorMessage.isHidden = true
         self.completeButton.inActivateLottieView()
         self.completeButton.isActivate = true

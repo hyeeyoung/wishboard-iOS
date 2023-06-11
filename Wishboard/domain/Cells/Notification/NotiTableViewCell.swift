@@ -16,28 +16,27 @@ class NotiTableViewCell: UITableViewCell {
         $0.layer.cornerRadius = 40
         $0.contentMode = .scaleAspectFill
     }
-    let itemName = UILabel().then{
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
+    let itemName = DefaultLabel().then{
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD3)
         $0.numberOfLines = 2
     }
     // '재입고 알림'
-    let notificationTypeLabel = UILabel().then{
+    let notificationTypeLabel = DefaultLabel().then{
         $0.text = Notification.restock
-        $0.font = UIFont.Suit(size: 13, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB4)
     }
-    let label = UILabel().then{
+    let label = DefaultLabel().then{
         $0.text = Notification.notification
-        $0.font = UIFont.Suit(size: 13, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB4)
     }
     // 읽음 표시
     let viewView = UIView().then{
-        $0.backgroundColor = .wishboardGreen
+        $0.backgroundColor = .green_500
         $0.layer.cornerRadius = 4
     }
-    let timeLabel = UILabel().then{
-        $0.text = ""
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.textColor = .gray
+    let timeLabel = DefaultLabel().then{
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
+        $0.textColor = .gray_300
     }
     //MARK: - Life Cycles
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -106,40 +105,40 @@ extension NotiTableViewCell {
             self.viewView.isHidden = isViewed == 1 ? true : false
         }
     }
-    // MARK: 캘린더 알림 조회 API 호출 후
-    func setCalenderNotiCell(_ data: NotificationModel) {
-//        print("notidata:", data)
-        if let image = data.item_img_url {
-            let processor = TintImageProcessor(tint: .black_5)
-            self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage(), options: [.processor(processor), .transition(.fade(0.5))])
-        }
-        if let notiType = data.item_notification_type {self.notificationTypeLabel.text = notiType}
-        if let name = data.item_name {self.itemName.text = name}
-        // 뒷배경 뷰 추가
-        let grayView = UIView().then{
-            $0.backgroundColor = .notificationBackgroundGray
-            $0.layer.cornerRadius = 24
-        }
-        contentView.insertSubview(grayView, at: 0)
-        grayView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalToSuperview().offset(-3)
-            make.top.equalToSuperview().offset(3)
-            make.height.equalTo(104)
-        }
-        // 초록 동그라미는 보여주지 않는다.
-        self.viewView.isHidden = true
-        // 알람 시간 파싱 ('오전 0시 0분')
-        let dateStr = data.item_notification_date
-        let myDateFormatter = DateFormatter()
-        myDateFormatter.dateFormat = "a h시 mm분" // 2020년 08월 13일 오후 04시 30분
-        myDateFormatter.locale = Locale(identifier:"ko_KR")
-        let notificationTimeStr = myDateFormatter.string(from: (dateStr?.toCreatedDate()!)!)
-        
-        // 00분인지, 30분인지 구분
-        let minute = notificationTimeStr[notificationTimeStr.index(notificationTimeStr.endIndex, offsetBy: -3)]
-        var notificationTime = notificationTimeStr
-        if minute != "3" {notificationTime = String(notificationTimeStr.dropLast(3))}
-        self.timeLabel.text = notificationTime
-    }
+//    // MARK: 캘린더 알림 조회 API 호출 후
+//    func setCalenderNotiCell(_ data: NotificationModel) {
+////        print("notidata:", data)
+//        if let image = data.item_img_url {
+//            let processor = TintImageProcessor(tint: .black_5)
+//            self.itemImage.kf.setImage(with: URL(string: image), placeholder: UIImage(), options: [.processor(processor), .transition(.fade(0.5))])
+//        }
+//        if let notiType = data.item_notification_type {self.notificationTypeLabel.text = notiType}
+//        if let name = data.item_name {self.itemName.text = name}
+//        // 뒷배경 뷰 추가
+//        let grayView = UIView().then{
+//            $0.backgroundColor = .notificationBackgroundGray
+//            $0.layer.cornerRadius = 24
+//        }
+//        contentView.insertSubview(grayView, at: 0)
+//        grayView.snp.makeConstraints { make in
+//            make.leading.trailing.equalToSuperview().inset(16)
+//            make.bottom.equalToSuperview().offset(-3)
+//            make.top.equalToSuperview().offset(3)
+//            make.height.equalTo(104)
+//        }
+//        // 초록 동그라미는 보여주지 않는다.
+//        self.viewView.isHidden = true
+//        // 알람 시간 파싱 ('오전 0시 0분')
+//        let dateStr = data.item_notification_date
+//        let myDateFormatter = DateFormatter()
+//        myDateFormatter.dateFormat = "a h시 mm분" // 2020년 08월 13일 오후 04시 30분
+//        myDateFormatter.locale = Locale(identifier:"ko_KR")
+//        let notificationTimeStr = myDateFormatter.string(from: (dateStr?.toCreatedDate()!)!)
+//
+//        // 00분인지, 30분인지 구분
+//        let minute = notificationTimeStr[notificationTimeStr.index(notificationTimeStr.endIndex, offsetBy: -3)]
+//        var notificationTime = notificationTimeStr
+//        if minute != "3" {notificationTime = String(notificationTimeStr.dropLast(3))}
+//        self.timeLabel.text = notificationTime
+//    }
 }

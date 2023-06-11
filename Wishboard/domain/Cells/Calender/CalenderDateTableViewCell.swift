@@ -9,9 +9,9 @@ import UIKit
 
 class CalenderDateTableViewCell: UITableViewCell {
     // MARK: - Views
-    let label = UILabel().then{
+    let label = DefaultLabel().then{
         $0.text = "_월 _일 일정"
-        $0.font = UIFont.Suit(size: 14, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH4)
     }
 
     // MARK: - Life Cycle

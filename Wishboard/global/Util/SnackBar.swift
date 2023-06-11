@@ -11,13 +11,13 @@ import UIKit
 class SnackBar {
     // MARK: - Views
     let backgroundView = UIView().then{
-        $0.backgroundColor = .black
+        $0.backgroundColor = .gray_700
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 25
     }
     var title = UILabel().then{
         $0.textColor = .white
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD2)
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
@@ -29,10 +29,8 @@ class SnackBar {
         
         // 만약 하단바가 존재할 때
         if (originView.tabBarController?.tabBar.isHidden == false) {
-            print("만약 하단바가 존재할 때")
             originView.tabBarController?.tabBar.addSubview(backgroundView)
         } else {
-            print("만약 하단바가 존재하지 않을 때")
             originView.view.addSubview(backgroundView)
         }
         
@@ -86,13 +84,13 @@ extension SnackBar {
 class ErrorBar {
     // MARK: - Views
     let backgroundView = UIView().then{
-        $0.backgroundColor = .black
+        $0.backgroundColor = .gray_700
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 25
     }
     var title = UILabel().then{
         $0.textColor = .white
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }

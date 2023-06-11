@@ -13,9 +13,9 @@ import SnapKit
 class ModifyPasswordView: UIView {
     // MARK: - Views
     // 새 비밀번호 Label
-    let newPasswordLabel = UILabel().then{
+    let newPasswordLabel = DefaultLabel().then{
         $0.text = Title.newPassword
-        $0.font = UIFont.Suit(size: 14, family: .Medium)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
     }
     // 새 비밀번호 TextField
     let newPasswordTextField = DefaultTextField(Placeholder.email).then{
@@ -23,14 +23,14 @@ class ModifyPasswordView: UIView {
     }
     let newPasswordErrorMessageLabel = UILabel().then{
         $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.textColor = UIColor.wishboardRed
+        $0.textColor = UIColor.pink_700
         $0.text = ErrorMessage.password
         $0.isHidden = true
     }
     // 비밀번호 재입력 Label
-    let passwordRewriteLabel = UILabel().then{
+    let passwordRewriteLabel = DefaultLabel().then{
         $0.text = Title.passwordRewrite
-        $0.font = UIFont.Suit(size: 14, family: .Medium)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
     }
     // 비밀번호 재입력 TextField
     let passwordRewriteTextField = DefaultTextField(Placeholder.password).then{
@@ -38,7 +38,7 @@ class ModifyPasswordView: UIView {
     }
     let passwordRewriteErrorMessageLabel = UILabel().then{
         $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.textColor = UIColor.wishboardRed
+        $0.textColor = UIColor.pink_700
         $0.text = ErrorMessage.passwordRewrite
         $0.isHidden = true
     }

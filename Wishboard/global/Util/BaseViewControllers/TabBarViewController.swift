@@ -9,7 +9,7 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
     let seperator = UIView().then{
-        $0.backgroundColor = .wishboardDisabledGray
+        $0.backgroundColor = .gray_100
     }
 
     override func viewDidLoad() {
@@ -43,9 +43,9 @@ class TabBarViewController: UITabBarController {
         noticeVC.tabBarItem.title = "NOTICE"
         profileVC.tabBarItem.title = "MY"
         
-        self.tabBar.tintColor = .black
-        self.tabBar.unselectedItemTintColor = .unselectedTabColor
-        let fontAttributes = [NSAttributedString.Key.font: UIFont.monteserrat(size: 9, family: .Regular)]
+        self.tabBar.tintColor = .gray_700
+        self.tabBar.unselectedItemTintColor = .gray_150
+        let fontAttributes = [NSAttributedString.Key.font: TypoStyle.MontserratD1.font]
         UITabBarItem.appearance().setTitleTextAttributes(fontAttributes, for: .normal)
         
        // navigationController의 root view 설정

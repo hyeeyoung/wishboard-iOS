@@ -12,32 +12,27 @@ class CartView: UIView {
     // MARK: - Properties
     // lower View
     let lowerView = UIView().then{
-        $0.backgroundColor = .wishboardGreen
+        $0.backgroundColor = .green_500
     }
-    let total = UILabel().then{
+    let total = DefaultLabel().then{
         $0.text = Item.total
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
-        $0.setTextWithLineHeight()
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD2)
     }
-    let countLabel = UILabel().then{
+    let countLabel = DefaultLabel().then{
         $0.text = Item.zero
-        $0.font = UIFont.monteserrat(size: 18, family: .Bold)
-        $0.setTextWithLineHeight()
+        $0.setTypoStyleWithSingleLine(typoStyle: .MontserratH2)
     }
-    let label = UILabel().then{
+    let label = DefaultLabel().then{
         $0.text = Item.count
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
-        $0.setTextWithLineHeight()
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD2)
     }
-    let price = UILabel().then{
+    let price = DefaultLabel().then{
         $0.text = Item.zero
-        $0.font = UIFont.monteserrat(size: 18, family: .Bold)
-        $0.setTextWithLineHeight()
+        $0.setTypoStyleWithSingleLine(typoStyle: .MontserratH2)
     }
-    let won = UILabel().then{
+    let won = DefaultLabel().then{
         $0.text = Item.won
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
-        $0.setTextWithLineHeight()
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD2)
     }
     // MARK: - Life Cycles
     var preVC: CartViewController!

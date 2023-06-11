@@ -19,11 +19,10 @@ class WebViewController: UIViewController, WKUIDelegate {
         $0.backgroundColor = .white
     }
     let operatorLine = UIView().then{
-        $0.backgroundColor = UIColor.webViewOperatorColor
+        $0.backgroundColor = .gray_100
     }
-    let titleLabel = UILabel().then{
-        $0.font = UIFont.Suit(size: 14, family: .Bold)
-        $0.setTextWithLineHeight()
+    let titleLabel = DefaultLabel().then{
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
     }
     let backButton = UIButton().then{
         $0.setImage(Image.goBack, for: .normal)

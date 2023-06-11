@@ -68,23 +68,23 @@ class ItemDetailView: UIView {
         // lower View
         lowerView = UIView()
         lowerView.then{
-            if isLinkExist {$0.backgroundColor = .black}
-            else {$0.backgroundColor = .wishboardDisabledGray}
+            if isLinkExist {$0.backgroundColor = .gray_700}
+            else {$0.backgroundColor = .gray_100}
         }
         lowerButton = UIButton().then{
             var config = UIButton.Configuration.plain()
             var attText = AttributedString.init("쇼핑몰로 이동하기")
             
-            attText.font = .Suit(size: 16, family: .Bold)
+            attText.font = TypoStyle.SuitB3.font
             if isLinkExist {
                 attText.foregroundColor = UIColor.white
                 config.attributedTitle = attText
-                config.background.backgroundColor = .black
+                config.background.backgroundColor = .gray_700
                 $0.isEnabled = true
             } else {
-                attText.foregroundColor = .dialogMessageColor
+                attText.foregroundColor = .gray_300
                 config.attributedTitle = attText
-                config.background.backgroundColor = .wishboardDisabledGray
+                config.background.backgroundColor = .gray_100
                 $0.isEnabled = false
             }
             

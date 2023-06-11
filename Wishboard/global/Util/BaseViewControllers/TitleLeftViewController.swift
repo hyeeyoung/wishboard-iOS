@@ -28,10 +28,8 @@ class TitleLeftViewController: UIViewController {
     // MARK: Views
     let navigationView = UIView()
     
-    lazy var navigationTitle = UILabel().then{
-        $0.font = UIFont.Suit(size: 22, family: .Bold)
-        $0.textColor = .black
-        $0.setTextWithLineHeight()
+    lazy var navigationTitle = DefaultLabel().then{
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH1)
     }
     
     lazy var rightPositionBtn: EtcButton? = nil{

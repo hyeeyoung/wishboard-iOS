@@ -109,7 +109,7 @@ extension FolderViewController {
         }
         let cancelAction = UIAlertAction(title: "취소", style: UIAlertAction.Style.cancel, handler: nil)
         
-        alert.view.tintColor = .black
+        alert.view.tintColor = .gray_700
         alert.addAction(modifyAction)
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
@@ -261,7 +261,7 @@ extension FolderViewController {
         refreshControl.addTarget(self, action: #selector(refreshTable(refresh:)), for: .valueChanged)
         
         refreshControl.backgroundColor = .white
-        refreshControl.tintColor = .black
+        refreshControl.tintColor = .gray_700
         
         folderView.folderCollectionView.refreshControl = refreshControl
     }

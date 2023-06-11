@@ -22,22 +22,20 @@ class PopUpViewController: UIViewController {
         
         $0.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
     }
-    let titleLabel = UILabel().then{
-        $0.text = "title"
-        $0.font = UIFont.Suit(size: 16, family: .Bold)
+    let titleLabel = DefaultLabel().then{
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
     }
     let messageLabel = UILabel().then{
-        $0.text = "message"
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
-        $0.textColor = .dialogMessageColor
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
+        $0.textColor = .gray_300
         $0.numberOfLines = 0
         $0.textAlignment = .center
     }
     let horizontalSeperator = UIView().then{
-        $0.backgroundColor = .wishboardDisabledGray
+        $0.backgroundColor = .gray_100
     }
     let verticalSeperator = UIView().then{
-        $0.backgroundColor = .wishboardDisabledGray
+        $0.backgroundColor = .gray_100
     }
     var cancelBtn: UIButton!
     var okBtn: UIButton!
@@ -59,7 +57,7 @@ class PopUpViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .popupBackground
+        self.view.backgroundColor = .black_4
 
         cancelBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
@@ -94,8 +92,8 @@ class PopUpViewController: UIViewController {
             var config = UIButton.Configuration.plain()
             var attText = AttributedString.init(self.greenBtnText!)
             
-            attText.font = UIFont.Suit(size: 14, family: .Medium)
-            attText.foregroundColor = UIColor.dialogGreenTxt
+            attText.font = TypoStyle.SuitB3.font
+            attText.foregroundColor = UIColor.green_700
             config.attributedTitle = attText
             
             $0.configuration = config
@@ -104,8 +102,8 @@ class PopUpViewController: UIViewController {
             var config = UIButton.Configuration.plain()
             var attText = AttributedString.init(self.blackBtnText!)
             
-            attText.font = UIFont.Suit(size: 14, family: .Medium)
-            attText.foregroundColor = UIColor.black
+            attText.font = TypoStyle.SuitB3.font
+            attText.foregroundColor = UIColor.gray_700
             config.attributedTitle = attText
             
             $0.configuration = config

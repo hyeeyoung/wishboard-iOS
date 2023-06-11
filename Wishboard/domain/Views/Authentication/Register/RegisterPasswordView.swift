@@ -14,10 +14,9 @@ class RegisterPasswordView: UIView {
     let lockedImage = UIImageView().then{
         $0.image = Image.locked
     }
-    let subTitleLabel = UILabel().then{
+    let subTitleLabel = DefaultLabel().then{
         $0.text = Message.password
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.setTextWithLineHeight()
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
@@ -27,8 +26,8 @@ class RegisterPasswordView: UIView {
     }
     let errorMessage = UILabel().then{
         $0.text = ErrorMessage.password
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.textColor = .wishboardRed
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
+        $0.textColor = .pink_700
     }
     let stack = UIStackView().then{
         $0.axis = .horizontal
@@ -127,15 +126,15 @@ extension RegisterPasswordView {
     func setLabel(_ title: String) {
         let label = UILabel().then{
             $0.text = title
-            $0.font = UIFont.Suit(size: 12, family: .Regular)
-            $0.textColor  = .wishboardGray
+            $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
+            $0.textColor  = .gray_300
             $0.setTextWithLineHeight()
         }
         stack.addArrangedSubview(label)
     }
     func setUnderLinedButton(_ title: String) -> UIButton {
         let underlineButton = UIButton().then{
-            $0.setUnderline(title, .wishboardGreen, UIFont.Suit(size: 12, family: .Medium))
+            $0.setUnderline(title, .green_700, TypoStyle.SuitB4.font)
         }
         stack.addArrangedSubview(underlineButton)
         return underlineButton

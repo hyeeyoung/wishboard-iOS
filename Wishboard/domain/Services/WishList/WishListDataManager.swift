@@ -35,6 +35,8 @@ class WishListDataManager {
                     RefreshDataManager().refreshDataManager() {
                         $0 ? self.wishListDataManager(homeView, viewcontroller) : ScreenManager().goToOnboarding(viewcontroller)
                     }
+                case 304:
+                    print(error.responseCode, error.localizedDescription)
                     
                 default:
                     print(error.responseCode)

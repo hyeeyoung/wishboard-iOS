@@ -19,10 +19,10 @@ class CalenderTableViewCell: UITableViewCell {
         $0.configuration = config
     }
     let weekSeperator = UIView().then{
-        $0.backgroundColor = .wishboardDisabledGray
+        $0.backgroundColor = .gray_100
     }
     let underSeperator = UIView().then{
-        $0.backgroundColor = .wishboardDisabledGray
+        $0.backgroundColor = .gray_100
     }
     
     //MARK: - Life Cycles
@@ -46,21 +46,21 @@ class CalenderTableViewCell: UITableViewCell {
             $0.appearance.headerMinimumDissolvedAlpha = 0
             $0.locale = Locale(identifier: "en")
             
-            $0.appearance.headerTitleColor = .black
-            $0.appearance.weekdayTextColor = .black
+            $0.appearance.headerTitleColor = .gray_700
+            $0.appearance.weekdayTextColor = .gray_700
             $0.appearance.headerTitleFont = UIFont.monteserrat(size: 20, family: .ExtraBold)
             $0.appearance.titleFont = UIFont.Suit(size: 16, family: .Regular)
             $0.appearance.weekdayFont = UIFont.monteserrat(size: 14, family: .Medium)
             $0.appearance.subtitleFont = UIFont.Suit(size: 16, family: .Bold)
             
-            $0.appearance.todayColor = .wishboardGreen
-            $0.appearance.titleTodayColor = .black
+            $0.appearance.todayColor = .green_500
+            $0.appearance.titleTodayColor = .gray_700
             $0.appearance.selectionColor = .clear
-            $0.appearance.todaySelectionColor = .wishboardGreen
-            $0.appearance.titleSelectionColor = .black
+            $0.appearance.todaySelectionColor = .green_500
+            $0.appearance.titleSelectionColor = .gray_700
             
-            $0.appearance.eventDefaultColor = .wishboardLightGreen
-            $0.appearance.eventSelectionColor = .wishboardLightGreen
+            $0.appearance.eventDefaultColor = .green_200
+            $0.appearance.eventSelectionColor = .green_500
         }
         contentView.addSubview(calender)
         contentView.addSubview(backButton)
