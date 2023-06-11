@@ -15,6 +15,7 @@
 		230192BC2A3068C200B30B0E /* DefaultLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230192BA2A30669200B30B0E /* DefaultLabel.swift */; };
 		230A3F5928E4B5CA00966682 /* NotificationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230A3F5828E4B5CA00966682 /* NotificationDataManager.swift */; };
 		230DBFA828E106EE00E9AED6 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230DBFA728E106EE00E9AED6 /* ShareView.swift */; };
+		23127C842A361DDB008452FD /* TypoStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23127C832A361DDB008452FD /* TypoStyle.swift */; };
 		23134D3D29B2216700238536 /* RefreshInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23134D3C29B2216700238536 /* RefreshInput.swift */; };
 		23134D3F29B222BF00238536 /* RefreshDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23134D3E29B222BF00238536 /* RefreshDataManager.swift */; };
 		231B581028E8A33C0030D33E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */; };
@@ -87,7 +88,6 @@
 		236AC9F0291A6AB700E1474C /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236AC9EF291A6AB700E1474C /* Storage.swift */; };
 		236FE90428DF7BE0006142DB /* SUIT-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 236FE90128DF7BE0006142DB /* SUIT-Bold.ttf */; };
 		236FE90628DF7BE0006142DB /* SUIT-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 236FE90228DF7BE0006142DB /* SUIT-Regular.ttf */; };
-		236FE90828DF7BE0006142DB /* SUIT-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 236FE90328DF7BE0006142DB /* SUIT-Thin.ttf */; };
 		236FE91028DF8385006142DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23DC04B628C58B5500ABB0CF /* Assets.xcassets */; };
 		236FE91128DF83E6006142DB /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C9568A28C6803900D88536 /* UIFont.swift */; };
 		236FE91628DF850D006142DB /* loading_horizontal_black.json in Resources */ = {isa = PBXBuildFile; fileRef = 2331867E28DA92EE00F17CBF /* loading_horizontal_black.json */; };
@@ -99,17 +99,10 @@
 		236FE91F28DF8592006142DB /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CB028CC1819001B8C7F /* UIView.swift */; };
 		236FE92128DF8592006142DB /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C9568C28C6812100D88536 /* UIColor.swift */; };
 		236FE92228DF8592006142DB /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5518028C69E2900D81B5F /* UITextField.swift */; };
-		236FE92928DF8599006142DB /* SUIT-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 236FE90328DF7BE0006142DB /* SUIT-Thin.ttf */; };
-		236FE92A28DF8599006142DB /* SUIT-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23C9569228C68D7900D88536 /* SUIT-Light.ttf */; };
 		236FE92B28DF8599006142DB /* SUIT-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23C9569628C68D7A00D88536 /* SUIT-SemiBold.ttf */; };
 		236FE92C28DF8599006142DB /* SUIT-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 236FE90228DF7BE0006142DB /* SUIT-Regular.ttf */; };
-		236FE92D28DF8599006142DB /* SUIT-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23C9568E28C68D7900D88536 /* SUIT-Heavy.ttf */; };
-		236FE92E28DF8599006142DB /* SUIT-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23C9569128C68D7900D88536 /* SUIT-ExtraBold.ttf */; };
-		236FE92F28DF8599006142DB /* SUIT-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23C9568F28C68D7900D88536 /* SUIT-ExtraLight.ttf */; };
 		236FE93028DF8599006142DB /* SUIT-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23C9569528C68D7900D88536 /* SUIT-Medium.ttf */; };
 		236FE93128DF8599006142DB /* SUIT-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 236FE90128DF7BE0006142DB /* SUIT-Bold.ttf */; };
-		236FE93228DF859D006142DB /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2374789328D1C9D600CF941A /* Montserrat-Bold.ttf */; };
-		236FE93328DF859D006142DB /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2374789428D1C9D600CF941A /* Montserrat-Light.ttf */; };
 		236FE93428DF859D006142DB /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2374789528D1C9D600CF941A /* Montserrat-Regular.ttf */; };
 		236FE93828DF85A4006142DB /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360095F28DA2297001FB107 /* EmptyView.swift */; };
 		236FE93928DF85A4006142DB /* SnackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360FF5B28DCB31600E481A6 /* SnackBar.swift */; };
@@ -121,8 +114,6 @@
 		236FE93F28DF85B0006142DB /* PopUpWithTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2378280328D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift */; };
 		236FE94028DF85B3006142DB /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3113628DF633D00A636F6 /* APIModel.swift */; };
 		236FE94228DF888A006142DB /* FolderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236FE94128DF888A006142DB /* FolderCollectionViewCell.swift */; };
-		2374789628D1C9D600CF941A /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2374789328D1C9D600CF941A /* Montserrat-Bold.ttf */; };
-		2374789728D1C9D600CF941A /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2374789428D1C9D600CF941A /* Montserrat-Light.ttf */; };
 		2374789828D1C9D600CF941A /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2374789528D1C9D600CF941A /* Montserrat-Regular.ttf */; };
 		2374789A28D1DB2900CF941A /* CheckNotch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2374789928D1DB2900CF941A /* CheckNotch.swift */; };
 		2374789C28D1EA1700CF941A /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2374789B28D1EA1700CF941A /* PaddingLabel.swift */; };
@@ -166,7 +157,6 @@
 		23C3113728DF633D00A636F6 /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3113628DF633D00A636F6 /* APIModel.swift */; };
 		23C3113F28DF680300A636F6 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3113E28DF680300A636F6 /* ShareViewController.swift */; };
 		23C3114228DF680300A636F6 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23C3114028DF680300A636F6 /* MainInterface.storyboard */; };
-		23C3114628DF680300A636F6 /* Share Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 23C3113C28DF680300A636F6 /* Share Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		23C5AB4928CAA23300A7E977 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C5AB4828CAA23300A7E977 /* MyPageView.swift */; };
 		23C5AB4B28CAA24300A7E977 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C5AB4A28CAA24300A7E977 /* MyPageViewController.swift */; };
 		23C5AB4D28CAA54600A7E977 /* MypageProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C5AB4C28CAA54600A7E977 /* MypageProfileTableViewCell.swift */; };
@@ -177,10 +167,6 @@
 		23C9567B28C67B9D00D88536 /* OnBoardingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C9567A28C67B9D00D88536 /* OnBoardingTableViewCell.swift */; };
 		23C9568B28C6803900D88536 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C9568A28C6803900D88536 /* UIFont.swift */; };
 		23C9568D28C6812100D88536 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C9568C28C6812100D88536 /* UIColor.swift */; };
-		23C9569728C68D7A00D88536 /* SUIT-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23C9568E28C68D7900D88536 /* SUIT-Heavy.ttf */; };
-		23C9569828C68D7A00D88536 /* SUIT-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23C9568F28C68D7900D88536 /* SUIT-ExtraLight.ttf */; };
-		23C9569A28C68D7A00D88536 /* SUIT-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23C9569128C68D7900D88536 /* SUIT-ExtraBold.ttf */; };
-		23C9569B28C68D7A00D88536 /* SUIT-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23C9569228C68D7900D88536 /* SUIT-Light.ttf */; };
 		23C9569E28C68D7A00D88536 /* SUIT-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23C9569528C68D7900D88536 /* SUIT-Medium.ttf */; };
 		23C9569F28C68D7A00D88536 /* SUIT-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23C9569628C68D7A00D88536 /* SUIT-SemiBold.ttf */; };
 		23C956A128C68F9400D88536 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C956A028C68F9400D88536 /* LoginViewController.swift */; };
@@ -236,13 +222,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		23C3114428DF680300A636F6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 23DC04A228C58B5200ABB0CF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 23C3113B28DF680300A636F6;
-			remoteInfo = "Share Extension";
-		};
 		23DC04C128C58B5500ABB0CF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 23DC04A228C58B5200ABB0CF /* Project object */;
@@ -266,7 +245,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				23C3114628DF680300A636F6 /* Share Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,6 +258,7 @@
 		230192BA2A30669200B30B0E /* DefaultLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLabel.swift; sourceTree = "<group>"; };
 		230A3F5828E4B5CA00966682 /* NotificationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataManager.swift; sourceTree = "<group>"; };
 		230DBFA728E106EE00E9AED6 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
+		23127C832A361DDB008452FD /* TypoStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypoStyle.swift; sourceTree = "<group>"; };
 		23134D3C29B2216700238536 /* RefreshInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshInput.swift; sourceTree = "<group>"; };
 		23134D3E29B222BF00238536 /* RefreshDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshDataManager.swift; sourceTree = "<group>"; };
 		232174DA28E1BE81008C155D /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
@@ -342,10 +321,7 @@
 		236AC9EF291A6AB700E1474C /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		236FE90128DF7BE0006142DB /* SUIT-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Bold.ttf"; sourceTree = "<group>"; };
 		236FE90228DF7BE0006142DB /* SUIT-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Regular.ttf"; sourceTree = "<group>"; };
-		236FE90328DF7BE0006142DB /* SUIT-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Thin.ttf"; sourceTree = "<group>"; };
 		236FE94128DF888A006142DB /* FolderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderCollectionViewCell.swift; sourceTree = "<group>"; };
-		2374789328D1C9D600CF941A /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
-		2374789428D1C9D600CF941A /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
 		2374789528D1C9D600CF941A /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		2374789928D1DB2900CF941A /* CheckNotch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNotch.swift; sourceTree = "<group>"; };
 		2374789B28D1EA1700CF941A /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
@@ -402,10 +378,6 @@
 		23C9567A28C67B9D00D88536 /* OnBoardingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingTableViewCell.swift; sourceTree = "<group>"; };
 		23C9568A28C6803900D88536 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		23C9568C28C6812100D88536 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		23C9568E28C68D7900D88536 /* SUIT-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Heavy.ttf"; sourceTree = "<group>"; };
-		23C9568F28C68D7900D88536 /* SUIT-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-ExtraLight.ttf"; sourceTree = "<group>"; };
-		23C9569128C68D7900D88536 /* SUIT-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-ExtraBold.ttf"; sourceTree = "<group>"; };
-		23C9569228C68D7900D88536 /* SUIT-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Light.ttf"; sourceTree = "<group>"; };
 		23C9569528C68D7900D88536 /* SUIT-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Medium.ttf"; sourceTree = "<group>"; };
 		23C9569628C68D7A00D88536 /* SUIT-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-SemiBold.ttf"; sourceTree = "<group>"; };
 		23C956A028C68F9400D88536 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -946,11 +918,6 @@
 			children = (
 				236FE90128DF7BE0006142DB /* SUIT-Bold.ttf */,
 				236FE90228DF7BE0006142DB /* SUIT-Regular.ttf */,
-				236FE90328DF7BE0006142DB /* SUIT-Thin.ttf */,
-				23C9569128C68D7900D88536 /* SUIT-ExtraBold.ttf */,
-				23C9568F28C68D7900D88536 /* SUIT-ExtraLight.ttf */,
-				23C9568E28C68D7900D88536 /* SUIT-Heavy.ttf */,
-				23C9569228C68D7900D88536 /* SUIT-Light.ttf */,
 				23C9569528C68D7900D88536 /* SUIT-Medium.ttf */,
 				23C9569628C68D7A00D88536 /* SUIT-SemiBold.ttf */,
 			);
@@ -963,8 +930,6 @@
 				2364B79D29D40426006459EF /* Montserrat-SemiBold.ttf */,
 				23933AC72903233A00FAC80A /* Montserrat-Medium.ttf */,
 				23933AC5290322A500FAC80A /* Montserrat-ExtraBold.ttf */,
-				2374789328D1C9D600CF941A /* Montserrat-Bold.ttf */,
-				2374789428D1C9D600CF941A /* Montserrat-Light.ttf */,
 				2374789528D1C9D600CF941A /* Montserrat-Regular.ttf */,
 			);
 			path = monteserrat;
@@ -1227,6 +1192,7 @@
 				234F837D28C9677500C4EB41 /* monteserrat */,
 				234F837C28C9676A00C4EB41 /* SUIT */,
 				23C9568A28C6803900D88536 /* UIFont.swift */,
+				23127C832A361DDB008452FD /* TypoStyle.swift */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -1502,7 +1468,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				23C3114528DF680300A636F6 /* PBXTargetDependency */,
 			);
 			name = Wishboard;
 			productName = Wishboard;
@@ -1602,21 +1567,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				236FE93428DF859D006142DB /* Montserrat-Regular.ttf in Resources */,
-				236FE93328DF859D006142DB /* Montserrat-Light.ttf in Resources */,
 				236FE92C28DF8599006142DB /* SUIT-Regular.ttf in Resources */,
 				236FE91628DF850D006142DB /* loading_horizontal_black.json in Resources */,
 				236FE93128DF8599006142DB /* SUIT-Bold.ttf in Resources */,
 				236FE91728DF8510006142DB /* loading_spin.json in Resources */,
 				2364B79F29D40426006459EF /* Montserrat-SemiBold.ttf in Resources */,
-				236FE92928DF8599006142DB /* SUIT-Thin.ttf in Resources */,
-				236FE92D28DF8599006142DB /* SUIT-Heavy.ttf in Resources */,
-				236FE93228DF859D006142DB /* Montserrat-Bold.ttf in Resources */,
 				23C3114228DF680300A636F6 /* MainInterface.storyboard in Resources */,
 				236FE93028DF8599006142DB /* SUIT-Medium.ttf in Resources */,
-				236FE92A28DF8599006142DB /* SUIT-Light.ttf in Resources */,
 				23A32DBA28F5816300A791F5 /* GoogleService-Info.plist in Resources */,
-				236FE92E28DF8599006142DB /* SUIT-ExtraBold.ttf in Resources */,
-				236FE92F28DF8599006142DB /* SUIT-ExtraLight.ttf in Resources */,
 				236FE91028DF8385006142DB /* Assets.xcassets in Resources */,
 				236FE92B28DF8599006142DB /* SUIT-SemiBold.ttf in Resources */,
 			);
@@ -1629,25 +1587,18 @@
 				236FE90628DF7BE0006142DB /* SUIT-Regular.ttf in Resources */,
 				23B1FA4B294017F200832425 /* InfoPlist.strings in Resources */,
 				2331867F28DA92EE00F17CBF /* loading_spin.json in Resources */,
-				236FE90828DF7BE0006142DB /* SUIT-Thin.ttf in Resources */,
 				23C9569E28C68D7A00D88536 /* SUIT-Medium.ttf in Resources */,
 				2374789828D1C9D600CF941A /* Montserrat-Regular.ttf in Resources */,
 				23DC04BA28C58B5500ABB0CF /* LaunchScreen.storyboard in Resources */,
 				23933AC82903233A00FAC80A /* Montserrat-Medium.ttf in Resources */,
-				2374789728D1C9D600CF941A /* Montserrat-Light.ttf in Resources */,
-				2374789628D1C9D600CF941A /* Montserrat-Bold.ttf in Resources */,
-				23C9569728C68D7A00D88536 /* SUIT-Heavy.ttf in Resources */,
 				23C9569F28C68D7A00D88536 /* SUIT-SemiBold.ttf in Resources */,
 				2364B79E29D40426006459EF /* Montserrat-SemiBold.ttf in Resources */,
-				23C9569A28C68D7A00D88536 /* SUIT-ExtraBold.ttf in Resources */,
 				23A32DB928F5816300A791F5 /* GoogleService-Info.plist in Resources */,
-				23C9569B28C68D7A00D88536 /* SUIT-Light.ttf in Resources */,
 				2331868028DA92EE00F17CBF /* loading_horizontal_black.json in Resources */,
 				23DC04B728C58B5500ABB0CF /* Assets.xcassets in Resources */,
 				236FE90428DF7BE0006142DB /* SUIT-Bold.ttf in Resources */,
 				23DC04B528C58B5200ABB0CF /* Main.storyboard in Resources */,
 				23933AC6290322A500FAC80A /* Montserrat-ExtraBold.ttf in Resources */,
-				23C9569828C68D7A00D88536 /* SUIT-ExtraLight.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1945,6 +1896,7 @@
 				239F93682939322C008AC5AB /* Bundle.swift in Sources */,
 				23D4C66028D8E87B00EA7F98 /* GetEmailView.swift in Sources */,
 				232174DB28E1BE81008C155D /* RegisterDataManager.swift in Sources */,
+				23127C842A361DDB008452FD /* TypoStyle.swift in Sources */,
 				23A48E6F28E9137100FD77A7 /* TitleLeftViewController.swift in Sources */,
 				23E378DE28D2EBFA00C52F2D /* PopUpDeleteUserViewController.swift in Sources */,
 				23D5517D28C6936400D81B5F /* OnBoardingViewModel.swift in Sources */,
@@ -2024,11 +1976,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		23C3114528DF680300A636F6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 23C3113B28DF680300A636F6 /* Share Extension */;
-			targetProxy = 23C3114428DF680300A636F6 /* PBXContainerItemProxy */;
-		};
 		23DC04C228C58B5500ABB0CF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 23DC04A928C58B5200ABB0CF /* Wishboard */;
@@ -2100,7 +2047,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "gomin.Wishboard.Share-Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2129,7 +2076,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "gomin.Wishboard.Share-Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2282,7 +2229,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = gomin.Wishboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2317,7 +2264,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = gomin.Wishboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

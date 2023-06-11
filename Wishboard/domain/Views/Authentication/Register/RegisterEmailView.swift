@@ -24,7 +24,7 @@ class RegisterEmailView: UIView {
         $0.becomeFirstResponder()
     }
     let errorMessageLabel = UILabel().then{
-        $0.text = ErrorMessage.nonExistAccount
+        $0.text = ErrorMessage.existAccount
         $0.textColor = .pink_700
         $0.font = UIFont.Suit(size: 12, family: .Regular)
     }
