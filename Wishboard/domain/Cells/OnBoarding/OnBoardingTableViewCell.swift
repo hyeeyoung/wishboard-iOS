@@ -24,7 +24,6 @@ class OnBoardingTableViewCell: UITableViewCell {
         $0.text = Message.onboarding
         $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.numberOfLines = 0
-        $0.setTextWithLineHeight()
         $0.textAlignment = .center
     }
     // 가입하기 버튼
