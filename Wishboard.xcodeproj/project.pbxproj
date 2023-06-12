@@ -22,6 +22,7 @@
 		231B581028E8A33C0030D33E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */; };
 		231C5F832A36EB7700FBDEE5 /* Share Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 23C3113C28DF680300A636F6 /* Share Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		231C5F852A36F06B00FBDEE5 /* NewFolderBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231C5F842A36F06B00FBDEE5 /* NewFolderBottomSheetViewController.swift */; };
+		231C5F872A36F79500FBDEE5 /* ModifyFolderBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231C5F862A36F79500FBDEE5 /* ModifyFolderBottomSheetViewController.swift */; };
 		232174DB28E1BE81008C155D /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174DA28E1BE81008C155D /* RegisterDataManager.swift */; };
 		232174E428E1BF1C008C155D /* RegisterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E328E1BF1C008C155D /* RegisterInput.swift */; };
 		232174E828E1D4AF008C155D /* LoginInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E728E1D4AF008C155D /* LoginInput.swift */; };
@@ -271,6 +272,7 @@
 		23134D3C29B2216700238536 /* RefreshInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshInput.swift; sourceTree = "<group>"; };
 		23134D3E29B222BF00238536 /* RefreshDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshDataManager.swift; sourceTree = "<group>"; };
 		231C5F842A36F06B00FBDEE5 /* NewFolderBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFolderBottomSheetViewController.swift; sourceTree = "<group>"; };
+		231C5F862A36F79500FBDEE5 /* ModifyFolderBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyFolderBottomSheetViewController.swift; sourceTree = "<group>"; };
 		232174DA28E1BE81008C155D /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
 		232174E328E1BF1C008C155D /* RegisterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInput.swift; sourceTree = "<group>"; };
 		232174E728E1D4AF008C155D /* LoginInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInput.swift; sourceTree = "<group>"; };
@@ -530,6 +532,7 @@
 				23C2378328C9CEE000CE3200 /* FolderViewController.swift */,
 				237478A128D2008300CF941A /* SetFolderBottomSheetViewController.swift */,
 				231C5F842A36F06B00FBDEE5 /* NewFolderBottomSheetViewController.swift */,
+				231C5F862A36F79500FBDEE5 /* ModifyFolderBottomSheetViewController.swift */,
 			);
 			path = Folder;
 			sourceTree = "<group>";
@@ -1922,6 +1925,7 @@
 				23EC504C28E2670D00AAA57E /* MypageDataManager.swift in Sources */,
 				236AC9F0291A6AB700E1474C /* Storage.swift in Sources */,
 				23279A1428E4A12300CAD1CA /* CartInput.swift in Sources */,
+				231C5F872A36F79500FBDEE5 /* ModifyFolderBottomSheetViewController.swift in Sources */,
 				234F838D28C9857000C4EB41 /* CartTableViewCell.swift in Sources */,
 				23D4C66628D8ECF300EA7F98 /* GetEmailViewController.swift in Sources */,
 				232174E428E1BF1C008C155D /* RegisterInput.swift in Sources */,

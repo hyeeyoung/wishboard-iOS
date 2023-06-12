@@ -97,6 +97,7 @@ enum Title {
     // MARK: Folder
     public static let folder = "폴더"
     public static let addFolder = "새 폴더 추가"
+    public static let modifyFolder = "폴더명 수정"
     
     // MARK: Notification
     public static let notificationSetting = "상품 알림 설정"
@@ -121,6 +122,7 @@ enum Button {
     public static let next = "다음"
     public static let save = "저장"
     public static let add = "추가"
+    public static let modify = "수정"
     
     public static let howTo = "네! 알겠어요"
 }

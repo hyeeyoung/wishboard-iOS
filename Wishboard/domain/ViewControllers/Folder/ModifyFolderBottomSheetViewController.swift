@@ -1,5 +1,5 @@
 //
-//  NewFolderBottomSheetViewController.swift
+//  ModifyFolderBottomSheetViewController.swift
 //  Wishboard
 //
 //  Created by gomin on 2023/06/12.
@@ -10,11 +10,13 @@ import UIKit
 import Lottie
 
 
-class NewFolderBottomSheetViewController: BottomSheetKeyboardViewController {
+class ModifyFolderBottomSheetViewController: BottomSheetKeyboardViewController {
     // MARK: - Life Cycles
     var folderStr: String!
     var tempFolderStr: String!
     var preVC: FolderViewController!
+    
+    var folderData: FolderModel!
     
     var lottieView: LottieAnimationView!
     
@@ -25,21 +27,30 @@ class NewFolderBottomSheetViewController: BottomSheetKeyboardViewController {
     
     override func initComponents() {
         // bottom sheet title
-        titleLabel.text = Title.addFolder
+        titleLabel.text = Title.modifyFolder
         
         // textfield placeholder
         textfield = DefaultTextField(Placeholder.folder).then{
             $0.clearButtonMode = .whileEditing
+            $0.text = folderData.folder_name
+        }
+        
+        // complete button
+        completeButton = DefaultButton(titleStr: Button.modify).then{
+            $0.isActivate = true
+        }
+        
+        // folder name count label
+        if let foldername = folderData.folder_name {
+            textFieldCountLabel.text = "(" + String(foldername.count) + "/10)자"
+            self.tempFolderStr = foldername
+            checkValidFolder(self.tempFolderStr, true)
         }
         
         // error message text
         errorMessage.text = ErrorMessage.sameFolderName
         errorMessage.isHidden = true
-        
-        // complete button
-        completeButton = DefaultButton(titleStr: Button.add).then{
-            $0.isActivate = false
-        }
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -49,12 +60,13 @@ class NewFolderBottomSheetViewController: BottomSheetKeyboardViewController {
     // MARK: - Actions
     @objc override func completeButtonDidTap() {
         UIDevice.vibrate()
-        lottieView = completeButton.setLottieView()
+        let folderId = folderData.folder_id
         
+        lottieView = completeButton.setLottieView()
         lottieView.play { completion in
             self.lottieView.loopMode = .loop
             let addFolderInput = AddFolderInput(folder_name: self.folderStr!)
-            FolderDataManager().addFolderDataManager(addFolderInput, self, self.preVC)
+            FolderDataManager().modifyFolderDataManager(folderId!, addFolderInput, self, self.preVC)
         }
     }
     override func textFieldEditingChanged(_ sender: UITextField) {
@@ -81,14 +93,12 @@ class NewFolderBottomSheetViewController: BottomSheetKeyboardViewController {
     }
 }
 // MARK: - API Success
-extension NewFolderBottomSheetViewController {
+extension ModifyFolderBottomSheetViewController {
     func sameFolderNameFail() {
         completeButton.reloadInputViews()
         errorMessage.isHidden = false
+        
         completeButton.inActivateLottieView()
-    }
-    func addFolderAPIFail() {
-        let addFolderInput = AddFolderInput(folder_name: self.folderStr)
-        FolderDataManager().addFolderDataManager(addFolderInput, self, preVC)
+        lottieView.isHidden = true
     }
 }
