@@ -20,6 +20,7 @@
 		23134D3D29B2216700238536 /* RefreshInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23134D3C29B2216700238536 /* RefreshInput.swift */; };
 		23134D3F29B222BF00238536 /* RefreshDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23134D3E29B222BF00238536 /* RefreshDataManager.swift */; };
 		231B581028E8A33C0030D33E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */; };
+		231C5F832A36EB7700FBDEE5 /* Share Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 23C3113C28DF680300A636F6 /* Share Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		232174DB28E1BE81008C155D /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174DA28E1BE81008C155D /* RegisterDataManager.swift */; };
 		232174E428E1BF1C008C155D /* RegisterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E328E1BF1C008C155D /* RegisterInput.swift */; };
 		232174E828E1D4AF008C155D /* LoginInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E728E1D4AF008C155D /* LoginInput.swift */; };
@@ -223,6 +224,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		231C5F812A36EB5F00FBDEE5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 23DC04A228C58B5200ABB0CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 23C3113B28DF680300A636F6;
+			remoteInfo = "Share Extension";
+		};
 		23DC04C128C58B5500ABB0CF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 23DC04A228C58B5200ABB0CF /* Project object */;
@@ -246,6 +254,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				231C5F832A36EB7700FBDEE5 /* Share Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1469,6 +1478,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				231C5F822A36EB5F00FBDEE5 /* PBXTargetDependency */,
 			);
 			name = Wishboard;
 			productName = Wishboard;
@@ -1978,6 +1988,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		231C5F822A36EB5F00FBDEE5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 23C3113B28DF680300A636F6 /* Share Extension */;
+			targetProxy = 231C5F812A36EB5F00FBDEE5 /* PBXContainerItemProxy */;
+		};
 		23DC04C228C58B5500ABB0CF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 23DC04A928C58B5200ABB0CF /* Wishboard */;

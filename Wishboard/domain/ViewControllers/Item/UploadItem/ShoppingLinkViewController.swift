@@ -9,24 +9,24 @@ import UIKit
 import Lottie
 
 class ShoppingLinkViewController: BottomSheetKeyboardViewController {
-    let titleLabel = DefaultLabel().then{
-        $0.text = BottomSheetTitle.shoppingMallLink
-        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
-    }
-    let exitBtn = UIButton().then{
-        $0.setImage(Image.quit, for: .normal)
-    }
-    let shoppingLinkTextField = DefaultTextField(Placeholder.shoppingLink).then{
-        $0.clearButtonMode = .always
-    }
-    let errorMessage = UILabel().then{
-        $0.text = ErrorMessage.shoppingLink
-        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
-        $0.textColor = .pink_700
-    }
-    let completeButton = DefaultButton(titleStr: Button.item).then{
-        $0.isActivate = true
-    }
+//    let titleLabel = DefaultLabel().then{
+//        $0.text = BottomSheetTitle.shoppingMallLink
+//        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
+//    }
+//    let exitBtn = UIButton().then{
+//        $0.setImage(Image.quit, for: .normal)
+//    }
+//    let shoppingLinkTextField = DefaultTextField(Placeholder.shoppingLink).then{
+//        $0.clearButtonMode = .always
+//    }
+//    let errorMessage = UILabel().then{
+//        $0.text = ErrorMessage.shoppingLink
+//        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
+//        $0.textColor = .pink_700
+//    }
+//    let completeButton = DefaultButton(titleStr: Button.item).then{
+//        $0.isActivate = true
+//    }
     // MARK: - Life Cycles
     var preVC: UploadItemViewController!
     var link: String!
@@ -42,22 +42,8 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.textfield = self.shoppingLinkTextField
-        super.backBtn.isHidden = true
         
-        self.view.backgroundColor = .white
-        self.navigationController?.isNavigationBarHidden = true
-        self.view.roundCornersDiffernt(topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0)
-
-        setUpView()
-        setUpConstraint()
         
-        self.errorMessage.isHidden = true
-        self.completeButton.isActivate = false
-        
-        self.shoppingLinkTextField.addTarget(self, action: #selector(LinkTextFieldEditingChanged(_:)), for: .editingChanged)
-        self.exitBtn.addTarget(self, action: #selector(exit), for: .touchUpInside)
-        self.completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
     }
     override func viewWillDisappear(_ animated: Bool) {
         if !isExit && !isFail {
@@ -108,59 +94,49 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
         NetworkCheck.shared.startMonitoring(vc: self)
     }
     // MARK: - Functions
+    override func initComponents() {
+        // bottom sheet title
+        titleLabel.text = BottomSheetTitle.shoppingMallLink
+        
+        // textfield placeholder
+        textfield = DefaultTextField(Placeholder.shoppingLink).then{
+            $0.clearButtonMode = .always
+        }
+        
+        // textfield count label
+        textFieldCountLabel.isHidden = true
+        
+        // error message text
+        errorMessage.text = ErrorMessage.shoppingLink
+        errorMessage.isHidden = true
+        
+        // complete button
+        completeButton = DefaultButton(titleStr: Button.add).then{
+            $0.isActivate = false
+        }
+    }
     func setPreViewController(_ preVC: UploadItemViewController) {
         self.preVC = preVC
     }
-    func setUpView() {
-        self.view.addSubview(titleLabel)
-        self.view.addSubview(exitBtn)
-        self.view.addSubview(shoppingLinkTextField)
-        self.view.addSubview(errorMessage)
-        self.view.addSubview(completeButton)
-    }
-    func setUpConstraint() {
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.centerX.equalToSuperview()
-        }
-        exitBtn.snp.makeConstraints { make in
-            make.centerY.equalTo(titleLabel)
-            make.width.height.equalTo(24)
-            make.trailing.equalToSuperview().offset(-16)
-        }
-        shoppingLinkTextField.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(titleLabel.snp.bottom).offset(82)
-            make.height.equalTo(42)
-        }
-        errorMessage.snp.makeConstraints { make in
-            make.leading.equalTo(shoppingLinkTextField)
-            make.top.equalTo(shoppingLinkTextField.snp.bottom).offset(6)
-        }
-        completeButton.snp.makeConstraints { make in
-            make.height.equalTo(44)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(shoppingLinkTextField.snp.bottom).offset(86)
-        }
-    }
+    
     // MARK: - Actions
-    @objc func exit() {
+    @objc override func exit() {
         UIDevice.vibrate()
         self.isExit = true
         self.dismiss(animated: true)
     }
-    @objc func completeButtonDidTap() {
+    @objc override func completeButtonDidTap() {
         UIDevice.vibrate()
         lottieView = self.completeButton.setLottieView()
         lottieView.play { completion in
             ItemDataManager().getItemByLinkDataManager(self.link, self)
         }
     }
-    @objc func LinkTextFieldEditingChanged(_ sender: UITextField) {
+    @objc override func textFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
         let trimString = text.trimmingCharacters(in: .whitespaces)
         self.tempLink = trimString
-        self.shoppingLinkTextField.text = self.tempLink
+        self.textfield.text = self.tempLink
         self.checkLink(self.tempLink)
     }
     func checkLink(_ link: String) {
