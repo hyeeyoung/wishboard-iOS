@@ -13,6 +13,7 @@
 		230180E928E50C0B001034FC /* FolderInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339D4FE28E3CFF900E636FD /* FolderInput.swift */; };
 		230192BB2A30669200B30B0E /* DefaultLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230192BA2A30669200B30B0E /* DefaultLabel.swift */; };
 		230192BC2A3068C200B30B0E /* DefaultLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230192BA2A30669200B30B0E /* DefaultLabel.swift */; };
+		230946D02A3739CE00D22323 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230946CF2A3739CE00D22323 /* BaseViewModel.swift */; };
 		230A3F5928E4B5CA00966682 /* NotificationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230A3F5828E4B5CA00966682 /* NotificationDataManager.swift */; };
 		230DBFA828E106EE00E9AED6 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230DBFA728E106EE00E9AED6 /* ShareView.swift */; };
 		23127C842A361DDB008452FD /* TypoStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23127C832A361DDB008452FD /* TypoStyle.swift */; };
@@ -266,6 +267,7 @@
 		1582000F9C7BDE6362679C88 /* Pods_Wishboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wishboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		230180E528E50B7C001034FC /* FolderDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDataManager.swift; sourceTree = "<group>"; };
 		230192BA2A30669200B30B0E /* DefaultLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLabel.swift; sourceTree = "<group>"; };
+		230946CF2A3739CE00D22323 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		230A3F5828E4B5CA00966682 /* NotificationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataManager.swift; sourceTree = "<group>"; };
 		230DBFA728E106EE00E9AED6 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		23127C832A361DDB008452FD /* TypoStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypoStyle.swift; sourceTree = "<group>"; };
@@ -1366,6 +1368,7 @@
 			children = (
 				23D5517C28C6936400D81B5F /* OnBoardingViewModel.swift */,
 				23D5518628C6AFFF00D81B5F /* LoginViewModel.swift */,
+				230946CF2A3739CE00D22323 /* BaseViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1913,6 +1916,7 @@
 				23A48E6F28E9137100FD77A7 /* TitleLeftViewController.swift in Sources */,
 				23E378DE28D2EBFA00C52F2D /* PopUpDeleteUserViewController.swift in Sources */,
 				23D5517D28C6936400D81B5F /* OnBoardingViewModel.swift in Sources */,
+				230946D02A3739CE00D22323 /* BaseViewModel.swift in Sources */,
 				234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */,
 				2335638428E3245000C0184C /* WishListDataManager.swift in Sources */,
 				2340CEAC28CB6252007C362F /* HowToCollectionViewCell.swift in Sources */,
