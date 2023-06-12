@@ -43,7 +43,7 @@ extension UIButton {
         var config = UIButton.Configuration.tinted()
         var attText = AttributedString.init("Cart")
         
-        attText.font = UIFont.Suit(size: 11.46, family: .Regular)
+        attText.font = TypoStyle.SuitD3.font
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         attText.foregroundColor = UIColor.gray_700
         config.attributedTitle = attText

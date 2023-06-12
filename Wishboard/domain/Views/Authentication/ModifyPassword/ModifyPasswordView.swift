@@ -22,7 +22,7 @@ class ModifyPasswordView: UIView {
         $0.isSecureTextEntry = true
     }
     let newPasswordErrorMessageLabel = UILabel().then{
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
         $0.textColor = UIColor.pink_700
         $0.text = ErrorMessage.password
         $0.isHidden = true
@@ -37,7 +37,7 @@ class ModifyPasswordView: UIView {
         $0.isSecureTextEntry = true
     }
     let passwordRewriteErrorMessageLabel = UILabel().then{
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
         $0.textColor = UIColor.pink_700
         $0.text = ErrorMessage.passwordRewrite
         $0.isHidden = true
