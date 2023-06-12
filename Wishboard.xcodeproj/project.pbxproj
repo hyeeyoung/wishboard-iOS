@@ -20,6 +20,9 @@
 		23134D3D29B2216700238536 /* RefreshInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23134D3C29B2216700238536 /* RefreshInput.swift */; };
 		23134D3F29B222BF00238536 /* RefreshDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23134D3E29B222BF00238536 /* RefreshDataManager.swift */; };
 		231B581028E8A33C0030D33E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */; };
+		231C5F832A36EB7700FBDEE5 /* Share Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 23C3113C28DF680300A636F6 /* Share Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		231C5F852A36F06B00FBDEE5 /* NewFolderBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231C5F842A36F06B00FBDEE5 /* NewFolderBottomSheetViewController.swift */; };
+		231C5F872A36F79500FBDEE5 /* ModifyFolderBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231C5F862A36F79500FBDEE5 /* ModifyFolderBottomSheetViewController.swift */; };
 		232174DB28E1BE81008C155D /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174DA28E1BE81008C155D /* RegisterDataManager.swift */; };
 		232174E428E1BF1C008C155D /* RegisterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E328E1BF1C008C155D /* RegisterInput.swift */; };
 		232174E828E1D4AF008C155D /* LoginInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E728E1D4AF008C155D /* LoginInput.swift */; };
@@ -112,7 +115,6 @@
 		236FE93C28DF85AA006142DB /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5518A28C6B45C00D81B5F /* String.swift */; };
 		236FE93D28DF85B0006142DB /* PopUpDeleteUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E378DD28D2EBFA00C52F2D /* PopUpDeleteUserViewController.swift */; };
 		236FE93E28DF85B0006142DB /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2374789D28D1EDF600CF941A /* PopUpViewController.swift */; };
-		236FE93F28DF85B0006142DB /* PopUpWithTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2378280328D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift */; };
 		236FE94028DF85B3006142DB /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3113628DF633D00A636F6 /* APIModel.swift */; };
 		236FE94228DF888A006142DB /* FolderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236FE94128DF888A006142DB /* FolderCollectionViewCell.swift */; };
 		2374789828D1C9D600CF941A /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2374789528D1C9D600CF941A /* Montserrat-Regular.ttf */; };
@@ -123,7 +125,6 @@
 		237478A228D2008300CF941A /* SetFolderBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237478A128D2008300CF941A /* SetFolderBottomSheetViewController.swift */; };
 		237478A428D20DB600CF941A /* FolderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237478A328D20DB500CF941A /* FolderListTableViewCell.swift */; };
 		2375C1CA28C5C2550017BAF7 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2375C1C928C5C2550017BAF7 /* OnBoardingView.swift */; };
-		2378280428D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2378280328D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift */; };
 		2385582728E51DD000E6A09E /* ShareDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2385582628E51DD000E6A09E /* ShareDataManager.swift */; };
 		2385582B28E51F7500E6A09E /* FormatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F7C28E39FE800075667 /* FormatManager.swift */; };
 		238AA72B29CD720D0086DF76 /* ItemRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238AA72A29CD720D0086DF76 /* ItemRouter.swift */; };
@@ -223,6 +224,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		231C5F812A36EB5F00FBDEE5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 23DC04A228C58B5200ABB0CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 23C3113B28DF680300A636F6;
+			remoteInfo = "Share Extension";
+		};
 		23DC04C128C58B5500ABB0CF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 23DC04A228C58B5200ABB0CF /* Project object */;
@@ -246,6 +254,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				231C5F832A36EB7700FBDEE5 /* Share Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,6 +271,8 @@
 		23127C832A361DDB008452FD /* TypoStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypoStyle.swift; sourceTree = "<group>"; };
 		23134D3C29B2216700238536 /* RefreshInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshInput.swift; sourceTree = "<group>"; };
 		23134D3E29B222BF00238536 /* RefreshDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshDataManager.swift; sourceTree = "<group>"; };
+		231C5F842A36F06B00FBDEE5 /* NewFolderBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFolderBottomSheetViewController.swift; sourceTree = "<group>"; };
+		231C5F862A36F79500FBDEE5 /* ModifyFolderBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyFolderBottomSheetViewController.swift; sourceTree = "<group>"; };
 		232174DA28E1BE81008C155D /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
 		232174E328E1BF1C008C155D /* RegisterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInput.swift; sourceTree = "<group>"; };
 		232174E728E1D4AF008C155D /* LoginInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInput.swift; sourceTree = "<group>"; };
@@ -331,7 +342,6 @@
 		237478A128D2008300CF941A /* SetFolderBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFolderBottomSheetViewController.swift; sourceTree = "<group>"; };
 		237478A328D20DB500CF941A /* FolderListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderListTableViewCell.swift; sourceTree = "<group>"; };
 		2375C1C928C5C2550017BAF7 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
-		2378280328D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWithTextFieldViewController.swift; sourceTree = "<group>"; };
 		2385582628E51DD000E6A09E /* ShareDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDataManager.swift; sourceTree = "<group>"; };
 		238AA72A29CD720D0086DF76 /* ItemRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRouter.swift; sourceTree = "<group>"; };
 		238AA72C29CD72150086DF76 /* ItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemService.swift; sourceTree = "<group>"; };
@@ -521,6 +531,8 @@
 				2360095D28DA1829001FB107 /* FolderDetailViewController.swift */,
 				23C2378328C9CEE000CE3200 /* FolderViewController.swift */,
 				237478A128D2008300CF941A /* SetFolderBottomSheetViewController.swift */,
+				231C5F842A36F06B00FBDEE5 /* NewFolderBottomSheetViewController.swift */,
+				231C5F862A36F79500FBDEE5 /* ModifyFolderBottomSheetViewController.swift */,
 			);
 			path = Folder;
 			sourceTree = "<group>";
@@ -1090,7 +1102,6 @@
 			children = (
 				2374789D28D1EDF600CF941A /* PopUpViewController.swift */,
 				23E378DD28D2EBFA00C52F2D /* PopUpDeleteUserViewController.swift */,
-				2378280328D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift */,
 			);
 			path = PopUpViewControllers;
 			sourceTree = "<group>";
@@ -1469,6 +1480,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				231C5F822A36EB5F00FBDEE5 /* PBXTargetDependency */,
 			);
 			name = Wishboard;
 			productName = Wishboard;
@@ -1776,7 +1788,6 @@
 				230180E628E50B7C001034FC /* FolderDataManager.swift in Sources */,
 				23A48E7128E92E7D00FD77A7 /* NetworkCheck.swift in Sources */,
 				236FE92228DF8592006142DB /* UITextField.swift in Sources */,
-				236FE93F28DF85B0006142DB /* PopUpWithTextFieldViewController.swift in Sources */,
 				236FE91D28DF8592006142DB /* PaddingLabel.swift in Sources */,
 				23E0ACC828E7B563008C35C2 /* KeyboardViewController.swift in Sources */,
 				235129DA28F67BAE00489CAD /* BottomSheetKeyboardViewController.swift in Sources */,
@@ -1863,6 +1874,7 @@
 				2360FF5C28DCB31600E481A6 /* SnackBar.swift in Sources */,
 				23D7901428CB0E5F00246109 /* CalenderTableViewCell.swift in Sources */,
 				23E378E728D2FDD000C52F2D /* NotificationSettingViewController.swift in Sources */,
+				231C5F852A36F06B00FBDEE5 /* NewFolderBottomSheetViewController.swift in Sources */,
 				23C9568B28C6803900D88536 /* UIFont.swift in Sources */,
 				2328C5B028CAC7930065ABB2 /* ModifyProfileViewController.swift in Sources */,
 				23DF699F28E5F33C00F7FBD0 /* FCMDataManager.swift in Sources */,
@@ -1885,7 +1897,6 @@
 				23A85F8528E3AE6200075667 /* LostPasswordInput.swift in Sources */,
 				239422E6292FEFCB0024CEBD /* Optional.swift in Sources */,
 				2375C1CA28C5C2550017BAF7 /* OnBoardingView.swift in Sources */,
-				2378280428D4DB8100A1ECC0 /* PopUpWithTextFieldViewController.swift in Sources */,
 				23630951291905E200E38885 /* Vibrate.swift in Sources */,
 				23C9568D28C6812100D88536 /* UIColor.swift in Sources */,
 				23CF158628FD630E000D012F /* UIDevice.swift in Sources */,
@@ -1914,6 +1925,7 @@
 				23EC504C28E2670D00AAA57E /* MypageDataManager.swift in Sources */,
 				236AC9F0291A6AB700E1474C /* Storage.swift in Sources */,
 				23279A1428E4A12300CAD1CA /* CartInput.swift in Sources */,
+				231C5F872A36F79500FBDEE5 /* ModifyFolderBottomSheetViewController.swift in Sources */,
 				234F838D28C9857000C4EB41 /* CartTableViewCell.swift in Sources */,
 				23D4C66628D8ECF300EA7F98 /* GetEmailViewController.swift in Sources */,
 				232174E428E1BF1C008C155D /* RegisterInput.swift in Sources */,
@@ -1978,6 +1990,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		231C5F822A36EB5F00FBDEE5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 23C3113B28DF680300A636F6 /* Share Extension */;
+			targetProxy = 231C5F812A36EB5F00FBDEE5 /* PBXContainerItemProxy */;
+		};
 		23DC04C228C58B5500ABB0CF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 23DC04A928C58B5200ABB0CF /* Wishboard */;

@@ -45,7 +45,7 @@ class FolderDataManager {
         }
     }
     // MARK: - 폴더 추가
-    func addFolderDataManager(_ parameter: AddFolderInput, _ viewcontroller: FolderViewController) {
+    func addFolderDataManager(_ parameter: AddFolderInput, _ viewcontroller: NewFolderBottomSheetViewController, _ preVC: FolderViewController) {
         AF.request(Storage().BaseURL + "/folder",
                            method: .post,
                            parameters: parameter,
@@ -55,7 +55,7 @@ class FolderDataManager {
             .responseDecodable(of: APIModel<ResultModel>.self) { response in
             switch response.result {
             case .success(let result):
-                viewcontroller.addFolderAPISuccess(result)
+                preVC.addFolderAPISuccess(result)
             case .failure(let error):
                 let statusCode = error.responseCode
                 switch statusCode {
@@ -67,7 +67,7 @@ class FolderDataManager {
                     }
                 case 401:
                     RefreshDataManager().refreshDataManager() {
-                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.addFolderDataManager(parameter, viewcontroller)
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.addFolderDataManager(parameter, viewcontroller, preVC)
                     }
                 default:
                     print(error.responseCode)
@@ -77,7 +77,7 @@ class FolderDataManager {
         }
     }
     // MARK: - 폴더명 수정
-    func modifyFolderDataManager(_ folderId: Int, _ parameter: AddFolderInput, _ viewcontroller: FolderViewController) {
+    func modifyFolderDataManager(_ folderId: Int, _ parameter: AddFolderInput, _ viewcontroller: ModifyFolderBottomSheetViewController, _ preVC: FolderViewController) {
         AF.request(Storage().BaseURL + "/folder/\(folderId)",
                            method: .put,
                            parameters: parameter,
@@ -87,7 +87,7 @@ class FolderDataManager {
             .responseDecodable(of: APIModel<ResultModel>.self) { response in
             switch response.result {
             case .success(let result):
-                viewcontroller.modifyFolderAPISuccess(result)
+                preVC.modifyFolderAPISuccess(result)
             case .failure(let error):
                 let statusCode = error.responseCode
                 switch statusCode {
@@ -99,7 +99,7 @@ class FolderDataManager {
                     }
                 case 401:
                     RefreshDataManager().refreshDataManager() {
-                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.modifyFolderDataManager(folderId, parameter, viewcontroller)
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.modifyFolderDataManager(folderId, parameter, viewcontroller, preVC)
                     }
                 default:
                     print(error.responseCode)

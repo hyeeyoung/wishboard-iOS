@@ -7,13 +7,12 @@
 
 import UIKit
 import Lottie
+import MaterialComponents.MaterialBottomSheet
 
 class FolderViewController: TitleLeftViewController {
     var folderView : FolderView!
     let emptyMessage = EmptyMessage.folder
-    var dialog: PopUpWithTextFieldViewController!
     var folderData: [FolderModel] = []
-    var folderStr: String?
     var lottieView: LottieAnimationView!
     
     var refreshControl = UIRefreshControl()
@@ -23,7 +22,6 @@ class FolderViewController: TitleLeftViewController {
         super.navigationTitle.text = Title.folder
 
         setFolderView()
-//        FolderDataManager().getFolderDataManager(self)
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
@@ -40,7 +38,7 @@ class FolderViewController: TitleLeftViewController {
         self.view.endEditing(true)
     }
     override func rightPositionBtnDidClicked() {
-        alertAddDialog()
+        showAddNewFolderBottomSheet()
     }
 }
 // MARK: - CollectionView delegate
@@ -113,32 +111,34 @@ extension FolderViewController {
         alert.addAction(modifyAction)
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
-
+        
         self.present(alert, animated: true)
     }
-    // 폴더 추가 팝업창
-    func alertAddDialog() {
+    // 새 폴더 추가 BottomSheet
+    func showAddNewFolderBottomSheet() {
         UIDevice.vibrate()
-        dialog = PopUpWithTextFieldViewController(titleText: "새 폴더 추가", placeholder: Placeholder.folder, prevText: nil, buttonTitle: "추가")
-        dialog.modalPresentationStyle = .overFullScreen
-        dialog.completeButton.addTarget(self, action: #selector(completeAddButtonDidTap), for: .touchUpInside)
-        dialog.textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
-        self.present(dialog, animated: false, completion: nil)
+        let vc = NewFolderBottomSheetViewController()
+        vc.preVC = self
+        let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: vc)
+        bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
+        bottomSheet.dismissOnDraggingDownSheet = false
         
-        dialog.textField.delegate = self
+        self.present(bottomSheet, animated: true, completion: nil)
     }
+    
     // 폴더명 수정 팝업창
     func alertModifyDialog(folderData: FolderModel) {
         UIDevice.vibrate()
-        dialog = PopUpWithTextFieldViewController(titleText: "폴더명 수정", placeholder: Placeholder.folder, prevText: folderData.folder_name, buttonTitle: "수정")
-        dialog.modalPresentationStyle = .overFullScreen
-        let folderMenuGesture = CustomButton(target: self, action: #selector(completeModifyButtonDidTap(_:)))
-        folderMenuGesture.folderData = folderData
-        dialog.completeButton.addGestureRecognizer(folderMenuGesture)
-        dialog.textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
-        self.present(dialog, animated: false, completion: nil)
         
-        dialog.textField.delegate = self
+        let vc = ModifyFolderBottomSheetViewController()
+        vc.preVC = self
+        vc.folderData = folderData
+        
+        let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: vc)
+        bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
+        bottomSheet.dismissOnDraggingDownSheet = false
+        
+        self.present(bottomSheet, animated: true, completion: nil)
     }
     // 폴더 삭제 팝업창
     func alertDeleteDialog(folderData: FolderModel) {
@@ -156,48 +156,6 @@ extension FolderViewController {
         UIDevice.vibrate()
         guard let folderId = sender.folderData?.folder_id else {return}
         FolderDataManager().deleteFolderDataManager(folderId, self)
-    }
-    // 폴더명 수정 버튼 클릭
-    @objc func completeModifyButtonDidTap(_ sender: CustomButton) {
-        UIDevice.vibrate()
-        let folderId = sender.folderData?.folder_id
-//        dialog.completeButtonDidTap()
-        
-        lottieView = dialog.completeButton.setLottieView()
-        lottieView.play { completion in
-            self.dialog.completeButton.isEnabled = false
-            let addFolderInput = AddFolderInput(folder_name: self.folderStr!)
-            FolderDataManager().modifyFolderDataManager(folderId!, addFolderInput, self)
-        }
-    }
-    // 폴더 추가 버튼 클릭
-    @objc func completeAddButtonDidTap() {
-        UIDevice.vibrate()
-        lottieView = dialog.completeButton.setLottieView()
-//        dialog.completeButtonDidTap()
-        
-        lottieView.play { completion in
-            self.dialog.completeButton.isEnabled = false
-            let addFolderInput = AddFolderInput(folder_name: self.folderStr!)
-            FolderDataManager().addFolderDataManager(addFolderInput, self)
-        }
-    }
-    // 팝업창 - 텍스트필드 감지
-    @objc func textFieldEditingChanged(_ sender: UITextField) {
-        let text = sender.text ?? ""
-        self.folderStr = text
-    }
-}
-// MARK: - TextField delegate
-extension FolderViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        self.view.bounds.origin.y = 0.0
-        return true
     }
 }
 
@@ -230,7 +188,6 @@ extension FolderViewController {
     }
     // MARK: 폴더 추가 API
     func addFolderAPISuccess(_ result: APIModel<ResultModel>) {
-        self.folderStr = ""
         self.dismiss(animated: false)
         SnackBar(self, message: .addFolder)
         FolderDataManager().getFolderDataManager(self)
@@ -238,14 +195,13 @@ extension FolderViewController {
     }
     // MARK: 폴더명 수정 API
     func modifyFolderAPISuccess(_ result: APIModel<ResultModel>) {
-        self.folderStr = ""
         self.dismiss(animated: false)
         SnackBar(self, message: .modifyFolder)
         FolderDataManager().getFolderDataManager(self)
         print(result.message)
     }
     func sameFolderNameFail() {
-        dialog.sameFolderNameFail()
+//        dialog.sameFolderNameFail()
         lottieView.isHidden = true
     }
     // MARK: 폴더 삭제 API
