@@ -1,19 +1,19 @@
 //
-//  NewFolderViewController.swift
-//  Share Extension
+//  NewFolderBottomSheetViewController.swift
+//  Wishboard
 //
-//  Created by gomin on 2022/09/25.
+//  Created by gomin on 2023/06/12.
 //
 
+import Foundation
 import UIKit
 import Lottie
 
-class NewFolderViewController: BottomSheetKeyboardViewController {
+class NewFolderBottomSheetViewController: BottomSheetKeyboardViewController {
     // MARK: - Life Cycles
     var folderStr: String!
     var tempFolderStr: String!
-    var isAddSuccess: Bool = false
-    var preVC: ShareViewController!
+    var preVC: FolderViewController!
     
     var lottieView: LottieAnimationView!
     
@@ -42,12 +42,6 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
         }
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        if let preVC = self.preVC {
-            if isAddSuccess {FolderDataManager().getFolderListDataManager(preVC)}
-            preVC.view.endEditing(true)
-        }
-    }
     override func viewDidAppear(_ animated: Bool) {
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
@@ -55,10 +49,11 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
     // MARK: - Actions
     @objc override func completeButtonDidTap() {
         UIDevice.vibrate()
-        lottieView = self.completeButton.setLottieView()
+        lottieView = completeButton.setLottieView()
+        
         lottieView.play { completion in
-            let addFolderInput = AddFolderInput(folder_name: self.folderStr)
-            FolderDataManager().addFolderDataManager(addFolderInput, self)
+            let addFolderInput = AddFolderInput(folder_name: self.folderStr!)
+            FolderDataManager().addFolderDataManager(addFolderInput, self, self.preVC)
         }
     }
     override func textFieldEditingChanged(_ sender: UITextField) {
@@ -85,20 +80,7 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
     }
 }
 // MARK: - API Success
-extension NewFolderViewController {
-    // MARK: 새 폴더 추가 API
-    func addFolderAPISuccess(_ result: APIModel<ResultModel>) {
-        self.isAddSuccess = true
-        self.viewDidLoad()
-        self.dismiss(animated: true)
-        
-        textFieldCountLabel.textColor = .gray_200
-        errorMessage.isHidden = true
-        completeButton.inActivateLottieView()
-        completeButton.isActivate = true
-        
-        print(result.message)
-    }
+extension NewFolderBottomSheetViewController {
     func sameFolderNameFail() {
         completeButton.reloadInputViews()
         errorMessage.isHidden = false
@@ -106,6 +88,6 @@ extension NewFolderViewController {
     }
     func addFolderAPIFail() {
         let addFolderInput = AddFolderInput(folder_name: self.folderStr)
-        FolderDataManager().addFolderDataManager(addFolderInput, self)
+        FolderDataManager().addFolderDataManager(addFolderInput, self, preVC)
     }
 }

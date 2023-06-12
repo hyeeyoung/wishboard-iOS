@@ -6,25 +6,132 @@
 //
 
 import UIKit
+import SnapKit
+import Then
+
+/* Need Setting
+     - title
+     - textfield placeholder
+     - text count label isHidden
+     - errorMessage text
+     - complete button title
+     - complete button activate
+ */
 
 class BottomSheetKeyboardViewController: BaseViewController {
+    let titleLabel = DefaultLabel().then{
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
+    }
+    let exitBtn = UIButton().then{
+        $0.setImage(Image.quit, for: .normal)
+    }
+    var textfield: DefaultTextField!
+    
+    let textFieldCountLabel = UILabel().then{
+        $0.text = Message.count
+        $0.textColor = .gray_200
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
+    }
+    let errorMessage = UILabel().then{
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
+        $0.textColor = .pink_700
+    }
+    var completeButton: DefaultButton!
+    
     // MARK: - Properties
     // keyboard
     var restoreFrameValue: CGFloat = 0.0
     var textfieldY: CGFloat = 244
     var buttonHeight: CGFloat = 66
-    var textfield: UITextField!
+    
     // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        initComponents()
+        addTarget()
+        setUpView()
+        setUpConstraint()
+        
+    }
+    
+    private func addTarget() {
+        textfield.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+        exitBtn.addTarget(self, action: #selector(exit), for: .touchUpInside)
+        completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
+    }
+    
+    func initComponents() {
+        textfield = DefaultTextField("").then{
+            $0.clearButtonMode = .whileEditing
+        }
+        if let textfield = self.textfield { textfield.delegate = self }
+        
+        completeButton = DefaultButton(titleStr: "")
+    }
+    
+    private func setUpView() {
+        super.backBtn.isHidden = true
+        
+        self.view.backgroundColor = .white
+        self.navigationController?.isNavigationBarHidden = true
+        self.view.roundCornersDiffernt(topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0)
 
         navigationView.addSubview(navigationTitle)
         navigationTitle.snp.makeConstraints{
             $0.centerY.centerX.equalToSuperview()
         }
         
-        if let textfield = self.textfield { textfield.delegate = self }
+        addSubView()
+        
     }
+    private func addSubView() {
+        self.view.addSubview(titleLabel)
+        self.view.addSubview(exitBtn)
+        self.view.addSubview(textfield)
+        self.view.addSubview(textFieldCountLabel)
+        self.view.addSubview(errorMessage)
+        self.view.addSubview(completeButton)
+    }
+    private func setUpConstraint() {
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16)
+            make.centerX.equalToSuperview()
+        }
+        exitBtn.snp.makeConstraints { make in
+            make.centerY.equalTo(titleLabel)
+            make.width.height.equalTo(24)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+        textfield.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(titleLabel.snp.bottom).offset(82)
+            make.height.equalTo(42)
+        }
+        textFieldCountLabel.snp.makeConstraints { make in
+            make.trailing.equalTo(textfield)
+            make.top.equalTo(textfield.snp.bottom).offset(5)
+        }
+        errorMessage.snp.makeConstraints { make in
+            make.leading.equalTo(textfield)
+            make.top.equalTo(textfield.snp.bottom).offset(6)
+        }
+        completeButton.snp.makeConstraints { make in
+            make.height.equalTo(44)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(textfield.snp.bottom).offset(86)
+        }
+    }
+    
+    @objc func textFieldEditingChanged(_ sender: UITextField) {}
+    
+    @objc func exit() {
+        UIDevice.vibrate()
+        self.dismiss(animated: true)
+    }
+    
+    @objc func completeButtonDidTap() {}
+    
     override func viewWillAppear(_ animated: Bool) {
         self.addKeyboardNotifications()
     }

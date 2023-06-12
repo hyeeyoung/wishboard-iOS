@@ -47,46 +47,46 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         if !isExit && !isFail {
-            self.preVC.wishListData.item_img_url = self.itemImgUrl
-            self.preVC.wishListData.item_name = self.itemName
-            self.preVC.wishListData.item_price = self.itemPrice
-            self.preVC.wishListData.item_url = self.link
-            self.preVC.selectedImage = nil
-            self.preVC.isValidContent()
+            preVC.wishListData.item_img_url = self.itemImgUrl
+            preVC.wishListData.item_name = self.itemName
+            preVC.wishListData.item_price = self.itemPrice
+            preVC.wishListData.item_url = self.link
+            preVC.selectedImage = nil
+            preVC.isValidContent()
             
             let indexPath1 = IndexPath(row: 0, section: 0)
             let indexPath2 = IndexPath(row: 1, section: 0)
             let indexPath5 = IndexPath(row: 4, section: 0)
-            self.preVC.uploadItemView.uploadImageTableView.reloadData()
-            self.preVC.uploadItemView.uploadContentTableView.reloadRows(at: [indexPath1, indexPath2, indexPath5], with: .automatic)
-            self.preVC.isValidContent()
+            preVC.uploadItemView.uploadImageTableView.reloadData()
+            preVC.uploadItemView.uploadContentTableView.reloadRows(at: [indexPath1, indexPath2, indexPath5], with: .automatic)
+            preVC.isValidContent()
             
-            self.preVC.view.endEditing(true)
-            self.preVC.view.frame.origin.y = 0.0
-            self.preVC.preKeyboardHeight = 0.0
+            preVC.view.endEditing(true)
+            preVC.view.frame.origin.y = 0.0
+            preVC.preKeyboardHeight = 0.0
         } else if isFail {
-            self.preVC.wishListData.item_img_url = nil
-            self.preVC.wishListData.item_name = nil
-            self.preVC.wishListData.item_price = nil
-            self.preVC.wishListData.item_url = ""
-            self.preVC.isValidContent()
+            preVC.wishListData.item_img_url = nil
+            preVC.wishListData.item_name = nil
+            preVC.wishListData.item_price = nil
+            preVC.wishListData.item_url = ""
+            preVC.isValidContent()
             
             let indexPath1 = IndexPath(row: 0, section: 0)
             let indexPath2 = IndexPath(row: 1, section: 0)
             let indexPath5 = IndexPath(row: 4, section: 0)
-            self.preVC.uploadItemView.uploadImageTableView.reloadRows(at: [indexPath1], with: .automatic)
-            self.preVC.uploadItemView.uploadContentTableView.reloadRows(at: [indexPath1, indexPath2, indexPath5], with: .automatic)
-            self.preVC.isValidContent()
+            preVC.uploadItemView.uploadImageTableView.reloadRows(at: [indexPath1], with: .automatic)
+            preVC.uploadItemView.uploadContentTableView.reloadRows(at: [indexPath1, indexPath2, indexPath5], with: .automatic)
+            preVC.isValidContent()
             
             SnackBar(self.preVC, message: .failShoppingLink)
-            self.preVC.view.endEditing(true)
-            self.preVC.view.frame.origin.y = 0.0
-            self.preVC.preKeyboardHeight = 0.0
+            preVC.view.endEditing(true)
+            preVC.view.frame.origin.y = 0.0
+            preVC.preKeyboardHeight = 0.0
         }
         else {
-            self.preVC.view.endEditing(true)
-            self.preVC.view.frame.origin.y = 0.0
-            self.preVC.preKeyboardHeight = 0.0
+            preVC.view.endEditing(true)
+            preVC.view.frame.origin.y = 0.0
+            preVC.preKeyboardHeight = 0.0
         }
     }
     override func viewDidAppear(_ animated: Bool) {

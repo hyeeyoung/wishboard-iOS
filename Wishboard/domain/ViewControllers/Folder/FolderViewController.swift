@@ -7,6 +7,7 @@
 
 import UIKit
 import Lottie
+import MaterialComponents.MaterialBottomSheet
 
 class FolderViewController: TitleLeftViewController {
     var folderView : FolderView!
@@ -40,7 +41,7 @@ class FolderViewController: TitleLeftViewController {
         self.view.endEditing(true)
     }
     override func rightPositionBtnDidClicked() {
-        alertAddDialog()
+        showAddNewFolderBottomSheet()
     }
 }
 // MARK: - CollectionView delegate
@@ -116,17 +117,18 @@ extension FolderViewController {
 
         self.present(alert, animated: true)
     }
-    // 폴더 추가 팝업창
-    func alertAddDialog() {
+    // 새 폴더 추가 BottomSheet
+    func showAddNewFolderBottomSheet() {
         UIDevice.vibrate()
-        dialog = PopUpWithTextFieldViewController(titleText: "새 폴더 추가", placeholder: Placeholder.folder, prevText: nil, buttonTitle: "추가")
-        dialog.modalPresentationStyle = .overFullScreen
-        dialog.completeButton.addTarget(self, action: #selector(completeAddButtonDidTap), for: .touchUpInside)
-        dialog.textField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
-        self.present(dialog, animated: false, completion: nil)
+        let vc = NewFolderBottomSheetViewController()
+        vc.preVC = self
+        let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: vc)
+        bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
+        bottomSheet.dismissOnDraggingDownSheet = false
         
-        dialog.textField.delegate = self
+        self.present(bottomSheet, animated: true, completion: nil)
     }
+    
     // 폴더명 수정 팝업창
     func alertModifyDialog(folderData: FolderModel) {
         UIDevice.vibrate()
@@ -168,18 +170,6 @@ extension FolderViewController {
             self.dialog.completeButton.isEnabled = false
             let addFolderInput = AddFolderInput(folder_name: self.folderStr!)
             FolderDataManager().modifyFolderDataManager(folderId!, addFolderInput, self)
-        }
-    }
-    // 폴더 추가 버튼 클릭
-    @objc func completeAddButtonDidTap() {
-        UIDevice.vibrate()
-        lottieView = dialog.completeButton.setLottieView()
-//        dialog.completeButtonDidTap()
-        
-        lottieView.play { completion in
-            self.dialog.completeButton.isEnabled = false
-            let addFolderInput = AddFolderInput(folder_name: self.folderStr!)
-            FolderDataManager().addFolderDataManager(addFolderInput, self)
         }
     }
     // 팝업창 - 텍스트필드 감지
