@@ -38,9 +38,9 @@ class OnBoardingTableViewCell: UITableViewCell {
         
         attText.font = TypoStyle.SuitD2.font
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        attText.foregroundColor = UIColor.gray_700
+        attText.foregroundColor = UIColor.gray_300
         config.attributedTitle = attText
-        config.baseForegroundColor = .gray_700
+        config.baseForegroundColor = .gray_300
         
         $0.configuration = config
     }
@@ -95,10 +95,10 @@ class OnBoardingTableViewCell: UITableViewCell {
         }
         
         self.loginStackView.snp.makeConstraints { make in
-            make.width.equalTo(150)
+            make.width.equalTo(180)
             make.height.equalTo(20)
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-34)
+            make.bottom.equalToSuperview().offset(-66)
         }
         self.accountExistButton.snp.makeConstraints { make in
             make.height.equalTo(20)
