@@ -54,7 +54,7 @@ class PopUpDeleteUserViewController: UIViewController {
     }
     let errorMessage = UILabel().then{
         $0.text = ErrorMessage.email
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
         $0.textColor = .pink_700
     }
     // MARK: - Life Cycles
@@ -128,7 +128,7 @@ class PopUpDeleteUserViewController: UIViewController {
             var config = UIButton.Configuration.plain()
             var attText = AttributedString.init(self.greenBtnText!)
             
-            attText.font = UIFont.Suit(size: 14, family: .Medium)
+            attText.font = TypoStyle.SuitB3.font
             attText.foregroundColor = UIColor.green_700
             config.attributedTitle = attText
             
@@ -138,7 +138,7 @@ class PopUpDeleteUserViewController: UIViewController {
             var config = UIButton.Configuration.plain()
             var attText = AttributedString.init(self.blackBtnText!)
             
-            attText.font = UIFont.Suit(size: 14, family: .Medium)
+            attText.font = TypoStyle.SuitB3.font
             attText.foregroundColor = UIColor.gray_700
             config.attributedTitle = attText
             

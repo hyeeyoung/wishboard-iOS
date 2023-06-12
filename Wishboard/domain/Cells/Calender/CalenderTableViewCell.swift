@@ -48,10 +48,10 @@ class CalenderTableViewCell: UITableViewCell {
             
             $0.appearance.headerTitleColor = .gray_700
             $0.appearance.weekdayTextColor = .gray_700
-            $0.appearance.headerTitleFont = UIFont.monteserrat(size: 20, family: .ExtraBold)
-            $0.appearance.titleFont = UIFont.Suit(size: 16, family: .Regular)
-            $0.appearance.weekdayFont = UIFont.monteserrat(size: 14, family: .Medium)
-            $0.appearance.subtitleFont = UIFont.Suit(size: 16, family: .Bold)
+            $0.appearance.headerTitleFont = TypoStyle.MontserratH1.font
+            $0.appearance.titleFont = TypoStyle.SuitD1.font
+            $0.appearance.weekdayFont = TypoStyle.MontserratB2.font
+            $0.appearance.subtitleFont = TypoStyle.SuitH3.font
             
             $0.appearance.todayColor = .green_500
             $0.appearance.titleTodayColor = .gray_700
