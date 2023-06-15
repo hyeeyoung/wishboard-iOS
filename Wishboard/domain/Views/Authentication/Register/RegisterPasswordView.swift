@@ -111,14 +111,12 @@ class RegisterPasswordView: UIView {
     @objc func termButtonDidTap() {
         UIDevice.vibrate()
         
-        let link = "\(Storage().BaseURL)/terms.html"
-        self.moveToWebVC(link, "이용약관")
+        self.moveToWebVC(Storage().useTermURL, "이용약관")
     }
     @objc func privacyButtonDidTap() {
         UIDevice.vibrate()
         
-        let link = "\(Storage().BaseURL)/privacy-policy.html"
-        self.moveToWebVC(link, "개인정보 처리방침")
+        self.moveToWebVC(Storage().privacyTermURL, "개인정보 처리방침")
     }
 }
 

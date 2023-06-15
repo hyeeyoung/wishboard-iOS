@@ -122,20 +122,17 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             // 위시보드 이용 방법
             UIDevice.vibrate()
             
-            let link = "https://hushed-bolt-fd4.notion.site/383c308f256f4f189b7c0b68a8f68d9f"
-            self.moveToWebVC(link, "위시보드 이용 방법")
+            self.moveToWebVC(Storage().howToUseLink, "위시보드 이용 방법")
         case 7:
             // 이용약관
             UIDevice.vibrate()
             
-            let link = "\(Storage().BaseURL)/terms.html"
-            self.moveToWebVC(link, "이용약관")
+            self.moveToWebVC(Storage().useTermURL, "이용약관")
         case 8:
             // 개인정보처리방침
             UIDevice.vibrate()
             
-            let link = "\(Storage().BaseURL)/privacy-policy.html"
-            self.moveToWebVC(link, "개인정보 처리방침")
+            self.moveToWebVC(Storage().privacyTermURL, "개인정보 처리방침")
         case 9:
             // 오픈소스 라이브러리
             UIDevice.vibrate()
