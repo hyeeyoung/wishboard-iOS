@@ -11,9 +11,9 @@ import UIKit
 class UploadItemView: UIView {
     // MARK: - View
     let navigationView = UIView()
-    let pageTitle = UILabel().then{
+    let pageTitle = DefaultLabel().then{
         $0.text = Title.addItem
-        $0.font = UIFont.Suit(size: 15, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
     }
     let backButton = UIButton().then{
         var config = UIButton.Configuration.plain()

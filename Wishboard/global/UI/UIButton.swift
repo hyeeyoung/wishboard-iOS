@@ -24,7 +24,7 @@ extension UIButton {
                                       value: NSUnderlineStyle.single.rawValue,
                                       range: NSRange(location: 0, length: title.count)
         )
-        attributedString.addAttribute(.font, value: UIFont.Suit(size: 12, family: .Bold), range: NSRange(location: 0, length: title.count))
+        attributedString.addAttribute(.font, value: TypoStyle.SuitB4.font, range: NSRange(location: 0, length: title.count))
         attributedString.addAttribute(.foregroundColor, value: color, range: NSRange(location: 0, length: title.count))
         setAttributedTitle(attributedString, for: .normal)
     }
@@ -43,31 +43,31 @@ extension UIButton {
         var config = UIButton.Configuration.tinted()
         var attText = AttributedString.init("Cart")
         
-        attText.font = UIFont.Suit(size: 11.46, family: .Regular)
+        attText.font = TypoStyle.SuitD3.font
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        attText.foregroundColor = UIColor.black
+        attText.foregroundColor = UIColor.gray_700
         config.attributedTitle = attText
         config.background.backgroundColor = color
-        config.baseForegroundColor = .black
+        config.baseForegroundColor = .gray_700
         config.cornerStyle = .capsule
         
         self.configuration = config
     }
-    // MARK: - Email resend button
-    func resendButton(_ color: UIColor) {
-        var config = UIButton.Configuration.tinted()
-        var attText = AttributedString.init("재전송")
-        
-        attText.font = UIFont.Suit(size: 14, family: .Bold)
-        attText.foregroundColor = color
-        
-        config.attributedTitle = attText
-        config.background.backgroundColor = .wishboardTextfieldGray
-        config.cornerStyle = .capsule
-        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10)
-        
-        self.configuration = config
-    }
+//    // MARK: - Email resend button
+//    func resendButton(_ color: UIColor) {
+//        var config = UIButton.Configuration.tinted()
+//        var attText = AttributedString.init("재전송")
+//        
+//        attText.font = UIFont.Suit(size: 14, family: .Bold)
+//        attText.foregroundColor = color
+//
+//        config.attributedTitle = attText
+//        config.background.backgroundColor = .gray_50
+//        config.cornerStyle = .capsule
+//        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10)
+//
+//        self.configuration = config
+//    }
     // MARK: - Share Viewcontroller's setNotification button
     func setNotificationButton(_ date: String, _ isSet: Bool) {
         var config = UIButton.Configuration.plain()
@@ -79,8 +79,8 @@ extension UIButton {
         else {
             attText = AttributedString.init(" 상품 알림 설정하기")
         }
-        attText.font = UIFont.Suit(size: 12, family: .Regular)
-        attText.foregroundColor = UIColor.black
+        attText.font = TypoStyle.SuitD3.font
+        attText.foregroundColor = UIColor.gray_700
         config.attributedTitle = attText
         config.image = Image.noti
         
@@ -91,7 +91,7 @@ extension UIButton {
         var config = UIButton.Configuration.plain()
         var attText = AttributedString.init(title)
         
-        attText.font = .systemFont(ofSize: 12)
+        attText.font = TypoStyle.SuitD3.font
         attText.foregroundColor = UIColor.gray
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         config.attributedTitle = attText

@@ -9,14 +9,12 @@ import Foundation
 import Alamofire
 
 class CartDataManager {
-    let header = APIManager().getHeader()
-    
     // MARK: - 장바구니 조회
     func getCartListDataManager(_ cartView: CartView) {
         AF.request(Storage().BaseURL + "/cart",
                            method: .get,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: [CartListModel].self) { response in
             switch response.result {
@@ -25,12 +23,14 @@ class CartDataManager {
             case .failure(let error):
                 let statusCode = error.responseCode
                 switch statusCode {
-                case 429:
-                    cartView.getCartListAPIFail()
+//                case 429:
+//                    cartView.getCartListAPIFail()
                 case 404:
                     cartView.noCartItem()
                 case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        !$0 ? ScreenManager().goToOnboarding(cartView.preVC) : self.getCartListDataManager(cartView)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -42,7 +42,8 @@ class CartDataManager {
         AF.request(Storage().BaseURL + "/cart/\(itemId)",
                            method: .put,
                            parameters: parameter,
-                           headers: header)
+                           encoder: JSONParameterEncoder.default,
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
@@ -50,7 +51,9 @@ class CartDataManager {
                 cartView.modifyCountAPISuccess(result)
             case .failure(let error):
                 if error.responseCode == 401 {
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        !$0 ? ScreenManager().goToOnboarding(cartView.preVC) : self.modifyCountDataManager(itemId, parameter, cartView)
+                    }
                 }
                 print(error.responseCode)
             }
@@ -62,7 +65,8 @@ class CartDataManager {
         AF.request(Storage().BaseURL + "/cart",
                            method: .post,
                            parameters: parameter,
-                           headers: header)
+                           encoder: JSONParameterEncoder.default,
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
@@ -70,7 +74,9 @@ class CartDataManager {
                 viewcontroller.addCartAPISuccess(result)
             case .failure(let error):
                 if error.responseCode == 401 {
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.addCartDataManager(parameter, homeView, viewcontroller)
+                    }
                 }
                 print(error.responseCode)
             }
@@ -81,7 +87,8 @@ class CartDataManager {
         AF.request(Storage().BaseURL + "/cart",
                            method: .post,
                            parameters: parameter,
-                           headers: header)
+                           encoder: JSONParameterEncoder.default,
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
@@ -89,7 +96,9 @@ class CartDataManager {
                 viewcontroller.addCartAPISuccess(result)
             case .failure(let error):
                 if error.responseCode == 401 {
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.addCartDataManager(parameter, viewcontroller)
+                    }
                 }
                 print(error.responseCode)
             }
@@ -100,7 +109,7 @@ class CartDataManager {
         AF.request(Storage().BaseURL + "/cart/\(itemId)",
                            method: .delete,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
@@ -108,7 +117,9 @@ class CartDataManager {
                 cartView.deleteCartAPISuccess(result)
             case .failure(let error):
                 if error.responseCode == 401 {
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        !$0 ? ScreenManager().goToOnboarding(cartView.preVC) : self.deleteCartDataManager(itemId, cartView)
+                    }
                 }
                 print(error.responseCode)
             }
@@ -119,7 +130,7 @@ class CartDataManager {
         AF.request(Storage().BaseURL + "/cart/\(itemId)",
                            method: .delete,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
@@ -127,7 +138,9 @@ class CartDataManager {
                 viewcontroller.deleteCartAPISuccess(result)
             case .failure(let error):
                 if error.responseCode == 401 {
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.deleteCartDataManager(itemId, homeView, viewcontroller)
+                    }
                 }
                 print(error.responseCode)
             }
@@ -138,7 +151,7 @@ class CartDataManager {
         AF.request(Storage().BaseURL + "/cart/\(itemId)",
                            method: .delete,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
@@ -146,7 +159,9 @@ class CartDataManager {
                 viewcontroller.deleteCartAPISuccess(result)
             case .failure(let error):
                 if error.responseCode == 401 {
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.deleteCartDataManager(itemId, viewcontroller)
+                    }
                 }
                 print(error.responseCode)
             }

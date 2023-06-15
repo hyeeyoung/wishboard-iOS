@@ -12,7 +12,7 @@ class CalenderNotiTableViewCell: UITableViewCell {
     // MARK: - Views
     // 뒷배경 뷰 추가
     let grayView = UIView().then{
-        $0.backgroundColor = .notificationBackgroundGray
+        $0.backgroundColor = .gray_50
         $0.layer.cornerRadius = 24
     }
     let itemImage = UIImageView().then{
@@ -21,22 +21,22 @@ class CalenderNotiTableViewCell: UITableViewCell {
         $0.layer.cornerRadius = 40
         $0.contentMode = .scaleAspectFill
     }
-    let itemName = UILabel().then{
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
+    let itemName = DefaultLabel().then{
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD3)
         $0.numberOfLines = 2
     }
     // '재입고 알림'
-    let notificationTypeLabel = UILabel().then{
+    let notificationTypeLabel = DefaultLabel().then{
         $0.text = Notification.restock
-        $0.font = UIFont.Suit(size: 13, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB4)
     }
-    let label = UILabel().then{
+    let label = DefaultLabel().then{
         $0.text = Notification.notification
-        $0.font = UIFont.Suit(size: 13, family: .Bold)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB4)
     }
-    let timeLabel = UILabel().then{
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.textColor = .gray
+    let timeLabel = DefaultLabel().then{
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
+        $0.textColor = .gray_300
     }
     //MARK: - Life Cycles
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

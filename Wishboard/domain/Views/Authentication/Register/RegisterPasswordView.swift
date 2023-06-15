@@ -14,10 +14,9 @@ class RegisterPasswordView: UIView {
     let lockedImage = UIImageView().then{
         $0.image = Image.locked
     }
-    let subTitleLabel = UILabel().then{
+    let subTitleLabel = DefaultLabel().then{
         $0.text = Message.password
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.setTextWithLineHeight()
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
@@ -27,8 +26,8 @@ class RegisterPasswordView: UIView {
     }
     let errorMessage = UILabel().then{
         $0.text = ErrorMessage.password
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.textColor = .wishboardRed
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
+        $0.textColor = .pink_700
     }
     let stack = UIStackView().then{
         $0.axis = .horizontal
@@ -55,7 +54,7 @@ class RegisterPasswordView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     @objc func terClicked() {
-        ScreenManager().linkTo(viewcontroller: preVC, "https://www.wishboard.xyz/terms.html")
+        ScreenManager().linkTo(viewcontroller: preVC, "\(Storage().BaseURL)/terms.html")
     }
     // MARK: - Functions
     func setUpView() {
@@ -111,11 +110,15 @@ class RegisterPasswordView: UIView {
     }
     @objc func termButtonDidTap() {
         UIDevice.vibrate()
-        ScreenManager().linkTo(viewcontroller: preVC, "https://www.wishboard.xyz/terms.html")
+        
+        let link = "\(Storage().BaseURL)/terms.html"
+        self.moveToWebVC(link, "이용약관")
     }
     @objc func privacyButtonDidTap() {
         UIDevice.vibrate()
-        ScreenManager().linkTo(viewcontroller: preVC, "https://www.wishboard.xyz/privacy-policy.html")
+        
+        let link = "\(Storage().BaseURL)/privacy-policy.html"
+        self.moveToWebVC(link, "개인정보 처리방침")
     }
 }
 
@@ -123,17 +126,24 @@ extension RegisterPasswordView {
     func setLabel(_ title: String) {
         let label = UILabel().then{
             $0.text = title
-            $0.font = UIFont.Suit(size: 12, family: .Regular)
-            $0.textColor  = .wishboardGray
-            $0.setTextWithLineHeight()
+            $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
+            $0.textColor  = .gray_300
         }
         stack.addArrangedSubview(label)
     }
     func setUnderLinedButton(_ title: String) -> UIButton {
         let underlineButton = UIButton().then{
-            $0.setUnderline(title, .wishboardGreen, UIFont.Suit(size: 12, family: .Medium))
+            $0.setUnderline(title, .green_700, TypoStyle.SuitB4.font)
         }
         stack.addArrangedSubview(underlineButton)
         return underlineButton
+    }
+    // MARK: move to link
+    func moveToWebVC(_ link: String, _ title: String) {
+        let vc = WebViewController()
+        vc.webURL = link
+        vc.setUpTitle(title)
+        
+        self.preVC.navigationController?.pushViewController(vc, animated: true)
     }
 }

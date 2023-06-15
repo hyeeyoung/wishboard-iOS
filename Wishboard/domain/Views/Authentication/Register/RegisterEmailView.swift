@@ -13,10 +13,9 @@ class RegisterEmailView: UIView {
     let heartLetterImage = UIImageView().then{
         $0.image = Image.loveLetter
     }
-    let subTitleLabel = UILabel().then{
+    let subTitleLabel = DefaultLabel().then{
         $0.text = Message.email
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.setTextWithLineHeight()
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
@@ -24,9 +23,9 @@ class RegisterEmailView: UIView {
         $0.becomeFirstResponder()
     }
     let errorMessageLabel = UILabel().then{
-        $0.text = ErrorMessage.nonExistAccount
-        $0.textColor = .wishboardRed
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
+        $0.text = ErrorMessage.existAccount
+        $0.textColor = .pink_700
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
     }
     let nextButton = DefaultButton(titleStr: Button.next)
     lazy var accessoryView: UIView = {

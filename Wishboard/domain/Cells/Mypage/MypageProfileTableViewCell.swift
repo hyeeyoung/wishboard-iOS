@@ -10,28 +10,27 @@ import Kingfisher
 
 class MypageProfileTableViewCell: UITableViewCell {
     // MARK: - View
-    let profileView = UIView().then{
-        $0.layer.cornerRadius = 32
-        $0.backgroundColor = .black
-    }
     let profileImage = UIImageView().then{
         $0.image = Image.defaultProfile
         $0.clipsToBounds = true
-        $0.layer.cornerRadius = 45
+        $0.layer.cornerRadius = 30
         $0.contentMode = .scaleAspectFill
     }
-    let cameraButton = UIButton().then{
-        $0.setImage(Image.cameraGreen, for: .normal)
-    }
-    let userNameLabel = UILabel().then{
-        $0.text = ""
-        $0.font = UIFont.Suit(size: 18, family: .Bold)
-        $0.textColor = .white
+    let userNameLabel = DefaultLabel().then{
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH2)
     }
     let emailLabel = UILabel().then{
-        $0.text = ""
-        $0.font = UIFont.Suit(size: 12, family: .Regular)
-        $0.textColor = .lightGray
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
+        $0.textColor = .gray_200
+    }
+    let modifyButton = UIButton().then{
+        $0.setTitle("편집", for: .normal)
+        $0.setTitleColor(UIColor.gray_600, for: .normal)
+        $0.titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
+        $0.backgroundColor = UIColor.gray_100
+        
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 12
     }
 
     //MARK: - Life Cycles
@@ -47,35 +46,31 @@ class MypageProfileTableViewCell: UITableViewCell {
 
     // MARK: - Functions
     func setUpView() {
-        contentView.addSubview(profileView)
-        profileView.addSubview(profileImage)
-        profileView.addSubview(cameraButton)
-        profileView.addSubview(userNameLabel)
-        profileView.addSubview(emailLabel)
+        contentView.addSubview(profileImage)
+        contentView.addSubview(userNameLabel)
+        contentView.addSubview(emailLabel)
+        contentView.addSubview(modifyButton)
     }
     func setUpConstraint() {
-        profileView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.bottom.equalToSuperview()
-        }
         profileImage.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.width.height.equalTo(90)
-            make.top.equalToSuperview().offset(20)
-        }
-        cameraButton.snp.makeConstraints { make in
-            make.width.equalTo(25)
-            make.height.equalTo(25)
-            make.trailing.bottom.equalTo(profileImage)
+            make.bottom.equalToSuperview().offset(-48)
+            make.top.equalToSuperview().offset(34)
+            make.width.height.equalTo(60)
+            make.leading.equalToSuperview().offset(16)
         }
         userNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(profileImage.snp.bottom).offset(16)
-            make.centerX.equalToSuperview()
+            make.leading.equalTo(profileImage.snp.trailing).offset(16)
+            make.top.equalToSuperview().offset(45)
         }
         emailLabel.snp.makeConstraints { make in
             make.top.equalTo(userNameLabel.snp.bottom).offset(8)
-            make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().inset(20)
+            make.leading.equalTo(userNameLabel)
+        }
+        modifyButton.snp.makeConstraints { make in
+            make.width.equalTo(45)
+            make.height.equalTo(24)
+            make.top.equalToSuperview().offset(52)
+            make.trailing.equalToSuperview().offset(-16)
         }
     }
     func setUpData(_ data: GetUserInfoModel) {

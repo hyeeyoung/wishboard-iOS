@@ -27,7 +27,7 @@ class NotificationViewController: TitleLeftViewController {
             make.bottom.equalToSuperview().offset(-tabBarHeight)
         }
         // DATA
-        NotificationDataManager().getNotificationListDataManager(self.notiView)
+//        NotificationDataManager().getNotificationListDataManager(self.notiView)
         refreshControl.endRefreshing()
         // Refresh
         initRefresh()
@@ -45,7 +45,7 @@ extension NotificationViewController {
         refreshControl.addTarget(self, action: #selector(refreshTable(refresh:)), for: .valueChanged)
         
         refreshControl.backgroundColor = .white
-        refreshControl.tintColor = .black
+        refreshControl.tintColor = .gray_700
         
         self.notiView.notificationTableView.refreshControl = refreshControl
     }

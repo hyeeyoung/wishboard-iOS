@@ -9,18 +9,18 @@ import Foundation
 
 enum Placeholder {
     // MARK: Authentication
-    public static let email = "이메일을 입력해주세요."
-    public static let password = "비밀번호를 입력해주세요."
-    public static let authcode = "인증코드를 입력해주세요."
-    public static let nickname = "닉네임을 입력해주세요."
+    public static let email = "이메일을 입력해 주세요."
+    public static let password = "비밀번호를 입력해 주세요."
+    public static let authcode = "인증코드를 입력해 주세요."
+    public static let nickname = "닉네임을 입력해 주세요."
     
     // MARK: Item
-    public static let shoppingLink = "쇼핑몰 링크를 입력해주세요."
-    public static let folder = "폴더명을 입력해주세요."
+    public static let shoppingLink = "쇼핑몰 링크를 입력해 주세요."
+    public static let folder = "폴더명을 입력해 주세요."
     
     // MARK: Upload Item
-    public static let shareItemName = "상품명을 입력해주세요."
-    public static let shareItemPrice = "가격을 입력해주세요."
+    public static let shareItemName = "상품명을 입력해 주세요."
+    public static let shareItemPrice = "가격을 입력해 주세요."
     
     public static let uploadItemName = "상품명"
     public static let uploadItemPrice = "₩ 가격(필수)"
@@ -29,10 +29,12 @@ enum Placeholder {
 
 enum ErrorMessage {
     // MARK: Authentication
-    public static let email = "이메일 주소를 정확하게 입력해주세요."
-    public static let password = "8자리 이상의 영문자, 숫자, 특수 문자 조합으로 입력해주세요."
+    public static let email = "이메일 주소를 정확하게 입력해 주세요."
+    public static let password = "8자리 이상의 영문자, 숫자, 특수 문자 조합으로 입력해 주세요."
+    public static let passwordRewrite = "비밀번호가 일치하지 않아요!"
     public static let authcode = "인증코드를 다시 확인해 주세요."
     public static let nonExistAccount = "앗, 가입되지 않은 계정이에요! 가입하기부터 진행해 주세요."
+    public static let existAccount = "앗, 이미 가입된 계정이에요! 로그인으로 진행해 주세요."
     
     // MARK: 500 Error
     public static let fiveHundredError = "예상하지 못한 오류가 발생했어요!\n잠시후 다시 시도해주세요."
@@ -43,19 +45,20 @@ enum ErrorMessage {
 
 enum Message {
     // MARK: Authentication
-    public static let email = "이메일 인증으로 비밀번호를 찾을 수 있어요.\n실제 사용될 이메일로 입력해주세요!"
+    public static let email = "이메일 인증으로 비밀번호를 찾을 수 있어요.\n실제 사용될 이메일로 입력해 주세요!"
     public static let password = "마지막 비밀번호 입력 단계예요!\n입력된 비밀번호로 바로 가입되니 신중히 입력해 주세요."
     public static let deleteUser = "정말 탈퇴하시겠습니까?\n탈퇴 시 앱 내 모든 데이터가 사라집니다.\n서비스를 탈퇴하시려면 이메일을 입력해 주세요."
     public static let toLogin = "이미 계정이 있으신가요?"
-    public static let sendedEmail = "인증코드가 전송되었어요!\n이메일을 확인해주세요."
-    public static let lostPassword = "가입하신 이메일을 입력해주세요!\n로그인을 위해 인증코드가 포함된 이메일을 보내드려요."
+    public static let sendedEmail = "인증코드가 전송되었어요!\n이메일을 확인해 주세요."
+    public static let lostPassword = "가입하신 이메일을 입력해 주세요!\n로그인을 위해 인증코드가 포함된 이메일을 보내드려요."
     
-    // MARK: Nouns
+    // MARK: Label
     public static let login = "로그인"
     public static let item = "아이템"
     public static let folder = "폴더"
     public static let timer = "5:00"
     public static let count = "(0/10)자"
+    public static let nickName = "닉네임"
     
     // MARK: Item
     public static let itemNotification = "30분 전에 상품 일정을 알려드려요! 시간은 30분 단위로 설정할 수 있어요."
@@ -67,10 +70,14 @@ enum Message {
 enum Title {
     // MARK: Authentication
     public static let register = "가입하기"
-    public static let login = "로그인하기"
+    public static let login = "로그인 하기"
     public static let loginByEmail = "이메일로 로그인하기"
     public static let email = "이메일"
     public static let password = "비밀번호"
+    public static let modifyPassword = "비밀번호 변경"
+    
+    public static let newPassword = "새 비밀번호"
+    public static let passwordRewrite = "새 비밀번호 재입력"
     
     // MARK: Camera
     public static let camera = "사진 찍기"
@@ -89,8 +96,8 @@ enum Title {
     
     // MARK: Folder
     public static let folder = "폴더"
-    public static let folderSetting = "폴더 설정"
     public static let addFolder = "새 폴더 추가"
+    public static let modifyFolder = "폴더명 수정"
     
     // MARK: Notification
     public static let notificationSetting = "상품 알림 설정"
@@ -115,6 +122,7 @@ enum Button {
     public static let next = "다음"
     public static let save = "저장"
     public static let add = "추가"
+    public static let modify = "수정"
     
     public static let howTo = "네! 알겠어요"
 }
@@ -127,6 +135,7 @@ enum EmptyMessage {
 
 enum RegularExpression {
     public static let shoppingLink = "^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$"
+    public static let password = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,50}"
 }
 
 enum Item {
@@ -139,4 +148,9 @@ enum Item {
 enum Notification {
     public static let restock = "재입고"
     public static let notification = " 알림"
+}
+
+enum BottomSheetTitle {
+    public static let shoppingMallLink = "쇼핑몰 링크로 아이템 불러오기"
+    public static let folderSetting = "폴더 선택"
 }

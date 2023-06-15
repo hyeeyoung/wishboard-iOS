@@ -11,3 +11,7 @@ struct LoginInput: Encodable {
     let password: String
     let fcmToken: String
 }
+
+struct ModifyPasswordInput: Encodable {
+    let newPassword: String
+}

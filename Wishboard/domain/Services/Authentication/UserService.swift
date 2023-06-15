@@ -21,5 +21,15 @@ extension UserService{
             completion(response)
         }
     }
+    func modifyPassword(pw: String, completion: @escaping (Result<APIModel<TokenResultModel>, Error>) -> Void) {
+        provider.requestDecoded(UserRouter.modifyPassword(pw: pw)) { response in
+            completion(response)
+        }
+    }
+    func modifyProfile(model: MoyaProfileInput, completion: @escaping (Result<APIModel<TokenResultModel>, Error>) -> Void) {
+        provider.requestDecoded(UserRouter.modifyProfile(param: model)) { response in
+            completion(response)
+        }
+    }
 }
 

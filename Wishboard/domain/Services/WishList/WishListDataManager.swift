@@ -9,14 +9,13 @@ import Foundation
 import Alamofire
 
 class WishListDataManager {
-    let header = APIManager().getHeader()
     
     // MARK: - 홈화면 위시리스트 조회
     func wishListDataManager(_ homeView: HomeView, _ viewcontroller: HomeViewController) {
         AF.request(Storage().BaseURL + "/item",
                            method: .get,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: [WishListModel].self) { response in
             switch response.result {
@@ -25,19 +24,20 @@ class WishListDataManager {
             case .failure(let error):
                 let statusCode = error.responseCode
                 switch statusCode {
-                case 429:
-                    viewcontroller.wishListAPIFail()
+//                case 429:
+//                    viewcontroller.wishListAPIFail()
+//                    print("위시리스트 429")
                 case 500:
                     DispatchQueue.main.async {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    print("status code: 401")
-                    print("refresh api 요청")
-                    RefreshDataManager().refreshDataManager()
-                    defer {
-                        self.wishListDataManager(homeView, viewcontroller)
+                    RefreshDataManager().refreshDataManager() {
+                        $0 ? self.wishListDataManager(homeView, viewcontroller) : ScreenManager().goToOnboarding(viewcontroller)
                     }
+                case 304:
+                    print(error.responseCode, error.localizedDescription)
+                    
                 default:
                     print(error.responseCode)
                 }

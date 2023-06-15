@@ -7,6 +7,7 @@
 
 import UIKit
 import MaterialComponents.MaterialBottomSheet
+import Lottie
 
 class UploadItemViewController: UIViewController {
     // MARK: - Properties
@@ -28,6 +29,8 @@ class UploadItemViewController: UIViewController {
     // keyboard
     var restoreFrameValue: CGFloat = 0.0
     var preKeyboardHeight: CGFloat = 0.0
+    // LottieView
+    var lottieView: LottieAnimationView!
     
     // MARK: - Life Cycles
     override func viewDidLoad() {
@@ -220,33 +223,33 @@ extension UploadItemViewController {
         UIDevice.vibrate()
         
         uploadItemView.saveButton.isEnabled = false
-        let lottieView = SetLottie().setSpinLottie(viewcontroller: self)
+        lottieView = SetLottie().setSpinLottie(viewcontroller: self)
         lottieView.isHidden = false
-        lottieView.play { completion in
-            let data = self.wishListData
-            DispatchQueue.main.async {
-                // 이미지 uri를 UIImage로 변환
-                var selectedImage : UIImage?
-                if self.selectedImage == nil {
-                    if let imageUrl = data?.item_img_url {
-                        let url = URL(string: imageUrl)
-                        guard let url = url else {return}
-                        guard let imgData = try? Data(contentsOf: url) else {return}
-                        selectedImage = UIImage(data: imgData)
-                    }
-                } else {selectedImage = self.selectedImage}
-               
-                let moyaItemInput = MoyaItemInput(folderId: data?.folder_id,
-                                                  photo: selectedImage ?? UIImage(),
-                                                  itemName: data?.item_name ?? "",
-                                                  itemPrice: data?.item_price ?? "",
-                                                  itemURL: data?.item_url,
-                                                  itemMemo: data?.item_memo,
-                                                  itemNotificationType: data?.item_notification_type,
-                                                  itemNotificationDate: data?.item_notification_date)
-                self.uploadItemWithMoya(model: moyaItemInput)
-            }
-            
+        lottieView.loopMode = .loop
+        lottieView.play()
+        
+        let data = self.wishListData
+        DispatchQueue.main.async {
+            // 이미지 uri를 UIImage로 변환
+            var selectedImage : UIImage?
+            if self.selectedImage == nil {
+                if let imageUrl = data?.item_img_url {
+                    let url = URL(string: imageUrl)
+                    guard let url = url else {return}
+                    guard let imgData = try? Data(contentsOf: url) else {return}
+                    selectedImage = UIImage(data: imgData)
+                }
+            } else {selectedImage = self.selectedImage}
+           
+            let moyaItemInput = MoyaItemInput(folderId: data?.folder_id,
+                                              photo: selectedImage ?? UIImage(),
+                                              itemName: data?.item_name ?? "",
+                                              itemPrice: data?.item_price ?? "",
+                                              itemURL: data?.item_url,
+                                              itemMemo: data?.item_memo,
+                                              itemNotificationType: data?.item_notification_type,
+                                              itemNotificationDate: data?.item_notification_date)
+            self.uploadItemWithMoya(model: moyaItemInput)
         }
     }
     // MARK: 저장 버튼 클릭 시 (아이템 수정)
@@ -254,32 +257,33 @@ extension UploadItemViewController {
         UIDevice.vibrate()
         
         uploadItemView.saveButton.isEnabled = false
-        let lottieView = SetLottie().setSpinLottie(viewcontroller: self)
+        lottieView = SetLottie().setSpinLottie(viewcontroller: self)
         lottieView.isHidden = false
-        lottieView.play { completion in
-            let data = self.wishListData
-            DispatchQueue.main.async {
-                // 이미지 uri를 UIImage로 변환
-                var selectedImage : UIImage?
-                if let imageUrl = data?.item_img_url {
-                    let url = URL(string: imageUrl)
-                    guard let url = url else {return}
-                    guard let imgData = try? Data(contentsOf: url) else {return}
-                    selectedImage = UIImage(data: imgData)
-                }
-                if self.selectedImage != nil {selectedImage = self.selectedImage}
-                
-                let moyaItemInput = MoyaItemInput(folderId: data?.folder_id,
-                                                  photo: selectedImage ?? UIImage(),
-                                                  itemName: data?.item_name ?? "",
-                                                  itemPrice: data?.item_price ?? "",
-                                                  itemURL: data?.item_url,
-                                                  itemMemo: data?.item_memo,
-                                                  itemNotificationType: data?.item_notification_type,
-                                                  itemNotificationDate: data?.item_notification_date)
-                self.modifyItemWithMoya(model: moyaItemInput, id: data?.item_id ?? -1)
-                
+        lottieView.loopMode = .loop
+        lottieView.play()
+        
+        let data = self.wishListData
+        DispatchQueue.main.async {
+            // 이미지 uri를 UIImage로 변환
+            var selectedImage : UIImage?
+            if let imageUrl = data?.item_img_url {
+                let url = URL(string: imageUrl)
+                guard let url = url else {return}
+                guard let imgData = try? Data(contentsOf: url) else {return}
+                selectedImage = UIImage(data: imgData)
             }
+            if self.selectedImage != nil {selectedImage = self.selectedImage}
+            
+            let moyaItemInput = MoyaItemInput(folderId: data?.folder_id,
+                                              photo: selectedImage ?? UIImage(),
+                                              itemName: data?.item_name ?? "",
+                                              itemPrice: data?.item_price ?? "",
+                                              itemURL: data?.item_url,
+                                              itemMemo: data?.item_memo,
+                                              itemNotificationType: data?.item_notification_type,
+                                              itemNotificationDate: data?.item_notification_date)
+            self.modifyItemWithMoya(model: moyaItemInput, id: data?.item_id ?? -1)
+            
         }
     }
 }
@@ -340,7 +344,7 @@ extension UploadItemViewController {
         }
         let cancelAction = UIAlertAction(title: Title.cancel, style: UIAlertAction.Style.cancel, handler: nil)
         
-        alert.view.tintColor = .black
+        alert.view.tintColor = .gray_700
         alert.addAction(cameraAction)
         alert.addAction(albumAction)
         alert.addAction(cancelAction)
@@ -414,6 +418,7 @@ extension UploadItemViewController {
                 case .success(let data):
                     if data.success {
                         print("아이템 등록 성공 by moya:", data.message)
+                        self.lottieView.stop()
                         self.viewDidLoad()
                         ScreenManager().goMainPages(0, self, family: .itemUpload)
                     }
@@ -435,6 +440,7 @@ extension UploadItemViewController {
                 case .success(let data):
                     if data.success {
                         print("아이템 수정 성공 by moya:", data.message)
+                        self.lottieView.stop()
                         self.viewDidLoad()
                         self.navigationController?.popViewController(animated: true)
                         self.isModified = true

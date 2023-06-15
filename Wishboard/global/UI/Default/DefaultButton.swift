@@ -10,12 +10,12 @@ import UIKit
 import Lottie
 
 class DefaultButton: UIButton {
-    var isActivate = false{
+    var isActivate: Bool = false {
         didSet{
             isActivate ? activateButton() : inactivateButton()
         }
     }
-    var lottieView: AnimationView!
+    var lottieView: LottieAnimationView!
     var titleStr: String?
     var titleColor: UIColor?
     
@@ -28,9 +28,9 @@ class DefaultButton: UIButton {
         self.titleStr = titleStr
         
         self.setTitle(titleStr, for: .normal)
-        self.setTitleColor(UIColor.dialogMessageColor, for: .normal)
-        self.titleLabel?.font = UIFont.Suit(size: 14, family: .Bold)
-        self.backgroundColor = UIColor.wishboardDisabledGray
+        self.setTitleColor(UIColor.gray_300, for: .normal)
+        self.titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
+        self.backgroundColor = UIColor.gray_100
         
         self.clipsToBounds = true
         self.layer.cornerRadius = 22
@@ -46,7 +46,7 @@ class DefaultButton: UIButton {
         
         self.setTitle(titleStr, for: .normal)
         self.setTitleColor(titleColor, for: .normal)
-        self.titleLabel?.font = UIFont.Suit(size: 14, family: .Bold)
+        self.titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
         self.backgroundColor = backgroundColor
         
         self.clipsToBounds = true
@@ -60,17 +60,17 @@ class DefaultButton: UIButton {
     
     // MARK: - Function
     func activateButton() {
-        self.backgroundColor = UIColor.wishboardGreen
-        self.titleLabel?.textColor = UIColor.black
+        self.backgroundColor = UIColor.green_500
+        self.setTitleColor(UIColor.gray_700, for: .normal)
         self.isEnabled = true
     }
     func inactivateButton() {
-        self.backgroundColor = UIColor.wishboardDisabledGray
-        self.titleLabel?.textColor = UIColor.dialogMessageColor
+        self.backgroundColor = UIColor.gray_100
+        self.setTitleColor(UIColor.gray_300, for: .normal)
         self.isEnabled = false
     }
     // MARK: Lottie View
-    func setLottieView() -> AnimationView {
+    func setLottieView() -> LottieAnimationView {
         self.lottieView = SetLottie().horizontalBlackView
         self.addSubview(lottieView)
         

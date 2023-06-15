@@ -11,13 +11,13 @@ import UIKit
 class SnackBar {
     // MARK: - Views
     let backgroundView = UIView().then{
-        $0.backgroundColor = .black
+        $0.backgroundColor = .gray_700
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 25
     }
     var title = UILabel().then{
         $0.textColor = .white
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD2)
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
@@ -68,10 +68,12 @@ extension SnackBar {
         case addFolder = "폴더를 추가했어요!😉"
         case modifyFolder = "폴더명을 수정했어요!📁"
         case deleteFolder = "폴더를 삭제했어요!🗑"
+        case deleteCartItem = "장바구니에서 아이템을 삭제했어요! 🗑"
         case addItem = "아이템을 위시리스트에 추가했어요!👜"
         case modifyItem = "아이템을 수정했어요!✍️️"
         case deleteItem = "아이템을 위시리스트에서 삭제했어요!🗑"
         case modifyProfile = "프로필이 수정되었어요!👩‍🎤"
+        case modifyPassword = "비밀번호가 변경되었어요!👩‍🎤"
         case deleteUser = "탈퇴 완료되었어요. 이용해주셔서 감사합니다!☺️"
         case ShoppingLink = "쇼핑몰 링크를 등록해 주세요!🛍️️"
         case failShoppingLink = "앗, 아이템 정보를 불러오지 못했어요🥲"
@@ -82,13 +84,13 @@ extension SnackBar {
 class ErrorBar {
     // MARK: - Views
     let backgroundView = UIView().then{
-        $0.backgroundColor = .black
+        $0.backgroundColor = .gray_700
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 25
     }
     var title = UILabel().then{
         $0.textColor = .white
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.textAlignment = .center
         $0.numberOfLines = 0
     }
@@ -96,7 +98,6 @@ class ErrorBar {
     // Error SnackBar (두 줄)
     init(_ originView: UIViewController) {
         title.text = ErrorMessage.fiveHundredError
-        title.setTextWithLineHeight()
         title.textAlignment = .center
         
         backgroundView.layer.cornerRadius = 35
@@ -124,7 +125,7 @@ class ErrorBar {
                 self.backgroundView.transform = CGAffineTransform(translationX: 0, y: -81)
             } completion: { finished in
                 UIView.animate(withDuration: 0.5, delay: 2.5) {
-                    self.backgroundView.transform = .identity
+                    self.backgroundView.transform = CGAffineTransform(translationX: 0, y: 81)
                 } completion: { finish in
                     if originView.extensionContext != nil {
                         originView.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)

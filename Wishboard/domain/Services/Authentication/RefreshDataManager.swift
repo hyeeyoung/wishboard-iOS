@@ -10,9 +10,9 @@ import Alamofire
 
 class RefreshDataManager {
     //MARK: Refresh
-    func refreshDataManager() {
+    func refreshDataManager(completion: @escaping (Bool) -> Void) {
         let parameter = RefreshInput(refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? "")
-        print("Refresh Token api -> Request Body:", parameter)
+        print("refresh token:", parameter)
         AF.request(Storage().BaseURL + "/auth/refresh",
                    method: .post,
                    parameters: parameter,
@@ -27,15 +27,22 @@ class RefreshDataManager {
                 
                 UserDefaults.standard.set(accessToken, forKey: "accessToken")
                 UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
-//                if result.success! {viewcontroller.refreshAPISuccess(result); print(result)}
+                
+                print("refresh success!", accessToken, refreshToken)
+                completion(true)
+                
+                break
             case .failure(let error):
                 if let statusCode = error.responseCode {
                     print("refresh token api FAIL:", statusCode)
                     print(error.localizedDescription)
-                    
                 }
+                completion(false)
             }
         }
+    }
+}
+//        return isRefreshed
 //        .responseString { response in
 //               print("String:\(response.result.value)")
 //               switch(response.result) {
@@ -49,5 +56,3 @@ class RefreshDataManager {
 //                   break
 //                }
 //            }
-    }
-}

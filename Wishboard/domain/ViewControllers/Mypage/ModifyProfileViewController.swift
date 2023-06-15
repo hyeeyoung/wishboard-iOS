@@ -20,17 +20,23 @@ class ModifyProfileViewController: TitleCenterViewController {
     let cameraButton = UIButton().then{
         $0.setImage(Image.cameraGray, for: .normal)
     }
+    let nicknameLabel = DefaultLabel().then{
+        $0.text = Message.nickName
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
+    }
     var nameTextField = DefaultTextField(Placeholder.nickname).then{
         $0.clearButtonMode = .always
         $0.becomeFirstResponder()
     }
     let completeButton = DefaultButton(titleStr: Button.complete)
+    let completeKeyboardButton = DefaultButton(titleStr: Button.complete)
+    lazy var accessoryView: UIView = {
+        return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
+    }()
     // MARK: - Life Cycles
     // 앨범 선택 image picker
-    var isPhotoSelected = false
-    var isNicknameChanged = false
     let imagePickerController = UIImagePickerController()
-    var selectedPhoto: UIImage!
+    var selectedPhoto: UIImage?
     var nickname: String?
     
     var preNickName: String?
@@ -52,17 +58,25 @@ class ModifyProfileViewController: TitleCenterViewController {
         setUpConstraint()
         setTarget()
         
+        nameTextField.inputAccessoryView = accessoryView // <-
+        
         self.nameTextField.delegate = self
     }
     override func viewDidDisappear(_ animated: Bool) {
         if modified {
-            SnackBar(preVC, message: .modifyProfile)
+            preVC.isProfileModified = true
             MypageDataManager().getUserInfoDataManager(preVC)
+//            SnackBar(preVC, message: .modifyProfile)
         }
     }
     override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
+        
+        if let nickname = preNickName {
+            isNicknameValid(nickname: nickname)
+        }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -73,8 +87,11 @@ extension ModifyProfileViewController {
     func setUpView() {
         self.view.addSubview(profileImage)
         self.view.addSubview(cameraButton)
+        self.view.addSubview(nicknameLabel)
         self.view.addSubview(nameTextField)
         self.view.addSubview(completeButton)
+        
+        accessoryView.addSubview(completeKeyboardButton)
         
         if let image = self.preProfileImg {
             let processor = TintImageProcessor(tint: .black_5)
@@ -93,17 +110,27 @@ extension ModifyProfileViewController {
             make.height.equalTo(26.67)
             make.trailing.bottom.equalTo(profileImage)
         }
+        nicknameLabel.snp.makeConstraints { make in
+            make.top.equalTo(profileImage.snp.bottom).offset(32)
+            make.leading.equalToSuperview().offset(16)
+        }
         nameTextField.snp.makeConstraints { make in
             make.height.equalTo(42)
-            make.top.equalTo(profileImage.snp.bottom).offset(24)
+            make.top.equalTo(nicknameLabel.snp.bottom).offset(8)
             make.leading.trailing.equalToSuperview().inset(16)
             make.centerX.equalToSuperview()
         }
         completeButton.snp.makeConstraints { make in
             make.height.equalTo(50)
-            make.top.equalTo(nameTextField.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview().inset(16)
             make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-34)
+        }
+        completeKeyboardButton.snp.makeConstraints { make in
+            make.height.equalTo(50)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-16)
         }
     }
 }
@@ -114,16 +141,17 @@ extension ModifyProfileViewController {
         self.cameraButton.addTarget(self, action: #selector(goAlbumButtonDidTap), for: .touchUpInside)
         self.nameTextField.addTarget(self, action: #selector(nameTextFieldEditingChanged(_:)), for: .editingChanged)
         self.completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
+        self.completeKeyboardButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
     }
     @objc func nameTextFieldEditingChanged(_ sender: UITextField) {
-        self.isNicknameChanged = true
         let text = sender.text ?? ""
         self.nickname = text
         isNicknameValid(nickname: self.nickname!)
     }
     // 닉네임 유효성 검사
     func isNicknameValid(nickname: String) {
-        self.completeButton.isActivate = nickname == "" ? false : true
+        self.completeButton.isActivate = nickname.isEmpty ? false : true
+        self.completeKeyboardButton.isActivate = nickname.isEmpty ? false : true
     }
     // 앨범에서 사진/동영상 선택
     // 프로필 이미지 클릭 시
@@ -141,23 +169,18 @@ extension ModifyProfileViewController {
     @objc func completeButtonDidTap() {
         UIDevice.vibrate()
         
-        let lottieView = self.completeButton.setLottieView()
+        var lottieView = self.completeButton.setLottieView()
         self.completeButton.isSelected = true
+        
+        lottieView = self.completeKeyboardButton.setLottieView()
+        self.completeKeyboardButton.isSelected = true
+        
         lottieView.isHidden = false
+        
         lottieView.play { completion in
             lottieView.loopMode = .loop
-            DispatchQueue.main.async {
-                if self.isPhotoSelected && self.isNicknameChanged {
-                    ModifyProfileDataManager().modifyProfileDataManager(self.nickname!, self.selectedPhoto, self)
-                } else if self.isNicknameChanged {
-                    let modifyProfileInput = ModifyProfileInputNickname(nickname: self.nickname)
-                    ModifyProfileDataManager().modifyProfileDataManager(modifyProfileInput, self)
-                } else if self.isPhotoSelected {
-                    ModifyProfileDataManager().modifyProfileDataManager(self.selectedPhoto, self)
-                } else {
-                    self.navigationController?.popViewController(animated: true)
-                }
-            }
+            let moyaProfileInput = MoyaProfileInput(photo: self.selectedPhoto, nickname: self.nickname)
+            self.modifyProfileWithMoya(model: moyaProfileInput)
         }
     }
 }
@@ -168,7 +191,6 @@ extension ModifyProfileViewController : UIImagePickerControllerDelegate, UINavig
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.selectedPhoto = image
             self.profileImage.image = image
-            self.isPhotoSelected = true
         }
         self.dismiss(animated: true, completion: nil)
     }
@@ -187,12 +209,25 @@ extension ModifyProfileViewController: UITextFieldDelegate {
 }
 // MARK: - API Success
 extension ModifyProfileViewController {
-    func modifyProfileAPISuccess(_ result: APIModel<TokenResultModel>) {
-        if result.success {
-            self.modified = true
-            self.navigationController?.popViewController(animated: true)
-        } else {}
-        
-        print(result.message)
+    // MARK: 프로필 편집 API
+    func modifyProfileWithMoya(model: MoyaProfileInput) {
+        UserService.shared.modifyProfile(model: model) { result in
+            switch result {
+                case .success(let data):
+                    if data.success {
+                        print("프로필 업데이트 성공 by moya:", data.message)
+                        self.modified = true
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    break
+            case .failure(let error):
+                self.navigationController?.popViewController(animated: true)
+                self.modified = false
+                print("moya profile modify error", error.localizedDescription)
+            default:
+                print("default error")
+                break
+            }
+        }
     }
 }

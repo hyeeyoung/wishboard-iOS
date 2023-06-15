@@ -16,7 +16,7 @@ class MypageDataManager {
         AF.request(Storage().BaseURL + "/user",
                            method: .get,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: [GetUserInfoModel].self) { response in
             switch response.result {
@@ -25,14 +25,16 @@ class MypageDataManager {
             case .failure(let error):
                 let statusCode = error.responseCode
                 switch statusCode {
-                case 429:
-                    viewcontroller.getUserInfoAPIFail()
+//                case 429:
+//                    viewcontroller.getUserInfoAPIFail()
                 case 500:
                    DispatchQueue.main.async {
                        ErrorBar(viewcontroller)
                    }
                 case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.getUserInfoDataManager(viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -45,7 +47,7 @@ class MypageDataManager {
         AF.request(Storage().BaseURL + "/user/push-state/\(isOn)",
                            method: .put,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
@@ -55,7 +57,9 @@ class MypageDataManager {
                 let statusCode = error.responseCode
                 switch statusCode {
                     case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.switchNotificationDataManager(isOn, viewcontroller)
+                    }
                     case 500:
                        DispatchQueue.main.async {
                            ErrorBar(viewcontroller)
@@ -71,7 +75,7 @@ class MypageDataManager {
         AF.request(Storage().BaseURL + "/user/push-state/\(isOn)",
                            method: .put,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
@@ -85,7 +89,9 @@ class MypageDataManager {
                            ErrorBar(viewcontroller)
                        }
                     case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.switchNotificationDataManager(isOn, viewcontroller)
+                    }
                     default:
                        print(error.responseCode)
                 }
@@ -97,7 +103,7 @@ class MypageDataManager {
         AF.request(Storage().BaseURL + "/user",
                            method: .delete,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
@@ -111,7 +117,9 @@ class MypageDataManager {
                            ErrorBar(viewcontroller)
                        }
                     case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.deleteUserDataManager(viewcontroller)
+                    }
                     default:
                        print(error.responseCode)
                 }
@@ -122,7 +130,7 @@ class MypageDataManager {
     func logoutDataManager(_ viewcontroller: MyPageViewController) {
         AF.request(Storage().BaseURL + "/auth/logout",
                            method: .post,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<ResultModel>.self) { response in
             switch response.result {
@@ -136,7 +144,9 @@ class MypageDataManager {
                            ErrorBar(viewcontroller)
                        }
                     case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.logoutDataManager(viewcontroller)
+                    }
                     default:
                        print(error.responseCode)
                 }

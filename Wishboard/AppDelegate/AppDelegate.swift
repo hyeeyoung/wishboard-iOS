@@ -23,12 +23,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // MARK: Network check
 //        NetworkCheck.shared.startMonitoring()
         
-        //MARK: UserDefaults
-        UserDefaults.standard.set(Storage().BaseURL, forKey: "url")
-        // MARK: UserDefaults for Share Extension
-        let defaults = UserDefaults(suiteName: Storage().ShareExtension)
-        defaults?.set(Storage().BaseURL, forKey: "url")
-        defaults?.synchronize()
+        // MARK: BaseURL
+        // 개발/릴리즈 URL 비교 후 로그아웃API 호출
+        let prevBaseURL = UserDefaults.standard.string(forKey: "url")
+        if prevBaseURL != Storage().BaseURL {
+            self.deleteUserInfo()
+            // Save URL at app
+            UserDefaults.standard.set(Storage().BaseURL, forKey: "url")
+            // Save URL for Share Extension
+            let defaults = UserDefaults(suiteName: Storage().ShareExtension)
+            defaults?.set(Storage().BaseURL, forKey: "url")
+            defaults?.synchronize()
+        }
         
         // MARK: Clean Cache
 //        let cache = ImageCache.default
@@ -49,13 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if Bundle.appBuildVersion != prevBuildVersion {
             // Build Version 올라갈 때마다 로그아웃API 호출
             UserDefaults.standard.set(Bundle.appBuildVersion, forKey: "appBuildVersion")
-            // delete UserInfo
-            UserDefaults.standard.removeObject(forKey: "accessToken")
-            UserDefaults.standard.removeObject(forKey: "refreshToken")
-            UserDefaults.standard.removeObject(forKey: "email")
-            UserDefaults.standard.removeObject(forKey: "password")
-            UserDefaults.standard.set(false, forKey: "isFirstLogin")
-            UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "accessToken")
+            self.deleteUserInfo()
         }
         
         
@@ -126,5 +126,18 @@ extension AppDelegate {
 
     func userNotificationCenter(_ center: UNUserNotificationCenter,didReceive response: UNNotificationResponse,withCompletionHandler completionHandler: @escaping () -> Void) {
         completionHandler()
+    }
+}
+// MARK: - Logout
+// User Data 삭제
+extension AppDelegate {
+    func deleteUserInfo() {
+        // delete UserInfo
+        UserDefaults.standard.removeObject(forKey: "accessToken")
+        UserDefaults.standard.removeObject(forKey: "refreshToken")
+        UserDefaults.standard.removeObject(forKey: "email")
+        UserDefaults.standard.removeObject(forKey: "password")
+        UserDefaults.standard.set(false, forKey: "isFirstLogin")
+        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "accessToken")
     }
 }

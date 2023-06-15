@@ -17,7 +17,7 @@ class LostPasswordDataManager {
                    method: .post,
                    parameters: parameter,
                    encoder: JSONParameterEncoder.default,
-                   headers: header)
+                   headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<LostPasswordModel>.self) { response in
             switch response.result {
@@ -45,7 +45,7 @@ class LostPasswordDataManager {
                    method: .post,
                    parameters: parameter,
                    encoder: JSONParameterEncoder.default,
-                   headers: header)
+                   headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<VerifyCodeModel>.self) { response in
             switch response.result {
@@ -61,7 +61,9 @@ class LostPasswordDataManager {
                            ErrorBar(viewcontroller)
                        }
                     case 401:
-                        RefreshDataManager().refreshDataManager()
+                        RefreshDataManager().refreshDataManager() {
+                            !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.verifyCodeDataManager(parameter, viewcontroller)
+                        }
                     default:
                         print(statusCode)
                     }

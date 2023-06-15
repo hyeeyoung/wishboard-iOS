@@ -30,7 +30,7 @@ class ItemDetailViewController: UIViewController {
         }
         
         setItemView()
-        ItemDataManager().getItemDetailDataManager(self.itemId, self)
+//        ItemDataManager().getItemDetailDataManager(self.itemId, self)
     }
     override func viewDidAppear(_ animated: Bool) {
         ItemDataManager().getItemDetailDataManager(self.itemId, self)
@@ -148,9 +148,11 @@ extension ItemDetailViewController {
         
         print(result.message)
     }
-    func deleteItemAPIFail() {
-        guard let itemId = self.wishListData.item_id else {return}
-        ItemDataManager().deleteItemDataManager(itemId, self)
+    func deleteItemAPIFail429() {
+        self.dismiss(animated: false)
+        self.isDeleted = false
+//        guard let itemId = self.wishListData.item_id else {return}
+//        ItemDataManager().deleteItemDataManager(itemId, self)
     }
     // MARK: 아이템 상세 조회
     func getItemDetailAPISuccess(_ result: WishListModel) {
@@ -164,6 +166,6 @@ extension ItemDetailViewController {
         itemDetailView.lowerButton.addTarget(self, action: #selector(linkButtonDidTap), for: .touchUpInside)
     }
     func getItemDetailAPIFail() {
-        ItemDataManager().getItemDetailDataManager(self.itemId, self)
+//        ItemDataManager().getItemDetailDataManager(self.itemId, self)
     }
 }

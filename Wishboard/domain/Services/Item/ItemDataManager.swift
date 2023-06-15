@@ -10,14 +10,13 @@ import Alamofire
 
 class ItemDataManager {
     let multiHeader = APIManager().getMultipartHeader()
-    let header = APIManager().getHeader()
     
     // MARK: - 아이템 상세 조회
     func getItemDetailDataManager(_ itemId: Int,_ viewcontroller: ItemDetailViewController) {
         AF.request(Storage().BaseURL + "/item/\(itemId)",
                            method: .get,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: [WishListModel].self) { response in
             switch response.result {
@@ -26,14 +25,16 @@ class ItemDataManager {
             case .failure(let error):
                 let statusCode = error.responseCode
                 switch statusCode {
-                case 429:
-                    viewcontroller.getItemDetailAPIFail()
+//                case 429:
+//                    viewcontroller.getItemDetailAPIFail()
                 case 500:
                     DispatchQueue.main.async {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.getItemDetailDataManager(itemId, viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -46,7 +47,7 @@ class ItemDataManager {
         AF.request(Storage().BaseURL + "/item/\(itemId)",
                            method: .delete,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
             switch response.result {
@@ -56,13 +57,15 @@ class ItemDataManager {
                 let statusCode = error.responseCode
                 switch statusCode {
                 case 429:
-                    viewcontroller.deleteItemAPIFail()
+                    viewcontroller.deleteItemAPIFail429()
                 case 500:
                     DispatchQueue.main.async {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.deleteItemDataManager(itemId, viewcontroller)
+                    }
                 default:
                     print(error.responseCode)
                 }
@@ -74,7 +77,7 @@ class ItemDataManager {
         AF.request(Storage().BaseURL + "/item/parse?site=\(url)",
                            method: .get,
                            parameters: nil,
-                           headers: header)
+                           headers: APIManager().getHeader())
             .validate()
             .responseDecodable(of: APIModel<ItemParsingModel>.self) { response in
             switch response.result {
@@ -92,7 +95,9 @@ class ItemDataManager {
                         ErrorBar(viewcontroller)
                     }
                 case 401:
-                    RefreshDataManager().refreshDataManager()
+                    RefreshDataManager().refreshDataManager() {
+                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.getItemByLinkDataManager(url, viewcontroller)
+                    }
                 default:
                     print(error.localizedDescription)
                     print(error.responseCode)

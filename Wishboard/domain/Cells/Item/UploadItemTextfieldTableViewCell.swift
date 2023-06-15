@@ -11,9 +11,9 @@ class UploadItemTextfieldTableViewCell: UITableViewCell {
 
     var textfield = UITextField().then{
         $0.backgroundColor = .clear
-        $0.font = UIFont.Suit(size: 14, family: .Regular)
+        $0.font = TypoStyle.SuitB3.font
         $0.addLeftPadding(16)
-        $0.textColor = .editTextFontColor
+        $0.textColor = .gray_700
     }
     
     //MARK: - Life Cycles

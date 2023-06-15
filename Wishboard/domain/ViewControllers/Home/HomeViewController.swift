@@ -35,8 +35,8 @@ class HomeViewController: UIViewController {
         
         self.homeView.cartButton.addTarget(self, action: #selector(goToCart), for: .touchUpInside)
         self.homeView.calenderButton.addTarget(self, action: #selector(goCalenderDidTap), for: .touchUpInside)
-        // DATA
-        WishListDataManager().wishListDataManager(self.homeView, self)
+//        // DATA
+//        WishListDataManager().wishListDataManager(self.homeView, self)
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false

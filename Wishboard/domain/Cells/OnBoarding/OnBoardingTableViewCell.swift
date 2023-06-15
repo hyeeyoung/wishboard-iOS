@@ -20,11 +20,10 @@ class OnBoardingTableViewCell: UITableViewCell {
         $0.image = Image.wishboardLogo
     }
     // Onbarding label
-    let onboardingLabel = UILabel().then{
+    let onboardingLabel = DefaultLabel().then{
         $0.text = Message.onboarding
-        $0.font = UIFont.Suit()
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.numberOfLines = 0
-        $0.setTextWithLineHeight()
         $0.textAlignment = .center
     }
     // 가입하기 버튼
@@ -37,17 +36,17 @@ class OnBoardingTableViewCell: UITableViewCell {
         var config = UIButton.Configuration.plain()
         var attText = AttributedString.init(Message.toLogin)
         
-        attText.font = UIFont.Suit(size: 12, family: .Regular)
+        attText.font = TypoStyle.SuitD2.font
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        attText.foregroundColor = UIColor.black
+        attText.foregroundColor = UIColor.gray_300
         config.attributedTitle = attText
-        config.baseForegroundColor = .black
+        config.baseForegroundColor = .gray_300
         
         $0.configuration = config
     }
     // 로그인
     let loginButton = UIButton().then{
-        $0.setUnderline(Message.login, .wishboardGreen)
+        $0.setUnderline(Message.login, .green_700, TypoStyle.SuitH4.font)
     }
     
     override func awakeFromNib() {
@@ -96,10 +95,10 @@ class OnBoardingTableViewCell: UITableViewCell {
         }
         
         self.loginStackView.snp.makeConstraints { make in
-            make.width.equalTo(150)
+            make.width.equalTo(180)
             make.height.equalTo(20)
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-34)
+            make.bottom.equalToSuperview().offset(-66)
         }
         self.accountExistButton.snp.makeConstraints { make in
             make.height.equalTo(20)

@@ -2,3 +2,4 @@
 Info.plist
 GoogleService-Info.plist
 Storage.swift
+fastlane/key.json

@@ -16,8 +16,8 @@ class CartTableViewCell: UITableViewCell {
         $0.isUserInteractionEnabled = true
         $0.contentMode = .scaleAspectFill
     }
-    let itemName = UILabel().then{
-        $0.font = UIFont.Suit(size: 12.5, family: .Regular)
+    let itemName = DefaultLabel().then{
+        $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.numberOfLines = 2
         $0.isUserInteractionEnabled = true
     }
@@ -39,16 +39,16 @@ class CartTableViewCell: UITableViewCell {
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         $0.configuration = config
     }
-    let countLabel = UILabel().then{
+    let countLabel = DefaultLabel().then{
         $0.textAlignment = .center
-        $0.font = UIFont.Suit(size: 14.58, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD2)
     }
-    let priceLabel = UILabel().then{
-        $0.font = UIFont.monteserrat(size: 18.75, family: .Bold)
+    let priceLabel = DefaultLabel().then{
+        $0.setTypoStyleWithSingleLine(typoStyle: .MontserratH2)
     }
-    let won = UILabel().then{
+    let won = DefaultLabel().then{
         $0.text = Item.won
-        $0.font = UIFont.Suit(size: 14.58, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD2)
     }
     //MARK: - Life Cycles
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

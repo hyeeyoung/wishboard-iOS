@@ -20,7 +20,7 @@ class ShareViewController: UIViewController {
     var folderListData: [FolderListModel] = []
     var notivc: NotificationSettingViewController!
     var newFoldervc: NewFolderViewController!
-    var lottieView: AnimationView!
+    var lottieView: LottieAnimationView!
     
     var selectedFolder: String?
     var selectedFolderIdx: Int?

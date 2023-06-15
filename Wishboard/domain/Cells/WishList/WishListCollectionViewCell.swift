@@ -16,16 +16,16 @@ class WishListCollectionViewCell: UICollectionViewCell {
         $0.clipsToBounds = true
         $0.contentMode = .scaleAspectFill
     }
-    let itemName = UILabel().then{
-        $0.font = UIFont.Suit(size: 12.5, family: .Regular)
+    let itemName = DefaultLabel().then{
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
         $0.numberOfLines = 1
     }
-    let itemPrice = UILabel().then{
-        $0.font = UIFont.monteserrat(size: 14.58, family: .Bold)
+    let itemPrice = DefaultLabel().then{
+        $0.setTypoStyleWithSingleLine(typoStyle: .MontserratH3)
     }
-    let won = UILabel().then{
+    let won = DefaultLabel().then{
         $0.text = Item.won
-        $0.font = UIFont.Suit(size: 11.46, family: .Regular)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
     }
     let cartButton = UIButton().then{
         $0.cartButton(.white)
@@ -89,7 +89,7 @@ class WishListCollectionViewCell: UICollectionViewCell {
         if let name = data.item_name {self.itemName.text = name}
         if let price = data.item_price {self.itemPrice.text = FormatManager().strToPrice(numStr: price)}
         if let isCart = data.cart_state {
-            if isCart == 1 {self.cartButton.cartButton(.wishboardGreen)}
+            if isCart == 1 {self.cartButton.cartButton(.green_500)}
             else {self.cartButton.cartButton(.white)}
         }
     }

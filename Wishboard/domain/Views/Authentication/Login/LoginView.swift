@@ -13,16 +13,16 @@ import SnapKit
 class LoginView: UIView {
     // MARK: - Views
     // 이메일 Label
-    let emailLabel = UILabel().then{
+    let emailLabel = DefaultLabel().then{
         $0.text = Title.email
-        $0.font = UIFont.Suit(size: 14, family: .Medium)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
     }
     // 이메일 TextField
     let emailTextField = DefaultTextField(Placeholder.email)
     // 비밀번호 Label
-    let passwordLabel = UILabel().then{
+    let passwordLabel = DefaultLabel().then{
         $0.text = Title.password
-        $0.font = UIFont.Suit(size: 14, family: .Medium)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
     }
     // 비밀번호 TextField
     let passwordTextField = DefaultTextField(Placeholder.password).then{
@@ -78,7 +78,7 @@ class LoginView: UIView {
     func setUpConstraint() {
         self.emailLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
-            make.top.equalToSuperview().offset(44)
+            make.top.equalToSuperview().offset(32)
         }
         self.emailTextField.snp.makeConstraints { make in
             make.height.equalTo(42)
