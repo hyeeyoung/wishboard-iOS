@@ -63,7 +63,8 @@ extension GetEmailViewController {
         } else {
             let lottieView = getEmailView.loginButton.setLottieView()
             lottieView.play { completion in
-                let lostPasswordInput = LostPasswordInput(verify: true, email: self.email)
+                let fcmToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
+                let lostPasswordInput = LostPasswordInput(verify: true, email: self.email!, fcmToken: fcmToken)
                 LostPasswordDataManager().verifyCodeDataManager(lostPasswordInput, self)
             }
         }

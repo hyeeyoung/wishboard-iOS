@@ -54,7 +54,7 @@ class RegisterPasswordView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     @objc func terClicked() {
-        ScreenManager().linkTo(viewcontroller: preVC, "https://www.wishboard.xyz/terms.html")
+        ScreenManager().linkTo(viewcontroller: preVC, "\(Storage().BaseURL)/terms.html")
     }
     // MARK: - Functions
     func setUpView() {
@@ -111,13 +111,13 @@ class RegisterPasswordView: UIView {
     @objc func termButtonDidTap() {
         UIDevice.vibrate()
         
-        let link = "https://www.wishboard.xyz/terms.html"
+        let link = "\(Storage().BaseURL)/terms.html"
         self.moveToWebVC(link, "이용약관")
     }
     @objc func privacyButtonDidTap() {
         UIDevice.vibrate()
         
-        let link = "https://www.wishboard.xyz/privacy-policy.html"
+        let link = "\(Storage().BaseURL)/privacy-policy.html"
         self.moveToWebVC(link, "개인정보 처리방침")
     }
 }
@@ -128,7 +128,6 @@ extension RegisterPasswordView {
             $0.text = title
             $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
             $0.textColor  = .gray_300
-            $0.setTextWithLineHeight()
         }
         stack.addArrangedSubview(label)
     }

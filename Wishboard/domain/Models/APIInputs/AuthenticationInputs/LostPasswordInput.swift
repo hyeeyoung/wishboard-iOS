@@ -6,6 +6,7 @@
 //
 
 struct LostPasswordInput: Encodable {
-    let verify: Bool?
-    let email: String?
+    let verify: Bool
+    let email: String
+    let fcmToken: String
 }
