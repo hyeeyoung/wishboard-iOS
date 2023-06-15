@@ -128,20 +128,19 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             // 이용약관
             UIDevice.vibrate()
             
-            let link = "https://www.wishboard.xyz/terms.html"
+            let link = "\(Storage().BaseURL)/terms.html"
             self.moveToWebVC(link, "이용약관")
         case 8:
             // 개인정보처리방침
             UIDevice.vibrate()
             
-            let link = "https://www.wishboard.xyz/privacy-policy.html"
+            let link = "\(Storage().BaseURL)/privacy-policy.html"
             self.moveToWebVC(link, "개인정보 처리방침")
         case 9:
             // 오픈소스 라이브러리
             UIDevice.vibrate()
             
-            let link = "https://www.wishboard.xyz/opensource.html"
-            self.moveToWebVC(link, "오픈소스 라이브러리")
+            self.moveToWebVC(Storage().openSourceLibraryURL, "오픈소스 라이브러리")
         default:
             tableView.deselectRow(at: indexPath, animated: true)
         }

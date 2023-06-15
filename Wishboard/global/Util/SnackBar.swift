@@ -98,7 +98,6 @@ class ErrorBar {
     // Error SnackBar (두 줄)
     init(_ originView: UIViewController) {
         title.text = ErrorMessage.fiveHundredError
-        title.setTextWithLineHeight()
         title.textAlignment = .center
         
         backgroundView.layer.cornerRadius = 35

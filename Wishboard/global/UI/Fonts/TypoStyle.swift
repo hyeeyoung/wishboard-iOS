@@ -66,71 +66,54 @@ extension TypoStyle {
     private var fontDescription: FontDescription {
         switch self {
             
-        case .SuitH1:                   return FontDescription(font: .SUIT, style: .Bold, size: 20)
-        case .SuitH2:                   return FontDescription(font: .SUIT, style: .Bold, size: 18)
-        case .SuitH3:                   return FontDescription(font: .SUIT, style: .Bold, size: 16)
-        case .SuitH4:                   return FontDescription(font: .SUIT, style: .Bold, size: 14)
-        case .SuitH5:                   return FontDescription(font: .SUIT, style: .Bold, size: 12)
-        case .SuitH6:                   return FontDescription(font: .SUIT, style: .Bold, size: 10)
-        case .SuitB1:                   return FontDescription(font: .SUIT, style: .SemiBold, size: 18)
-        case .SuitB2:                   return FontDescription(font: .SUIT, style: .SemiBold, size: 14)
-        case .SuitB3:                   return FontDescription(font: .SUIT, style: .Medium, size: 14)
-        case .SuitB4:                   return FontDescription(font: .SUIT, style: .SemiBold, size: 12)
-        case .SuitB5:                   return FontDescription(font: .SUIT, style: .Medium, size: 12)
-        case .SuitD1:                   return FontDescription(font: .SUIT, style: .Regular, size: 16)
-        case .SuitD2:                   return FontDescription(font: .SUIT, style: .Regular, size: 14)
-        case .SuitD3:                   return FontDescription(font: .SUIT, style: .Regular, size: 12)
-        case .MontserratH1:            return FontDescription(font: .Montserrat, style: .ExtraBold, size: 20)
-        case .MontserratH2:            return FontDescription(font: .Montserrat, style: .ExtraBold, size: 18)
-        case .MontserratH3:            return FontDescription(font: .Montserrat, style: .ExtraBold, size: 14)
-        case .MontserratB1:            return FontDescription(font: .Montserrat, style: .SemiBold, size: 16)
-        case .MontserratB2:            return FontDescription(font: .Montserrat, style: .Medium, size: 16)
-        case .MontserratD1:            return FontDescription(font: .Montserrat, style: .Regular, size: 9)
+            case .SuitH1:                   return FontDescription(font: .SUIT, style: .Bold, size: 20)
+            case .SuitH2:                   return FontDescription(font: .SUIT, style: .Bold, size: 18)
+            case .SuitH3:                   return FontDescription(font: .SUIT, style: .Bold, size: 16)
+            case .SuitH4:                   return FontDescription(font: .SUIT, style: .Bold, size: 14)
+            case .SuitH5:                   return FontDescription(font: .SUIT, style: .Bold, size: 12)
+            case .SuitH6:                   return FontDescription(font: .SUIT, style: .Bold, size: 10)
+            case .SuitB1:                   return FontDescription(font: .SUIT, style: .SemiBold, size: 18)
+            case .SuitB2:                   return FontDescription(font: .SUIT, style: .SemiBold, size: 14)
+            case .SuitB3:                   return FontDescription(font: .SUIT, style: .Medium, size: 14)
+            case .SuitB4:                   return FontDescription(font: .SUIT, style: .SemiBold, size: 12)
+            case .SuitB5:                   return FontDescription(font: .SUIT, style: .Medium, size: 12)
+            case .SuitD1:                   return FontDescription(font: .SUIT, style: .Regular, size: 16)
+            case .SuitD2:                   return FontDescription(font: .SUIT, style: .Regular, size: 14)
+            case .SuitD3:                   return FontDescription(font: .SUIT, style: .Regular, size: 12)
+            case .MontserratH1:            return FontDescription(font: .Montserrat, style: .ExtraBold, size: 20)
+            case .MontserratH2:            return FontDescription(font: .Montserrat, style: .ExtraBold, size: 18)
+            case .MontserratH3:            return FontDescription(font: .Montserrat, style: .ExtraBold, size: 14)
+            case .MontserratB1:            return FontDescription(font: .Montserrat, style: .SemiBold, size: 16)
+            case .MontserratB2:            return FontDescription(font: .Montserrat, style: .Medium, size: 16)
+            case .MontserratD1:            return FontDescription(font: .Montserrat, style: .Regular, size: 9)
         }
     }
     
     public var labelDescription: LabelDescription {
         switch self {
         
-        case .SuitH1:
-                return LabelDescription(singleLineHeight: 22, multiLineHeight: 26)
-        case .SuitH2:
-                return LabelDescription(singleLineHeight: 20, multiLineHeight: 24)
-        case .SuitH3:
-            return LabelDescription(singleLineHeight: 18, multiLineHeight: 22)
-        case .SuitH4:
-            return LabelDescription(singleLineHeight: 16, multiLineHeight: 20)
-        case .SuitH5:
-            return LabelDescription(singleLineHeight: 14, multiLineHeight: 14)
-        case .SuitH6:
-            return LabelDescription(singleLineHeight: 12, multiLineHeight: 12)
-            
-        case .SuitB1:
-            return LabelDescription(singleLineHeight: 18, multiLineHeight: 22)
-        case .SuitB2:
-            return LabelDescription(singleLineHeight: 16, multiLineHeight: 22)
-        case .SuitB3:
-            return LabelDescription(singleLineHeight: 16, multiLineHeight: 20)
-        case .SuitB4:
-            return LabelDescription(singleLineHeight: 14, multiLineHeight: 20)
-        case .SuitB5:
-            return LabelDescription(singleLineHeight: 14, multiLineHeight: 18)
-            
-        case .SuitD1:
-            return LabelDescription(singleLineHeight: 18, multiLineHeight: 22)
-        case .SuitD2:
-            return LabelDescription(singleLineHeight: 16, multiLineHeight: 20)
-        case .SuitD3:
-            return LabelDescription(singleLineHeight: 14, multiLineHeight: 18)
-            
-        case .MontserratH1:
-            return LabelDescription(singleLineHeight: 22, multiLineHeight: 22)
-        case .MontserratH2:
-            return LabelDescription(singleLineHeight: 20, multiLineHeight: 20)
-        case .MontserratH3, .MontserratB1, .MontserratB2:
-            return LabelDescription(singleLineHeight: 16, multiLineHeight: 16)
-        case .MontserratD1:
-            return LabelDescription(singleLineHeight: 11, multiLineHeight: 11)
+            case .SuitH1:               return LabelDescription(singleLineHeight: 22, multiLineHeight: 26)
+            case .SuitH2:               return LabelDescription(singleLineHeight: 20, multiLineHeight: 24)
+            case .SuitH3:               return LabelDescription(singleLineHeight: 18, multiLineHeight: 22)
+            case .SuitH4:               return LabelDescription(singleLineHeight: 16, multiLineHeight: 20)
+            case .SuitH5:               return LabelDescription(singleLineHeight: 14, multiLineHeight: 14)
+            case .SuitH6:               return LabelDescription(singleLineHeight: 12, multiLineHeight: 12)
+                
+            case .SuitB1:               return LabelDescription(singleLineHeight: 18, multiLineHeight: 22)
+            case .SuitB2:               return LabelDescription(singleLineHeight: 16, multiLineHeight: 22)
+            case .SuitB3:               return LabelDescription(singleLineHeight: 16, multiLineHeight: 20)
+            case .SuitB4:               return LabelDescription(singleLineHeight: 14, multiLineHeight: 20)
+            case .SuitB5:               return LabelDescription(singleLineHeight: 14, multiLineHeight: 18)
+                
+            case .SuitD1:               return LabelDescription(singleLineHeight: 18, multiLineHeight: 22)
+            case .SuitD2:               return LabelDescription(singleLineHeight: 16, multiLineHeight: 20)
+            case .SuitD3:               return LabelDescription(singleLineHeight: 14, multiLineHeight: 18)
+                
+            case .MontserratH1:         return LabelDescription(singleLineHeight: 22, multiLineHeight: 22)
+            case .MontserratH2:         return LabelDescription(singleLineHeight: 20, multiLineHeight: 20)
+            case .MontserratH3, .MontserratB1, .MontserratB2:
+                                        return LabelDescription(singleLineHeight: 16, multiLineHeight: 16)
+            case .MontserratD1:         return LabelDescription(singleLineHeight: 11, multiLineHeight: 11)
         }
     }
 }
