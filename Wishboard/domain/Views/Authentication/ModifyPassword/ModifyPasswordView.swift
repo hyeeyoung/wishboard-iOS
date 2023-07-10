@@ -18,7 +18,7 @@ class ModifyPasswordView: UIView {
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
     }
     // 새 비밀번호 TextField
-    let newPasswordTextField = DefaultTextField(Placeholder.email).then{
+    let newPasswordTextField = DefaultTextField(Placeholder.newPassword).then{
         $0.isSecureTextEntry = true
     }
     let newPasswordErrorMessageLabel = UILabel().then{
@@ -33,7 +33,7 @@ class ModifyPasswordView: UIView {
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
     }
     // 비밀번호 재입력 TextField
-    let passwordRewriteTextField = DefaultTextField(Placeholder.password).then{
+    let passwordRewriteTextField = DefaultTextField(Placeholder.rewritePassword).then{
         $0.isSecureTextEntry = true
     }
     let passwordRewriteErrorMessageLabel = UILabel().then{
