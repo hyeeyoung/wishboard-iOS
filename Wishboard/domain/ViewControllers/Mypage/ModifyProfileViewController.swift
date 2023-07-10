@@ -121,13 +121,13 @@ extension ModifyProfileViewController {
             make.centerX.equalToSuperview()
         }
         completeButton.snp.makeConstraints { make in
-            make.height.equalTo(50)
+            make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(16)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-34)
         }
         completeKeyboardButton.snp.makeConstraints { make in
-            make.height.equalTo(50)
+            make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(16)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-16)

@@ -113,14 +113,14 @@ class ModifyPasswordView: UIView {
             make.top.equalTo(passwordRewriteTextField.snp.bottom).offset(6)
         }
         self.completeButton.snp.makeConstraints { make in
-            make.height.equalTo(50)
+            make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(16)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-34)
         }
         // keyboard button
         self.completeButtonKeyboard.snp.makeConstraints { make in
-            make.height.equalTo(50)
+            make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(20)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-16)

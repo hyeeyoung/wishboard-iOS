@@ -74,7 +74,7 @@ class LostPasswordView: UIView {
         }
         getEmailButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(44)
+            make.height.equalTo(48)
             make.bottom.equalToSuperview().inset(16)
         }
     }

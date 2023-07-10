@@ -100,7 +100,7 @@ class NotificationSettingViewController: UIViewController {
             make.top.equalTo(notificationPickerView.snp.bottom).offset(43)
         }
         completeButton.snp.makeConstraints { make in
-            make.height.equalTo(44)
+            make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(message.snp.bottom).offset(16)
         }
