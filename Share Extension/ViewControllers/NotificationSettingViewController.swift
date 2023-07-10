@@ -24,7 +24,9 @@ class NotificationSettingViewController: UIViewController {
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
         $0.textColor = .gray_200
     }
-    let completeButton = DefaultButton(titleStr: Button.complete)
+    let completeButton = DefaultButton(titleStr: Button.complete).then{
+        $0.isActivate = true
+    }
     // MARK: - Life Cycles
     var notiType: String?
     var dateAndTime: String?
@@ -77,8 +79,8 @@ class NotificationSettingViewController: UIViewController {
         self.view.addSubview(titleLabel)
         self.view.addSubview(exitBtn)
         self.view.addSubview(notificationPickerView)
-        self.view.addSubview(message)
         self.view.addSubview(completeButton)
+        self.view.addSubview(message)
     }
     func setUpConstraint() {
         titleLabel.snp.makeConstraints { make in
@@ -92,17 +94,17 @@ class NotificationSettingViewController: UIViewController {
         }
         notificationPickerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(titleLabel.snp.bottom).offset(65)
+            make.top.equalTo(titleLabel.snp.bottom).offset(51.5)
             make.height.equalTo(100)
-        }
-        message.snp.makeConstraints { make in
-            make.leading.equalTo(notificationPickerView)
-            make.top.equalTo(notificationPickerView.snp.bottom).offset(43)
         }
         completeButton.snp.makeConstraints { make in
             make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(message.snp.bottom).offset(16)
+            make.top.equalToSuperview().offset(235)
+        }
+        message.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(completeButton.snp.top).offset(-6)
         }
     }
     // MARK: - Actions
