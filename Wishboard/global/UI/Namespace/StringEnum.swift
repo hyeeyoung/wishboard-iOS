@@ -97,6 +97,7 @@ enum Title {
     public static let shoppingMallLink = "쇼핑몰 링크"
     public static let addItem = "아이템 추가"
     public static let modifyItem = "아이템 수정"
+    public static let memo = "메모"
     
     // MARK: Folder
     public static let folder = "폴더"

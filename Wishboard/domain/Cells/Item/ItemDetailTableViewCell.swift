@@ -50,6 +50,7 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.backgroundColor = .gray_100
     }
     let memoTitlelabel = DefaultLabel().then{
+        $0.text = Title.memo
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitB2)
     }
     let memoContentLabel = DefaultLabel().then{
