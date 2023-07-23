@@ -15,6 +15,12 @@ class ShareDataManager {
     func getItemDataDataManager(_ url: String, _ viewcontroller: ShareViewController) {
         let BaseURL = defaults?.string(forKey: "url") ?? ""
         let token = defaults?.string(forKey: "accessToken") ?? ""
+        // 로그아웃 상태일 때
+        if token == "" {
+            viewcontroller.needLogin()
+            return
+        }
+        
         let header: HTTPHeaders = [
             "Authorization": "Bearer " + token,
             "Accept": "application/json"
@@ -33,8 +39,11 @@ class ShareDataManager {
                 switch statusCode {
                 case 404:
                     viewcontroller.getItemDataAPIFail()
-//                case 429:
-//                    viewcontroller.getFolderListAPIFail()
+                case 401:
+                    RefreshDataManager().refreshDataManager {
+                        $0 ? viewcontroller.getWebURL() : viewcontroller.getItemDataAPIFail()
+                    }
+                    viewcontroller.getFolderListAPIFail()
                 default:
                     print(error.localizedDescription)
                     print(error.responseCode)

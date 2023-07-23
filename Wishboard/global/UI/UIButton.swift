@@ -83,6 +83,7 @@ extension UIButton {
         attText.foregroundColor = UIColor.gray_700
         config.attributedTitle = attText
         config.image = Image.noti
+        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         
         self.configuration = config
     }

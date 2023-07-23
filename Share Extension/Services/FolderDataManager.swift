@@ -15,6 +15,12 @@ class FolderDataManager {
     func getFolderListDataManager(_ viewcontroller: ShareViewController) {
         let BaseURL = defaults?.string(forKey: "url") ?? ""
         let token = defaults?.string(forKey: "accessToken") ?? ""
+        // 로그아웃 상태일 때
+        if token == "" {
+            viewcontroller.needLogin()
+            return
+        }
+        
         let header: HTTPHeaders = [
             "Authorization": "Bearer " + token,
             "Accept": "application/json"
@@ -30,9 +36,14 @@ class FolderDataManager {
                 viewcontroller.getFolderListAPISuccess(result)
             case .failure(let error):
                 let statusCode = error.responseCode
+                print("FOLDER 가져오기::",statusCode)
                 switch statusCode {
                 case 429:
                     viewcontroller.getFolderListAPIFail()
+                case 401:
+                    RefreshDataManager().refreshDataManager() {
+                        $0 ? FolderDataManager().getFolderListDataManager(viewcontroller) : viewcontroller.uploadItem500Error()
+                    }
                 default:
                     print(error.localizedDescription)
                     print(error.responseCode)

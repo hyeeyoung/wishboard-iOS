@@ -12,7 +12,6 @@ class RefreshDataManager {
     //MARK: Refresh
     func refreshDataManager(completion: @escaping (Bool) -> Void) {
         let parameter = RefreshInput(refreshToken: UserDefaults.standard.string(forKey: "refreshToken") ?? "")
-        print("refresh token:", parameter)
         AF.request(Storage().BaseURL + "/auth/refresh",
                    method: .post,
                    parameters: parameter,

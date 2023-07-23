@@ -92,6 +92,11 @@ class ShareView: UIView {
             make.leading.trailing.bottom.equalToSuperview()
             make.height.equalTo(317)
         }
+        itemImage.snp.makeConstraints { make in
+            make.width.height.equalTo(80)
+            make.centerX.equalToSuperview()
+            make.centerY.equalTo(backgroundView.snp.top)
+        }
         quitButton.snp.makeConstraints { make in
             make.width.height.equalTo(24)
             make.trailing.equalToSuperview().offset(-16)
@@ -100,20 +105,20 @@ class ShareView: UIView {
         itemNameTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalToSuperview().offset(50)
+            make.top.equalTo(itemImage.snp.bottom).offset(16)
         }
         itemPriceTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(itemNameTextField.snp.bottom).offset(2)
+            make.top.equalTo(itemNameTextField.snp.bottom).offset(6)
         }
         setNotificationButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(itemPriceTextField.snp.bottom).offset(12)
+            make.top.equalTo(itemPriceTextField.snp.bottom).offset(16)
         }
         addFolderButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)
             make.leading.equalToSuperview().offset(16)
-            make.top.equalTo(setNotificationButton.snp.bottom).offset(15)
+            make.top.equalTo(setNotificationButton.snp.bottom).offset(16)
         }
         folderCollectionView.snp.makeConstraints { make in
             make.leading.equalTo(addFolderButton.snp.trailing).offset(10)
@@ -123,13 +128,9 @@ class ShareView: UIView {
         completeButton.snp.makeConstraints { make in
             make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(addFolderButton.snp.bottom).offset(16)
             make.bottom.equalToSuperview().offset(-34)
-        }
-        
-        itemImage.snp.makeConstraints { make in
-            make.width.height.equalTo(80)
-            make.centerX.equalToSuperview()
-            make.centerY.equalTo(backgroundView.snp.top)
+//            make.bottom.greaterThanOrEqualToSuperview().offset(-34)
         }
     }
 }
