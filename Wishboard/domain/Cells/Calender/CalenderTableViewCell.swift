@@ -59,8 +59,9 @@ class CalenderTableViewCell: UITableViewCell {
             $0.appearance.todaySelectionColor = .green_500
             $0.appearance.titleSelectionColor = .gray_700
             
-            $0.appearance.eventDefaultColor = .green_200
-            $0.appearance.eventSelectionColor = .green_500
+            // 이벤트가 있는 날짜는 투명도가 높은 green색이 덧씌워진다.
+            $0.appearance.eventDefaultColor = .green_alpha
+            $0.appearance.eventSelectionColor = .green_alpha
         }
         contentView.addSubview(calender)
         contentView.addSubview(backButton)
