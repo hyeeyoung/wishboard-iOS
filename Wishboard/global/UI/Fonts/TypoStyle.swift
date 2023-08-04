@@ -84,7 +84,7 @@ extension TypoStyle {
             case .MontserratH2:            return FontDescription(font: .Montserrat, style: .ExtraBold, size: 18)
             case .MontserratH3:            return FontDescription(font: .Montserrat, style: .ExtraBold, size: 14)
             case .MontserratB1:            return FontDescription(font: .Montserrat, style: .SemiBold, size: 14)
-            case .MontserratB2:            return FontDescription(font: .Montserrat, style: .Medium, size: 14)
+            case .MontserratB2:            return FontDescription(font: .Montserrat, style: .Regular, size: 14)
             case .MontserratD1:            return FontDescription(font: .Montserrat, style: .Regular, size: 9)
         }
     }
