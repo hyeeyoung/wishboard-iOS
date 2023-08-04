@@ -34,7 +34,7 @@ class LoginView: UIView {
     }
     // 비밀번호를 잊으셨나요?
     let lostPasswordButton = UIButton().then{
-        $0.setUnderline(Button.lostPassword, UIColor.systemGray)
+        $0.setUnderline(Button.lostPassword, .gray_300, TypoStyle.SuitB3.font)
     }
     // 키보드 위 Accessory
     lazy var accessoryView: UIView = {
@@ -103,7 +103,7 @@ class LoginView: UIView {
             make.bottom.equalToSuperview().offset(-34)
         }
         self.loginButton.snp.makeConstraints { make in
-            make.height.equalTo(50)
+            make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(16)
             make.centerX.equalToSuperview()
             make.bottom.equalTo(lostPasswordButton.snp.top).offset(-16)
@@ -116,7 +116,7 @@ class LoginView: UIView {
             make.bottom.equalToSuperview().offset(-16)
         }
         self.loginButtonKeyboard.snp.makeConstraints { make in
-            make.height.equalTo(50)
+            make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(16)
             make.centerX.equalToSuperview()
             make.bottom.equalTo(lostPasswordButtonKeyboard.snp.top).offset(-16)

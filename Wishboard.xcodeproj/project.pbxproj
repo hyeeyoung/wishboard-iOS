@@ -114,7 +114,6 @@
 		236FE93A28DF85A4006142DB /* SetNotificationDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2350FADE28DB9BEA00981B8F /* SetNotificationDate.swift */; };
 		236FE93B28DF85A7006142DB /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5518828C6B02400D81B5F /* Observable.swift */; };
 		236FE93C28DF85AA006142DB /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5518A28C6B45C00D81B5F /* String.swift */; };
-		236FE93D28DF85B0006142DB /* PopUpDeleteUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E378DD28D2EBFA00C52F2D /* PopUpDeleteUserViewController.swift */; };
 		236FE93E28DF85B0006142DB /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2374789D28D1EDF600CF941A /* PopUpViewController.swift */; };
 		236FE94028DF85B3006142DB /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3113628DF633D00A636F6 /* APIModel.swift */; };
 		236FE94228DF888A006142DB /* FolderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236FE94128DF888A006142DB /* FolderCollectionViewCell.swift */; };
@@ -150,6 +149,9 @@
 		23A85F8528E3AE6200075667 /* LostPasswordInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F8428E3AE6200075667 /* LostPasswordInput.swift */; };
 		23AADBC128DF8F9800AB75C6 /* NotificationSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AADBC028DF8F9800AB75C6 /* NotificationSettingViewController.swift */; };
 		23B1FA4B294017F200832425 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 23B1FA4D294017F200832425 /* InfoPlist.strings */; };
+		23B351842A6CF74200FD7A14 /* RefreshDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23134D3E29B222BF00238536 /* RefreshDataManager.swift */; };
+		23B351852A6CF9D600FD7A14 /* RefreshInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23134D3C29B2216700238536 /* RefreshInput.swift */; };
+		23B351862A6CF9DE00FD7A14 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236AC9EF291A6AB700E1474C /* Storage.swift */; };
 		23B885EC28E5A9B400142FFA /* UploadItemInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233CDED228E4FE0A004E12BC /* UploadItemInput.swift */; };
 		23BB603528E2709C007EA1EF /* ModifyProfileInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB603428E2709C007EA1EF /* ModifyProfileInput.swift */; };
 		23BDC2452944E7B1004338E0 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239422E5292FEFCB0024CEBD /* Optional.swift */; };
@@ -1795,13 +1797,16 @@
 				23E0ACC828E7B563008C35C2 /* KeyboardViewController.swift in Sources */,
 				235129DA28F67BAE00489CAD /* BottomSheetKeyboardViewController.swift in Sources */,
 				23F1F21C293D7E7D0074C4D0 /* UILabel.swift in Sources */,
+				23B351852A6CF9D600FD7A14 /* RefreshInput.swift in Sources */,
 				233C34B229C73E2F005DFA39 /* DefaultButton.swift in Sources */,
 				236FE94028DF85B3006142DB /* APIModel.swift in Sources */,
+				23B351862A6CF9DE00FD7A14 /* Storage.swift in Sources */,
 				230192BC2A3068C200B30B0E /* DefaultLabel.swift in Sources */,
 				236FE91128DF83E6006142DB /* UIFont.swift in Sources */,
 				230180E928E50C0B001034FC /* FolderInput.swift in Sources */,
 				236FE93A28DF85A4006142DB /* SetNotificationDate.swift in Sources */,
 				23BDC2452944E7B1004338E0 /* Optional.swift in Sources */,
+				23B351842A6CF74200FD7A14 /* RefreshDataManager.swift in Sources */,
 				236FE92128DF8592006142DB /* UIColor.swift in Sources */,
 				2351859A29A6F8540004FCB4 /* Image.swift in Sources */,
 				235D550728EBD2CE00314D62 /* ItemParsingModel.swift in Sources */,
@@ -1810,7 +1815,6 @@
 				23B885EC28E5A9B400142FFA /* UploadItemInput.swift in Sources */,
 				23CBAFDC28DFDF8500B41513 /* NewFolderViewController.swift in Sources */,
 				236FE91F28DF8592006142DB /* UIView.swift in Sources */,
-				236FE93D28DF85B0006142DB /* PopUpDeleteUserViewController.swift in Sources */,
 				2364B7AA29D41E1F006459EF /* TitleCenterViewController.swift in Sources */,
 				236FE91E28DF8592006142DB /* UIBezierPath.swift in Sources */,
 				236FE93C28DF85AA006142DB /* String.swift in Sources */,

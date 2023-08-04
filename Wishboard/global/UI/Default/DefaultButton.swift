@@ -92,4 +92,10 @@ class DefaultButton: UIButton {
         self.lottieView.isHidden = true
         self.titleLabel?.isHidden = false
     }
+    func needLoginButton() {
+        setTitle(Button.doLogin, for: .normal)
+        backgroundColor = UIColor.gray_100
+        setTitleColor(UIColor.gray_300, for: .normal)
+        isEnabled = false
+    }
 }

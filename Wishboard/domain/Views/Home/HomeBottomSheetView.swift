@@ -71,7 +71,7 @@ class HomeBottomSheetView: UIView {
             make.height.equalTo(590)
         }
         okButton.snp.makeConstraints { make in
-            make.height.equalTo(50)
+            make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(howToCollectionView.snp.bottom).offset(16)
         }

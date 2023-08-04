@@ -215,17 +215,10 @@ extension MyPageViewController {
         let dialog = PopUpDeleteUserViewController(titleText: "회원 탈퇴", greenBtnText: "취소", blackBtnText: "탈퇴", placeholder: Placeholder.email, email: email)
         dialog.modalPresentationStyle = .overFullScreen
         self.present(dialog, animated: false, completion: nil)
-        
-        dialog.okBtn.addTarget(self, action: #selector(signOutButtonDidTap), for: .touchUpInside)
     }
     @objc func logoutButtonDidTap() {
         self.dismiss(animated: false)
         MypageDataManager().logoutDataManager(self)
-        UIDevice.vibrate()
-    }
-    @objc func signOutButtonDidTap() {
-        self.dismiss(animated: false)
-        MypageDataManager().deleteUserDataManager(self)
         UIDevice.vibrate()
     }
 }
@@ -319,22 +312,6 @@ extension MyPageViewController {
     // MARK: 알림 토글 수정 API
     func switchNotificationAPISuccess(_ result: APIModel<TokenResultModel>) {
         pushState?.toggle()
-        print(result.message)
-    }
-    // MARK: 회원 탈퇴 API
-    func deleteUserAPISuccess(_ result: APIModel<TokenResultModel>) {
-        // delete UserInfo
-        UserDefaults.standard.removeObject(forKey: "accessToken")
-        UserDefaults.standard.removeObject(forKey: "refreshToken")
-        UserDefaults.standard.removeObject(forKey: "email")
-        UserDefaults.standard.removeObject(forKey: "password")
-        UserDefaults.standard.removeObject(forKey: "isFirstLogin")
-        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "accessToken")
-        
-        let onboardingVC = OnBoardingViewController()
-        onboardingVC.deleteUser = true
-        self.navigationController?.pushViewController(onboardingVC, animated: true)
-        
         print(result.message)
     }
     // MARK: 로그아웃 API

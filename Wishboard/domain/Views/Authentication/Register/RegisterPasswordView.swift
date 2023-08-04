@@ -88,13 +88,13 @@ class RegisterPasswordView: UIView {
         }
         registerButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(44)
+            make.height.equalTo(48)
             make.bottom.equalToSuperview().inset(16)
         }
         stack.snp.makeConstraints { make in
             make.leading.greaterThanOrEqualToSuperview().offset(16)
             make.trailing.lessThanOrEqualToSuperview().offset(-16)
-            make.bottom.equalTo(registerButton.snp.top).offset(-5)
+            make.bottom.equalTo(registerButton.snp.top).offset(-6)
             make.centerX.equalToSuperview()
         }
     }

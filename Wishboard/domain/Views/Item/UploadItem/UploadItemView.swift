@@ -24,6 +24,7 @@ class UploadItemView: UIView {
     var saveButton = DefaultButton(titleStr: Button.save).then{
         $0.isActivate = true
         $0.layer.cornerRadius = 15
+        $0.titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
     }
     
     let scrollView = UIScrollView().then{

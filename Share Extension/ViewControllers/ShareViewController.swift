@@ -51,10 +51,6 @@ class ShareViewController: UIViewController {
         
         self.selectedFolderIdx = -1
         setUpShareView()
-        
-        DispatchQueue.main.async {
-            self.getWebURL()
-        }
     }
     override func viewDidAppear(_ animated: Bool) {
         // Network Check
@@ -63,12 +59,12 @@ class ShareViewController: UIViewController {
         let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
         let token = defaults?.string(forKey: "accessToken") ?? ""
         if token == "" {
-            shareView.completeButton.isActivate = false
-            shareView.itemNameTextField.isEnabled = false
-            shareView.itemPriceTextField.isEnabled = false
-            shareView.setNotificationButton.isEnabled = false
-            shareView.addFolderButton.isEnabled = false
+            needLogin()
             return
+        } else {
+            DispatchQueue.main.async {
+                self.getWebURL()
+            }
         }
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -268,6 +264,13 @@ extension ShareViewController: UICollectionViewDelegate, UICollectionViewDataSou
 }
 // MARK: - API Success
 extension ShareViewController {
+    func needLogin() {
+        shareView.completeButton.needLoginButton()
+        shareView.itemNameTextField.isEnabled = false
+        shareView.itemPriceTextField.isEnabled = false
+        shareView.setNotificationButton.isEnabled = false
+        shareView.addFolderButton.isEnabled = false
+    }
     // MARK: 폴더 리스트 조회 API
     func getFolderListAPISuccess(_ result: [FolderListModel]) {
         self.folderListData = result
@@ -279,6 +282,8 @@ extension ShareViewController {
     }
     // MARK: 아이템 정보 파싱
     func getItemDataAPISuccess(_ result: APIModel<ItemParsingModel>) {
+//        print("get item Data: ", result)
+        
         if let itemImg = result.data?.item_img.nilIfEmpty {self.itemImg = itemImg}
         if let itemName = result.data?.item_name.nilIfEmpty {self.itemName = itemName}
         if let itemPrice = result.data?.item_price.nilIfEmpty {self.itemPrice = itemPrice}
@@ -317,6 +322,8 @@ extension ShareViewController {
         if result.success {
             uploadItemAPIFunc()
         } else {
+            // 500일때 뿐만 아니라 다른 이슈일 때도 에러바 출력
+            // 401 일때도
             uploadItem500Error()
         }
         print("아이템 등록 🔥", result.message)

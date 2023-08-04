@@ -28,6 +28,7 @@ class MypageProfileTableViewCell: UITableViewCell {
         $0.setTitleColor(UIColor.gray_600, for: .normal)
         $0.titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
         $0.backgroundColor = UIColor.gray_100
+        $0.titleEdgeInsets = UIEdgeInsets(top: 4, left: 10, bottom: 4, right: 10)
         
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 12

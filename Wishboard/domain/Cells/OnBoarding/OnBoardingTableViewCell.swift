@@ -110,7 +110,7 @@ class OnBoardingTableViewCell: UITableViewCell {
             make.leading.equalTo(accountExistButton.snp.trailing).offset(5)
         }
         self.registerButton.snp.makeConstraints { make in
-            make.height.equalTo(50)
+            make.height.equalTo(48)
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)

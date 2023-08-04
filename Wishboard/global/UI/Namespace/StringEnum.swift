@@ -22,6 +22,10 @@ enum Placeholder {
     public static let shareItemName = "상품명을 입력해 주세요."
     public static let shareItemPrice = "가격을 입력해 주세요."
     
+    // MARK: Modify Password
+    public static let newPassword = "새 비밀번호를 입력해 주세요."
+    public static let rewritePassword = "새 비밀번호를 다시 입력해 주세요."
+    
     public static let uploadItemName = "상품명"
     public static let uploadItemPrice = "₩ 가격(필수)"
     public static let uploadItemMemo = "브랜드, 사이즈, 컬러 등 아이템 정보를 메모로 남겨보세요!😉"
@@ -29,7 +33,7 @@ enum Placeholder {
 
 enum ErrorMessage {
     // MARK: Authentication
-    public static let email = "이메일 주소를 정확하게 입력해 주세요."
+    public static let email = "이메일을 다시 확인해 주세요."
     public static let password = "8자리 이상의 영문자, 숫자, 특수 문자 조합으로 입력해 주세요."
     public static let passwordRewrite = "비밀번호가 일치하지 않아요!"
     public static let authcode = "인증코드를 다시 확인해 주세요."
@@ -93,6 +97,7 @@ enum Title {
     public static let shoppingMallLink = "쇼핑몰 링크"
     public static let addItem = "아이템 추가"
     public static let modifyItem = "아이템 수정"
+    public static let memo = "메모"
     
     // MARK: Folder
     public static let folder = "폴더"
