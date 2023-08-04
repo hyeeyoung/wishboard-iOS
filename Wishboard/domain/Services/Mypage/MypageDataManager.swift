@@ -99,7 +99,7 @@ class MypageDataManager {
         }
     }
     // MARK: - 회원 탈퇴
-    func deleteUserDataManager(_ viewcontroller: MyPageViewController) {
+    func deleteUserDataManager(_ viewcontroller: PopUpDeleteUserViewController) {
         AF.request(Storage().BaseURL + "/user",
                            method: .delete,
                            parameters: nil,

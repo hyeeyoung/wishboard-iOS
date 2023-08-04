@@ -33,7 +33,7 @@ enum Placeholder {
 
 enum ErrorMessage {
     // MARK: Authentication
-    public static let email = "이메일 주소를 정확하게 입력해 주세요."
+    public static let email = "이메일을 다시 확인해 주세요."
     public static let password = "8자리 이상의 영문자, 숫자, 특수 문자 조합으로 입력해 주세요."
     public static let passwordRewrite = "비밀번호가 일치하지 않아요!"
     public static let authcode = "인증코드를 다시 확인해 주세요."
