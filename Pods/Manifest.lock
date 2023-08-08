@@ -150,7 +150,6 @@ PODS:
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
-  - Pageboy (3.6.2)
   - PromisesObjC (2.1.1)
   - ReactiveSwift (6.6.1)
   - RxCocoa (6.5.0):
@@ -159,11 +158,7 @@ PODS:
   - RxRelay (6.5.0):
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
-  - SnackBar.swift (0.1.0):
-    - SnapKit
   - SnapKit (5.6.0)
-  - Tabman (2.12.0):
-    - Pageboy (~> 3.6.0)
   - Then (3.0.0)
 
 DEPENDENCIES:
@@ -181,9 +176,7 @@ DEPENDENCIES:
   - Moya/RxSwift
   - RxCocoa
   - RxSwift
-  - SnackBar.swift
   - SnapKit (~> 5.6.0)
-  - Tabman (~> 2.9)
   - Then
 
 SPEC REPOS:
@@ -205,15 +198,12 @@ SPEC REPOS:
     - MaterialComponents
     - Moya
     - nanopb
-    - Pageboy
     - PromisesObjC
     - ReactiveSwift
     - RxCocoa
     - RxRelay
     - RxSwift
-    - SnackBar.swift
     - SnapKit
-    - Tabman
     - Then
 
 SPEC CHECKSUMS:
@@ -234,17 +224,14 @@ SPEC CHECKSUMS:
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
-  Pageboy: cf121b9dd48c63f3f281b2a9ec93d02e0f23879b
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   ReactiveSwift: fab34244ad908808dc822bae352a058c8837c4ca
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
-  SnackBar.swift: 79ea4df13ea9e6633137dd6acbd490534d26440d
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
-  Tabman: 447a50447ed2869c39ab3b1a779327e43e067c4e
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: b4de7cb88f20dfda144d58d93b8461e2ee2555ec
+PODFILE CHECKSUM: 25af5af1582a7b0d03228322b2ccba3874fd768b
 
 COCOAPODS: 1.12.1

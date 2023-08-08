@@ -12,7 +12,6 @@ import Then
 import MaterialComponents.MaterialBottomSheet
 import Lottie
 import MobileCoreServices
-import SnackBar_swift
 
 class ShareViewController: UIViewController {
     //MARK: - Properties
@@ -336,7 +335,7 @@ extension ShareViewController {
         SnackBar(self, message: .addItem)
     }
     func uploadItem500Error() {
-        lottieView.isHidden = true
+//        lottieView.isHidden = true
         shareView.completeButton.isSelected = false
         shareView.completeButton.isActivate = true
         

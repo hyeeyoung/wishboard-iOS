@@ -74,12 +74,10 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
         // TODO: 유효한 폴더명인 지 확인 필요
         if isValidCount {
             errorMessage.isHidden = true
-            self.textFieldCountLabel.textColor = .gray_200
             self.completeButton.isActivate = true
             self.folderStr = self.tempFolderStr
         } else {
             errorMessage.isHidden = true
-            self.textFieldCountLabel.textColor = .pink_700
             self.completeButton.isActivate = false
         }
     }
@@ -92,7 +90,6 @@ extension NewFolderViewController {
         self.viewDidLoad()
         self.dismiss(animated: true)
         
-        textFieldCountLabel.textColor = .gray_200
         errorMessage.isHidden = true
         completeButton.inActivateLottieView()
         completeButton.isActivate = true

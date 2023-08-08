@@ -101,9 +101,12 @@ extension HomeViewController {
 // MARK: - Token User Defaults for Share Extension
 extension HomeViewController {
     func setToken() {
-        let token = UserDefaults.standard.string(forKey: "accessToken") ?? ""
+        let accessToken = UserDefaults.standard.string(forKey: "accessToken") ?? ""
+        let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") ?? ""
+        
         let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
-        defaults?.set(token, forKey: "accessToken")
+        defaults?.set(accessToken, forKey: "accessToken")
+        defaults?.set(refreshToken, forKey: "refreshToken")
         defaults?.synchronize()
     }
 }

@@ -79,11 +79,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pageboy.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-Wishboard-Share Extension.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -129,17 +124,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SnackBar.swift.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>SnapKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Tabman.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

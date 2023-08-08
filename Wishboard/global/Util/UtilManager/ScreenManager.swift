@@ -62,6 +62,7 @@ class ScreenManager {
         UserDefaults.standard.removeObject(forKey: "password")
         UserDefaults.standard.set(false, forKey: "isFirstLogin")
         UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "accessToken")
+        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "removeToken")
         
         // 화면 전환
         let onboardingVC = OnBoardingViewController()

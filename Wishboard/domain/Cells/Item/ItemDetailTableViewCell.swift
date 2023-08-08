@@ -17,7 +17,11 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.contentMode = .scaleAspectFill
     }
     var setFolderButton = UIButton().then{
-        $0.setFolderButton("폴더를 지정해 보세요! > ")
+        let title = "폴더를 지정해 보세요! > "
+        let attributedString = NSMutableAttributedString(string: title)
+        attributedString.addAttribute(.font, value: TypoStyle.SuitD3.font, range: NSRange(location: 0, length: title.count))
+        attributedString.addAttribute(.foregroundColor, value: UIColor.gray, range: NSRange(location: 0, length: title.count))
+        $0.setAttributedTitle(attributedString, for: .normal)
     }
     let dateLabel = UILabel().then{
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
@@ -158,7 +162,6 @@ class ItemDetailTableViewCell: UITableViewCell {
                 self.restockLabel.isHidden = false
                 self.restockDateLabel.isHidden = false
                 let notiDateStr = FormatManager().showNotificationDateInItemDetail(notificationDate)
-//                let notiDateStr = FormatManager().notiDateToKoreanStr(notificationDate)
                 self.restockLabel.text = notificationType
                 self.restockDateLabel.text = notiDateStr
             }

@@ -216,8 +216,10 @@ extension CartView {
             totalPrice = totalPrice + Int(initPrice)! * count
             totalCount = totalCount + count
         }
+        /// 아이템 수: 고유한 아이템 자체의 개수
+        /// 총 가격: 장바구니에 넣은 수량에 가격을 곱한 만큼의 총 가격
         self.price.text = FormatManager().strToPrice(numStr: String(totalPrice))
-        self.countLabel.text = String(totalCount)
+        self.countLabel.text = String(cartData.count)
     }
 }
 // MARK: - API Success
