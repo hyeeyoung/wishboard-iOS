@@ -104,6 +104,11 @@ extension LoginViewController {
                     UserDefaults.standard.set(self.loginViewModel.password, forKey: "password")
                     UserDefaults.standard.set(tempNickname, forKey: "tempNickname")
                     
+                    let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
+                    defaults?.set(accessToken, forKey: "accessToken")
+                    defaults?.set(refreshToken, forKey: "refreshToken")
+                    defaults?.synchronize()
+                    
                     // go Main
                     ScreenManager().goMain(self)
                 } else {

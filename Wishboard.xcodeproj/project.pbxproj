@@ -57,6 +57,7 @@
 		2340CEAA28CB6173007C362F /* HomeBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEA928CB6173007C362F /* HomeBottomSheetView.swift */; };
 		2340CEAC28CB6252007C362F /* HowToCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEAB28CB6252007C362F /* HowToCollectionViewCell.swift */; };
 		2340CEAE28CB65AE007C362F /* HowToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2340CEAD28CB65AE007C362F /* HowToViewController.swift */; };
+		2341A3E92A81059E000191B8 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233C34BB29C75AEF005DFA39 /* BaseRouter.swift */; };
 		2344949428D78A9A00CF3BD9 /* RegisterEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2344949328D78A9A00CF3BD9 /* RegisterEmailViewController.swift */; };
 		2344949728D78AB500CF3BD9 /* RegisterEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2344949628D78AB500CF3BD9 /* RegisterEmailView.swift */; };
 		2344949928D78F6300CF3BD9 /* RegisterPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2344949828D78F6300CF3BD9 /* RegisterPasswordViewController.swift */; };
@@ -1792,6 +1793,7 @@
 				230DBFA828E106EE00E9AED6 /* ShareView.swift in Sources */,
 				230180E628E50B7C001034FC /* FolderDataManager.swift in Sources */,
 				23A48E7128E92E7D00FD77A7 /* NetworkCheck.swift in Sources */,
+				2341A3E92A81059E000191B8 /* BaseRouter.swift in Sources */,
 				236FE92228DF8592006142DB /* UITextField.swift in Sources */,
 				236FE91D28DF8592006142DB /* PaddingLabel.swift in Sources */,
 				23E0ACC828E7B563008C35C2 /* KeyboardViewController.swift in Sources */,

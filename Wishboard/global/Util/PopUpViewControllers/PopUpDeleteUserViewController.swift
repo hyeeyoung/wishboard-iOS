@@ -270,6 +270,7 @@ extension PopUpDeleteUserViewController {
         UserDefaults.standard.removeObject(forKey: "password")
         UserDefaults.standard.removeObject(forKey: "isFirstLogin")
         UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "accessToken")
+        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "removeToken")
         
         let onboardingVC = OnBoardingViewController()
         onboardingVC.deleteUser = true

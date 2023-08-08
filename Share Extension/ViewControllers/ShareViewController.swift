@@ -12,7 +12,6 @@ import Then
 import MaterialComponents.MaterialBottomSheet
 import Lottie
 import MobileCoreServices
-import SnackBar_swift
 
 class ShareViewController: UIViewController {
     //MARK: - Properties
@@ -66,6 +65,8 @@ class ShareViewController: UIViewController {
                 self.getWebURL()
             }
         }
+        let refreshToken = defaults?.string(forKey: "refreshToken")
+        print("✏️TEST: refreshToken", refreshToken)
     }
     override func viewWillAppear(_ animated: Bool) {
         self.addKeyboardNotifications()
@@ -336,7 +337,7 @@ extension ShareViewController {
         SnackBar(self, message: .addItem)
     }
     func uploadItem500Error() {
-        lottieView.isHidden = true
+//        lottieView.isHidden = true
         shareView.completeButton.isSelected = false
         shareView.completeButton.isActivate = true
         
