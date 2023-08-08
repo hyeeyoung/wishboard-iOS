@@ -20,6 +20,7 @@ class LostPasswordView: UIView {
         $0.numberOfLines = 0
     }
     var emailTextField = DefaultTextField(Placeholder.email).then{
+        $0.keyboardType = .emailAddress
         $0.becomeFirstResponder()
     }
     let errorMessage = UILabel().then{

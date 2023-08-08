@@ -56,7 +56,6 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
     @objc override func completeButtonDidTap() {
         UIDevice.vibrate()
         lottieView = self.completeButton.setLottieView()
-        print("✏️ lottieView set and make new folder")
         lottieView.play { completion in
             let addFolderInput = AddFolderInput(folder_name: self.folderStr)
             FolderDataManager().addFolderDataManager(addFolderInput, self)

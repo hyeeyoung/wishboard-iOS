@@ -43,6 +43,7 @@ class PopUpDeleteUserViewController: UIViewController {
     var cancelBtn: UIButton!
     var okBtn: UIButton!
     var textField = DefaultTextField("").then{
+        $0.keyboardType = .emailAddress
         $0.clearButtonMode = .always
     }
     let errorMessage = UILabel().then{

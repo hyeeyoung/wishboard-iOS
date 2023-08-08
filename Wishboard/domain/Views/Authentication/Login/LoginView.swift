@@ -18,7 +18,9 @@ class LoginView: UIView {
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
     }
     // 이메일 TextField
-    let emailTextField = DefaultTextField(Placeholder.email)
+    let emailTextField = DefaultTextField(Placeholder.email).then {
+        $0.keyboardType = .emailAddress
+    }
     // 비밀번호 Label
     let passwordLabel = DefaultLabel().then{
         $0.text = Title.password
