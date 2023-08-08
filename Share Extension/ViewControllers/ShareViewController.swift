@@ -65,8 +65,6 @@ class ShareViewController: UIViewController {
                 self.getWebURL()
             }
         }
-        let refreshToken = defaults?.string(forKey: "refreshToken")
-        print("✏️TEST: refreshToken", refreshToken)
     }
     override func viewWillAppear(_ animated: Bool) {
         self.addKeyboardNotifications()

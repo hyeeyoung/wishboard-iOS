@@ -79,7 +79,7 @@ class DefaultButton: UIButton {
             make.height.equalToSuperview()
             make.centerY.centerX.equalToSuperview()
         }
-        activateLottieView()
+        defer {activateLottieView()}
         
         return lottieView
     }
@@ -89,7 +89,9 @@ class DefaultButton: UIButton {
         self.isSelected = true
     }
     func inActivateLottieView() {
-        self.lottieView.isHidden = true
+        if let lottieView = self.lottieView {
+            lottieView.isHidden = true
+        }
         self.titleLabel?.isHidden = false
     }
     func needLoginButton() {
