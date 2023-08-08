@@ -70,12 +70,10 @@ class NewFolderBottomSheetViewController: BottomSheetKeyboardViewController {
         // TODO: 유효한 폴더명인 지 확인 필요
         if isValidCount {
             errorMessage.isHidden = true
-            textFieldCountLabel.textColor = .gray_200
             completeButton.isActivate = true
             folderStr = self.tempFolderStr
         } else {
             errorMessage.isHidden = true
-            textFieldCountLabel.textColor = .pink_700
             completeButton.isActivate = false
         }
     }
