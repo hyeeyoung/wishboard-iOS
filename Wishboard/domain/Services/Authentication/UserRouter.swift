@@ -88,7 +88,7 @@ extension UserRouter{
         }
 
         if let image = param.photo {
-            let imageData = image.jpegData(compressionQuality: 0.5) ?? Data()
+            let imageData = image.resizeImageIfNeeded().jpegData(compressionQuality: 1.0) ?? Data()
             imageMultipartFormData = MultipartFormData(provider: .data(imageData), name: "profile_img", fileName: "profileImg.jpeg", mimeType: "image/jpeg")
             if let imageMultipartFormData = imageMultipartFormData {
                 formData.append(imageMultipartFormData)
