@@ -120,6 +120,7 @@ class BottomSheetKeyboardViewController: BaseViewController {
             make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(textfield.snp.bottom).offset(86)
+            make.bottom.equalToSuperview().offset(-34)
         }
     }
     
