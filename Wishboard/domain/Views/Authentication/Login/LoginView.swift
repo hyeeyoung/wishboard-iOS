@@ -48,7 +48,7 @@ class LoginView: UIView {
     }
     // 비밀번호를 잊으셨나요?
     let lostPasswordButtonKeyboard = UIButton().then{
-        $0.setUnderline(Button.lostPassword, UIColor.systemGray)
+        $0.setUnderline(Button.lostPassword, .gray_300, TypoStyle.SuitB3.font)
     }
     
     // MARK: - Functions

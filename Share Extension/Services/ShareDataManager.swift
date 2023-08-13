@@ -80,7 +80,7 @@ class ShareDataManager {
                         "item_notification_date" : itemNotificationDate,
                     ]    //PUT 함수로 전달할 String 데이터, 이미지 데이터는 제외하고 구성
         AF.upload(multipartFormData: { (multipart) in
-            if let imageData = photo.jpegData(compressionQuality: 0.8) {
+            if let imageData = photo.resizeImageIfNeeded().jpegData(compressionQuality: 1.0) {
                 multipart.append(imageData, withName: "item_img", fileName: "photo.jpg", mimeType: "image/jpeg")
                 //이미지 데이터를 POST할 데이터에 덧붙임
             }
@@ -134,7 +134,7 @@ class ShareDataManager {
                         "item_notification_date" : itemNotificationDate,
                     ]    //PUT 함수로 전달할 String 데이터, 이미지 데이터는 제외하고 구성
         AF.upload(multipartFormData: { (multipart) in
-            if let imageData = photo.jpegData(compressionQuality: 0.8) {
+            if let imageData = photo.resizeImageIfNeeded().jpegData(compressionQuality: 1.0) {
                 multipart.append(imageData, withName: "item_img", fileName: "photo.jpg", mimeType: "image/jpeg")
                 //이미지 데이터를 POST할 데이터에 덧붙임
             }
@@ -186,7 +186,7 @@ class ShareDataManager {
                         "item_memo" : itemMemo,
                     ]    //PUT 함수로 전달할 String 데이터, 이미지 데이터는 제외하고 구성
         AF.upload(multipartFormData: { (multipart) in
-            if let imageData = photo.jpegData(compressionQuality: 0.8) {
+            if let imageData = photo.resizeImageIfNeeded().jpegData(compressionQuality: 1.0) {
                 multipart.append(imageData, withName: "item_img", fileName: "photo.jpg", mimeType: "image/jpeg")
                 //이미지 데이터를 POST할 데이터에 덧붙임
             }
@@ -237,7 +237,7 @@ class ShareDataManager {
                         "item_memo" : itemMemo,
                     ]    //PUT 함수로 전달할 String 데이터, 이미지 데이터는 제외하고 구성
         AF.upload(multipartFormData: { (multipart) in
-            if let imageData = photo.jpegData(compressionQuality: 0.8) {
+            if let imageData = photo.resizeImageIfNeeded().jpegData(compressionQuality: 1.0) {
                 multipart.append(imageData, withName: "item_img", fileName: "photo.jpg", mimeType: "image/jpeg")
                 //이미지 데이터를 POST할 데이터에 덧붙임
             }
