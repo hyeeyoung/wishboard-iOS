@@ -218,6 +218,8 @@
 		23EC504C28E2670D00AAA57E /* MypageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504B28E2670D00AAA57E /* MypageDataManager.swift */; };
 		23ED291A2A88F68600B26885 /* AlamofireBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED29192A88F68600B26885 /* AlamofireBaseService.swift */; };
 		23ED291C2A88FE4E00B26885 /* AuthIntercepter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED291B2A88FE4E00B26885 /* AuthIntercepter.swift */; };
+		23ED291D2A89142D00B26885 /* AlamofireBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED29192A88F68600B26885 /* AlamofireBaseService.swift */; };
+		23ED291E2A89170F00B26885 /* AuthIntercepter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED291B2A88FE4E00B26885 /* AuthIntercepter.swift */; };
 		23F07F3E28E7CCBA0012D77D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */; };
 		23F07F4428E7D5930012D77D /* TitleCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */; };
 		23F1714B291056970016206A /* CalenderDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F1714A291056970016206A /* CalenderDateTableViewCell.swift */; };
@@ -1818,6 +1820,8 @@
 				23CBAFDC28DFDF8500B41513 /* NewFolderViewController.swift in Sources */,
 				236FE91F28DF8592006142DB /* UIView.swift in Sources */,
 				2364B7AA29D41E1F006459EF /* TitleCenterViewController.swift in Sources */,
+				23ED291E2A89170F00B26885 /* AuthIntercepter.swift in Sources */,
+				23ED291D2A89142D00B26885 /* AlamofireBaseService.swift in Sources */,
 				236FE91E28DF8592006142DB /* UIBezierPath.swift in Sources */,
 				236FE93C28DF85AA006142DB /* String.swift in Sources */,
 				233C34B529C754EC005DFA39 /* DefaultTextField.swift in Sources */,
