@@ -11,84 +11,29 @@ import Alamofire
 class NotificationDataManager {
     // MARK: - 알림 조회
     func getNotificationListDataManager(_ notiView: NotiView) {
-        AF.request(Storage().BaseURL + "/noti",
-                           method: .get,
-                           parameters: nil,
-                           headers: APIManager().getHeader())
-            .validate()
-            .responseDecodable(of: [NotificationModel].self) { response in
-            switch response.result {
-            case .success(let result):
-                notiView.getNotificationListAPISuccess(result)
-            case .failure(let error):
-                let statusCode = error.responseCode
-                switch statusCode {
-//                case 429:
-//                    notiView.getNotificationListAPIFail()
-                case 401:
-                    RefreshDataManager().refreshDataManager() {
-                        !$0 ? ScreenManager().goToOnboarding(notiView.preVC) : self.getNotificationListDataManager(notiView)
-                    }
-                default:
-                    print(error.responseCode)
-                }
-            }
+        let url = Storage().BaseURL + "/noti"
+        let request = AlamofireBaseService.shared.requestWithParameter(url, .get, nil)
+        
+        AlamofireBaseService.shared.responseDecoded(request, [NotificationModel].self) { result in
+            notiView.getNotificationListAPISuccess(result)
         }
     }
     // MARK: - 알림 읽음 처리
     func readNotificationListDataManager(_ itemId: Int, _ notiView: NotiView) {
-        AF.request(Storage().BaseURL + "/noti/\(itemId)/read-state",
-                           method: .put,
-                           parameters: nil,
-                           headers: APIManager().getHeader())
-            .validate()
-            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
-            switch response.result {
-            case .success(let result):
-                notiView.readNotificationAPISuccess(result)
-            case .failure(let error):
-                let statusCode = error.responseCode
-                switch statusCode {
-                case 401:
-                    RefreshDataManager().refreshDataManager() {
-                        !$0 ? ScreenManager().goToOnboarding(notiView.preVC) : self.readNotificationListDataManager(itemId, notiView)
-                    }
-                default:
-                    print(error.responseCode)
-                }
-                print(error.responseCode)
-            }
+        let url = Storage().BaseURL + "/noti/\(itemId)/read-state"
+        let request = AlamofireBaseService.shared.requestWithParameter(url, .put, nil)
+        
+        AlamofireBaseService.shared.responseDecoded(request, APIModel<TokenResultModel>.self) { result in
+            notiView.readNotificationAPISuccess(result)
         }
     }
     // MARK: - 캘린더 알림 조회
     func getCalenderNotificationDataManager(_ viewcontroller: CalenderViewController) {
-        AF.request(Storage().BaseURL + "/noti/calendar",
-                           method: .get,
-                           parameters: nil,
-                           headers: APIManager().getHeader())
-            .validate()
-            .responseDecodable(of: [NotificationModel].self) { response in
-            switch response.result {
-            case .success(let result):
-                viewcontroller.getCalenderNotificationAPISuccess(result)
-            case .failure(let error):
-                let statusCode = error.responseCode
-                switch statusCode {
-//                case 429:
-//                    viewcontroller.getCalenderNotificationAPIFail()
-                case 500:
-                    DispatchQueue.main.async {
-                        ErrorBar(viewcontroller)
-                    }
-                case 401:
-                    RefreshDataManager().refreshDataManager() {
-                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.getCalenderNotificationDataManager(viewcontroller)
-                    }
-                default:
-                    print(error.responseCode)
-                }
-            }
+        let url = Storage().BaseURL + "/noti/calendar"
+        let request = AlamofireBaseService.shared.requestWithParameter(url, .get, viewcontroller)
+        
+        AlamofireBaseService.shared.responseDecoded(request, [NotificationModel].self) { result in
+            viewcontroller.getCalenderNotificationAPISuccess(result)
         }
     }
-
 }
