@@ -217,6 +217,8 @@
 		23EC504228E25DAC00AAA57E /* CheckEmailInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504128E25DAC00AAA57E /* CheckEmailInput.swift */; };
 		23EC504628E2664D00AAA57E /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504528E2664D00AAA57E /* APIManager.swift */; };
 		23EC504C28E2670D00AAA57E /* MypageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504B28E2670D00AAA57E /* MypageDataManager.swift */; };
+		23ED291A2A88F68600B26885 /* AlamofireBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED29192A88F68600B26885 /* AlamofireBaseService.swift */; };
+		23ED291C2A88FE4E00B26885 /* AuthIntercepter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED291B2A88FE4E00B26885 /* AuthIntercepter.swift */; };
 		23F07F3E28E7CCBA0012D77D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */; };
 		23F07F4428E7D5930012D77D /* TitleCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */; };
 		23F1714B291056970016206A /* CalenderDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F1714A291056970016206A /* CalenderDateTableViewCell.swift */; };
@@ -442,6 +444,8 @@
 		23EC504128E25DAC00AAA57E /* CheckEmailInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckEmailInput.swift; sourceTree = "<group>"; };
 		23EC504528E2664D00AAA57E /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		23EC504B28E2670D00AAA57E /* MypageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageDataManager.swift; sourceTree = "<group>"; };
+		23ED29192A88F68600B26885 /* AlamofireBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireBaseService.swift; sourceTree = "<group>"; };
+		23ED291B2A88FE4E00B26885 /* AuthIntercepter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthIntercepter.swift; sourceTree = "<group>"; };
 		23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCenterViewController.swift; sourceTree = "<group>"; };
 		23F1714A291056970016206A /* CalenderDateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderDateTableViewCell.swift; sourceTree = "<group>"; };
@@ -888,6 +892,8 @@
 				233C34BB29C75AEF005DFA39 /* BaseRouter.swift */,
 				233C34BD29C75B10005DFA39 /* MultiMoyaService.swift */,
 				233C34C329C7602D005DFA39 /* MoyaLoggerPlugin.swift */,
+				23ED29192A88F68600B26885 /* AlamofireBaseService.swift */,
+				23ED291B2A88FE4E00B26885 /* AuthIntercepter.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1902,6 +1908,7 @@
 				2360096028DA2297001FB107 /* EmptyView.swift in Sources */,
 				2328C5A728CABF300065ABB2 /* NotiView.swift in Sources */,
 				235204CE28E2690F004F5DC6 /* GetUserInfoModel.swift in Sources */,
+				23ED291C2A88FE4E00B26885 /* AuthIntercepter.swift in Sources */,
 				2360095E28DA1829001FB107 /* FolderDetailViewController.swift in Sources */,
 				2351859929A6F40B0004FCB4 /* Image.swift in Sources */,
 				23F07F4428E7D5930012D77D /* TitleCenterViewController.swift in Sources */,
@@ -1932,6 +1939,7 @@
 				234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */,
 				2335638428E3245000C0184C /* WishListDataManager.swift in Sources */,
 				2340CEAC28CB6252007C362F /* HowToCollectionViewCell.swift in Sources */,
+				23ED291A2A88F68600B26885 /* AlamofireBaseService.swift in Sources */,
 				235D550628EBD2C700314D62 /* ItemParsingModel.swift in Sources */,
 				23E378E328D2F16900C52F2D /* UploadItemPhotoTableViewCell.swift in Sources */,
 				233C34B129C73B30005DFA39 /* DefaultButton.swift in Sources */,
@@ -2069,7 +2077,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202308131710;
+				CURRENT_PROJECT_VERSION = 202308131811;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Share Extension/Info.plist";
@@ -2098,7 +2106,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202308131710;
+				CURRENT_PROJECT_VERSION = 202308131811;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Share Extension/Info.plist";
@@ -2247,7 +2255,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Wishboard/Wishboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202308131710;
+				CURRENT_PROJECT_VERSION = 202308131811;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2283,7 +2291,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Wishboard/Wishboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202308131710;
+				CURRENT_PROJECT_VERSION = 202308131811;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wishboard/Info.plist;

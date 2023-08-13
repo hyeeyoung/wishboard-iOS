@@ -132,7 +132,7 @@ extension ItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - API Success
 extension ItemDetailViewController {
     // MARK: 아이템 삭제
-    func deleteItemAPISuccess(_ result: APIModel<TokenResultModel>) {
+    func deleteItemAPISuccess() {
         self.dismiss(animated: false)
         self.isDeleted = true
         
@@ -146,13 +146,10 @@ extension ItemDetailViewController {
         }
         // home o cart x folderdetail x calender x
         
-        print(result.message)
     }
     func deleteItemAPIFail429() {
         self.dismiss(animated: false)
         self.isDeleted = false
-//        guard let itemId = self.wishListData.item_id else {return}
-//        ItemDataManager().deleteItemDataManager(itemId, self)
     }
     // MARK: 아이템 상세 조회
     func getItemDetailAPISuccess(_ result: WishListModel) {
@@ -164,8 +161,5 @@ extension ItemDetailViewController {
             else {itemDetailView.isLinkExist(isLinkExist: false)}
         } else {itemDetailView.isLinkExist(isLinkExist: false)}
         itemDetailView.lowerButton.addTarget(self, action: #selector(linkButtonDidTap), for: .touchUpInside)
-    }
-    func getItemDetailAPIFail() {
-//        ItemDataManager().getItemDetailDataManager(self.itemId, self)
     }
 }

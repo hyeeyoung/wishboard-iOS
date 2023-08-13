@@ -227,6 +227,11 @@ extension CartView {
     // MARK: Cart 조회 API
     func getCartListAPISuccess(_ result: [CartListModel]) {
         self.cartData = result
+        if result.isEmpty {
+            noCartItem()
+            return
+        }
+        
         // reload data with animation
         UIView.transition(with: cartTableView,
                                   duration: 0.35,
@@ -236,9 +241,7 @@ extension CartView {
                                 completion: nil);
         calculate()
     }
-    func getCartListAPIFail() {
-        CartDataManager().getCartListDataManager(self)
-    }
+    
     func noCartItem() {
         self.cartData = []
         cartTableView.reloadData()
@@ -255,7 +258,6 @@ extension CartView {
         self.preVC.dismiss(animated: false)
         CartDataManager().getCartListDataManager(self)
         SnackBar(self.preVC, message: .deleteCartItem)
-        print(result.message)
     }
 }
 // MARK: - CartGesture
