@@ -273,9 +273,8 @@ extension PopUpDeleteUserViewController {
         UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "accessToken")
         UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "removeToken")
         
-        let onboardingVC = OnBoardingViewController()
-        onboardingVC.deleteUser = true
-        self.navigationController?.pushViewController(onboardingVC, animated: true)
+        let onboardingVC = OnBoardingViewController(usecase: .signOut)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(onboardingVC, animated: true)
         
         print(result.message)
     }

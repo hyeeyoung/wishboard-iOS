@@ -8,16 +8,15 @@
 import UIKit
 import MessageUI
 
-class MyPageViewController: TitleLeftViewController {
+class MyPageViewController: TitleLeftViewController, Observer {
+    var observer = UserObserver.shared
+    
     var mypageView: MyPageView!
     let settingArray = ["", "알림 설정", "비밀번호 변경", "", "문의하기", "위시보드 이용 방법", "이용약관", "개인정보 처리방침", "오픈소스 라이브러리", "버전 정보", "", "로그아웃", "탈퇴하기"]
 
     var userInfoData: GetUserInfoModel!
     var nickName: String?
     var pushState: Bool?
-    
-    var isProfileModified: Bool = false
-    var isPasswordModified: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,20 +33,33 @@ class MyPageViewController: TitleLeftViewController {
             make.top.equalTo(super.navigationView.snp.bottom)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
-        // DATA
-//        MypageDataManager().getUserInfoDataManager(self)
+        // load DATA
+        MypageDataManager().getUserInfoDataManager(self)
+        
+        /// Observer init
+        observer.bind(self)
         
         self.tabBarController?.tabBar.isHidden = false
     }
-    override func viewDidAppear(_ animated: Bool) {
+    /// Observer
+    func update(_ newValue: Any) {
+        // 어떤 값을 전달받든 TabBar 는 visible
         self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.isNavigationBarHidden = true
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
-        // DATA
-        MypageDataManager().getUserInfoDataManager(self)
-        // Check if userdata modified
-        checkIfUserdataModified()
+        
+        guard let usecase = newValue as? ObserverUseCase else {return}
+        defer {
+            // 프로필이 수정된 경우와 비밀번호가 수정된 경우 분기처리
+            if usecase == .profileModified {
+                SnackBar(self, message: .modifyProfile)
+                // reload profile Data
+                MypageDataManager().getUserInfoDataManager(self)
+            } else if usecase == .passwordModified {
+                SnackBar(self, message: .modifyPassword)
+            }
+        }
     }
 }
 // MARK: - Main TableView delegate
@@ -104,7 +116,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         case 3:
             // 비밀번호 변경
             let vc = ModifyPasswordViewController()
-            vc.preVC = self
             self.navigationController?.pushViewController(vc, animated: true)
         case 5:
             // 문의하기
@@ -157,7 +168,6 @@ extension MyPageViewController {
             vc.profileImage.kf.setImage(with: URL(string: profileImg), placeholder: UIImage())
             vc.preProfileImg = self.userInfoData.profile_img_url
         }
-        vc.preVC = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
     // 알림 설정 - Switch 넣기
@@ -270,19 +280,19 @@ extension MyPageViewController: MFMailComposeViewControllerDelegate {
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    // Check if userdata modified
-    func checkIfUserdataModified() {
-        // 프로필이 변경되었을 때 스낵바 출력
-        if isProfileModified {
-            SnackBar(self, message: .modifyProfile)
-            isProfileModified.toggle()
-        }
-        // 비밀번호 변경되었을 때 스낵바 출력
-        if isPasswordModified {
-            SnackBar(self, message: .modifyPassword)
-            isPasswordModified.toggle()
-        }
-    }
+//    // Check if userdata modified
+//    func checkIfUserdataModified() {
+//        // 프로필이 변경되었을 때 스낵바 출력
+//        if isProfileModified {
+//            SnackBar(self, message: .modifyProfile)
+//            isProfileModified.toggle()
+//        }
+//        // 비밀번호 변경되었을 때 스낵바 출력
+//        if isPasswordModified {
+//            SnackBar(self, message: .modifyPassword)
+//            isPasswordModified.toggle()
+//        }
+//    }
 }
 // MARK: - API Success
 extension MyPageViewController {
@@ -325,8 +335,9 @@ extension MyPageViewController {
         UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "accessToken")
         UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "removeToken")
         
+        
         let onboardingVC = OnBoardingViewController()
-        self.navigationController?.pushViewController(onboardingVC, animated: true)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(onboardingVC, animated: true)
         
         print(result.message)
     }

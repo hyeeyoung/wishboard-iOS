@@ -8,7 +8,14 @@
 import UIKit
 
 class OnBoardingViewController: UIViewController {
-    var deleteUser = false
+    
+    convenience init(usecase: ObserverUseCase) {
+        self.init()
+
+        if usecase == .signOut {
+            SnackBar(self, message: .deleteUser)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,12 +36,9 @@ class OnBoardingViewController: UIViewController {
         NetworkCheck.shared.startMonitoring(vc: self)
         // 자동 로그인
         checkRememberMe()
-        // 탈퇴 후 스낵바
-        if self.deleteUser {
-            SnackBar(self, message: .deleteUser)
-            self.deleteUser.toggle()
-        }
+        
     }
+    /// 자동로그인 로직 구현
     func checkRememberMe() {
         if let token = UserDefaults.standard.string(forKey: "accessToken") {
             let email = UserDefaults.standard.string(forKey: "email")

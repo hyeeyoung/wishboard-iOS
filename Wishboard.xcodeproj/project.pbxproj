@@ -24,6 +24,8 @@
 		231C5F832A36EB7700FBDEE5 /* Share Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 23C3113C28DF680300A636F6 /* Share Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		231C5F852A36F06B00FBDEE5 /* NewFolderBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231C5F842A36F06B00FBDEE5 /* NewFolderBottomSheetViewController.swift */; };
 		231C5F872A36F79500FBDEE5 /* ModifyFolderBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231C5F862A36F79500FBDEE5 /* ModifyFolderBottomSheetViewController.swift */; };
+		23203DDD2A925E90009BB07B /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23203DDC2A925E90009BB07B /* UseCase.swift */; };
+		23203DDE2A925F08009BB07B /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23203DDC2A925E90009BB07B /* UseCase.swift */; };
 		232174DB28E1BE81008C155D /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174DA28E1BE81008C155D /* RegisterDataManager.swift */; };
 		232174E428E1BF1C008C155D /* RegisterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E328E1BF1C008C155D /* RegisterInput.swift */; };
 		232174E828E1D4AF008C155D /* LoginInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E728E1D4AF008C155D /* LoginInput.swift */; };
@@ -283,6 +285,7 @@
 		23134D3E29B222BF00238536 /* RefreshDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshDataManager.swift; sourceTree = "<group>"; };
 		231C5F842A36F06B00FBDEE5 /* NewFolderBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFolderBottomSheetViewController.swift; sourceTree = "<group>"; };
 		231C5F862A36F79500FBDEE5 /* ModifyFolderBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyFolderBottomSheetViewController.swift; sourceTree = "<group>"; };
+		23203DDC2A925E90009BB07B /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		232174DA28E1BE81008C155D /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
 		232174E328E1BF1C008C155D /* RegisterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInput.swift; sourceTree = "<group>"; };
 		232174E728E1D4AF008C155D /* LoginInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInput.swift; sourceTree = "<group>"; };
@@ -731,6 +734,14 @@
 				230DBFA728E106EE00E9AED6 /* ShareView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		23203DDB2A925E84009BB07B /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				23203DDC2A925E90009BB07B /* UseCase.swift */,
+			);
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 		232174D928E1BE71008C155D /* Authentication */ = {
@@ -1198,6 +1209,7 @@
 		23C9567D28C67FD000D88536 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				23203DDB2A925E84009BB07B /* UseCase */,
 				23A48E6D28E9134400FD77A7 /* UtilManager */,
 				23A48E6C28E9132C00FD77A7 /* BaseViewControllers */,
 				23C3113528DF633000A636F6 /* APIManager */,
@@ -1792,6 +1804,7 @@
 				236FE91828DF8512006142DB /* SetLottie.swift in Sources */,
 				231B581028E8A33C0030D33E /* BaseViewController.swift in Sources */,
 				236EE70C2A88BBA10070437D /* UIImage.swift in Sources */,
+				23203DDE2A925F08009BB07B /* UseCase.swift in Sources */,
 				230DBFA828E106EE00E9AED6 /* ShareView.swift in Sources */,
 				230180E628E50B7C001034FC /* FolderDataManager.swift in Sources */,
 				23A48E7128E92E7D00FD77A7 /* NetworkCheck.swift in Sources */,
@@ -1930,6 +1943,7 @@
 				230946D02A3739CE00D22323 /* BaseViewModel.swift in Sources */,
 				234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */,
 				2335638428E3245000C0184C /* WishListDataManager.swift in Sources */,
+				23203DDD2A925E90009BB07B /* UseCase.swift in Sources */,
 				2340CEAC28CB6252007C362F /* HowToCollectionViewCell.swift in Sources */,
 				23ED291A2A88F68600B26885 /* AlamofireBaseService.swift in Sources */,
 				235D550628EBD2C700314D62 /* ItemParsingModel.swift in Sources */,
