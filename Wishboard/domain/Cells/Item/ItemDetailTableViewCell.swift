@@ -68,6 +68,8 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.backgroundColor = .green_500
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 12
+        
+        $0.isHidden = true
     }
     let restockDateLabel = PaddingLabel().then{
         $0.textColor = .gray_700
@@ -75,6 +77,8 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.backgroundColor = .green_500
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 12
+        
+        $0.isHidden = true
     }
     
     //MARK: - Life Cycles
