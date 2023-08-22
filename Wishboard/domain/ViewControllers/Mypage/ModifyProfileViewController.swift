@@ -172,13 +172,23 @@ extension ModifyProfileViewController {
         var lottieView = self.completeButton.setLottieView()
         self.completeButton.isSelected = true
         
-        lottieView = self.completeKeyboardButton.setLottieView()
-        self.completeKeyboardButton.isSelected = true
+        // 키보드가 올라와있을 때 키보드 위 버튼 처리
+        if nameTextField.isFirstResponder {
+            lottieView = self.completeKeyboardButton.setLottieView()
+            self.completeKeyboardButton.isSelected = true
+        }
         
         lottieView.isHidden = false
-        
         lottieView.play { completion in
             lottieView.loopMode = .loop
+            
+            // 이미지와 닉네임 둘 다 변경사항이 없을 때, selectedPhoto와 nickname 값이 nil이 되어 버그.
+            // 예외처리
+            if self.selectedPhoto == nil && self.nickname == nil {
+                self.navigationController?.popViewController(animated: true)
+                return
+            }
+            // 변경사항이 하나라도 있을 때 통신
             let moyaProfileInput = MoyaProfileInput(photo: self.selectedPhoto, nickname: self.nickname)
             self.modifyProfileWithMoya(model: moyaProfileInput)
         }
