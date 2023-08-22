@@ -20,6 +20,7 @@ class LoginView: UIView {
     // 이메일 TextField
     let emailTextField = DefaultTextField(Placeholder.email).then {
         $0.keyboardType = .emailAddress
+        $0.becomeFirstResponder()
     }
     // 비밀번호 Label
     let passwordLabel = DefaultLabel().then{
