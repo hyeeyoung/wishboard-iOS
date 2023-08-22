@@ -26,7 +26,7 @@ final class Observable<T> {
     }
 }
 
-
+// MARK: - 유저 관련 Observer Pattern
 protocol Observer {
     func update(_ newValue: Any)
 }

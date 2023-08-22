@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// 유저의 유즈케이스
 enum ObserverUseCase {
     case signOut
     case profileModified
