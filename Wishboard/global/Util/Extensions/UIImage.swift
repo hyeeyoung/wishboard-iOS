@@ -33,13 +33,31 @@ extension UIImage {
             newSize.height = targetSize.height
         }
         
-        // 이미지의 원래 방향 정보를 탐지해 만약 아래위로 180도 뒤집혀져 있다면
-        // imageOrientation.rawValue가 1일 때
-        // 이미지를 180도 회전시키는 메서드 호출
-        if imageOrientation.rawValue == 1 {
+        // 이미지의 방향 정보를 탐지
+        switch imageOrientation.rawValue {
+        // 제대로 된 방향일 때 break
+        case 0, 4:
+            break
+        // 위아래로 뒤집혀져있을 때 180도 회전
+        case 1, 5:
             if let rotatedCGImage = rotateCGImage180(cgImage: cgImage) {
                 cgImage = rotatedCGImage
             }
+        // 왼쪽으로 회전되어있을 때 오른쪽으로 90도 회전
+        case 2, 6:
+            if let rotatedCGImage = rotateCGImageRight90(cgImage: cgImage) {
+                cgImage = rotatedCGImage
+            }
+        // 오른쪽으로 회전되어있을 때 오른쪽으로 90도 회전 후 180도 뒤집기
+        case 3, 7:
+            if let rotatedCGImage = rotateCGImageRight90(cgImage: cgImage) {
+                if let rotatedImage = rotateCGImage180(cgImage: rotatedCGImage) {
+                    cgImage = rotatedImage
+                }
+                
+            }
+        default:
+            print("이미지 방향 파악 불가")
         }
         
         let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -76,6 +94,19 @@ extension UIImage {
         
         return context?.makeImage()
     }
-
+    /// cgImage를 오른쪽으로 90도 회전시키는 메서드
+    func rotateCGImageRight90(cgImage: CGImage) -> CGImage? {
+        let rotatedSize = CGSize(width: cgImage.height, height: cgImage.width)
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let context = CGContext(data: nil, width: Int(rotatedSize.width), height: Int(rotatedSize.height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
+        
+        context?.translateBy(x: rotatedSize.width, y: 0)
+        context?.rotate(by: .pi / 2)  // 오른쪽으로 90도 회전 (라디안 단위)
+        
+        // 이미지를 그릴 위치와 크기를 조정하여 그립니다.
+        context?.draw(cgImage, in: CGRect(x: 0, y: 0, width: rotatedSize.height, height: rotatedSize.width))
+        
+        return context?.makeImage()
+    }
 
 }
