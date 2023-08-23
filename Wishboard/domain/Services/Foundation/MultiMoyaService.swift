@@ -14,7 +14,6 @@ class MultiMoyaService: MoyaProvider<MultiTarget> {
     
     func requestDecoded<T: BaseRouter, L: Decodable>(_ target: T,
                                                      completion: @escaping (Result<L, Error>) -> Void) {
-//        addObserver()
         request(MultiTarget(target)) { result in
             switch result {
             case .success(let response):
@@ -34,7 +33,6 @@ class MultiMoyaService: MoyaProvider<MultiTarget> {
 
     func requestNoResultAPI<T: BaseRouter>(_ target: T,
                                                completion: @escaping (Result<Int, Error>) -> Void) {
-//        addObserver()
         request = request(MultiTarget(target)) { result in
             switch result {
             case .success(let response):
@@ -47,7 +45,6 @@ class MultiMoyaService: MoyaProvider<MultiTarget> {
     
     func requestNoResultAPI<T: BaseRouter>(_ target: T,
                                            completion: @escaping (NetworkResult<Any>) -> Void) {
-//        addObserver()
         request = request(MultiTarget(target)) { result in
             switch result {
             case .success(let response):
@@ -72,7 +69,7 @@ class MultiMoyaService: MoyaProvider<MultiTarget> {
     func requestWithProgress<T: BaseRouter>(_ target: T,
                                                 progressCompletion: @escaping ((ProgressResponse) -> Void),
                                                 completion: @escaping (Result<Int?, Error>) -> Void) {
-//        addObserver()
+        
         request = request(MultiTarget(target)) { progress in
             progressCompletion(progress)
         } completion: { result in
