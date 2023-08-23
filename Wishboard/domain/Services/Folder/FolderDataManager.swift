@@ -15,13 +15,13 @@ class FolderDataManager {
         let url = Storage().BaseURL + "/folder"
         let request = AlamofireBaseService.shared.requestWithParameter(url, .get, viewcontroller)
         
-        AlamofireBaseService.shared.responseDecoded(request, [FolderModel].self) { result in
-            viewcontroller.getFolderAPISuccess(result)
+        AlamofireBaseService.shared.responseWithErrorException(request, [FolderModel].self) { result in
+            if let response = result as? [FolderModel] {
+                viewcontroller.getFolderAPISuccess(response)
+            } else if let errorCode = result as? Int, errorCode == 404 {
+                viewcontroller.noFolder()
+            }
         }
-        
-        // TODO: 404 처리
-//        case 404:
-//            viewcontroller.noFolder()
                
     }
     // MARK: - 폴더 추가
@@ -30,13 +30,13 @@ class FolderDataManager {
         let url = Storage().BaseURL + "/folder"
         let request = AlamofireBaseService.shared.requestWithBody(url, .post, parameter, preVC)
         
-        AlamofireBaseService.shared.responseDecoded(request, APIModel<ResultModel>.self) { result in
-            preVC.addFolderAPISuccess(result)
+        AlamofireBaseService.shared.responseWithErrorException(request, APIModel<ResultModel>.self) { result in
+            if let response = result as? APIModel<ResultModel> {
+                preVC.addFolderAPISuccess(response)
+            } else if let errorCode = result as? Int, errorCode == 409 {
+                viewcontroller.sameFolderNameFail()
+            }
         }
-        
-        // TODO: 409 처리
-//    case 409:
-//        viewcontroller.sameFolderNameFail()
         
     }
     // MARK: - 폴더명 수정
@@ -45,13 +45,13 @@ class FolderDataManager {
         let url = Storage().BaseURL + "/folder\(folderId)"
         let request = AlamofireBaseService.shared.requestWithBody(url, .put, parameter, preVC)
         
-        AlamofireBaseService.shared.responseDecoded(request, APIModel<ResultModel>.self) { result in
-            preVC.modifyFolderAPISuccess(result)
+        AlamofireBaseService.shared.responseWithErrorException(request, APIModel<ResultModel>.self) { result in
+            if let response = result as? APIModel<ResultModel> {
+                preVC.modifyFolderAPISuccess(response)
+            } else if let errorCode = result as? Int, errorCode == 409 || errorCode == 400 || errorCode == 404 {
+                viewcontroller.sameFolderNameFail()
+            }
         }
-        
-        // TODO: 400, 409 처리
-//    case 409:
-//        viewcontroller.sameFolderNameFail()
         
     }
     // MARK: - 폴더 삭제
@@ -82,12 +82,13 @@ class FolderDataManager {
         let url = Storage().BaseURL + "/folder/item/\(folderId)"
         let request = AlamofireBaseService.shared.requestWithParameter(url, .get, viewcontroller)
         
-        AlamofireBaseService.shared.responseDecoded(request, [WishListModel].self) { result in
-            viewcontroller.getFolderDetailAPISuccess(result)
+        AlamofireBaseService.shared.responseWithErrorException(request, [WishListModel].self) { result in
+            if let response = result as? [WishListModel] {
+                viewcontroller.getFolderDetailAPISuccess(response)
+            } else if let errorCode = result as? Int, errorCode == 404 {
+                viewcontroller.noWishList()
+            }
         }
-        
-        // TODO: 404 처리
-//        case 404: viewcontroller.noWishList()
     
     }
     // MARK: - 아이템의 폴더 수정

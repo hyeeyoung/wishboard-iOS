@@ -14,13 +14,13 @@ class CartDataManager {
         let url = Storage().BaseURL + "/cart"
         let request = AlamofireBaseService.shared.requestWithParameter(url, .get, nil)
         
-        AlamofireBaseService.shared.responseDecoded(request, [CartListModel].self) { result in
-            cartView.getCartListAPISuccess(result)
+        AlamofireBaseService.shared.responseWithErrorException(request, [CartListModel].self) { result in
+            if let response = result as? [CartListModel] {
+                cartView.getCartListAPISuccess(response)
+            } else if let errorCode = result as? Int, errorCode == 404 {
+                cartView.noCartItem()
+            }
         }
-        
-        //TODO: 장바구니 리스트가 없을 때 예외처리
-//        case 404:
-//            cartView.noCartItem()
         
     }
     // MARK: - 장바구니 수량 변경

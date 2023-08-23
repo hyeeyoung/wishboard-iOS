@@ -202,7 +202,6 @@ extension FolderViewController {
         print(result.message)
     }
     func sameFolderNameFail() {
-//        dialog.sameFolderNameFail()
         lottieView.isHidden = true
     }
     // MARK: 폴더 삭제 API

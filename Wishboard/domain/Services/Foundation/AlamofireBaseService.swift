@@ -13,6 +13,7 @@ class AlamofireBaseService {
     
     private init() {}
     
+    // MARK: - Request
     /// 서버 요청값
     func requestWithParameter(_ url: String, _ method: HTTPMethod, _ viewcontroller: UIViewController?) -> DataRequest {
         let request = AF.request(url,
@@ -37,6 +38,7 @@ class AlamofireBaseService {
         return request
     }
     
+    // MARK: - Response
     /// 서버 응답값
     func responseDecoded<T: Decodable>(_ request: DataRequest, _ model: T.Type, completion: @escaping ((T) -> Void)) {
         request.responseDecodable(of: T.self) { response in
@@ -51,14 +53,16 @@ class AlamofireBaseService {
         }
     }
     
-    func responseWithBasicModel(_ request: DataRequest, completion: @escaping ((Bool) -> Void)) {
-        request.responseDecodable(of: APIModel<Bool>.self) { response in
+    /// Error Exception이 필요한 reponse
+    /// responseCode (응답코드)를 completion으로 전달한다.
+    func responseWithErrorException<T: Decodable>(_ request: DataRequest, _ model: T.Type, completion: @escaping ((Any) -> Void)) {
+        request.responseDecodable(of: T.self) { response in
             switch response.result {
             case .success(let result):
-                completion(true)
-            case .failure(let error):
-                completion(false)
-                print(error.responseCode)
+                completion(result)
+            case .failure(_):
+                guard let response = request.task?.response as? HTTPURLResponse else {return}
+                completion(response.statusCode)
             }
         }
     }
@@ -69,10 +73,6 @@ class AlamofireBaseService {
              switch(response.result) {
              case .success(_):
                  print("success")
-//                 if let data = response.result.value {
-//                   print(data)
-//                  }
-          
              case .failure(_):
                  print("Error message:\(response.result)")
                  break

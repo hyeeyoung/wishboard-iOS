@@ -11,55 +11,29 @@ import Alamofire
 class RegisterDataManager {
     //MARK: 회원가입
     func registerDataManager(_ parameter: RegisterInput, _ viewcontroller: RegisterPasswordViewController) {
-        AF.request(Storage().BaseURL + "/auth/signup",
-                   method: .post,
-                   parameters: parameter,
-                   encoder: JSONParameterEncoder.default,
-                   headers: nil)
-            .validate()
-            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
-            switch response.result {
-            case .success(let result):
-                if result.success {viewcontroller.registerAPISuccess(result)}
-            case .failure(let error):
-                let statusCode = error.responseCode
-                switch statusCode {
-                case 500:
-                   DispatchQueue.main.async {
-                       ErrorBar(viewcontroller)
-                   }
-                default:
-                    print(error.responseCode)
-                }
+        
+        let url = Storage().BaseURL + "/auth/signup"
+        let request = AlamofireBaseService.shared.requestWithBody(url, .post, parameter, viewcontroller)
+        
+        AlamofireBaseService.shared.responseWithErrorException(request, APIModel<TokenResultModel>.self) { result in
+            if let response = result as? APIModel<TokenResultModel>, response.success {
+                viewcontroller.registerAPISuccess(response)
             }
         }
+        
     }
     //MARK: 이메일 인증 - 회원가입 시
     func checkEmailDataManager(_ parameter: CheckEmailInput, _ viewcontroller: RegisterEmailViewController) {
-        AF.request(Storage().BaseURL + "/auth/check-email",
-                   method: .post,
-                   parameters: parameter,
-                   encoder: JSONParameterEncoder.default,
-                   headers: nil)
-            .validate()
-            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
-            switch response.result {
-            case .success(let result):
-                if result.success {viewcontroller.checkEmailAPISuccess(result)}
-            case .failure(let error):
-                if let statusCode = error.responseCode {
-                    switch statusCode {
-                    case 409:
-                        viewcontroller.checkEmaiAPIFail()
-                    case 500:
-                       DispatchQueue.main.async {
-                           ErrorBar(viewcontroller)
-                       }
-                    default:
-                        print(statusCode)
-                    }
-                }
+        let url = Storage().BaseURL + "/auth/check-email"
+        let request = AlamofireBaseService.shared.requestWithBody(url, .post, parameter, viewcontroller)
+        
+        AlamofireBaseService.shared.responseWithErrorException(request, APIModel<TokenResultModel>.self) { result in
+            if let response = result as? APIModel<TokenResultModel>, response.success {
+                viewcontroller.checkEmailAPISuccess(response)
+            } else if let errorCode = result as? Int, errorCode == 409 {
+                viewcontroller.checkEmaiAPIFail()
             }
         }
+        
     }
 }
