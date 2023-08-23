@@ -17,7 +17,6 @@ class FolderDataManager {
         let token = defaults?.string(forKey: "accessToken") ?? ""
         // 로그아웃 상태일 때
         if token == "" {
-            print("🍉")
             viewcontroller.needLogin()
             return
         }
