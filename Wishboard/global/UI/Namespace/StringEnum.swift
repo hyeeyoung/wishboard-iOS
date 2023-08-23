@@ -74,7 +74,7 @@ enum Message {
 enum Title {
     // MARK: Authentication
     public static let register = "가입하기"
-    public static let login = "로그인 하기"
+    public static let login = "로그인하기"
     public static let loginByEmail = "이메일로 로그인하기"
     public static let email = "이메일"
     public static let password = "비밀번호"

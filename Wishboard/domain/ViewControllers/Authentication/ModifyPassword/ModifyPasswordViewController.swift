@@ -11,11 +11,11 @@ import RxSwift
 import RxCocoa
 
 class ModifyPasswordViewController: TitleCenterViewController {
+    var observer = UserObserver.shared
+    
     let modifyPasswordView = ModifyPasswordView()
     var passwordInput: String?
     var passwordRewriteInput: String?
-    var preVC: MyPageViewController!
-    var modified: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,11 +36,11 @@ class ModifyPasswordViewController: TitleCenterViewController {
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        if modified {
-            preVC.isPasswordModified = true
-            MypageDataManager().getUserInfoDataManager(preVC)
-        }
+    /// will disappear
+    override func viewWillDisappear(_ animated: Bool) {
+        // 화면이 사라질 때 마이페이지에 nil 전달
+        // 이유: 마이페이지에서 어떤 값을 전달받아도 TabBar를 보여주게 작동
+        observer.notify(nil)
     }
     // MARK: - Set Up
     func setUpTextField() {
@@ -101,7 +101,6 @@ class ModifyPasswordViewController: TitleCenterViewController {
 // MARK: - API Success
 extension ModifyPasswordViewController {
     func loginAPIFail() {
-//        SnackBar(self, message: .login)
         for completeButton in [self.modifyPasswordView.completeButton, self.modifyPasswordView.completeButtonKeyboard] {
             completeButton.isActivate = false
         }
@@ -113,10 +112,10 @@ extension ModifyPasswordViewController {
                 case .success(let data):
                 if data.success {
                     print("비밀번호 변경 성공 by moya")
-                    self.modified = true
+                    // 마이페이지에 노티를 준다.
+                    self.observer.notify(.passwordModified)
                     // 화면 이동
                     self.navigationController?.popViewController(animated: true)
-//                    ScreenManager().goMainPages(4, self, family: .passwordModified)
                 }
                     
                     break

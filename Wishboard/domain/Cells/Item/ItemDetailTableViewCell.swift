@@ -46,35 +46,41 @@ class ItemDetailTableViewCell: UITableViewCell {
     let seperatorLine1 = UIView().then{
         $0.backgroundColor = .gray_100
     }
-    let linkLabel = UILabel().then{
+    let linkLabel = PaddingLabel(padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)).then{
         $0.textColor = .gray_200
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
     }
     let seperatorLine2 = UIView().then{
         $0.backgroundColor = .gray_100
     }
-    let memoTitlelabel = DefaultLabel().then{
+    let memoTitlelabel = PaddingLabel(padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)).then{
         $0.text = Title.memo
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitB2)
+        $0.textColor = .gray_700
     }
-    let memoContentLabel = DefaultLabel().then{
+    let memoContentLabel = PaddingLabel(padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)).then{
         $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.numberOfLines = 0
+        $0.textColor = .gray_700
     }
     // 재입고 초록색
-    let restockLabel = PaddingLabel().then{
+    let restockLabel = PaddingLabel(padding: UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)).then{
         $0.textColor = .gray_700
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitB5)
         $0.backgroundColor = .green_500
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 12
+        
+        $0.isHidden = true
     }
-    let restockDateLabel = PaddingLabel().then{
+    let restockDateLabel = PaddingLabel(padding: UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)).then{
         $0.textColor = .gray_700
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitB5)
         $0.backgroundColor = .green_500
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 12
+        
+        $0.isHidden = true
     }
     
     //MARK: - Life Cycles
@@ -103,7 +109,10 @@ class ItemDetailTableViewCell: UITableViewCell {
         stack.addArrangedSubview(linkLabel)
         stack.addArrangedSubview(seperatorLine2)
         stack.addArrangedSubview(memoTitlelabel)
-        stack.addArrangedSubview(memoContentLabel)
+        
+        // memo content label은 스택에 포함시키지 않았음.
+        // memo title label과의 간격(10) 때문에
+        contentView.addSubview(memoContentLabel)
     }
     func setUpConstraint() {
         itemImage.snp.makeConstraints { make in
@@ -142,10 +151,14 @@ class ItemDetailTableViewCell: UITableViewCell {
             make.height.equalTo(0.5)
         }
         stack.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview()
             make.top.equalTo(priceLabel.snp.bottom).offset(16)
             if UIDevice.current.hasNotch {make.bottom.equalToSuperview().offset(-78)}
             else {make.bottom.equalToSuperview().offset(-44)}
+        }
+        memoContentLabel.snp.makeConstraints { make in
+            make.top.equalTo(memoTitlelabel.snp.bottom).offset(10)
+            make.leading.equalTo(memoTitlelabel)
         }
         seperatorLine2.snp.makeConstraints { make in
             make.height.equalTo(0.5)

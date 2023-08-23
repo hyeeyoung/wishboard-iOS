@@ -67,7 +67,6 @@ class NewFolderBottomSheetViewController: BottomSheetKeyboardViewController {
     }
     
     func checkValidFolder(_ folder: String, _ isValidCount: Bool) {
-        // TODO: 유효한 폴더명인 지 확인 필요
         if isValidCount {
             errorMessage.isHidden = true
             completeButton.isActivate = true

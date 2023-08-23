@@ -158,10 +158,10 @@ extension HomeView {
         UIDevice.vibrate()
         if let data = sender.data {
             if data.cart_state == 1 {
-                CartDataManager().deleteCartDataManager(data.item_id!, self, self.viewController)
+                CartDataManager().deleteCartDataManager(data.item_id!, self.viewController)
             } else {
                 let addCartInput = AddCartInput(item_id: data.item_id)
-                CartDataManager().addCartDataManager(addCartInput, self, self.viewController)
+                CartDataManager().addCartDataManager(addCartInput, self.viewController)
             }
         }
     }

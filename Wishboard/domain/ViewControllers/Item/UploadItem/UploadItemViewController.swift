@@ -9,7 +9,9 @@ import UIKit
 import MaterialComponents.MaterialBottomSheet
 import Lottie
 
-class UploadItemViewController: UIViewController {
+class UploadItemViewController: UIViewController, Observer {
+    var observer = ItemLinkObserver.shared
+    
     // MARK: - Properties
     var uploadItemView: UploadItemView!
     let cellTitleArray = ["상품명(필수)", "₩ 가격(필수)", "폴더", "상품 일정 알림", "쇼핑몰 링크", "브랜드, 사이즈, 컬러 등 아이템 정보를 메모로 남겨보세요!😉"]
@@ -49,6 +51,9 @@ class UploadItemViewController: UIViewController {
         
         setUploadItemView()
         
+        // Observer init
+        observer.bind(self)
+        
         if !isUploadItem {
             self.tabBarController?.tabBar.isHidden = true
             self.wishListData = self.wishListModifyData
@@ -79,6 +84,43 @@ class UploadItemViewController: UIViewController {
     }
     @objc func MyTapMethod(sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
+    }
+    
+    /// Observer method
+    func update(_ newValue: Any) {
+        let data = newValue as? ItemParseData
+        switch data?.usecase {
+        case .itemLinkExit:
+            setPageContents()
+        case .itemParsingFail:
+            wishListData.item_url = ""
+            SnackBar(self, message: .failShoppingLink)
+            setPageContents()
+        case .itemParsingSuccess:
+            // 파싱한 아이템 정보 적용
+            wishListData.item_url = data?.itemModel?.link
+            wishListData.item_name = data?.itemModel?.itemName
+            wishListData.item_price = data?.itemModel?.itemPrice
+            wishListData.item_img_url = data?.itemModel?.imageURL
+            selectedImage = nil
+            // 테이블뷰 reload
+            let indexPath1 = IndexPath(row: 0, section: 0)
+            let indexPath2 = IndexPath(row: 1, section: 0)
+            let indexPath5 = IndexPath(row: 4, section: 0)
+            uploadItemView.uploadImageTableView.reloadRows(at: [indexPath1], with: .automatic)
+            uploadItemView.uploadContentTableView.reloadRows(at: [indexPath1, indexPath2, indexPath5], with: .automatic)
+            isValidContent()
+            
+            setPageContents()
+        default:
+            print("Item Parse Error")
+        }
+    }
+    /// 키보드가 올라와있고 화면이 위로 스크롤 되어있었다면 제자리로 두기
+    func setPageContents() {
+        view.endEditing(true)
+        view.frame.origin.y = 0.0
+        preKeyboardHeight = 0.0
     }
 }
 // MARK: - TableView delegate
@@ -375,7 +417,6 @@ extension UploadItemViewController {
     }
     // 쇼핑몰 링크 BottomSheet
     func showLinkBottomSheet() {
-        linkvc.setPreViewController(self)
         let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: linkvc)
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 317
         bottomSheet.dismissOnDraggingDownSheet = false

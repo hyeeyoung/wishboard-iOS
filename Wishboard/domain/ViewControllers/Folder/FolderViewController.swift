@@ -164,6 +164,10 @@ extension FolderViewController {
     // MARK: 폴더 조회 API
     func getFolderAPISuccess(_ result: [FolderModel]) {
         self.folderData = result
+        if result.isEmpty {
+            noFolder()
+            return
+        }
         // reload data with animation
         UIView.transition(with: folderView.folderCollectionView,
                           duration: 0.35,
@@ -172,9 +176,6 @@ extension FolderViewController {
                               self.folderView.folderCollectionView.reloadData()},
                           completion: nil);
         refreshControl.endRefreshing()
-    }
-    func getFolderAPIFail() {
-        FolderDataManager().getFolderDataManager(self)
     }
     func noFolder() {
         self.folderData = []
@@ -201,7 +202,6 @@ extension FolderViewController {
         print(result.message)
     }
     func sameFolderNameFail() {
-//        dialog.sameFolderNameFail()
         lottieView.isHidden = true
     }
     // MARK: 폴더 삭제 API

@@ -9,6 +9,8 @@ import UIKit
 import Kingfisher
 
 class ModifyProfileViewController: TitleCenterViewController {
+    var observer = UserObserver.shared
+    
     // profile
     var profileImage = UIImageView().then{
         $0.image = Image.defaultProfile
@@ -41,8 +43,6 @@ class ModifyProfileViewController: TitleCenterViewController {
     
     var preNickName: String?
     var preProfileImg: String?
-    var preVC: MyPageViewController!
-    var modified: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,13 +62,13 @@ class ModifyProfileViewController: TitleCenterViewController {
         
         self.nameTextField.delegate = self
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        if modified {
-            preVC.isProfileModified = true
-            MypageDataManager().getUserInfoDataManager(preVC)
-//            SnackBar(preVC, message: .modifyProfile)
-        }
+    /// will disappear
+    override func viewWillDisappear(_ animated: Bool) {
+        // 화면이 사라질 때 마이페이지에 nil 전달
+        // 이유: 마이페이지에서 어떤 값을 전달받아도 TabBar를 보여주게 작동
+        observer.notify(nil)
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
         // Network Check
@@ -172,13 +172,23 @@ extension ModifyProfileViewController {
         var lottieView = self.completeButton.setLottieView()
         self.completeButton.isSelected = true
         
-        lottieView = self.completeKeyboardButton.setLottieView()
-        self.completeKeyboardButton.isSelected = true
+        // 키보드가 올라와있을 때 키보드 위 버튼 처리
+        if nameTextField.isFirstResponder {
+            lottieView = self.completeKeyboardButton.setLottieView()
+            self.completeKeyboardButton.isSelected = true
+        }
         
         lottieView.isHidden = false
-        
         lottieView.play { completion in
             lottieView.loopMode = .loop
+            
+            // 이미지와 닉네임 둘 다 변경사항이 없을 때, selectedPhoto와 nickname 값이 nil이 되어 버그.
+            // 예외처리
+            if self.selectedPhoto == nil && self.nickname == nil {
+                self.navigationController?.popViewController(animated: true)
+                return
+            }
+            // 변경사항이 하나라도 있을 때 통신
             let moyaProfileInput = MoyaProfileInput(photo: self.selectedPhoto, nickname: self.nickname)
             self.modifyProfileWithMoya(model: moyaProfileInput)
         }
@@ -216,13 +226,13 @@ extension ModifyProfileViewController {
                 case .success(let data):
                     if data.success {
                         print("프로필 업데이트 성공 by moya:", data.message)
-                        self.modified = true
+                        // 마이페이지에 노티를 준다.
+                        self.observer.notify(.profileModified)
                         self.navigationController?.popViewController(animated: true)
                     }
                     break
             case .failure(let error):
                 self.navigationController?.popViewController(animated: true)
-                self.modified = false
                 print("moya profile modify error", error.localizedDescription)
             default:
                 print("default error")

@@ -75,7 +75,7 @@ class ItemDetailView: UIView {
             var config = UIButton.Configuration.plain()
             var attText = AttributedString.init("쇼핑몰로 이동하기")
             
-            attText.font = TypoStyle.SuitB3.font
+            attText.font = TypoStyle.SuitH3.font
             if isLinkExist {
                 attText.foregroundColor = UIColor.white
                 config.attributedTitle = attText
@@ -95,13 +95,13 @@ class ItemDetailView: UIView {
         addSubview(itemDetailTableView)
         
         lowerView.snp.makeConstraints { make in
-            if UIDevice.current.hasNotch {make.height.equalTo(78)}
-            else {make.height.equalTo(44)}
+            if UIDevice.current.hasNotch {make.height.equalTo(34+48)}
+            else {make.height.equalTo(48)}
             make.leading.trailing.bottom.equalToSuperview()
         }
         lowerButton.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(44)
+            make.height.equalTo(48)
         }
     }
     func setUpConstraint() {

@@ -181,24 +181,7 @@ class ShareViewController: UIViewController {
         guard let data = try? Data(contentsOf: url) else {return}
         DispatchQueue.main.async { [self] in
             selectedImage = UIImage(data: data)
-            // 폴더O, 알림O
-            if var notificationDate = self.notificationDate {
-                notificationDate = FormatManager().koreanStrToDate(notificationDate)!
-                if (self.selectedFolderIdx != nil) && (self.selectedFolderIdx != -1) {
-                    ShareDataManager().uploadItemDataManager(self.selectedFolderIdx!, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self.notificationType!, notificationDate + ":00", self)
-                } else {
-                    // 폴더X, 알림O
-                    ShareDataManager().uploadItemDataManager(selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self.notificationType!, notificationDate + ":00", self)
-                }
-            } else {
-                // 폴더O, 알림X
-                if (self.selectedFolderIdx != nil) && (self.selectedFolderIdx != -1) {
-                    ShareDataManager().uploadItemDataManager(self.selectedFolderIdx!, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self)
-                } else {
-                    // 폴더X, 알림X
-                    ShareDataManager().uploadItemDataManager(selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self)
-                }
-            }
+            ShareDataManager().uploadItemDataManager(selectedFolderIdx, selectedImage!, itemName!, itemPrice!, webURL!, "", notificationType, notificationDate, self)
         }
     }
     // 알람 설정 BottomSheet

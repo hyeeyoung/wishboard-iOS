@@ -24,6 +24,8 @@
 		231C5F832A36EB7700FBDEE5 /* Share Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 23C3113C28DF680300A636F6 /* Share Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		231C5F852A36F06B00FBDEE5 /* NewFolderBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231C5F842A36F06B00FBDEE5 /* NewFolderBottomSheetViewController.swift */; };
 		231C5F872A36F79500FBDEE5 /* ModifyFolderBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231C5F862A36F79500FBDEE5 /* ModifyFolderBottomSheetViewController.swift */; };
+		23203DDD2A925E90009BB07B /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23203DDC2A925E90009BB07B /* UseCase.swift */; };
+		23203DDE2A925F08009BB07B /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23203DDC2A925E90009BB07B /* UseCase.swift */; };
 		232174DB28E1BE81008C155D /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174DA28E1BE81008C155D /* RegisterDataManager.swift */; };
 		232174E428E1BF1C008C155D /* RegisterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E328E1BF1C008C155D /* RegisterInput.swift */; };
 		232174E828E1D4AF008C155D /* LoginInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232174E728E1D4AF008C155D /* LoginInput.swift */; };
@@ -204,7 +206,6 @@
 		23DC04D128C58B5500ABB0CF /* WishboardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04D028C58B5500ABB0CF /* WishboardUITestsLaunchTests.swift */; };
 		23DC04E928C591E600ABB0CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04E828C591E600ABB0CF /* ViewController.swift */; };
 		23DC04EB28C591F400ABB0CF /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04EA28C591F400ABB0CF /* OnBoardingViewController.swift */; };
-		23DF699F28E5F33C00F7FBD0 /* FCMDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DF699E28E5F33C00F7FBD0 /* FCMDataManager.swift */; };
 		23E0ACC528E79F09008C35C2 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E0ACC428E79F09008C35C2 /* KeyboardViewController.swift */; };
 		23E0ACC728E7A767008C35C2 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E0ACC628E7A767008C35C2 /* UILabel.swift */; };
 		23E0ACC828E7B563008C35C2 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E0ACC428E79F09008C35C2 /* KeyboardViewController.swift */; };
@@ -217,6 +218,10 @@
 		23EC504228E25DAC00AAA57E /* CheckEmailInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504128E25DAC00AAA57E /* CheckEmailInput.swift */; };
 		23EC504628E2664D00AAA57E /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504528E2664D00AAA57E /* APIManager.swift */; };
 		23EC504C28E2670D00AAA57E /* MypageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC504B28E2670D00AAA57E /* MypageDataManager.swift */; };
+		23ED291A2A88F68600B26885 /* AlamofireBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED29192A88F68600B26885 /* AlamofireBaseService.swift */; };
+		23ED291C2A88FE4E00B26885 /* AuthIntercepter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED291B2A88FE4E00B26885 /* AuthIntercepter.swift */; };
+		23ED291D2A89142D00B26885 /* AlamofireBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED29192A88F68600B26885 /* AlamofireBaseService.swift */; };
+		23ED291E2A89170F00B26885 /* AuthIntercepter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED291B2A88FE4E00B26885 /* AuthIntercepter.swift */; };
 		23F07F3E28E7CCBA0012D77D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */; };
 		23F07F4428E7D5930012D77D /* TitleCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */; };
 		23F1714B291056970016206A /* CalenderDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F1714A291056970016206A /* CalenderDateTableViewCell.swift */; };
@@ -280,6 +285,7 @@
 		23134D3E29B222BF00238536 /* RefreshDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshDataManager.swift; sourceTree = "<group>"; };
 		231C5F842A36F06B00FBDEE5 /* NewFolderBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFolderBottomSheetViewController.swift; sourceTree = "<group>"; };
 		231C5F862A36F79500FBDEE5 /* ModifyFolderBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyFolderBottomSheetViewController.swift; sourceTree = "<group>"; };
+		23203DDC2A925E90009BB07B /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		232174DA28E1BE81008C155D /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
 		232174E328E1BF1C008C155D /* RegisterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInput.swift; sourceTree = "<group>"; };
 		232174E728E1D4AF008C155D /* LoginInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInput.swift; sourceTree = "<group>"; };
@@ -430,7 +436,6 @@
 		23DC04D028C58B5500ABB0CF /* WishboardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishboardUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		23DC04E828C591E600ABB0CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		23DC04EA28C591F400ABB0CF /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
-		23DF699E28E5F33C00F7FBD0 /* FCMDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMDataManager.swift; sourceTree = "<group>"; };
 		23E0ACC428E79F09008C35C2 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		23E0ACC628E7A767008C35C2 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		23E378DD28D2EBFA00C52F2D /* PopUpDeleteUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDeleteUserViewController.swift; sourceTree = "<group>"; };
@@ -442,6 +447,8 @@
 		23EC504128E25DAC00AAA57E /* CheckEmailInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckEmailInput.swift; sourceTree = "<group>"; };
 		23EC504528E2664D00AAA57E /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		23EC504B28E2670D00AAA57E /* MypageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageDataManager.swift; sourceTree = "<group>"; };
+		23ED29192A88F68600B26885 /* AlamofireBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireBaseService.swift; sourceTree = "<group>"; };
+		23ED291B2A88FE4E00B26885 /* AuthIntercepter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthIntercepter.swift; sourceTree = "<group>"; };
 		23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCenterViewController.swift; sourceTree = "<group>"; };
 		23F1714A291056970016206A /* CalenderDateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderDateTableViewCell.swift; sourceTree = "<group>"; };
@@ -729,6 +736,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		23203DDB2A925E84009BB07B /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				23203DDC2A925E90009BB07B /* UseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
 		232174D928E1BE71008C155D /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -888,6 +903,8 @@
 				233C34BB29C75AEF005DFA39 /* BaseRouter.swift */,
 				233C34BD29C75B10005DFA39 /* MultiMoyaService.swift */,
 				233C34C329C7602D005DFA39 /* MoyaLoggerPlugin.swift */,
+				23ED29192A88F68600B26885 /* AlamofireBaseService.swift */,
+				23ED291B2A88FE4E00B26885 /* AuthIntercepter.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1075,7 +1092,6 @@
 			isa = PBXGroup;
 			children = (
 				233C34B829C75AAB005DFA39 /* Foundation */,
-				23DF699D28E5F33300F7FBD0 /* FCM */,
 				23D0824C28E4DC2A00CE541E /* Item */,
 				230A3F5728E4B5BE00966682 /* Notification */,
 				23279A0C28E497FD00CAD1CA /* Cart */,
@@ -1193,6 +1209,7 @@
 		23C9567D28C67FD000D88536 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				23203DDB2A925E84009BB07B /* UseCase */,
 				23A48E6D28E9134400FD77A7 /* UtilManager */,
 				23A48E6C28E9132C00FD77A7 /* BaseViewControllers */,
 				23C3113528DF633000A636F6 /* APIManager */,
@@ -1394,14 +1411,6 @@
 				2307A23D28DE545F00E00005 /* Authentication */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		23DF699D28E5F33300F7FBD0 /* FCM */ = {
-			isa = PBXGroup;
-			children = (
-				23DF699E28E5F33C00F7FBD0 /* FCMDataManager.swift */,
-			);
-			path = FCM;
 			sourceTree = "<group>";
 		};
 		23E378DF28D2F05D00C52F2D /* UploadItem */ = {
@@ -1795,6 +1804,7 @@
 				236FE91828DF8512006142DB /* SetLottie.swift in Sources */,
 				231B581028E8A33C0030D33E /* BaseViewController.swift in Sources */,
 				236EE70C2A88BBA10070437D /* UIImage.swift in Sources */,
+				23203DDE2A925F08009BB07B /* UseCase.swift in Sources */,
 				230DBFA828E106EE00E9AED6 /* ShareView.swift in Sources */,
 				230180E628E50B7C001034FC /* FolderDataManager.swift in Sources */,
 				23A48E7128E92E7D00FD77A7 /* NetworkCheck.swift in Sources */,
@@ -1823,6 +1833,8 @@
 				23CBAFDC28DFDF8500B41513 /* NewFolderViewController.swift in Sources */,
 				236FE91F28DF8592006142DB /* UIView.swift in Sources */,
 				2364B7AA29D41E1F006459EF /* TitleCenterViewController.swift in Sources */,
+				23ED291E2A89170F00B26885 /* AuthIntercepter.swift in Sources */,
+				23ED291D2A89142D00B26885 /* AlamofireBaseService.swift in Sources */,
 				236FE91E28DF8592006142DB /* UIBezierPath.swift in Sources */,
 				236FE93C28DF85AA006142DB /* String.swift in Sources */,
 				233C34B529C754EC005DFA39 /* DefaultTextField.swift in Sources */,
@@ -1892,7 +1904,6 @@
 				231C5F852A36F06B00FBDEE5 /* NewFolderBottomSheetViewController.swift in Sources */,
 				23C9568B28C6803900D88536 /* UIFont.swift in Sources */,
 				2328C5B028CAC7930065ABB2 /* ModifyProfileViewController.swift in Sources */,
-				23DF699F28E5F33C00F7FBD0 /* FCMDataManager.swift in Sources */,
 				2328C5AC28CAC1260065ABB2 /* NotificationViewController.swift in Sources */,
 				23D5518728C6AFFF00D81B5F /* LoginViewModel.swift in Sources */,
 				232174E828E1D4AF008C155D /* LoginInput.swift in Sources */,
@@ -1902,6 +1913,7 @@
 				2360096028DA2297001FB107 /* EmptyView.swift in Sources */,
 				2328C5A728CABF300065ABB2 /* NotiView.swift in Sources */,
 				235204CE28E2690F004F5DC6 /* GetUserInfoModel.swift in Sources */,
+				23ED291C2A88FE4E00B26885 /* AuthIntercepter.swift in Sources */,
 				2360095E28DA1829001FB107 /* FolderDetailViewController.swift in Sources */,
 				2351859929A6F40B0004FCB4 /* Image.swift in Sources */,
 				23F07F4428E7D5930012D77D /* TitleCenterViewController.swift in Sources */,
@@ -1931,7 +1943,9 @@
 				230946D02A3739CE00D22323 /* BaseViewModel.swift in Sources */,
 				234F837B28C9647600C4EB41 /* TabBarViewController.swift in Sources */,
 				2335638428E3245000C0184C /* WishListDataManager.swift in Sources */,
+				23203DDD2A925E90009BB07B /* UseCase.swift in Sources */,
 				2340CEAC28CB6252007C362F /* HowToCollectionViewCell.swift in Sources */,
+				23ED291A2A88F68600B26885 /* AlamofireBaseService.swift in Sources */,
 				235D550628EBD2C700314D62 /* ItemParsingModel.swift in Sources */,
 				23E378E328D2F16900C52F2D /* UploadItemPhotoTableViewCell.swift in Sources */,
 				233C34B129C73B30005DFA39 /* DefaultButton.swift in Sources */,
@@ -2069,7 +2083,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202308082122;
+				CURRENT_PROJECT_VERSION = 202308131811;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Share Extension/Info.plist";
@@ -2098,7 +2112,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202308082122;
+				CURRENT_PROJECT_VERSION = 202308131811;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Share Extension/Info.plist";
@@ -2247,7 +2261,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Wishboard/Wishboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202308082122;
+				CURRENT_PROJECT_VERSION = 202308131811;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2255,7 +2269,7 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = NSCameraUsageDescription;
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = NSPhotoLibraryUsageDescription;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -2283,14 +2297,14 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Wishboard/Wishboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202308082122;
+				CURRENT_PROJECT_VERSION = 202308131811;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wishboard/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = NSCameraUsageDescription;
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = NSPhotoLibraryUsageDescription;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
