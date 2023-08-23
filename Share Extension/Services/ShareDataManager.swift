@@ -17,6 +17,7 @@ class ShareDataManager {
         let token = defaults?.string(forKey: "accessToken") ?? ""
         // 로그아웃 상태일 때
         if token == "" {
+            print("🍉")
             viewcontroller.needLogin()
             return
         }
@@ -28,9 +29,11 @@ class ShareDataManager {
         AF.request(BaseURL + "/item/parse?site=\(url)",
                            method: .get,
                            parameters: nil,
-                           headers: header)
+                           headers: header,
+                           interceptor: AuthInterceptor(viewcontroller))
             .validate()
             .responseDecodable(of: APIModel<ItemParsingModel>.self) { response in
+                print(BaseURL + "/item/parse?site=\(url)")
             switch response.result {
             case .success(let result):
                 viewcontroller.getItemDataAPISuccess(result)

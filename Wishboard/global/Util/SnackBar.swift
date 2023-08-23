@@ -124,13 +124,16 @@ class ErrorBar {
             UIView.animate(withDuration: 0.5) {
                 self.backgroundView.transform = CGAffineTransform(translationX: 0, y: -81)
             } completion: { finished in
-                UIView.animate(withDuration: 0.5, delay: 2.5) {
-                    self.backgroundView.transform = CGAffineTransform(translationX: 0, y: 81)
-                } completion: { finish in
-                    if originView.extensionContext != nil {
-                        originView.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
-                    }
+                if originView.extensionContext != nil {
+                    originView.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
                 }
+//                UIView.animate(withDuration: 0.5, delay: 2.5) {
+//                    self.backgroundView.transform = CGAffineTransform(translationX: 0, y: 81)
+//                } completion: { finish in
+//                    if originView.extensionContext != nil {
+//                        originView.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
+//                    }
+//                }
             }
         }
     }

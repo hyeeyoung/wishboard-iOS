@@ -17,6 +17,7 @@ class FolderDataManager {
         let token = defaults?.string(forKey: "accessToken") ?? ""
         // 로그아웃 상태일 때
         if token == "" {
+            print("🍉")
             viewcontroller.needLogin()
             return
         }
@@ -28,7 +29,8 @@ class FolderDataManager {
         AF.request(BaseURL + "/folder/list",
                            method: .get,
                            parameters: nil,
-                           headers: header)
+                           headers: header,
+                           interceptor: AuthInterceptor(viewcontroller))
             .validate()
             .responseDecodable(of: [FolderListModel].self) { response in
             switch response.result {
