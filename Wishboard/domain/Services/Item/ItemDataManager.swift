@@ -37,8 +37,13 @@ class ItemDataManager {
         let url = Storage().BaseURL + "/item/parse?site=\(url)"
         let request = AlamofireBaseService.shared.requestWithParameter(url, .get, viewcontroller)
         
-        AlamofireBaseService.shared.responseDecoded(request, APIModel<ItemParsingModel>.self) { result in
-            viewcontroller.getItemByLinkAPISuccess(result)
+        AlamofireBaseService.shared.responseWithErrorException(request, APIModel<ItemParsingModel>.self) { result in
+            if let response = result as? APIModel<ItemParsingModel> {
+                viewcontroller.getItemByLinkAPISuccess(response)
+            } else if let errorCode = result as? Int, errorCode == 404 {
+                // 아이템 정보를 불러오지 못했을 떄: 404
+                viewcontroller.getItemByLinkAPIFail()
+            }
         }
     }
 }

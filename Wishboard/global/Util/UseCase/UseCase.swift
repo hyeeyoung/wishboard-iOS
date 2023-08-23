@@ -7,9 +7,15 @@
 
 import Foundation
 
-/// 유저의 유즈케이스
+/// 유즈케이스
 enum ObserverUseCase {
+    // User
     case signOut
     case profileModified
     case passwordModified
+    
+    // Item Parsing
+    case itemLinkExit
+    case itemParsingFail
+    case itemParsingSuccess
 }
