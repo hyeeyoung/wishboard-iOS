@@ -29,6 +29,7 @@ class RegisterEmailView: UIView {
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
     }
     let nextButton = DefaultButton(titleStr: Button.next)
+    let nextButtonKeyboard = DefaultButton(titleStr: Button.next)
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
     }()
@@ -51,8 +52,9 @@ class RegisterEmailView: UIView {
         addSubview(subTitleLabel)
         addSubview(emailTextField)
         addSubview(errorMessageLabel)
+        addSubview(nextButton)
         
-        accessoryView.addSubview(nextButton)
+        accessoryView.addSubview(nextButtonKeyboard)
     }
     func setUpConstraint() {
         heartLetterImage.snp.makeConstraints { make in
@@ -74,6 +76,12 @@ class RegisterEmailView: UIView {
             make.top.equalTo(emailTextField.snp.bottom).offset(6)
         }
         nextButton.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(48)
+            // TODO: 여백 Check
+            make.bottom.equalToSuperview().inset(34)
+        }
+        nextButtonKeyboard.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(48)
             make.bottom.equalToSuperview().inset(16)
