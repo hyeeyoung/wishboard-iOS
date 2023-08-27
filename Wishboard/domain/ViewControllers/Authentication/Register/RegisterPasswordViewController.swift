@@ -71,21 +71,8 @@ extension RegisterPasswordViewController {
         UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
         UserDefaults.standard.set(true, forKey: "isFirstLogin")
         UserDefaults.standard.set(tempNickname, forKey: "tempNickname")
-        
-//         FCM
-//        sendFCM()
+  
         // go main
         ScreenManager().goMain(self)
     }
-//    // MARK: FCM API
-//    func sendFCM() {
-//        // Send FCM token to server
-//        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
-//        print("device Token:", deviceToken)
-//        let fcmInput = FCMInput(fcm_token: deviceToken)
-//        FCMDataManager().fcmDataManager(fcmInput, self)
-//    }
-//    func fcmAPISuccess(_ result: APIModel<TokenResultModel>) {
-//        print(result.message)
-//    }
 }

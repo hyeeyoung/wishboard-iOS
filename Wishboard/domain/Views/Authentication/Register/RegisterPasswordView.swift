@@ -96,6 +96,7 @@ class RegisterPasswordView: UIView {
             make.trailing.lessThanOrEqualToSuperview().offset(-16)
             make.bottom.equalTo(registerButton.snp.top).offset(-6)
             make.centerX.equalToSuperview()
+            make.height.equalTo(14)
         }
     }
     func setStackView() {
@@ -123,15 +124,24 @@ class RegisterPasswordView: UIView {
 extension RegisterPasswordView {
     func setLabel(_ title: String) {
         let label = UILabel().then{
-            $0.text = title
-            $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
-            $0.textColor  = .gray_300
+            let attributedText = NSMutableAttributedString(string: title)
+            // Line height 설정
+            let lineHeight: CGFloat = 14.0
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.minimumLineHeight = lineHeight
+            paragraphStyle.maximumLineHeight = lineHeight
+
+            attributedText.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedText.length))
+            attributedText.addAttribute(.font, value: UIFont.Suit(size: 12, family: .Regular), range: NSRange(location: 0, length: title.count))
+            attributedText.addAttribute(.foregroundColor, value: UIColor.gray_300, range: NSRange(location: 0, length: title.count))
+            
+            $0.attributedText = attributedText
         }
         stack.addArrangedSubview(label)
     }
     func setUnderLinedButton(_ title: String) -> UIButton {
         let underlineButton = UIButton().then{
-            $0.setUnderline(title, .green_700, TypoStyle.SuitB4.font)
+            $0.setUnderline(title, .green_700, UIFont.Suit(size: 12, family: .SemiBold))
         }
         stack.addArrangedSubview(underlineButton)
         return underlineButton
