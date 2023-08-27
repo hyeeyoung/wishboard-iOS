@@ -113,7 +113,7 @@ enum Title {
 
 enum Button {
     // MARK: Authentication
-    public static let login = "로그인 하기"
+    public static let login = "로그인하기"
     public static let getEmail = "인증메일 받기"
     public static let register = "가입하기"
     public static let lostPassword = "비밀번호를 잊으셨나요?"
