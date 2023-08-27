@@ -13,7 +13,6 @@ import Lottie
 class NewFolderBottomSheetViewController: BottomSheetKeyboardViewController {
     // MARK: - Life Cycles
     var folderStr: String!
-    var tempFolderStr: String!
     var preVC: FolderViewController!
     
     var lottieView: LottieAnimationView!
@@ -58,23 +57,32 @@ class NewFolderBottomSheetViewController: BottomSheetKeyboardViewController {
         }
     }
     override func textFieldEditingChanged(_ sender: UITextField) {
-        let text = sender.text ?? ""
+        let folderInput = sender.text ?? ""
 
-        textFieldCountLabel.text = "(" + String(text.count) + "/10)자"
-        self.tempFolderStr = text
-        if text.count > 10 || text.isEmpty {self.checkValidFolder(self.tempFolderStr, false)}
-        else {self.checkValidFolder(self.tempFolderStr, true)}
+        // 폴더명 input 분기처리
+        if folderInput.isEmpty { setFolderTextCountEmpty()}
+        else if folderInput.count > 10 {setFolderTextCountOver10(sender)}
+        else {folderTextCountValid(folderInput)}
     }
-    
-    func checkValidFolder(_ folder: String, _ isValidCount: Bool) {
-        if isValidCount {
-            errorMessage.isHidden = true
-            completeButton.isActivate = true
-            folderStr = self.tempFolderStr
-        } else {
-            errorMessage.isHidden = true
-            completeButton.isActivate = false
-        }
+    /// 분기처리: 폴더명 input 의 카운트가 10 초과 시
+    func setFolderTextCountOver10(_ sender: UITextField) {
+        textFieldCountLabel.text = "(10/10)자"
+        sender.text = folderStr
+        return
+    }
+    /// 분기처리: 폴더명 input 이 비어있을 시
+    func setFolderTextCountEmpty() {
+        textFieldCountLabel.text = "(0/10)자"
+        errorMessage.isHidden = true
+        completeButton.isActivate = false
+    }
+    /// 분기처리: 폴더명 input 이 유효할 때
+    func folderTextCountValid(_ folderInput: String) {
+        textFieldCountLabel.text = "(" + String(folderInput.count) + "/10)자"
+        
+        errorMessage.isHidden = true
+        completeButton.isActivate = true
+        folderStr = folderInput
     }
 }
 // MARK: - API Success

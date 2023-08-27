@@ -19,8 +19,9 @@ import Then
  */
 
 class BottomSheetKeyboardViewController: BaseViewController {
-    let titleLabel = DefaultLabel().then{
+    let titleLabel = UILabel().then{
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
+        $0.sizeToFit()
     }
     let exitBtn = UIButton().then{
         $0.setImage(Image.quit, for: .normal)
@@ -97,6 +98,7 @@ class BottomSheetKeyboardViewController: BaseViewController {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
             make.centerX.equalToSuperview()
+            make.height.equalTo(18)
         }
         exitBtn.snp.makeConstraints { make in
             make.centerY.equalTo(titleLabel)
@@ -105,12 +107,12 @@ class BottomSheetKeyboardViewController: BaseViewController {
         }
         textfield.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(titleLabel.snp.bottom).offset(82)
+            make.top.equalTo(titleLabel.snp.bottom).offset(77)
             make.height.equalTo(42)
         }
         textFieldCountLabel.snp.makeConstraints { make in
             make.trailing.equalTo(textfield)
-            make.top.equalTo(textfield.snp.bottom).offset(5)
+            make.top.equalTo(textfield.snp.bottom).offset(6)
         }
         errorMessage.snp.makeConstraints { make in
             make.leading.equalTo(textfield)
@@ -119,7 +121,7 @@ class BottomSheetKeyboardViewController: BaseViewController {
         completeButton.snp.makeConstraints { make in
             make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(textfield.snp.bottom).offset(86)
+            make.top.greaterThanOrEqualTo(textfield.snp.bottom).offset(86)
             make.bottom.equalToSuperview().offset(-34)
         }
     }
