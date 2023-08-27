@@ -42,7 +42,7 @@ class FolderDataManager {
     // MARK: - 폴더명 수정
     func modifyFolderDataManager(_ folderId: Int, _ parameter: AddFolderInput, _ viewcontroller: ModifyFolderBottomSheetViewController, _ preVC: FolderViewController) {
         
-        let url = Storage().BaseURL + "/folder\(folderId)"
+        let url = Storage().BaseURL + "/folder/\(folderId)"
         let request = AlamofireBaseService.shared.requestWithBody(url, .put, parameter, preVC)
         
         AlamofireBaseService.shared.responseWithErrorException(request, APIModel<ResultModel>.self) { result in
@@ -52,7 +52,6 @@ class FolderDataManager {
                 viewcontroller.sameFolderNameFail()
             }
         }
-        
     }
     // MARK: - 폴더 삭제
     func deleteFolderDataManager(_ folderId: Int, _ viewcontroller: FolderViewController) {
