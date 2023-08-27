@@ -336,8 +336,8 @@ extension MyPageViewController {
         UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "removeToken")
         
         
-        let onboardingVC = OnBoardingViewController()
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(onboardingVC, animated: true)
+        let navigationController = UINavigationController(rootViewController: OnBoardingViewController())
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(navigationController, animated: true)
         
         print(result.message)
     }
