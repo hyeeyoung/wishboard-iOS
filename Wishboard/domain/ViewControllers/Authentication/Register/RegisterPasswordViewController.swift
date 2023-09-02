@@ -25,12 +25,18 @@ class RegisterPasswordViewController: KeyboardViewController {
             make.top.equalTo(super.navigationView.snp.bottom)
         }
         registerPWView.preVC = self
+        registerPWView.registerButtonKeyboard.isEnabled = false
         registerPWView.registerButton.isEnabled = false
+        
         registerPWView.pwTextField.addTarget(self, action: #selector(pwTextFieldEditingChanged(_:)), for: .editingChanged)
+        registerPWView.registerButtonKeyboard.addTarget(self, action: #selector(registerButtonDidTap), for: .touchUpInside)
         registerPWView.registerButton.addTarget(self, action: #selector(registerButtonDidTap), for: .touchUpInside)
         
         super.textfield = registerPWView.pwTextField
-        if !UIDevice.current.hasNotch {registerPWView.stack.isHidden = true}
+        if !UIDevice.current.hasNotch {registerPWView.stackKeyboard.isHidden = true}
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        registerPWView.pwTextField.becomeFirstResponder()
     }
 }
 extension RegisterPasswordViewController {
@@ -44,7 +50,14 @@ extension RegisterPasswordViewController {
     }
     @objc func registerButtonDidTap() {
         UIDevice.vibrate()
-        let lottieView = registerPWView.registerButton.setLottieView()
+        
+        var lottieView: LottieAnimationView!
+        if registerPWView.pwTextField.isFirstResponder {
+            lottieView = registerPWView.registerButtonKeyboard.setLottieView()
+        } else {
+            lottieView = registerPWView.registerButton.setLottieView()
+        }
+        
         lottieView.play { completion in
             self.view.endEditing(true)
             let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
@@ -56,6 +69,7 @@ extension RegisterPasswordViewController {
     func checkValidPW(_ pw: String) {
         let isValid = self.pw.checkPassword()
         
+        registerPWView.registerButtonKeyboard.isActivate = isValid ? true : false
         registerPWView.registerButton.isActivate = isValid ? true : false
         registerPWView.errorMessage.isHidden = isValid ? true : false
     }
@@ -71,21 +85,8 @@ extension RegisterPasswordViewController {
         UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
         UserDefaults.standard.set(true, forKey: "isFirstLogin")
         UserDefaults.standard.set(tempNickname, forKey: "tempNickname")
-        
-//         FCM
-//        sendFCM()
+  
         // go main
         ScreenManager().goMain(self)
     }
-//    // MARK: FCM API
-//    func sendFCM() {
-//        // Send FCM token to server
-//        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
-//        print("device Token:", deviceToken)
-//        let fcmInput = FCMInput(fcm_token: deviceToken)
-//        FCMDataManager().fcmDataManager(fcmInput, self)
-//    }
-//    func fcmAPISuccess(_ result: APIModel<TokenResultModel>) {
-//        print(result.message)
-//    }
 }

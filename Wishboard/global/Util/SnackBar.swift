@@ -48,11 +48,19 @@ class SnackBar {
             UIView.animate(withDuration: 0.5) {
                 self.backgroundView.transform = CGAffineTransform(translationX: 0, y: -81)
             } completion: { finished in
-                UIView.animate(withDuration: 0.5, delay: 2.5) {
-                    self.backgroundView.transform = .identity
-                } completion: { finish in
-                    if (originView.extensionContext != nil) && (message == .addItem) {
+                // 만약 링크공유일 때: 스낵바가 올라오고 창과 함께 닫힌다.
+                if (originView.extensionContext != nil) && (message == .addItem) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                         originView.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
+                    }
+                } else {
+                    // 일반 스낵바: 2.5초 후 0.5동안 내려간다.
+                    UIView.animate(withDuration: 0.5, delay: 2.5) {
+                        self.backgroundView.transform = .identity
+                    } completion: { finish in
+                        if (originView.extensionContext != nil) && (message == .addItem) {
+                            originView.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
+                        }
                     }
                 }
             }

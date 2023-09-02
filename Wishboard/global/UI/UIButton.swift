@@ -29,6 +29,10 @@ extension UIButton {
         setAttributedTitle(attributedString, for: .normal)
     }
     func setUnderline(_ title: String, _ color: UIColor, _ font: UIFont) {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.maximumLineHeight = 16.0
+        paragraphStyle.minimumLineHeight = 16.0
+        
         let attributedString = NSMutableAttributedString(string: title)
         attributedString.addAttribute(.underlineStyle,
                                       value: NSUnderlineStyle.single.rawValue,
@@ -36,6 +40,8 @@ extension UIButton {
         )
         attributedString.addAttribute(.font, value: font, range: NSRange(location: 0, length: title.count))
         attributedString.addAttribute(.foregroundColor, value: color, range: NSRange(location: 0, length: title.count))
+        attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: title.count))
+        
         setAttributedTitle(attributedString, for: .normal)
     }
     // MARK: Cart Button

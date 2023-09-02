@@ -28,7 +28,8 @@ class FolderDataManager {
         AF.request(BaseURL + "/folder/list",
                            method: .get,
                            parameters: nil,
-                           headers: header)
+                           headers: header,
+                           interceptor: AuthInterceptor(viewcontroller))
             .validate()
             .responseDecodable(of: [FolderListModel].self) { response in
             switch response.result {

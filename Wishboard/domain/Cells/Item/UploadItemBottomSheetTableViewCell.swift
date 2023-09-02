@@ -10,7 +10,7 @@ import UIKit
 class UploadItemBottomSheetTableViewCell: UITableViewCell {
     let subTitle = UILabel().then{
         $0.text = Message.shoppingLink
-        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
         $0.textColor = .green_700
         $0.isHidden = true
     }

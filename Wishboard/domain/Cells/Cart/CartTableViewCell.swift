@@ -102,7 +102,7 @@ class CartTableViewCell: UITableViewCell {
             make.width.height.equalTo(44)
         }
         won.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-10)
+            make.trailing.equalToSuperview().offset(-16)
             make.centerY.equalTo(plusButton)
         }
         priceLabel.snp.makeConstraints { make in

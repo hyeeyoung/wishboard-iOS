@@ -66,7 +66,7 @@ enum Message {
     
     // MARK: Item
     public static let itemNotification = "30분 전에 상품 일정을 알려드려요! 시간은 30분 단위로 설정할 수 있어요."
-    public static let shoppingLink = "복사한 링크로 아이템 정보를 불러올 수 있어요!"
+    public static let shoppingLink = "복사한 링크로 아이템을 불러올 수 있어요!"
     
     public static let onboarding = "흩어져있는 위시리스트를\n위시보드로 간편하게 통합 관리해 보세요!️"
 }
@@ -113,7 +113,7 @@ enum Title {
 
 enum Button {
     // MARK: Authentication
-    public static let login = "로그인 하기"
+    public static let login = "로그인하기"
     public static let getEmail = "인증메일 받기"
     public static let register = "가입하기"
     public static let lostPassword = "비밀번호를 잊으셨나요?"

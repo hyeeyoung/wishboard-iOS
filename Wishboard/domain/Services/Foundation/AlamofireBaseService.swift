@@ -37,6 +37,17 @@ class AlamofireBaseService {
         
         return request
     }
+    /// 토큰이 필요 없는 request
+    func requestWithNoHeader(_ url: String, _ method: HTTPMethod, _ model: Encodable, _ viewcontroller: UIViewController?) -> DataRequest {
+        let request = AF.request(url,
+                   method: method,
+                   parameters: model,
+                   encoder: JSONParameterEncoder.default,
+                   headers: nil)
+        .validate()
+        
+        return request
+    }
     
     // MARK: - Response
     /// 서버 응답값
