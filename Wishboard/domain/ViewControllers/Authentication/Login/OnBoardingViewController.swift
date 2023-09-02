@@ -41,7 +41,7 @@ class OnBoardingViewController: UIViewController {
     func checkRememberMe() {
         if let token = UserManager.accessToken {
             // go Main
-            ScreenManager().goMain(self)
+            ScreenManager.shared.goMain(self)
         }
     }
 }
@@ -74,7 +74,7 @@ extension OnBoardingViewController {
     }
     @objc func appNoticeButtonDidTap() {
         // 인스타그램 이동
-        ScreenManager().linkTo(viewcontroller: self, "https://www.instagram.com/p/CtN6KfUPqbI/?igshid=NTc4MTIwNjQ2YQ==")
+        ScreenManager.shared.linkTo(viewcontroller: self, "https://www.instagram.com/p/CtN6KfUPqbI/?igshid=NTc4MTIwNjQ2YQ==")
     }
     @objc func exitButtonDidTap() {
         // 애니메이션을 주어 앱 종료시키기

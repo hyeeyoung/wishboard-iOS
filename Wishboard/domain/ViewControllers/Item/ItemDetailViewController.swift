@@ -12,8 +12,6 @@ class ItemDetailViewController: UIViewController {
     var itemDetailView: ItemDetailView!
     var itemId: Int!
     var wishListData: WishListModel!
-    var preVC: UIViewController!
-    var isDeleted: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,17 +35,7 @@ class ItemDetailViewController: UIViewController {
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        if isDeleted {
-            guard let preVC = self.preVC else {return}
-            switch preVC {
-            case is HomeViewController:
-                break
-            default:
-                SnackBar(preVC, message: .deleteItem)
-            }
-        }
-    }
+    
     // MARK: - Actions
     @objc func goBack() {
         UIDevice.vibrate()
@@ -110,7 +98,7 @@ extension ItemDetailViewController {
     @objc func linkButtonDidTap() {
         UIDevice.vibrate()
         guard let urlStr = self.wishListData.item_url else {return}
-        ScreenManager().linkTo(viewcontroller: self, urlStr)
+        ScreenManager.shared.linkTo(viewcontroller: self, urlStr)
     }
 }
 // MARK: - TableView delegate
@@ -137,22 +125,13 @@ extension ItemDetailViewController {
     // MARK: 아이템 삭제
     func deleteItemAPISuccess() {
         self.dismiss(animated: false)
-        self.isDeleted = true
         
-        guard let preVC = self.preVC else {return}
-        switch preVC {
-        case is HomeViewController:
-            ScreenManager().goMainPages(0, self, family: .itemDeleted)
-            break
-        default:
-            self.navigationController?.popViewController(animated: true)
-        }
-        // home o cart x folderdetail x calender x
-        
+        let observer = WishListObserver.shared
+        observer.notify(.delete)
+        self.navigationController?.popViewController(animated: true)
     }
     func deleteItemAPIFail429() {
         self.dismiss(animated: false)
-        self.isDeleted = false
     }
     // MARK: 아이템 상세 조회
     func getItemDetailAPISuccess(_ result: WishListModel) {

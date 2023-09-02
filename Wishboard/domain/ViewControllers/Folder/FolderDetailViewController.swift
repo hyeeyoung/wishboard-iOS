@@ -7,7 +7,8 @@
 
 import UIKit
 
-class FolderDetailViewController: TitleCenterViewController {
+class FolderDetailViewController: TitleCenterViewController, Observer {
+    var observer = WishListObserver.shared
     // MARK: - View
     let emptyMessage = EmptyMessage.item
     // MARK: - Life Cycles
@@ -27,16 +28,18 @@ class FolderDetailViewController: TitleCenterViewController {
 
         // DATA
         if let folderName = self.folderName {super.navigationTitle.text = folderName}
-        if let folderId = self.folderId {
-            FolderDataManager().getFolderDetailDataManager(self.folderId, self)
-        }
+        FolderDataManager().getFolderDetailDataManager(self.folderId, self)
+        
+        observer.bind(self)
         
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
-        // DATA
-        if let folderName = self.folderName {super.navigationTitle.text = folderName}
-        if let folderId = self.folderId {
+    }
+    
+    func update(_ newValue: Any) {
+        if let usecase = newValue as? WishListUseCase, usecase == .delete {
+            SnackBar(self, message: .deleteItem)
             FolderDataManager().getFolderDetailDataManager(self.folderId, self)
         }
     }
@@ -99,7 +102,6 @@ extension FolderDetailViewController: UICollectionViewDelegate, UICollectionView
         
         let itemIdx = indexPath.item
         let itemDetailVC = ItemDetailViewController()
-        itemDetailVC.preVC = self
         itemDetailVC.itemId = self.wishListData[itemIdx].item_id
         self.navigationController?.pushViewController(itemDetailVC, animated: true)
     }

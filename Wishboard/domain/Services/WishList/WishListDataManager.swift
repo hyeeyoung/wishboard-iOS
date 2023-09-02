@@ -33,7 +33,7 @@ class WishListDataManager {
                     }
                 case 401:
                     RefreshDataManager().refreshDataManager() {
-                        $0 ? self.wishListDataManager(homeView, viewcontroller) : ScreenManager().goToOnboarding(viewcontroller)
+                        $0 ? self.wishListDataManager(homeView, viewcontroller) : ScreenManager.shared.goToOnboarding(viewcontroller)
                     }
                 case 304:
                     print(error.responseCode, error.localizedDescription)

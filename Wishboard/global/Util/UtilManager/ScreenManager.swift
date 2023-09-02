@@ -10,27 +10,41 @@ import UIKit
 import SafariServices
 
 class ScreenManager {
+    static let shared = ScreenManager()
+    private let tabBarController: UITabBarController
+
+    private init() {
+        guard let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabBarViewController") as? UITabBarController else {fatalError()}
+        self.tabBarController = tabBarController
+    }
+    
     enum Family: String {
         case itemDeleted, profileModified, passwordModified, itemUpload, itemModified
     }
     func goMain(_ viewcontroller: UIViewController) {
         // 첫화면으로 전환
-        guard let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabBarViewController") as? UITabBarController else {return}
-        viewcontroller.navigationController?.pushViewController(tabBarController, animated: true)
-//        viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
+        let tbc = tabBarController
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(tbc, animated: true)
+//        viewcontroller.navigationController?.pushViewController(tabBarController, animated: true)
     }
     func goMainPages(_ index: Int, _ viewcontroller: UIViewController) {
-        guard let tabBarController = viewcontroller.tabBarController else {return}
-        tabBarController.selectedIndex = index
-        tabBarController.modalPresentationStyle = .fullScreen
-        viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
+        let tbc = tabBarController
+        tbc.selectedIndex = index
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(tbc, animated: true)
+//        guard let tabBarController = viewcontroller.tabBarController else {return}
+//        tabBarController.selectedIndex = index
+//        tabBarController.modalPresentationStyle = .fullScreen
+//        viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
     }
     // tabBar가 없는 뷰에서 메인으로 이동할 때
     func goMainPages(_ index: Int, _ viewcontroller: UIViewController, family: Family) {
-        guard let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabBarViewController") as? UITabBarController else {return}
-        tabBarController.selectedIndex = index
-        tabBarController.modalPresentationStyle = .fullScreen
-        viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
+        let tbc = tabBarController
+        tbc.selectedIndex = index
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(tbc, animated: true)
+//        guard let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabBarViewController") as? UITabBarController else {return}
+//        tabBarController.selectedIndex = index
+//        tabBarController.modalPresentationStyle = .fullScreen
+//        viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
         
         switch family {
             case .itemDeleted:

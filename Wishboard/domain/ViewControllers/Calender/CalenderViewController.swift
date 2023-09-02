@@ -8,7 +8,9 @@
 import UIKit
 import FSCalendar
 
-class CalenderViewController: UIViewController {
+class CalenderViewController: UIViewController, Observer {
+    var observer = WishListObserver.shared
+    
     var calenderView: CalenderView!
     var selectedDate: String!
     var calenderData: [NotificationModel] = []
@@ -36,12 +38,20 @@ class CalenderViewController: UIViewController {
         calenderView.setTableView(dataSourceDelegate: self)
         calenderView.setUpView()
         calenderView.setUpConstraint()
+        
+        // DATA
+        DispatchQueue.main.async {
+            NotificationDataManager().getCalenderNotificationDataManager(self)
+        }
+        
+        observer.bind(self)
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
-        // DATA
+    }
+    func update(_ newValue: Any) {
         DispatchQueue.main.async {
             NotificationDataManager().getCalenderNotificationDataManager(self)
         }
@@ -99,7 +109,6 @@ extension CalenderViewController: UITableViewDelegate, UITableViewDataSource {
         let itemIdx = indexPath.item
         if itemIdx != 0 && itemIdx != 1 {
             let vc = ItemDetailViewController()
-            vc.preVC = self
             vc.itemId = self.notiData[itemIdx - 2].item_id
             self.navigationController?.pushViewController(vc, animated: true)
         }

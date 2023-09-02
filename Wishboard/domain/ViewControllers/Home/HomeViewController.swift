@@ -7,8 +7,9 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, Observer {
     var homeView: HomeView!
+    var observer = WishListObserver.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,15 +36,22 @@ class HomeViewController: UIViewController {
         
         self.homeView.cartButton.addTarget(self, action: #selector(goToCart), for: .touchUpInside)
         self.homeView.calenderButton.addTarget(self, action: #selector(goCalenderDidTap), for: .touchUpInside)
-//        // DATA
-//        WishListDataManager().wishListDataManager(self.homeView, self)
+        
+        observer.bind(self)
+        
+        // DATA
+        WishListDataManager().wishListDataManager(self.homeView, self)
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
-        // DATA
-        WishListDataManager().wishListDataManager(self.homeView, self)
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
+    }
+    func update(_ newValue: Any) {
+        if let usecase = newValue as? WishListUseCase, usecase == .delete {
+            SnackBar(self, message: .deleteItem)
+            WishListDataManager().wishListDataManager(self.homeView, self)
+        }
     }
     // MARK: - Actions & Functions
     @objc func goToCart() {

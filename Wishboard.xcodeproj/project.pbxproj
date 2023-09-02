@@ -184,6 +184,11 @@
 		23C956A128C68F9400D88536 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C956A028C68F9400D88536 /* LoginViewController.swift */; };
 		23CB5C462AA31DA5007A0900 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB5C452AA31DA5007A0900 /* UserManager.swift */; };
 		23CB5C472AA33E4B007A0900 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB5C452AA31DA5007A0900 /* UserManager.swift */; };
+		23CB5C492AA34A5B007A0900 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB5C482AA34A5B007A0900 /* Observer.swift */; };
+		23CB5C4B2AA34A74007A0900 /* UserObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB5C4A2AA34A74007A0900 /* UserObserver.swift */; };
+		23CB5C4D2AA34A99007A0900 /* ItemLinkOberver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB5C4C2AA34A99007A0900 /* ItemLinkOberver.swift */; };
+		23CB5C4F2AA34B37007A0900 /* WishListObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB5C4E2AA34B37007A0900 /* WishListObserver.swift */; };
+		23CB5C502AA34B40007A0900 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB5C482AA34A5B007A0900 /* Observer.swift */; };
 		23CBAFDC28DFDF8500B41513 /* NewFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CBAFDB28DFDF8500B41513 /* NewFolderViewController.swift */; };
 		23CF158628FD630E000D012F /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CF158528FD630E000D012F /* UIDevice.swift */; };
 		23D0824E28E4DC3A00CE541E /* ItemDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D0824D28E4DC3A00CE541E /* ItemDataManager.swift */; };
@@ -412,6 +417,10 @@
 		23C9569628C68D7A00D88536 /* SUIT-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-SemiBold.ttf"; sourceTree = "<group>"; };
 		23C956A028C68F9400D88536 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		23CB5C452AA31DA5007A0900 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		23CB5C482AA34A5B007A0900 /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
+		23CB5C4A2AA34A74007A0900 /* UserObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObserver.swift; sourceTree = "<group>"; };
+		23CB5C4C2AA34A99007A0900 /* ItemLinkOberver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemLinkOberver.swift; sourceTree = "<group>"; };
+		23CB5C4E2AA34B37007A0900 /* WishListObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListObserver.swift; sourceTree = "<group>"; };
 		23CBAFDB28DFDF8500B41513 /* NewFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFolderViewController.swift; sourceTree = "<group>"; };
 		23CF158528FD630E000D012F /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		23D0824D28E4DC3A00CE541E /* ItemDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDataManager.swift; sourceTree = "<group>"; };
@@ -1115,6 +1124,10 @@
 			isa = PBXGroup;
 			children = (
 				23D5518828C6B02400D81B5F /* Observable.swift */,
+				23CB5C482AA34A5B007A0900 /* Observer.swift */,
+				23CB5C4A2AA34A74007A0900 /* UserObserver.swift */,
+				23CB5C4C2AA34A99007A0900 /* ItemLinkOberver.swift */,
+				23CB5C4E2AA34B37007A0900 /* WishListObserver.swift */,
 			);
 			path = Observable;
 			sourceTree = "<group>";
@@ -1822,6 +1835,7 @@
 				236FE92228DF8592006142DB /* UITextField.swift in Sources */,
 				236FE91D28DF8592006142DB /* PaddingLabel.swift in Sources */,
 				23E0ACC828E7B563008C35C2 /* KeyboardViewController.swift in Sources */,
+				23CB5C502AA34B40007A0900 /* Observer.swift in Sources */,
 				235129DA28F67BAE00489CAD /* BottomSheetKeyboardViewController.swift in Sources */,
 				23F1F21C293D7E7D0074C4D0 /* UILabel.swift in Sources */,
 				23B351852A6CF9D600FD7A14 /* RefreshInput.swift in Sources */,
@@ -1873,6 +1887,7 @@
 				23134D3D29B2216700238536 /* RefreshInput.swift in Sources */,
 				2344949B28D78F7000CF3BD9 /* RegisterPasswordView.swift in Sources */,
 				2364B7A829D40F8F006459EF /* ModifyPasswordView.swift in Sources */,
+				23CB5C4D2AA34A99007A0900 /* ItemLinkOberver.swift in Sources */,
 				23C2378628C9CEE800CE3200 /* FolderView.swift in Sources */,
 				233C34C229C75B95005DFA39 /* UserService.swift in Sources */,
 				23F69CB128CC1819001B8C7F /* UIView.swift in Sources */,
@@ -1919,6 +1934,7 @@
 				23D5518728C6AFFF00D81B5F /* LoginViewModel.swift in Sources */,
 				232174E828E1D4AF008C155D /* LoginInput.swift in Sources */,
 				23EC504628E2664D00AAA57E /* APIManager.swift in Sources */,
+				23CB5C492AA34A5B007A0900 /* Observer.swift in Sources */,
 				238AA72B29CD720D0086DF76 /* ItemRouter.swift in Sources */,
 				234F837928C9629800C4EB41 /* HomeView.swift in Sources */,
 				2360096028DA2297001FB107 /* EmptyView.swift in Sources */,
@@ -1983,6 +1999,7 @@
 				2339D4F928E3CCE300E636FD /* FolderDataManager.swift in Sources */,
 				23DC04EB28C591F400ABB0CF /* OnBoardingViewController.swift in Sources */,
 				23BB603528E2709C007EA1EF /* ModifyProfileInput.swift in Sources */,
+				23CB5C4F2AA34B37007A0900 /* WishListObserver.swift in Sources */,
 				23E0ACC728E7A767008C35C2 /* UILabel.swift in Sources */,
 				23C2378B28C9CF1D00CE3200 /* FolderCollectionViewCell.swift in Sources */,
 				233C34C429C7602D005DFA39 /* MoyaLoggerPlugin.swift in Sources */,
@@ -1998,6 +2015,7 @@
 				230192BB2A30669200B30B0E /* DefaultLabel.swift in Sources */,
 				237478A028D1FF0400CF941A /* SetFolderBottomSheetView.swift in Sources */,
 				233CDED328E4FE0A004E12BC /* UploadItemInput.swift in Sources */,
+				23CB5C4B2AA34A74007A0900 /* UserObserver.swift in Sources */,
 				233C34C029C75B7F005DFA39 /* UserRouter.swift in Sources */,
 				2344949728D78AB500CF3BD9 /* RegisterEmailView.swift in Sources */,
 				23C3113728DF633D00A636F6 /* APIModel.swift in Sources */,

@@ -461,12 +461,12 @@ extension UploadItemViewController {
                         print("아이템 등록 성공 by moya:", data.message)
                         self.lottieView.stop()
                         self.viewDidLoad()
-                        ScreenManager().goMainPages(0, self, family: .itemUpload)
+                        ScreenManager.shared.goMainPages(0, self, family: .itemUpload)
                     }
                     break
             case .failure(let error):
                 self.viewDidLoad()
-                ScreenManager().goMainPages(0, self, family: .itemUpload)
+                ScreenManager.shared.goMainPages(0, self, family: .itemUpload)
                 print("moya item upload error", error.localizedDescription)
             default:
                 print("default error")

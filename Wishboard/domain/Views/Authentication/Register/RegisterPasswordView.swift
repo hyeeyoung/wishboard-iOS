@@ -58,7 +58,7 @@ class RegisterPasswordView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     @objc func terClicked() {
-        ScreenManager().linkTo(viewcontroller: preVC, "\(Storage().BaseURL)/terms.html")
+        ScreenManager.shared.linkTo(viewcontroller: preVC, "\(Storage().BaseURL)/terms.html")
     }
     // MARK: - Functions
     func setUpView() {

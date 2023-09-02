@@ -204,7 +204,6 @@ extension CartView {
         UIDevice.vibrate()
         guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
         let vc = ItemDetailViewController()
-        vc.preVC = self.preVC
         vc.itemId = itemId
         self.preVC.navigationController?.pushViewController(vc, animated: true)
     }
