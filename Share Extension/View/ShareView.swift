@@ -32,7 +32,7 @@ class ShareView: UIView {
     }
     let itemPriceTextField = UITextField().then{
         $0.borderStyle = .none
-        $0.font = TypoStyle.MontserratB1.font
+        $0.font = UIFont.monteserrat(size: 14, family: .Bold)
         $0.keyboardType = .numberPad
         $0.textAlignment = .center
         $0.placeholder = Placeholder.shareItemPrice
