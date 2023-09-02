@@ -21,7 +21,6 @@ class RegisterPasswordView: UIView {
         $0.numberOfLines = 0
     }
     var pwTextField = DefaultTextField(Placeholder.password).then{
-        $0.becomeFirstResponder()
         $0.isSecureTextEntry = true
     }
     let errorMessage = UILabel().then{
@@ -99,7 +98,6 @@ class RegisterPasswordView: UIView {
         registerButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(48)
-            // TODO: 하단 여백 Check
             make.bottom.equalToSuperview().inset(34)
         }
         stack.snp.makeConstraints { make in

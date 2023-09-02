@@ -35,6 +35,9 @@ class RegisterPasswordViewController: KeyboardViewController {
         super.textfield = registerPWView.pwTextField
         if !UIDevice.current.hasNotch {registerPWView.stackKeyboard.isHidden = true}
     }
+    override func viewDidAppear(_ animated: Bool) {
+        registerPWView.pwTextField.becomeFirstResponder()
+    }
 }
 extension RegisterPasswordViewController {
     // MARK: - Actions
