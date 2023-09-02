@@ -100,7 +100,7 @@ class LoginView: UIView {
             make.top.equalTo(passwordLabel.snp.bottom).offset(8)
         }
         self.lostPasswordButton.snp.makeConstraints { make in
-            make.height.equalTo(20)
+            make.height.equalTo(16)
             make.leading.trailing.equalToSuperview().inset(20)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-34)
@@ -113,7 +113,7 @@ class LoginView: UIView {
         }
         // keyboard button
         self.lostPasswordButtonKeyboard.snp.makeConstraints { make in
-            make.height.equalTo(20)
+            make.height.equalTo(16)
             make.leading.trailing.equalToSuperview().inset(20)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-16)

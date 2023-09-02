@@ -30,8 +30,8 @@ extension UIButton {
     }
     func setUnderline(_ title: String, _ color: UIColor, _ font: UIFont) {
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.maximumLineHeight = 14.0
-        paragraphStyle.minimumLineHeight = 14.0
+        paragraphStyle.maximumLineHeight = 16.0
+        paragraphStyle.minimumLineHeight = 16.0
         
         let attributedString = NSMutableAttributedString(string: title)
         attributedString.addAttribute(.underlineStyle,
