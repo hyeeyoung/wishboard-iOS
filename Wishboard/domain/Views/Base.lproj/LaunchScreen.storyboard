@@ -22,7 +22,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ma9-GN-miP">
                                 <rect key="frame" x="75.5" y="501" width="158.5" height="36"/>
                                 <string key="text">Version: 1.1.1 (dev)
-BuildVersion: 202308271809
+BuildVersion: 202309021450
 Server: http://3.39.165.250:3000</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

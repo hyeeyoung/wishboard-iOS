@@ -108,7 +108,7 @@ extension OnBoardingViewController {
            
             if comparisonResult == .orderedAscending {
                 // 앱 스토어 버전이 더 높음, 업데이트 알림
-                let dialog = PopUpViewController(titleText: "업데이트 안내", messageText: "위시보드가 유저분들에게 더 나은 경험을\n제공하기 위해 사용성을 개선했어요!\n더 새로워진 위시보드를 만나보세요 😆", greenBtnText: "나중에", blackBtnText: "업데이트")
+                let dialog = PopUpViewController(titleText: "업데이트 안내", messageText: "위시보드가 유저분들에게 더 나은 경험을\n제공하기 위해 사용성을 개선했어요!\n더 새로워진 위시보드를 만나보세요 😆", greenBtnText: "업데이트", blackBtnText: "나중에")
                 dialog.modalPresentationStyle = .overFullScreen
                 self.present(dialog, animated: false, completion: nil)
                 
