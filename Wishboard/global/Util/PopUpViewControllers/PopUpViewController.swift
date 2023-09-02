@@ -7,13 +7,20 @@
 
 import UIKit
 
+struct PopUpModel {
+    let title: String
+    let message: String
+    let greenBtnText: String?
+    let blackBtnText: String?
+}
+
 // Default 팝업창
 class PopUpViewController: UIViewController {
     // MARK: - Properties
-    private var titleText: String?
-    private var messageText: String?
-    private var greenBtnText: String?
-    private var blackBtnText: String?
+    private var titleText: String!
+    private var messageText: String!
+    private var greenBtnText: String!
+    private var blackBtnText: String!
     
     let popupView = UIView().then{
         $0.backgroundColor = .white
@@ -40,20 +47,19 @@ class PopUpViewController: UIViewController {
     var cancelBtn: UIButton!
     var okBtn: UIButton!
     // MARK: - Life Cycles
-    convenience init(titleText: String? = nil,
-                     messageText: String? = nil,
-                     greenBtnText: String? = nil,
-                     blackBtnText: String? = nil) {
+    convenience init(_ model: PopUpModel) {
         self.init()
-
-        self.titleText = titleText
-        self.messageText = messageText
-        self.greenBtnText = greenBtnText
-        self.blackBtnText = blackBtnText
+        
+        self.titleText = model.title
+        self.messageText = model.message
+        self.greenBtnText = model.greenBtnText ?? ""
+        self.blackBtnText = model.blackBtnText ?? ""
         
         setUpContent()
         setUpView()
         setUpConstraint()
+        
+        modalPresentationStyle = .overFullScreen
     }
     override func viewDidLoad() {
         super.viewDidLoad()

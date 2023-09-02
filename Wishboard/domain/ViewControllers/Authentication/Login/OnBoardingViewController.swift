@@ -62,8 +62,11 @@ extension OnBoardingViewController {
     }
     /// 서버 이전 등의 이슈로 안내 알럿창을 띄워야할 때
     private func showServiceInspectionAlert() {
-        let dialog = PopUpViewController(titleText: "서비스 일시 중단 안내", messageText: " 서버 이전으로 서비스가\n일시 중단되오니 양해 부탁드립니다.\n보다 안정적인 위시보드로 곧 돌아올게요!\n자세한 사항은 공지사항을 확인해 주세요 😉", greenBtnText: "공지사항 확인", blackBtnText: "앱 종료")
-        dialog.modalPresentationStyle = .overFullScreen
+        let model = PopUpModel(title: "서비스 일시 중단 안내",
+                               message: "서버 이전으로 서비스가\n일시 중단되오니 양해 부탁드립니다.\n보다 안정적인 위시보드로 곧 돌아올게요!\n자세한 사항은 공지사항을 확인해 주세요 😉",
+                               greenBtnText: "공지사항 확인",
+                               blackBtnText: "앱 종료")
+        let dialog = PopUpViewController(model)
         self.present(dialog, animated: false, completion: nil)
 
         dialog.cancelBtn.addTarget(self, action: #selector(appNoticeButtonDidTap), for: .touchUpInside)
@@ -103,8 +106,11 @@ extension OnBoardingViewController {
            
             if comparisonResult == .orderedAscending {
                 // 앱 스토어 버전이 더 높음, 업데이트 알림
-                let dialog = PopUpViewController(titleText: "업데이트 안내", messageText: "위시보드가 유저분들에게 더 나은 경험을\n제공하기 위해 사용성을 개선했어요!\n더 새로워진 위시보드를 만나보세요 😆", greenBtnText: "업데이트", blackBtnText: "나중에")
-                dialog.modalPresentationStyle = .overFullScreen
+                let model = PopUpModel(title: "업데이트 안내",
+                                       message: "위시보드가 유저분들에게 더 나은 경험을\n제공하기 위해 사용성을 개선했어요!\n더 새로워진 위시보드를 만나보세요 😆",
+                                       greenBtnText: "업데이트",
+                                       blackBtnText: "나중에")
+                let dialog = PopUpViewController(model)
                 self.present(dialog, animated: false, completion: nil)
                 
                 dialog.cancelBtn.addTarget(self, action: #selector(appUpdateButtonDidTap), for: .touchUpInside)

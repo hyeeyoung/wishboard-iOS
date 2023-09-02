@@ -63,7 +63,7 @@ class UserManager {
     static var tempNickname: String?
     
     
-    
+    /// 사용자 데이터 삭제 (로그아웃, 탈퇴)
     static func removeUserData() {
         UserDefaults.standard.removeObject(forKey: "accessToken")
         UserDefaults.standard.removeObject(forKey: "refreshToken")

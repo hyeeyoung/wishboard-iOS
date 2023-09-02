@@ -213,8 +213,11 @@ extension MyPageViewController {
     }
     // 로그아웃 팝업창
     func showLogoutDialog() {
-        let dialog = PopUpViewController(titleText: "로그아웃", messageText: "정말 로그아웃 하시겠어요?", greenBtnText: "취소", blackBtnText: "로그아웃")
-        dialog.modalPresentationStyle = .overFullScreen
+        let model = PopUpModel(title: "로그아웃",
+                               message: "정말 로그아웃 하시겠어요?",
+                               greenBtnText: "취소",
+                               blackBtnText: "로그아웃")
+        let dialog = PopUpViewController(model)
         self.present(dialog, animated: false, completion: nil)
         
         dialog.okBtn.addTarget(self, action: #selector(logoutButtonDidTap), for: .touchUpInside)

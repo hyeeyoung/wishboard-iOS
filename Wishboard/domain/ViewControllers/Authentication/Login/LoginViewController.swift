@@ -92,17 +92,18 @@ extension LoginViewController {
             switch result {
                 case .success(let data):
                 if data.success {
-                    print("로그인 성공 by moya")
+                    print("로그인 성공 by moya", data.data)
                     let accessToken = data.data?.token.accessToken
                     let refreshToken = data.data?.token.refreshToken
-                    let tempNickname = data.data?.tempNickname
                     
                     UserManager.accessToken = accessToken
                     UserManager.refreshToken = refreshToken
                     UserManager.isFirstLogin = false
                     UserManager.email = self.loginViewModel.email
                     UserManager.password = self.loginViewModel.password
-                    UserManager.tempNickname = tempNickname
+                    if let tempNickname = data.data?.tempNickname {
+                        UserManager.tempNickname = tempNickname
+                    }
                     
                     let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
                     defaults?.set(accessToken, forKey: "accessToken")

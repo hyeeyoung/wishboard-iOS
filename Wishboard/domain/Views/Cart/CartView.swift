@@ -182,8 +182,11 @@ extension CartView {
     // (X) 버튼 클릭
     @objc func deleteButtonDidTap(_ sender: CartGesture) {
         UIDevice.vibrate()
-        let dialog = PopUpViewController(titleText: "장바구니에서 삭제", messageText: "정말 장바구니에서 아이템을 삭제하시겠어요?", greenBtnText: "취소", blackBtnText: "삭제")
-        dialog.modalPresentationStyle = .overFullScreen
+        let model = PopUpModel(title: "장바구니에서 삭제",
+                               message: "정말 장바구니에서 아이템을 삭제하시겠어요?",
+                               greenBtnText: "취소",
+                               blackBtnText: "삭제")
+        let dialog = PopUpViewController(model)
         self.preVC.present(dialog, animated: false, completion: nil)
         
         let deleteGesture = CartGesture(target: self, action: #selector(deleteItem(_:)))

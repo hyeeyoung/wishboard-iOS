@@ -79,12 +79,13 @@ extension RegisterPasswordViewController {
     func registerAPISuccess(_ result: APIModel<TokenResultModel>) {
         let accessToken = result.data?.token.accessToken
         let refreshToken = result.data?.token.refreshToken
-        let tempNickname = result.data?.tempNickname
         
         UserManager.accessToken = accessToken
         UserManager.refreshToken = refreshToken
         UserManager.isFirstLogin = true
-        UserManager.tempNickname = tempNickname
+        if let tempNickname = result.data?.tempNickname {
+            UserManager.tempNickname = tempNickname
+        }
   
         // go main
         ScreenManager().goMain(self)

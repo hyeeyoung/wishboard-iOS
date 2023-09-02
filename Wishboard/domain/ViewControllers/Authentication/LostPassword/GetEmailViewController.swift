@@ -107,13 +107,14 @@ extension GetEmailViewController {
         let accessToken = result.data?.token.accessToken
         let refreshToken = result.data?.token.refreshToken
         let email = self.email
-        let tempNickname = result.data?.tempNickname
         
         UserManager.accessToken = accessToken
         UserManager.refreshToken = refreshToken
         UserManager.isFirstLogin = false
         UserManager.email = email
-        UserManager.tempNickname = tempNickname
+        if let tempNickname = result.data?.tempNickname {
+            UserManager.tempNickname = tempNickname
+        }
         
         ScreenManager().goMain(self)
         
