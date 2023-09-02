@@ -23,6 +23,7 @@ class LostPasswordViewController: KeyboardViewController {
             make.top.equalTo(super.navigationView.snp.bottom)
         }
         lostPasswordView.emailTextField.addTarget(self, action: #selector(emailTextFieldEditingChanged(_:)), for: .editingChanged)
+        lostPasswordView.getEmailButtonKeyboard.addTarget(self, action: #selector(getEmailButtonDidTap), for: .touchUpInside)
         lostPasswordView.getEmailButton.addTarget(self, action: #selector(getEmailButtonDidTap), for: .touchUpInside)
         
         super.textfield = lostPasswordView.emailTextField
@@ -47,9 +48,11 @@ class LostPasswordViewController: KeyboardViewController {
     func checkValidEmail(_ email: String) {
         let isValid = self.email.checkEmail()
         if isValid {
+            self.lostPasswordView.getEmailButtonKeyboard.isActivate = true
             self.lostPasswordView.getEmailButton.isActivate = true
             self.lostPasswordView.errorMessage.isHidden = true
         } else {
+            self.lostPasswordView.getEmailButtonKeyboard.isActivate = false
             self.lostPasswordView.getEmailButton.isActivate = false
             self.lostPasswordView.errorMessage.text = ErrorMessage.email
             self.lostPasswordView.errorMessage.isHidden = false
@@ -72,6 +75,7 @@ extension LostPasswordViewController {
         self.lostPasswordView.errorMessage.text = ErrorMessage.nonExistAccount
         self.lostPasswordView.errorMessage.isHidden = false
         
+        self.lostPasswordView.getEmailButtonKeyboard.isActivate = false
         self.lostPasswordView.getEmailButton.isActivate = false
     }
 }

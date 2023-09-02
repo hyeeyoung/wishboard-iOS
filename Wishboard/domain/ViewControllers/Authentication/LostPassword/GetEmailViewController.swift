@@ -10,12 +10,14 @@ import Lottie
 
 class GetEmailViewController: KeyboardViewController {
     var getEmailView: GetEmailView!
-    var isValidTime: Bool = true
+    var lottieView: LottieAnimationView!
+    
     // 인증번호 Properties
     var authCode: String?
     var code: String = ""
     var email: String?
     // Timer Properties
+    var isValidTime: Bool = true
     var timer: Timer!
     let timeSelector: Selector = #selector(updateTime)
     let interval = 1.0
@@ -39,6 +41,7 @@ extension GetEmailViewController {
         }
         
         getEmailView.codeTextField.addTarget(self, action: #selector(codeTextFieldEditingChanged(_:)), for: .editingChanged)
+        getEmailView.loginButtonKeyboard.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
         getEmailView.loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
         
         super.textfield = getEmailView.codeTextField
@@ -59,9 +62,10 @@ extension GetEmailViewController {
         UIDevice.vibrate()
         if self.code != self.authCode {
             getEmailView.messageLabel.isHidden = false
+            self.getEmailView.loginButtonKeyboard.isActivate = false
             self.getEmailView.loginButton.isActivate = false
         } else {
-            let lottieView = getEmailView.loginButton.setLottieView()
+            lottieView = getEmailView.codeTextField.isFirstResponder ? getEmailView.loginButtonKeyboard.setLottieView() : getEmailView.loginButton.setLottieView()
             lottieView.play { completion in
                 let fcmToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
                 let lostPasswordInput = LostPasswordInput(verify: true, email: self.email!, fcmToken: fcmToken)
@@ -89,8 +93,10 @@ extension GetEmailViewController {
         var isValidCode = codeCount > 0 ? true : false
         if isValidCode && self.isValidTime {
             self.getEmailView.messageLabel.isHidden = true
+            self.getEmailView.loginButtonKeyboard.isActivate = true
             self.getEmailView.loginButton.isActivate = true
         } else {
+            self.getEmailView.loginButtonKeyboard.isActivate = false
             self.getEmailView.loginButton.isActivate = false
         }
     }

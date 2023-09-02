@@ -36,6 +36,7 @@ class GetEmailView: UIView {
         $0.numberOfLines = 1
     }
     // 로그인하기 버튼
+    let loginButtonKeyboard = DefaultButton(titleStr: Button.login)
     let loginButton = DefaultButton(titleStr: Button.login)
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
@@ -64,7 +65,9 @@ class GetEmailView: UIView {
         addSubview(messageLabel)
         codeTextField.addSubview(timerLabel)
         
-        accessoryView.addSubview(loginButton)
+        addSubview(loginButton)
+        
+        accessoryView.addSubview(loginButtonKeyboard)
     }
     func setUpConstraint() {
         lockedImage.snp.makeConstraints { make in
@@ -90,6 +93,12 @@ class GetEmailView: UIView {
             make.top.equalTo(codeTextField.snp.bottom).offset(6)
         }
         loginButton.snp.makeConstraints { make in
+            make.height.equalTo(48)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().inset(34)
+        }
+        loginButtonKeyboard.snp.makeConstraints { make in
             make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(16)
             make.centerX.equalToSuperview()
