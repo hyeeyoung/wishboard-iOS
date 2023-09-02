@@ -199,7 +199,7 @@ extension MyPageViewController {
     }
     // 버전 정보 표시 (1.0.0)
     func setVersionLabel(_ cell: UITableViewCell) {
-        let appVersion = UserDefaults.standard.string(forKey: "appVersion") ?? ""
+        let appVersion = UserManager.appVersion
         let versionLabel = UILabel().then{
             $0.text = appVersion
             $0.setTypoStyleWithSingleLine(typoStyle: .MontserratB1)
@@ -248,9 +248,9 @@ extension MyPageViewController: MFMailComposeViewControllerDelegate {
             let compseVC = MFMailComposeViewController()
             compseVC.mailComposeDelegate = self
             
-            let deviceModel = UserDefaults.standard.string(forKey: "deviceModel") ?? ""
-            let osVersion = UserDefaults.standard.string(forKey: "OSVersion") ?? ""
-            let appVersion = UserDefaults.standard.string(forKey: "appVersion") ?? ""
+            let deviceModel = UserManager.deviceModel
+            let osVersion = UserManager.OSVersion
+            let appVersion = UserManager.appVersion
             
             let messageBody = "\nDevice: \(deviceModel)"
                                 + "\nOS Version: \(osVersion)"
@@ -327,14 +327,7 @@ extension MyPageViewController {
     // MARK: 로그아웃 API
     func logoutAPISuccess(_ result: APIModel<ResultModel>) {
         // delete UserInfo
-        UserDefaults.standard.removeObject(forKey: "accessToken")
-        UserDefaults.standard.removeObject(forKey: "refreshToken")
-        UserDefaults.standard.removeObject(forKey: "email")
-        UserDefaults.standard.removeObject(forKey: "password")
-        UserDefaults.standard.set(false, forKey: "isFirstLogin")
-        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "accessToken")
-        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "removeToken")
-        
+        UserManager.removeUserData()
         
         let navigationController = UINavigationController(rootViewController: OnBoardingViewController())
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(navigationController, animated: true)

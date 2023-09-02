@@ -25,11 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         // MARK: BaseURL
         // 개발/릴리즈 URL 비교 후 로그아웃API 호출
-        let prevBaseURL = UserDefaults.standard.string(forKey: "url")
+        let prevBaseURL = UserManager.url
         if prevBaseURL != Storage().BaseURL {
             self.deleteUserInfo()
             // Save URL at app
-            UserDefaults.standard.set(Storage().BaseURL, forKey: "url")
+            UserManager.url = Storage().BaseURL
             // Save URL for Share Extension
             let defaults = UserDefaults(suiteName: Storage().ShareExtension)
             defaults?.set(Storage().BaseURL, forKey: "url")
@@ -44,17 +44,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // MARK: Device Model
         // device model
         let deviceModel = UIDevice.modelName
-        UserDefaults.standard.set(deviceModel, forKey: "deviceModel")
+        UserManager.deviceModel = deviceModel
         // OS version
         var systemVersion = UIDevice.current.systemVersion
-        UserDefaults.standard.set(systemVersion, forKey: "OSVersion")
+        UserManager.OSVersion = systemVersion
         // App version
-        UserDefaults.standard.set(Bundle.appVersion, forKey: "appVersion")
+        UserManager.appVersion = Bundle.appVersion
         // App Build Version
-        let prevBuildVersion = UserDefaults.standard.string(forKey: "appBuildVersion") ?? ""
+        let prevBuildVersion = UserManager.appBuildVersion
         if Bundle.appBuildVersion != prevBuildVersion {
             // Build Version 올라갈 때마다 로그아웃API 호출
-            UserDefaults.standard.set(Bundle.appBuildVersion, forKey: "appBuildVersion")
+            UserManager.appBuildVersion = Bundle.appBuildVersion
             self.deleteUserInfo()
         }
         
@@ -103,11 +103,11 @@ extension AppDelegate {
         print("파이어베이스 토큰: \(fcmToken)")
         
         // 디바이스가 변경되었을 때에만 (기존의 디바이스 토큰과 지금 얻은 디바이스 토큰값이 다를 때에만)
-        let preDeviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
+        let preDeviceToken = UserManager.deviceToken
         if preDeviceToken != fcmToken {
             // 디바이스 토큰 변경 시
             DispatchQueue.main.async {
-                UserDefaults.standard.set(fcmToken, forKey: "deviceToken")
+                UserManager.deviceToken = fcmToken
             }
         } else {
             // 디바이스 토큰 그대로일 때
@@ -133,12 +133,6 @@ extension AppDelegate {
 extension AppDelegate {
     func deleteUserInfo() {
         // delete UserInfo
-        UserDefaults.standard.removeObject(forKey: "accessToken")
-        UserDefaults.standard.removeObject(forKey: "refreshToken")
-        UserDefaults.standard.removeObject(forKey: "email")
-        UserDefaults.standard.removeObject(forKey: "password")
-        UserDefaults.standard.set(false, forKey: "isFirstLogin")
-        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "accessToken")
-        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "refreshToken")
+        UserManager.removeUserData()
     }
 }

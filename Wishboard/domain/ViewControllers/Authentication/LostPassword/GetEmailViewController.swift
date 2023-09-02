@@ -67,7 +67,7 @@ extension GetEmailViewController {
         } else {
             lottieView = getEmailView.codeTextField.isFirstResponder ? getEmailView.loginButtonKeyboard.setLottieView() : getEmailView.loginButton.setLottieView()
             lottieView.play { completion in
-                let fcmToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
+                let fcmToken = UserManager.deviceToken ?? ""
                 let lostPasswordInput = LostPasswordInput(verify: true, email: self.email!, fcmToken: fcmToken)
                 LostPasswordDataManager().verifyCodeDataManager(lostPasswordInput, self)
             }
@@ -109,11 +109,11 @@ extension GetEmailViewController {
         let email = self.email
         let tempNickname = result.data?.tempNickname
         
-        UserDefaults.standard.set(accessToken, forKey: "accessToken")
-        UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
-        UserDefaults.standard.set(false, forKey: "isFirstLogin")
-        UserDefaults.standard.set(email, forKey: "email")
-        UserDefaults.standard.set(tempNickname, forKey: "tempNickname")
+        UserManager.accessToken = accessToken
+        UserManager.refreshToken = refreshToken
+        UserManager.isFirstLogin = false
+        UserManager.email = email
+        UserManager.tempNickname = tempNickname
         
         ScreenManager().goMain(self)
         

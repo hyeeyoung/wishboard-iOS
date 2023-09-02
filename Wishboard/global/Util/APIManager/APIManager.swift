@@ -9,7 +9,7 @@ import Alamofire
 import Kingfisher
 
 class APIManager {
-    let token = UserDefaults.standard.string(forKey: "accessToken") ?? ""
+    let token = UserManager.accessToken ?? ""
     
     func getHeader() -> HTTPHeaders {
         let headers: HTTPHeaders = [

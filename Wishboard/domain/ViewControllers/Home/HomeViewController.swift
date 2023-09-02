@@ -30,7 +30,7 @@ class HomeViewController: UIViewController {
         }
         
         // 첫 로그인일 시 앱 이용방법 호출
-        let isFirstLogin = UserDefaults.standard.bool(forKey: "isFirstLogin")
+        let isFirstLogin = UserManager.isFirstLogin ?? true
         if isFirstLogin {homeView.showBottomSheet(self)}
         
         self.homeView.cartButton.addTarget(self, action: #selector(goToCart), for: .touchUpInside)
@@ -66,13 +66,13 @@ class HomeViewController: UIViewController {
     }
     @objc func cancelButtonDidTap() {
         // 앱 이용방법 더는 안 띄우게
-        UserDefaults.standard.set(false, forKey: "isFirstLogin")
+        UserManager.isFirstLogin = false
         MypageDataManager().switchNotificationDataManager(false, self)
         UIDevice.vibrate()
     }
     @objc func okButtonDidTap() {
         // 앱 이용방법 더는 안 띄우게
-        UserDefaults.standard.set(false, forKey: "isFirstLogin")
+        UserManager.isFirstLogin = false
         MypageDataManager().switchNotificationDataManager(true, self)
         UIDevice.vibrate()
     }
@@ -101,8 +101,8 @@ extension HomeViewController {
 // MARK: - Token User Defaults for Share Extension
 extension HomeViewController {
     func setToken() {
-        let accessToken = UserDefaults.standard.string(forKey: "accessToken") ?? ""
-        let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") ?? ""
+        let accessToken = UserManager.accessToken
+        let refreshToken = UserManager.refreshToken
         
         let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
         defaults?.set(accessToken, forKey: "accessToken")

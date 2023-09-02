@@ -182,6 +182,8 @@
 		23C9569E28C68D7A00D88536 /* SUIT-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23C9569528C68D7900D88536 /* SUIT-Medium.ttf */; };
 		23C9569F28C68D7A00D88536 /* SUIT-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23C9569628C68D7A00D88536 /* SUIT-SemiBold.ttf */; };
 		23C956A128C68F9400D88536 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C956A028C68F9400D88536 /* LoginViewController.swift */; };
+		23CB5C462AA31DA5007A0900 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB5C452AA31DA5007A0900 /* UserManager.swift */; };
+		23CB5C472AA33E4B007A0900 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB5C452AA31DA5007A0900 /* UserManager.swift */; };
 		23CBAFDC28DFDF8500B41513 /* NewFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CBAFDB28DFDF8500B41513 /* NewFolderViewController.swift */; };
 		23CF158628FD630E000D012F /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CF158528FD630E000D012F /* UIDevice.swift */; };
 		23D0824E28E4DC3A00CE541E /* ItemDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D0824D28E4DC3A00CE541E /* ItemDataManager.swift */; };
@@ -409,6 +411,7 @@
 		23C9569528C68D7900D88536 /* SUIT-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Medium.ttf"; sourceTree = "<group>"; };
 		23C9569628C68D7A00D88536 /* SUIT-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-SemiBold.ttf"; sourceTree = "<group>"; };
 		23C956A028C68F9400D88536 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		23CB5C452AA31DA5007A0900 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		23CBAFDB28DFDF8500B41513 /* NewFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFolderViewController.swift; sourceTree = "<group>"; };
 		23CF158528FD630E000D012F /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		23D0824D28E4DC3A00CE541E /* ItemDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDataManager.swift; sourceTree = "<group>"; };
@@ -1064,6 +1067,7 @@
 				2360FF5D28DCC64100E481A6 /* ScreenManager.swift */,
 				23CF158528FD630E000D012F /* UIDevice.swift */,
 				23A85F7C28E39FE800075667 /* FormatManager.swift */,
+				23CB5C452AA31DA5007A0900 /* UserManager.swift */,
 			);
 			path = UtilManager;
 			sourceTree = "<group>";
@@ -1838,6 +1842,7 @@
 				23B885EC28E5A9B400142FFA /* UploadItemInput.swift in Sources */,
 				23CBAFDC28DFDF8500B41513 /* NewFolderViewController.swift in Sources */,
 				236FE91F28DF8592006142DB /* UIView.swift in Sources */,
+				23CB5C472AA33E4B007A0900 /* UserManager.swift in Sources */,
 				2364B7AA29D41E1F006459EF /* TitleCenterViewController.swift in Sources */,
 				23ED291E2A89170F00B26885 /* AuthIntercepter.swift in Sources */,
 				23ED291D2A89142D00B26885 /* AlamofireBaseService.swift in Sources */,
@@ -1974,6 +1979,7 @@
 				237478A228D2008300CF941A /* SetFolderBottomSheetViewController.swift in Sources */,
 				233C34BE29C75B10005DFA39 /* MultiMoyaService.swift in Sources */,
 				23C5AB4B28CAA24300A7E977 /* MyPageViewController.swift in Sources */,
+				23CB5C462AA31DA5007A0900 /* UserManager.swift in Sources */,
 				2339D4F928E3CCE300E636FD /* FolderDataManager.swift in Sources */,
 				23DC04EB28C591F400ABB0CF /* OnBoardingViewController.swift in Sources */,
 				23BB603528E2709C007EA1EF /* ModifyProfileInput.swift in Sources */,
@@ -2089,7 +2095,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202309021450;
+				CURRENT_PROJECT_VERSION = 202309021458;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Share Extension/Info.plist";
@@ -2118,7 +2124,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202309021450;
+				CURRENT_PROJECT_VERSION = 202309021458;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Share Extension/Info.plist";
@@ -2267,7 +2273,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Wishboard/Wishboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202309021450;
+				CURRENT_PROJECT_VERSION = 202309021458;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2303,7 +2309,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Wishboard/Wishboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202309021450;
+				CURRENT_PROJECT_VERSION = 202309021458;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wishboard/Info.plist;

@@ -81,10 +81,10 @@ extension RegisterPasswordViewController {
         let refreshToken = result.data?.token.refreshToken
         let tempNickname = result.data?.tempNickname
         
-        UserDefaults.standard.set(accessToken, forKey: "accessToken")
-        UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
-        UserDefaults.standard.set(true, forKey: "isFirstLogin")
-        UserDefaults.standard.set(tempNickname, forKey: "tempNickname")
+        UserManager.accessToken = accessToken
+        UserManager.refreshToken = refreshToken
+        UserManager.isFirstLogin = true
+        UserManager.tempNickname = tempNickname
   
         // go main
         ScreenManager().goMain(self)

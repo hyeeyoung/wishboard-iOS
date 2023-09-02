@@ -7,6 +7,11 @@
 
 import UIKit
 
+/*
+ Onboarding TODO
+ 서버 이전 알럿창 api 요청
+ */
+
 class OnBoardingViewController: UIViewController {
     
     convenience init(usecase: ObserverUseCase) {
@@ -21,30 +26,20 @@ class OnBoardingViewController: UIViewController {
         super.viewDidLoad()
         
         setLayout()
+        // 자동 로그인
         checkRememberMe()
     }
     override func viewDidAppear(_ animated: Bool) {
-//        // 점검 이슈 알럿창
-//        view.backgroundColor = .white
-//        showServiceInspectionAlert()
-        
         // 현재 앱 버전과 앱 스토어에 있는 앱버전을 비교 후 알럿창 띄우기
         compareAppVersionAndAlert(loadAppStoreVersion())
         
         self.tabBarController?.tabBar.isHidden = true
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
-        // 자동 로그인
-        checkRememberMe()
-        
     }
     /// 자동로그인 로직 구현
     func checkRememberMe() {
-        if let token = UserDefaults.standard.string(forKey: "accessToken") {
-            let email = UserDefaults.standard.string(forKey: "email")
-            let password = UserDefaults.standard.string(forKey: "password")
-            print(email, password, token)
-            
+        if let token = UserManager.accessToken {
             // go Main
             ScreenManager().goMain(self)
         }
@@ -112,10 +107,6 @@ extension OnBoardingViewController {
                 dialog.modalPresentationStyle = .overFullScreen
                 self.present(dialog, animated: false, completion: nil)
                 
-                /* 추후 논의 필요
-                 업데이트 버튼 = 검정 버튼(cancelButton)
-                 나중에 버튼 = 초록 버튼(okButton)
-                 */
                 dialog.cancelBtn.addTarget(self, action: #selector(appUpdateButtonDidTap), for: .touchUpInside)
                 dialog.okBtn.addTarget(self, action: #selector(quitButtonDidTap), for: .touchUpInside)
             }

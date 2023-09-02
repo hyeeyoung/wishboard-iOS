@@ -56,13 +56,7 @@ class ScreenManager {
     // MARK: - 로그아웃 후, Onboarding 화면으로 이동
     func goToOnboarding(_ viewcontroller: UIViewController) {
         // delete UserInfo
-        UserDefaults.standard.removeObject(forKey: "accessToken")
-        UserDefaults.standard.removeObject(forKey: "refreshToken")
-        UserDefaults.standard.removeObject(forKey: "email")
-        UserDefaults.standard.removeObject(forKey: "password")
-        UserDefaults.standard.set(false, forKey: "isFirstLogin")
-        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "accessToken")
-        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "removeToken")
+        UserManager.removeUserData()
         
         // 화면 전환
         let onboardingVC = OnBoardingViewController()

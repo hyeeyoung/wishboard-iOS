@@ -97,12 +97,12 @@ extension LoginViewController {
                     let refreshToken = data.data?.token.refreshToken
                     let tempNickname = data.data?.tempNickname
                     
-                    UserDefaults.standard.set(accessToken, forKey: "accessToken")
-                    UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
-                    UserDefaults.standard.set(false, forKey: "isFirstLogin")
-                    UserDefaults.standard.set(self.loginViewModel.email, forKey: "email")
-                    UserDefaults.standard.set(self.loginViewModel.password, forKey: "password")
-                    UserDefaults.standard.set(tempNickname, forKey: "tempNickname")
+                    UserManager.accessToken = accessToken
+                    UserManager.refreshToken = refreshToken
+                    UserManager.isFirstLogin = false
+                    UserManager.email = self.loginViewModel.email
+                    UserManager.password = self.loginViewModel.password
+                    UserManager.tempNickname = tempNickname
                     
                     let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
                     defaults?.set(accessToken, forKey: "accessToken")
