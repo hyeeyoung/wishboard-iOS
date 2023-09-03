@@ -9,7 +9,7 @@ import UIKit
 import FSCalendar
 
 class CalenderViewController: UIViewController, Observer {
-    var observer = WishListObserver.shared
+    var observer = WishItemObserver.shared
     
     var calenderView: CalenderView!
     var selectedDate: String!

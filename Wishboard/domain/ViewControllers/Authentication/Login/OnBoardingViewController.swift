@@ -41,7 +41,7 @@ class OnBoardingViewController: UIViewController {
     func checkRememberMe() {
         if let token = UserManager.accessToken {
             // go Main
-            ScreenManager.shared.goMain(self)
+            ScreenManager.shared.goMain()
         }
     }
 }

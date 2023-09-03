@@ -8,7 +8,9 @@
 import UIKit
 import MaterialComponents.MaterialBottomSheet
 
-class ItemDetailViewController: UIViewController {
+class ItemDetailViewController: UIViewController, Observer {
+    var observer = WishItemObserver.shared
+    
     var itemDetailView: ItemDetailView!
     var itemId: Int!
     var wishListData: WishListModel!
@@ -28,12 +30,22 @@ class ItemDetailViewController: UIViewController {
         }
         
         setItemView()
-//        ItemDataManager().getItemDetailDataManager(self.itemId, self)
+        
+        // observer init
+        observer.bind(self)
     }
     override func viewDidAppear(_ animated: Bool) {
         ItemDataManager().getItemDetailDataManager(self.itemId, self)
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
+    }
+    
+    /// 아이템이 수정되었을 때 호출
+    func update(_ newValue: Any) {
+        ItemDataManager().getItemDetailDataManager(self.itemId, self)
+        if let usecase = newValue as? WishItemUseCase {
+            SnackBar(self, message: .modifyItem)
+        }
     }
     
     // MARK: - Actions
@@ -75,7 +87,6 @@ class ItemDetailViewController: UIViewController {
         let modifyVC = UploadItemViewController().then{
             $0.isUploadItem = false
             $0.wishListModifyData = self.wishListData
-            $0.preVC = self
         }
         self.navigationController?.pushViewController(modifyVC, animated: true)
     }
@@ -126,7 +137,7 @@ extension ItemDetailViewController {
     func deleteItemAPISuccess() {
         self.dismiss(animated: false)
         
-        let observer = WishListObserver.shared
+        let observer = WishItemObserver.shared
         observer.notify(.delete)
         self.navigationController?.popViewController(animated: true)
     }

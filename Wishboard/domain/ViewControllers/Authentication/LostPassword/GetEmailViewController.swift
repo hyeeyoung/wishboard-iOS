@@ -116,7 +116,7 @@ extension GetEmailViewController {
             UserManager.tempNickname = tempNickname
         }
         
-        ScreenManager.shared.goMain(self)
+        ScreenManager.shared.goMain()
         
         print(result)
     }

@@ -8,7 +8,7 @@
 import UIKit
 
 class FolderDetailViewController: TitleCenterViewController, Observer {
-    var observer = WishListObserver.shared
+    var observer = WishItemObserver.shared
     // MARK: - View
     let emptyMessage = EmptyMessage.item
     // MARK: - Life Cycles
@@ -38,7 +38,7 @@ class FolderDetailViewController: TitleCenterViewController, Observer {
     }
     
     func update(_ newValue: Any) {
-        if let usecase = newValue as? WishListUseCase, usecase == .delete {
+        if let usecase = newValue as? WishItemUseCase, usecase == .delete {
             SnackBar(self, message: .deleteItem)
             FolderDataManager().getFolderDetailDataManager(self.folderId, self)
         }

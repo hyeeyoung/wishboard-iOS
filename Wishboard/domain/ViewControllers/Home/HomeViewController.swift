@@ -9,7 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController, Observer {
     var homeView: HomeView!
-    var observer = WishListObserver.shared
+    var observer = WishItemObserver.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,8 +48,14 @@ class HomeViewController: UIViewController, Observer {
         NetworkCheck.shared.startMonitoring(vc: self)
     }
     func update(_ newValue: Any) {
-        if let usecase = newValue as? WishListUseCase, usecase == .delete {
-            SnackBar(self, message: .deleteItem)
+        // 케이스에 따른 스낵바 출력
+        if let usecase = newValue as? WishItemUseCase {
+            if usecase == .delete {
+                SnackBar(tabBarController ?? self, message: .deleteItem)
+            } else if usecase == .upload {
+                SnackBar(tabBarController ?? self, message: .addItem)
+            }
+            // Data reload
             WishListDataManager().wishListDataManager(self.homeView, self)
         }
     }

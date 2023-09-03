@@ -88,6 +88,6 @@ extension RegisterPasswordViewController {
         }
   
         // go main
-        ScreenManager.shared.goMain(self)
+        ScreenManager.shared.goMain()
     }
 }

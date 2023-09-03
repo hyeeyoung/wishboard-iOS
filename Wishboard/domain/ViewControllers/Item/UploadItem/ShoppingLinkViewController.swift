@@ -114,7 +114,7 @@ extension ShoppingLinkViewController {
         if let itemName = result.data?.item_name {
             self.itemName = itemName
         } else {self.itemName = nil}
-        if let itemPrice = result.data?.item_price {
+        if let itemPrice = result.data?.item_price.nilIfEmpty {
             self.itemPrice = itemPrice
         } else {self.itemPrice = "0"}
         self.viewDidLoad()

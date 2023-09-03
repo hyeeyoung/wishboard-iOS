@@ -10,7 +10,7 @@ import MaterialComponents.MaterialBottomSheet
 import Lottie
 
 class UploadItemViewController: UIViewController, Observer {
-    var observer = ItemLinkObserver.shared
+    var itemLinkObserver = ItemLinkObserver.shared
     
     // MARK: - Properties
     var uploadItemView: UploadItemView!
@@ -22,9 +22,7 @@ class UploadItemViewController: UIViewController, Observer {
     var notivc: NotificationSettingViewController!
     var linkvc: ShoppingLinkViewController!
     // Modify Item
-    var preVC: ItemDetailViewController!
     var isUploadItem: Bool!
-    var isModified: Bool = false
     var wishListModifyData: WishListModel!
     // UploadItem
     var wishListData: WishListModel!
@@ -52,7 +50,7 @@ class UploadItemViewController: UIViewController, Observer {
         setUploadItemView()
         
         // Observer init
-        observer.bind(self)
+        itemLinkObserver.bind(self)
         
         if !isUploadItem {
             self.tabBarController?.tabBar.isHidden = true
@@ -70,14 +68,7 @@ class UploadItemViewController: UIViewController, Observer {
     override func viewWillDisappear(_ animated: Bool) {
         self.removeKeyboardNotifications()
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        if let preVC = self.preVC {
-            if self.isModified {
-                SnackBar(preVC, message: .modifyItem)
-                self.isModified = false
-            }
-        }
-    }
+    
     @objc func goBack() {
         UIDevice.vibrate()
         self.navigationController?.popViewController(animated: true)
@@ -461,12 +452,15 @@ extension UploadItemViewController {
                         print("아이템 등록 성공 by moya:", data.message)
                         self.lottieView.stop()
                         self.viewDidLoad()
-                        ScreenManager.shared.goMainPages(0, self, family: .itemUpload)
+                        // 홈화면으로 이동
+                        WishItemObserver.shared.notify(.upload)
+                        ScreenManager.shared.goMain()
                     }
                     break
             case .failure(let error):
                 self.viewDidLoad()
-                ScreenManager.shared.goMainPages(0, self, family: .itemUpload)
+                // 홈화면으로 이동
+                ScreenManager.shared.goMain()
                 print("moya item upload error", error.localizedDescription)
             default:
                 print("default error")
@@ -483,14 +477,14 @@ extension UploadItemViewController {
                         print("아이템 수정 성공 by moya:", data.message)
                         self.lottieView.stop()
                         self.viewDidLoad()
+                        // 뒤로 화면 이동 (아이템 상세 조회 화면)
+                        WishItemObserver.shared.notify(.modify)
                         self.navigationController?.popViewController(animated: true)
-                        self.isModified = true
                     }
                     break
             case .failure(let error):
                 self.viewDidLoad()
                 self.navigationController?.popViewController(animated: true)
-                self.isModified = true
                 print("moya item modify error", error.localizedDescription)
             default:
                 print("default error")

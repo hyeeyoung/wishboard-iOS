@@ -187,7 +187,7 @@
 		23CB5C492AA34A5B007A0900 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB5C482AA34A5B007A0900 /* Observer.swift */; };
 		23CB5C4B2AA34A74007A0900 /* UserObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB5C4A2AA34A74007A0900 /* UserObserver.swift */; };
 		23CB5C4D2AA34A99007A0900 /* ItemLinkOberver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB5C4C2AA34A99007A0900 /* ItemLinkOberver.swift */; };
-		23CB5C4F2AA34B37007A0900 /* WishListObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB5C4E2AA34B37007A0900 /* WishListObserver.swift */; };
+		23CB5C4F2AA34B37007A0900 /* WishItemObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB5C4E2AA34B37007A0900 /* WishItemObserver.swift */; };
 		23CB5C502AA34B40007A0900 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB5C482AA34A5B007A0900 /* Observer.swift */; };
 		23CBAFDC28DFDF8500B41513 /* NewFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CBAFDB28DFDF8500B41513 /* NewFolderViewController.swift */; };
 		23CF158628FD630E000D012F /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CF158528FD630E000D012F /* UIDevice.swift */; };
@@ -420,7 +420,7 @@
 		23CB5C482AA34A5B007A0900 /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		23CB5C4A2AA34A74007A0900 /* UserObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObserver.swift; sourceTree = "<group>"; };
 		23CB5C4C2AA34A99007A0900 /* ItemLinkOberver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemLinkOberver.swift; sourceTree = "<group>"; };
-		23CB5C4E2AA34B37007A0900 /* WishListObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListObserver.swift; sourceTree = "<group>"; };
+		23CB5C4E2AA34B37007A0900 /* WishItemObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishItemObserver.swift; sourceTree = "<group>"; };
 		23CBAFDB28DFDF8500B41513 /* NewFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFolderViewController.swift; sourceTree = "<group>"; };
 		23CF158528FD630E000D012F /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		23D0824D28E4DC3A00CE541E /* ItemDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDataManager.swift; sourceTree = "<group>"; };
@@ -1127,7 +1127,7 @@
 				23CB5C482AA34A5B007A0900 /* Observer.swift */,
 				23CB5C4A2AA34A74007A0900 /* UserObserver.swift */,
 				23CB5C4C2AA34A99007A0900 /* ItemLinkOberver.swift */,
-				23CB5C4E2AA34B37007A0900 /* WishListObserver.swift */,
+				23CB5C4E2AA34B37007A0900 /* WishItemObserver.swift */,
 			);
 			path = Observable;
 			sourceTree = "<group>";
@@ -1999,7 +1999,7 @@
 				2339D4F928E3CCE300E636FD /* FolderDataManager.swift in Sources */,
 				23DC04EB28C591F400ABB0CF /* OnBoardingViewController.swift in Sources */,
 				23BB603528E2709C007EA1EF /* ModifyProfileInput.swift in Sources */,
-				23CB5C4F2AA34B37007A0900 /* WishListObserver.swift in Sources */,
+				23CB5C4F2AA34B37007A0900 /* WishItemObserver.swift in Sources */,
 				23E0ACC728E7A767008C35C2 /* UILabel.swift in Sources */,
 				23C2378B28C9CF1D00CE3200 /* FolderCollectionViewCell.swift in Sources */,
 				233C34C429C7602D005DFA39 /* MoyaLoggerPlugin.swift in Sources */,

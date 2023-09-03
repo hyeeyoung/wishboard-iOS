@@ -7,13 +7,14 @@
 
 import Foundation
 
-enum WishListUseCase {
+enum WishItemUseCase {
     case upload
     case delete
+    case modify
 }
 
-final class WishListObserver {
-    static let shared = WishListObserver()
+final class WishItemObserver {
+    static let shared = WishItemObserver()
     private var observers: [Observer] = [Observer]()
     
     private init() {}
@@ -25,7 +26,7 @@ final class WishListObserver {
     }
     
     // 옵저버 알림
-    func notify(_ usecase: WishListUseCase) {
+    func notify(_ usecase: WishItemUseCase) {
         for observer in observers {
             observer.update(usecase)
         }

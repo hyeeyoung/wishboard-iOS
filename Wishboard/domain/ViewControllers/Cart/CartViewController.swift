@@ -8,7 +8,7 @@
 import UIKit
 
 class CartViewController: TitleCenterViewController, Observer {
-    var observer = WishListObserver.shared
+    var observer = WishItemObserver.shared
     var cartView: CartView!
 
     override func viewDidLoad() {

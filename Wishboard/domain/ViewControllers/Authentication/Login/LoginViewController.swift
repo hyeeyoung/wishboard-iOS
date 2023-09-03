@@ -111,7 +111,7 @@ extension LoginViewController {
                     defaults?.synchronize()
                     
                     // go Main
-                    ScreenManager.shared.goMain(self)
+                    ScreenManager.shared.goMain()
                 } else {
                     self.loginAPIFail()
                 }

@@ -19,46 +19,30 @@ class ScreenManager {
     }
     
     enum Family: String {
-        case itemDeleted, profileModified, passwordModified, itemUpload, itemModified
+        case itemModified
     }
-    func goMain(_ viewcontroller: UIViewController) {
+    func goMain() {
         // 첫화면으로 전환
         let tbc = tabBarController
+        tbc.selectedIndex = 0
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(tbc, animated: true)
-//        viewcontroller.navigationController?.pushViewController(tabBarController, animated: true)
     }
-    func goMainPages(_ index: Int, _ viewcontroller: UIViewController) {
+    func goMainPages(_ index: Int) {
         let tbc = tabBarController
         tbc.selectedIndex = index
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(tbc, animated: true)
-//        guard let tabBarController = viewcontroller.tabBarController else {return}
-//        tabBarController.selectedIndex = index
-//        tabBarController.modalPresentationStyle = .fullScreen
-//        viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
     }
     // tabBar가 없는 뷰에서 메인으로 이동할 때
     func goMainPages(_ index: Int, _ viewcontroller: UIViewController, family: Family) {
         let tbc = tabBarController
         tbc.selectedIndex = index
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(tbc, animated: true)
-//        guard let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabBarViewController") as? UITabBarController else {return}
-//        tabBarController.selectedIndex = index
-//        tabBarController.modalPresentationStyle = .fullScreen
-//        viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
         
         switch family {
-            case .itemDeleted:
-                SnackBar(tabBarController, message: .deleteItem)
-            case .profileModified:
-                SnackBar(tabBarController, message: .modifyProfile)
-            case .passwordModified:
-                SnackBar(tabBarController, message: .modifyPassword)
-            case .itemUpload:
-                SnackBar(tabBarController, message: .addItem)
             case .itemModified:
                 SnackBar(tabBarController, message: .modifyItem)
             default:
-                viewcontroller.view.window?.windowScene?.keyWindow?.rootViewController = tabBarController
+                fatalError()
         }
     }
     // MARK: - 링크 이동
