@@ -111,7 +111,8 @@ extension LoginViewController {
                     defaults?.synchronize()
                     
                     // go Main
-                    ScreenManager.shared.goMain()
+                    guard let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabBarViewController") as? UITabBarController else {fatalError()}
+                    self.navigationController?.pushViewController(tabBarController, animated: true)
                 } else {
                     self.loginAPIFail()
                 }

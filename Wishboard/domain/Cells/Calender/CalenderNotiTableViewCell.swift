@@ -28,15 +28,15 @@ class CalenderNotiTableViewCell: UITableViewCell {
     // '재입고 알림'
     let notificationTypeLabel = DefaultLabel().then{
         $0.text = Notification.restock
-        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB4)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH5)
     }
     let label = DefaultLabel().then{
         $0.text = Notification.notification
-        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB4)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH5)
     }
     let timeLabel = DefaultLabel().then{
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
-        $0.textColor = .gray_300
+        $0.textColor = .gray_200
     }
     //MARK: - Life Cycles
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -83,7 +83,7 @@ class CalenderNotiTableViewCell: UITableViewCell {
             make.leading.equalTo(notificationTypeLabel.snp.leading)
         }
         itemName.snp.makeConstraints { make in
-            make.top.equalTo(notificationTypeLabel.snp.bottom).offset(8)
+            make.top.equalTo(notificationTypeLabel.snp.bottom).offset(6)
             make.leading.equalTo(notificationTypeLabel.snp.leading)
             make.trailing.equalToSuperview().offset(-16)
         }
