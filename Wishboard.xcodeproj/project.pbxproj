@@ -156,6 +156,7 @@
 		23A85F8528E3AE6200075667 /* LostPasswordInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F8428E3AE6200075667 /* LostPasswordInput.swift */; };
 		23AADBC128DF8F9800AB75C6 /* NotificationSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AADBC028DF8F9800AB75C6 /* NotificationSettingViewController.swift */; };
 		23B1FA4B294017F200832425 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 23B1FA4D294017F200832425 /* InfoPlist.strings */; };
+		23B2A3512AA4D11100002F90 /* WishItemObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CB5C4E2AA34B37007A0900 /* WishItemObserver.swift */; };
 		23B351842A6CF74200FD7A14 /* RefreshDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23134D3E29B222BF00238536 /* RefreshDataManager.swift */; };
 		23B351852A6CF9D600FD7A14 /* RefreshInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23134D3C29B2216700238536 /* RefreshInput.swift */; };
 		23B351862A6CF9DE00FD7A14 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236AC9EF291A6AB700E1474C /* Storage.swift */; };
@@ -1830,6 +1831,7 @@
 				23203DDE2A925F08009BB07B /* UseCase.swift in Sources */,
 				230DBFA828E106EE00E9AED6 /* ShareView.swift in Sources */,
 				230180E628E50B7C001034FC /* FolderDataManager.swift in Sources */,
+				23B2A3512AA4D11100002F90 /* WishItemObserver.swift in Sources */,
 				23A48E7128E92E7D00FD77A7 /* NetworkCheck.swift in Sources */,
 				2341A3E92A81059E000191B8 /* BaseRouter.swift in Sources */,
 				236FE92228DF8592006142DB /* UITextField.swift in Sources */,

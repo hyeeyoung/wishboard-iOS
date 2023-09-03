@@ -255,6 +255,7 @@ extension ShareViewController {
     }
     // MARK: 폴더 리스트 조회 API
     func getFolderListAPISuccess(_ result: [FolderListModel]) {
+        print("폴더 가져오기 성공", result)
         self.folderListData = result
         self.selectedFolderIdx = -1
         reloadDataAnimation()
@@ -315,6 +316,7 @@ extension ShareViewController {
         shareView.completeButton.isActivate = true
         lottieView.isHidden = true
         
+        WishItemObserver.shared.notify(.upload)
         SnackBar(self, message: .addItem)
     }
     func uploadItem500Error() {
