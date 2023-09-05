@@ -10,8 +10,10 @@ import RxSwift
 import RxCocoa
 
 class LoginViewController: TitleCenterViewController {
+    private let viewModel: LoginViewModel2 = LoginViewModel2()
+    var disposeBag = DisposeBag()
+    
     let loginView = LoginView()
-    private let loginViewModel: LoginViewModel = LoginViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,40 +32,14 @@ class LoginViewController: TitleCenterViewController {
     }
     // MARK: - Set Up
     func setUpTextField() {
-        loginView.emailTextField.addTarget(self, action: #selector(emailTextFieldEditingChanged), for: .editingChanged)
-        loginView.passwordTextField.addTarget(self, action: #selector(passwordTextFieldEditingChanged), for: .editingChanged)
-        
         loginView.emailTextField.delegate = self
         loginView.passwordTextField.delegate = self
     }
     func setUpButton() {
-        loginView.loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
-        loginView.loginButtonKeyboard.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
         loginView.lostPasswordButton.addTarget(self, action: #selector(lostPasswordButtonDidTap), for: .touchUpInside)
         loginView.lostPasswordButtonKeyboard.addTarget(self, action: #selector(lostPasswordButtonDidTap), for: .touchUpInside)
     }
     // MARK: - Actions
-    @objc func emailTextFieldEditingChanged(_ sender: UITextField) {
-        let text = sender.text ?? ""
-        let trimString = text.trimmingCharacters(in: .whitespaces)
-        self.loginView.emailTextField.text = trimString
-        loginViewModel.emailTextFieldEditingChanged(trimString)
-    }
-    @objc func passwordTextFieldEditingChanged(_ sender: UITextField) {
-        let text = sender.text ?? ""
-        let trimString = text.trimmingCharacters(in: .whitespaces)
-        self.loginView.passwordTextField.text = trimString
-        loginViewModel.passwordTextFieldEditingChanged(trimString)
-    }
-    @objc func loginButtonDidTap() {
-        UIDevice.vibrate()
-        self.view.endEditing(true)
-        let email = loginViewModel.email ?? ""
-        let pw = loginViewModel.password ?? ""
-        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
-        let loginInput = LoginInput(email: email, password: pw, fcmToken: deviceToken)
-        self.signIn(model: loginInput)
-    }
     @objc func lostPasswordButtonDidTap() {
         UIDevice.vibrate()
         let lostPwVC = LostPasswordViewController(title: "1/2 단계")
@@ -71,63 +47,48 @@ class LoginViewController: TitleCenterViewController {
     }
     //MARK: - Methods
     private func bind() {
-        loginViewModel.isValidID.bind { isValidID in
-            guard let isValid = isValidID else {return}
-            if isValid {
-                self.loginView.loginButton.isActivate = true
-                self.loginView.loginButtonKeyboard.isActivate = true
-                
-            } else {
-                self.loginView.loginButton.isActivate = false
-                self.loginView.loginButtonKeyboard.isActivate = false
-            }
-        }
-
+        // 키보드가 올라와있을 때와 아닐 때의 버튼 구분
+        let activatedButton = loginView.emailTextField.isFirstResponder || loginView.passwordTextField.isFirstResponder ? loginView.loginButtonKeyboard : loginView.loginButton
+        
+        let input = LoginViewModel2.Input(emailText: loginView.emailTextField.rx.text.orEmpty.asObservable(),
+                                          passwordText: loginView.passwordTextField.rx.text.orEmpty.asObservable(),
+                                          loginButtonEvent: activatedButton.rx.tap)
+        
+        let output = viewModel.transform(input)
+        
+        // 로그인 버튼 활성화 유무
+        output.buttonActivate
+            .drive(loginView.loginButton.rx.isActivate)
+        
+        output.buttonActivate
+            .drive(loginView.loginButtonKeyboard.rx.isActivate)
+        
+        // 이메일과 비밀번호 입력값의 띄어쓰기 제거
+        output.processEmailText
+            .bind(to: loginView.emailTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.processPwText
+            .bind(to: loginView.passwordTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        // 로그인 api 호출 후 분기처리
+        output.loginResponse
+            .subscribe(onNext: { [self]
+                if $0 {self.moveToMain()}
+                else {self.loginAPIFail()}
+            })
+            .disposed(by: disposeBag)
+    }
+    /// 로그인 성공 후 메인 화면으로 이동
+    func moveToMain() {
+        // go Main
+        guard let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabBarViewController") as? UITabBarController else {fatalError()}
+        self.navigationController?.pushViewController(tabBarController, animated: true)
     }
 }
-// MARK: - API Success
+/// api 응답 실패했을 때
 extension LoginViewController {
-    private func signIn(model: LoginInput){
-        UserService.shared.signIn(model: model) { result in
-            switch result {
-                case .success(let data):
-                if data.success {
-                    print("로그인 성공 by moya", data.data)
-                    let accessToken = data.data?.token.accessToken
-                    let refreshToken = data.data?.token.refreshToken
-                    
-                    UserManager.accessToken = accessToken
-                    UserManager.refreshToken = refreshToken
-                    UserManager.isFirstLogin = false
-                    UserManager.email = self.loginViewModel.email
-                    UserManager.password = self.loginViewModel.password
-                    if let tempNickname = data.data?.tempNickname {
-                        UserManager.tempNickname = tempNickname
-                    }
-                    
-                    let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
-                    defaults?.set(accessToken, forKey: "accessToken")
-                    defaults?.set(refreshToken, forKey: "refreshToken")
-                    defaults?.synchronize()
-                    
-                    // go Main
-                    guard let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabBarViewController") as? UITabBarController else {fatalError()}
-                    self.navigationController?.pushViewController(tabBarController, animated: true)
-                } else {
-                    self.loginAPIFail()
-                }
-                break
-                
-            case .failure(let error):
-                print(error.localizedDescription)
-                self.loginAPIFail()
-            default:
-                self.loginAPIFail()
-                break
-            }
-        }
-    }
-    
     func loginAPIFail() {
         SnackBar(self, message: .login)
         for loginButton in [self.loginView.loginButton, self.loginView.loginButtonKeyboard] {
@@ -135,6 +96,7 @@ extension LoginViewController {
         }
     }
 }
+/// Textfield delegate
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

@@ -2,14 +2,13 @@
 //  BaseViewModel.swift
 //  Wishboard
 //
-//  Created by gomin on 2023/06/12.
+//  Created by gomin on 2023/09/05.
 //
 
 import Foundation
-import RxSwift
 
-protocol BaseViewModel{
+protocol BaseViewModel {
     associatedtype Input
     associatedtype Output
-    func transform(_ input: Input) -> Output
+    func transform(_ : Input) -> Output
 }
