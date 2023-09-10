@@ -120,7 +120,6 @@
 		236FE93828DF85A4006142DB /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360095F28DA2297001FB107 /* EmptyView.swift */; };
 		236FE93928DF85A4006142DB /* SnackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360FF5B28DCB31600E481A6 /* SnackBar.swift */; };
 		236FE93A28DF85A4006142DB /* SetNotificationDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2350FADE28DB9BEA00981B8F /* SetNotificationDate.swift */; };
-		236FE93B28DF85A7006142DB /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5518828C6B02400D81B5F /* Observable.swift */; };
 		236FE93C28DF85AA006142DB /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5518A28C6B45C00D81B5F /* String.swift */; };
 		236FE93E28DF85B0006142DB /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2374789D28D1EDF600CF941A /* PopUpViewController.swift */; };
 		236FE94028DF85B3006142DB /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3113628DF633D00A636F6 /* APIModel.swift */; };
@@ -202,8 +201,6 @@
 		23D5517F28C698D200D81B5F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5517E28C698D200D81B5F /* LoginView.swift */; };
 		23D5518128C69E2900D81B5F /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5518028C69E2900D81B5F /* UITextField.swift */; };
 		23D5518328C6A3BD00D81B5F /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5518228C6A3BD00D81B5F /* UIButton.swift */; };
-		23D5518728C6AFFF00D81B5F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5518628C6AFFF00D81B5F /* LoginViewModel.swift */; };
-		23D5518928C6B02400D81B5F /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5518828C6B02400D81B5F /* Observable.swift */; };
 		23D5518B28C6B45C00D81B5F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5518A28C6B45C00D81B5F /* String.swift */; };
 		23D7901428CB0E5F00246109 /* CalenderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D7901328CB0E5F00246109 /* CalenderTableViewCell.swift */; };
 		23D7901628CB172900246109 /* CalenderNotiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D7901528CB172900246109 /* CalenderNotiTableViewCell.swift */; };
@@ -435,8 +432,6 @@
 		23D5517E28C698D200D81B5F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		23D5518028C69E2900D81B5F /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		23D5518228C6A3BD00D81B5F /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
-		23D5518628C6AFFF00D81B5F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		23D5518828C6B02400D81B5F /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		23D5518A28C6B45C00D81B5F /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		23D7901328CB0E5F00246109 /* CalenderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderTableViewCell.swift; sourceTree = "<group>"; };
 		23D7901528CB172900246109 /* CalenderNotiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderNotiTableViewCell.swift; sourceTree = "<group>"; };
@@ -1127,7 +1122,6 @@
 		23C3113228DF62D700A636F6 /* Observable */ = {
 			isa = PBXGroup;
 			children = (
-				23D5518828C6B02400D81B5F /* Observable.swift */,
 				23CB5C482AA34A5B007A0900 /* Observer.swift */,
 				23CB5C4A2AA34A74007A0900 /* UserObserver.swift */,
 				23CB5C4C2AA34A99007A0900 /* ItemLinkOberver.swift */,
@@ -1416,7 +1410,6 @@
 			isa = PBXGroup;
 			children = (
 				23D5517C28C6936400D81B5F /* OnBoardingViewModel.swift */,
-				23D5518628C6AFFF00D81B5F /* LoginViewModel.swift */,
 				2369A9CB2AA7487800781A81 /* LoginViewModel2.swift */,
 			);
 			path = ViewModels;
@@ -1871,7 +1864,6 @@
 				230180E828E50BE2001034FC /* FolderListModel.swift in Sources */,
 				2385582B28E51F7500E6A09E /* FormatManager.swift in Sources */,
 				2385582728E51DD000E6A09E /* ShareDataManager.swift in Sources */,
-				236FE93B28DF85A7006142DB /* Observable.swift in Sources */,
 				236FE93E28DF85B0006142DB /* PopUpViewController.swift in Sources */,
 				23C3113F28DF680300A636F6 /* ShareViewController.swift in Sources */,
 				23127C852A3636C1008452FD /* TypoStyle.swift in Sources */,
@@ -1888,7 +1880,6 @@
 			files = (
 				2331868228DA933600F17CBF /* SetLottie.swift in Sources */,
 				23C956A128C68F9400D88536 /* LoginViewController.swift in Sources */,
-				23D5518928C6B02400D81B5F /* Observable.swift in Sources */,
 				23134D3D29B2216700238536 /* RefreshInput.swift in Sources */,
 				2344949B28D78F7000CF3BD9 /* RegisterPasswordView.swift in Sources */,
 				2364B7A829D40F8F006459EF /* ModifyPasswordView.swift in Sources */,
@@ -1936,7 +1927,6 @@
 				23C9568B28C6803900D88536 /* UIFont.swift in Sources */,
 				2328C5B028CAC7930065ABB2 /* ModifyProfileViewController.swift in Sources */,
 				2328C5AC28CAC1260065ABB2 /* NotificationViewController.swift in Sources */,
-				23D5518728C6AFFF00D81B5F /* LoginViewModel.swift in Sources */,
 				232174E828E1D4AF008C155D /* LoginInput.swift in Sources */,
 				23EC504628E2664D00AAA57E /* APIManager.swift in Sources */,
 				23CB5C492AA34A5B007A0900 /* Observer.swift in Sources */,
