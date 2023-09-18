@@ -234,6 +234,7 @@
 		23F07F4428E7D5930012D77D /* TitleCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */; };
 		23F1714B291056970016206A /* CalenderDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F1714A291056970016206A /* CalenderDateTableViewCell.swift */; };
 		23F1F21C293D7E7D0074C4D0 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E0ACC628E7A767008C35C2 /* UILabel.swift */; };
+		23F203F22AAD9E3200CF5493 /* MypageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F203F12AAD9E3200CF5493 /* MypageViewModel.swift */; };
 		23F69CAF28CC17F8001B8C7F /* UIBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */; };
 		23F69CB128CC1819001B8C7F /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F69CB028CC1819001B8C7F /* UIView.swift */; };
 		8FC34572B49CFC063CDC4619 /* Pods_WishboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 420154A5B1D7E2D7C5F49F42 /* Pods_WishboardTests.framework */; };
@@ -465,6 +466,7 @@
 		23F07F3D28E7CCBA0012D77D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		23F07F4328E7D5930012D77D /* TitleCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCenterViewController.swift; sourceTree = "<group>"; };
 		23F1714A291056970016206A /* CalenderDateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderDateTableViewCell.swift; sourceTree = "<group>"; };
+		23F203F12AAD9E3200CF5493 /* MypageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewModel.swift; sourceTree = "<group>"; };
 		23F69CAE28CC17F8001B8C7F /* UIBezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPath.swift; sourceTree = "<group>"; };
 		23F69CB028CC1819001B8C7F /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		420154A5B1D7E2D7C5F49F42 /* Pods_WishboardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WishboardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1411,6 +1413,7 @@
 			children = (
 				23D5517C28C6936400D81B5F /* OnBoardingViewModel.swift */,
 				2369A9CB2AA7487800781A81 /* LoginViewModel2.swift */,
+				23F203F12AAD9E3200CF5493 /* MypageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1885,6 +1888,7 @@
 				2364B7A829D40F8F006459EF /* ModifyPasswordView.swift in Sources */,
 				23CB5C4D2AA34A99007A0900 /* ItemLinkOberver.swift in Sources */,
 				23C2378628C9CEE800CE3200 /* FolderView.swift in Sources */,
+				23F203F22AAD9E3200CF5493 /* MypageViewModel.swift in Sources */,
 				233C34C229C75B95005DFA39 /* UserService.swift in Sources */,
 				23F69CB128CC1819001B8C7F /* UIView.swift in Sources */,
 				23E378E528D2F47E00C52F2D /* UploadItemViewController.swift in Sources */,

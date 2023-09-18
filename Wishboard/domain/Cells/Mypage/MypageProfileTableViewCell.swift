@@ -80,6 +80,6 @@ class MypageProfileTableViewCell: UITableViewCell {
         }
         if let nickname = data.nickname {userNameLabel.text = nickname}
         else {userNameLabel.text = UserManager.tempNickname}
-        if let email = data.email {emailLabel.text = email}
+        emailLabel.text = data.email
     }
 }

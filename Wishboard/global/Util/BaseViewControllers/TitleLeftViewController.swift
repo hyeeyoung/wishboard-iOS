@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class TitleLeftViewController: UIViewController {
     // MARK: - Properties
+    var disposeBag = DisposeBag()
+    
     // MARK: Init
     // 기본 초기화
     init(){

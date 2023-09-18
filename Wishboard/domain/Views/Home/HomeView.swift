@@ -14,9 +14,28 @@ import MaterialComponents.MaterialBottomSheet
 class HomeView: UIView {
     // MARK: - Properties
     // Navigation Views
+    
+    /// 이벤트뷰와 네비게이션 뷰가 있는 Stack
+    let navigationViewStack = UIStackView().then {
+        $0.axis = .vertical
+    }
+    let eventView = UIView().then {
+        $0.backgroundColor = .gray_700
+        $0.isUserInteractionEnabled = true
+        $0.isHidden = true
+    }
+    let eventLabel = UILabel().then {
+        $0.text = "위시보드 설문조사 참여하고 기프티콘 받으세요! 🤍 "
+        $0.textColor = .white
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitD2)
+    }
+    let eventQuitButton = UIButton().then {
+        $0.setImage(Image.whiteQuit, for: .normal)
+    }
     let navigationView = UIView()
+    
     let logo = UIImageView().then{
-        $0.image = Image.wishboardLogo
+        $0.image = Image.homeAppLogo
     }
     let cartButton = UIButton().then{
         $0.setImage(Image.cartIcon, for: .normal)
@@ -71,7 +90,12 @@ class HomeView: UIView {
         }
     }
     func setUpView() {
-        addSubview(navigationView)
+        addSubview(navigationViewStack)
+        navigationViewStack.addArrangedSubview(eventView)
+        navigationViewStack.addArrangedSubview(navigationView)
+        
+        eventView.addSubview(eventLabel)
+        eventView.addSubview(eventQuitButton)
         
         navigationView.addSubview(logo)
         navigationView.addSubview(calenderButton)
@@ -80,17 +104,32 @@ class HomeView: UIView {
         addSubview(collectionView)
     }
     func setUpNavigationConstraint() {
-        navigationView.snp.makeConstraints { make in
+        navigationViewStack.snp.makeConstraints { make in
             if UIDevice.current.hasNotch {make.top.equalToSuperview().offset(50)}
             else {make.top.equalToSuperview().offset(20)}
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(50)
+        }
+        eventView.snp.makeConstraints { make in
+            make.height.equalTo(36)
+        }
+        eventQuitButton.snp.makeConstraints { make in
+            make.height.width.equalTo(16)
+            make.trailing.equalToSuperview().offset(-13)
+            make.centerY.equalToSuperview()
+        }
+        eventLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
+            make.centerY.equalToSuperview()
+            make.trailing.lessThanOrEqualTo(eventQuitButton.snp.leading).offset(-16)
+        }
+        navigationView.snp.makeConstraints { make in
+            make.height.equalTo(52)
         }
         logo.snp.makeConstraints { make in
-            make.width.equalTo(145)
-            make.height.equalTo(19)
+            make.width.equalTo(136.13)
+            make.height.equalTo(18)
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(20)
+            make.leading.equalToSuperview().offset(16)
         }
         calenderButton.snp.makeConstraints { make in
             make.width.height.equalTo(24)
