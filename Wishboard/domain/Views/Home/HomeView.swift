@@ -35,7 +35,7 @@ class HomeView: UIView {
     let navigationView = UIView()
     
     let logo = UIImageView().then{
-        $0.image = Image.homeAppLogo
+        $0.image = Image.wishboardLogo
     }
     let cartButton = UIButton().then{
         $0.setImage(Image.cartIcon, for: .normal)

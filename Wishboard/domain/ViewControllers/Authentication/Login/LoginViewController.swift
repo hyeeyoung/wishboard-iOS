@@ -117,8 +117,8 @@ extension LoginViewController {
     /// 비밀번호를 잊으셨나요? 버튼 클릭 시 화면 이동
     func setLostPasswordButton() {
         loginView.lostPasswordButton.rx.tap
-            .subscribe{
-                self.lostPasswordButtonDidTap()
+            .subscribe{ [weak self] _ in
+                self?.lostPasswordButtonDidTap()
             }.disposed(by: disposeBag)
     }
     func lostPasswordButtonDidTap() {
