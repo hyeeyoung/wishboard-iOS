@@ -39,7 +39,7 @@ class FolderDetailViewController: TitleCenterViewController, Observer {
     
     func update(_ newValue: Any) {
         if let usecase = newValue as? WishItemUseCase, usecase == .delete {
-            SnackBar(self, message: .deleteItem)
+            SnackBar.shared.showSnackBar(self, message: .deleteItem)
             FolderDataManager().getFolderDetailDataManager(self.folderId, self)
         }
     }

@@ -85,7 +85,7 @@ class UploadItemViewController: UIViewController, Observer {
             setPageContents()
         case .itemParsingFail:
             wishListData.item_url = ""
-            SnackBar(self, message: .failShoppingLink)
+            SnackBar.shared.showSnackBar(self, message: .failShoppingLink)
             setPageContents()
         case .itemParsingSuccess:
             // 파싱한 아이템 정보 적용

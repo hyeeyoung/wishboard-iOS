@@ -40,7 +40,7 @@ class ScreenManager {
         
         switch family {
             case .itemModified:
-                SnackBar(tabBarController, message: .modifyItem)
+                SnackBar.shared.showSnackBar(tabBarController, message: .modifyItem)
             default:
                 fatalError()
         }

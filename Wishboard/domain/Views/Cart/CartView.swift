@@ -259,7 +259,8 @@ extension CartView {
     func deleteCartAPISuccess(_ result: APIModel<TokenResultModel>) {
         self.preVC.dismiss(animated: false)
         CartDataManager().getCartListDataManager(self)
-        SnackBar(self.preVC, message: .deleteCartItem)
+        SnackBar.shared.showSnackBar(preVC, message: .deleteCartItem)
+        WishItemObserver.shared.notify(.cartItemDelete)
     }
 }
 // MARK: - CartGesture

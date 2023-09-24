@@ -42,7 +42,7 @@ final class NetworkCheck {
             } else {
                 print("연결안됨!")
                 DispatchQueue.main.async {
-                    SnackBar(vc, message: .networkCheck)
+                    SnackBar.shared.showSnackBar(vc, message: .networkCheck)
                 }
                 
             }

@@ -58,11 +58,11 @@ class MyPageViewController: TitleLeftViewController, Observer {
         do {
             // 프로필이 수정된 경우와 비밀번호가 수정된 경우 분기처리
             if usecase == .profileModified {
-                SnackBar(self, message: .modifyProfile)
+                SnackBar.shared.showSnackBar(self, message: .modifyProfile)
                 // reload profile Data
 //                MypageDataManager().getUserInfoDataManager(self)
             } else if usecase == .passwordModified {
-                SnackBar(self, message: .modifyPassword)
+                SnackBar.shared.showSnackBar(self, message: .modifyPassword)
             }
         }
     }

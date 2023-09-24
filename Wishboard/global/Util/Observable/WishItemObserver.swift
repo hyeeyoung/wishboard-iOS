@@ -11,6 +11,7 @@ enum WishItemUseCase {
     case upload
     case delete
     case modify
+    case cartItemDelete
 }
 
 final class WishItemObserver {

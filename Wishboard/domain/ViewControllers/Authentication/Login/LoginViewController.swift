@@ -137,7 +137,7 @@ extension LoginViewController {
     }
     /// 로그인 실패했을 때
     func loginAPIFail() {
-        SnackBar(self, message: .login)
+        SnackBar.shared.showSnackBar(self, message: .login)
         loginView.loginButton.isActivate = false
     }
 }

@@ -18,7 +18,7 @@ class OnBoardingViewController: UIViewController {
         self.init()
 
         if usecase == .signOut {
-            SnackBar(self, message: .deleteUser)
+            SnackBar.shared.showSnackBar(self, message: .deleteUser)
         }
     }
     

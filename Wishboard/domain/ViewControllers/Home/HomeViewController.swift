@@ -59,9 +59,9 @@ class HomeViewController: UIViewController, Observer {
         // 케이스에 따른 스낵바 출력
         if let usecase = newValue as? WishItemUseCase {
             if usecase == .delete {
-                SnackBar(tabBarController ?? self, message: .deleteItem)
+                SnackBar.shared.showSnackBar(tabBarController ?? self, message: .deleteItem)
             } else if usecase == .upload {
-                SnackBar(tabBarController ?? self, message: .addItem)
+                SnackBar.shared.showSnackBar(tabBarController ?? self, message: .addItem)
             }
             // Data reload
             WishListDataManager().wishListDataManager(self.homeView, self)

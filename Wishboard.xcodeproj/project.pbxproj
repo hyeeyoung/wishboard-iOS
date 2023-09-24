@@ -87,6 +87,11 @@
 		2360096028DA2297001FB107 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360095F28DA2297001FB107 /* EmptyView.swift */; };
 		2360FF5C28DCB31600E481A6 /* SnackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360FF5B28DCB31600E481A6 /* SnackBar.swift */; };
 		2360FF5E28DCC64100E481A6 /* ScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360FF5D28DCC64100E481A6 /* ScreenManager.swift */; };
+		2362CFAE2AC081E2002B0B6D /* ErrorBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2362CFAD2AC081E2002B0B6D /* ErrorBar.swift */; };
+		2362CFAF2AC0820A002B0B6D /* ErrorBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2362CFAD2AC081E2002B0B6D /* ErrorBar.swift */; };
+		2362CFB42AC0842C002B0B6D /* SnackBarMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2362CFB32AC0842C002B0B6D /* SnackBarMessage.swift */; };
+		2362CFB92AC08477002B0B6D /* SnackBarMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2362CFB32AC0842C002B0B6D /* SnackBarMessage.swift */; };
+		2362CFBC2AC089A1002B0B6D /* SnackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2362CFBB2AC089A1002B0B6D /* SnackBar.swift */; };
 		23630951291905E200E38885 /* Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23630950291905E200E38885 /* Vibrate.swift */; };
 		236309522919085600E38885 /* Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23630950291905E200E38885 /* Vibrate.swift */; };
 		2364B79E29D40426006459EF /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2364B79D29D40426006459EF /* Montserrat-SemiBold.ttf */; };
@@ -118,7 +123,6 @@
 		236FE93128DF8599006142DB /* SUIT-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 236FE90128DF7BE0006142DB /* SUIT-Bold.ttf */; };
 		236FE93428DF859D006142DB /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2374789528D1C9D600CF941A /* Montserrat-Regular.ttf */; };
 		236FE93828DF85A4006142DB /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360095F28DA2297001FB107 /* EmptyView.swift */; };
-		236FE93928DF85A4006142DB /* SnackBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360FF5B28DCB31600E481A6 /* SnackBar.swift */; };
 		236FE93A28DF85A4006142DB /* SetNotificationDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2350FADE28DB9BEA00981B8F /* SetNotificationDate.swift */; };
 		236FE93C28DF85AA006142DB /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5518A28C6B45C00D81B5F /* String.swift */; };
 		236FE93E28DF85B0006142DB /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2374789D28D1EDF600CF941A /* PopUpViewController.swift */; };
@@ -348,6 +352,9 @@
 		2360095F28DA2297001FB107 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		2360FF5B28DCB31600E481A6 /* SnackBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBar.swift; sourceTree = "<group>"; };
 		2360FF5D28DCC64100E481A6 /* ScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenManager.swift; sourceTree = "<group>"; };
+		2362CFAD2AC081E2002B0B6D /* ErrorBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorBar.swift; sourceTree = "<group>"; };
+		2362CFB32AC0842C002B0B6D /* SnackBarMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBarMessage.swift; sourceTree = "<group>"; };
+		2362CFBB2AC089A1002B0B6D /* SnackBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackBar.swift; sourceTree = "<group>"; };
 		23630950291905E200E38885 /* Vibrate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibrate.swift; sourceTree = "<group>"; };
 		2364B79D29D40426006459EF /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		2364B7A329D40F61006459EF /* ModifyPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyPasswordViewController.swift; sourceTree = "<group>"; };
@@ -1031,6 +1038,23 @@
 			path = ItemModel;
 			sourceTree = "<group>";
 		};
+		2362CFB22AC08413002B0B6D /* SnackBar */ = {
+			isa = PBXGroup;
+			children = (
+				2360FF5B28DCB31600E481A6 /* SnackBar.swift */,
+				2362CFB32AC0842C002B0B6D /* SnackBarMessage.swift */,
+			);
+			path = SnackBar;
+			sourceTree = "<group>";
+		};
+		2362CFBA2AC08999002B0B6D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2362CFBB2AC089A1002B0B6D /* SnackBar.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		2364B7A229D40F3F006459EF /* ModifyPassword */ = {
 			isa = PBXGroup;
 			children = (
@@ -1164,6 +1188,7 @@
 		23C3113D28DF680300A636F6 /* Share Extension */ = {
 			isa = PBXGroup;
 			children = (
+				2362CFBA2AC08999002B0B6D /* Utils */,
 				230180E428E50B6D001034FC /* Services */,
 				230DBFA628E106E000E9AED6 /* View */,
 				23C3114028DF680300A636F6 /* MainInterface.storyboard */,
@@ -1230,6 +1255,7 @@
 		23C9567D28C67FD000D88536 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				2362CFB22AC08413002B0B6D /* SnackBar */,
 				23203DDB2A925E84009BB07B /* UseCase */,
 				23A48E6D28E9134400FD77A7 /* UtilManager */,
 				23A48E6C28E9132C00FD77A7 /* BaseViewControllers */,
@@ -1239,8 +1265,8 @@
 				23C3113228DF62D700A636F6 /* Observable */,
 				2360095F28DA2297001FB107 /* EmptyView.swift */,
 				2350FADE28DB9BEA00981B8F /* SetNotificationDate.swift */,
-				2360FF5B28DCB31600E481A6 /* SnackBar.swift */,
 				239ED94B28E5D8A500CBCCAD /* NetworkCheck.swift */,
+				2362CFAD2AC081E2002B0B6D /* ErrorBar.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1834,9 +1860,11 @@
 				23A48E7128E92E7D00FD77A7 /* NetworkCheck.swift in Sources */,
 				2341A3E92A81059E000191B8 /* BaseRouter.swift in Sources */,
 				236FE92228DF8592006142DB /* UITextField.swift in Sources */,
+				2362CFB92AC08477002B0B6D /* SnackBarMessage.swift in Sources */,
 				236FE91D28DF8592006142DB /* PaddingLabel.swift in Sources */,
 				23E0ACC828E7B563008C35C2 /* KeyboardViewController.swift in Sources */,
 				23CB5C502AA34B40007A0900 /* Observer.swift in Sources */,
+				2362CFBC2AC089A1002B0B6D /* SnackBar.swift in Sources */,
 				235129DA28F67BAE00489CAD /* BottomSheetKeyboardViewController.swift in Sources */,
 				23F1F21C293D7E7D0074C4D0 /* UILabel.swift in Sources */,
 				23B351852A6CF9D600FD7A14 /* RefreshInput.swift in Sources */,
@@ -1850,10 +1878,10 @@
 				23BDC2452944E7B1004338E0 /* Optional.swift in Sources */,
 				23B351842A6CF74200FD7A14 /* RefreshDataManager.swift in Sources */,
 				236FE92128DF8592006142DB /* UIColor.swift in Sources */,
+				2362CFAF2AC0820A002B0B6D /* ErrorBar.swift in Sources */,
 				2351859A29A6F8540004FCB4 /* Image.swift in Sources */,
 				235D550728EBD2CE00314D62 /* ItemParsingModel.swift in Sources */,
 				236FE94228DF888A006142DB /* FolderCollectionViewCell.swift in Sources */,
-				236FE93928DF85A4006142DB /* SnackBar.swift in Sources */,
 				23B885EC28E5A9B400142FFA /* UploadItemInput.swift in Sources */,
 				23CBAFDC28DFDF8500B41513 /* NewFolderViewController.swift in Sources */,
 				236FE91F28DF8592006142DB /* UIView.swift in Sources */,
@@ -1955,6 +1983,7 @@
 				23CF158628FD630E000D012F /* UIDevice.swift in Sources */,
 				23D7901628CB172900246109 /* CalenderNotiTableViewCell.swift in Sources */,
 				23D4C66428D8E96700EA7F98 /* LostPasswordViewController.swift in Sources */,
+				2362CFB42AC0842C002B0B6D /* SnackBarMessage.swift in Sources */,
 				23134D3F29B222BF00238536 /* RefreshDataManager.swift in Sources */,
 				23C5AB4928CAA23300A7E977 /* MyPageView.swift in Sources */,
 				238AA72D29CD72150086DF76 /* ItemService.swift in Sources */,
@@ -1990,6 +2019,7 @@
 				23D5517F28C698D200D81B5F /* LoginView.swift in Sources */,
 				23C8A1C028C9F23E003ABFE9 /* NavigationBar.swift in Sources */,
 				23C9567B28C67B9D00D88536 /* OnBoardingTableViewCell.swift in Sources */,
+				2362CFAE2AC081E2002B0B6D /* ErrorBar.swift in Sources */,
 				237478A228D2008300CF941A /* SetFolderBottomSheetViewController.swift in Sources */,
 				233C34BE29C75B10005DFA39 /* MultiMoyaService.swift in Sources */,
 				23C5AB4B28CAA24300A7E977 /* MyPageViewController.swift in Sources */,
@@ -2113,7 +2143,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202309182052;
+				CURRENT_PROJECT_VERSION = 202309212241;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Share Extension/Info.plist";
@@ -2126,7 +2156,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "gomin.Wishboard.Share-Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2142,7 +2172,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202309182052;
+				CURRENT_PROJECT_VERSION = 202309212241;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Share Extension/Info.plist";
@@ -2155,7 +2185,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "gomin.Wishboard.Share-Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2291,7 +2321,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Wishboard/Wishboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202309182052;
+				CURRENT_PROJECT_VERSION = 202309212241;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2308,7 +2338,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = gomin.Wishboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2327,7 +2357,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Wishboard/Wishboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202309182052;
+				CURRENT_PROJECT_VERSION = 202309212241;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wishboard/Info.plist;
@@ -2343,7 +2373,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = gomin.Wishboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

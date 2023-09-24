@@ -193,14 +193,14 @@ extension FolderViewController {
     // MARK: 폴더 추가 API
     func addFolderAPISuccess(_ result: APIModel<ResultModel>) {
         self.dismiss(animated: false)
-        SnackBar(self, message: .addFolder)
+        SnackBar.shared.showSnackBar(self, message: .addFolder)
         FolderDataManager().getFolderDataManager(self)
         print(result.message)
     }
     // MARK: 폴더명 수정 API
     func modifyFolderAPISuccess(_ result: APIModel<ResultModel>) {
         self.dismiss(animated: false)
-        SnackBar(self, message: .modifyFolder)
+        SnackBar.shared.showSnackBar(self, message: .modifyFolder)
         FolderDataManager().getFolderDataManager(self)
         print(result.message)
     }
@@ -210,7 +210,7 @@ extension FolderViewController {
     // MARK: 폴더 삭제 API
     func deleteFolderAPISuccess(_ result: APIModel<ResultModel>) {
         self.dismiss(animated: false)
-        SnackBar(self, message: .deleteFolder)
+        SnackBar.shared.showSnackBar(self, message: .deleteFolder)
         FolderDataManager().getFolderDataManager(self)
         print(result.message)
     }

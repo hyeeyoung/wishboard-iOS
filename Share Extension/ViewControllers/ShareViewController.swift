@@ -165,7 +165,7 @@ class ShareViewController: UIViewController {
         UIDevice.vibrate()
         // 만약 상품명 또는 가격이 비어있을 시
         if self.itemName == nil || self.itemPrice == nil {
-            SnackBar(self, message: .emptyItemContent)
+            SnackBar.shared.showSnackBar(self, message: .emptyItemContent)
             return
         }
         
@@ -272,7 +272,7 @@ extension ShareViewController {
         if let itemPrice = result.data?.item_price.nilIfEmpty {self.itemPrice = itemPrice}
         
         if self.itemImg == nil || self.itemName == nil && self.itemPrice == nil {
-            SnackBar(self, message: .failShoppingLink)
+            SnackBar.shared.showSnackBar(self, message: .failShoppingLink)
             FolderDataManager().getFolderListDataManager(self)
             
             shareView.completeButton.isActivate = false
@@ -296,7 +296,7 @@ extension ShareViewController {
         FolderDataManager().getFolderListDataManager(self)
     }
     func getItemDataAPIFail() {
-        SnackBar(self, message: .failShoppingLink)
+        SnackBar.shared.showSnackBar(self, message: .failShoppingLink)
         
         shareView.completeButton.isActivate = false
     }
@@ -317,7 +317,7 @@ extension ShareViewController {
         lottieView.isHidden = true
         
         WishItemObserver.shared.notify(.upload)
-        SnackBar(self, message: .addItem)
+        SnackBar.shared.showSnackBar(self, message: .addItem)
     }
     func uploadItem500Error() {
 //        lottieView.isHidden = true

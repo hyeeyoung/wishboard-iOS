@@ -83,12 +83,12 @@ extension NotiView: UITableViewDelegate, UITableViewDataSource {
                 ScreenManager.shared.linkTo(viewcontroller: preVC, urlStr)
             } else {
                 DispatchQueue.main.async {
-                    SnackBar(self.preVC, message: .ShoppingLink)
+                    SnackBar.shared.showSnackBar(self.preVC, message: .ShoppingLink)
                 }
             }
         } else {
             DispatchQueue.main.async {
-                SnackBar(self.preVC, message: .ShoppingLink)
+                SnackBar.shared.showSnackBar(self.preVC, message: .ShoppingLink)
             }
         }
         // 읽음 처리

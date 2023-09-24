@@ -44,7 +44,7 @@ class ItemDetailViewController: UIViewController, Observer {
     func update(_ newValue: Any) {
         ItemDataManager().getItemDetailDataManager(self.itemId, self)
         if let usecase = newValue as? WishItemUseCase {
-            SnackBar(self, message: .modifyItem)
+            SnackBar.shared.showSnackBar(self, message: .modifyItem)
         }
     }
     
