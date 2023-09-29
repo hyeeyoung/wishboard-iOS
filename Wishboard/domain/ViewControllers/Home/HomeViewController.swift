@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MaterialComponents.MaterialBottomSheet
 
 class HomeViewController: UIViewController, Observer {
     var homeView: HomeView!
@@ -14,6 +15,11 @@ class HomeViewController: UIViewController, Observer {
     // 이벤트뷰 관련 Properties
     let koreanTimeZone = TimeZone(identifier: "Asia/Seoul")!
     let koreanCalendar = Calendar(identifier: .gregorian)
+    
+    // Properties
+    var wishListData: [WishListModel] = []
+    let emptyMessage = "앗, 아이템이 없어요!\n갖고 싶은 아이템을 등록해보세요!"
+    var refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,17 +32,18 @@ class HomeViewController: UIViewController, Observer {
         
         homeView = HomeView()
         self.view.addSubview(homeView)
-        homeView.setViewController(self)
         
         let tabBarHeight = self.tabBarController?.tabBar.frame.height ?? 0
         homeView.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
             make.bottom.equalToSuperview().offset(-tabBarHeight)
         }
+        homeView.collectionView.dataSource = self
+        homeView.collectionView.delegate = self
         
         // 첫 로그인일 시 앱 이용방법 호출
         let isFirstLogin = UserManager.isFirstLogin ?? true
-        if isFirstLogin {homeView.showBottomSheet(self)}
+        if isFirstLogin {showBottomSheet()}
         
         self.homeView.cartButton.addTarget(self, action: #selector(goToCart), for: .touchUpInside)
         self.homeView.calenderButton.addTarget(self, action: #selector(goCalenderDidTap), for: .touchUpInside)
@@ -46,7 +53,9 @@ class HomeViewController: UIViewController, Observer {
         observer.bind(self)
         
         // DATA
-        WishListDataManager().wishListDataManager(self.homeView, self)
+        WishListDataManager.shared.wishListDataManager(self)
+        // Init RefreshControl
+        initRefresh()
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
@@ -64,8 +73,18 @@ class HomeViewController: UIViewController, Observer {
                 SnackBar.shared.showSnackBar(tabBarController ?? self, message: .addItem)
             }
             // Data reload
-            WishListDataManager().wishListDataManager(self.homeView, self)
+            WishListDataManager.shared.wishListDataManager(self)
         }
+    }
+    // Bottom Sheet
+    func showBottomSheet() {
+        let vc = HowToViewController()
+        vc.preVC = self
+        let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: vc)
+        bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = 610
+        bottomSheet.dismissOnDraggingDownSheet = false
+        
+        present(bottomSheet, animated: true, completion: nil)
     }
     // MARK: - Actions & Functions
     /// 장바구니 이동
@@ -167,24 +186,101 @@ class HomeViewController: UIViewController, Observer {
         UIDevice.vibrate()
     }
 }
-// MARK: - API Success
+// MARK: - WishList CollectionView delegate
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let count = wishListData.count
+        EmptyView().setEmptyView(self.emptyMessage, homeView.collectionView, count)
+        return count
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WishListCollectionViewCell.identifier,
+                                                            for: indexPath)
+                as? WishListCollectionViewCell else{ fatalError() }
+        let itemIdx = indexPath.item
+        cell.setUpData(self.wishListData[itemIdx])
+        
+        let cartGesture = HomeCartGesture(target: self, action: #selector(cartButtonDidTap(_:)))
+        cartGesture.data = self.wishListData[itemIdx]
+        cell.cartButton.addGestureRecognizer(cartGesture)
+        
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        UIDevice.vibrate()
+        
+        let itemIdx = indexPath.item
+        let vc = ItemDetailViewController()
+        vc.itemId = self.wishListData[itemIdx].item_id
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+// MARK: - Cart
 extension HomeViewController {
-    // MARK: 알림 허용 팝업창
+    // 장바구니 추가, 삭제
+    @objc func cartButtonDidTap(_ sender: HomeCartGesture) {
+        UIDevice.vibrate()
+        if let data = sender.data {
+            if data.cart_state == 1 {
+                CartDataManager().deleteCartDataManager(data.item_id!, self)
+            } else {
+                let addCartInput = AddCartInput(item_id: data.item_id)
+                CartDataManager().addCartDataManager(addCartInput, self)
+            }
+        }
+    }
+}
+// MARK: - Refresh
+extension HomeViewController {
+    func initRefresh() {
+        refreshControl.addTarget(self, action: #selector(refreshTable(refresh:)), for: .valueChanged)
+        
+        refreshControl.backgroundColor = .white
+        refreshControl.tintColor = .gray_700
+        
+        homeView.collectionView.refreshControl = refreshControl
+    }
+    
+    @objc func refreshTable(refresh: UIRefreshControl) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            // DATA reload
+            WishListDataManager.shared.wishListDataManager(self)
+            self.homeView.collectionView.reloadData()
+            refresh.endRefreshing()
+        }
+    }
+}
+// MARK: - API
+extension HomeViewController {
+    /// 위시리스트 조회 API 성공
+    func wishListAPISuccess(_ result: [WishListModel]) {
+        self.wishListData = result
+        // 애니메이션과 함께 reload
+        UIView.transition(with: homeView.collectionView,
+                                  duration: 0.35,
+                                  options: .transitionCrossDissolve,
+                                  animations: { () -> Void in
+            self.homeView.collectionView.reloadData()},
+                                completion: nil);
+        refreshControl.endRefreshing()
+    }
+    /// 알림 허용 팝업창
     func switchNotificationAPISuccess(_ result: APIModel<TokenResultModel>) {
         self.dismiss(animated: false)
         print(result.message)
     }
+    /// 위시리스트 조회 실패
     func wishListAPIFail() {
-        WishListDataManager().wishListDataManager(self.homeView, self)
+        WishListDataManager.shared.wishListDataManager(self)
     }
-    // MARK: 카트 추가 API
+    /// 카트 추가 API
     func addCartAPISuccess(_ result: APIModel<TokenResultModel>) {
-        WishListDataManager().wishListDataManager(self.homeView, self)
+        WishListDataManager.shared.wishListDataManager(self)
         print(result.message)
     }
-    // MARK: 장바구니 삭제 API
+    /// 장바구니 삭제 API
     func deleteCartAPISuccess(_ result: APIModel<TokenResultModel>) {
-        WishListDataManager().wishListDataManager(self.homeView, self)
+        WishListDataManager.shared.wishListDataManager(self)
         print(result.message)
     }
 }
