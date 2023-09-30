@@ -10,15 +10,15 @@ import RxCocoa
 import RxSwift
 
 /*
- 이벤트뷰 로직
  앱 이용방법 로직
- 아이템 클릭 시 상세화면으로 이동 (VC)
  */
 
 final class HomeViewModel: BaseViewModel {
     
     var wishList: [WishListModel]
     var reloadCollectionView = PublishRelay<Void>()
+    var performAppGuide = PublishRelay<Void>()
+    
     private(set) var input: Input
     
     struct Input {
@@ -33,6 +33,7 @@ final class HomeViewModel: BaseViewModel {
     override init() {
         self.wishList = []
         self.input = Input(cartButtonTap: PublishSubject())
+        
         super.init()
                 
         // cartButtonTap 이벤트를 구독하여 장바구니 추가/삭제 동작 수행
@@ -41,6 +42,9 @@ final class HomeViewModel: BaseViewModel {
                 self?.handleCartButtonTap(cartState: cartState, itemId: itemId)
             })
             .disposed(by: disposeBag)
+        
+        checkFirstLoginUser()
+        setToken()
     }
     
     func transform(_ input: Input) -> Output {
@@ -64,11 +68,13 @@ final class HomeViewModel: BaseViewModel {
         return Output(wishListSuccessResponse: wishListSuccessResponse,
                       wishListFailCode: wishListFailResponse)
     }
+    
     /// 위시리스트를 새로 refresh 하는 메서드
     func refreshWishList() -> Observable<[WishListModel]> {
         let wishListResponseObservable = WishListDataManager.shared.getWishListDataManager()
         return reloadWishList(wishListResponseObservable)
     }
+    
     /// 위시리스트를 reload
     private func reloadWishList(_ wishListResponseObservable: Observable<Any>) -> Observable<[WishListModel]> {
         let wishListSuccessResponse = wishListResponseObservable
@@ -124,5 +130,23 @@ final class HomeViewModel: BaseViewModel {
             .disposed(by: self.disposeBag)
     }
     
+    /// 회원가입 후, 첫 로그인인 지 구분
+    private func checkFirstLoginUser() {
+        // 첫 로그인일 시 앱 이용방법 호출
+        let isFirstLogin = UserManager.isFirstLogin ?? true
+        if isFirstLogin {
+            self.performAppGuide.accept(Void())
+        }
+    }
     
+    /// 로그인 성공 후 앱과 Extension에 토큰 정보 저장
+    private func setToken() {
+        let accessToken = UserManager.accessToken
+        let refreshToken = UserManager.refreshToken
+        
+        let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
+        defaults?.set(accessToken, forKey: "accessToken")
+        defaults?.set(refreshToken, forKey: "refreshToken")
+        defaults?.synchronize()
+    }
 }

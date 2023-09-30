@@ -27,34 +27,15 @@ class HomeViewController: UIViewController, Observer {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setToken() 
-
-        self.view.backgroundColor = .white
-        self.navigationController?.isNavigationBarHidden = true
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
-        self.tabBarController?.tabBar.isHidden = false
         
-        homeView = HomeView()
-        self.view.addSubview(homeView)
-        
-        let tabBarHeight = self.tabBarController?.tabBar.frame.height ?? 0
-        homeView.snp.makeConstraints { make in
-            make.leading.trailing.top.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-tabBarHeight)
-        }
-        homeView.collectionView.dataSource = self
-        homeView.collectionView.delegate = self
-        
-        // 첫 로그인일 시 앱 이용방법 호출
-        let isFirstLogin = UserManager.isFirstLogin ?? true
-        if isFirstLogin {showBottomSheet()}
-        
-        observer.bind(self)
-        
+        setView()
         setTapEvent()
+        
         // Init RefreshControl
         initRefresh()
         
+        // Bind
+        observer.bind(self)
         bind()
     }
     
@@ -88,6 +69,13 @@ class HomeViewController: UIViewController, Observer {
         viewModel.reloadCollectionView
             .subscribe(onNext: { [weak self] wishList in
                 self?.reloadWishListCollectionView()
+            })
+            .disposed(by: disposeBag)
+        
+        // 회원가입 후 첫 로그인일 시 앱 이용방법 호출
+        viewModel.performAppGuide
+            .subscribe(onNext: { [weak self] wishList in
+                self?.showAppGuideBottomSheet()
             })
             .disposed(by: disposeBag)
         
@@ -143,8 +131,29 @@ class HomeViewController: UIViewController, Observer {
         
     }
     
-    // Bottom Sheet
-    func showBottomSheet() {
+    /// View 관련 정의
+    func setView() {
+        // TabViewController, NavigationViewController 관련 정의
+        self.view.backgroundColor = .white
+        self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        self.tabBarController?.tabBar.isHidden = false
+        
+        // HomeView 관련 정의
+        homeView = HomeView()
+        self.view.addSubview(homeView)
+        
+        let tabBarHeight = self.tabBarController?.tabBar.frame.height ?? 0
+        homeView.snp.makeConstraints { make in
+            make.leading.trailing.top.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-tabBarHeight)
+        }
+        homeView.collectionView.dataSource = self
+        homeView.collectionView.delegate = self
+    }
+    
+    /// 앱 이용방법 바텀시트 보여주기
+    func showAppGuideBottomSheet() {
         let vc = HowToViewController()
         vc.preVC = self
         let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: vc)
@@ -180,16 +189,16 @@ class HomeViewController: UIViewController, Observer {
     }
     
     @objc func cancelButtonDidTap() {
+        UIDevice.vibrate()
         // 앱 이용방법 더는 안 띄우게
         UserManager.isFirstLogin = false
         MypageDataManager().switchNotificationDataManager(false, self)
-        UIDevice.vibrate()
     }
     @objc func okButtonDidTap() {
+        UIDevice.vibrate()
         // 앱 이용방법 더는 안 띄우게
         UserManager.isFirstLogin = false
         MypageDataManager().switchNotificationDataManager(true, self)
-        UIDevice.vibrate()
     }
 }
 // MARK: - WishList CollectionView delegate
@@ -331,8 +340,8 @@ extension HomeViewController {
 }
 // MARK: - API
 extension HomeViewController {
+    /// 애니메이션과 함께 reload
     func reloadWishListCollectionView() {
-        // 애니메이션과 함께 reload
         UIView.transition(with: homeView.collectionView,
                                   duration: 0.35,
                                   options: .transitionCrossDissolve,
@@ -349,17 +358,5 @@ extension HomeViewController {
     /// 위시리스트 조회 실패
     func wishListAPIFail() {
 //        WishListDataManager.shared.wishListDataManager(self)
-    }
-}
-// MARK: - Token User Defaults for Share Extension
-extension HomeViewController {
-    func setToken() {
-        let accessToken = UserManager.accessToken
-        let refreshToken = UserManager.refreshToken
-        
-        let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
-        defaults?.set(accessToken, forKey: "accessToken")
-        defaults?.set(refreshToken, forKey: "refreshToken")
-        defaults?.synchronize()
     }
 }
