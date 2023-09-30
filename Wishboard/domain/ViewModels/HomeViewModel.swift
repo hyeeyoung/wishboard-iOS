@@ -10,12 +10,9 @@ import RxCocoa
 import RxSwift
 
 /*
- 위시리스트 조회
- 카트 추가/삭제 로직
  이벤트뷰 로직
  앱 이용방법 로직
  아이템 클릭 시 상세화면으로 이동 (VC)
- refresh 로직
  */
 
 final class HomeViewModel: BaseViewModel {
