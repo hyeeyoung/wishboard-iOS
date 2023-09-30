@@ -236,6 +236,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     let itemIdx = indexPath.item
                     let itemData = self?.viewModel.wishList[itemIdx]
                     
+                    print("💗", itemData?.item_id)
+                    
                     let cartState = itemData?.cart_state ?? 0
                     let itemId = itemData?.item_id ?? -1
                     let buttonTapData = (cartState: cartState, itemId: itemId)

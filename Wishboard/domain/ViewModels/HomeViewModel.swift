@@ -108,23 +108,31 @@ final class HomeViewModel: BaseViewModel {
     /// 장바구니에 아이템 추가하는 메서드
     private func addCartItem(_ itemId: Int) {
         let addCartInput = AddCartInput(item_id: itemId)
-        CartDataManager().addCartDataManager2(addCartInput)
-        
-        refreshWishList()
-            .subscribe(onNext: { [weak self] _ in
-                print("장바구니 추가")
-                self?.reloadCollectionView.accept(Void())
+        CartDataManager2.shared.addCartDataManager2(addCartInput)
+            .subscribe(onNext: { [weak self] response in
+                if response {
+                    print("장바구니 추가")
+                    self?.refreshWishListAndReload()
+                }
             })
             .disposed(by: self.disposeBag)
     }
     
     /// 장바구니에서 아이템 삭제하는 메서드
     private func deleteCartItem(_ itemId: Int) {
-        CartDataManager().deleteCartDataManager(itemId, self)
-        
+        CartDataManager2.shared.deleteCartDataManager2(itemId)
+            .subscribe(onNext: { [weak self] response in
+                if response {
+                    print("장바구니 삭제")
+                    self?.refreshWishListAndReload()
+                }
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    private func refreshWishListAndReload() {
         refreshWishList()
             .subscribe(onNext: { [weak self] _ in
-                print("장바구니 삭제")
                 self?.reloadCollectionView.accept(Void())
             })
             .disposed(by: self.disposeBag)

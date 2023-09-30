@@ -7,6 +7,8 @@
 
 import Foundation
 import Alamofire
+import RxCocoa
+import RxSwift
 
 class CartDataManager {
     // MARK: - 장바구니 조회
@@ -65,12 +67,38 @@ class CartDataManager {
     
 }
 
-extension CartDataManager {
-    func addCartDataManager2(_ parameter: AddCartInput) {
+class CartDataManager2 {
+    static let shared = CartDataManager2()
+    private init() { }
+    
+    func addCartDataManager2(_ parameter: AddCartInput) -> Observable<Bool> {
         let url = Storage().BaseURL + "/cart"
         let request = AlamofireBaseService.shared.requestWithBody(url, .post, parameter, nil)
-        AlamofireBaseService.shared.responseDecoded(request, APIModel<TokenResultModel>.self) { result in
-            print(result)
+        
+        return Observable.create { observer in
+            AlamofireBaseService.shared.responseDecoded(request, APIModel<TokenResultModel>.self) { result in
+                let response = result.success
+                observer.onNext(response)
+                observer.onCompleted()
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func deleteCartDataManager2(_ itemId: Int) -> Observable<Bool> {
+        let url = Storage().BaseURL + "/cart/\(itemId)"
+        let request = AlamofireBaseService.shared.requestWithParameter(url, .delete, nil)
+        
+        return Observable.create { observer in
+            AlamofireBaseService.shared.responseDecoded(request, APIModel<TokenResultModel>.self) { result in
+                let response = result.success
+                observer.onNext(response)
+                observer.onCompleted()
+            }
+            
+            return Disposables.create()
         }
     }
 }
+
