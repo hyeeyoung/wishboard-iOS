@@ -38,7 +38,7 @@ class CartDataManager {
         let request = AlamofireBaseService.shared.requestWithBody(url, .post, parameter, viewcontroller)
         AlamofireBaseService.shared.responseDecoded(request, APIModel<TokenResultModel>.self) { result in
             if let viewcontroller = viewcontroller as? HomeViewController {
-                viewcontroller.addCartAPISuccess(result)
+//                viewcontroller.addCartAPISuccess(result)
             } else if let viewcontroller = viewcontroller as? FolderDetailViewController {
                 viewcontroller.addCartAPISuccess(result)
             } else {return}
@@ -55,7 +55,7 @@ class CartDataManager {
             if let cartView = viewcontroller as? CartView {
                 cartView.deleteCartAPISuccess(result)
             } else if let viewcontroller = viewcontroller as? HomeViewController {
-                viewcontroller.deleteCartAPISuccess(result)
+//                viewcontroller.deleteCartAPISuccess(result)
             } else if let viewcontroller = viewcontroller as? FolderDetailViewController {
                 viewcontroller.deleteCartAPISuccess(result)
             } else {return}
@@ -63,4 +63,14 @@ class CartDataManager {
         
     }
     
+}
+
+extension CartDataManager {
+    func addCartDataManager2(_ parameter: AddCartInput) {
+        let url = Storage().BaseURL + "/cart"
+        let request = AlamofireBaseService.shared.requestWithBody(url, .post, parameter, nil)
+        AlamofireBaseService.shared.responseDecoded(request, APIModel<TokenResultModel>.self) { result in
+            print(result)
+        }
+    }
 }

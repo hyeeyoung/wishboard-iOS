@@ -15,8 +15,6 @@ final class LoginViewModel2: BaseViewModel {
     var email: String?
     var password: String?
     
-    var disposeBag = DisposeBag()
-    
     struct Input {
         var emailText: Observable<String>
         var passwordText: Observable<String>

@@ -19,8 +19,6 @@ final class MyPageViewModel: BaseViewModel {
         return logoutButtonTapSubject.asObservable()
     }
     
-    var disposeBag = DisposeBag()
-    
     struct Input {
         var notiSwitchObservable: Observable<Bool>
     }

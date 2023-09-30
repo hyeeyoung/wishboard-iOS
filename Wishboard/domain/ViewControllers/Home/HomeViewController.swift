@@ -7,9 +7,14 @@
 
 import UIKit
 import MaterialComponents.MaterialBottomSheet
+import RxCocoa
+import RxSwift
 
 class HomeViewController: UIViewController, Observer {
     var homeView: HomeView!
+    var viewModel = HomeViewModel()
+    var disposeBag = DisposeBag()
+    
     var observer = WishItemObserver.shared
     
     // 이벤트뷰 관련 Properties
@@ -17,7 +22,6 @@ class HomeViewController: UIViewController, Observer {
     let koreanCalendar = Calendar(identifier: .gregorian)
     
     // Properties
-    var wishListData: [WishListModel] = []
     let emptyMessage = "앗, 아이템이 없어요!\n갖고 싶은 아이템을 등록해보세요!"
     var refreshControl = UIRefreshControl()
 
@@ -52,10 +56,10 @@ class HomeViewController: UIViewController, Observer {
         
         observer.bind(self)
         
-        // DATA
-        WishListDataManager.shared.wishListDataManager(self)
         // Init RefreshControl
         initRefresh()
+        
+        bind()
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
@@ -64,6 +68,34 @@ class HomeViewController: UIViewController, Observer {
         // 이벤트뷰
         performEventView()
     }
+    
+    func bind() {
+        let input = HomeViewModel.Input(cartButtonTap: PublishSubject<(cartState: Int, itemId: Int)>())
+        let output = viewModel.transform(input)
+        
+        // 위시리스트 조회 성공 시 데이터를 처리
+        output.wishListSuccessResponse
+            .subscribe(onNext: { [weak self] wishList in
+                self?.reloadWishListCollectionView()
+            })
+            .disposed(by: disposeBag)
+        
+        // 위시리스트 조회 실패 시 에러 코드 처리
+        output.wishListFailCode
+            .subscribe(onNext: { errorCode in
+                print("위시리스트 조회: \(errorCode) Error")
+            })
+            .disposed(by: disposeBag)
+        
+        // 위시리스트 조회 성공 시 CollectionView Reload
+        viewModel.reloadCollectionView
+            .subscribe(onNext: { [weak self] wishList in
+                self?.reloadWishListCollectionView()
+            })
+            .disposed(by: disposeBag)
+        
+    }
+    
     func update(_ newValue: Any) {
         // 케이스에 따른 스낵바 출력
         if let usecase = newValue as? WishItemUseCase {
@@ -73,7 +105,11 @@ class HomeViewController: UIViewController, Observer {
                 SnackBar.shared.showSnackBar(tabBarController ?? self, message: .addItem)
             }
             // Data reload
-            WishListDataManager.shared.wishListDataManager(self)
+            viewModel.refreshWishList()
+                .subscribe(onNext: { [weak self] wishList in
+                    self?.reloadWishListCollectionView()
+                })
+                .disposed(by: self.disposeBag)
         }
     }
     // Bottom Sheet
@@ -189,7 +225,7 @@ class HomeViewController: UIViewController, Observer {
 // MARK: - WishList CollectionView delegate
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let count = wishListData.count
+        let count = viewModel.wishList.count
         EmptyView().setEmptyView(self.emptyMessage, homeView.collectionView, count)
         return count
     }
@@ -197,12 +233,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WishListCollectionViewCell.identifier,
                                                             for: indexPath)
                 as? WishListCollectionViewCell else{ fatalError() }
-        let itemIdx = indexPath.item
-        cell.setUpData(self.wishListData[itemIdx])
         
-        let cartGesture = HomeCartGesture(target: self, action: #selector(cartButtonDidTap(_:)))
-        cartGesture.data = self.wishListData[itemIdx]
-        cell.cartButton.addGestureRecognizer(cartGesture)
+        setWishItem(cell, collectionView, indexPath)
         
         return cell
     }
@@ -211,25 +243,31 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         let itemIdx = indexPath.item
         let vc = ItemDetailViewController()
-        vc.itemId = self.wishListData[itemIdx].item_id
+        vc.itemId = viewModel.wishList[itemIdx].item_id
         navigationController?.pushViewController(vc, animated: true)
     }
-}
-// MARK: - Cart
-extension HomeViewController {
-    // 장바구니 추가, 삭제
-    @objc func cartButtonDidTap(_ sender: HomeCartGesture) {
-        UIDevice.vibrate()
-        if let data = sender.data {
-            if data.cart_state == 1 {
-                CartDataManager().deleteCartDataManager(data.item_id!, self)
-            } else {
-                let addCartInput = AddCartInput(item_id: data.item_id)
-                CartDataManager().addCartDataManager(addCartInput, self)
-            }
-        }
+    
+    /// 위시아이템의 UI 설정 및 장바구니 버튼 탭 이벤트 관리
+    func setWishItem(_ cell: WishListCollectionViewCell, _ collectionView: UICollectionView, _ indexPath: IndexPath) {
+        cell.setUpData(viewModel.wishList[indexPath.item])
+        
+        cell.cartButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                if let indexPath = collectionView.indexPath(for: cell) {
+                    let itemIdx = indexPath.item
+                    let itemData = self?.viewModel.wishList[itemIdx]
+                    
+                    let cartState = itemData?.cart_state ?? 0
+                    let itemId = itemData?.item_id ?? -1
+                    let buttonTapData = (cartState: cartState, itemId: itemId)
+                    
+                    self?.viewModel.input.cartButtonTap.onNext(buttonTapData)
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }
+
 // MARK: - Refresh
 extension HomeViewController {
     func initRefresh() {
@@ -243,24 +281,25 @@ extension HomeViewController {
     
     @objc func refreshTable(refresh: UIRefreshControl) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            // DATA reload
-            WishListDataManager.shared.wishListDataManager(self)
-            self.homeView.collectionView.reloadData()
+            self.viewModel.refreshWishList()
+                .subscribe(onNext: { [weak self] wishList in
+                    self?.reloadWishListCollectionView()
+                })
+                .disposed(by: self.disposeBag)
+            
             refresh.endRefreshing()
         }
     }
 }
 // MARK: - API
 extension HomeViewController {
-    /// 위시리스트 조회 API 성공
-    func wishListAPISuccess(_ result: [WishListModel]) {
-        self.wishListData = result
+    func reloadWishListCollectionView() {
         // 애니메이션과 함께 reload
         UIView.transition(with: homeView.collectionView,
                                   duration: 0.35,
                                   options: .transitionCrossDissolve,
                                   animations: { () -> Void in
-            self.homeView.collectionView.reloadData()},
+                                    self.homeView.collectionView.reloadData()},
                                 completion: nil);
         refreshControl.endRefreshing()
     }
@@ -271,17 +310,7 @@ extension HomeViewController {
     }
     /// 위시리스트 조회 실패
     func wishListAPIFail() {
-        WishListDataManager.shared.wishListDataManager(self)
-    }
-    /// 카트 추가 API
-    func addCartAPISuccess(_ result: APIModel<TokenResultModel>) {
-        WishListDataManager.shared.wishListDataManager(self)
-        print(result.message)
-    }
-    /// 장바구니 삭제 API
-    func deleteCartAPISuccess(_ result: APIModel<TokenResultModel>) {
-        WishListDataManager.shared.wishListDataManager(self)
-        print(result.message)
+//        WishListDataManager.shared.wishListDataManager(self)
     }
 }
 // MARK: - Token User Defaults for Share Extension

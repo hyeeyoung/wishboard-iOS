@@ -38,6 +38,7 @@ final class AuthInterceptor: RequestInterceptor {
             // 토큰 갱신 API 호출
             RefreshDataManager().refreshDataManager { result in
                 print("Renew Token success")
+                completion(.retry)
             }
         case 500:
             // 서버 500에러

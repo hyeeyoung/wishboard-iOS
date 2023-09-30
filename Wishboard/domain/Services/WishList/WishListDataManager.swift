@@ -7,6 +7,8 @@
 
 import Foundation
 import Alamofire
+import RxSwift
+import RxCocoa
 
 class WishListDataManager {
     static let shared = WishListDataManager()
@@ -14,53 +16,24 @@ class WishListDataManager {
     private init() { }
     
     // MARK: 홈화면 위시리스트 조회
-    func wishListDataManager(_ viewcontroller: HomeViewController) {
+    func getWishListDataManager() -> Observable<Any>  {
         let url = Storage().BaseURL + "/item"
-        let request = AlamofireBaseService.shared.requestWithParameter(url, .get, viewcontroller)
+        let request = AlamofireBaseService.shared.requestWithParameter(url, .get, nil)
         
-        AlamofireBaseService.shared.responseWithErrorException(request, [WishListModel].self) { result in
-            if let response = result as? [WishListModel] {
-                viewcontroller.wishListAPISuccess(response)
-            } else if let errorCode = result as? Int {
-                switch errorCode {
-                case 404:
-                    print("홈화면 위시리스트 조회: 404 Error - 위시리스트가 존재하지 않음")
-                case 304:
-                    print("홈화면 위시리스트 조회: 304 Error")
-                default:
-                    print("홈화면 위시리스트 조회 Error")
-                    
+        return Observable.create { observer in
+            AlamofireBaseService.shared.responseWithErrorException(request, [WishListModel].self) { result in
+                if let response = result as? [WishListModel] {
+                    // 응답 성공 시 데이터를 onNext로 전달
+                    observer.onNext(response)
+                    observer.onCompleted()
+                } else if let errorCode = result as? Int {
+                    // 실패 시 에러코드를 전달
+                    observer.onNext(errorCode)
+                    observer.onCompleted()
                 }
             }
+            
+            return Disposables.create()
         }
-        
-//        AF.request(Storage().BaseURL + "/item",
-//                           method: .get,
-//                           parameters: nil,
-//                           headers: APIManager().getHeader())
-//            .validate()
-//            .responseDecodable(of: [WishListModel].self) { response in
-//            switch response.result {
-//            case .success(let result):
-//                homeView.wishListAPISuccess(result)
-//            case .failure(let error):
-//                let statusCode = error.responseCode
-//                switch statusCode {
-//                case 500:
-//                    DispatchQueue.main.async {
-//                        ErrorBar(viewcontroller)
-//                    }
-//                case 401:
-//                    RefreshDataManager().refreshDataManager() {
-//                        $0 ? self.wishListDataManager(homeView, viewcontroller) : ScreenManager.shared.goToOnboarding(viewcontroller)
-//                    }
-//                case 304:
-//                    print(error.responseCode, error.localizedDescription)
-//
-//                default:
-//                    print(error.responseCode)
-//                }
-//            }
-//        }
     }
 }
