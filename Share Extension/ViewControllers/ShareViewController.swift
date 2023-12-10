@@ -163,6 +163,8 @@ class ShareViewController: UIViewController {
     // 위시리스트 추가 버튼
     @objc func completeButtonDidTap() {
         UIDevice.vibrate()
+        // 등록 버튼 비활성화
+        shareView.completeButton.isEnabled = false
         // 만약 상품명 또는 가격이 비어있을 시
         if self.itemName == nil || self.itemPrice == nil {
             SnackBar.shared.showSnackBar(self, message: .emptyItemContent)

@@ -167,6 +167,7 @@ extension ModifyProfileViewController {
         UIDevice.vibrate()
     }
     @objc func completeButtonDidTap() {
+        self.completeButton.isEnabled = false
         UIDevice.vibrate()
         
         var lottieView = self.completeButton.setLottieView()
@@ -191,6 +192,10 @@ extension ModifyProfileViewController {
             // 변경사항이 하나라도 있을 때 통신
             let moyaProfileInput = MoyaProfileInput(photo: self.selectedPhoto, nickname: self.nickname)
             self.modifyProfileWithMoya(model: moyaProfileInput)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.completeButton.isEnabled = true
         }
     }
 }

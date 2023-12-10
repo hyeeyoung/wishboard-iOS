@@ -66,10 +66,16 @@ class ModifyPasswordViewController: TitleCenterViewController {
         isValid()
     }
     @objc func completeButtonDidTap() {
+        modifyPasswordView.completeButton.isEnabled = false
         UIDevice.vibrate()
         self.view.endEditing(true)
         
         self.modifyPassword(pw: self.passwordInput ?? "")
+        
+        // 지정된 시간 후에 버튼 다시 활성화
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.modifyPasswordView.completeButton.isEnabled = true
+        }
     }
     //MARK: - Methods
     private func isValidPassword(_ pw: String) -> Bool {

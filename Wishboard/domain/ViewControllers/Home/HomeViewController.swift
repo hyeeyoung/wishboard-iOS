@@ -7,6 +7,7 @@
 
 import UIKit
 import MaterialComponents.MaterialBottomSheet
+import RxSwift
 
 class HomeViewController: UIViewController, Observer {
     var homeView: HomeView!
@@ -148,7 +149,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 extension HomeViewController {
     // 장바구니 추가, 삭제
     @objc func cartButtonDidTap(_ sender: HomeCartGesture) {
+        sender.isEnabled = false
         UIDevice.vibrate()
+        
         if let data = sender.data {
             if data.cart_state == 1 {
                 CartDataManager().deleteCartDataManager(data.item_id!, self)
@@ -156,6 +159,10 @@ extension HomeViewController {
                 let addCartInput = AddCartInput(item_id: data.item_id)
                 CartDataManager().addCartDataManager(addCartInput, self)
             }
+        }
+        // 지정된 시간 후에 버튼 다시 활성화
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            sender.isEnabled = true
         }
     }
 }

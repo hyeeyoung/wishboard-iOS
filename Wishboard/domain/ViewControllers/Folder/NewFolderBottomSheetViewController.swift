@@ -47,13 +47,19 @@ class NewFolderBottomSheetViewController: BottomSheetKeyboardViewController {
     }
     // MARK: - Actions
     @objc override func completeButtonDidTap() {
+        self.completeButton.isEnabled = false
         UIDevice.vibrate()
+        
         lottieView = completeButton.setLottieView()
         
         lottieView.play { completion in
             self.lottieView.loopMode = .loop
             let addFolderInput = AddFolderInput(folder_name: self.folderStr!)
             FolderDataManager().addFolderDataManager(addFolderInput, self, self.preVC)
+        }
+        // 지정된 시간 후에 버튼 다시 활성화
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.completeButton.isEnabled = true
         }
     }
     override func textFieldEditingChanged(_ sender: UITextField) {

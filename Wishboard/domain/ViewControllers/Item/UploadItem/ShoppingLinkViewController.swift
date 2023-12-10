@@ -61,10 +61,16 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
         self.dismiss(animated: true)
     }
     @objc override func completeButtonDidTap() {
+        self.completeButton.isEnabled = false
         UIDevice.vibrate()
+        
         lottieView = self.completeButton.setLottieView()
         lottieView.play { completion in
             ItemDataManager().getItemByLinkDataManager(self.link, self)
+        }
+        // 지정된 시간 후에 버튼 다시 활성화
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.completeButton.isEnabled = true
         }
     }
     @objc override func textFieldEditingChanged(_ sender: UITextField) {
