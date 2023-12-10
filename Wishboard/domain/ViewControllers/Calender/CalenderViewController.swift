@@ -138,9 +138,13 @@ extension CalenderViewController {
         myDateFormatter.locale = Locale(identifier:"ko_KR") // PM, AM을 언어에 맞게 setting (ex: PM -> 오후)
 
         for data in self.calenderData {
-            let dateStr = myDateFormatter.string(from: (data.item_notification_date?.toCreatedDate())!)
-            if dateStr == self.selectedDate {
-                self.notiData.append(data)
+            if let createdDate = data.item_notification_date?.toCreatedDate() {
+                let dateStr = myDateFormatter.string(from: (createdDate))
+                if dateStr == self.selectedDate {
+                    self.notiData.append(data)
+                }
+            } else {
+                continue
             }
         }
         // reload data with animation

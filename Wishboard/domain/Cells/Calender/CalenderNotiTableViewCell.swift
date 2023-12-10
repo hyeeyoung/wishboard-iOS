@@ -104,12 +104,18 @@ extension CalenderNotiTableViewCell {
         let myDateFormatter = DateFormatter()
         myDateFormatter.dateFormat = "a h시 mm분" // 2020년 08월 13일 오후 04시 30분
         myDateFormatter.locale = Locale(identifier:"ko_KR")
-        let notificationTimeStr = myDateFormatter.string(from: (dateStr?.toCreatedDate()!)!)
         
-        // 00분인지, 30분인지 구분
-        let minute = notificationTimeStr[notificationTimeStr.index(notificationTimeStr.endIndex, offsetBy: -3)]
-        var notificationTime = notificationTimeStr
-        if minute != "3" {notificationTime = String(notificationTimeStr.dropLast(3))}
-        self.timeLabel.text = notificationTime
+        var notificationTimeStr: String = ""
+        if let createdDate = dateStr?.toCreatedDate() {
+            notificationTimeStr = myDateFormatter.string(from: createdDate)
+            
+            // 00분인지, 30분인지 구분
+            let minute = notificationTimeStr[notificationTimeStr.index(notificationTimeStr.endIndex, offsetBy: -3)]
+            var notificationTime = notificationTimeStr
+            if minute != "3" {notificationTime = String(notificationTimeStr.dropLast(3))}
+            self.timeLabel.text = notificationTime
+        } else {
+            self.timeLabel.text = ""
+        }
     }
 }
