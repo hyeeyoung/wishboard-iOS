@@ -44,7 +44,7 @@ class HomeViewController: UIViewController, Observer {
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
         // 이벤트뷰
-        performEventView()
+//        performEventView()
     }
     
     func bind() {

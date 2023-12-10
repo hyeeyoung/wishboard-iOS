@@ -16,6 +16,7 @@ class RefreshDataManager {
     func refreshDataManager(completion: @escaping (Bool) -> Void) {
         if let refreshToken = UserManager.refreshToken {
             parameter = RefreshInput(refreshToken: refreshToken)
+            print("Refresh Manager 호출 -> refreshToken: \(refreshToken)")
         }
         
         AF.request(Storage().BaseURL + "/auth/refresh",

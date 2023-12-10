@@ -9,9 +9,6 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-/*
- 앱 이용방법 로직
- */
 
 final class HomeViewModel: BaseViewModel {
     

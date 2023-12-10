@@ -7,10 +7,6 @@
 
 import UIKit
 
-/*
- Onboarding TODO
- 서버 이전 알럿창 api 요청
- */
 
 class OnBoardingViewController: UIViewController {
     
@@ -39,6 +35,7 @@ class OnBoardingViewController: UIViewController {
     }
     /// 자동로그인 로직 구현
     func checkRememberMe() {
+        print("UserManager에 저장된 accessToken -> \(UserManager.accessToken)")
         if let token = UserManager.accessToken {
             // go Main
             ScreenManager.shared.goMain()

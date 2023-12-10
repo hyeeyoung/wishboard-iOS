@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import SnapKit
 
 class ItemDetailTableViewCell: UITableViewCell {
     // MARK: - Properties
@@ -117,9 +118,10 @@ class ItemDetailTableViewCell: UITableViewCell {
     func setUpConstraint() {
         itemImage.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(468)
+            make.height.equalTo(itemImage.snp.width).multipliedBy(1.154)
             make.top.equalToSuperview()
         }
+
         restockLabel.snp.makeConstraints { make in
             make.leading.bottom.equalToSuperview().inset(16)
         }
@@ -166,6 +168,8 @@ class ItemDetailTableViewCell: UITableViewCell {
     }
     // After API success
     func setUpData(_ data: WishListModel) {
+        itemImage.layer.cornerRadius = itemImage.bounds.width / 10.7
+        
         if let url = data.item_img_url {
             let processor = TintImageProcessor(tint: .black_5)
             self.itemImage.kf.setImage(with: URL(string: url), placeholder: UIImage(), options: [.processor(processor), .transition(.fade(0.5))])

@@ -36,9 +36,23 @@ final class AuthInterceptor: RequestInterceptor {
         switch response.statusCode {
         case 401:
             // 토큰 갱신 API 호출
-            RefreshDataManager().refreshDataManager { result in
-                print("Renew Token success")
-                completion(.retry)
+            RefreshDataManager().refreshDataManager { didRefreshToken in
+                if didRefreshToken {
+                    print("Renew Token success At AuthInterceptor")
+                    completion(.retry)
+                } else {
+                    #if WISHBOARD_APP
+                    ScreenManager.shared.goToOnboarding()
+                    
+                    #elseif SHARE_EXTENSION
+                    DispatchQueue.main.async {
+                        if let vc = self.viewcontroller {
+                            ErrorBar(vc)
+                        }
+                    }
+                    
+                    #endif
+                }
             }
         case 500:
             // 서버 500에러

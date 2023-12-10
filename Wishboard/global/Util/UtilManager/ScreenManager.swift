@@ -52,12 +52,12 @@ class ScreenManager {
         viewcontroller.present(linkView, animated: true, completion: nil)
     }
     // MARK: - 로그아웃 후, Onboarding 화면으로 이동
-    func goToOnboarding(_ viewcontroller: UIViewController) {
+    func goToOnboarding() {
         // delete UserInfo
         UserManager.removeUserData()
         
-        // 화면 전환
-        let onboardingVC = OnBoardingViewController()
-        viewcontroller.navigationController?.pushViewController(onboardingVC, animated: true)
+        // 온보딩 화면 전환
+        let navigationController = UINavigationController(rootViewController: OnBoardingViewController())
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(navigationController, animated: true)
     }
 }

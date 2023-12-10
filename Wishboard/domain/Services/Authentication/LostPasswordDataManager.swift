@@ -62,7 +62,7 @@ class LostPasswordDataManager {
                        }
                     case 401:
                         RefreshDataManager().refreshDataManager() {
-                            !$0 ? ScreenManager.shared.goToOnboarding(viewcontroller) : self.verifyCodeDataManager(parameter, viewcontroller)
+                            !$0 ? ScreenManager.shared.goToOnboarding() : self.verifyCodeDataManager(parameter, viewcontroller)
                         }
                     default:
                         print(statusCode)
