@@ -40,7 +40,7 @@ class CartDataManager {
         let request = AlamofireBaseService.shared.requestWithBody(url, .post, parameter, viewcontroller)
         AlamofireBaseService.shared.responseDecoded(request, APIModel<TokenResultModel>.self) { result in
             if let viewcontroller = viewcontroller as? HomeViewController {
-//                viewcontroller.addCartAPISuccess(result)
+                viewcontroller.addCartAPISuccess(result)
             } else if let viewcontroller = viewcontroller as? FolderDetailViewController {
                 viewcontroller.addCartAPISuccess(result)
             } else {return}
@@ -57,7 +57,7 @@ class CartDataManager {
             if let cartView = viewcontroller as? CartView {
                 cartView.deleteCartAPISuccess(result)
             } else if let viewcontroller = viewcontroller as? HomeViewController {
-//                viewcontroller.deleteCartAPISuccess(result)
+                viewcontroller.deleteCartAPISuccess(result)
             } else if let viewcontroller = viewcontroller as? FolderDetailViewController {
                 viewcontroller.deleteCartAPISuccess(result)
             } else {return}
@@ -66,39 +66,3 @@ class CartDataManager {
     }
     
 }
-
-class CartDataManager2 {
-    static let shared = CartDataManager2()
-    private init() { }
-    
-    func addCartDataManager2(_ parameter: AddCartInput) -> Observable<Bool> {
-        let url = Storage().BaseURL + "/cart"
-        let request = AlamofireBaseService.shared.requestWithBody(url, .post, parameter, nil)
-        
-        return Observable.create { observer in
-            AlamofireBaseService.shared.responseDecoded(request, APIModel<TokenResultModel>.self) { result in
-                let response = result.success
-                observer.onNext(response)
-                observer.onCompleted()
-            }
-            
-            return Disposables.create()
-        }
-    }
-    
-    func deleteCartDataManager2(_ itemId: Int) -> Observable<Bool> {
-        let url = Storage().BaseURL + "/cart/\(itemId)"
-        let request = AlamofireBaseService.shared.requestWithParameter(url, .delete, nil)
-        
-        return Observable.create { observer in
-            AlamofireBaseService.shared.responseDecoded(request, APIModel<TokenResultModel>.self) { result in
-                let response = result.success
-                observer.onNext(response)
-                observer.onCompleted()
-            }
-            
-            return Disposables.create()
-        }
-    }
-}
-
