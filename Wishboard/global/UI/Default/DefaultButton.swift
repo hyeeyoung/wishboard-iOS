@@ -51,6 +51,8 @@ class DefaultButton: UIButton {
         
         self.clipsToBounds = true
         self.layer.cornerRadius = 22
+        
+        self.setTitle("", for: .selected)
     }
     
     
