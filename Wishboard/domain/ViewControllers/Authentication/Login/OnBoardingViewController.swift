@@ -15,6 +15,8 @@ class OnBoardingViewController: UIViewController {
 
         if usecase == .signOut {
             SnackBar.shared.showSnackBar(self, message: .deleteUser)
+        } else {
+            
         }
     }
     

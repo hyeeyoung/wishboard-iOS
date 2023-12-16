@@ -54,6 +54,7 @@ final class AuthInterceptor: RequestInterceptor {
                     #endif
                 }
             }
+            return
         case 500:
             // 서버 500에러
             print("server 500 error")

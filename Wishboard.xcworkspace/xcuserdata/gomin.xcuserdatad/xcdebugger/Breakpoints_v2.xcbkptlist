@@ -7,32 +7,112 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A99BCBC1-6093-4482-BC30-86A717383EE2"
-            shouldBeEnabled = "No"
+            uuid = "4787F538-0A13-434D-AAA3-FB4F38B0B019"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Wishboard/domain/ViewControllers/Authentication/Login/OnBoardingViewController.swift"
+            filePath = "Wishboard/domain/Services/Foundation/AuthIntercepter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "retry(_:for:dueTo:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4787F538-0A13-434D-AAA3-FB4F38B0B019 - 9c24f6342a5af772"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool) -&gt; () in Wishboard.AuthInterceptor.retry(_: Alamofire.Request, for: Alamofire.Session, dueTo: Swift.Error, completion: (Alamofire.RetryResult) -&gt; ()) -&gt; ()"
+                  moduleName = "Wishboard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/domain/Services/Foundation/AuthIntercepter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "4787F538-0A13-434D-AAA3-FB4F38B0B019 - ea9c66f19d6df199"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[1] = Dead&gt; of Wishboard.AuthInterceptor.retry(_: Alamofire.Request, for: Alamofire.Session, dueTo: Swift.Error, completion: (Alamofire.RetryResult) -&gt; ()) -&gt; ()"
+                  moduleName = "Wishboard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/domain/Services/Foundation/AuthIntercepter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "428">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "09A5DD81-6371-47AB-BD49-FFA1E3E88D6E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/domain/Services/Foundation/AuthIntercepter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
             endingLineNumber = "43"
-            landmarkName = "checkRememberMe()"
+            landmarkName = "retry(_:for:dueTo:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0AAD9DDC-3F78-44E0-B826-5CA23564FA9E"
-            shouldBeEnabled = "No"
+            uuid = "BA6A9D92-742E-47B6-8C01-9A4DB2B6DEC1"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Wishboard/domain/ViewControllers/Authentication/Login/OnBoardingViewController.swift"
+            filePath = "Wishboard/domain/Services/Foundation/AuthIntercepter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "checkRememberMe()"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "retry(_:for:dueTo:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BF59F243-F6EC-4389-B826-F0DA07230636"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/domain/Services/Authentication/RefreshDataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "refreshDataManager(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EA6B396A-5FFD-448C-ADBB-648A2E9D48E2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/domain/Services/Authentication/RefreshDataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "refreshDataManager(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
