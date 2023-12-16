@@ -71,8 +71,10 @@ class UploadItemView: UIView {
         uploadContentTableView = UITableView().then{
             $0.delegate = dataSourceDelegate
             $0.dataSource = dataSourceDelegate
+            
             $0.register(UploadItemTextfieldTableViewCell.self, forCellReuseIdentifier: "UploadItemTextfieldTableViewCell")
             $0.register(UploadItemBottomSheetTableViewCell.self, forCellReuseIdentifier: "UploadItemBottomSheetTableViewCell")
+            $0.register(UploadItemTextViewCell.self, forCellReuseIdentifier: "UploadItemTextViewCell")
             
             // autoHeight
             $0.rowHeight = UITableView.automaticDimension

@@ -148,7 +148,7 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
             let tag = indexPath.row
             // TextField가 있는 Cell
             switch tag {
-            case 0, 1, 5:
+            case 0, 1:
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: "UploadItemTextfieldTableViewCell", for: indexPath) as? UploadItemTextfieldTableViewCell else { return UITableViewCell() }
                 cell.setTextfieldCell(dataSourceDelegate: self)
                 cell.setPlaceholder(tag: tag)
@@ -158,9 +158,6 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
                 if tag == 0 {cell.textfield.addTarget(self, action: #selector(itemNameTextfieldEditingField(_:)), for: .editingChanged)}
                 else if tag == 1 {
                     cell.textfield.addTarget(self, action: #selector(itemPriceTextfieldEditingField(_:)), for: .editingChanged)
-                }
-                else {
-                    cell.textfield.addTarget(self, action: #selector(memoTextfieldEditingField(_:)), for: .editingChanged)
                 }
                 cell.selectionStyle = .none
                 return cell
@@ -172,6 +169,19 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 cell.selectionStyle = .none
                 return cell
+            case 5:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "UploadItemTextViewCell", for: indexPath) as? UploadItemTextViewCell else { return UITableViewCell() }
+                
+                if isUploadItem {
+                    cell.memoTextView.text = Placeholder.uploadItemMemo
+                    cell.memoTextView.textColor = .placeholderText
+                } else if let cellData = self.wishListData {
+                    cell.setUpData(data: cellData)
+                }
+                
+                cell.memoTextView.delegate = self
+                cell.selectionStyle = .none
+                return cell
             default:
                 fatalError()
             }
@@ -180,7 +190,13 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == uploadItemView.uploadImageTableView { return 251 }
-        else { return 54 }
+        else {
+            if indexPath.row == 5 {
+                return 200
+            } else {
+                return 54
+            }
+        }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         UIDevice.vibrate()
@@ -337,10 +353,6 @@ extension UploadItemViewController {
             guard let price = Float(priceStr) else {return}
             sender.text = numberFormatter.string(from: NSNumber(value: price))
         }
-    }
-    @objc func memoTextfieldEditingField(_ sender: UITextField) {
-        let text = sender.text ?? ""
-        self.wishListData.item_memo = text
     }
     func setPriceString(_ str: String) -> String {
         let myString = str.replacingOccurrences(of: ",", with: "")
@@ -554,4 +566,41 @@ extension UploadItemViewController: UITextFieldDelegate {
         return true
     }
     
+}
+
+// MARK: - TextView delegate
+extension UploadItemViewController: UITextViewDelegate {
+    // 텍스트뷰에서 텍스트 편집이 시작될 때 호출되는 메서드
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == Placeholder.uploadItemMemo {
+            textView.text = ""
+            textView.textColor = UIColor.gray_700
+        }
+    }
+
+    // 텍스트뷰에서 텍스트 편집이 종료될 때 호출되는 메서드
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = Placeholder.uploadItemMemo
+            textView.textColor = UIColor.placeholderText
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let text = textView.text ?? ""
+        self.wishListData.item_memo = text
+        
+        // 최소 높이를 유지하도록 높이를 조절
+        let newHeight = max(200, textView.sizeThatFits(CGSize(width: textView.frame.width, height: CGFloat.greatestFiniteMagnitude)).height)
+        if newHeight > 200 {
+            // TODO: TextView Height 동적
+            
+        }
+        updateCellHeight()
+    }
+    
+    private func updateCellHeight() {
+        self.uploadItemView.uploadContentTableView.beginUpdates()
+        self.uploadItemView.uploadContentTableView.endUpdates()
+   }
 }

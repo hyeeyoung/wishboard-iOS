@@ -18,8 +18,8 @@ final class AuthInterceptor: RequestInterceptor {
 
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
        
-        let accessToken = UserDefaults.standard.string(forKey: "accessToken") ?? ""
-        let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") ?? ""
+        let accessToken = UserManager.accessToken ?? ""
+        let refreshToken = UserManager.refreshToken ?? ""
         
         var urlRequest = urlRequest
         urlRequest.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
@@ -63,6 +63,7 @@ final class AuthInterceptor: RequestInterceptor {
                     ErrorBar(vc)
                 }
             }
+            completion(.doNotRetryWithError(error))
             return
         default:
             print(error.localizedDescription)

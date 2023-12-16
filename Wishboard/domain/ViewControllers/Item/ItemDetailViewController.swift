@@ -22,14 +22,8 @@ class ItemDetailViewController: UIViewController, Observer {
         self.navigationController?.isNavigationBarHidden = true
         self.tabBarController?.tabBar.isHidden = true
         
-        itemDetailView = ItemDetailView()
-        self.view.addSubview(itemDetailView)
-        
-        itemDetailView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview()
-        }
-        
         setItemView()
+        addTargets()
         
         // observer init
         observer.bind(self)
@@ -46,6 +40,14 @@ class ItemDetailViewController: UIViewController, Observer {
         if let usecase = newValue as? WishItemUseCase {
             SnackBar.shared.showSnackBar(self, message: .modifyItem)
         }
+    }
+    
+    private func addTargets() {
+        itemDetailView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        itemDetailView.deleteButton.addTarget(self, action: #selector(alertDialog), for: .touchUpInside)
+        itemDetailView.modifyButton.addTarget(self, action: #selector(goModify), for: .touchUpInside)
+        
+        itemDetailView.lowerButton.addTarget(self, action: #selector(linkButtonDidTap), for: .touchUpInside)
     }
     
     // MARK: - Actions
@@ -93,18 +95,22 @@ class ItemDetailViewController: UIViewController, Observer {
 }
 extension ItemDetailViewController {
     func setItemView() {
-        itemDetailView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        itemDetailView.deleteButton.addTarget(self, action: #selector(alertDialog), for: .touchUpInside)
-        itemDetailView.modifyButton.addTarget(self, action: #selector(goModify), for: .touchUpInside)
+        itemDetailView = ItemDetailView()
+        self.view.addSubview(itemDetailView)
+        
+        itemDetailView.snp.makeConstraints { make in
+            make.leading.trailing.top.bottom.equalToSuperview()
+        }
         
         itemDetailView.setTableView(self)
-        itemDetailView.setUpNavigationView()
-        if let data = self.wishListData {
-            if data.item_url != "" {itemDetailView.isLinkExist(isLinkExist: true)}
-            else {itemDetailView.isLinkExist(isLinkExist: false)}
-        } else {itemDetailView.isLinkExist(isLinkExist: false)}
         
-        itemDetailView.setUpConstraint()
+        // 쇼핑몰 링크 여부에 따라 하단 버튼 UI 변경
+        if let data = self.wishListData, data.item_url != "" {
+            itemDetailView.activateLinkButton()
+        } else {
+            itemDetailView.inactivateLinkButton()
+        }
+        
     }
     @objc func linkButtonDidTap() {
         UIDevice.vibrate()
@@ -148,11 +154,11 @@ extension ItemDetailViewController {
     func getItemDetailAPISuccess(_ result: WishListModel) {
         self.wishListData = result
         self.itemDetailView.itemDetailTableView.reloadData()
-        // lower view setting
-        if let data = self.wishListData {
-            if data.item_url != "" {itemDetailView.isLinkExist(isLinkExist: true)}
-            else {itemDetailView.isLinkExist(isLinkExist: false)}
-        } else {itemDetailView.isLinkExist(isLinkExist: false)}
-        itemDetailView.lowerButton.addTarget(self, action: #selector(linkButtonDidTap), for: .touchUpInside)
+        // 쇼핑몰 링크 여부에 따라 하단 버튼 UI 변경
+        if let data = self.wishListData, data.item_url != "" {
+            itemDetailView.activateLinkButton()
+        } else {
+            itemDetailView.inactivateLinkButton()
+        }
     }
 }

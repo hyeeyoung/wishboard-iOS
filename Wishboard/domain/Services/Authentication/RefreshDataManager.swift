@@ -31,8 +31,8 @@ class RefreshDataManager {
                 let accessToken = result.data?.token.accessToken
                 let refreshToken = result.data?.token.refreshToken
                 
-                UserDefaults.standard.set(accessToken, forKey: "accessToken")
-                UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
+                UserManager.accessToken = accessToken
+                UserManager.refreshToken = refreshToken
                 
                 let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
                 defaults?.set(accessToken, forKey: "accessToken")
@@ -70,8 +70,8 @@ class RefreshDataManager {
                 let accessToken = result.data?.token.accessToken
                 let refreshToken = result.data?.token.refreshToken
                 
-                UserDefaults.standard.set(accessToken, forKey: "accessToken")
-                UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
+                UserManager.accessToken = accessToken
+                UserManager.refreshToken = refreshToken
                 
                 let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
                 defaults?.set(accessToken, forKey: "accessToken")

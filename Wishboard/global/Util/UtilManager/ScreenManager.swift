@@ -54,7 +54,7 @@ class ScreenManager {
     // MARK: - 로그아웃 후, Onboarding 화면으로 이동
     func goToOnboarding() {
         // delete UserInfo
-//        UserManager.removeUserData()
+        UserManager.removeUserData()
         
         // 온보딩 화면 전환
         let navigationController = UINavigationController(rootViewController: OnBoardingViewController())

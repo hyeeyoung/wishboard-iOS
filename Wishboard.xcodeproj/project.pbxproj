@@ -136,6 +136,7 @@
 		237478A028D1FF0400CF941A /* SetFolderBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2374789F28D1FF0400CF941A /* SetFolderBottomSheetView.swift */; };
 		237478A228D2008300CF941A /* SetFolderBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237478A128D2008300CF941A /* SetFolderBottomSheetViewController.swift */; };
 		237478A428D20DB600CF941A /* FolderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237478A328D20DB500CF941A /* FolderListTableViewCell.swift */; };
+		23748D1B2B2DFF26006245F1 /* UploadItemTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23748D1A2B2DFF26006245F1 /* UploadItemTextViewCell.swift */; };
 		2375C1CA28C5C2550017BAF7 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2375C1C928C5C2550017BAF7 /* OnBoardingView.swift */; };
 		2385582728E51DD000E6A09E /* ShareDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2385582628E51DD000E6A09E /* ShareDataManager.swift */; };
 		2385582B28E51F7500E6A09E /* FormatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A85F7C28E39FE800075667 /* FormatManager.swift */; };
@@ -375,6 +376,7 @@
 		2374789F28D1FF0400CF941A /* SetFolderBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFolderBottomSheetView.swift; sourceTree = "<group>"; };
 		237478A128D2008300CF941A /* SetFolderBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFolderBottomSheetViewController.swift; sourceTree = "<group>"; };
 		237478A328D20DB500CF941A /* FolderListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderListTableViewCell.swift; sourceTree = "<group>"; };
+		23748D1A2B2DFF26006245F1 /* UploadItemTextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadItemTextViewCell.swift; sourceTree = "<group>"; };
 		2375C1C928C5C2550017BAF7 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		2385582628E51DD000E6A09E /* ShareDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDataManager.swift; sourceTree = "<group>"; };
 		238AA72A29CD720D0086DF76 /* ItemRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRouter.swift; sourceTree = "<group>"; };
@@ -689,6 +691,7 @@
 				23E378E228D2F16900C52F2D /* UploadItemPhotoTableViewCell.swift */,
 				2395FFF32902E1C1005A8D8F /* UploadItemTextfieldTableViewCell.swift */,
 				2395FFF52902E1D7005A8D8F /* UploadItemBottomSheetTableViewCell.swift */,
+				23748D1A2B2DFF26006245F1 /* UploadItemTextViewCell.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -1957,6 +1960,7 @@
 				23DC04B028C58B5200ABB0CF /* SceneDelegate.swift in Sources */,
 				2360FF5C28DCB31600E481A6 /* SnackBar.swift in Sources */,
 				23D7901428CB0E5F00246109 /* CalenderTableViewCell.swift in Sources */,
+				23748D1B2B2DFF26006245F1 /* UploadItemTextViewCell.swift in Sources */,
 				23E378E728D2FDD000C52F2D /* NotificationSettingViewController.swift in Sources */,
 				231C5F852A36F06B00FBDEE5 /* NewFolderBottomSheetViewController.swift in Sources */,
 				23C9568B28C6803900D88536 /* UIFont.swift in Sources */,
@@ -2147,7 +2151,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202312102223;
+				CURRENT_PROJECT_VERSION = 202312162357;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Share Extension/Info.plist";
@@ -2160,7 +2164,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.5;
+				MARKETING_VERSION = 1.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "gomin.Wishboard.Share-Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2177,7 +2181,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202312102223;
+				CURRENT_PROJECT_VERSION = 202312162357;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Share Extension/Info.plist";
@@ -2190,7 +2194,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.5;
+				MARKETING_VERSION = 1.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "gomin.Wishboard.Share-Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2327,7 +2331,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Wishboard/Wishboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202312102223;
+				CURRENT_PROJECT_VERSION = 202312162357;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2344,7 +2348,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.5;
+				MARKETING_VERSION = 1.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = gomin.Wishboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG WISHBOARD_APP";
@@ -2364,7 +2368,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Wishboard/Wishboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202312102223;
+				CURRENT_PROJECT_VERSION = 202312162357;
 				DEVELOPMENT_TEAM = B974XY47GZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Wishboard/Info.plist;
@@ -2380,7 +2384,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.5;
+				MARKETING_VERSION = 1.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = gomin.Wishboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "REL WISHBOARD_APP";

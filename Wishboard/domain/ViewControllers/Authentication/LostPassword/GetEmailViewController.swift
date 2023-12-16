@@ -116,6 +116,11 @@ extension GetEmailViewController {
             UserManager.tempNickname = tempNickname
         }
         
+        let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
+        defaults?.set(accessToken, forKey: "accessToken")
+        defaults?.set(refreshToken, forKey: "refreshToken")
+        defaults?.synchronize()
+        
         ScreenManager.shared.goMain()
         
         print(result)

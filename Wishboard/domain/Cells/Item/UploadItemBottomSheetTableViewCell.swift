@@ -33,6 +33,10 @@ class UploadItemBottomSheetTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        subTitle.isHidden = true
+    }
+    
     func setBottomSheetCell(isUploadItem: Bool, tag: Int) {
         let arrowImg = UIImageView().then{
             $0.image = Image.arrowRight

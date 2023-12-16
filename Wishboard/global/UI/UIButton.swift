@@ -106,3 +106,23 @@ extension UIButton {
         setAttributedTitle(attributedString, for: .normal)
     }
 }
+extension UIButton {
+    func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
+        let image = imageWithColor(color: color)
+        setBackgroundImage(image, for: state)
+    }
+
+    private func imageWithColor(color: UIColor) -> UIImage {
+        let size = CGSize(width: 1, height: 1)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(CGRect(origin: CGPoint.zero, size: size))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image ?? UIImage()
+    }
+    
+    func setFont(font: UIFont, for state: UIControl.State = .normal) {
+        titleLabel?.font = font
+    }
+}

@@ -62,13 +62,13 @@ extension UserRouter{
         case .signIn:
             return ["Content-Type": "application/json"]
         case .modifyPassword:
-            let token = UserDefaults.standard.string(forKey: "accessToken") ?? ""
+            let token = UserManager.accessToken ?? ""
             let header = [
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + token]
             return header
         case .modifyProfile:
-            let token = UserDefaults.standard.string(forKey: "accessToken") ?? ""
+            let token = UserManager.accessToken ?? ""
             return ["Content-Type": "multipart/form-data",
                     "Authorization": "Bearer " + token]
         }
