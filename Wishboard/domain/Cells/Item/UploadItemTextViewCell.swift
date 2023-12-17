@@ -10,7 +10,7 @@ import UIKit
 
 class UploadItemTextViewCell: UITableViewCell {
     let memoTextView = UITextView().then{
-        $0.font = TypoStyle.SuitD3.font
+        $0.font = TypoStyle.SuitB3.font
         $0.textColor = .gray_700
         $0.textAlignment = .left
     }

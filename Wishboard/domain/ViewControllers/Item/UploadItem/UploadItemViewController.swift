@@ -450,6 +450,8 @@ extension UploadItemViewController: UIImagePickerControllerDelegate, UINavigatio
 // MARK: - ScrollView Delegate
 extension UploadItemViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView){
+        self.view.frame.origin.y = restoreFrameValue
+        self.preKeyboardHeight = 0.0
         self.view.endEditing(true)
     }
 }
@@ -550,8 +552,10 @@ extension UploadItemViewController: UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.frame.origin.y = restoreFrameValue
+        self.preKeyboardHeight = 0.0
         print("touches Began Execute")
-        self.view.endEditing(true)    }
+        self.view.endEditing(true)
+    }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("textFieldShouldReturn Execute")
