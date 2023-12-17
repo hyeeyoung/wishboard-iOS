@@ -20,8 +20,10 @@ class AlamofireBaseService {
                    method: method,
                    parameters: nil,
                    headers: APIManager().getHeader(),
-                   interceptor: AuthInterceptor(viewcontroller))
+                   interceptor: AuthInterceptor.shared)
         .validate()
+        
+        AuthInterceptor.shared.viewcontroller = viewcontroller
         
         return request
     }
@@ -32,8 +34,10 @@ class AlamofireBaseService {
                    parameters: model,
                    encoder: JSONParameterEncoder.default,
                    headers: APIManager().getHeader(),
-                   interceptor: AuthInterceptor(viewcontroller))
+                   interceptor: AuthInterceptor.shared)
         .validate()
+        
+        AuthInterceptor.shared.viewcontroller = viewcontroller
         
         return request
     }

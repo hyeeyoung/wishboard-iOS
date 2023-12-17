@@ -9,11 +9,13 @@ import Foundation
 import Alamofire
 
 final class AuthInterceptor: RequestInterceptor {
-
+    static let shared = AuthInterceptor()
+    private var isRefreshingToken = false
+    
     var viewcontroller: UIViewController?
     
-    init(_ viewcontroller: UIViewController?) {
-        self.viewcontroller = viewcontroller
+    private init() {
+        
     }
 
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
@@ -33,10 +35,19 @@ final class AuthInterceptor: RequestInterceptor {
         print("retry 진입")
         guard let response = request.task?.response as? HTTPURLResponse else {return}
         
+        // 이미 토큰을 갱신 중이라면 재시도를 막음
+        guard !isRefreshingToken else {
+            completion(.doNotRetry)
+            return
+        }
+        
         switch response.statusCode {
         case 401:
+            isRefreshingToken = true
             // 토큰 갱신 API 호출
             RefreshDataManager().refreshDataManager { didRefreshToken in
+                self.isRefreshingToken = false
+                
                 if didRefreshToken {
                     print("Renew Token success At AuthInterceptor")
                     completion(.retry)
@@ -52,6 +63,7 @@ final class AuthInterceptor: RequestInterceptor {
                     }
                     
                     #endif
+                    completion(.doNotRetryWithError(error))
                 }
             }
             return

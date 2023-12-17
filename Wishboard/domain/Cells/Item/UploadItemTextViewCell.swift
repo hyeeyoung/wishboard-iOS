@@ -15,7 +15,6 @@ class UploadItemTextViewCell: UITableViewCell {
         $0.textAlignment = .left
     }
     
-    var textViewHeightConstraint: Constraint?
     //MARK: - Life Cycles
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

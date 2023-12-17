@@ -24,4 +24,6 @@ enum SnackBarMessage: String {
     case failShoppingLink = "앗, 아이템 정보를 불러오지 못했어요🥲"
     case emptyItemContent = "앗, 상품명과 가격을 입력해 주세요😁"
     case errorMessage = "예상하지 못한 오류가 발생했어요!\n잠시후 다시 시도해주세요."
+    
+    case test = "로그아웃"
 }
