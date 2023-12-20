@@ -60,7 +60,7 @@ class MyPageViewController: TitleLeftViewController, Observer {
             if usecase == .profileModified {
                 SnackBar.shared.showSnackBar(self, message: .modifyProfile)
                 // reload profile Data
-//                MypageDataManager().getUserInfoDataManager(self)
+                MypageDataManager().getUserInfoDataManager(self)
             } else if usecase == .passwordModified {
                 SnackBar.shared.showSnackBar(self, message: .modifyPassword)
             }

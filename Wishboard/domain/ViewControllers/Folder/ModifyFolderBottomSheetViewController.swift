@@ -17,8 +17,6 @@ class ModifyFolderBottomSheetViewController: BottomSheetKeyboardViewController {
     
     var folderData: FolderModel!
     
-    var lottieView: LottieAnimationView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,8 +33,8 @@ class ModifyFolderBottomSheetViewController: BottomSheetKeyboardViewController {
         }
         
         // complete button
-        completeButton = DefaultButton(titleStr: Button.modify).then{
-            $0.isActivate = true
+        completeButton = LoadingButton(Button.modify).then{
+            $0.activateButton()
         }
         
         // folder name count label
@@ -57,22 +55,13 @@ class ModifyFolderBottomSheetViewController: BottomSheetKeyboardViewController {
     }
     // MARK: - Actions
     @objc override func completeButtonDidTap() {
-        self.completeButton.isEnabled = false
         UIDevice.vibrate()
         
+        completeButton.startLoadingAnimation()
+        
         let folderId = folderData.folder_id
-        
-        lottieView = completeButton.setLottieView()
-        lottieView.play { completion in
-            self.lottieView.loopMode = .loop
-            let addFolderInput = AddFolderInput(folder_name: self.folderStr!)
-            FolderDataManager().modifyFolderDataManager(folderId!, addFolderInput, self, self.preVC)
-        }
-        
-        // 지정된 시간 후에 버튼 다시 활성화
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.completeButton.isEnabled = true
-        }
+        let addFolderInput = AddFolderInput(folder_name: self.folderStr!)
+        FolderDataManager().modifyFolderDataManager(folderId!, addFolderInput, self, self.preVC)
     }
     override func textFieldEditingChanged(_ sender: UITextField) {
         let folderInput = sender.text ?? ""
@@ -92,14 +81,14 @@ class ModifyFolderBottomSheetViewController: BottomSheetKeyboardViewController {
     func setFolderTextCountEmpty() {
         textFieldCountLabel.text = "(0/10)자"
         errorMessage.isHidden = true
-        completeButton.isActivate = false
+        completeButton.inactivateButton()
     }
     /// 분기처리: 폴더명 input 이 유효할 때
     func folderTextCountValid(_ folderInput: String) {
         textFieldCountLabel.text = "(" + String(folderInput.count) + "/10)자"
         
         errorMessage.isHidden = true
-        completeButton.isActivate = true
+        completeButton.activateButton()
         folderStr = folderInput
     }
 }
@@ -109,7 +98,6 @@ extension ModifyFolderBottomSheetViewController {
         completeButton.reloadInputViews()
         errorMessage.isHidden = false
         
-        completeButton.inActivateLottieView()
-        lottieView.isHidden = true
+        completeButton.inactivateButton()
     }
 }

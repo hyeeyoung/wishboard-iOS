@@ -19,8 +19,6 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
     var itemName: String?
     var itemPrice: String?
     
-    var lottieView: LottieAnimationView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,8 +47,8 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
         errorMessage.isHidden = true
         
         // complete button
-        completeButton = DefaultButton(titleStr: Button.add).then{
-            $0.isActivate = false
+        completeButton = LoadingButton(Button.add).then{
+            $0.inactivateButton()
         }
     }
     
@@ -61,17 +59,10 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
         self.dismiss(animated: true)
     }
     @objc override func completeButtonDidTap() {
-        self.completeButton.isEnabled = false
         UIDevice.vibrate()
         
-        lottieView = self.completeButton.setLottieView()
-        lottieView.play { completion in
-            ItemDataManager().getItemByLinkDataManager(self.link, self)
-        }
-        // 지정된 시간 후에 버튼 다시 활성화
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.completeButton.isEnabled = true
-        }
+        completeButton.startLoadingAnimation()
+        ItemDataManager().getItemByLinkDataManager(self.link, self)
     }
     @objc override func textFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
@@ -85,11 +76,11 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
             if link == "" {self.errorMessage.isHidden = true}
             else {
                 self.errorMessage.isHidden = false
-                self.completeButton.isActivate = false
+                self.completeButton.inactivateButton()
             }
         } else {
             self.errorMessage.isHidden = true
-            self.completeButton.isActivate = true
+            self.completeButton.activateButton()
             self.link = self.tempLink
         }
     }
@@ -125,9 +116,6 @@ extension ShoppingLinkViewController {
         } else {self.itemPrice = "0"}
         self.viewDidLoad()
         
-        self.lottieView.isHidden = true
-        self.completeButton.isSelected = false
-        
         print("parsing::", result)
         let model = ItemParseModel(link: self.link, imageURL: self.itemImgUrl, itemName: self.itemName, itemPrice: self.itemPrice)
         observer.notify(ItemParseData(itemModel: model, usecase: .itemParsingSuccess))
@@ -138,8 +126,7 @@ extension ShoppingLinkViewController {
         
         self.errorMessage.isHidden = false
         self.completeButton.then{
-            $0.isActivate = false
-            $0.inActivateLottieView()
+            $0.inactivateButton()
         }
         
         self.dismiss(animated: true)

@@ -43,16 +43,16 @@ class ModifyPasswordView: UIView {
         $0.isHidden = true
     }
     // 완료 버튼
-    let completeButton = DefaultButton(titleStr: Button.complete).then{
-        $0.isActivate = false
+    let completeButton = LoadingButton(Button.complete).then{
+        $0.inactivateButton()
     }
     // 키보드 Accessory
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 100.0))
     }()
     // 키보드 위 완료 버튼
-    let completeButtonKeyboard = DefaultButton(titleStr: Button.complete).then{
-        $0.isActivate = false
+    let completeButtonKeyboard = LoadingButton(Button.complete).then{
+        $0.inactivateButton()
     }
     var intervalConstraint: Constraint? = nil
     

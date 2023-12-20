@@ -51,19 +51,13 @@ extension RegisterPasswordViewController {
     @objc func registerButtonDidTap() {
         UIDevice.vibrate()
         
-        var lottieView: LottieAnimationView!
-        if registerPWView.pwTextField.isFirstResponder {
-            lottieView = registerPWView.registerButtonKeyboard.setLottieView()
-        } else {
-            lottieView = registerPWView.registerButton.setLottieView()
-        }
+        registerPWView.registerButton.startLoadingAnimation()
+        registerPWView.registerButtonKeyboard.startLoadingAnimation()
         
-        lottieView.play { completion in
-            self.view.endEditing(true)
-            let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
-            let registerInput = RegisterInput(email: self.email, password: self.pw, fcmToken: deviceToken)
-            RegisterDataManager().registerDataManager(registerInput, self)
-        }
+        self.view.endEditing(true)
+        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
+        let registerInput = RegisterInput(email: self.email, password: self.pw, fcmToken: deviceToken)
+        RegisterDataManager().registerDataManager(registerInput, self)
     }
     // MARK: - Functions
     func checkValidPW(_ pw: String) {

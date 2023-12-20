@@ -46,8 +46,8 @@ class ShareView: UIView {
     let addFolderButton = UIButton().then{
         $0.setImage(Image.addFolder, for: .normal)
     }
-    let completeButton = DefaultButton(titleStr: Button.addToWishList).then{
-        $0.isActivate = true
+    let completeButton = LoadingButton(Button.addToWishList).then{
+        $0.inactivateButton()
     }
     //MARK: - Life Cycles
     var folderCollectionView: UICollectionView!

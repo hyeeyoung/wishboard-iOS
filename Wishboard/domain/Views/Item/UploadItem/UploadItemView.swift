@@ -21,11 +21,7 @@ class UploadItemView: UIView {
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         $0.configuration = config
     }
-    var saveButton = DefaultButton(titleStr: Button.save).then{
-        $0.isActivate = true
-        $0.layer.cornerRadius = 15
-        $0.titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
-    }
+    var saveButton: LoadingButton!
     
     let scrollView = UIScrollView().then{
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -47,7 +43,7 @@ class UploadItemView: UIView {
     // MARK: - Functions
     // 저장버튼 Enabled 여부
     func setSaveButton(_ isEnable: Bool) {
-        saveButton.isActivate = isEnable ? true : false
+        isEnable ? saveButton.activateButton() : saveButton.inactivateButton()
     }
     func setImageTableView(dataSourceDelegate: UITableViewDelegate & UITableViewDataSource) {
         uploadImageTableView = UITableView().then{

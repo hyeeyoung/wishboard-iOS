@@ -32,8 +32,8 @@ class LoginView: UIView {
         $0.isSecureTextEntry = true
     }
     // 로그인하기 버튼
-    let loginButton = DefaultButton(titleStr: Button.login).then{
-        $0.isActivate = false
+    let loginButton = LoadingButton(Button.login).then{
+        $0.inactivateButton()
     }
     // 비밀번호를 잊으셨나요?
     let lostPasswordButton = UIButton().then{

@@ -14,13 +14,13 @@
             filePath = "Wishboard/domain/Services/Foundation/AuthIntercepter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "retry(_:for:dueTo:completion:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "D8B3AF63-FC8B-4F9D-B593-D2091418A9D6 - 9c24f6342a5afbd4"
+                  uuid = "D8B3AF63-FC8B-4F9D-B593-D2091418A9D6 - 9c24f6342a5afa1a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -30,24 +30,24 @@
                   urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/domain/Services/Foundation/AuthIntercepter.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "66"
-                  endingLineNumber = "66"
-                  offsetFromSymbolStart = "620">
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "624">
                </Location>
                <Location
-                  uuid = "D8B3AF63-FC8B-4F9D-B593-D2091418A9D6 - 9c24f6342a5afb96"
+                  uuid = "D8B3AF63-FC8B-4F9D-B593-D2091418A9D6 - c9aca527f836398c"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool) -&gt; () in Wishboard.AuthInterceptor.retry(_: Alamofire.Request, for: Alamofire.Session, dueTo: Swift.Error, completion: (Alamofire.RetryResult) -&gt; ()) -&gt; ()"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (Swift.Bool) -&gt; () in Wishboard.AuthInterceptor.retry(_: Alamofire.Request, for: Alamofire.Session, dueTo: Swift.Error, completion: (Alamofire.RetryResult) -&gt; ()) -&gt; ()"
                   moduleName = "Wishboard"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/domain/Services/Foundation/AuthIntercepter.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "68"
-                  endingLineNumber = "68"
-                  offsetFromSymbolStart = "156">
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "624">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -62,13 +62,13 @@
             filePath = "Wishboard/domain/Services/Foundation/AuthIntercepter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
             landmarkName = "retry(_:for:dueTo:completion:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "481862BE-1402-400B-8436-5D25B8529072 - 9c24f6342a5af581"
+                  uuid = "481862BE-1402-400B-8436-5D25B8529072 - 9c24f6342a5afa1a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -78,24 +78,24 @@
                   urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/domain/Services/Foundation/AuthIntercepter.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "53"
-                  endingLineNumber = "53"
-                  offsetFromSymbolStart = "148">
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "624">
                </Location>
                <Location
-                  uuid = "481862BE-1402-400B-8436-5D25B8529072 - 9c24f6342a5af581"
+                  uuid = "481862BE-1402-400B-8436-5D25B8529072 - c9aca527f836365f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool) -&gt; () in Wishboard.AuthInterceptor.retry(_: Alamofire.Request, for: Alamofire.Session, dueTo: Swift.Error, completion: (Alamofire.RetryResult) -&gt; ()) -&gt; ()"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (Swift.Bool) -&gt; () in Wishboard.AuthInterceptor.retry(_: Alamofire.Request, for: Alamofire.Session, dueTo: Swift.Error, completion: (Alamofire.RetryResult) -&gt; ()) -&gt; ()"
                   moduleName = "Wishboard"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/domain/Services/Foundation/AuthIntercepter.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "53"
-                  endingLineNumber = "53"
-                  offsetFromSymbolStart = "144">
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "152">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -110,13 +110,13 @@
             filePath = "Wishboard/domain/Services/Foundation/AuthIntercepter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "retry(_:for:dueTo:completion:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "E889561A-2180-43F8-B863-EC70C0CF2786 - 9c24f6342a5afb96"
+                  uuid = "E889561A-2180-43F8-B863-EC70C0CF2786 - 9c24f6342a5afbf7"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -126,12 +126,92 @@
                   urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/domain/Services/Foundation/AuthIntercepter.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "68"
-                  endingLineNumber = "68"
-                  offsetFromSymbolStart = "632">
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
+                  offsetFromSymbolStart = "636">
                </Location>
                <Location
-                  uuid = "E889561A-2180-43F8-B863-EC70C0CF2786 - 9c24f6342a5afb96"
+                  uuid = "E889561A-2180-43F8-B863-EC70C0CF2786 - c9aca527f836382f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (Swift.Bool) -&gt; () in Wishboard.AuthInterceptor.retry(_: Alamofire.Request, for: Alamofire.Session, dueTo: Swift.Error, completion: (Alamofire.RetryResult) -&gt; ()) -&gt; ()"
+                  moduleName = "Wishboard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/domain/Services/Foundation/AuthIntercepter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "68"
+                  endingLineNumber = "68"
+                  offsetFromSymbolStart = "636">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FE687246-B35D-41F7-9BDC-08BC69C67393"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/domain/ViewControllers/Home/HomeViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
+            landmarkName = "wishListAPISuccess(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "51216212-275A-4B35-8F20-FAF83C20DB1A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/domain/Services/WishList/WishListDataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "wishListDataManager(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7CACC079-D287-42D7-84D3-E91D585F5391"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/domain/Services/Foundation/AuthIntercepter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "retry(_:for:dueTo:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7CACC079-D287-42D7-84D3-E91D585F5391 - ea9c66f19d6dfdd8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[1] = Dead&gt; of Wishboard.AuthInterceptor.retry(_: Alamofire.Request, for: Alamofire.Session, dueTo: Swift.Error, completion: (Alamofire.RetryResult) -&gt; ()) -&gt; ()"
+                  moduleName = "Wishboard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/domain/Services/Foundation/AuthIntercepter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "572">
+               </Location>
+               <Location
+                  uuid = "7CACC079-D287-42D7-84D3-E91D585F5391 - 9c24f6342a5afb50"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -141,11 +221,171 @@
                   urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/domain/Services/Foundation/AuthIntercepter.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "68"
-                  endingLineNumber = "68"
-                  offsetFromSymbolStart = "156">
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "460">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CEEA7D2F-B1F2-4083-B5C2-72A7A831096E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/domain/Services/Foundation/AuthIntercepter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "retry(_:for:dueTo:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "65BEF9D7-FB26-49BB-A26B-077968365725"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/domain/Services/Authentication/RefreshDataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "refreshDataManager(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6A7718BD-C6D3-482C-B9E4-416C33D24316"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/domain/Services/Authentication/RefreshDataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "refreshDataManager(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "75E8D507-6F0E-4649-A494-B0656D95FC03"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/domain/Services/Authentication/RefreshDataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "refreshDataManager(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E14A83BA-A1ED-4CDC-8D0D-F3DF442CD563"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/domain/Services/Foundation/AuthIntercepter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "adapt(_:for:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DCADFE1C-62C9-4F2C-81C6-856BDAA5848E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/domain/ViewControllers/Home/HomeViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "refreshTable(refresh:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DCADFE1C-62C9-4F2C-81C6-856BDAA5848E - 6d3eba6bbeaa5580"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Wishboard.HomeViewController.refreshTable(refresh: __C.UIRefreshControl) -&gt; ()"
+                  moduleName = "Wishboard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/domain/ViewControllers/Home/HomeViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "181"
+                  endingLineNumber = "181"
+                  offsetFromSymbolStart = "176">
+               </Location>
+               <Location
+                  uuid = "DCADFE1C-62C9-4F2C-81C6-856BDAA5848E - 696fa1ec071dfe31"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in Wishboard.HomeViewController.refreshTable(refresh: __C.UIRefreshControl) -&gt; ()"
+                  moduleName = "Wishboard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/domain/Services/WishList/WishListDataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A02D0AC4-B7C0-4C04-B45E-6FA1F103CEF6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/domain/ViewControllers/Home/HomeViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "wishListAPISuccess(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "50528A4A-2014-42A8-93F4-3ADF69CFA376"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/domain/Services/WishList/WishListDataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "wishListDataManager(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

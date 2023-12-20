@@ -9,93 +9,133 @@ import Foundation
 import UIKit
 import Lottie
 
-class DefaultButton: UIButton {
+
+class LoadingButton: UIButton {
+
+    private var animationView: LottieAnimationView?
+    
     var isActivate: Bool = false {
         didSet{
             isActivate ? activateButton() : inactivateButton()
         }
     }
-    var lottieView: LottieAnimationView!
-    var titleStr: String?
-    var titleColor: UIColor?
     
-    // MARK: - Life Cycle
-    
-    // 디폴트 초록 배경 버튼
-    init(titleStr: String) {
+    /// 지렁이 로띠뷰
+    init(_ title: String) {
         super.init(frame: CGRect.zero)
         
-        self.titleStr = titleStr
+        setupHorizontalBlack()
         
-        self.setTitle(titleStr, for: .normal)
-        self.setTitleColor(UIColor.gray_300, for: .normal)
-        self.titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
-        self.backgroundColor = UIColor.gray_100
+        setTitle(title, for: .normal)
+        setTitleColor(UIColor.gray_300, for: .normal)
+        titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
+        backgroundColor = UIColor.gray_100
         
-        self.clipsToBounds = true
-        self.layer.cornerRadius = 22
-        
-        self.setTitle("", for: .selected)
+        clipsToBounds = true
+        layer.cornerRadius = 22
     }
     
-    // 제목, 배경색, 글씨색 설정
-    init(titleStr: String, titleColor: UIColor, backgroundColor: UIColor) {
+    /// 초록 돌돌이 로띠뷰
+    init(_ title: String, _ vc: UIViewController) {
         super.init(frame: CGRect.zero)
         
-        self.titleStr = titleStr
+        setupSpinGreen(vc)
         
-        self.setTitle(titleStr, for: .normal)
-        self.setTitleColor(titleColor, for: .normal)
-        self.titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
-        self.backgroundColor = backgroundColor
+        setTitle(title, for: .normal)
+        setTitleColor(UIColor.gray_300, for: .normal)
+        titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitH3)
+        backgroundColor = UIColor.gray_100
         
-        self.clipsToBounds = true
-        self.layer.cornerRadius = 22
+        clipsToBounds = true
+        layer.cornerRadius = 22
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         
-        self.setTitle("", for: .selected)
     }
-    
-    
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Function
-    func activateButton() {
-        self.backgroundColor = UIColor.green_500
-        self.setTitleColor(UIColor.gray_700, for: .normal)
-        self.isEnabled = true
-    }
-    func inactivateButton() {
-        self.backgroundColor = UIColor.gray_100
-        self.setTitleColor(UIColor.gray_300, for: .normal)
-        self.isEnabled = false
-    }
-    // MARK: Lottie View
-    func setLottieView() -> LottieAnimationView {
-        self.lottieView = SetLottie().horizontalBlackView
-        self.addSubview(lottieView)
+
+    private func setupHorizontalBlack() {
+        // Lottie 애니메이션 초기화
+        animationView = LottieAnimationView(name: "loading_horizontal_black") // Lottie 애니메이션 파일명으로 변경
+        animationView?.loopMode = .loop
+        animationView?.isUserInteractionEnabled = false
+
+        // 로딩 상태를 나타낼 뷰 추가
+        addSubview(animationView!)
+        animationView?.center = center
+        animationView?.stop()
         
-        lottieView.snp.makeConstraints { make in
+        animationView?.snp.makeConstraints { make in
             make.width.equalTo(50)
             make.height.equalToSuperview()
             make.centerY.centerX.equalToSuperview()
         }
-        defer {activateLottieView()}
-        
-        return lottieView
+
+        animationView?.isHidden = true
     }
-    func activateLottieView() {
-        self.lottieView.isHidden = false
-        self.titleLabel?.isHidden = true
-        self.isSelected = true
-    }
-    func inActivateLottieView() {
-        if let lottieView = self.lottieView {
-            lottieView.isHidden = true
+    private func setupSpinGreen(_ vc: UIViewController) {
+        // Lottie 애니메이션 초기화
+        animationView = LottieAnimationView(name: "loading_spin") // Lottie 애니메이션 파일명으로 변경
+        animationView?.loopMode = .loop
+        animationView?.isUserInteractionEnabled = false
+
+        // 로딩 상태를 나타낼 뷰 추가
+        vc.view.addSubview(animationView!)
+        animationView?.snp.makeConstraints { make in
+            make.width.height.equalTo(100)
+            make.centerY.centerX.equalToSuperview()
         }
-        self.titleLabel?.isHidden = false
+        
+        animationView?.isHidden = true
     }
+
+    // MARK: Methods
+    
+    func startLoadingAnimation() {
+        // 로딩 애니메이션 시작
+        isEnabled = false
+        titleLabel?.isHidden = true
+        titleLabel?.alpha = 0
+        
+        animationView?.isHidden = false
+        animationView?.play()
+    }
+
+    func stopLoadingAnimation() {
+        // 로딩 애니메이션 멈춤
+        isEnabled = true
+        titleLabel?.isHidden = false
+        titleLabel?.alpha = 1
+        
+        animationView?.isHidden = true
+        animationView?.stop()
+    }
+
+    func activateButton() {
+        self.backgroundColor = UIColor.green_500
+        self.setTitleColor(UIColor.gray_700, for: .normal)
+        isEnabled = true
+        
+        titleLabel?.isHidden = false
+        titleLabel?.alpha = 1
+        
+        animationView?.isHidden = true
+        animationView?.stop()
+    }
+    
+    func inactivateButton() {
+        self.backgroundColor = UIColor.gray_100
+        self.setTitleColor(UIColor.gray_300, for: .normal)
+        isEnabled = false
+        
+        titleLabel?.isHidden = false
+        titleLabel?.alpha = 1
+        
+        animationView?.isHidden = true
+        animationView?.stop()
+    }
+    
     func needLoginButton() {
         setTitle(Button.doLogin, for: .normal)
         backgroundColor = UIColor.gray_100

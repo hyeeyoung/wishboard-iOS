@@ -13,7 +13,6 @@ class FolderViewController: TitleLeftViewController {
     var folderView : FolderView!
     let emptyMessage = EmptyMessage.folder
     var folderData: [FolderModel] = []
-    var lottieView: LottieAnimationView!
     
     var refreshControl = UIRefreshControl()
 
@@ -205,7 +204,7 @@ extension FolderViewController {
         print(result.message)
     }
     func sameFolderNameFail() {
-        lottieView.isHidden = true
+        
     }
     // MARK: 폴더 삭제 API
     func deleteFolderAPISuccess(_ result: APIModel<ResultModel>) {

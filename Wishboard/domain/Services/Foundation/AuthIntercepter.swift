@@ -21,7 +21,6 @@ final class AuthInterceptor: RequestInterceptor {
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
        
         let accessToken = UserManager.accessToken ?? ""
-        let refreshToken = UserManager.refreshToken ?? ""
         
         var urlRequest = urlRequest
         urlRequest.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
@@ -46,24 +45,27 @@ final class AuthInterceptor: RequestInterceptor {
             isRefreshingToken = true
             // 토큰 갱신 API 호출
             RefreshDataManager().refreshDataManager { didRefreshToken in
-                self.isRefreshingToken = false
                 
-                if didRefreshToken {
-                    print("Renew Token success At AuthInterceptor")
-                    completion(.retry)
-                } else {
-                    #if WISHBOARD_APP
-                    ScreenManager.shared.goToOnboarding()
-                    
-                    #elseif SHARE_EXTENSION
-                    DispatchQueue.main.async {
-                        if let vc = self.viewcontroller {
-                            ErrorBar(vc)
+                DispatchQueue.main.async {
+                    if didRefreshToken {
+                        print("Renew Token success At AuthInterceptor")
+                        completion(.retry)
+                    } else {
+                        #if WISHBOARD_APP
+                        ScreenManager.shared.goToOnboarding()
+                        
+                        #elseif SHARE_EXTENSION
+                        DispatchQueue.main.async {
+                            if let vc = self.viewcontroller {
+                                ErrorBar(vc)
+                            }
                         }
+                        
+                        #endif
+                        completion(.doNotRetryWithError(error))
                     }
                     
-                    #endif
-//                    completion(.doNotRetryWithError(error))
+                    self.isRefreshingToken = false
                 }
             }
             return

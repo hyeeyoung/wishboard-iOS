@@ -29,8 +29,6 @@ class UploadItemViewController: UIViewController, Observer {
     // keyboard
     var restoreFrameValue: CGFloat = 0.0
     var preKeyboardHeight: CGFloat = 0.0
-    // LottieView
-    var lottieView: LottieAnimationView!
     
     // MARK: - Life Cycles
     override func viewDidLoad() {
@@ -228,6 +226,12 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
 extension UploadItemViewController {
     func setUploadItemView() {
         uploadItemView = UploadItemView()
+        uploadItemView.saveButton = LoadingButton(Button.save, self).then{
+            $0.activateButton()
+            $0.layer.cornerRadius = 15
+            $0.titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
+        }
+        
         uploadItemView.setImageTableView(dataSourceDelegate: self)
         uploadItemView.setContentTableView(dataSourceDelegate: self)
         uploadItemView.setUpView()
@@ -271,11 +275,7 @@ extension UploadItemViewController {
     @objc func saveButtonDidTap() {
         UIDevice.vibrate()
         
-        uploadItemView.saveButton.isEnabled = false
-        lottieView = SetLottie().setSpinLottie(viewcontroller: self)
-        lottieView.isHidden = false
-        lottieView.loopMode = .loop
-        lottieView.play()
+        uploadItemView.saveButton.startLoadingAnimation()
         
         let data = self.wishListData
         DispatchQueue.main.async {
@@ -305,11 +305,7 @@ extension UploadItemViewController {
     @objc func modifyButtonDidTap() {
         UIDevice.vibrate()
         
-        uploadItemView.saveButton.isEnabled = false
-        lottieView = SetLottie().setSpinLottie(viewcontroller: self)
-        lottieView.isHidden = false
-        lottieView.loopMode = .loop
-        lottieView.play()
+        uploadItemView.saveButton.startLoadingAnimation()
         
         let data = self.wishListData
         DispatchQueue.main.async {
@@ -464,7 +460,7 @@ extension UploadItemViewController {
                 case .success(let data):
                     if data.success {
                         print("아이템 등록 성공 by moya:", data.message)
-                        self.lottieView.stop()
+                        self.uploadItemView.saveButton.stopLoadingAnimation()
                         self.viewDidLoad()
                         // 홈화면으로 이동
                         WishItemObserver.shared.notify(.upload)
@@ -489,7 +485,7 @@ extension UploadItemViewController {
                 case .success(let data):
                     if data.success {
                         print("아이템 수정 성공 by moya:", data.message)
-                        self.lottieView.stop()
+                        self.uploadItemView.saveButton.stopLoadingAnimation()
                         self.viewDidLoad()
                         // 뒤로 화면 이동 (아이템 상세 조회 화면)
                         WishItemObserver.shared.notify(.modify)

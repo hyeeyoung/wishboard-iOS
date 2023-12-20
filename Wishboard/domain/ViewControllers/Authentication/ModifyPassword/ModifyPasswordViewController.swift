@@ -95,11 +95,11 @@ class ModifyPasswordViewController: TitleCenterViewController {
     }
     private func isValid() {
         if isValidPassword(self.passwordInput ?? "") && isPasswordSame(self.passwordRewriteInput ?? "") {
-            self.modifyPasswordView.completeButton.isActivate = true
-            self.modifyPasswordView.completeButtonKeyboard.isActivate = true
+            self.modifyPasswordView.completeButton.activateButton()
+            self.modifyPasswordView.completeButtonKeyboard.activateButton()
         } else {
-            self.modifyPasswordView.completeButton.isActivate = false
-            self.modifyPasswordView.completeButtonKeyboard.isActivate = false
+            self.modifyPasswordView.completeButton.inactivateButton()
+            self.modifyPasswordView.completeButtonKeyboard.inactivateButton()
         }
     }
 }
@@ -108,7 +108,7 @@ class ModifyPasswordViewController: TitleCenterViewController {
 extension ModifyPasswordViewController {
     func loginAPIFail() {
         for completeButton in [self.modifyPasswordView.completeButton, self.modifyPasswordView.completeButtonKeyboard] {
-            completeButton.isActivate = false
+            completeButton.inactivateButton()
         }
     }
     

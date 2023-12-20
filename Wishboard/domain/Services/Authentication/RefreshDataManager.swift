@@ -49,6 +49,7 @@ class RefreshDataManager {
                     print(error.localizedDescription)
                 }
                 completion(false)
+                break
             }
         }
     }

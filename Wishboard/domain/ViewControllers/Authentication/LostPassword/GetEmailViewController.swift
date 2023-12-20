@@ -10,7 +10,6 @@ import Lottie
 
 class GetEmailViewController: KeyboardViewController {
     var getEmailView: GetEmailView!
-    var lottieView: LottieAnimationView!
     
     // 인증번호 Properties
     var authCode: String?
@@ -62,15 +61,15 @@ extension GetEmailViewController {
         UIDevice.vibrate()
         if self.code != self.authCode {
             getEmailView.messageLabel.isHidden = false
-            self.getEmailView.loginButtonKeyboard.isActivate = false
-            self.getEmailView.loginButton.isActivate = false
+            self.getEmailView.loginButtonKeyboard.inactivateButton()
+            self.getEmailView.loginButton.inactivateButton()
         } else {
-            lottieView = getEmailView.codeTextField.isFirstResponder ? getEmailView.loginButtonKeyboard.setLottieView() : getEmailView.loginButton.setLottieView()
-            lottieView.play { completion in
-                let fcmToken = UserManager.deviceToken ?? ""
-                let lostPasswordInput = LostPasswordInput(verify: true, email: self.email!, fcmToken: fcmToken)
-                LostPasswordDataManager().verifyCodeDataManager(lostPasswordInput, self)
-            }
+            self.getEmailView.loginButtonKeyboard.startLoadingAnimation()
+            self.getEmailView.loginButton.startLoadingAnimation()
+            
+            let fcmToken = UserManager.deviceToken ?? ""
+            let lostPasswordInput = LostPasswordInput(verify: true, email: self.email!, fcmToken: fcmToken)
+            LostPasswordDataManager().verifyCodeDataManager(lostPasswordInput, self)
         }
     }
     @objc func updateTime() {
@@ -93,11 +92,11 @@ extension GetEmailViewController {
         var isValidCode = codeCount > 0 ? true : false
         if isValidCode && self.isValidTime {
             self.getEmailView.messageLabel.isHidden = true
-            self.getEmailView.loginButtonKeyboard.isActivate = true
-            self.getEmailView.loginButton.isActivate = true
+            self.getEmailView.loginButtonKeyboard.activateButton()
+            self.getEmailView.loginButton.activateButton()
         } else {
-            self.getEmailView.loginButtonKeyboard.isActivate = false
-            self.getEmailView.loginButton.isActivate = false
+            self.getEmailView.loginButtonKeyboard.inactivateButton()
+            self.getEmailView.loginButton.inactivateButton()
         }
     }
 }
