@@ -276,9 +276,11 @@ extension UploadItemViewController {
         UIDevice.vibrate()
         
         uploadItemView.saveButton.startLoadingAnimation()
+        uploadItemView.saveButton.titleLabel?.isHidden = false
+        uploadItemView.saveButton.titleLabel?.alpha = 1
         
         let data = self.wishListData
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             // 이미지 uri를 UIImage로 변환
             var selectedImage : UIImage?
             if self.selectedImage == nil {
@@ -306,9 +308,11 @@ extension UploadItemViewController {
         UIDevice.vibrate()
         
         uploadItemView.saveButton.startLoadingAnimation()
+        uploadItemView.saveButton.titleLabel?.isHidden = false
+        uploadItemView.saveButton.titleLabel?.alpha = 1
         
         let data = self.wishListData
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             // 이미지 uri를 UIImage로 변환
             var selectedImage : UIImage?
             if let imageUrl = data?.item_img_url {

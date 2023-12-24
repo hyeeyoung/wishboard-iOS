@@ -84,7 +84,7 @@ class LoadingButton: UIButton {
         vc.view.addSubview(animationView!)
         animationView?.snp.makeConstraints { make in
             make.width.height.equalTo(100)
-            make.centerY.centerX.equalToSuperview()
+            make.center.equalToSuperview()
         }
         
         animationView?.isHidden = true

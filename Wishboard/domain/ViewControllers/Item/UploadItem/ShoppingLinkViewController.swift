@@ -56,6 +56,10 @@ class ShoppingLinkViewController: BottomSheetKeyboardViewController {
     @objc override func exit() {
         UIDevice.vibrate()
         observer.notify(ItemParseData(itemModel: nil, usecase: .itemLinkExit))
+        
+        // 창 닫힐 때 내용 초기화
+        completeButton.stopLoadingAnimation()
+        self.viewDidLoad()
         self.dismiss(animated: true)
     }
     @objc override func completeButtonDidTap() {
