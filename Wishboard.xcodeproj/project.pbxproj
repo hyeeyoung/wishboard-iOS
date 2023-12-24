@@ -166,6 +166,7 @@
 		23B351842A6CF74200FD7A14 /* RefreshDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23134D3E29B222BF00238536 /* RefreshDataManager.swift */; };
 		23B351852A6CF9D600FD7A14 /* RefreshInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23134D3C29B2216700238536 /* RefreshInput.swift */; };
 		23B351862A6CF9DE00FD7A14 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236AC9EF291A6AB700E1474C /* Storage.swift */; };
+		23B5845B2B37FCC80032AC85 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B5845A2B37FCC80032AC85 /* SplashViewController.swift */; };
 		23B885EC28E5A9B400142FFA /* UploadItemInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233CDED228E4FE0A004E12BC /* UploadItemInput.swift */; };
 		23BB603528E2709C007EA1EF /* ModifyProfileInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB603428E2709C007EA1EF /* ModifyProfileInput.swift */; };
 		23BDC2452944E7B1004338E0 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239422E5292FEFCB0024CEBD /* Optional.swift */; };
@@ -214,7 +215,6 @@
 		23DC04B028C58B5200ABB0CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04AF28C58B5200ABB0CF /* SceneDelegate.swift */; };
 		23DC04B528C58B5200ABB0CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23DC04B328C58B5200ABB0CF /* Main.storyboard */; };
 		23DC04B728C58B5500ABB0CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23DC04B628C58B5500ABB0CF /* Assets.xcassets */; };
-		23DC04BA28C58B5500ABB0CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23DC04B828C58B5500ABB0CF /* LaunchScreen.storyboard */; };
 		23DC04C528C58B5500ABB0CF /* WishboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04C428C58B5500ABB0CF /* WishboardTests.swift */; };
 		23DC04CF28C58B5500ABB0CF /* WishboardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04CE28C58B5500ABB0CF /* WishboardUITests.swift */; };
 		23DC04D128C58B5500ABB0CF /* WishboardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC04D028C58B5500ABB0CF /* WishboardUITestsLaunchTests.swift */; };
@@ -400,9 +400,9 @@
 		23AADBC028DF8F9800AB75C6 /* NotificationSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingViewController.swift; sourceTree = "<group>"; };
 		23B1FA4C294017F200832425 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		23B1FA4E2940184100832425 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
-		23B1FA4F2940184100832425 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		23B1FA502940184100832425 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		23B1FA512940184200832425 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		23B5845A2B37FCC80032AC85 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		23BB603428E2709C007EA1EF /* ModifyProfileInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyProfileInput.swift; sourceTree = "<group>"; };
 		23C2378328C9CEE000CE3200 /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
 		23C2378528C9CEE800CE3200 /* FolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderView.swift; sourceTree = "<group>"; };
@@ -452,7 +452,6 @@
 		23DC04AF28C58B5200ABB0CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		23DC04B428C58B5200ABB0CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		23DC04B628C58B5500ABB0CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		23DC04B928C58B5500ABB0CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		23DC04BB28C58B5500ABB0CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23DC04C028C58B5500ABB0CF /* WishboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WishboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		23DC04C428C58B5500ABB0CF /* WishboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishboardTests.swift; sourceTree = "<group>"; };
@@ -1127,6 +1126,14 @@
 			path = LostPasswordModel;
 			sourceTree = "<group>";
 		};
+		23B584592B37FCBF0032AC85 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				23B5845A2B37FCC80032AC85 /* SplashViewController.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
 		23C2378228C9CED300CE3200 /* Folder */ = {
 			isa = PBXGroup;
 			children = (
@@ -1425,7 +1432,6 @@
 				234F837728C9628900C4EB41 /* OnBoarding */,
 				234F837528C9627F00C4EB41 /* Home */,
 				23DC04B328C58B5200ABB0CF /* Main.storyboard */,
-				23DC04B828C58B5500ABB0CF /* LaunchScreen.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1453,6 +1459,7 @@
 		23DC04E328C58E1600ABB0CF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				23B584592B37FCBF0032AC85 /* Splash */,
 				23DC04E828C591E600ABB0CF /* ViewController.swift */,
 				2307A24B28DE552900E00005 /* Calender */,
 				2307A24A28DE552300E00005 /* Cart */,
@@ -1675,7 +1682,6 @@
 				2331867F28DA92EE00F17CBF /* loading_spin.json in Resources */,
 				23C9569E28C68D7A00D88536 /* SUIT-Medium.ttf in Resources */,
 				2374789828D1C9D600CF941A /* Montserrat-Regular.ttf in Resources */,
-				23DC04BA28C58B5500ABB0CF /* LaunchScreen.storyboard in Resources */,
 				23933AC82903233A00FAC80A /* Montserrat-Medium.ttf in Resources */,
 				23C9569F28C68D7A00D88536 /* SUIT-SemiBold.ttf in Resources */,
 				2364B79E29D40426006459EF /* Montserrat-SemiBold.ttf in Resources */,
@@ -2050,6 +2056,7 @@
 				238EF90928CB070700ECA606 /* CalenderView.swift in Sources */,
 				23EC504228E25DAC00AAA57E /* CheckEmailInput.swift in Sources */,
 				230192BB2A30669200B30B0E /* DefaultLabel.swift in Sources */,
+				23B5845B2B37FCC80032AC85 /* SplashViewController.swift in Sources */,
 				237478A028D1FF0400CF941A /* SetFolderBottomSheetView.swift in Sources */,
 				233CDED328E4FE0A004E12BC /* UploadItemInput.swift in Sources */,
 				23CB5C4B2AA34A74007A0900 /* UserObserver.swift in Sources */,
@@ -2131,15 +2138,6 @@
 				23B1FA4E2940184100832425 /* ko */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		23DC04B828C58B5500ABB0CF /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				23DC04B928C58B5500ABB0CF /* Base */,
-				23B1FA4F2940184100832425 /* ko */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
