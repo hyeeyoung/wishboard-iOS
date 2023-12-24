@@ -254,6 +254,8 @@ extension ShareViewController {
         self.folderListData = result
         self.selectedFolderIdx = -1
         reloadDataAnimation()
+        
+        shareView.completeButton.activateButton()
     }
     func getFolderListAPIFail() {
         FolderDataManager().getFolderListDataManager(self)
@@ -288,6 +290,7 @@ extension ShareViewController {
                               self.shareView.reloadInputViews()},
                           completion: nil);
         
+        shareView.completeButton.activateButton()
         FolderDataManager().getFolderListDataManager(self)
     }
     func getItemDataAPIFail() {

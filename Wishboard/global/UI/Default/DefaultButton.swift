@@ -14,7 +14,7 @@ class LoadingButton: UIButton {
 
     private var animationView: LottieAnimationView?
     
-    var isActivate: Bool = false {
+    var isActivate: Bool = true {
         didSet{
             isActivate ? activateButton() : inactivateButton()
         }

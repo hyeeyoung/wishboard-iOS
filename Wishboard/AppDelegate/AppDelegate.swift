@@ -17,8 +17,6 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // MARK: LaunchScreen
-//        sleep(2)
         
         // MARK: Network check
 //        NetworkCheck.shared.startMonitoring()
