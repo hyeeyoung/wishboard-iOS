@@ -189,10 +189,13 @@ extension HomeViewController {
 extension HomeViewController {
     /// 위시리스트 조회 API 성공
     func wishListAPISuccess(_ result: [WishListModel]) {
-        self.wishListData = result
-        // 애니메이션과 함께 reload
-        self.reloadWithAnimation()
-        refreshControl.endRefreshing()
+        DispatchQueue.main.async {
+            self.wishListData = result
+            print("Data updated. Reloading UI.")
+            // 애니메이션과 함께 reload
+            self.reloadWithAnimation()
+            self.refreshControl.endRefreshing()
+        }
     }
     /// 알림 허용 팝업창
     func switchNotificationAPISuccess(_ result: APIModel<TokenResultModel>) {

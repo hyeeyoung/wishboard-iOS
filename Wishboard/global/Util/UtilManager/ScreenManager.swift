@@ -11,11 +11,9 @@ import SafariServices
 
 class ScreenManager {
     static let shared = ScreenManager()
-    private let tabBarController: UITabBarController
 
     private init() {
-        guard let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabBarViewController") as? UITabBarController else {fatalError()}
-        self.tabBarController = tabBarController
+        
     }
     
     enum Family: String {
@@ -23,24 +21,24 @@ class ScreenManager {
     }
     func goMain() {
         // 첫화면으로 전환
-        let tbc = tabBarController
+        let tbc = TabBarViewController()
         tbc.selectedIndex = 0
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(tbc, animated: true)
     }
     func goMainPages(_ index: Int) {
-        let tbc = tabBarController
+        let tbc = TabBarViewController()
         tbc.selectedIndex = index
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(tbc, animated: true)
     }
     // tabBar가 없는 뷰에서 메인으로 이동할 때
     func goMainPages(_ index: Int, _ viewcontroller: UIViewController, family: Family) {
-        let tbc = tabBarController
+        let tbc = TabBarViewController()
         tbc.selectedIndex = index
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(tbc, animated: true)
         
         switch family {
             case .itemModified:
-                SnackBar.shared.showSnackBar(tabBarController, message: .modifyItem)
+                SnackBar.shared.showSnackBar(tbc, message: .modifyItem)
             default:
                 fatalError()
         }

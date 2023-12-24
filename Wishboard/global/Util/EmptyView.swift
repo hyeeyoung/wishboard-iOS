@@ -22,8 +22,10 @@ class EmptyView {
     func setEmptyView(_ message: String, _ collectionView: UICollectionView, _ count: Int) {
         self.message = message
         
-        if count == 0 {showEmptyView(collectionView)}
-        else {hideEmptyView(collectionView)}
+        DispatchQueue.main.async {
+            if count == 0 {self.showEmptyView(collectionView)}
+            else {self.hideEmptyView(collectionView)}
+        }
     }
     func setEmptyView(_ message: String, _ tableView: UITableView, _ count: Int) {
         self.message = message

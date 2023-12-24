@@ -132,8 +132,7 @@ extension LoginViewController {
 extension LoginViewController {
     /// 로그인 성공 후 메인 화면으로 이동
     func moveToMain() {
-        guard let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabBarViewController") as? UITabBarController else {fatalError()}
-        self.navigationController?.pushViewController(tabBarController, animated: true)
+        ScreenManager.shared.goMain()
     }
     /// 로그인 실패했을 때
     func loginAPIFail() {

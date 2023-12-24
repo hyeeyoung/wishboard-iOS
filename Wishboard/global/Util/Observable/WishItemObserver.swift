@@ -22,8 +22,16 @@ final class WishItemObserver {
     
     // 옵저버 등록
     func bind(_ observer: Observer) {
-        observers.append(observer)
-        // TODO: 중복 제거
+//        observers.append(observer)
+//        print("observers -> \(self.observers)")
+//        // TODO: 중복 제거
+        
+        if !observers.contains(where: { $0 === observer }) {
+            observers.append(observer)
+            print("observers -> \(self.observers)")
+        } else {
+            print("Observer is already registered.")
+        }
     }
     
     // 옵저버 알림

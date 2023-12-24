@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol Observer {
+protocol Observer: AnyObject {
     func update(_ newValue: Any)
 }
