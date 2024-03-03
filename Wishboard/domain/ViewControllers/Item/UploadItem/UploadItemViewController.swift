@@ -332,7 +332,7 @@ extension UploadItemViewController {
                                               itemNotificationType: data?.item_notification_type,
                                               itemNotificationDate: data?.item_notification_date)
             self.modifyItemWithMoya(model: moyaItemInput, id: data?.item_id ?? -1)
-            
+            print("✅ modify item -> \(moyaItemInput)")
         }
     }
 }

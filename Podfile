@@ -24,7 +24,7 @@ target 'Wishboard' do
 	pod 'Moya/ReactiveSwift'
 	pod 'Moya/Combine'
 
-	pod 'lottie-ios'
+	pod 'lottie-ios', '4.2.0'
   target 'WishboardTests' do
     inherit! :search_paths
     # Pods for testing
