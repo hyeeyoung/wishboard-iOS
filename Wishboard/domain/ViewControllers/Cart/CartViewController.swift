@@ -7,7 +7,8 @@
 
 import UIKit
 
-class CartViewController: TitleCenterViewController {
+class CartViewController: TitleCenterViewController, Observer {
+    var observer = WishItemObserver.shared
     var cartView: CartView!
 
     override func viewDidLoad() {
@@ -24,12 +25,19 @@ class CartViewController: TitleCenterViewController {
             make.bottom.equalToSuperview()
         }
         cartView.preVC = self
+        
+        observer.bind(self)
+        
+        // DATA
+        CartDataManager().getCartListDataManager(self.cartView)
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
-        // DATA
-        CartDataManager().getCartListDataManager(self.cartView)
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
+    }
+    func update(_ newValue: Any) {
+        // DATA
+        CartDataManager().getCartListDataManager(self.cartView)
     }
 }

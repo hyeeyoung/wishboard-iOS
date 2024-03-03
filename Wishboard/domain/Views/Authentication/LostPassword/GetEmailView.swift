@@ -36,8 +36,8 @@ class GetEmailView: UIView {
         $0.numberOfLines = 1
     }
     // 로그인하기 버튼
-    let loginButtonKeyboard = DefaultButton(titleStr: Button.login)
-    let loginButton = DefaultButton(titleStr: Button.login)
+    let loginButtonKeyboard = LoadingButton(Button.login)
+    let loginButton = LoadingButton(Button.login)
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
     }()

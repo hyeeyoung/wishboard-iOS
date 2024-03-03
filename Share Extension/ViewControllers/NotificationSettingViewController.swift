@@ -24,8 +24,8 @@ class NotificationSettingViewController: UIViewController {
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
         $0.textColor = .gray_200
     }
-    let completeButton = DefaultButton(titleStr: Button.complete).then{
-        $0.isActivate = true
+    let completeButton = LoadingButton(Button.complete).then{
+        $0.activateButton()
     }
     // MARK: - Life Cycles
     var notiType: String?

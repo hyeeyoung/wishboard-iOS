@@ -30,8 +30,8 @@ class ModifyProfileViewController: TitleCenterViewController {
         $0.clearButtonMode = .always
         $0.becomeFirstResponder()
     }
-    let completeButton = DefaultButton(titleStr: Button.complete)
-    let completeKeyboardButton = DefaultButton(titleStr: Button.complete)
+    let completeButton = LoadingButton(Button.complete)
+    let completeKeyboardButton = LoadingButton(Button.complete)
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
     }()
@@ -150,8 +150,8 @@ extension ModifyProfileViewController {
     }
     // 닉네임 유효성 검사
     func isNicknameValid(nickname: String) {
-        self.completeButton.isActivate = nickname.isEmpty ? false : true
-        self.completeKeyboardButton.isActivate = nickname.isEmpty ? false : true
+        nickname.isEmpty ? completeButton.inactivateButton() : completeButton.activateButton()
+        nickname.isEmpty ? completeKeyboardButton.inactivateButton() : completeKeyboardButton.activateButton()
     }
     // 앨범에서 사진/동영상 선택
     // 프로필 이미지 클릭 시
@@ -167,31 +167,22 @@ extension ModifyProfileViewController {
         UIDevice.vibrate()
     }
     @objc func completeButtonDidTap() {
+        
         UIDevice.vibrate()
         
-        var lottieView = self.completeButton.setLottieView()
-        self.completeButton.isSelected = true
+        completeButton.startLoadingAnimation()
+        completeKeyboardButton.startLoadingAnimation()
         
-        // 키보드가 올라와있을 때 키보드 위 버튼 처리
-        if nameTextField.isFirstResponder {
-            lottieView = self.completeKeyboardButton.setLottieView()
-            self.completeKeyboardButton.isSelected = true
+        // 이미지와 닉네임 둘 다 변경사항이 없을 때, selectedPhoto와 nickname 값이 nil이 되어 버그.
+        // 예외처리
+        if self.selectedPhoto == nil && self.nickname == nil {
+            self.navigationController?.popViewController(animated: true)
+            return
         }
+        // 변경사항이 하나라도 있을 때 통신
+        let moyaProfileInput = MoyaProfileInput(photo: self.selectedPhoto, nickname: self.nickname)
+        self.modifyProfileWithMoya(model: moyaProfileInput)
         
-        lottieView.isHidden = false
-        lottieView.play { completion in
-            lottieView.loopMode = .loop
-            
-            // 이미지와 닉네임 둘 다 변경사항이 없을 때, selectedPhoto와 nickname 값이 nil이 되어 버그.
-            // 예외처리
-            if self.selectedPhoto == nil && self.nickname == nil {
-                self.navigationController?.popViewController(animated: true)
-                return
-            }
-            // 변경사항이 하나라도 있을 때 통신
-            let moyaProfileInput = MoyaProfileInput(photo: self.selectedPhoto, nickname: self.nickname)
-            self.modifyProfileWithMoya(model: moyaProfileInput)
-        }
     }
 }
 // MARK: - ImagePicker Delegate

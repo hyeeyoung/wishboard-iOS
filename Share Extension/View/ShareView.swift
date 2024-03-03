@@ -21,6 +21,9 @@ class ShareView: UIView {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 20
     }
+    let backgroundViewSquare = UIView().then {
+        $0.backgroundColor = .white
+    }
     lazy var quitButton = UIButton().then{
         $0.setImage(Image.quit, for: .normal)
     }
@@ -43,8 +46,8 @@ class ShareView: UIView {
     let addFolderButton = UIButton().then{
         $0.setImage(Image.addFolder, for: .normal)
     }
-    let completeButton = DefaultButton(titleStr: Button.addToWishList).then{
-        $0.isActivate = true
+    let completeButton = LoadingButton(Button.addToWishList).then{
+        $0.inactivateButton()
     }
     //MARK: - Life Cycles
     var folderCollectionView: UICollectionView!
@@ -77,6 +80,8 @@ class ShareView: UIView {
     }
     func setUpView() {
         addSubview(backgroundView)
+        addSubview(backgroundViewSquare)
+        
         backgroundView.addSubview(quitButton)
         backgroundView.addSubview(itemNameTextField)
         backgroundView.addSubview(itemPriceTextField)
@@ -88,6 +93,10 @@ class ShareView: UIView {
         addSubview(itemImage)
     }
     func setUpConstraint() {
+        backgroundViewSquare.snp.makeConstraints { make in
+            make.bottom.leading.trailing.equalToSuperview()
+            make.height.equalTo(20)
+        }
         backgroundView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
             make.height.equalTo(317)
@@ -112,6 +121,7 @@ class ShareView: UIView {
             make.top.equalTo(itemNameTextField.snp.bottom).offset(6)
         }
         setNotificationButton.snp.makeConstraints { make in
+            make.height.equalTo(14)
             make.centerX.equalToSuperview()
             make.top.equalTo(itemPriceTextField.snp.bottom).offset(16)
         }

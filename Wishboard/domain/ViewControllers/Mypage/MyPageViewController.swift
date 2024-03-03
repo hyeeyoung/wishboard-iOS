@@ -7,9 +7,11 @@
 
 import UIKit
 import MessageUI
+import RxSwift
 
 class MyPageViewController: TitleLeftViewController, Observer {
     var observer = UserObserver.shared
+    var viewModel = MyPageViewModel()
     
     var mypageView: MyPageView!
     let settingArray = ["", "알림 설정", "비밀번호 변경", "", "문의하기", "위시보드 이용 방법", "이용약관", "개인정보 처리방침", "오픈소스 라이브러리", "버전 정보", "", "로그아웃", "탈퇴하기"]
@@ -17,6 +19,8 @@ class MyPageViewController: TitleLeftViewController, Observer {
     var userInfoData: GetUserInfoModel!
     var nickName: String?
     var pushState: Bool?
+    
+    var notiSwitch: UISwitch = UISwitch()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +37,9 @@ class MyPageViewController: TitleLeftViewController, Observer {
             make.top.equalTo(super.navigationView.snp.bottom)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
-        // load DATA
-        MypageDataManager().getUserInfoDataManager(self)
+        
+        /// ViewModel bind
+        bind()
         
         /// Observer init
         observer.bind(self)
@@ -50,16 +55,34 @@ class MyPageViewController: TitleLeftViewController, Observer {
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         
         guard let usecase = newValue as? ObserverUseCase else {return}
-        defer {
+        do {
             // 프로필이 수정된 경우와 비밀번호가 수정된 경우 분기처리
             if usecase == .profileModified {
-                SnackBar(self, message: .modifyProfile)
+                SnackBar.shared.showSnackBar(self, message: .modifyProfile)
                 // reload profile Data
                 MypageDataManager().getUserInfoDataManager(self)
             } else if usecase == .passwordModified {
-                SnackBar(self, message: .modifyPassword)
+                SnackBar.shared.showSnackBar(self, message: .modifyPassword)
             }
         }
+    }
+    
+    func bind() {
+        let input = MyPageViewModel.Input(notiSwitchObservable: notiSwitch.rx.isOn.asObservable())
+        let output = viewModel.transform(input)
+        
+        output.getUserInfoResponse
+            .drive(onNext: { [weak self] userInfo in
+                // 사용자 정보를 화면에 출력
+                self?.getUserInfoAPISuccess2(userInfo)
+            })
+            .disposed(by: disposeBag)
+
+        output.setNotificationResponse
+            .drive { [weak self] _ in
+                UIDevice.vibrate()
+                self?.pushState?.toggle()
+            }
     }
 }
 // MARK: - Main TableView delegate
@@ -83,7 +106,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             cell.backgroundColor = .gray_50
         case 2:
             cell.textLabel?.text = settingArray[tag - 1]
-            self.setSwitch(cell)
+            self.setSwitchUI(cell)
         case 10:
             cell.textLabel?.text = settingArray[tag - 1]
             self.setVersionLabel(cell)
@@ -171,9 +194,9 @@ extension MyPageViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     // 알림 설정 - Switch 넣기
-    func setSwitch(_ cell: UITableViewCell) {
+    func setSwitchUI(_ cell: UITableViewCell) {
         // Switch 기본 크기: 가로51, 세로31
-        var notiSwitch = UISwitch().then{
+        notiSwitch.do{
             if let pushState = self.pushState {$0.isOn = pushState}
             else {$0.isOn = false}
             $0.onTintColor = .green_500
@@ -187,19 +210,11 @@ extension MyPageViewController {
             make.centerY.equalToSuperview()
         }
         
-        notiSwitch.addTarget(self, action: #selector(onClickSwitch(_:)), for: UIControl.Event.valueChanged)
     }
-    @objc func onClickSwitch(_ sender: UISwitch) {
-        UIDevice.vibrate()
-        if sender.isOn {
-            MypageDataManager().switchNotificationDataManager(true, self)
-        } else {
-            MypageDataManager().switchNotificationDataManager(false, self)
-        }
-    }
+    
     // 버전 정보 표시 (1.0.0)
     func setVersionLabel(_ cell: UITableViewCell) {
-        let appVersion = UserDefaults.standard.string(forKey: "appVersion") ?? ""
+        let appVersion = UserManager.appVersion
         let versionLabel = UILabel().then{
             $0.text = appVersion
             $0.setTypoStyleWithSingleLine(typoStyle: .MontserratB1)
@@ -213,22 +228,38 @@ extension MyPageViewController {
     }
     // 로그아웃 팝업창
     func showLogoutDialog() {
-        let dialog = PopUpViewController(titleText: "로그아웃", messageText: "정말 로그아웃 하시겠어요?", greenBtnText: "취소", blackBtnText: "로그아웃")
-        dialog.modalPresentationStyle = .overFullScreen
+        let model = PopUpModel(title: "로그아웃",
+                               message: "정말 로그아웃 하시겠어요?",
+                               greenBtnText: "취소",
+                               blackBtnText: "로그아웃")
+        let dialog = PopUpViewController(model)
         self.present(dialog, animated: false, completion: nil)
         
-        dialog.okBtn.addTarget(self, action: #selector(logoutButtonDidTap), for: .touchUpInside)
+        // 로그아웃 확인 버튼 클릭 이벤트
+        dialog.okBtn.rx.tap
+            .flatMap { [weak self] _ -> Observable<Void> in
+                return Observable.create { observer in
+                    self?.logoutButtonDidTap()
+                    self?.viewModel.callLogoutAPI()
+                    self?.logoutAPISuccess()
+                    observer.onCompleted()
+                    return Disposables.create()
+                }
+            }
+            .subscribe()
+            .disposed(by: disposeBag)
+        
     }
     // 회원 탈퇴 팝업창
     func showSignoutDialog() {
-        guard let email = self.userInfoData.email else {return}
+        let email = userInfoData.email
         let dialog = PopUpDeleteUserViewController(titleText: "회원 탈퇴", greenBtnText: "취소", blackBtnText: "탈퇴", placeholder: Placeholder.email, email: email)
         dialog.modalPresentationStyle = .overFullScreen
         self.present(dialog, animated: false, completion: nil)
     }
-    @objc func logoutButtonDidTap() {
+    /// 로그아웃 버튼 클릭 시 UI 이벤트
+    func logoutButtonDidTap() {
         self.dismiss(animated: false)
-        MypageDataManager().logoutDataManager(self)
         UIDevice.vibrate()
     }
 }
@@ -248,9 +279,9 @@ extension MyPageViewController: MFMailComposeViewControllerDelegate {
             let compseVC = MFMailComposeViewController()
             compseVC.mailComposeDelegate = self
             
-            let deviceModel = UserDefaults.standard.string(forKey: "deviceModel") ?? ""
-            let osVersion = UserDefaults.standard.string(forKey: "OSVersion") ?? ""
-            let appVersion = UserDefaults.standard.string(forKey: "appVersion") ?? ""
+            let deviceModel = UserManager.deviceModel
+            let osVersion = UserManager.OSVersion
+            let appVersion = UserManager.appVersion
             
             let messageBody = "\nDevice: \(deviceModel)"
                                 + "\nOS Version: \(osVersion)"
@@ -280,19 +311,6 @@ extension MyPageViewController: MFMailComposeViewControllerDelegate {
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
-//    // Check if userdata modified
-//    func checkIfUserdataModified() {
-//        // 프로필이 변경되었을 때 스낵바 출력
-//        if isProfileModified {
-//            SnackBar(self, message: .modifyProfile)
-//            isProfileModified.toggle()
-//        }
-//        // 비밀번호 변경되었을 때 스낵바 출력
-//        if isPasswordModified {
-//            SnackBar(self, message: .modifyPassword)
-//            isPasswordModified.toggle()
-//        }
-//    }
 }
 // MARK: - API Success
 extension MyPageViewController {
@@ -314,32 +332,34 @@ extension MyPageViewController {
                           animations: { () -> Void in
                               self.mypageView.mypageTableView.reloadData()},
                           completion: nil);
-        print(result)
+    }
+    func getUserInfoAPISuccess2(_ result: GetUserInfoModel?) {
+        guard let result = result else {return}
+        self.userInfoData = result
+        self.nickName = self.userInfoData.nickname
+        
+        pushState = userInfoData.push_state == 1
+        
+        // reload data with animation
+        UIView.transition(with: mypageView.mypageTableView,
+                          duration: 0.35,
+                          options: .transitionCrossDissolve,
+                          animations: { () -> Void in
+                              self.mypageView.mypageTableView.reloadData()},
+                          completion: nil);
     }
     func getUserInfoAPIFail() {
         MypageDataManager().getUserInfoDataManager(self)
     }
-    // MARK: 알림 토글 수정 API
-    func switchNotificationAPISuccess(_ result: APIModel<TokenResultModel>) {
-        pushState?.toggle()
-        print(result.message)
-    }
+    
     // MARK: 로그아웃 API
-    func logoutAPISuccess(_ result: APIModel<ResultModel>) {
-        // delete UserInfo
-        UserDefaults.standard.removeObject(forKey: "accessToken")
-        UserDefaults.standard.removeObject(forKey: "refreshToken")
-        UserDefaults.standard.removeObject(forKey: "email")
-        UserDefaults.standard.removeObject(forKey: "password")
-        UserDefaults.standard.set(false, forKey: "isFirstLogin")
-        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "accessToken")
-        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "removeToken")
-        
-        
+    func logoutAPISuccess() {
+        // 사용자 데이터 삭제
+        UserManager.removeUserData()
+        // 첫화면으로 전환
         let navigationController = UINavigationController(rootViewController: OnBoardingViewController())
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(navigationController, animated: true)
         
-        print(result.message)
     }
 }
 

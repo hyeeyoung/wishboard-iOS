@@ -20,8 +20,10 @@ class AlamofireBaseService {
                    method: method,
                    parameters: nil,
                    headers: APIManager().getHeader(),
-                   interceptor: AuthInterceptor(viewcontroller))
+                   interceptor: AuthInterceptor.shared)
         .validate()
+        
+        AuthInterceptor.shared.viewcontroller = viewcontroller
         
         return request
     }
@@ -32,8 +34,10 @@ class AlamofireBaseService {
                    parameters: model,
                    encoder: JSONParameterEncoder.default,
                    headers: APIManager().getHeader(),
-                   interceptor: AuthInterceptor(viewcontroller))
+                   interceptor: AuthInterceptor.shared)
         .validate()
+        
+        AuthInterceptor.shared.viewcontroller = viewcontroller
         
         return request
     }
@@ -58,7 +62,6 @@ class AlamofireBaseService {
             case .success(let result):
                 completion(result)
             case .failure(let error):
-//                completion(false)
                 print(error.responseCode)
             }
         }
@@ -78,6 +81,8 @@ class AlamofireBaseService {
         }
     }
     
+    /// String으로 응답받아 출력하기
+    /// 에러 원인을 찾기 어려울 때 사용
     func responseWithString(_ request: DataRequest, completion: @escaping ((Any) -> Void)) {
         request.responseString { response in
             print("String:\(response.result)")

@@ -10,7 +10,7 @@ import MaterialComponents.MaterialBottomSheet
 import Lottie
 
 class UploadItemViewController: UIViewController, Observer {
-    var observer = ItemLinkObserver.shared
+    var itemLinkObserver = ItemLinkObserver.shared
     
     // MARK: - Properties
     var uploadItemView: UploadItemView!
@@ -22,17 +22,13 @@ class UploadItemViewController: UIViewController, Observer {
     var notivc: NotificationSettingViewController!
     var linkvc: ShoppingLinkViewController!
     // Modify Item
-    var preVC: ItemDetailViewController!
     var isUploadItem: Bool!
-    var isModified: Bool = false
     var wishListModifyData: WishListModel!
     // UploadItem
     var wishListData: WishListModel!
     // keyboard
     var restoreFrameValue: CGFloat = 0.0
     var preKeyboardHeight: CGFloat = 0.0
-    // LottieView
-    var lottieView: LottieAnimationView!
     
     // MARK: - Life Cycles
     override func viewDidLoad() {
@@ -52,7 +48,7 @@ class UploadItemViewController: UIViewController, Observer {
         setUploadItemView()
         
         // Observer init
-        observer.bind(self)
+        itemLinkObserver.bind(self)
         
         if !isUploadItem {
             self.tabBarController?.tabBar.isHidden = true
@@ -70,14 +66,7 @@ class UploadItemViewController: UIViewController, Observer {
     override func viewWillDisappear(_ animated: Bool) {
         self.removeKeyboardNotifications()
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        if let preVC = self.preVC {
-            if self.isModified {
-                SnackBar(preVC, message: .modifyItem)
-                self.isModified = false
-            }
-        }
-    }
+    
     @objc func goBack() {
         UIDevice.vibrate()
         self.navigationController?.popViewController(animated: true)
@@ -94,7 +83,7 @@ class UploadItemViewController: UIViewController, Observer {
             setPageContents()
         case .itemParsingFail:
             wishListData.item_url = ""
-            SnackBar(self, message: .failShoppingLink)
+            SnackBar.shared.showSnackBar(self, message: .failShoppingLink)
             setPageContents()
         case .itemParsingSuccess:
             // 파싱한 아이템 정보 적용
@@ -157,7 +146,7 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
             let tag = indexPath.row
             // TextField가 있는 Cell
             switch tag {
-            case 0, 1, 5:
+            case 0, 1:
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: "UploadItemTextfieldTableViewCell", for: indexPath) as? UploadItemTextfieldTableViewCell else { return UITableViewCell() }
                 cell.setTextfieldCell(dataSourceDelegate: self)
                 cell.setPlaceholder(tag: tag)
@@ -167,9 +156,6 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
                 if tag == 0 {cell.textfield.addTarget(self, action: #selector(itemNameTextfieldEditingField(_:)), for: .editingChanged)}
                 else if tag == 1 {
                     cell.textfield.addTarget(self, action: #selector(itemPriceTextfieldEditingField(_:)), for: .editingChanged)
-                }
-                else {
-                    cell.textfield.addTarget(self, action: #selector(memoTextfieldEditingField(_:)), for: .editingChanged)
                 }
                 cell.selectionStyle = .none
                 return cell
@@ -181,6 +167,19 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 cell.selectionStyle = .none
                 return cell
+            case 5:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "UploadItemTextViewCell", for: indexPath) as? UploadItemTextViewCell else { return UITableViewCell() }
+                
+                if isUploadItem {
+                    cell.memoTextView.text = Placeholder.uploadItemMemo
+                    cell.memoTextView.textColor = .placeholderText
+                } else if let cellData = self.wishListData {
+                    cell.setUpData(data: cellData)
+                }
+                
+                cell.memoTextView.delegate = self
+                cell.selectionStyle = .none
+                return cell
             default:
                 fatalError()
             }
@@ -189,7 +188,13 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == uploadItemView.uploadImageTableView { return 251 }
-        else { return 54 }
+        else {
+            if indexPath.row == 5 {
+                return 200
+            } else {
+                return 54
+            }
+        }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         UIDevice.vibrate()
@@ -221,6 +226,12 @@ extension UploadItemViewController: UITableViewDelegate, UITableViewDataSource {
 extension UploadItemViewController {
     func setUploadItemView() {
         uploadItemView = UploadItemView()
+        uploadItemView.saveButton = LoadingButton(Button.save, self).then{
+            $0.activateButton()
+            $0.layer.cornerRadius = 15
+            $0.titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
+        }
+        
         uploadItemView.setImageTableView(dataSourceDelegate: self)
         uploadItemView.setContentTableView(dataSourceDelegate: self)
         uploadItemView.setUpView()
@@ -264,14 +275,12 @@ extension UploadItemViewController {
     @objc func saveButtonDidTap() {
         UIDevice.vibrate()
         
-        uploadItemView.saveButton.isEnabled = false
-        lottieView = SetLottie().setSpinLottie(viewcontroller: self)
-        lottieView.isHidden = false
-        lottieView.loopMode = .loop
-        lottieView.play()
+        uploadItemView.saveButton.startLoadingAnimation()
+        uploadItemView.saveButton.titleLabel?.isHidden = false
+        uploadItemView.saveButton.titleLabel?.alpha = 1
         
         let data = self.wishListData
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             // 이미지 uri를 UIImage로 변환
             var selectedImage : UIImage?
             if self.selectedImage == nil {
@@ -298,14 +307,12 @@ extension UploadItemViewController {
     @objc func modifyButtonDidTap() {
         UIDevice.vibrate()
         
-        uploadItemView.saveButton.isEnabled = false
-        lottieView = SetLottie().setSpinLottie(viewcontroller: self)
-        lottieView.isHidden = false
-        lottieView.loopMode = .loop
-        lottieView.play()
+        uploadItemView.saveButton.startLoadingAnimation()
+        uploadItemView.saveButton.titleLabel?.isHidden = false
+        uploadItemView.saveButton.titleLabel?.alpha = 1
         
         let data = self.wishListData
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             // 이미지 uri를 UIImage로 변환
             var selectedImage : UIImage?
             if let imageUrl = data?.item_img_url {
@@ -325,7 +332,7 @@ extension UploadItemViewController {
                                               itemNotificationType: data?.item_notification_type,
                                               itemNotificationDate: data?.item_notification_date)
             self.modifyItemWithMoya(model: moyaItemInput, id: data?.item_id ?? -1)
-            
+            print("✅ modify item -> \(moyaItemInput)")
         }
     }
 }
@@ -346,10 +353,6 @@ extension UploadItemViewController {
             guard let price = Float(priceStr) else {return}
             sender.text = numberFormatter.string(from: NSNumber(value: price))
         }
-    }
-    @objc func memoTextfieldEditingField(_ sender: UITextField) {
-        let text = sender.text ?? ""
-        self.wishListData.item_memo = text
     }
     func setPriceString(_ str: String) -> String {
         let myString = str.replacingOccurrences(of: ",", with: "")
@@ -447,6 +450,8 @@ extension UploadItemViewController: UIImagePickerControllerDelegate, UINavigatio
 // MARK: - ScrollView Delegate
 extension UploadItemViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView){
+        self.view.frame.origin.y = restoreFrameValue
+        self.preKeyboardHeight = 0.0
         self.view.endEditing(true)
     }
 }
@@ -459,14 +464,17 @@ extension UploadItemViewController {
                 case .success(let data):
                     if data.success {
                         print("아이템 등록 성공 by moya:", data.message)
-                        self.lottieView.stop()
+                        self.uploadItemView.saveButton.stopLoadingAnimation()
                         self.viewDidLoad()
-                        ScreenManager().goMainPages(0, self, family: .itemUpload)
+                        // 홈화면으로 이동
+                        WishItemObserver.shared.notify(.upload)
+                        ScreenManager.shared.goMain()
                     }
                     break
             case .failure(let error):
                 self.viewDidLoad()
-                ScreenManager().goMainPages(0, self, family: .itemUpload)
+                // 홈화면으로 이동
+                ScreenManager.shared.goMain()
                 print("moya item upload error", error.localizedDescription)
             default:
                 print("default error")
@@ -481,16 +489,16 @@ extension UploadItemViewController {
                 case .success(let data):
                     if data.success {
                         print("아이템 수정 성공 by moya:", data.message)
-                        self.lottieView.stop()
+                        self.uploadItemView.saveButton.stopLoadingAnimation()
                         self.viewDidLoad()
+                        // 뒤로 화면 이동 (아이템 상세 조회 화면)
+                        WishItemObserver.shared.notify(.modify)
                         self.navigationController?.popViewController(animated: true)
-                        self.isModified = true
                     }
                     break
             case .failure(let error):
                 self.viewDidLoad()
                 self.navigationController?.popViewController(animated: true)
-                self.isModified = true
                 print("moya item modify error", error.localizedDescription)
             default:
                 print("default error")
@@ -544,8 +552,10 @@ extension UploadItemViewController: UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.frame.origin.y = restoreFrameValue
+        self.preKeyboardHeight = 0.0
         print("touches Began Execute")
-        self.view.endEditing(true)    }
+        self.view.endEditing(true)
+    }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("textFieldShouldReturn Execute")
@@ -560,4 +570,41 @@ extension UploadItemViewController: UITextFieldDelegate {
         return true
     }
     
+}
+
+// MARK: - TextView delegate
+extension UploadItemViewController: UITextViewDelegate {
+    // 텍스트뷰에서 텍스트 편집이 시작될 때 호출되는 메서드
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == Placeholder.uploadItemMemo {
+            textView.text = ""
+            textView.textColor = UIColor.gray_700
+        }
+    }
+
+    // 텍스트뷰에서 텍스트 편집이 종료될 때 호출되는 메서드
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = Placeholder.uploadItemMemo
+            textView.textColor = UIColor.placeholderText
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let text = textView.text ?? ""
+        self.wishListData.item_memo = text
+        
+        // 최소 높이를 유지하도록 높이를 조절
+        let newHeight = max(200, textView.sizeThatFits(CGSize(width: textView.frame.width, height: CGFloat.greatestFiniteMagnitude)).height)
+        if newHeight > 200 {
+            // TODO: TextView Height 동적
+            
+        }
+        updateCellHeight()
+    }
+    
+    private func updateCellHeight() {
+        self.uploadItemView.uploadContentTableView.beginUpdates()
+        self.uploadItemView.uploadContentTableView.endUpdates()
+   }
 }

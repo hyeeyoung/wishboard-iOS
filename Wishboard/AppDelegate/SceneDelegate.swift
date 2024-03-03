@@ -22,8 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        let navigationController = UINavigationController(rootViewController: OnBoardingViewController())
-        window?.rootViewController = navigationController // 루트 뷰컨트롤러 생성
+        window?.rootViewController = SplashViewController()
         window?.makeKeyAndVisible()
         
         // MARK: Light mode

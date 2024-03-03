@@ -53,8 +53,10 @@ class UploadItemTextfieldTableViewCell: UITableViewCell {
             if let itemName = data.item_name {textfield.text = itemName}
         case 1:
             textfield.keyboardType = .numberPad
-            if let price = data.item_price {
+            if let price = data.item_price.nilIfEmpty {
                 textfield.text = numberFormatter.string(from: NSNumber(value: Int(price)!))
+            } else {
+                textfield.text = "0"
             }
         default:
             if let memo = data.item_memo {textfield.text = memo}

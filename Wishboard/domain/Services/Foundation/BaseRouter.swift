@@ -19,7 +19,7 @@ extension BaseRouter {
     }
 
     var headers: [String: String]? {
-        let token = UserDefaults.standard.string(forKey: "accessToken") ?? ""
+        let token = UserManager.accessToken ?? ""
         let header = [
             "Content-Type": "application/json",
             "Authorization": "Bearer " + token]

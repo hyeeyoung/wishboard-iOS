@@ -15,8 +15,6 @@ class NewFolderBottomSheetViewController: BottomSheetKeyboardViewController {
     var folderStr: String!
     var preVC: FolderViewController!
     
-    var lottieView: LottieAnimationView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,8 +34,8 @@ class NewFolderBottomSheetViewController: BottomSheetKeyboardViewController {
         errorMessage.isHidden = true
         
         // complete button
-        completeButton = DefaultButton(titleStr: Button.add).then{
-            $0.isActivate = false
+        completeButton = LoadingButton(Button.add).then{
+            $0.inactivateButton()
         }
     }
     
@@ -48,13 +46,10 @@ class NewFolderBottomSheetViewController: BottomSheetKeyboardViewController {
     // MARK: - Actions
     @objc override func completeButtonDidTap() {
         UIDevice.vibrate()
-        lottieView = completeButton.setLottieView()
         
-        lottieView.play { completion in
-            self.lottieView.loopMode = .loop
-            let addFolderInput = AddFolderInput(folder_name: self.folderStr!)
-            FolderDataManager().addFolderDataManager(addFolderInput, self, self.preVC)
-        }
+        completeButton.startLoadingAnimation()
+        let addFolderInput = AddFolderInput(folder_name: self.folderStr!)
+        FolderDataManager().addFolderDataManager(addFolderInput, self, self.preVC)
     }
     override func textFieldEditingChanged(_ sender: UITextField) {
         let folderInput = sender.text ?? ""
@@ -74,14 +69,14 @@ class NewFolderBottomSheetViewController: BottomSheetKeyboardViewController {
     func setFolderTextCountEmpty() {
         textFieldCountLabel.text = "(0/10)자"
         errorMessage.isHidden = true
-        completeButton.isActivate = false
+        completeButton.inactivateButton()
     }
     /// 분기처리: 폴더명 input 이 유효할 때
     func folderTextCountValid(_ folderInput: String) {
         textFieldCountLabel.text = "(" + String(folderInput.count) + "/10)자"
         
         errorMessage.isHidden = true
-        completeButton.isActivate = true
+        completeButton.activateButton()
         folderStr = folderInput
     }
 }
@@ -90,7 +85,7 @@ extension NewFolderBottomSheetViewController {
     func sameFolderNameFail() {
         completeButton.reloadInputViews()
         errorMessage.isHidden = false
-        completeButton.inActivateLottieView()
+        completeButton.inactivateButton()
     }
     func addFolderAPIFail() {
         let addFolderInput = AddFolderInput(folder_name: self.folderStr)

@@ -13,6 +13,7 @@ class FolderDataManager {
     
     // MARK: - 폴더 리스트 조회
     func getFolderListDataManager(_ viewcontroller: ShareViewController) {
+        // TODO: TokenInterceptor 적용
         let BaseURL = defaults?.string(forKey: "url") ?? ""
         let token = defaults?.string(forKey: "accessToken") ?? ""
         // 로그아웃 상태일 때
@@ -28,8 +29,7 @@ class FolderDataManager {
         AF.request(BaseURL + "/folder/list",
                            method: .get,
                            parameters: nil,
-                           headers: header,
-                           interceptor: AuthInterceptor(viewcontroller))
+                           headers: header)
             .validate()
             .responseDecodable(of: [FolderListModel].self) { response in
             switch response.result {
@@ -37,12 +37,12 @@ class FolderDataManager {
                 viewcontroller.getFolderListAPISuccess(result)
             case .failure(let error):
                 let statusCode = error.responseCode
-                print("FOLDER 가져오기::",statusCode)
+                print("FOLDER 가져오기 error",statusCode)
                 switch statusCode {
                 case 429:
                     viewcontroller.getFolderListAPIFail()
                 case 401:
-                    RefreshDataManager().refreshDataManager() {
+                    RefreshDataManager().shareExtensionRefreshDataManager {
                         $0 ? FolderDataManager().getFolderListDataManager(viewcontroller) : viewcontroller.uploadItem500Error()
                     }
                 default:

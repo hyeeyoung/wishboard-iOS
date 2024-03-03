@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import SnapKit
 
 class ItemDetailTableViewCell: UITableViewCell {
     // MARK: - Properties
@@ -41,8 +42,13 @@ class ItemDetailTableViewCell: UITableViewCell {
     }
     let stack = UIStackView().then{
         $0.axis = .vertical
-        $0.spacing = 16
+        $0.spacing = 0
     }
+    
+    private let linkView = UIView()
+    private let memoView = UIView()
+    
+    // LinkView subViews
     let seperatorLine1 = UIView().then{
         $0.backgroundColor = .gray_100
     }
@@ -50,6 +56,7 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.textColor = .gray_200
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
     }
+    // MemoView subViews
     let seperatorLine2 = UIView().then{
         $0.backgroundColor = .gray_100
     }
@@ -105,21 +112,23 @@ class ItemDetailTableViewCell: UITableViewCell {
         contentView.addSubview(won)
         contentView.addSubview(stack)
         
-        stack.addArrangedSubview(seperatorLine1)
-        stack.addArrangedSubview(linkLabel)
-        stack.addArrangedSubview(seperatorLine2)
-        stack.addArrangedSubview(memoTitlelabel)
+        stack.addArrangedSubview(linkView)
+        stack.addArrangedSubview(memoView)
         
-        // memo content label은 스택에 포함시키지 않았음.
-        // memo title label과의 간격(10) 때문에
-        contentView.addSubview(memoContentLabel)
+        linkView.addSubview(seperatorLine1)
+        linkView.addSubview(linkLabel)
+        
+        memoView.addSubview(seperatorLine2)
+        memoView.addSubview(memoTitlelabel)
+        memoView.addSubview(memoContentLabel)
     }
     func setUpConstraint() {
         itemImage.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(468)
+            make.height.equalTo(itemImage.snp.width).multipliedBy(1.154)
             make.top.equalToSuperview()
         }
+
         restockLabel.snp.makeConstraints { make in
             make.leading.bottom.equalToSuperview().inset(16)
         }
@@ -147,25 +156,41 @@ class ItemDetailTableViewCell: UITableViewCell {
             make.leading.equalTo(priceLabel.snp.trailing)
             make.centerY.equalTo(priceLabel)
         }
+        
+        stack.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(priceLabel.snp.bottom).offset(16)
+        }
+        
+        // LinkView
         seperatorLine1.snp.makeConstraints { make in
             make.height.equalTo(0.5)
+            make.top.leading.trailing.equalToSuperview()
         }
-        stack.snp.makeConstraints { make in
+        linkLabel.snp.makeConstraints { make in
+            make.top.equalTo(seperatorLine1.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(priceLabel.snp.bottom).offset(16)
-            if UIDevice.current.hasNotch {make.bottom.equalToSuperview().offset(-78)}
-            else {make.bottom.equalToSuperview().offset(-44)}
+            make.bottom.trailing.equalToSuperview().offset(-16)
+        }
+        // MemoView
+        seperatorLine2.snp.makeConstraints { make in
+            make.height.equalTo(0.5)
+            make.top.leading.trailing.equalToSuperview()
+        }
+        memoTitlelabel.snp.makeConstraints { make in
+            make.top.equalTo(seperatorLine2.snp.bottom).offset(16)
+            make.leading.trailing.equalToSuperview()
         }
         memoContentLabel.snp.makeConstraints { make in
             make.top.equalTo(memoTitlelabel.snp.bottom).offset(10)
-            make.leading.equalTo(memoTitlelabel)
-        }
-        seperatorLine2.snp.makeConstraints { make in
-            make.height.equalTo(0.5)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-16)
         }
     }
     // After API success
     func setUpData(_ data: WishListModel) {
+        itemImage.layer.cornerRadius = itemImage.bounds.width / 10.7
+        
         if let url = data.item_img_url {
             let processor = TintImageProcessor(tint: .black_5)
             self.itemImage.kf.setImage(with: URL(string: url), placeholder: UIImage(), options: [.processor(processor), .transition(.fade(0.5))])
@@ -198,22 +223,16 @@ class ItemDetailTableViewCell: UITableViewCell {
             var url = URL(string: link)
             var domain = url?.host
             
-            self.linkLabel.isHidden = false
-            self.seperatorLine1.isHidden = false
+            self.linkView.isHidden = false
             self.linkLabel.text = domain
         } else {
-            self.linkLabel.isHidden = true
-            self.seperatorLine1.isHidden = true
+            self.linkView.isHidden = true
         }
         if let memo = data.item_memo.nilIfEmpty {
-            self.seperatorLine2.isHidden = false
-            self.memoTitlelabel.isHidden = false
-            self.memoContentLabel.isHidden = false
+            self.memoView.isHidden = false
             self.memoContentLabel.text = memo
         } else {
-            self.seperatorLine2.isHidden = true
-            self.memoTitlelabel.isHidden = true
-            self.memoContentLabel.isHidden = true
+            self.memoView.isHidden = true
         }
     }
 }

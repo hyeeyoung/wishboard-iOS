@@ -265,13 +265,7 @@ extension PopUpDeleteUserViewController {
     // MARK: 회원 탈퇴 API
     func deleteUserAPISuccess(_ result: APIModel<TokenResultModel>) {
         // delete UserInfo
-        UserDefaults.standard.removeObject(forKey: "accessToken")
-        UserDefaults.standard.removeObject(forKey: "refreshToken")
-        UserDefaults.standard.removeObject(forKey: "email")
-        UserDefaults.standard.removeObject(forKey: "password")
-        UserDefaults.standard.removeObject(forKey: "isFirstLogin")
-        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "accessToken")
-        UserDefaults(suiteName: "group.gomin.Wishboard.Share")?.removeObject(forKey: "removeToken")
+        UserManager.removeUserData()
         
         let onboardingVC = OnBoardingViewController(usecase: .signOut)
         let navigationController = UINavigationController(rootViewController: onboardingVC)

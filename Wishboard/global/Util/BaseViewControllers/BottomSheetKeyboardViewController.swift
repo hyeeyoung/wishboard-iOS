@@ -37,7 +37,7 @@ class BottomSheetKeyboardViewController: BaseViewController {
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
         $0.textColor = .pink_700
     }
-    var completeButton: DefaultButton!
+    var completeButton: LoadingButton!
     
     // MARK: - Properties
     // keyboard
@@ -68,7 +68,7 @@ class BottomSheetKeyboardViewController: BaseViewController {
         }
         if let textfield = self.textfield { textfield.delegate = self }
         
-        completeButton = DefaultButton(titleStr: "")
+        completeButton = LoadingButton("")
     }
     
     private func setUpView() {

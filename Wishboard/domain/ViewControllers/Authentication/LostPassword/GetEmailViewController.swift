@@ -10,7 +10,6 @@ import Lottie
 
 class GetEmailViewController: KeyboardViewController {
     var getEmailView: GetEmailView!
-    var lottieView: LottieAnimationView!
     
     // 인증번호 Properties
     var authCode: String?
@@ -62,15 +61,15 @@ extension GetEmailViewController {
         UIDevice.vibrate()
         if self.code != self.authCode {
             getEmailView.messageLabel.isHidden = false
-            self.getEmailView.loginButtonKeyboard.isActivate = false
-            self.getEmailView.loginButton.isActivate = false
+            self.getEmailView.loginButtonKeyboard.inactivateButton()
+            self.getEmailView.loginButton.inactivateButton()
         } else {
-            lottieView = getEmailView.codeTextField.isFirstResponder ? getEmailView.loginButtonKeyboard.setLottieView() : getEmailView.loginButton.setLottieView()
-            lottieView.play { completion in
-                let fcmToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
-                let lostPasswordInput = LostPasswordInput(verify: true, email: self.email!, fcmToken: fcmToken)
-                LostPasswordDataManager().verifyCodeDataManager(lostPasswordInput, self)
-            }
+            self.getEmailView.loginButtonKeyboard.startLoadingAnimation()
+            self.getEmailView.loginButton.startLoadingAnimation()
+            
+            let fcmToken = UserManager.deviceToken ?? ""
+            let lostPasswordInput = LostPasswordInput(verify: true, email: self.email!, fcmToken: fcmToken)
+            LostPasswordDataManager().verifyCodeDataManager(lostPasswordInput, self)
         }
     }
     @objc func updateTime() {
@@ -93,11 +92,11 @@ extension GetEmailViewController {
         var isValidCode = codeCount > 0 ? true : false
         if isValidCode && self.isValidTime {
             self.getEmailView.messageLabel.isHidden = true
-            self.getEmailView.loginButtonKeyboard.isActivate = true
-            self.getEmailView.loginButton.isActivate = true
+            self.getEmailView.loginButtonKeyboard.activateButton()
+            self.getEmailView.loginButton.activateButton()
         } else {
-            self.getEmailView.loginButtonKeyboard.isActivate = false
-            self.getEmailView.loginButton.isActivate = false
+            self.getEmailView.loginButtonKeyboard.inactivateButton()
+            self.getEmailView.loginButton.inactivateButton()
         }
     }
 }
@@ -107,15 +106,21 @@ extension GetEmailViewController {
         let accessToken = result.data?.token.accessToken
         let refreshToken = result.data?.token.refreshToken
         let email = self.email
-        let tempNickname = result.data?.tempNickname
         
-        UserDefaults.standard.set(accessToken, forKey: "accessToken")
-        UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
-        UserDefaults.standard.set(false, forKey: "isFirstLogin")
-        UserDefaults.standard.set(email, forKey: "email")
-        UserDefaults.standard.set(tempNickname, forKey: "tempNickname")
+        UserManager.accessToken = accessToken
+        UserManager.refreshToken = refreshToken
+        UserManager.isFirstLogin = false
+        UserManager.email = email
+        if let tempNickname = result.data?.tempNickname {
+            UserManager.tempNickname = tempNickname
+        }
         
-        ScreenManager().goMain(self)
+        let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
+        defaults?.set(accessToken, forKey: "accessToken")
+        defaults?.set(refreshToken, forKey: "refreshToken")
+        defaults?.synchronize()
+        
+        ScreenManager.shared.goMain()
         
         print(result)
     }

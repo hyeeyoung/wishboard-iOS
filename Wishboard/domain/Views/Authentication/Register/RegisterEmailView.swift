@@ -28,8 +28,8 @@ class RegisterEmailView: UIView {
         $0.textColor = .pink_700
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
     }
-    let nextButton = DefaultButton(titleStr: Button.next)
-    let nextButtonKeyboard = DefaultButton(titleStr: Button.next)
+    let nextButton = LoadingButton(Button.next)
+    let nextButtonKeyboard = LoadingButton(Button.next)
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
     }()

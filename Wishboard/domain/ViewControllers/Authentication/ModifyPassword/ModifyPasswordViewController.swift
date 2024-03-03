@@ -66,10 +66,16 @@ class ModifyPasswordViewController: TitleCenterViewController {
         isValid()
     }
     @objc func completeButtonDidTap() {
+        modifyPasswordView.completeButton.isEnabled = false
         UIDevice.vibrate()
         self.view.endEditing(true)
         
         self.modifyPassword(pw: self.passwordInput ?? "")
+        
+        // 지정된 시간 후에 버튼 다시 활성화
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.modifyPasswordView.completeButton.isEnabled = true
+        }
     }
     //MARK: - Methods
     private func isValidPassword(_ pw: String) -> Bool {
@@ -89,11 +95,11 @@ class ModifyPasswordViewController: TitleCenterViewController {
     }
     private func isValid() {
         if isValidPassword(self.passwordInput ?? "") && isPasswordSame(self.passwordRewriteInput ?? "") {
-            self.modifyPasswordView.completeButton.isActivate = true
-            self.modifyPasswordView.completeButtonKeyboard.isActivate = true
+            self.modifyPasswordView.completeButton.activateButton()
+            self.modifyPasswordView.completeButtonKeyboard.activateButton()
         } else {
-            self.modifyPasswordView.completeButton.isActivate = false
-            self.modifyPasswordView.completeButtonKeyboard.isActivate = false
+            self.modifyPasswordView.completeButton.inactivateButton()
+            self.modifyPasswordView.completeButtonKeyboard.inactivateButton()
         }
     }
 }
@@ -102,7 +108,7 @@ class ModifyPasswordViewController: TitleCenterViewController {
 extension ModifyPasswordViewController {
     func loginAPIFail() {
         for completeButton in [self.modifyPasswordView.completeButton, self.modifyPasswordView.completeButtonKeyboard] {
-            completeButton.isActivate = false
+            completeButton.inactivateButton()
         }
     }
     

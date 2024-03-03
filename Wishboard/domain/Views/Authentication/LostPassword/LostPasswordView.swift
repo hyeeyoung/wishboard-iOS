@@ -28,8 +28,8 @@ class LostPasswordView: UIView {
         $0.textColor = .pink_700
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
     }
-    let getEmailButtonKeyboard = DefaultButton(titleStr: Button.getEmail)
-    let getEmailButton = DefaultButton(titleStr: Button.getEmail)
+    let getEmailButtonKeyboard = LoadingButton(Button.getEmail)
+    let getEmailButton = LoadingButton(Button.getEmail)
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
     }()

@@ -58,7 +58,7 @@ extension ItemRouter{
     }
     
     var headers: [String: String]? {
-        let token = UserDefaults.standard.string(forKey: "accessToken") ?? ""
+        let token = UserManager.accessToken ?? ""
         return ["Content-Type": "multipart/form-data",
                 "Authorization": "Bearer " + token]
     }

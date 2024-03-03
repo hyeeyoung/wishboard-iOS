@@ -29,7 +29,7 @@ class ShareDataManager {
                            method: .get,
                            parameters: nil,
                            headers: header,
-                           interceptor: AuthInterceptor(viewcontroller))
+                           interceptor: AuthInterceptor.shared)
             .validate()
             .responseDecodable(of: APIModel<ItemParsingModel>.self) { response in
                 print(BaseURL + "/item/parse?site=\(url)")

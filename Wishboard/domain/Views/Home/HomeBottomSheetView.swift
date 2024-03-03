@@ -10,7 +10,11 @@ import UIKit
 
 class HomeBottomSheetView: UIView {
     // MARK: - Properties
-    let okButton = DefaultButton(titleStr: Button.howTo, titleColor: .white, backgroundColor: .gray_700)
+    let okButton = UIButton().then{
+        $0.setTitle(Button.howTo, for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.setBackgroundColor(.gray_700, for: .normal)
+    }
     private let pageControl = UIPageControl().then{
         $0.hidesForSinglePage = true
         $0.numberOfPages = 3

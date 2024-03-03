@@ -35,15 +35,21 @@ class ItemDataManager {
     // MARK: - 링크 복사로 불러오기
     func getItemByLinkDataManager(_ url: String, _ viewcontroller: ShoppingLinkViewController) {
         let url = Storage().BaseURL + "/item/parse?site=\(url)"
-        let request = AlamofireBaseService.shared.requestWithParameter(url, .get, viewcontroller)
         
-        AlamofireBaseService.shared.responseWithErrorException(request, APIModel<ItemParsingModel>.self) { result in
-            if let response = result as? APIModel<ItemParsingModel> {
-                viewcontroller.getItemByLinkAPISuccess(response)
-            } else if let errorCode = result as? Int, errorCode == 404 {
-                // 아이템 정보를 불러오지 못했을 떄: 404
-                viewcontroller.getItemByLinkAPIFail()
+        // URL 인코딩
+        if let encodedAddress = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            let request = AlamofireBaseService.shared.requestWithParameter(encodedAddress, .get, viewcontroller)
+            
+            AlamofireBaseService.shared.responseWithErrorException(request, APIModel<ItemParsingModel>.self) { result in
+                if let response = result as? APIModel<ItemParsingModel> {
+                    viewcontroller.getItemByLinkAPISuccess(response)
+                } else if let errorCode = result as? Int, errorCode == 404 {
+                    // 아이템 정보를 불러오지 못했을 떄: 404
+                    viewcontroller.getItemByLinkAPIFail()
+                }
             }
+        } else {
+            print("주소 인코딩 실패")
         }
     }
 }

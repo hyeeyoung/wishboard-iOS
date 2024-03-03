@@ -51,19 +51,13 @@ extension RegisterPasswordViewController {
     @objc func registerButtonDidTap() {
         UIDevice.vibrate()
         
-        var lottieView: LottieAnimationView!
-        if registerPWView.pwTextField.isFirstResponder {
-            lottieView = registerPWView.registerButtonKeyboard.setLottieView()
-        } else {
-            lottieView = registerPWView.registerButton.setLottieView()
-        }
+        registerPWView.registerButton.startLoadingAnimation()
+        registerPWView.registerButtonKeyboard.startLoadingAnimation()
         
-        lottieView.play { completion in
-            self.view.endEditing(true)
-            let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
-            let registerInput = RegisterInput(email: self.email, password: self.pw, fcmToken: deviceToken)
-            RegisterDataManager().registerDataManager(registerInput, self)
-        }
+        self.view.endEditing(true)
+        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
+        let registerInput = RegisterInput(email: self.email, password: self.pw, fcmToken: deviceToken)
+        RegisterDataManager().registerDataManager(registerInput, self)
     }
     // MARK: - Functions
     func checkValidPW(_ pw: String) {
@@ -79,14 +73,20 @@ extension RegisterPasswordViewController {
     func registerAPISuccess(_ result: APIModel<TokenResultModel>) {
         let accessToken = result.data?.token.accessToken
         let refreshToken = result.data?.token.refreshToken
-        let tempNickname = result.data?.tempNickname
         
-        UserDefaults.standard.set(accessToken, forKey: "accessToken")
-        UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
-        UserDefaults.standard.set(true, forKey: "isFirstLogin")
-        UserDefaults.standard.set(tempNickname, forKey: "tempNickname")
+        UserManager.accessToken = accessToken
+        UserManager.refreshToken = refreshToken
+        UserManager.isFirstLogin = true
+        if let tempNickname = result.data?.tempNickname {
+            UserManager.tempNickname = tempNickname
+        }
+        
+        let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
+        defaults?.set(accessToken, forKey: "accessToken")
+        defaults?.set(refreshToken, forKey: "refreshToken")
+        defaults?.synchronize()
   
         // go main
-        ScreenManager().goMain(self)
+        ScreenManager.shared.goMain()
     }
 }

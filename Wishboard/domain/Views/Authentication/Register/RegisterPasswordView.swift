@@ -36,8 +36,8 @@ class RegisterPasswordView: UIView {
         $0.axis = .horizontal
         $0.spacing = 0
     }
-    let registerButton = DefaultButton(titleStr: Button.register)
-    let registerButtonKeyboard = DefaultButton(titleStr: Button.register)
+    let registerButton = LoadingButton(Button.register)
+    let registerButtonKeyboard = LoadingButton(Button.register)
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 100.0))
     }()
@@ -58,7 +58,7 @@ class RegisterPasswordView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     @objc func terClicked() {
-        ScreenManager().linkTo(viewcontroller: preVC, "\(Storage().BaseURL)/terms.html")
+        ScreenManager.shared.linkTo(viewcontroller: preVC, "\(Storage().BaseURL)/terms.html")
     }
     // MARK: - Functions
     func setUpView() {

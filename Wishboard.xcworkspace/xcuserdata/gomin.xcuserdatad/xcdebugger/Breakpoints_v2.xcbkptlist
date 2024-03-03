@@ -3,4 +3,102 @@
    uuid = "2DEA5AD4-D74D-4120-8B2F-F9147783CB0D"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9E0FACB6-B9AB-4D5F-AF64-5FAD87073C0D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Share Extension/ViewControllers/ShareViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
+            landmarkName = "getItemDataAPISuccess(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9E0FACB6-B9AB-4D5F-AF64-5FAD87073C0D - e87bcdeda30f50d7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Share_Extension.ShareViewController.getItemDataAPISuccess(Share_Extension.APIModel&lt;Share_Extension.ItemParsingModel&gt;) -&gt; ()"
+                  moduleName = "Share Extension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Share%20Extension/ViewControllers/ShareViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "275"
+                  endingLineNumber = "275"
+                  offsetFromSymbolStart = "2256">
+               </Location>
+               <Location
+                  uuid = "9E0FACB6-B9AB-4D5F-AF64-5FAD87073C0D - e87bcdeda30f50d7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Share_Extension.ShareViewController.getItemDataAPISuccess(Share_Extension.APIModel&lt;Share_Extension.ItemParsingModel&gt;) -&gt; ()"
+                  moduleName = "Share Extension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Share%20Extension/ViewControllers/ShareViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "275"
+                  endingLineNumber = "275"
+                  offsetFromSymbolStart = "2024">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "523C1525-3FAC-4609-BDBE-68F13A4B96F5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/global/UI/Default/DefaultButton.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "activateButton()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "523C1525-3FAC-4609-BDBE-68F13A4B96F5 - 6f234f33128e46c3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Share_Extension.LoadingButton.activateButton() -&gt; ()"
+                  moduleName = "Share Extension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/global/UI/Default/DefaultButton.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "628">
+               </Location>
+               <Location
+                  uuid = "523C1525-3FAC-4609-BDBE-68F13A4B96F5 - a387cecdb546bfc2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Wishboard.LoadingButton.activateButton() -&gt; ()"
+                  moduleName = "Wishboard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/global/UI/Default/DefaultButton.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "628">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

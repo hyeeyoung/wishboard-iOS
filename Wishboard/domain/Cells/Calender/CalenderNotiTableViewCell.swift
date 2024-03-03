@@ -28,15 +28,15 @@ class CalenderNotiTableViewCell: UITableViewCell {
     // '재입고 알림'
     let notificationTypeLabel = DefaultLabel().then{
         $0.text = Notification.restock
-        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB4)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH5)
     }
     let label = DefaultLabel().then{
         $0.text = Notification.notification
-        $0.setTypoStyleWithSingleLine(typoStyle: .SuitB4)
+        $0.setTypoStyleWithSingleLine(typoStyle: .SuitH5)
     }
     let timeLabel = DefaultLabel().then{
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
-        $0.textColor = .gray_300
+        $0.textColor = .gray_200
     }
     //MARK: - Life Cycles
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -83,7 +83,7 @@ class CalenderNotiTableViewCell: UITableViewCell {
             make.leading.equalTo(notificationTypeLabel.snp.leading)
         }
         itemName.snp.makeConstraints { make in
-            make.top.equalTo(notificationTypeLabel.snp.bottom).offset(8)
+            make.top.equalTo(notificationTypeLabel.snp.bottom).offset(6)
             make.leading.equalTo(notificationTypeLabel.snp.leading)
             make.trailing.equalToSuperview().offset(-16)
         }
@@ -104,12 +104,18 @@ extension CalenderNotiTableViewCell {
         let myDateFormatter = DateFormatter()
         myDateFormatter.dateFormat = "a h시 mm분" // 2020년 08월 13일 오후 04시 30분
         myDateFormatter.locale = Locale(identifier:"ko_KR")
-        let notificationTimeStr = myDateFormatter.string(from: (dateStr?.toCreatedDate()!)!)
         
-        // 00분인지, 30분인지 구분
-        let minute = notificationTimeStr[notificationTimeStr.index(notificationTimeStr.endIndex, offsetBy: -3)]
-        var notificationTime = notificationTimeStr
-        if minute != "3" {notificationTime = String(notificationTimeStr.dropLast(3))}
-        self.timeLabel.text = notificationTime
+        var notificationTimeStr: String = ""
+        if let createdDate = dateStr?.toCreatedDate() {
+            notificationTimeStr = myDateFormatter.string(from: createdDate)
+            
+            // 00분인지, 30분인지 구분
+            let minute = notificationTimeStr[notificationTimeStr.index(notificationTimeStr.endIndex, offsetBy: -3)]
+            var notificationTime = notificationTimeStr
+            if minute != "3" {notificationTime = String(notificationTimeStr.dropLast(3))}
+            self.timeLabel.text = notificationTime
+        } else {
+            self.timeLabel.text = ""
+        }
     }
 }

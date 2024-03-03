@@ -44,8 +44,8 @@ class RegisterEmailViewController: KeyboardViewController {
     // MARK: - Functions
     func checkValidEmail(_ email: String) {
         let isValid = self.email.checkEmail()
-        self.registerEmailView.nextButtonKeyboard.isActivate = isValid ? true : false
-        self.registerEmailView.nextButton.isActivate = isValid ? true : false
+         isValid ? self.registerEmailView.nextButtonKeyboard.activateButton() : self.registerEmailView.nextButtonKeyboard.inactivateButton()
+        isValid ? self.registerEmailView.nextButton.activateButton() : self.registerEmailView.nextButton.inactivateButton()
     }
 }
 // MARK: - API Success
@@ -59,11 +59,7 @@ extension RegisterEmailViewController {
     }
     func checkEmaiAPIFail() {
         self.registerEmailView.errorMessageLabel.isHidden = false
-        self.registerEmailView.nextButtonKeyboard.then{
-            $0.isActivate = false
-        }
-        self.registerEmailView.nextButton.then{
-            $0.isActivate = false
-        }
+        self.registerEmailView.nextButtonKeyboard.inactivateButton()
+        self.registerEmailView.nextButton.inactivateButton()
     }
 }
