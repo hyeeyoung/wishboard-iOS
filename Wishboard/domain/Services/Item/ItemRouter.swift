@@ -60,7 +60,9 @@ extension ItemRouter{
     var headers: [String: String]? {
         let token = UserManager.accessToken ?? ""
         return ["Content-Type": "multipart/form-data",
-                "Authorization": "Bearer " + token]
+                "Authorization": "Bearer " + token,
+                "User-Agent": "wishboard-ios/dev"
+        ]
     }
     
     func makeMultipartFormData(param: MoyaItemInput) -> [Moya.MultipartFormData] {

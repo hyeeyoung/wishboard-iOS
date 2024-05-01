@@ -22,7 +22,9 @@ extension BaseRouter {
         let token = UserManager.accessToken ?? ""
         let header = [
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + token]
+            "Authorization": "Bearer " + token,
+            "User-Agent": "wishboard-ios/dev"
+        ]
         return header
     }
 
