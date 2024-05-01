@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SnackBar {
+final class SnackBar {
     
     static let shared = SnackBar()
     private var isShowing = false // 스낵바 표시 여부를 추적
@@ -29,7 +29,7 @@ class SnackBar {
     let backgroundView = UIView().then{
         $0.backgroundColor = .gray_700
         $0.clipsToBounds = true
-        $0.layer.cornerRadius = 25
+        $0.layer.cornerRadius = 24
     }
     var title = UILabel().then{
         $0.textColor = .white
@@ -74,13 +74,14 @@ class SnackBar {
     }
     /// 스낵바의 제약 조건 설정
     private func setSnackBarConstraints() {
-        backgroundView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(SNACKBAR_HEIGHT)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(SNACKBAR_HEIGHT)
-        }
         title.snp.makeConstraints { make in
             make.centerY.centerX.equalToSuperview()
+        }
+        backgroundView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(SNACKBAR_HEIGHT)
+            make.width.equalTo(title.snp.width).offset(32 * 2)
+            make.height.equalTo(SNACKBAR_HEIGHT)
+            make.centerX.equalToSuperview()
         }
     }
     
