@@ -864,8 +864,6 @@
 		2331867C28DA92DF00F17CBF /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
-				2331867E28DA92EE00F17CBF /* loading_horizontal_black.json */,
-				2331867D28DA92EE00F17CBF /* loading_spin.json */,
 				2331868128DA933600F17CBF /* SetLottie.swift */,
 			);
 			path = Lottie;
@@ -915,6 +913,8 @@
 		233C34AF29C73B16005DFA39 /* Default */ = {
 			isa = PBXGroup;
 			children = (
+				2331867E28DA92EE00F17CBF /* loading_horizontal_black.json */,
+				2331867D28DA92EE00F17CBF /* loading_spin.json */,
 				233C34B029C73B30005DFA39 /* DefaultButton.swift */,
 				233C34B329C754DF005DFA39 /* DefaultTextField.swift */,
 				230192BA2A30669200B30B0E /* DefaultLabel.swift */,

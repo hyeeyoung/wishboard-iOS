@@ -18,5 +18,101 @@
             endingLineNumber = "182">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8D2A0955-170B-487E-AF77-26EA3B8DBC9D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/global/UI/Default/DefaultButton.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "startLoadingAnimation()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0C689902-FFC8-476F-B763-8C846D46F846"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/global/UI/Default/DefaultButton.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "startLoadingAnimation()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0C689902-FFC8-476F-B763-8C846D46F846 - 2ac7a5e07efc1ff2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Wishboard.LoadingButton.startLoadingAnimation() -&gt; ()"
+                  moduleName = "Wishboard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/global/UI/Default/DefaultButton.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "103"
+                  endingLineNumber = "103"
+                  offsetFromSymbolStart = "516">
+               </Location>
+               <Location
+                  uuid = "0C689902-FFC8-476F-B763-8C846D46F846 - 2ac7a5e07efc1fd1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Wishboard.LoadingButton.startLoadingAnimation() -&gt; ()"
+                  moduleName = "Wishboard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/global/UI/Default/DefaultButton.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "104"
+                  endingLineNumber = "104"
+                  offsetFromSymbolStart = "516">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "803B9C9E-C0F3-419E-B8FF-051B47FA82DE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/domain/ViewControllers/Item/UploadItem/UploadItemViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "279"
+            endingLineNumber = "279"
+            landmarkName = "saveButtonDidTap()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7FB4F156-8B45-4D5D-8179-F9A8060526AD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/domain/ViewControllers/Item/UploadItem/UploadItemViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
+            landmarkName = "modifyButtonDidTap()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

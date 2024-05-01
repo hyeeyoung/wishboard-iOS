@@ -76,18 +76,23 @@ class LoadingButton: UIButton {
     }
     private func setupSpinGreen(_ vc: UIViewController) {
         // Lottie 애니메이션 초기화
-        animationView = LottieAnimationView(name: "loading_spin") // Lottie 애니메이션 파일명으로 변경
+        animationView = LottieAnimationView(name: "loading_spin") // Lottie 애니메이션 파일명
         animationView?.loopMode = .loop
         animationView?.isUserInteractionEnabled = false
-
+        
+        #if WISHBOARD_APP
+        
         // 로딩 상태를 나타낼 뷰 추가
-        vc.view.addSubview(animationView!)
-        animationView?.snp.makeConstraints { make in
+        guard let animationView = self.animationView else {return}
+        UIApplication.shared.keyWindow?.addSubview(animationView)
+        
+        animationView.snp.makeConstraints { make in
             make.width.height.equalTo(100)
             make.center.equalToSuperview()
         }
+        animationView.isHidden = true
         
-        animationView?.isHidden = true
+        #endif
     }
 
     // MARK: Methods
