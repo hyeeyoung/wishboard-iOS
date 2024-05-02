@@ -71,13 +71,10 @@ final class SnackBar {
     private func addSnackBarSubview() {
         defer {
             backgroundView.addSubview(title)
-            print("스낵바가 보이는지: \(backgroundView.isHidden ? "보이지 않음" : "보임")")
-            print("스낵바의 위치 - 애니메이션 전: \(backgroundView.frame)")
         }
         
         #if WISHBOARD_APP
         if let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) {
-            print("📍 활성화된 윈도우 -> \(window)")
             window.addSubview(backgroundView)
         } else {
             // 앱에서 활성화된 윈도우를 찾을 수 없는 경우 예외 처리
@@ -113,7 +110,6 @@ final class SnackBar {
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.5) {
                 self.backgroundView.transform = CGAffineTransform(translationX: 0, y: self.TRANSLATION_Y)
-                print("스낵바의 위치 - 애니메이션 후: \(self.backgroundView.frame)")
             } completion: { finished in
                 self.performAnimationAtApp()
             }
