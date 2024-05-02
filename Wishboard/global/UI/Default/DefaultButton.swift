@@ -10,7 +10,7 @@ import UIKit
 import Lottie
 
 
-class LoadingButton: UIButton {
+final class LoadingButton: UIButton {
 
     private var animationView: LottieAnimationView?
     
@@ -39,7 +39,7 @@ class LoadingButton: UIButton {
     init(_ title: String, _ vc: UIViewController) {
         super.init(frame: CGRect.zero)
         
-        setupSpinGreen(vc)
+        setupSpinGreen()
         
         setTitle(title, for: .normal)
         setTitleColor(UIColor.gray_300, for: .normal)
@@ -74,15 +74,16 @@ class LoadingButton: UIButton {
 
         animationView?.isHidden = true
     }
-    private func setupSpinGreen(_ vc: UIViewController) {
+    private func setupSpinGreen() {
+        // 앱에서만 생성되는 초록 돌돌이 로띠
+        #if WISHBOARD_APP
+        
         // Lottie 애니메이션 초기화
         animationView = LottieAnimationView(name: "loading_spin") // Lottie 애니메이션 파일명
         animationView?.loopMode = .loop
         animationView?.isUserInteractionEnabled = false
         
-        #if WISHBOARD_APP
-        
-        // 로딩 상태를 나타낼 뷰 추가
+        // 최상단 뷰 위에 추가
         guard let animationView = self.animationView else {return}
         UIApplication.shared.keyWindow?.addSubview(animationView)
         

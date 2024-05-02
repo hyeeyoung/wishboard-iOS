@@ -66,11 +66,20 @@ final class SnackBar {
         guard let message = message else {return}
         
         title.text = message.rawValue
-        backgroundView.addSubview(title)
     }
     /// 스낵바의 addSubView
     private func addSnackBarSubview() {
-        UIApplication.shared.keyWindow?.addSubview(backgroundView)
+        defer {
+            backgroundView.addSubview(title)
+        }
+        
+        if let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) {
+            window.addSubview(backgroundView)
+        } else {
+            // 앱에서 활성화된 윈도우를 찾을 수 없는 경우 예외 처리
+            print("No active window found")
+        }
+        
     }
     /// 스낵바의 제약 조건 설정
     private func setSnackBarConstraints() {
@@ -88,7 +97,6 @@ final class SnackBar {
     /// 스낵바의 애니메이션 설정
     private func performAnimation() {
         guard let message = message else {return}
-        guard let originView = originView else {return}
         
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.5) {
@@ -100,16 +108,19 @@ final class SnackBar {
     }
     /// 앱에서 스낵바를 실행
     private func performAnimationAtApp() {
-        guard let message = message else {return}
-        guard let originView = originView else {return}
         
         UIView.animate(withDuration: 0.5, delay: 2.5) {
             self.backgroundView.transform = .identity
         } completion: { finish in
-            if (originView.extensionContext != nil) && (message == .addItem) {
-                originView.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
-            }
-            defer{self.closeSnackBar()}
+            #if WISHBOARD_APP
+            self.closeSnackBar()
+            
+            #else
+            guard let originView = originView else {return}
+            originView.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
+            self.closeSnackBar()
+            
+            #endif
         }
     }
     /// 스낵바가 닫힐 때 호출되는 메서드

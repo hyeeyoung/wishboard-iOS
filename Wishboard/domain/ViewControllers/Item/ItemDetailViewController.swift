@@ -61,7 +61,7 @@ class ItemDetailViewController: UIViewController, Observer {
                                message: "정말 아이템을 삭제하시겠어요?\n삭제된 아이템은 다시 복구할 수 없어요!",
                                greenBtnText: "취소",
                                blackBtnText: "삭제")
-        let dialog = PopUpViewController(model)
+        let dialog = PopUpViewController(model, .delete)
         self.present(dialog, animated: false, completion: nil)
         
         dialog.okBtn.addTarget(self, action: #selector(deleteButtonDidTap), for: .touchUpInside)
