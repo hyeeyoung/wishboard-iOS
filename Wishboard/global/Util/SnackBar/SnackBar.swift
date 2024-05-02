@@ -13,7 +13,7 @@ final class SnackBar {
     static let shared = SnackBar()
     private var isShowing = false // 스낵바 표시 여부를 추적
     
-    let SNACKBAR_HEIGHT = 47
+    let SNACKBAR_HEIGHT = 48
     let SNACKBAR_INTERVAL = 34
     let TRANSLATION_Y: CGFloat
     
@@ -71,14 +71,26 @@ final class SnackBar {
     private func addSnackBarSubview() {
         defer {
             backgroundView.addSubview(title)
+            print("스낵바가 보이는지: \(backgroundView.isHidden ? "보이지 않음" : "보임")")
+            print("스낵바의 위치 - 애니메이션 전: \(backgroundView.frame)")
         }
         
+        #if WISHBOARD_APP
         if let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) {
+            print("📍 활성화된 윈도우 -> \(window)")
             window.addSubview(backgroundView)
         } else {
             // 앱에서 활성화된 윈도우를 찾을 수 없는 경우 예외 처리
             print("No active window found")
+            guard let originView = self.originView else {return}
+            originView.view.addSubview(backgroundView)
         }
+        
+        #else
+        guard let originView = self.originView else {return}
+        originView.view.addSubview(backgroundView)
+        
+        #endif
         
     }
     /// 스낵바의 제약 조건 설정
@@ -96,11 +108,12 @@ final class SnackBar {
     
     /// 스낵바의 애니메이션 설정
     private func performAnimation() {
-        guard let message = message else {return}
+        guard let _ = message else {return}
         
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.5) {
                 self.backgroundView.transform = CGAffineTransform(translationX: 0, y: self.TRANSLATION_Y)
+                print("스낵바의 위치 - 애니메이션 후: \(self.backgroundView.frame)")
             } completion: { finished in
                 self.performAnimationAtApp()
             }
@@ -116,7 +129,7 @@ final class SnackBar {
             self.closeSnackBar()
             
             #else
-            guard let originView = originView else {return}
+            guard let originView = self.originView else {return}
             originView.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
             self.closeSnackBar()
             

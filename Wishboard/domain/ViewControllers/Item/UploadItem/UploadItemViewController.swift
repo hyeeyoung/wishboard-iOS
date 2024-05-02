@@ -467,8 +467,8 @@ extension UploadItemViewController {
                         self.uploadItemView.saveButton.stopLoadingAnimation()
                         self.viewDidLoad()
                         // 홈화면으로 이동
-                        WishItemObserver.shared.notify(.upload)
                         ScreenManager.shared.goMain()
+                        WishItemObserver.shared.notify(.upload)
                     }
                     break
             case .failure(let error):

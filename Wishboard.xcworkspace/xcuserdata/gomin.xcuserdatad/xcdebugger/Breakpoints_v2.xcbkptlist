@@ -44,8 +44,8 @@
             filePath = "Wishboard/global/Util/SnackBar/SnackBar.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "performAnimation()"
             landmarkType = "7">
             <Locations>
@@ -79,6 +79,21 @@
                   endingLineNumber = "94"
                   offsetFromSymbolStart = "28">
                </Location>
+               <Location
+                  uuid = "076CE00F-7B41-4C03-9019-2CC9C8B18EE5 - 6c91426abcba8d0f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 @Swift.MainActor () -&gt; () in Wishboard.SnackBar.performAnimation() -&gt; ()"
+                  moduleName = "Wishboard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/global/Util/SnackBar/SnackBar.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "110"
+                  endingLineNumber = "110"
+                  offsetFromSymbolStart = "28">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -92,8 +107,8 @@
             filePath = "Wishboard/global/Util/SnackBar/SnackBar.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "performAnimation()"
             landmarkType = "7">
             <Locations>
@@ -157,6 +172,36 @@
                   endingLineNumber = "93"
                   offsetFromSymbolStart = "28">
                </Location>
+               <Location
+                  uuid = "3B7B98F0-D6A0-4929-8BF7-32AEE181229D - b416058728f92f18"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Wishboard.SnackBar.performAnimation() -&gt; ()"
+                  moduleName = "Wishboard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/global/Util/SnackBar/SnackBar.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "220">
+               </Location>
+               <Location
+                  uuid = "3B7B98F0-D6A0-4929-8BF7-32AEE181229D - 1ae5614a504b3925"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in Wishboard.SnackBar.performAnimation() -&gt; ()"
+                  moduleName = "Wishboard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/global/Util/SnackBar/SnackBar.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "109"
+                  endingLineNumber = "109"
+                  offsetFromSymbolStart = "28">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -170,8 +215,8 @@
             filePath = "Wishboard/global/Util/SnackBar/SnackBar.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "performAnimationAtApp()"
             landmarkType = "7">
             <Locations>
@@ -235,6 +280,21 @@
                   endingLineNumber = "104"
                   offsetFromSymbolStart = "24">
                </Location>
+               <Location
+                  uuid = "60ECBCEB-0B09-499C-B13F-05B62C7736FB - 11e18e0fcafa7e7d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in Wishboard.SnackBar.performAnimationAtApp() -&gt; ()"
+                  moduleName = "Wishboard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/global/Util/SnackBar/SnackBar.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "120"
+                  endingLineNumber = "120"
+                  offsetFromSymbolStart = "24">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -248,8 +308,8 @@
             filePath = "Wishboard/global/Util/SnackBar/SnackBar.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "performAnimationAtApp()"
             landmarkType = "7">
             <Locations>
@@ -298,6 +358,21 @@
                   endingLineNumber = "107"
                   offsetFromSymbolStart = "48">
                </Location>
+               <Location
+                  uuid = "331C5463-9CCA-444D-A5F4-C5EEC33D1010 - c9de057dc5736ee"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Bool) -&gt; () in Wishboard.SnackBar.performAnimationAtApp() -&gt; ()"
+                  moduleName = "Wishboard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/global/Util/SnackBar/SnackBar.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "48">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -311,8 +386,8 @@
             filePath = "Wishboard/global/Util/SnackBar/SnackBar.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "performAnimation()"
             landmarkType = "7">
             <Locations>
@@ -344,6 +419,21 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "96"
                   endingLineNumber = "96"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "6A3D56AB-51B4-4C0B-AEAD-2A411DA6A656 - 8fb53c53650c0275"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Bool) -&gt; () in closure #1 @Swift.MainActor () -&gt; () in Wishboard.SnackBar.performAnimation() -&gt; ()"
+                  moduleName = "Wishboard"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gomin/Desktop/XcodeProjects/Wishboard/Wishboard/global/Util/SnackBar/SnackBar.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
                   offsetFromSymbolStart = "48">
                </Location>
             </Locations>
@@ -426,6 +516,38 @@
             startingLineNumber = "49"
             endingLineNumber = "49"
             landmarkName = "showSnackBar(_:message:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D36C2A41-93D1-4C3D-825B-921B862BDFF6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/global/Util/SnackBar/SnackBar.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "addSnackBarSubview()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "74CDB184-F592-4991-9CD9-A853E1E34F54"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wishboard/global/Util/SnackBar/SnackBar.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "addSnackBarSubview()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
