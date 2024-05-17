@@ -62,11 +62,28 @@ class UploadItemViewController: UIViewController, Observer {
         self.addKeyboardNotifications()
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
+        // 수정화면 초기 진입 시에는 상단 BackButton 활성화
+        self.activateButtons()
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.removeKeyboardNotifications()
         // 화면 disappear 시 스핀 로딩 버튼도 제거
         self.uploadItemView.saveButton.stopLoadingAnimation()
+    }
+    
+    private func activateButtons() {
+        DispatchQueue.main.async {
+            self.uploadItemView.backButton.isEnabled = true
+            self.uploadItemView.uploadImageTableView.isUserInteractionEnabled = true
+            self.uploadItemView.uploadContentTableView.isUserInteractionEnabled = true
+        }
+    }
+    private func inActivateButtons() {
+        DispatchQueue.main.async {
+            self.uploadItemView.backButton.isEnabled = false
+            self.uploadItemView.uploadImageTableView.isUserInteractionEnabled = false
+            self.uploadItemView.uploadContentTableView.isUserInteractionEnabled = false
+        }
     }
     
     @objc func goBack() {
@@ -277,6 +294,9 @@ extension UploadItemViewController {
     @objc func saveButtonDidTap() {
         UIDevice.vibrate()
         
+        // 서버 통신 와중에는 버튼 및 화면 탭 비활성화
+        self.inActivateButtons()
+        
         uploadItemView.saveButton.startLoadingAnimation()
         uploadItemView.saveButton.titleLabel?.isHidden = false
         uploadItemView.saveButton.titleLabel?.alpha = 1
@@ -308,6 +328,9 @@ extension UploadItemViewController {
     // MARK: 저장 버튼 클릭 시 (아이템 수정)
     @objc func modifyButtonDidTap() {
         UIDevice.vibrate()
+        
+        // 서버 통신 와중에는 버튼 및 화면 탭 비활성화
+        self.inActivateButtons()
         
         uploadItemView.saveButton.startLoadingAnimation()
         uploadItemView.saveButton.titleLabel?.isHidden = false
@@ -462,6 +485,10 @@ extension UploadItemViewController {
     // MARK: 아이템 추가 API
     func uploadItemWithMoya(model: MoyaItemInput) {
         ItemService.shared.uploadItem(model: model) { result in
+            // 서버 통신 이후에는 버튼 및 화면 탭 활성화
+            self.activateButtons()
+            self.uploadItemView.saveButton.stopLoadingAnimation()
+            
             switch result {
                 case .success(let data):
                     if data.success {
@@ -487,6 +514,10 @@ extension UploadItemViewController {
     // MARK: 아이템 수정 API
     func modifyItemWithMoya(model: MoyaItemInput, id: Int) {
         ItemService.shared.modifyItem(model: model, id: id) { result in
+            // 서버 통신 이후에는 버튼 및 화면 탭 활성화
+            self.activateButtons()
+            self.uploadItemView.saveButton.stopLoadingAnimation()
+            
             switch result {
                 case .success(let data):
                     if data.success {

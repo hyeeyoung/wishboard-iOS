@@ -14,6 +14,16 @@ class UploadItemTextfieldTableViewCell: UITableViewCell {
         $0.font = TypoStyle.SuitB3.font
         $0.addLeftPadding(16)
         $0.textColor = .gray_700
+        // TextField MainThread 버그를 위해 '수정제안' 제거 (24.05.18 / Xcode 15)
+        $0.spellCheckingType = .no
+        $0.autocorrectionType = .no
+        if #available(iOS 17.0, *) {
+            $0.inlinePredictionType = .no
+        }
+        $0.smartQuotesType = .no
+        $0.smartDashesType = .no
+        $0.smartInsertDeleteType = .no
+        $0.autocapitalizationType = .none
     }
     
     //MARK: - Life Cycles
