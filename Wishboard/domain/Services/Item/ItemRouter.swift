@@ -61,7 +61,7 @@ extension ItemRouter{
         let token = UserManager.accessToken ?? ""
         return ["Content-Type": "multipart/form-data",
                 "Authorization": "Bearer " + token,
-                "User-Agent": "wishboard-ios/dev"
+                "User-Agent": Storage().AgentHeader
         ]
     }
     

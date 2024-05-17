@@ -24,7 +24,7 @@ class ShareDataManager {
         let header: HTTPHeaders = [
             "Authorization": "Bearer " + token,
             "Content-type": "application/json",
-            "User-Agent": "wishboard-ios/dev"
+            "User-Agent": Storage().AgentHeader
         ]
         AF.request(BaseURL + "/item/parse?site=\(url)",
                            method: .get,
@@ -72,7 +72,7 @@ class ShareDataManager {
         let multiHeader: HTTPHeaders = [
             "Content-type": "multipart/form-data",
             "Authorization": "Bearer " + token,
-            "User-Agent": "wishboard-ios/dev"
+            "User-Agent": Storage().AgentHeader
         ]
         
         let uploadItemUrl = BaseURL + "/item"

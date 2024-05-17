@@ -15,7 +15,7 @@ class APIManager {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + token,
             "Content-Type": "application/json",
-            "User-Agent": "wishboard-ios/dev"
+            "User-Agent": Storage().AgentHeader
         ]
         return headers
     }
@@ -23,7 +23,7 @@ class APIManager {
         let headers: HTTPHeaders = [
             "Content-type": "multipart/form-data",
             "Authorization": "Bearer " + token,
-            "User-Agent": "wishboard-ios/dev"
+            "User-Agent": Storage().AgentHeader
         ]
         return headers
     }

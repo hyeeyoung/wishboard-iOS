@@ -23,7 +23,7 @@ extension BaseRouter {
         let header = [
             "Content-Type": "application/json",
             "Authorization": "Bearer " + token,
-            "User-Agent": "wishboard-ios/dev"
+            "User-Agent": Storage().AgentHeader
         ]
         return header
     }
