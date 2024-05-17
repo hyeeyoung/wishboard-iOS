@@ -212,11 +212,17 @@ extension MyPageViewController {
         
     }
     
-    // 버전 정보 표시 (1.0.0)
+    // 버전 정보 표시 (1.2.0)
     func setVersionLabel(_ cell: UITableViewCell) {
-        let appVersion = UserManager.appVersion
+        var appVersionStr: String = UserManager.appVersion ?? ""
+        
+        // 디버그 모드일 때에만 빌드버전 노출
+        #if DEBUG
+        appVersionStr += "(\(UserManager.appBuildVersion ?? ""))"
+        #endif
+        
         let versionLabel = UILabel().then{
-            $0.text = appVersion
+            $0.text = appVersionStr
             $0.setTypoStyleWithSingleLine(typoStyle: .MontserratB1)
             $0.textColor = .gray_300
         }
