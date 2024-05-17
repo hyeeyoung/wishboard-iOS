@@ -24,6 +24,7 @@ class ItemDetailViewController: UIViewController, Observer {
         
         setItemView()
         addTargets()
+        initButtons()
         
         // observer init
         observer.bind(self)
@@ -48,6 +49,23 @@ class ItemDetailViewController: UIViewController, Observer {
         itemDetailView.modifyButton.addTarget(self, action: #selector(goModify), for: .touchUpInside)
         
         itemDetailView.lowerButton.addTarget(self, action: #selector(linkButtonDidTap), for: .touchUpInside)
+    }
+    
+    /// 아이템 디테일 뷰의 버튼들 초기화
+    private func initButtons() {
+        self.inActivateButtons()
+    }
+    private func inActivateButtons() {
+        itemDetailView.backButton.isEnabled = false
+        itemDetailView.deleteButton.isEnabled = false
+        itemDetailView.modifyButton.isEnabled = false
+        itemDetailView.lowerButton.isEnabled = false
+    }
+    private func activateButtons() {
+        itemDetailView.backButton.isEnabled = true
+        itemDetailView.deleteButton.isEnabled = true
+        itemDetailView.modifyButton.isEnabled = true
+        itemDetailView.lowerButton.isEnabled = true
     }
     
     // MARK: - Actions
@@ -152,6 +170,9 @@ extension ItemDetailViewController {
     }
     // MARK: 아이템 상세 조회
     func getItemDetailAPISuccess(_ result: WishListModel) {
+        // 아이템 정보 로딩 이후에 버튼들 활성화
+        self.activateButtons()
+        
         self.wishListData = result
         self.itemDetailView.itemDetailTableView.reloadData()
         // 쇼핑몰 링크 여부에 따라 하단 버튼 UI 변경
