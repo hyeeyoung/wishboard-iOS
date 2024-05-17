@@ -65,6 +65,8 @@ class UploadItemViewController: UIViewController, Observer {
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.removeKeyboardNotifications()
+        // 화면 disappear 시 스핀 로딩 버튼도 제거
+        self.uploadItemView.saveButton.stopLoadingAnimation()
     }
     
     @objc func goBack() {

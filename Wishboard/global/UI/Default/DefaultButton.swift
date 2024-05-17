@@ -116,6 +116,7 @@ final class LoadingButton: UIButton {
         
         animationView?.isHidden = true
         animationView?.stop()
+        animationView?.removeFromSuperview()
     }
 
     func activateButton() {
