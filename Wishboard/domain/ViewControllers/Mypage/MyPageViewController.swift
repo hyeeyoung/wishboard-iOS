@@ -243,16 +243,24 @@ extension MyPageViewController {
         
         // 로그아웃 확인 버튼 클릭 이벤트
         dialog.okBtn.rx.tap
-            .flatMap { [weak self] _ -> Observable<Void> in
-                return Observable.create { observer in
-                    self?.logoutButtonDidTap()
-                    self?.viewModel.callLogoutAPI()
-                    self?.logoutAPISuccess()
-                    observer.onCompleted()
-                    return Disposables.create()
-                }
+            .do(onNext: { [weak self] _ in
+                print("로그아웃 버튼 탭")
+            })
+            .flatMap { [weak self] _ -> Observable<Bool> in
+                guard let self = self else { return Observable.just(false) }
+                self.logoutButtonDidTap()
+                return self.viewModel.callLogoutAPI()
             }
-            .subscribe()
+            .do(onNext: { success in
+                print("로그아웃 API 호출 결과: \(success)")
+            })
+            .subscribe(onNext: { [weak self] success in
+                if success {
+                    self?.logoutAPISuccess()
+                } else {
+                    print("로그아웃 API 실패")
+                }
+            })
             .disposed(by: disposeBag)
         
     }

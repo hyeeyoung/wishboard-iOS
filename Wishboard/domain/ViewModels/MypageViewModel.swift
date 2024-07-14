@@ -51,14 +51,8 @@ final class MyPageViewModel: BaseViewModel {
     }
     
     /// 로그아웃 버튼 클릭 시
-    func callLogoutAPI() -> Driver<Bool> {
-        let logoutResponse = logoutButtonTap
-            .flatMapLatest {
-                return MypageDataManager2.shared.logoutDataManager()
-            }
-            .asDriver(onErrorJustReturn: false)
-        
-        return logoutResponse
+    func callLogoutAPI() -> Observable<Bool> {
+        return MypageDataManager2.shared.logoutDataManager()
     }
     
 }
