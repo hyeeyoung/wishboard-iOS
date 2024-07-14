@@ -58,9 +58,10 @@ final class LoginViewController: TitleCenterViewController {
         
         // 로그인 api 호출 후 분기처리
         output.loginResponse
-            .subscribe(onNext: {
-                if $0 {self.moveToMain()}
-                else {self.loginAPIFail()}
+            .subscribe(onNext: { [weak self] success in
+                self?.view.endEditing(true)
+                if success {self?.moveToMain()}
+                else {self?.loginAPIFail()}
             })
             .disposed(by: disposeBag)
     }
@@ -123,6 +124,7 @@ extension LoginViewController {
     }
     func lostPasswordButtonDidTap() {
         UIDevice.vibrate()
+        self.view.endEditing(true)
         let lostPwVC = LostPasswordViewController(title: "1/2 단계")
         navigationController?.pushViewController(lostPwVC, animated: true)
     }
