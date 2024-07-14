@@ -7,13 +7,25 @@
 
 import UIKit
 
+struct PopUpModel {
+    let title: String
+    let message: String
+    let greenBtnText: String?
+    let blackBtnText: String?
+}
+
+enum PopUpType {
+    case normal
+    case delete
+}
+
 // Default 팝업창
 class PopUpViewController: UIViewController {
     // MARK: - Properties
-    private var titleText: String?
-    private var messageText: String?
-    private var greenBtnText: String?
-    private var blackBtnText: String?
+    private var titleText: String!
+    private var messageText: String!
+    private var greenBtnText: String!
+    private var blackBtnText: String!
     
     let popupView = UIView().then{
         $0.backgroundColor = .white
@@ -39,21 +51,25 @@ class PopUpViewController: UIViewController {
     }
     var cancelBtn: UIButton!
     var okBtn: UIButton!
+    
+    var type: PopUpType?
+    
     // MARK: - Life Cycles
-    convenience init(titleText: String? = nil,
-                     messageText: String? = nil,
-                     greenBtnText: String? = nil,
-                     blackBtnText: String? = nil) {
+    convenience init(_ model: PopUpModel, _ type: PopUpType? = .normal) {
         self.init()
-
-        self.titleText = titleText
-        self.messageText = messageText
-        self.greenBtnText = greenBtnText
-        self.blackBtnText = blackBtnText
+        
+        self.titleText = model.title
+        self.messageText = model.message
+        self.greenBtnText = model.greenBtnText ?? ""
+        self.blackBtnText = model.blackBtnText ?? ""
+        
+        self.type = type
         
         setUpContent()
         setUpView()
         setUpConstraint()
+        
+        modalPresentationStyle = .overFullScreen
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +109,7 @@ class PopUpViewController: UIViewController {
             var attText = AttributedString.init(self.greenBtnText!)
             
             attText.font = TypoStyle.SuitB3.font
-            attText.foregroundColor = UIColor.green_700
+            attText.foregroundColor = self.type == .normal ? UIColor.green_700 : UIColor.gray_700
             config.attributedTitle = attText
             
             $0.configuration = config
@@ -103,7 +119,7 @@ class PopUpViewController: UIViewController {
             var attText = AttributedString.init(self.blackBtnText!)
             
             attText.font = TypoStyle.SuitB3.font
-            attText.foregroundColor = UIColor.gray_700
+            attText.foregroundColor = self.type == .normal ? UIColor.gray_700 : UIColor.pink_700
             config.attributedTitle = attText
             
             $0.configuration = config

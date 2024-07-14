@@ -182,8 +182,11 @@ extension CartView {
     // (X) 버튼 클릭
     @objc func deleteButtonDidTap(_ sender: CartGesture) {
         UIDevice.vibrate()
-        let dialog = PopUpViewController(titleText: "장바구니에서 삭제", messageText: "정말 장바구니에서 아이템을 삭제하시겠어요?", greenBtnText: "취소", blackBtnText: "삭제")
-        dialog.modalPresentationStyle = .overFullScreen
+        let model = PopUpModel(title: "장바구니에서 삭제",
+                               message: "정말 장바구니에서 아이템을 삭제하시겠어요?",
+                               greenBtnText: "취소",
+                               blackBtnText: "삭제")
+        let dialog = PopUpViewController(model, .delete)
         self.preVC.present(dialog, animated: false, completion: nil)
         
         let deleteGesture = CartGesture(target: self, action: #selector(deleteItem(_:)))
@@ -201,7 +204,6 @@ extension CartView {
         UIDevice.vibrate()
         guard let itemId = sender.cartItem?.wishItem?.item_id else {return}
         let vc = ItemDetailViewController()
-        vc.preVC = self.preVC
         vc.itemId = itemId
         self.preVC.navigationController?.pushViewController(vc, animated: true)
     }
@@ -216,8 +218,10 @@ extension CartView {
             totalPrice = totalPrice + Int(initPrice)! * count
             totalCount = totalCount + count
         }
+        /// 아이템 수: 고유한 아이템 자체의 개수
+        /// 총 가격: 장바구니에 넣은 수량에 가격을 곱한 만큼의 총 가격
         self.price.text = FormatManager().strToPrice(numStr: String(totalPrice))
-        self.countLabel.text = String(totalCount)
+        self.countLabel.text = String(cartData.count)
     }
 }
 // MARK: - API Success
@@ -225,6 +229,11 @@ extension CartView {
     // MARK: Cart 조회 API
     func getCartListAPISuccess(_ result: [CartListModel]) {
         self.cartData = result
+        if result.isEmpty {
+            noCartItem()
+            return
+        }
+        
         // reload data with animation
         UIView.transition(with: cartTableView,
                                   duration: 0.35,
@@ -234,9 +243,7 @@ extension CartView {
                                 completion: nil);
         calculate()
     }
-    func getCartListAPIFail() {
-        CartDataManager().getCartListDataManager(self)
-    }
+    
     func noCartItem() {
         self.cartData = []
         cartTableView.reloadData()
@@ -252,8 +259,8 @@ extension CartView {
     func deleteCartAPISuccess(_ result: APIModel<TokenResultModel>) {
         self.preVC.dismiss(animated: false)
         CartDataManager().getCartListDataManager(self)
-        SnackBar(self.preVC, message: .deleteCartItem)
-        print(result.message)
+        SnackBar.shared.showSnackBar(preVC, message: .deleteCartItem)
+        WishItemObserver.shared.notify(.cartItemDelete)
     }
 }
 // MARK: - CartGesture

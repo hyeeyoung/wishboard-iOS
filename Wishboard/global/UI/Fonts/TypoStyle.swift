@@ -51,9 +51,9 @@ enum TypoStyle: Int, CaseIterable {     // font size / type / line height (multi
     case SuitD2           // 14pt / regular / 16 / 20(m)
     case SuitD3           // 12pt / regular / 14 / 18(m)
     
-    case MontserratH1           // 20pt / extrabold / 22
-    case MontserratH2           // 18pt / extrabold / 20
-    case MontserratH3           // 14pt / extrabold / 16
+    case MontserratH1           // 20pt / bold / 22
+    case MontserratH2           // 18pt / bold / 20
+    case MontserratH3           // 14pt / bold / 16
     
     case MontserratB1           // 14pt / semibold / 16
     case MontserratB2           // 14pt / medium / 16
@@ -80,11 +80,11 @@ extension TypoStyle {
             case .SuitD1:                   return FontDescription(font: .SUIT, style: .Regular, size: 16)
             case .SuitD2:                   return FontDescription(font: .SUIT, style: .Regular, size: 14)
             case .SuitD3:                   return FontDescription(font: .SUIT, style: .Regular, size: 12)
-            case .MontserratH1:            return FontDescription(font: .Montserrat, style: .ExtraBold, size: 20)
-            case .MontserratH2:            return FontDescription(font: .Montserrat, style: .ExtraBold, size: 18)
-            case .MontserratH3:            return FontDescription(font: .Montserrat, style: .ExtraBold, size: 14)
-            case .MontserratB1:            return FontDescription(font: .Montserrat, style: .SemiBold, size: 16)
-            case .MontserratB2:            return FontDescription(font: .Montserrat, style: .Medium, size: 16)
+            case .MontserratH1:            return FontDescription(font: .Montserrat, style: .Bold, size: 20)
+            case .MontserratH2:            return FontDescription(font: .Montserrat, style: .Bold, size: 18)
+            case .MontserratH3:            return FontDescription(font: .Montserrat, style: .Bold, size: 14)
+            case .MontserratB1:            return FontDescription(font: .Montserrat, style: .SemiBold, size: 14)
+            case .MontserratB2:            return FontDescription(font: .Montserrat, style: .Regular, size: 14)
             case .MontserratD1:            return FontDescription(font: .Montserrat, style: .Regular, size: 9)
         }
     }

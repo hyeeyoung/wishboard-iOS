@@ -22,10 +22,10 @@ class NotificationSettingViewController: UIViewController {
     let message = UILabel().then{
         $0.text = Message.itemNotification
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
-        $0.textColor = .gray_200
+        $0.textColor = .gray_300
     }
-    let completeButton = DefaultButton(titleStr: Button.complete).then{
-        $0.isActivate = true
+    let completeButton = LoadingButton(Button.complete).then{
+        $0.activateButton()
     }
     // MARK: - Life Cycles
     var notiType: String?
@@ -85,8 +85,8 @@ class NotificationSettingViewController: UIViewController {
         self.view.addSubview(titleLabel)
         self.view.addSubview(exitBtn)
         self.view.addSubview(notificationPickerView)
-        self.view.addSubview(message)
         self.view.addSubview(completeButton)
+        self.view.addSubview(message)
     }
     func setUpConstraint() {
         titleLabel.snp.makeConstraints { make in
@@ -100,17 +100,17 @@ class NotificationSettingViewController: UIViewController {
         }
         notificationPickerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(titleLabel.snp.bottom).offset(65)
-            make.height.equalTo(100)
-        }
-        message.snp.makeConstraints { make in
-            make.leading.equalTo(notificationPickerView)
-            make.top.equalTo(notificationPickerView.snp.bottom).offset(43)
+            make.top.equalTo(titleLabel.snp.bottom).offset(45)
+            make.height.equalTo(34 * 3 + 20)
         }
         completeButton.snp.makeConstraints { make in
-            make.height.equalTo(44)
+            make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(message.snp.bottom).offset(16)
+            make.bottom.equalToSuperview().offset(-34)
+        }
+        message.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(completeButton.snp.top).offset(-6)
         }
     }
     // MARK: - Actions
@@ -135,13 +135,20 @@ class NotificationSettingViewController: UIViewController {
 // MARK: - Picker delegate
 extension NotificationSettingViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        /*
+         첫번째: 상품 알림 유형 (재입고, 오픈 등..)
+         두번째: 날짜
+         세번째: 시
+         네번째: 땡땡 (:)
+         다섯번째: 분
+         */
         return 5
     }
-    
+    /// row 당 아이템 개수
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component {
         case 0:
-            return 5
+            return 6
         case 1:
             return 90
         case 2:
@@ -153,7 +160,7 @@ extension NotificationSettingViewController: UIPickerViewDelegate, UIPickerViewD
         }
         
     }
-    
+    /// row 당 아이템 타이틀
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch component {
         case 0:
@@ -169,11 +176,11 @@ extension NotificationSettingViewController: UIPickerViewDelegate, UIPickerViewD
         }
         
     }
-    // font 적용
+    /// font 적용
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         var label = UILabel()
         if let v = view as? UILabel { label = v }
-        label.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
+        label.setTypoStyleWithSingleLine(typoStyle: .SuitD2)
         label.textAlignment = .center
         
         switch component {
@@ -191,6 +198,7 @@ extension NotificationSettingViewController: UIPickerViewDelegate, UIPickerViewD
         
         return label
     }
+    /// 열 가로길이
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         switch component {
         case 0:
@@ -205,6 +213,11 @@ extension NotificationSettingViewController: UIPickerViewDelegate, UIPickerViewD
             return 5
         }
     }
+    /// 행 세로길이
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 34
+    }
+    /// 행 선택 이벤트
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch component {
         case 0:

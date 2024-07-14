@@ -9,6 +9,8 @@ import UIKit
 import Kingfisher
 
 class ModifyProfileViewController: TitleCenterViewController {
+    var observer = UserObserver.shared
+    
     // profile
     var profileImage = UIImageView().then{
         $0.image = Image.defaultProfile
@@ -28,8 +30,8 @@ class ModifyProfileViewController: TitleCenterViewController {
         $0.clearButtonMode = .always
         $0.becomeFirstResponder()
     }
-    let completeButton = DefaultButton(titleStr: Button.complete)
-    let completeKeyboardButton = DefaultButton(titleStr: Button.complete)
+    let completeButton = LoadingButton(Button.complete)
+    let completeKeyboardButton = LoadingButton(Button.complete)
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
     }()
@@ -41,8 +43,6 @@ class ModifyProfileViewController: TitleCenterViewController {
     
     var preNickName: String?
     var preProfileImg: String?
-    var preVC: MyPageViewController!
-    var modified: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,13 +62,13 @@ class ModifyProfileViewController: TitleCenterViewController {
         
         self.nameTextField.delegate = self
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        if modified {
-            preVC.isProfileModified = true
-            MypageDataManager().getUserInfoDataManager(preVC)
-//            SnackBar(preVC, message: .modifyProfile)
-        }
+    /// will disappear
+    override func viewWillDisappear(_ animated: Bool) {
+        // 화면이 사라질 때 마이페이지에 nil 전달
+        // 이유: 마이페이지에서 어떤 값을 전달받아도 TabBar를 보여주게 작동
+        observer.notify(nil)
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
         // Network Check
@@ -121,13 +121,13 @@ extension ModifyProfileViewController {
             make.centerX.equalToSuperview()
         }
         completeButton.snp.makeConstraints { make in
-            make.height.equalTo(50)
+            make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(16)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-34)
         }
         completeKeyboardButton.snp.makeConstraints { make in
-            make.height.equalTo(50)
+            make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(16)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-16)
@@ -150,8 +150,8 @@ extension ModifyProfileViewController {
     }
     // 닉네임 유효성 검사
     func isNicknameValid(nickname: String) {
-        self.completeButton.isActivate = nickname.isEmpty ? false : true
-        self.completeKeyboardButton.isActivate = nickname.isEmpty ? false : true
+        nickname.isEmpty ? completeButton.inactivateButton() : completeButton.activateButton()
+        nickname.isEmpty ? completeKeyboardButton.inactivateButton() : completeKeyboardButton.activateButton()
     }
     // 앨범에서 사진/동영상 선택
     // 프로필 이미지 클릭 시
@@ -167,21 +167,22 @@ extension ModifyProfileViewController {
         UIDevice.vibrate()
     }
     @objc func completeButtonDidTap() {
+        
         UIDevice.vibrate()
         
-        var lottieView = self.completeButton.setLottieView()
-        self.completeButton.isSelected = true
+        completeButton.startLoadingAnimation()
+        completeKeyboardButton.startLoadingAnimation()
         
-        lottieView = self.completeKeyboardButton.setLottieView()
-        self.completeKeyboardButton.isSelected = true
-        
-        lottieView.isHidden = false
-        
-        lottieView.play { completion in
-            lottieView.loopMode = .loop
-            let moyaProfileInput = MoyaProfileInput(photo: self.selectedPhoto, nickname: self.nickname)
-            self.modifyProfileWithMoya(model: moyaProfileInput)
+        // 이미지와 닉네임 둘 다 변경사항이 없을 때, selectedPhoto와 nickname 값이 nil이 되어 버그.
+        // 예외처리
+        if self.selectedPhoto == nil && self.nickname == nil {
+            self.navigationController?.popViewController(animated: true)
+            return
         }
+        // 변경사항이 하나라도 있을 때 통신
+        let moyaProfileInput = MoyaProfileInput(photo: self.selectedPhoto, nickname: self.nickname)
+        self.modifyProfileWithMoya(model: moyaProfileInput)
+        
     }
 }
 // MARK: - ImagePicker Delegate
@@ -216,13 +217,13 @@ extension ModifyProfileViewController {
                 case .success(let data):
                     if data.success {
                         print("프로필 업데이트 성공 by moya:", data.message)
-                        self.modified = true
+                        // 마이페이지에 노티를 준다.
+                        self.observer.notify(.profileModified)
                         self.navigationController?.popViewController(animated: true)
                     }
                     break
             case .failure(let error):
                 self.navigationController?.popViewController(animated: true)
-                self.modified = false
                 print("moya profile modify error", error.localizedDescription)
             default:
                 print("default error")

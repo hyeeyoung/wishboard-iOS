@@ -13,7 +13,6 @@ class FolderViewController: TitleLeftViewController {
     var folderView : FolderView!
     let emptyMessage = EmptyMessage.folder
     var folderData: [FolderModel] = []
-    var lottieView: LottieAnimationView!
     
     var refreshControl = UIRefreshControl()
 
@@ -143,8 +142,11 @@ extension FolderViewController {
     // 폴더 삭제 팝업창
     func alertDeleteDialog(folderData: FolderModel) {
         UIDevice.vibrate()
-        let dialog = PopUpViewController(titleText: "폴더 삭제", messageText: "정말 폴더를 삭제하시겠어요?\n폴더가 삭제되어도 아이템은 사라지지 않아요.", greenBtnText: "취소", blackBtnText: "삭제")
-        dialog.modalPresentationStyle = .overFullScreen
+        let model = PopUpModel(title: "폴더 삭제",
+                               message: "정말 폴더를 삭제하시겠어요?\n폴더가 삭제되어도 아이템은 사라지지 않아요.",
+                               greenBtnText: "취소",
+                               blackBtnText: "삭제")
+        let dialog = PopUpViewController(model, .delete)
         self.present(dialog, animated: false, completion: nil)
         
         let folderMenuGesture = CustomButton(target: self, action: #selector(deleteFolderButtonDidTap(_:)))
@@ -164,6 +166,10 @@ extension FolderViewController {
     // MARK: 폴더 조회 API
     func getFolderAPISuccess(_ result: [FolderModel]) {
         self.folderData = result
+        if result.isEmpty {
+            noFolder()
+            return
+        }
         // reload data with animation
         UIView.transition(with: folderView.folderCollectionView,
                           duration: 0.35,
@@ -172,9 +178,6 @@ extension FolderViewController {
                               self.folderView.folderCollectionView.reloadData()},
                           completion: nil);
         refreshControl.endRefreshing()
-    }
-    func getFolderAPIFail() {
-        FolderDataManager().getFolderDataManager(self)
     }
     func noFolder() {
         self.folderData = []
@@ -189,25 +192,24 @@ extension FolderViewController {
     // MARK: 폴더 추가 API
     func addFolderAPISuccess(_ result: APIModel<ResultModel>) {
         self.dismiss(animated: false)
-        SnackBar(self, message: .addFolder)
+        SnackBar.shared.showSnackBar(self, message: .addFolder)
         FolderDataManager().getFolderDataManager(self)
         print(result.message)
     }
     // MARK: 폴더명 수정 API
     func modifyFolderAPISuccess(_ result: APIModel<ResultModel>) {
         self.dismiss(animated: false)
-        SnackBar(self, message: .modifyFolder)
+        SnackBar.shared.showSnackBar(self, message: .modifyFolder)
         FolderDataManager().getFolderDataManager(self)
         print(result.message)
     }
     func sameFolderNameFail() {
-//        dialog.sameFolderNameFail()
-        lottieView.isHidden = true
+        
     }
     // MARK: 폴더 삭제 API
     func deleteFolderAPISuccess(_ result: APIModel<ResultModel>) {
         self.dismiss(animated: false)
-        SnackBar(self, message: .deleteFolder)
+        SnackBar.shared.showSnackBar(self, message: .deleteFolder)
         FolderDataManager().getFolderDataManager(self)
         print(result.message)
     }

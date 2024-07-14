@@ -21,6 +21,9 @@ class ShareView: UIView {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 20
     }
+    let backgroundViewSquare = UIView().then {
+        $0.backgroundColor = .white
+    }
     lazy var quitButton = UIButton().then{
         $0.setImage(Image.quit, for: .normal)
     }
@@ -32,7 +35,7 @@ class ShareView: UIView {
     }
     let itemPriceTextField = UITextField().then{
         $0.borderStyle = .none
-        $0.font = TypoStyle.MontserratB1.font
+        $0.font = UIFont.monteserrat(size: 14, family: .Bold)
         $0.keyboardType = .numberPad
         $0.textAlignment = .center
         $0.placeholder = Placeholder.shareItemPrice
@@ -43,8 +46,8 @@ class ShareView: UIView {
     let addFolderButton = UIButton().then{
         $0.setImage(Image.addFolder, for: .normal)
     }
-    let completeButton = DefaultButton(titleStr: Button.addToWishList).then{
-        $0.isActivate = true
+    let completeButton = LoadingButton(Button.addToWishList).then{
+        $0.inactivateButton()
     }
     //MARK: - Life Cycles
     var folderCollectionView: UICollectionView!
@@ -77,6 +80,8 @@ class ShareView: UIView {
     }
     func setUpView() {
         addSubview(backgroundView)
+        addSubview(backgroundViewSquare)
+        
         backgroundView.addSubview(quitButton)
         backgroundView.addSubview(itemNameTextField)
         backgroundView.addSubview(itemPriceTextField)
@@ -88,9 +93,18 @@ class ShareView: UIView {
         addSubview(itemImage)
     }
     func setUpConstraint() {
+        backgroundViewSquare.snp.makeConstraints { make in
+            make.bottom.leading.trailing.equalToSuperview()
+            make.height.equalTo(20)
+        }
         backgroundView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
             make.height.equalTo(317)
+        }
+        itemImage.snp.makeConstraints { make in
+            make.width.height.equalTo(80)
+            make.centerX.equalToSuperview()
+            make.centerY.equalTo(backgroundView.snp.top)
         }
         quitButton.snp.makeConstraints { make in
             make.width.height.equalTo(24)
@@ -100,20 +114,21 @@ class ShareView: UIView {
         itemNameTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalToSuperview().offset(50)
+            make.top.equalTo(itemImage.snp.bottom).offset(16)
         }
         itemPriceTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(itemNameTextField.snp.bottom).offset(2)
+            make.top.equalTo(itemNameTextField.snp.bottom).offset(6)
         }
         setNotificationButton.snp.makeConstraints { make in
+            make.height.equalTo(14)
             make.centerX.equalToSuperview()
-            make.top.equalTo(itemPriceTextField.snp.bottom).offset(12)
+            make.top.equalTo(itemPriceTextField.snp.bottom).offset(16)
         }
         addFolderButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)
             make.leading.equalToSuperview().offset(16)
-            make.top.equalTo(setNotificationButton.snp.bottom).offset(15)
+            make.top.equalTo(setNotificationButton.snp.bottom).offset(16)
         }
         folderCollectionView.snp.makeConstraints { make in
             make.leading.equalTo(addFolderButton.snp.trailing).offset(10)
@@ -121,15 +136,11 @@ class ShareView: UIView {
             make.trailing.equalToSuperview()
         }
         completeButton.snp.makeConstraints { make in
-            make.height.equalTo(44)
+            make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(addFolderButton.snp.bottom).offset(16)
             make.bottom.equalToSuperview().offset(-34)
-        }
-        
-        itemImage.snp.makeConstraints { make in
-            make.width.height.equalTo(80)
-            make.centerX.equalToSuperview()
-            make.centerY.equalTo(backgroundView.snp.top)
+//            make.bottom.greaterThanOrEqualToSuperview().offset(-34)
         }
     }
 }

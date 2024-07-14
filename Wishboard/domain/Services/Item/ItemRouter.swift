@@ -58,9 +58,11 @@ extension ItemRouter{
     }
     
     var headers: [String: String]? {
-        let token = UserDefaults.standard.string(forKey: "accessToken") ?? ""
+        let token = UserManager.accessToken ?? ""
         return ["Content-Type": "multipart/form-data",
-                "Authorization": "Bearer " + token]
+                "Authorization": "Bearer " + token,
+                "User-Agent": Storage().AgentHeader
+        ]
     }
     
     func makeMultipartFormData(param: MoyaItemInput) -> [Moya.MultipartFormData] {
@@ -84,8 +86,8 @@ extension ItemRouter{
             itemNotificationDateData = MultipartFormData(provider: .data(itemNotificationDate.data(using: String.Encoding.utf8) ?? Data()), name: "item_notification_date")
         }
 
-        let imageData = param.photo.jpegData(compressionQuality: 0.5) ?? Data()
-        let imageMultipartFormData = MultipartFormData(provider: .data(imageData), name: "item_img", fileName: "itemmm.jpeg", mimeType: "image/jpeg")
+        let imageData = param.photo.resizeImageIfNeeded().jpegData(compressionQuality: 1.0) ?? Data()
+        let imageMultipartFormData = MultipartFormData(provider: .data(imageData), name: "item_img", fileName: "item.jpeg", mimeType: "image/jpeg")
         
         var formData: [Moya.MultipartFormData] = [imageMultipartFormData]
         formData.append(itemNameData)

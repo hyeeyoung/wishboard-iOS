@@ -22,6 +22,10 @@ enum Placeholder {
     public static let shareItemName = "상품명을 입력해 주세요."
     public static let shareItemPrice = "가격을 입력해 주세요."
     
+    // MARK: Modify Password
+    public static let newPassword = "새 비밀번호를 입력해 주세요."
+    public static let rewritePassword = "새 비밀번호를 다시 입력해 주세요."
+    
     public static let uploadItemName = "상품명"
     public static let uploadItemPrice = "₩ 가격(필수)"
     public static let uploadItemMemo = "브랜드, 사이즈, 컬러 등 아이템 정보를 메모로 남겨보세요!😉"
@@ -29,7 +33,7 @@ enum Placeholder {
 
 enum ErrorMessage {
     // MARK: Authentication
-    public static let email = "이메일 주소를 정확하게 입력해 주세요."
+    public static let email = "이메일을 다시 확인해 주세요."
     public static let password = "8자리 이상의 영문자, 숫자, 특수 문자 조합으로 입력해 주세요."
     public static let passwordRewrite = "비밀번호가 일치하지 않아요!"
     public static let authcode = "인증코드를 다시 확인해 주세요."
@@ -62,7 +66,7 @@ enum Message {
     
     // MARK: Item
     public static let itemNotification = "30분 전에 상품 일정을 알려드려요! 시간은 30분 단위로 설정할 수 있어요."
-    public static let shoppingLink = "복사한 링크로 아이템 정보를 불러올 수 있어요!"
+    public static let shoppingLink = "복사한 링크로 아이템을 불러올 수 있어요!"
     
     public static let onboarding = "흩어져있는 위시리스트를\n위시보드로 간편하게 통합 관리해 보세요!️"
 }
@@ -70,7 +74,7 @@ enum Message {
 enum Title {
     // MARK: Authentication
     public static let register = "가입하기"
-    public static let login = "로그인 하기"
+    public static let login = "로그인하기"
     public static let loginByEmail = "이메일로 로그인하기"
     public static let email = "이메일"
     public static let password = "비밀번호"
@@ -93,6 +97,7 @@ enum Title {
     public static let shoppingMallLink = "쇼핑몰 링크"
     public static let addItem = "아이템 추가"
     public static let modifyItem = "아이템 수정"
+    public static let memo = "메모"
     
     // MARK: Folder
     public static let folder = "폴더"
@@ -108,7 +113,7 @@ enum Title {
 
 enum Button {
     // MARK: Authentication
-    public static let login = "로그인 하기"
+    public static let login = "로그인하기"
     public static let getEmail = "인증메일 받기"
     public static let register = "가입하기"
     public static let lostPassword = "비밀번호를 잊으셨나요?"

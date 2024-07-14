@@ -8,11 +8,13 @@
 import Foundation
 import SnapKit
 import Then
+import RxSwift
 
 class OnBoardingView: UIView {
     
     var onBoardingTableView: UITableView!
     var onBoardingViewModel: OnBoardingViewModel!
+    var disposeBag = DisposeBag()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -65,9 +67,23 @@ extension OnBoardingView: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "OnBoardingTableViewCell", for: indexPath) as? OnBoardingTableViewCell else { return UITableViewCell() }
 
         cell.selectionStyle = .none
-        cell.loginButton.addTarget(self, action: #selector(loginButtonDidTap(_:)), for: .touchUpInside)
-        cell.accountExistButton.addTarget(self, action: #selector(loginButtonDidTap(_:)), for: .touchUpInside)
+//        cell.loginButton.addTarget(self, action: #selector(loginButtonDidTap(_:)), for: .touchUpInside)
+//        cell.accountExistButton.addTarget(self, action: #selector(loginButtonDidTap(_:)), for: .touchUpInside)
         cell.registerButton.addTarget(self, action: #selector(registerButtonDidTap(_:)), for: .touchUpInside)
+        
+        cell.loginButton.rx.tap
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                self?.loginButtonDidTap(cell.loginButton)
+            })
+            .disposed(by: disposeBag)
+        cell.accountExistButton.rx.tap
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                self?.loginButtonDidTap(cell.loginButton)
+            })
+            .disposed(by: disposeBag)
+        
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

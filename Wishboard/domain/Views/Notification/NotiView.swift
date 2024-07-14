@@ -80,15 +80,15 @@ extension NotiView: UITableViewDelegate, UITableViewDataSource {
         // 쇼핑몰 이동
         if let urlStr = self.notiData[index].item_url {
             if urlStr != "" {
-                ScreenManager().linkTo(viewcontroller: preVC, urlStr)
+                ScreenManager.shared.linkTo(viewcontroller: preVC, urlStr)
             } else {
                 DispatchQueue.main.async {
-                    SnackBar(self.preVC, message: .ShoppingLink)
+                    SnackBar.shared.showSnackBar(self.preVC, message: .ShoppingLink)
                 }
             }
         } else {
             DispatchQueue.main.async {
-                SnackBar(self.preVC, message: .ShoppingLink)
+                SnackBar.shared.showSnackBar(self.preVC, message: .ShoppingLink)
             }
         }
         // 읽음 처리

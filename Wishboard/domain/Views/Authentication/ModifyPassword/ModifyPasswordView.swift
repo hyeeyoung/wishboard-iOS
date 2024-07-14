@@ -18,7 +18,7 @@ class ModifyPasswordView: UIView {
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
     }
     // 새 비밀번호 TextField
-    let newPasswordTextField = DefaultTextField(Placeholder.email).then{
+    let newPasswordTextField = DefaultTextField(Placeholder.newPassword).then{
         $0.isSecureTextEntry = true
     }
     let newPasswordErrorMessageLabel = UILabel().then{
@@ -33,7 +33,7 @@ class ModifyPasswordView: UIView {
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
     }
     // 비밀번호 재입력 TextField
-    let passwordRewriteTextField = DefaultTextField(Placeholder.password).then{
+    let passwordRewriteTextField = DefaultTextField(Placeholder.rewritePassword).then{
         $0.isSecureTextEntry = true
     }
     let passwordRewriteErrorMessageLabel = UILabel().then{
@@ -43,16 +43,16 @@ class ModifyPasswordView: UIView {
         $0.isHidden = true
     }
     // 완료 버튼
-    let completeButton = DefaultButton(titleStr: Button.complete).then{
-        $0.isActivate = false
+    let completeButton = LoadingButton(Button.complete).then{
+        $0.inactivateButton()
     }
     // 키보드 Accessory
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 100.0))
     }()
     // 키보드 위 완료 버튼
-    let completeButtonKeyboard = DefaultButton(titleStr: Button.complete).then{
-        $0.isActivate = false
+    let completeButtonKeyboard = LoadingButton(Button.complete).then{
+        $0.inactivateButton()
     }
     var intervalConstraint: Constraint? = nil
     
@@ -113,14 +113,14 @@ class ModifyPasswordView: UIView {
             make.top.equalTo(passwordRewriteTextField.snp.bottom).offset(6)
         }
         self.completeButton.snp.makeConstraints { make in
-            make.height.equalTo(50)
+            make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(16)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-34)
         }
         // keyboard button
         self.completeButtonKeyboard.snp.makeConstraints { make in
-            make.height.equalTo(50)
+            make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(20)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-16)

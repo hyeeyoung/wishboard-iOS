@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import SnapKit
 
 class ItemDetailTableViewCell: UITableViewCell {
     // MARK: - Properties
@@ -17,7 +18,11 @@ class ItemDetailTableViewCell: UITableViewCell {
         $0.contentMode = .scaleAspectFill
     }
     var setFolderButton = UIButton().then{
-        $0.setFolderButton("폴더를 지정해 보세요! > ")
+        let title = "폴더를 지정해 보세요! > "
+        let attributedString = NSMutableAttributedString(string: title)
+        attributedString.addAttribute(.font, value: TypoStyle.SuitD3.font, range: NSRange(location: 0, length: title.count))
+        attributedString.addAttribute(.foregroundColor, value: UIColor.gray, range: NSRange(location: 0, length: title.count))
+        $0.setAttributedTitle(attributedString, for: .normal)
     }
     let dateLabel = UILabel().then{
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
@@ -37,39 +42,52 @@ class ItemDetailTableViewCell: UITableViewCell {
     }
     let stack = UIStackView().then{
         $0.axis = .vertical
-        $0.spacing = 16
+        $0.spacing = 0
     }
+    
+    private let linkView = UIView()
+    private let memoView = UIView()
+    
+    // LinkView subViews
     let seperatorLine1 = UIView().then{
         $0.backgroundColor = .gray_100
     }
-    let linkLabel = UILabel().then{
+    let linkLabel = PaddingLabel(padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)).then{
         $0.textColor = .gray_200
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
     }
+    // MemoView subViews
     let seperatorLine2 = UIView().then{
         $0.backgroundColor = .gray_100
     }
-    let memoTitlelabel = DefaultLabel().then{
+    let memoTitlelabel = PaddingLabel(padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)).then{
+        $0.text = Title.memo
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitB2)
+        $0.textColor = .gray_700
     }
-    let memoContentLabel = DefaultLabel().then{
+    let memoContentLabel = PaddingLabel(padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)).then{
         $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.numberOfLines = 0
+        $0.textColor = .gray_700
     }
     // 재입고 초록색
-    let restockLabel = PaddingLabel().then{
+    let restockLabel = PaddingLabel(padding: UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)).then{
         $0.textColor = .gray_700
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitB5)
         $0.backgroundColor = .green_500
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 12
+        
+        $0.isHidden = true
     }
-    let restockDateLabel = PaddingLabel().then{
+    let restockDateLabel = PaddingLabel(padding: UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)).then{
         $0.textColor = .gray_700
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitB5)
         $0.backgroundColor = .green_500
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 12
+        
+        $0.isHidden = true
     }
     
     //MARK: - Life Cycles
@@ -94,18 +112,23 @@ class ItemDetailTableViewCell: UITableViewCell {
         contentView.addSubview(won)
         contentView.addSubview(stack)
         
-        stack.addArrangedSubview(seperatorLine1)
-        stack.addArrangedSubview(linkLabel)
-        stack.addArrangedSubview(seperatorLine2)
-        stack.addArrangedSubview(memoTitlelabel)
-        stack.addArrangedSubview(memoContentLabel)
+        stack.addArrangedSubview(linkView)
+        stack.addArrangedSubview(memoView)
+        
+        linkView.addSubview(seperatorLine1)
+        linkView.addSubview(linkLabel)
+        
+        memoView.addSubview(seperatorLine2)
+        memoView.addSubview(memoTitlelabel)
+        memoView.addSubview(memoContentLabel)
     }
     func setUpConstraint() {
         itemImage.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(468)
+            make.height.equalTo(itemImage.snp.width).multipliedBy(1.154)
             make.top.equalToSuperview()
         }
+
         restockLabel.snp.makeConstraints { make in
             make.leading.bottom.equalToSuperview().inset(16)
         }
@@ -133,21 +156,41 @@ class ItemDetailTableViewCell: UITableViewCell {
             make.leading.equalTo(priceLabel.snp.trailing)
             make.centerY.equalTo(priceLabel)
         }
+        
+        stack.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(priceLabel.snp.bottom).offset(16)
+        }
+        
+        // LinkView
         seperatorLine1.snp.makeConstraints { make in
             make.height.equalTo(0.5)
+            make.top.leading.trailing.equalToSuperview()
         }
-        stack.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(priceLabel.snp.bottom).offset(16)
-            if UIDevice.current.hasNotch {make.bottom.equalToSuperview().offset(-78)}
-            else {make.bottom.equalToSuperview().offset(-44)}
+        linkLabel.snp.makeConstraints { make in
+            make.top.equalTo(seperatorLine1.snp.bottom).offset(16)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.trailing.equalToSuperview().offset(-16)
         }
+        // MemoView
         seperatorLine2.snp.makeConstraints { make in
             make.height.equalTo(0.5)
+            make.top.leading.trailing.equalToSuperview()
+        }
+        memoTitlelabel.snp.makeConstraints { make in
+            make.top.equalTo(seperatorLine2.snp.bottom).offset(16)
+            make.leading.trailing.equalToSuperview()
+        }
+        memoContentLabel.snp.makeConstraints { make in
+            make.top.equalTo(memoTitlelabel.snp.bottom).offset(10)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-16)
         }
     }
     // After API success
     func setUpData(_ data: WishListModel) {
+        itemImage.layer.cornerRadius = itemImage.bounds.width / 10.7
+        
         if let url = data.item_img_url {
             let processor = TintImageProcessor(tint: .black_5)
             self.itemImage.kf.setImage(with: URL(string: url), placeholder: UIImage(), options: [.processor(processor), .transition(.fade(0.5))])
@@ -157,7 +200,6 @@ class ItemDetailTableViewCell: UITableViewCell {
                 self.restockLabel.isHidden = false
                 self.restockDateLabel.isHidden = false
                 let notiDateStr = FormatManager().showNotificationDateInItemDetail(notificationDate)
-//                let notiDateStr = FormatManager().notiDateToKoreanStr(notificationDate)
                 self.restockLabel.text = notificationType
                 self.restockDateLabel.text = notiDateStr
             }
@@ -181,22 +223,16 @@ class ItemDetailTableViewCell: UITableViewCell {
             var url = URL(string: link)
             var domain = url?.host
             
-            self.linkLabel.isHidden = false
-            self.seperatorLine1.isHidden = false
+            self.linkView.isHidden = false
             self.linkLabel.text = domain
         } else {
-            self.linkLabel.isHidden = true
-            self.seperatorLine1.isHidden = true
+            self.linkView.isHidden = true
         }
         if let memo = data.item_memo.nilIfEmpty {
-            self.seperatorLine2.isHidden = false
-            self.memoTitlelabel.isHidden = false
-            self.memoContentLabel.isHidden = false
+            self.memoView.isHidden = false
             self.memoContentLabel.text = memo
         } else {
-            self.seperatorLine2.isHidden = true
-            self.memoTitlelabel.isHidden = true
-            self.memoContentLabel.isHidden = true
+            self.memoView.isHidden = true
         }
     }
 }

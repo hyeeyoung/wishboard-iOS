@@ -28,6 +28,7 @@ class MypageProfileTableViewCell: UITableViewCell {
         $0.setTitleColor(UIColor.gray_600, for: .normal)
         $0.titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitB3)
         $0.backgroundColor = UIColor.gray_100
+        $0.titleEdgeInsets = UIEdgeInsets(top: 4, left: 10, bottom: 4, right: 10)
         
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 12
@@ -78,7 +79,7 @@ class MypageProfileTableViewCell: UITableViewCell {
             profileImage.kf.setImage(with: URL(string: profileUrl), placeholder: Image.defaultProfile)
         }
         if let nickname = data.nickname {userNameLabel.text = nickname}
-        else {userNameLabel.text = UserDefaults.standard.string(forKey: "tempNickname") ?? ""}
-        if let email = data.email {emailLabel.text = email}
+        else {userNameLabel.text = UserManager.tempNickname}
+        emailLabel.text = data.email
     }
 }

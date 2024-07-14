@@ -60,17 +60,22 @@ extension UserRouter{
     var headers: [String: String]? {
         switch self {
         case .signIn:
-            return ["Content-Type": "application/json"]
+            return ["Content-Type": "application/json",
+                    "User-Agent": Storage().AgentHeader]
         case .modifyPassword:
-            let token = UserDefaults.standard.string(forKey: "accessToken") ?? ""
+            let token = UserManager.accessToken ?? ""
             let header = [
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + token]
+                "Authorization": "Bearer " + token,
+                "User-Agent": Storage().AgentHeader
+            ]
             return header
         case .modifyProfile:
-            let token = UserDefaults.standard.string(forKey: "accessToken") ?? ""
+            let token = UserManager.accessToken ?? ""
             return ["Content-Type": "multipart/form-data",
-                    "Authorization": "Bearer " + token]
+                    "Authorization": "Bearer " + token,
+                    "User-Agent": Storage().AgentHeader
+            ]
         }
         
     }
@@ -88,7 +93,7 @@ extension UserRouter{
         }
 
         if let image = param.photo {
-            let imageData = image.jpegData(compressionQuality: 0.5) ?? Data()
+            let imageData = image.resizeImageIfNeeded().jpegData(compressionQuality: 1.0) ?? Data()
             imageMultipartFormData = MultipartFormData(provider: .data(imageData), name: "profile_img", fileName: "profileImg.jpeg", mimeType: "image/jpeg")
             if let imageMultipartFormData = imageMultipartFormData {
                 formData.append(imageMultipartFormData)

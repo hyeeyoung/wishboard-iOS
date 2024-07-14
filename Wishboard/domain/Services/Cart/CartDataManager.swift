@@ -7,164 +7,62 @@
 
 import Foundation
 import Alamofire
+import RxCocoa
+import RxSwift
 
 class CartDataManager {
     // MARK: - 장바구니 조회
     func getCartListDataManager(_ cartView: CartView) {
-        AF.request(Storage().BaseURL + "/cart",
-                           method: .get,
-                           parameters: nil,
-                           headers: APIManager().getHeader())
-            .validate()
-            .responseDecodable(of: [CartListModel].self) { response in
-            switch response.result {
-            case .success(let result):
-                cartView.getCartListAPISuccess(result)
-            case .failure(let error):
-                let statusCode = error.responseCode
-                switch statusCode {
-//                case 429:
-//                    cartView.getCartListAPIFail()
-                case 404:
-                    cartView.noCartItem()
-                case 401:
-                    RefreshDataManager().refreshDataManager() {
-                        !$0 ? ScreenManager().goToOnboarding(cartView.preVC) : self.getCartListDataManager(cartView)
-                    }
-                default:
-                    print(error.responseCode)
-                }
+        let url = Storage().BaseURL + "/cart"
+        let request = AlamofireBaseService.shared.requestWithParameter(url, .get, nil)
+        
+        AlamofireBaseService.shared.responseWithErrorException(request, [CartListModel].self) { result in
+            if let response = result as? [CartListModel] {
+                cartView.getCartListAPISuccess(response)
+            } else if let errorCode = result as? Int, errorCode == 404 {
+                cartView.noCartItem()
             }
         }
+        
     }
     // MARK: - 장바구니 수량 변경
     func modifyCountDataManager(_ itemId: Int, _ parameter: CartModifyCountInput,_ cartView: CartView) {
-        AF.request(Storage().BaseURL + "/cart/\(itemId)",
-                           method: .put,
-                           parameters: parameter,
-                           encoder: JSONParameterEncoder.default,
-                           headers: APIManager().getHeader())
-            .validate()
-            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
-            switch response.result {
-            case .success(let result):
-                cartView.modifyCountAPISuccess(result)
-            case .failure(let error):
-                if error.responseCode == 401 {
-                    RefreshDataManager().refreshDataManager() {
-                        !$0 ? ScreenManager().goToOnboarding(cartView.preVC) : self.modifyCountDataManager(itemId, parameter, cartView)
-                    }
-                }
-                print(error.responseCode)
-            }
+        let url = Storage().BaseURL + "/cart/\(itemId)"
+        let request = AlamofireBaseService.shared.requestWithBody(url, .put, parameter, nil)
+        AlamofireBaseService.shared.responseDecoded(request, APIModel<TokenResultModel>.self) { result in
+            cartView.modifyCountAPISuccess(result)
         }
     }
     // MARK: - 장바구니 추가
-    // 홈 페이지
-    func addCartDataManager(_ parameter: AddCartInput,_ homeView: HomeView, _ viewcontroller: HomeViewController) {
-        AF.request(Storage().BaseURL + "/cart",
-                           method: .post,
-                           parameters: parameter,
-                           encoder: JSONParameterEncoder.default,
-                           headers: APIManager().getHeader())
-            .validate()
-            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
-            switch response.result {
-            case .success(let result):
+    // 홈 페이지와 폴더 디테일 페이지 구분
+    func addCartDataManager(_ parameter: AddCartInput, _ viewcontroller: UIViewController) {
+        let url = Storage().BaseURL + "/cart"
+        let request = AlamofireBaseService.shared.requestWithBody(url, .post, parameter, viewcontroller)
+        AlamofireBaseService.shared.responseDecoded(request, APIModel<TokenResultModel>.self) { result in
+            if let viewcontroller = viewcontroller as? HomeViewController {
                 viewcontroller.addCartAPISuccess(result)
-            case .failure(let error):
-                if error.responseCode == 401 {
-                    RefreshDataManager().refreshDataManager() {
-                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.addCartDataManager(parameter, homeView, viewcontroller)
-                    }
-                }
-                print(error.responseCode)
-            }
+            } else if let viewcontroller = viewcontroller as? FolderDetailViewController {
+                viewcontroller.addCartAPISuccess(result)
+            } else {return}
         }
     }
-    // 폴더 디테일 페이지
-    func addCartDataManager(_ parameter: AddCartInput, _ viewcontroller: FolderDetailViewController) {
-        AF.request(Storage().BaseURL + "/cart",
-                           method: .post,
-                           parameters: parameter,
-                           encoder: JSONParameterEncoder.default,
-                           headers: APIManager().getHeader())
-            .validate()
-            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
-            switch response.result {
-            case .success(let result):
-                viewcontroller.addCartAPISuccess(result)
-            case .failure(let error):
-                if error.responseCode == 401 {
-                    RefreshDataManager().refreshDataManager() {
-                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.addCartDataManager(parameter, viewcontroller)
-                    }
-                }
-                print(error.responseCode)
-            }
-        }
-    }
-    // MARK: - 장바구니 삭제 : 장바구니 페이지
-    func deleteCartDataManager(_ itemId: Int, _ cartView: CartView) {
-        AF.request(Storage().BaseURL + "/cart/\(itemId)",
-                           method: .delete,
-                           parameters: nil,
-                           headers: APIManager().getHeader())
-            .validate()
-            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
-            switch response.result {
-            case .success(let result):
+
+    // MARK: - 장바구니 삭제
+    /// 분기처리 : 장바구니 페이지 / 홈 페이지 / 폴더 디테일 페이지
+    func deleteCartDataManager(_ itemId: Int, _ viewcontroller: Any) {
+        let url = Storage().BaseURL + "/cart/\(itemId)"
+        let request = AlamofireBaseService.shared.requestWithParameter(url, .delete, nil)
+        
+        AlamofireBaseService.shared.responseDecoded(request, APIModel<TokenResultModel>.self) { result in
+            if let cartView = viewcontroller as? CartView {
                 cartView.deleteCartAPISuccess(result)
-            case .failure(let error):
-                if error.responseCode == 401 {
-                    RefreshDataManager().refreshDataManager() {
-                        !$0 ? ScreenManager().goToOnboarding(cartView.preVC) : self.deleteCartDataManager(itemId, cartView)
-                    }
-                }
-                print(error.responseCode)
-            }
-        }
-    }
-    // MARK: - 장바구니 삭제 : 홈 페이지
-    func deleteCartDataManager(_ itemId: Int, _ homeView: HomeView, _ viewcontroller: HomeViewController) {
-        AF.request(Storage().BaseURL + "/cart/\(itemId)",
-                           method: .delete,
-                           parameters: nil,
-                           headers: APIManager().getHeader())
-            .validate()
-            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
-            switch response.result {
-            case .success(let result):
+            } else if let viewcontroller = viewcontroller as? HomeViewController {
                 viewcontroller.deleteCartAPISuccess(result)
-            case .failure(let error):
-                if error.responseCode == 401 {
-                    RefreshDataManager().refreshDataManager() {
-                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.deleteCartDataManager(itemId, homeView, viewcontroller)
-                    }
-                }
-                print(error.responseCode)
-            }
-        }
-    }
-    // MARK: - 장바구니 삭제 : 폴더 디테일 페이지
-    func deleteCartDataManager(_ itemId: Int, _ viewcontroller: FolderDetailViewController) {
-        AF.request(Storage().BaseURL + "/cart/\(itemId)",
-                           method: .delete,
-                           parameters: nil,
-                           headers: APIManager().getHeader())
-            .validate()
-            .responseDecodable(of: APIModel<TokenResultModel>.self) { response in
-            switch response.result {
-            case .success(let result):
+            } else if let viewcontroller = viewcontroller as? FolderDetailViewController {
                 viewcontroller.deleteCartAPISuccess(result)
-            case .failure(let error):
-                if error.responseCode == 401 {
-                    RefreshDataManager().refreshDataManager() {
-                        !$0 ? ScreenManager().goToOnboarding(viewcontroller) : self.deleteCartDataManager(itemId, viewcontroller)
-                    }
-                }
-                print(error.responseCode)
-            }
+            } else {return}
         }
+        
     }
+    
 }

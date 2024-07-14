@@ -8,12 +8,12 @@
 import UIKit
 import MaterialComponents.MaterialBottomSheet
 
-class ItemDetailViewController: UIViewController {
+class ItemDetailViewController: UIViewController, Observer {
+    var observer = WishItemObserver.shared
+    
     var itemDetailView: ItemDetailView!
     var itemId: Int!
     var wishListData: WishListModel!
-    var preVC: UIViewController!
-    var isDeleted: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,32 +22,52 @@ class ItemDetailViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         self.tabBarController?.tabBar.isHidden = true
         
-        itemDetailView = ItemDetailView()
-        self.view.addSubview(itemDetailView)
-        
-        itemDetailView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview()
-        }
-        
         setItemView()
-//        ItemDataManager().getItemDetailDataManager(self.itemId, self)
+        addTargets()
+        initButtons()
+        
+        // observer init
+        observer.bind(self)
     }
     override func viewDidAppear(_ animated: Bool) {
         ItemDataManager().getItemDetailDataManager(self.itemId, self)
         // Network Check
         NetworkCheck.shared.startMonitoring(vc: self)
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        if isDeleted {
-            guard let preVC = self.preVC else {return}
-            switch preVC {
-            case is HomeViewController:
-                break
-            default:
-                SnackBar(preVC, message: .deleteItem)
-            }
+    
+    /// 아이템이 수정되었을 때 호출
+    func update(_ newValue: Any) {
+        ItemDataManager().getItemDetailDataManager(self.itemId, self)
+        if let usecase = newValue as? WishItemUseCase {
+            SnackBar.shared.showSnackBar(self, message: .modifyItem)
         }
     }
+    
+    private func addTargets() {
+        itemDetailView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        itemDetailView.deleteButton.addTarget(self, action: #selector(alertDialog), for: .touchUpInside)
+        itemDetailView.modifyButton.addTarget(self, action: #selector(goModify), for: .touchUpInside)
+        
+        itemDetailView.lowerButton.addTarget(self, action: #selector(linkButtonDidTap), for: .touchUpInside)
+    }
+    
+    /// 아이템 디테일 뷰의 버튼들 초기화
+    private func initButtons() {
+        self.inActivateButtons()
+    }
+    private func inActivateButtons() {
+        itemDetailView.backButton.isEnabled = false
+        itemDetailView.deleteButton.isEnabled = false
+        itemDetailView.modifyButton.isEnabled = false
+        itemDetailView.lowerButton.isEnabled = false
+    }
+    private func activateButtons() {
+        itemDetailView.backButton.isEnabled = true
+        itemDetailView.deleteButton.isEnabled = true
+        itemDetailView.modifyButton.isEnabled = true
+        itemDetailView.lowerButton.isEnabled = true
+    }
+    
     // MARK: - Actions
     @objc func goBack() {
         UIDevice.vibrate()
@@ -55,8 +75,11 @@ class ItemDetailViewController: UIViewController {
     }
     @objc func alertDialog() {
         UIDevice.vibrate()
-        let dialog = PopUpViewController(titleText: "아이템 삭제", messageText: "정말 아이템을 삭제하시겠어요?\n삭제된 아이템은 다시 복구할 수 없어요!", greenBtnText: "취소", blackBtnText: "삭제")
-        dialog.modalPresentationStyle = .overFullScreen
+        let model = PopUpModel(title: "아이템 삭제",
+                               message: "정말 아이템을 삭제하시겠어요?\n삭제된 아이템은 다시 복구할 수 없어요!",
+                               greenBtnText: "취소",
+                               blackBtnText: "삭제")
+        let dialog = PopUpViewController(model, .delete)
         self.present(dialog, animated: false, completion: nil)
         
         dialog.okBtn.addTarget(self, action: #selector(deleteButtonDidTap), for: .touchUpInside)
@@ -84,30 +107,33 @@ class ItemDetailViewController: UIViewController {
         let modifyVC = UploadItemViewController().then{
             $0.isUploadItem = false
             $0.wishListModifyData = self.wishListData
-            $0.preVC = self
         }
         self.navigationController?.pushViewController(modifyVC, animated: true)
     }
 }
 extension ItemDetailViewController {
     func setItemView() {
-        itemDetailView.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        itemDetailView.deleteButton.addTarget(self, action: #selector(alertDialog), for: .touchUpInside)
-        itemDetailView.modifyButton.addTarget(self, action: #selector(goModify), for: .touchUpInside)
+        itemDetailView = ItemDetailView()
+        self.view.addSubview(itemDetailView)
+        
+        itemDetailView.snp.makeConstraints { make in
+            make.leading.trailing.top.bottom.equalToSuperview()
+        }
         
         itemDetailView.setTableView(self)
-        itemDetailView.setUpNavigationView()
-        if let data = self.wishListData {
-            if data.item_url != "" {itemDetailView.isLinkExist(isLinkExist: true)}
-            else {itemDetailView.isLinkExist(isLinkExist: false)}
-        } else {itemDetailView.isLinkExist(isLinkExist: false)}
         
-        itemDetailView.setUpConstraint()
+        // 쇼핑몰 링크 여부에 따라 하단 버튼 UI 변경
+        if let data = self.wishListData, data.item_url != "" {
+            itemDetailView.activateLinkButton()
+        } else {
+            itemDetailView.inactivateLinkButton()
+        }
+        
     }
     @objc func linkButtonDidTap() {
         UIDevice.vibrate()
         guard let urlStr = self.wishListData.item_url else {return}
-        ScreenManager().linkTo(viewcontroller: self, urlStr)
+        ScreenManager.shared.linkTo(viewcontroller: self, urlStr)
     }
 }
 // MARK: - TableView delegate
@@ -132,40 +158,28 @@ extension ItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - API Success
 extension ItemDetailViewController {
     // MARK: 아이템 삭제
-    func deleteItemAPISuccess(_ result: APIModel<TokenResultModel>) {
+    func deleteItemAPISuccess() {
         self.dismiss(animated: false)
-        self.isDeleted = true
         
-        guard let preVC = self.preVC else {return}
-        switch preVC {
-        case is HomeViewController:
-            ScreenManager().goMainPages(0, self, family: .itemDeleted)
-            break
-        default:
-            self.navigationController?.popViewController(animated: true)
-        }
-        // home o cart x folderdetail x calender x
-        
-        print(result.message)
+        let observer = WishItemObserver.shared
+        observer.notify(.delete)
+        self.navigationController?.popViewController(animated: true)
     }
     func deleteItemAPIFail429() {
         self.dismiss(animated: false)
-        self.isDeleted = false
-//        guard let itemId = self.wishListData.item_id else {return}
-//        ItemDataManager().deleteItemDataManager(itemId, self)
     }
     // MARK: 아이템 상세 조회
     func getItemDetailAPISuccess(_ result: WishListModel) {
+        // 아이템 정보 로딩 이후에 버튼들 활성화
+        self.activateButtons()
+        
         self.wishListData = result
         self.itemDetailView.itemDetailTableView.reloadData()
-        // lower view setting
-        if let data = self.wishListData {
-            if data.item_url != "" {itemDetailView.isLinkExist(isLinkExist: true)}
-            else {itemDetailView.isLinkExist(isLinkExist: false)}
-        } else {itemDetailView.isLinkExist(isLinkExist: false)}
-        itemDetailView.lowerButton.addTarget(self, action: #selector(linkButtonDidTap), for: .touchUpInside)
-    }
-    func getItemDetailAPIFail() {
-//        ItemDataManager().getItemDetailDataManager(self.itemId, self)
+        // 쇼핑몰 링크 여부에 따라 하단 버튼 UI 변경
+        if let data = self.wishListData, data.item_url != "" {
+            itemDetailView.activateLinkButton()
+        } else {
+            itemDetailView.inactivateLinkButton()
+        }
     }
 }

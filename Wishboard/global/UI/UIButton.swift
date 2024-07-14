@@ -29,6 +29,10 @@ extension UIButton {
         setAttributedTitle(attributedString, for: .normal)
     }
     func setUnderline(_ title: String, _ color: UIColor, _ font: UIFont) {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.maximumLineHeight = 16.0
+        paragraphStyle.minimumLineHeight = 16.0
+        
         let attributedString = NSMutableAttributedString(string: title)
         attributedString.addAttribute(.underlineStyle,
                                       value: NSUnderlineStyle.single.rawValue,
@@ -36,6 +40,8 @@ extension UIButton {
         )
         attributedString.addAttribute(.font, value: font, range: NSRange(location: 0, length: title.count))
         attributedString.addAttribute(.foregroundColor, value: color, range: NSRange(location: 0, length: title.count))
+        attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: title.count))
+        
         setAttributedTitle(attributedString, for: .normal)
     }
     // MARK: Cart Button
@@ -83,19 +89,40 @@ extension UIButton {
         attText.foregroundColor = UIColor.gray_700
         config.attributedTitle = attText
         config.image = Image.noti
+        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         
         self.configuration = config
     }
     // MARK: 폴더 지정하기 버튼
     func setFolderButton(_ title: String) {
-        var config = UIButton.Configuration.plain()
-        var attText = AttributedString.init(title)
-        
-        attText.font = TypoStyle.SuitD3.font
-        attText.foregroundColor = UIColor.gray
-        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-        config.attributedTitle = attText
-        
-        self.configuration = config
+        let buttonTitle = title + " > "
+        let attributedString = NSMutableAttributedString(string: buttonTitle)
+        attributedString.addAttribute(.underlineStyle,
+                                      value: NSUnderlineStyle.single.rawValue,
+                                      range: NSRange(location: 0, length: title.count)
+        )
+        attributedString.addAttribute(.font, value: TypoStyle.SuitD3.font, range: NSRange(location: 0, length: buttonTitle.count))
+        attributedString.addAttribute(.foregroundColor, value: UIColor.gray, range: NSRange(location: 0, length: buttonTitle.count))
+        setAttributedTitle(attributedString, for: .normal)
+    }
+}
+extension UIButton {
+    func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
+        let image = imageWithColor(color: color)
+        setBackgroundImage(image, for: state)
+    }
+
+    private func imageWithColor(color: UIColor) -> UIImage {
+        let size = CGSize(width: 1, height: 1)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(CGRect(origin: CGPoint.zero, size: size))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image ?? UIImage()
+    }
+    
+    func setFont(font: UIFont, for state: UIControl.State = .normal) {
+        titleLabel?.font = font
     }
 }

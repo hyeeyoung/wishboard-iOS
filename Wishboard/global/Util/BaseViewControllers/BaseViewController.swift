@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class BaseViewController: UIViewController {
     // MARK: - Properties
+    var disposeBag = DisposeBag()
+    
     // MARK: Init
     // 기본 초기화
     init(){
@@ -105,7 +109,7 @@ class EtcButton: UIButton{
         self.titleLabel?.textAlignment = .center
         self.titleLabel?.setTypoStyleWithSingleLine(typoStyle: .SuitD2)
         self.setTitleColor(.gray_700, for: .normal)
-        self.titleEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 4, right: 0)
+        self.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -4)
     }
     
     init(image: UIImage){

@@ -15,8 +15,6 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
     var isAddSuccess: Bool = false
     var preVC: ShareViewController!
     
-    var lottieView: LottieAnimationView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -37,8 +35,8 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
         errorMessage.isHidden = true
         
         // complete button
-        completeButton = DefaultButton(titleStr: Button.add).then{
-            $0.isActivate = false
+        completeButton = LoadingButton(Button.add).then{
+            $0.activateButton()
         }
     }
     
@@ -55,11 +53,10 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
     // MARK: - Actions
     @objc override func completeButtonDidTap() {
         UIDevice.vibrate()
-        lottieView = self.completeButton.setLottieView()
-        lottieView.play { completion in
-            let addFolderInput = AddFolderInput(folder_name: self.folderStr)
-            FolderDataManager().addFolderDataManager(addFolderInput, self)
-        }
+        
+        completeButton.startLoadingAnimation()
+        let addFolderInput = AddFolderInput(folder_name: self.folderStr)
+        FolderDataManager().addFolderDataManager(addFolderInput, self)
     }
     override func textFieldEditingChanged(_ sender: UITextField) {
         let text = sender.text ?? ""
@@ -74,13 +71,11 @@ class NewFolderViewController: BottomSheetKeyboardViewController {
         // TODO: 유효한 폴더명인 지 확인 필요
         if isValidCount {
             errorMessage.isHidden = true
-            self.textFieldCountLabel.textColor = .gray_200
-            self.completeButton.isActivate = true
+            self.completeButton.activateButton()
             self.folderStr = self.tempFolderStr
         } else {
             errorMessage.isHidden = true
-            self.textFieldCountLabel.textColor = .pink_700
-            self.completeButton.isActivate = false
+            self.completeButton.inactivateButton()
         }
     }
 }
@@ -92,17 +87,15 @@ extension NewFolderViewController {
         self.viewDidLoad()
         self.dismiss(animated: true)
         
-        textFieldCountLabel.textColor = .gray_200
         errorMessage.isHidden = true
-        completeButton.inActivateLottieView()
-        completeButton.isActivate = true
+        completeButton.activateButton()
         
         print(result.message)
     }
     func sameFolderNameFail() {
         completeButton.reloadInputViews()
         errorMessage.isHidden = false
-        completeButton.inActivateLottieView()
+        completeButton.inactivateButton()
     }
     func addFolderAPIFail() {
         let addFolderInput = AddFolderInput(folder_name: self.folderStr)

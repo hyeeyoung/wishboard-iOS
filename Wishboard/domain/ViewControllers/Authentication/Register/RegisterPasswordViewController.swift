@@ -25,12 +25,18 @@ class RegisterPasswordViewController: KeyboardViewController {
             make.top.equalTo(super.navigationView.snp.bottom)
         }
         registerPWView.preVC = self
+        registerPWView.registerButtonKeyboard.isEnabled = false
         registerPWView.registerButton.isEnabled = false
+        
         registerPWView.pwTextField.addTarget(self, action: #selector(pwTextFieldEditingChanged(_:)), for: .editingChanged)
+        registerPWView.registerButtonKeyboard.addTarget(self, action: #selector(registerButtonDidTap), for: .touchUpInside)
         registerPWView.registerButton.addTarget(self, action: #selector(registerButtonDidTap), for: .touchUpInside)
         
         super.textfield = registerPWView.pwTextField
-        if !UIDevice.current.hasNotch {registerPWView.stack.isHidden = true}
+        if !UIDevice.current.hasNotch {registerPWView.stackKeyboard.isHidden = true}
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        registerPWView.pwTextField.becomeFirstResponder()
     }
 }
 extension RegisterPasswordViewController {
@@ -44,18 +50,20 @@ extension RegisterPasswordViewController {
     }
     @objc func registerButtonDidTap() {
         UIDevice.vibrate()
-        let lottieView = registerPWView.registerButton.setLottieView()
-        lottieView.play { completion in
-            self.view.endEditing(true)
-            let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
-            let registerInput = RegisterInput(email: self.email, password: self.pw, fcmToken: deviceToken)
-            RegisterDataManager().registerDataManager(registerInput, self)
-        }
+        
+        registerPWView.registerButton.startLoadingAnimation()
+        registerPWView.registerButtonKeyboard.startLoadingAnimation()
+        
+        self.view.endEditing(true)
+        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
+        let registerInput = RegisterInput(email: self.email, password: self.pw, fcmToken: deviceToken)
+        RegisterDataManager().registerDataManager(registerInput, self)
     }
     // MARK: - Functions
     func checkValidPW(_ pw: String) {
         let isValid = self.pw.checkPassword()
         
+        registerPWView.registerButtonKeyboard.isActivate = isValid ? true : false
         registerPWView.registerButton.isActivate = isValid ? true : false
         registerPWView.errorMessage.isHidden = isValid ? true : false
     }
@@ -65,27 +73,20 @@ extension RegisterPasswordViewController {
     func registerAPISuccess(_ result: APIModel<TokenResultModel>) {
         let accessToken = result.data?.token.accessToken
         let refreshToken = result.data?.token.refreshToken
-        let tempNickname = result.data?.tempNickname
         
-        UserDefaults.standard.set(accessToken, forKey: "accessToken")
-        UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
-        UserDefaults.standard.set(true, forKey: "isFirstLogin")
-        UserDefaults.standard.set(tempNickname, forKey: "tempNickname")
+        UserManager.accessToken = accessToken
+        UserManager.refreshToken = refreshToken
+        UserManager.isFirstLogin = true
+        if let tempNickname = result.data?.tempNickname {
+            UserManager.tempNickname = tempNickname
+        }
         
-//         FCM
-//        sendFCM()
+        let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
+        defaults?.set(accessToken, forKey: "accessToken")
+        defaults?.set(refreshToken, forKey: "refreshToken")
+        defaults?.synchronize()
+  
         // go main
-        ScreenManager().goMain(self)
+        ScreenManager.shared.goMain()
     }
-//    // MARK: FCM API
-//    func sendFCM() {
-//        // Send FCM token to server
-//        let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") ?? ""
-//        print("device Token:", deviceToken)
-//        let fcmInput = FCMInput(fcm_token: deviceToken)
-//        FCMDataManager().fcmDataManager(fcmInput, self)
-//    }
-//    func fcmAPISuccess(_ result: APIModel<TokenResultModel>) {
-//        print(result.message)
-//    }
 }

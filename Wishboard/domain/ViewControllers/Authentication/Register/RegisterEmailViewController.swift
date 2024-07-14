@@ -23,6 +23,7 @@ class RegisterEmailViewController: KeyboardViewController {
             make.top.equalTo(super.navigationView.snp.bottom)
         }
         registerEmailView.emailTextField.addTarget(self, action: #selector(emailTextFieldEditingChanged(_:)), for: .editingChanged)
+        registerEmailView.nextButtonKeyboard.addTarget(self, action: #selector(nextButtonDidTap), for: .touchUpInside)
         registerEmailView.nextButton.addTarget(self, action: #selector(nextButtonDidTap), for: .touchUpInside)
         
         super.textfield = registerEmailView.emailTextField
@@ -43,7 +44,8 @@ class RegisterEmailViewController: KeyboardViewController {
     // MARK: - Functions
     func checkValidEmail(_ email: String) {
         let isValid = self.email.checkEmail()
-        self.registerEmailView.nextButton.isActivate = isValid ? true : false
+         isValid ? self.registerEmailView.nextButtonKeyboard.activateButton() : self.registerEmailView.nextButtonKeyboard.inactivateButton()
+        isValid ? self.registerEmailView.nextButton.activateButton() : self.registerEmailView.nextButton.inactivateButton()
     }
 }
 // MARK: - API Success
@@ -57,8 +59,7 @@ extension RegisterEmailViewController {
     }
     func checkEmaiAPIFail() {
         self.registerEmailView.errorMessageLabel.isHidden = false
-        self.registerEmailView.nextButton.then{
-            $0.isActivate = false
-        }
+        self.registerEmailView.nextButtonKeyboard.inactivateButton()
+        self.registerEmailView.nextButton.inactivateButton()
     }
 }

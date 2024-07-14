@@ -27,6 +27,9 @@ class CartTableViewCell: UITableViewCell {
         config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         $0.configuration = config
     }
+    let cartCountStack = UIStackView().then {
+        $0.axis = .horizontal
+    }
     let minusButton = UIButton().then{
         var config = UIButton.Configuration.plain()
         config.image = Image.cartMinus
@@ -40,8 +43,8 @@ class CartTableViewCell: UITableViewCell {
         $0.configuration = config
     }
     let countLabel = DefaultLabel().then{
-        $0.textAlignment = .center
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitD2)
+        $0.textAlignment = .center
     }
     let priceLabel = DefaultLabel().then{
         $0.setTypoStyleWithSingleLine(typoStyle: .MontserratH2)
@@ -64,9 +67,12 @@ class CartTableViewCell: UITableViewCell {
     func setUpView() {
         contentView.addSubview(itemImage)
         contentView.addSubview(deleteButton)
-        contentView.addSubview(minusButton)
-        contentView.addSubview(plusButton)
-        contentView.addSubview(countLabel)
+        
+        contentView.addSubview(cartCountStack)
+        cartCountStack.addArrangedSubview(minusButton)
+        cartCountStack.addArrangedSubview(countLabel)
+        cartCountStack.addArrangedSubview(plusButton)
+        
         contentView.addSubview(priceLabel)
         contentView.addSubview(won)
         contentView.addSubview(itemName)
@@ -79,26 +85,24 @@ class CartTableViewCell: UITableViewCell {
         }
         deleteButton.snp.makeConstraints { make in
             make.width.height.equalTo(44)
-            make.top.equalTo(itemImage.snp.top).offset(-10)
-            make.trailing.equalToSuperview().offset(-9)
+            make.top.equalToSuperview().offset(6)
+            make.trailing.equalToSuperview().offset(-2)
+        }
+        cartCountStack.snp.makeConstraints { make in
+            make.leading.equalTo(itemImage.snp.trailing)
+            make.bottom.equalTo(itemImage.snp.bottom).offset(10)
         }
         minusButton.snp.makeConstraints { make in
             make.width.height.equalTo(44)
-            make.bottom.equalTo(itemImage.snp.bottom).offset(10)
-            make.leading.equalTo(itemImage.snp.trailing)
         }
         countLabel.snp.makeConstraints { make in
             make.width.equalTo(20)
-            make.centerY.equalTo(minusButton)
-            make.leading.equalTo(minusButton.snp.trailing)
         }
         plusButton.snp.makeConstraints { make in
             make.width.height.equalTo(44)
-            make.centerY.equalTo(countLabel)
-            make.leading.equalTo(countLabel.snp.trailing)
         }
         won.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-10)
+            make.trailing.equalToSuperview().offset(-16)
             make.centerY.equalTo(plusButton)
         }
         priceLabel.snp.makeConstraints { make in
@@ -106,10 +110,9 @@ class CartTableViewCell: UITableViewCell {
             make.centerY.equalTo(won)
         }
         itemName.snp.makeConstraints { make in
-            make.top.equalTo(itemImage.snp.top).offset(5)
+            make.top.equalTo(itemImage.snp.top)
             make.leading.equalTo(itemImage.snp.trailing).offset(10)
             make.trailing.equalTo(deleteButton.snp.leading)
-//            make.bottom.lessThanOrEqualTo(minusButton.snp.top).offset(-10)
         }
     }
 }

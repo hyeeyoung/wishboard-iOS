@@ -53,6 +53,8 @@ enum Image{
     public static let trash = UIImage(named: "trash")!
     public static let quit = UIImage(named: "x")!
     
+    public static let whiteQuit = UIImage(named: "white_x")!
+    
     // profile
     public static let defaultProfile = UIImage(named: "defaultProfile")!
     // MARK: - How to Images
@@ -62,6 +64,7 @@ enum Image{
     
     // MARK: - Logo
     public static let appLogo = UIImage(named: "appLogo")!
+    public static let homeAppLogo = UIImage(named: "home_app_logo")!
     public static let blackLogo = UIImage(named: "blackLogo")!
     public static let wishboardLogo = UIImage(named: "WishBoardLogo")!
     

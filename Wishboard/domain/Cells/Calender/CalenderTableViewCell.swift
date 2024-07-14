@@ -49,8 +49,8 @@ class CalenderTableViewCell: UITableViewCell {
             $0.appearance.headerTitleColor = .gray_700
             $0.appearance.weekdayTextColor = .gray_700
             $0.appearance.headerTitleFont = TypoStyle.MontserratH1.font
-            $0.appearance.titleFont = TypoStyle.SuitD1.font
-            $0.appearance.weekdayFont = TypoStyle.MontserratB2.font
+            $0.appearance.titleFont = TypoStyle.SuitD1.font   // 날(1...31일) 폰트
+            $0.appearance.weekdayFont = TypoStyle.MontserratB2.font       // 상단 월화수목금 폰트
             $0.appearance.subtitleFont = TypoStyle.SuitH3.font
             
             $0.appearance.todayColor = .green_500
@@ -59,8 +59,9 @@ class CalenderTableViewCell: UITableViewCell {
             $0.appearance.todaySelectionColor = .green_500
             $0.appearance.titleSelectionColor = .gray_700
             
-            $0.appearance.eventDefaultColor = .green_200
-            $0.appearance.eventSelectionColor = .green_500
+            // 이벤트가 있는 날짜는 투명도가 높은 green색이 덧씌워진다.
+            $0.appearance.eventDefaultColor = .green_alpha
+            $0.appearance.eventSelectionColor = .green_alpha
         }
         contentView.addSubview(calender)
         contentView.addSubview(backButton)

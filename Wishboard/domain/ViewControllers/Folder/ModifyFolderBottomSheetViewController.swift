@@ -13,12 +13,9 @@ import Lottie
 class ModifyFolderBottomSheetViewController: BottomSheetKeyboardViewController {
     // MARK: - Life Cycles
     var folderStr: String!
-    var tempFolderStr: String!
     var preVC: FolderViewController!
     
     var folderData: FolderModel!
-    
-    var lottieView: LottieAnimationView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,15 +33,14 @@ class ModifyFolderBottomSheetViewController: BottomSheetKeyboardViewController {
         }
         
         // complete button
-        completeButton = DefaultButton(titleStr: Button.modify).then{
-            $0.isActivate = true
+        completeButton = LoadingButton(Button.modify).then{
+            $0.activateButton()
         }
         
         // folder name count label
         if let foldername = folderData.folder_name {
             textFieldCountLabel.text = "(" + String(foldername.count) + "/10)자"
-            self.tempFolderStr = foldername
-            checkValidFolder(self.tempFolderStr, true)
+            folderTextCountValid(foldername)
         }
         
         // error message text
@@ -60,36 +56,40 @@ class ModifyFolderBottomSheetViewController: BottomSheetKeyboardViewController {
     // MARK: - Actions
     @objc override func completeButtonDidTap() {
         UIDevice.vibrate()
-        let folderId = folderData.folder_id
         
-        lottieView = completeButton.setLottieView()
-        lottieView.play { completion in
-            self.lottieView.loopMode = .loop
-            let addFolderInput = AddFolderInput(folder_name: self.folderStr!)
-            FolderDataManager().modifyFolderDataManager(folderId!, addFolderInput, self, self.preVC)
-        }
+        completeButton.startLoadingAnimation()
+        
+        let folderId = folderData.folder_id
+        let addFolderInput = AddFolderInput(folder_name: self.folderStr!)
+        FolderDataManager().modifyFolderDataManager(folderId!, addFolderInput, self, self.preVC)
     }
     override func textFieldEditingChanged(_ sender: UITextField) {
-        let text = sender.text ?? ""
+        let folderInput = sender.text ?? ""
 
-        textFieldCountLabel.text = "(" + String(text.count) + "/10)자"
-        self.tempFolderStr = text
-        if text.count > 10 || text.isEmpty {self.checkValidFolder(self.tempFolderStr, false)}
-        else {self.checkValidFolder(self.tempFolderStr, true)}
+        // 폴더명 input 분기처리
+        if folderInput.isEmpty { setFolderTextCountEmpty()}
+        else if folderInput.count > 10 {setFolderTextCountOver10(sender)}
+        else {folderTextCountValid(folderInput)}
     }
-    
-    func checkValidFolder(_ folder: String, _ isValidCount: Bool) {
-        // TODO: 유효한 폴더명인 지 확인 필요
-        if isValidCount {
-            errorMessage.isHidden = true
-            textFieldCountLabel.textColor = .gray_200
-            completeButton.isActivate = true
-            folderStr = self.tempFolderStr
-        } else {
-            errorMessage.isHidden = true
-            textFieldCountLabel.textColor = .pink_700
-            completeButton.isActivate = false
-        }
+    /// 분기처리: 폴더명 input 의 카운트가 10 초과 시
+    func setFolderTextCountOver10(_ sender: UITextField) {
+        textFieldCountLabel.text = "(10/10)자"
+        sender.text = folderStr
+        return
+    }
+    /// 분기처리: 폴더명 input 이 비어있을 시
+    func setFolderTextCountEmpty() {
+        textFieldCountLabel.text = "(0/10)자"
+        errorMessage.isHidden = true
+        completeButton.inactivateButton()
+    }
+    /// 분기처리: 폴더명 input 이 유효할 때
+    func folderTextCountValid(_ folderInput: String) {
+        textFieldCountLabel.text = "(" + String(folderInput.count) + "/10)자"
+        
+        errorMessage.isHidden = true
+        completeButton.activateButton()
+        folderStr = folderInput
     }
 }
 // MARK: - API Success
@@ -98,7 +98,6 @@ extension ModifyFolderBottomSheetViewController {
         completeButton.reloadInputViews()
         errorMessage.isHidden = false
         
-        completeButton.inActivateLottieView()
-        lottieView.isHidden = true
+        completeButton.inactivateButton()
     }
 }

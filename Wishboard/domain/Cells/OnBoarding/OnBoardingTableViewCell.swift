@@ -27,8 +27,8 @@ class OnBoardingTableViewCell: UITableViewCell {
         $0.textAlignment = .center
     }
     // 가입하기 버튼
-    lazy var registerButton = DefaultButton(titleStr: Button.register).then{
-        $0.isActivate = true
+    lazy var registerButton = LoadingButton(Button.register).then{
+        $0.activateButton()
     }
     let loginStackView = UIStackView()
     // 이미 계정이 있으신가요?
@@ -110,7 +110,7 @@ class OnBoardingTableViewCell: UITableViewCell {
             make.leading.equalTo(accountExistButton.snp.trailing).offset(5)
         }
         self.registerButton.snp.makeConstraints { make in
-            make.height.equalTo(50)
+            make.height.equalTo(48)
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)

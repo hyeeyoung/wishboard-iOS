@@ -32,14 +32,7 @@ class PopUpDeleteUserViewController: UIViewController {
         $0.setTypoStyleWithMultiLine(typoStyle: .SuitD2)
         $0.textColor = .gray_300
         $0.numberOfLines = 0
-        
-//        let attrString = NSMutableAttributedString(string: $0.text!)
-//        let paragraphStyle = NSMutableParagraphStyle()
-//        paragraphStyle.lineHeightMultiple = 1.18
-//        attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
-//        $0.attributedText = attrString
-//
-//        $0.textAlignment = .center
+        $0.textAlignment = .center
     }
     let horizontalSeperator = UIView().then{
         $0.backgroundColor = .gray_100
@@ -50,6 +43,7 @@ class PopUpDeleteUserViewController: UIViewController {
     var cancelBtn: UIButton!
     var okBtn: UIButton!
     var textField = DefaultTextField("").then{
+        $0.keyboardType = .emailAddress
         $0.clearButtonMode = .always
     }
     let errorMessage = UILabel().then{
@@ -85,6 +79,7 @@ class PopUpDeleteUserViewController: UIViewController {
         
         cancelBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         textField.addTarget(self, action: #selector(emailTextFieldEditingChanged(_:)), for: .allEditingEvents)
+        okBtn.addTarget(self, action: #selector(signOutButtonDidTap), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -112,14 +107,18 @@ class PopUpDeleteUserViewController: UIViewController {
         self.dismiss(animated: false)
     }
     @objc func emailTextFieldEditingChanged(_ sender: UITextField) {
-        let text = sender.text ?? ""
-        if text != self.email {
-            self.errorMessage.isHidden = false
-            self.okBtn.isEnabled = false
+        errorMessage.isHidden = true
+    }
+    @objc func signOutButtonDidTap() {
+        print("tap")
+        let input = textField.text ?? ""
+        if input != self.email {
+            errorMessage.isHidden = false
         } else {
-            self.errorMessage.isHidden = true
-            self.okBtn.isEnabled = true
+            self.dismiss(animated: false)
+            MypageDataManager().deleteUserDataManager(self)
         }
+        UIDevice.vibrate()
     }
     // MARK: - Functions
     func setUpContent() {
@@ -143,7 +142,6 @@ class PopUpDeleteUserViewController: UIViewController {
             config.attributedTitle = attText
             
             $0.configuration = config
-            $0.isEnabled = false
         }
         textField.placeholder = self.placeholder
     }
@@ -262,4 +260,17 @@ extension PopUpDeleteUserViewController: UITextFieldDelegate {
         return true
     }
     
+}
+extension PopUpDeleteUserViewController {
+    // MARK: 회원 탈퇴 API
+    func deleteUserAPISuccess(_ result: APIModel<TokenResultModel>) {
+        // delete UserInfo
+        UserManager.removeUserData()
+        
+        let onboardingVC = OnBoardingViewController(usecase: .signOut)
+        let navigationController = UINavigationController(rootViewController: onboardingVC)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(navigationController, animated: true)
+        
+        print(result.message)
+    }
 }

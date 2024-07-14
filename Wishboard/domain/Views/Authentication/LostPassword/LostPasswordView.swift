@@ -20,6 +20,7 @@ class LostPasswordView: UIView {
         $0.numberOfLines = 0
     }
     var emailTextField = DefaultTextField(Placeholder.email).then{
+        $0.keyboardType = .emailAddress
         $0.becomeFirstResponder()
     }
     let errorMessage = UILabel().then{
@@ -27,7 +28,8 @@ class LostPasswordView: UIView {
         $0.textColor = .pink_700
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
     }
-    let getEmailButton = DefaultButton(titleStr: Button.getEmail)
+    let getEmailButtonKeyboard = LoadingButton(Button.getEmail)
+    let getEmailButton = LoadingButton(Button.getEmail)
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
     }()
@@ -50,8 +52,9 @@ class LostPasswordView: UIView {
         addSubview(subTitleLabel)
         addSubview(emailTextField)
         addSubview(errorMessage)
+        addSubview(getEmailButton)
         
-        accessoryView.addSubview(getEmailButton)
+        accessoryView.addSubview(getEmailButtonKeyboard)
     }
     func setUpConstraint() {
         heartLetterImage.snp.makeConstraints { make in
@@ -74,7 +77,12 @@ class LostPasswordView: UIView {
         }
         getEmailButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(44)
+            make.height.equalTo(48)
+            make.bottom.equalToSuperview().inset(34)
+        }
+        getEmailButtonKeyboard.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(48)
             make.bottom.equalToSuperview().inset(16)
         }
     }

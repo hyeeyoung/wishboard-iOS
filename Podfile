@@ -8,15 +8,12 @@ target 'Wishboard' do
 	pod 'Alamofire'
 	pod 'Kingfisher', '~> 7.6.1'
 	pod 'SnapKit', '~> 5.6.0'
-	pod 'MaterialComponents/BottomSheet'
-	pod 'Tabman', '~> 2.9'
+	
 	pod 'Then'
 	pod 'RxSwift'
   	pod 'RxCocoa'
 	pod 'FSCalendar'
 	pod 'MaterialComponents/BottomSheet'
-	pod 'SnackBar.swift'
-	pod 'lottie-ios'
 
 	pod 'Firebase/Analytics'
 	pod 'Firebase/Messaging'
@@ -27,6 +24,7 @@ target 'Wishboard' do
 	pod 'Moya/ReactiveSwift'
 	pod 'Moya/Combine'
 
+	pod 'lottie-ios', '4.2.0'
   target 'WishboardTests' do
     inherit! :search_paths
     # Pods for testing
@@ -41,6 +39,11 @@ target 'Wishboard' do
 	pod 'Then'
 	pod 'SnapKit', '~> 5.6.0'
 	pod 'MaterialComponents/BottomSheet'
+
+	pod 'Moya'
+        pod 'Moya/RxSwift'
+        pod 'Moya/ReactiveSwift'
+        pod 'Moya/Combine'
   end
 end
 post_install do |installer|

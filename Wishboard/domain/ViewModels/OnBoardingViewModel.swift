@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 class OnBoardingViewModel {
     var viewcontroller: OnBoardingViewController!

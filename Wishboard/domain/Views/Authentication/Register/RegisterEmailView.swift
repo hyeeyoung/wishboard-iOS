@@ -20,6 +20,7 @@ class RegisterEmailView: UIView {
         $0.numberOfLines = 0
     }
     var emailTextField = DefaultTextField(Placeholder.email).then{
+        $0.keyboardType = .emailAddress
         $0.becomeFirstResponder()
     }
     let errorMessageLabel = UILabel().then{
@@ -27,7 +28,8 @@ class RegisterEmailView: UIView {
         $0.textColor = .pink_700
         $0.setTypoStyleWithSingleLine(typoStyle: .SuitD3)
     }
-    let nextButton = DefaultButton(titleStr: Button.next)
+    let nextButton = LoadingButton(Button.next)
+    let nextButtonKeyboard = LoadingButton(Button.next)
     lazy var accessoryView: UIView = {
         return UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 72.0))
     }()
@@ -50,8 +52,9 @@ class RegisterEmailView: UIView {
         addSubview(subTitleLabel)
         addSubview(emailTextField)
         addSubview(errorMessageLabel)
+        addSubview(nextButton)
         
-        accessoryView.addSubview(nextButton)
+        accessoryView.addSubview(nextButtonKeyboard)
     }
     func setUpConstraint() {
         heartLetterImage.snp.makeConstraints { make in
@@ -74,7 +77,13 @@ class RegisterEmailView: UIView {
         }
         nextButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(44)
+            make.height.equalTo(48)
+            // TODO: 여백 Check
+            make.bottom.equalToSuperview().inset(34)
+        }
+        nextButtonKeyboard.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(48)
             make.bottom.equalToSuperview().inset(16)
         }
     }

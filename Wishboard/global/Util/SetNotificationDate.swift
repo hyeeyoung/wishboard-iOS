@@ -8,7 +8,7 @@
 import Foundation
 
 class SetNotificationDate {
-    let notificationData = ["재입고", "오픈", "프리오더", "세일 시작", "세일 마감"]
+    let notificationData = ["재입고", "오픈", "프리오더", "세일 시작", "세일 마감", "리마인드"]
     var dateData: Array<String>! = []
     var hourData: Array<String>! = []
     var minuteData: Array<String>! = []

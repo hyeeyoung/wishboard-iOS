@@ -9,19 +9,21 @@ import Alamofire
 import Kingfisher
 
 class APIManager {
-    let token = UserDefaults.standard.string(forKey: "accessToken") ?? ""
+    let token = UserManager.accessToken ?? ""
     
     func getHeader() -> HTTPHeaders {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + token,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "User-Agent": Storage().AgentHeader
         ]
         return headers
     }
     func getMultipartHeader() -> HTTPHeaders {
         let headers: HTTPHeaders = [
             "Content-type": "multipart/form-data",
-            "Authorization": "Bearer " + token
+            "Authorization": "Bearer " + token,
+            "User-Agent": Storage().AgentHeader
         ]
         return headers
     }

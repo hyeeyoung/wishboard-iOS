@@ -12,7 +12,6 @@ import Then
 import MaterialComponents.MaterialBottomSheet
 import Lottie
 import MobileCoreServices
-import SnackBar_swift
 
 class ShareViewController: UIViewController {
     //MARK: - Properties
@@ -20,7 +19,6 @@ class ShareViewController: UIViewController {
     var folderListData: [FolderListModel] = []
     var notivc: NotificationSettingViewController!
     var newFoldervc: NewFolderViewController!
-    var lottieView: LottieAnimationView!
     
     var selectedFolder: String?
     var selectedFolderIdx: Int?
@@ -51,10 +49,6 @@ class ShareViewController: UIViewController {
         
         self.selectedFolderIdx = -1
         setUpShareView()
-        
-        DispatchQueue.main.async {
-            self.getWebURL()
-        }
     }
     override func viewDidAppear(_ animated: Bool) {
         // Network Check
@@ -63,12 +57,12 @@ class ShareViewController: UIViewController {
         let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
         let token = defaults?.string(forKey: "accessToken") ?? ""
         if token == "" {
-            shareView.completeButton.isActivate = false
-            shareView.itemNameTextField.isEnabled = false
-            shareView.itemPriceTextField.isEnabled = false
-            shareView.setNotificationButton.isEnabled = false
-            shareView.addFolderButton.isEnabled = false
+            needLogin()
             return
+        } else {
+            DispatchQueue.main.async {
+                self.getWebURL()
+            }
         }
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -153,11 +147,9 @@ class ShareViewController: UIViewController {
     }
     func setButton() {
         if isValidContent() {
-            shareView.completeButton.isActivate = true
-            shareView.completeButton.isEnabled = true
+            shareView.completeButton.activateButton()
         } else {
-            shareView.completeButton.isActivate = false
-            shareView.completeButton.isEnabled = false
+            shareView.completeButton.inactivateButton()
         }
     }
     // X버튼 클릭
@@ -168,16 +160,14 @@ class ShareViewController: UIViewController {
     // 위시리스트 추가 버튼
     @objc func completeButtonDidTap() {
         UIDevice.vibrate()
+       
+        shareView.completeButton.startLoadingAnimation()
+        
         // 만약 상품명 또는 가격이 비어있을 시
         if self.itemName == nil || self.itemPrice == nil {
-            SnackBar(self, message: .emptyItemContent)
+            SnackBar.shared.showSnackBar(self, message: .emptyItemContent)
             return
         }
-        
-        // Set up lottieView
-        lottieView = shareView.completeButton.setLottieView()
-        lottieView.loopMode = .loop
-        lottieView.play()
         
         // 이미지 uri를 UIImage로 변환
         guard let itemImg = self.itemImg else {return}
@@ -186,24 +176,7 @@ class ShareViewController: UIViewController {
         guard let data = try? Data(contentsOf: url) else {return}
         DispatchQueue.main.async { [self] in
             selectedImage = UIImage(data: data)
-            // 폴더O, 알림O
-            if var notificationDate = self.notificationDate {
-                notificationDate = FormatManager().koreanStrToDate(notificationDate)!
-                if (self.selectedFolderIdx != nil) && (self.selectedFolderIdx != -1) {
-                    ShareDataManager().uploadItemDataManager(self.selectedFolderIdx!, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self.notificationType!, notificationDate + ":00", self)
-                } else {
-                    // 폴더X, 알림O
-                    ShareDataManager().uploadItemDataManager(selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self.notificationType!, notificationDate + ":00", self)
-                }
-            } else {
-                // 폴더O, 알림X
-                if (self.selectedFolderIdx != nil) && (self.selectedFolderIdx != -1) {
-                    ShareDataManager().uploadItemDataManager(self.selectedFolderIdx!, selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self)
-                } else {
-                    // 폴더X, 알림X
-                    ShareDataManager().uploadItemDataManager(selectedImage!, self.itemName!, self.itemPrice!, self.webURL!, "", self)
-                }
-            }
+            ShareDataManager().uploadItemDataManager(selectedFolderIdx, selectedImage!, itemName!, itemPrice!, webURL!, "", notificationType, notificationDate, self)
         }
     }
     // 알람 설정 BottomSheet
@@ -268,26 +241,38 @@ extension ShareViewController: UICollectionViewDelegate, UICollectionViewDataSou
 }
 // MARK: - API Success
 extension ShareViewController {
+    func needLogin() {
+        shareView.completeButton.needLoginButton()
+        shareView.itemNameTextField.isEnabled = false
+        shareView.itemPriceTextField.isEnabled = false
+        shareView.setNotificationButton.isEnabled = false
+        shareView.addFolderButton.isEnabled = false
+    }
     // MARK: 폴더 리스트 조회 API
     func getFolderListAPISuccess(_ result: [FolderListModel]) {
+        print("폴더 가져오기 성공", result)
         self.folderListData = result
         self.selectedFolderIdx = -1
         reloadDataAnimation()
+        
+        shareView.completeButton.activateButton()
     }
     func getFolderListAPIFail() {
         FolderDataManager().getFolderListDataManager(self)
     }
     // MARK: 아이템 정보 파싱
     func getItemDataAPISuccess(_ result: APIModel<ItemParsingModel>) {
+//        print("get item Data: ", result)
+        
         if let itemImg = result.data?.item_img.nilIfEmpty {self.itemImg = itemImg}
         if let itemName = result.data?.item_name.nilIfEmpty {self.itemName = itemName}
         if let itemPrice = result.data?.item_price.nilIfEmpty {self.itemPrice = itemPrice}
         
         if self.itemImg == nil || self.itemName == nil && self.itemPrice == nil {
-            SnackBar(self, message: .failShoppingLink)
+            SnackBar.shared.showSnackBar(self, message: .failShoppingLink)
             FolderDataManager().getFolderListDataManager(self)
             
-            shareView.completeButton.isActivate = false
+            shareView.completeButton.inactivateButton()
             
         } else if self.itemPrice == nil {
             self.itemPrice = "0"
@@ -305,33 +290,33 @@ extension ShareViewController {
                               self.shareView.reloadInputViews()},
                           completion: nil);
         
+        shareView.completeButton.activateButton()
         FolderDataManager().getFolderListDataManager(self)
     }
     func getItemDataAPIFail() {
-        SnackBar(self, message: .failShoppingLink)
+        SnackBar.shared.showSnackBar(self, message: .failShoppingLink)
         
-        shareView.completeButton.isActivate = false
+        shareView.completeButton.inactivateButton()
     }
     // MARK: 아이템 간편 등록
     func uploadItemAPISuccess(_ result: APIModel<ResultModel>) {
         if result.success {
             uploadItemAPIFunc()
         } else {
+            // 500일때 뿐만 아니라 다른 이슈일 때도 에러바 출력
+            // 401 일때도
             uploadItem500Error()
         }
         print("아이템 등록 🔥", result.message)
     }
     func uploadItemAPIFunc() {
-        lottieView.stop()
-        shareView.completeButton.isActivate = true
-        lottieView.isHidden = true
+        shareView.completeButton.activateButton()
         
-        SnackBar(self, message: .addItem)
+        WishItemObserver.shared.notify(.upload)
+        SnackBar.shared.showSnackBar(self, message: .addItem)
     }
     func uploadItem500Error() {
-        lottieView.isHidden = true
-        shareView.completeButton.isSelected = false
-        shareView.completeButton.isActivate = true
+        shareView.completeButton.inactivateButton()
         
         ErrorBar(self)
     }
