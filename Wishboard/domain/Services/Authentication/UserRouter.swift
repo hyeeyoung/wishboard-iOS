@@ -60,7 +60,8 @@ extension UserRouter{
     var headers: [String: String]? {
         switch self {
         case .signIn:
-            return ["Content-Type": "application/json"]
+            return ["Content-Type": "application/json",
+                    "User-Agent": Storage().AgentHeader]
         case .modifyPassword:
             let token = UserManager.accessToken ?? ""
             let header = [
