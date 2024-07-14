@@ -14,14 +14,16 @@ class APIManager {
     func getHeader() -> HTTPHeaders {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + token,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "User-Agent": Storage().AgentHeader
         ]
         return headers
     }
     func getMultipartHeader() -> HTTPHeaders {
         let headers: HTTPHeaders = [
             "Content-type": "multipart/form-data",
-            "Authorization": "Bearer " + token
+            "Authorization": "Bearer " + token,
+            "User-Agent": Storage().AgentHeader
         ]
         return headers
     }

@@ -65,12 +65,16 @@ extension UserRouter{
             let token = UserManager.accessToken ?? ""
             let header = [
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + token]
+                "Authorization": "Bearer " + token,
+                "User-Agent": Storage().AgentHeader
+            ]
             return header
         case .modifyProfile:
             let token = UserManager.accessToken ?? ""
             return ["Content-Type": "multipart/form-data",
-                    "Authorization": "Bearer " + token]
+                    "Authorization": "Bearer " + token,
+                    "User-Agent": Storage().AgentHeader
+            ]
         }
         
     }

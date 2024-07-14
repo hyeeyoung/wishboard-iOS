@@ -186,7 +186,7 @@ extension CartView {
                                message: "정말 장바구니에서 아이템을 삭제하시겠어요?",
                                greenBtnText: "취소",
                                blackBtnText: "삭제")
-        let dialog = PopUpViewController(model)
+        let dialog = PopUpViewController(model, .delete)
         self.preVC.present(dialog, animated: false, completion: nil)
         
         let deleteGesture = CartGesture(target: self, action: #selector(deleteItem(_:)))

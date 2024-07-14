@@ -14,6 +14,11 @@ struct PopUpModel {
     let blackBtnText: String?
 }
 
+enum PopUpType {
+    case normal
+    case delete
+}
+
 // Default 팝업창
 class PopUpViewController: UIViewController {
     // MARK: - Properties
@@ -46,14 +51,19 @@ class PopUpViewController: UIViewController {
     }
     var cancelBtn: UIButton!
     var okBtn: UIButton!
+    
+    var type: PopUpType?
+    
     // MARK: - Life Cycles
-    convenience init(_ model: PopUpModel) {
+    convenience init(_ model: PopUpModel, _ type: PopUpType? = .normal) {
         self.init()
         
         self.titleText = model.title
         self.messageText = model.message
         self.greenBtnText = model.greenBtnText ?? ""
         self.blackBtnText = model.blackBtnText ?? ""
+        
+        self.type = type
         
         setUpContent()
         setUpView()
@@ -99,7 +109,7 @@ class PopUpViewController: UIViewController {
             var attText = AttributedString.init(self.greenBtnText!)
             
             attText.font = TypoStyle.SuitB3.font
-            attText.foregroundColor = UIColor.green_700
+            attText.foregroundColor = self.type == .normal ? UIColor.green_700 : UIColor.gray_700
             config.attributedTitle = attText
             
             $0.configuration = config
@@ -109,7 +119,7 @@ class PopUpViewController: UIViewController {
             var attText = AttributedString.init(self.blackBtnText!)
             
             attText.font = TypoStyle.SuitB3.font
-            attText.foregroundColor = UIColor.gray_700
+            attText.foregroundColor = self.type == .normal ? UIColor.gray_700 : UIColor.pink_700
             config.attributedTitle = attText
             
             $0.configuration = config

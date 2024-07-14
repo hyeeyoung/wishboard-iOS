@@ -24,7 +24,8 @@ class FolderDataManager {
         
         let header: HTTPHeaders = [
             "Authorization": "Bearer " + token,
-            "Accept": "application/json"
+            "Content-type": "application/json",
+            "User-Agent": Storage().AgentHeader
         ]
         AF.request(BaseURL + "/folder/list",
                            method: .get,
@@ -58,7 +59,8 @@ class FolderDataManager {
         let token = defaults?.string(forKey: "accessToken") ?? ""
         let header: HTTPHeaders = [
             "Authorization": "Bearer " + token,
-            "Accept": "application/json"
+            "Content-type": "application/json",
+            "User-Agent": Storage().AgentHeader
         ]
         AF.request(BaseURL + "/folder",
                            method: .post,

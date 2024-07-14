@@ -63,7 +63,7 @@ class HomeViewController: UIViewController, Observer {
             if usecase == .delete {
                 SnackBar.shared.showSnackBar(tabBarController ?? self, message: .deleteItem)
             } else if usecase == .upload {
-                SnackBar.shared.showSnackBar(tabBarController ?? self, message: .addItem)
+                SnackBar.shared.showSnackBar(self.tabBarController ?? self, message: .addItem)
             }
             // Data reload
             WishListDataManager.shared.wishListDataManager(self)

@@ -56,10 +56,13 @@ class RefreshDataManager {
     /// 링크공유에서 refresh 호출
     func shareExtensionRefreshDataManager(completion: @escaping (Bool) -> Void) {
         let defaults = UserDefaults(suiteName: "group.gomin.Wishboard.Share")
+        let BaseURL = defaults?.string(forKey: "url") ?? ""
         let refreshToken = defaults?.string(forKey: "refreshToken") ?? ""
         parameter = RefreshInput(refreshToken: refreshToken)
         
-        AF.request(Storage().BaseURL + "/auth/refresh",
+        print("✅ Base url : \(BaseURL)")
+        print("✅ Token Refresh url : \(BaseURL)/auth/refresh")
+        AF.request("\(BaseURL)/auth/refresh",
                    method: .post,
                    parameters: parameter,
                    encoder: JSONParameterEncoder.default,

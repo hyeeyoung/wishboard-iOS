@@ -24,6 +24,7 @@ final class AuthInterceptor: RequestInterceptor {
         
         var urlRequest = urlRequest
         urlRequest.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+        urlRequest.setValue(Storage().AgentHeader, forHTTPHeaderField: "User-Agent")
         
         print("adaptor 적용 \(urlRequest.headers)")
         completion(.success(urlRequest))

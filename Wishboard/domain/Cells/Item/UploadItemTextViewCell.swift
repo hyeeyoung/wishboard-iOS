@@ -13,6 +13,9 @@ class UploadItemTextViewCell: UITableViewCell {
         $0.font = TypoStyle.SuitB3.font
         $0.textColor = .gray_700
         $0.textAlignment = .left
+        // TextField MainThread 버그를 위해 '수정제안' 제거 (24.05.18 / Xcode 15)
+        $0.spellCheckingType = .no
+        $0.autocorrectionType = .no
     }
     
     //MARK: - Life Cycles

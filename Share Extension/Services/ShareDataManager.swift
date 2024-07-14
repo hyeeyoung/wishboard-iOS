@@ -23,7 +23,8 @@ class ShareDataManager {
         
         let header: HTTPHeaders = [
             "Authorization": "Bearer " + token,
-            "Accept": "application/json"
+            "Content-type": "application/json",
+            "User-Agent": Storage().AgentHeader
         ]
         AF.request(BaseURL + "/item/parse?site=\(url)",
                            method: .get,
@@ -49,6 +50,7 @@ class ShareDataManager {
                 default:
                     print(error.localizedDescription)
                     print(error.responseCode)
+                    viewcontroller.getItemDataAPIFail()
                 }
             }
         }
@@ -69,7 +71,8 @@ class ShareDataManager {
         
         let multiHeader: HTTPHeaders = [
             "Content-type": "multipart/form-data",
-            "Authorization": "Bearer " + token
+            "Authorization": "Bearer " + token,
+            "User-Agent": Storage().AgentHeader
         ]
         
         let uploadItemUrl = BaseURL + "/item"

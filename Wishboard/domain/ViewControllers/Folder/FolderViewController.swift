@@ -146,7 +146,7 @@ extension FolderViewController {
                                message: "정말 폴더를 삭제하시겠어요?\n폴더가 삭제되어도 아이템은 사라지지 않아요.",
                                greenBtnText: "취소",
                                blackBtnText: "삭제")
-        let dialog = PopUpViewController(model)
+        let dialog = PopUpViewController(model, .delete)
         self.present(dialog, animated: false, completion: nil)
         
         let folderMenuGesture = CustomButton(target: self, action: #selector(deleteFolderButtonDidTap(_:)))
