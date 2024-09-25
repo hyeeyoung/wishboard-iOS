@@ -102,12 +102,9 @@ class SplashViewController: UIViewController {
     private func showForceUpdateAlert() {
         let model = PopUpModel(title: "업데이트 안내",
                                message: "위시보드가 유저분들에게 더 나은 경험을\n제공하기 위해 사용성을 개선했어요!\n더 새로워진 위시보드를 만나보세요 😆",
-                               greenBtnText: "업데이트",
-                               blackBtnText: "앱 종료")
-        let dialog = PopUpViewController(model)
+                               btnText: "업데이트")
+        let dialog = OneButtonPopUpViewController(model)
         self.present(dialog, animated: false, completion: nil)
-        
-        dialog.cancelBtn.addTarget(self, action: #selector(exitAppButtonDidTap), for: .touchUpInside)
         dialog.okBtn.addTarget(self, action: #selector(appUpdateButtonDidTap), for: .touchUpInside)
     }
 
@@ -126,13 +123,6 @@ class SplashViewController: UIViewController {
             if UIApplication.shared.canOpenURL(appStoreURL) {
                 UIApplication.shared.open(appStoreURL, options: [:], completionHandler: nil)
             }
-        }
-    }
-    
-    @objc private func exitAppButtonDidTap() {
-        UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            exit(0)
         }
     }
     
