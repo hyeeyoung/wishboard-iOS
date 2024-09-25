@@ -106,20 +106,20 @@ class PopUpViewController: UIViewController {
         messageLabel.text = self.messageText
         cancelBtn = UIButton().then{
             var config = UIButton.Configuration.plain()
-            var attText = AttributedString.init(self.greenBtnText!)
+            var attText = AttributedString.init(self.blackBtnText!)
             
             attText.font = TypoStyle.SuitB3.font
-            attText.foregroundColor = self.type == .normal ? UIColor.green_700 : UIColor.gray_700
+            attText.foregroundColor = self.type == .normal ? UIColor.gray_700 : UIColor.gray_700
             config.attributedTitle = attText
             
             $0.configuration = config
         }
         okBtn = UIButton().then{
             var config = UIButton.Configuration.plain()
-            var attText = AttributedString.init(self.blackBtnText!)
+            var attText = AttributedString.init(self.greenBtnText!)
             
             attText.font = TypoStyle.SuitB3.font
-            attText.foregroundColor = self.type == .normal ? UIColor.gray_700 : UIColor.pink_700
+            attText.foregroundColor = self.type == .normal ? UIColor.green_700 : UIColor.pink_700
             config.attributedTitle = attText
             
             $0.configuration = config
