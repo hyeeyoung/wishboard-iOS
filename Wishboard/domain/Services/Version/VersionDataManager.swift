@@ -10,7 +10,7 @@ import Alamofire
 
 class VersionDataManager {
     
-    // MARK: - 폴더 조회
+    // MARK: - 버전 조회
     func getVersionDataManager(_ viewcontroller: SplashViewController) {
         let header: HTTPHeaders = [
             "Content-type": "application/json",
@@ -21,13 +21,14 @@ class VersionDataManager {
                            parameters: nil,
                            headers: header)
             .validate()
-            .responseDecodable(of: VersionModel.self) { response in
+            .responseDecodable(of: APIModel<VersionModel>.self) { response in
             switch response.result {
             case .success(let result):
-                viewcontroller.checkAppVersion(result)
+                guard let data = result.data else {return}
+                viewcontroller.checkAppVersion(data)
             case .failure(let error):
                 let statusCode = error.responseCode
-                print("VERSION 가져오기 error", error.localizedDescription)
+                print("VERSION 가져오기 \(statusCode) error", error.localizedDescription)
             }
         }
                

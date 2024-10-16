@@ -9,6 +9,6 @@ import Foundation
 
 struct VersionModel: Decodable {
     let platform: String?
-    let min_version: String?
-    let recommended_version: String?
+    let minVersion: String?
+    let recommendedVersion: String?
 }

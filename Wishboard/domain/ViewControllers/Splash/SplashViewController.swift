@@ -61,8 +61,8 @@ class SplashViewController: UIViewController {
     func checkAppVersion(_ response: VersionModel) {
         
         // 1. 서버로부터 받은 데이터 (API 응답)
-        guard let minVersion = response.min_version,
-              let recommendedVersion = response.recommended_version,
+        guard let minVersion = response.minVersion,
+              let recommendedVersion = response.recommendedVersion,
               let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
             return
         }
